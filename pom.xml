@@ -473,11 +473,6 @@
 			<url>http://www.ibiblio.org/maven2</url>
 		</repository>
 		<repository>
-			<id>geotools.fr</id>
-			<name>maven.geotools.fr</name>
-			<url>http://maven.geotools.fr/repository</url>
-		</repository>
-		<repository>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -488,10 +483,6 @@
 		<repository>
 			<id>Maven Mirror</id>
 			<url>http://mirrors.dotsrc.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>Maven Mirror2</id>
-			<url>http://apache.osuosl.org/maven-repository</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -544,7 +535,7 @@
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
-			<version>4.2.0</version>
+			<version>2.1.3</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -555,17 +546,22 @@
 		<dependency>
 			<groupId>org.jfree</groupId>
 			<artifactId>jcommon</artifactId>
-			<version>1.0.16</version>
+			<version>1.0.5.pack200</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
 			<artifactId>chart</artifactId>
-			<version>1.0.13</version>
+			<version>1.0.2.2.pack200</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>

@@ -1,0 +1,15 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jfree</groupId>
+  <artifactId>jcommon</artifactId>
+  <version>1.0.5.pack200</version>
+ 	<name>JCommon</name>
+  <description>
+		JCommon is a collection of useful classes used by JFreeChart, JFreeReport and other projects.  
+	</description>
+	<url>http://www.jfree.org/jcommon/index.php.
+	</url>
+	<distributionManagement>
+		<downloadUrl>http://www.jfree.org/jcommon/download/</downloadUrl>
+	</distributionManagement>
+</project>

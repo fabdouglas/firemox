@@ -1,0 +1,15 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jfree</groupId>
+  <artifactId>chart</artifactId>
+  <version>1.0.2.2.pack200</version>
+ 	<name>JCommon</name>
+  <description>
+		A free Java chart library. JFreeChart supports pie charts (2D and 3D), bar charts (horizontal and vertical, regular and stacked), line charts, scatter plots, time series charts, high-low-open-close charts, candlestick plots, Gantt charts, combined plots, thermometers, dials and more. JFreeChart can be used in applications, applets, servlets and JSP. This project is maintained by David Gilbert.  
+	</description>
+	<url>http://www.jfree.org/jfreechart/
+	</url>
+	<distributionManagement>
+		<downloadUrl>http://sourceforge.net/project/showfiles.php?group_id=15494</downloadUrl>
+	</distributionManagement>
+</project>

@@ -33,7 +33,7 @@ public interface IChartKey extends Comparable<IChartKey> {
 	 * 
 	 * @return the integer key.
 	 */
-	int getIntegerKey();
+	public int getIntegerKey();
 
 	/**
 	 * @return the default value of this key type.
