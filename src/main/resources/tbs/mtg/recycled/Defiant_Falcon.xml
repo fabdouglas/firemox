@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Defiant Falcon">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+<!--  {1}{w} flying 
+{4}, {t}: search your library for a rebel card with converted mana cost 3 or less and put that card into 
+play. then shuffle your library. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>flying rebel bird</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="4" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<and>
+							<has-property property="rebel"/>
+							<sup left="4">
+								<right register="tested" index="manacost"/>
+							</sup>
+						</and>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

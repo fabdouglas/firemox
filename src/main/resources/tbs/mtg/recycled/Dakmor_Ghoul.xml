@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dakmor Ghoul">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b}{b} when dakmor ghoul comes into play, 
+target opponent loses 2 life and you gain 2 life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<action ref="lose-life-target" value="2"/>
+				<action ref="gain-life" value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

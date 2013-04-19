@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Necravolver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - volver
+	2/2
+	kicker 1g and/or w
+	if the 1g kicker cost was paid, necravolver comes into play with two +1/+1 counters on it and with trample.
+	if the w kicker cost was paid, necravolver comes into play with a +1/+1 counter on it and with lifelink. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>volver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" green="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="add" property="trample"/>
+				</add-modifier>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker2">
+			<actions>
+				<pay-mana white="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-ability ref="lifelink"/>
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker12">
+			<actions>
+				<pay-mana colorless="1" green="1" />
+			</actions>
+			<actions>
+				<pay-mana white="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="add" property="trample"/>
+				</add-modifier>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-ability ref="lifelink"/>
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

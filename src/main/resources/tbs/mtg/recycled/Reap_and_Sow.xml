@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reap and Sow">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	sorcery
+	choose one - destroy target land; or search your library for a land card, put that card into play, then shuffle your library.
+	entwine 1g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<pay-mana green="1" colorless="1"/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target-list operation="clear"/>
+				<action ref='search-lib' value="1">
+					<test>
+						<has-idcard idcard='land'/>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='search-lib' value="1">
+					<test>
+						<has-idcard idcard='land'/>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

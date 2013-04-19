@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Essence Filter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	sorcery
+	choose one - destroy all enchantments; or destroy all nonwhite enchantments.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<has-idcard idcard="enchantment"/>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<not>
+								<has-color color="white"/>
+							</not>
+							<has-idcard idcard="enchantment"/>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arctic Merfolk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - merfolk
+	1/1
+	kicker-return a creature you control to its owner's hand. 
+	if the kicker cost was paid, arctic merfolk comes into play with a +1/+1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<action ref="target-creature">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+				<target-list operation="clear"/>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Conclave's Blessing">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	enchantment - aura
+	convoke 
+	enchant creature
+	enchanted creature gets +0/+2 for each other creature you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura convoke </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<mult right="2">	
+						<left>
+							<counter restriction-zone="play">
+								<and>
+									<not>
+										<is target="attachedto"/>
+									</not>
+									<has-idcard idcard="creature"/>
+									<controller player="you"/>
+								</and>
+							</counter>
+						</left>
+					</mult>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

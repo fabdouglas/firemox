@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Slith Bloodletter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bb
+	creature - slith
+	1/1
+	whenever slith bloodletter deals combat damage to a player, put a +1/+1 counter on it.
+	1b: regenerate slith bloodletter.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>slith </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

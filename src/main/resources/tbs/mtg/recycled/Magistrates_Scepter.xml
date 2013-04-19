@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Magistrate's Scepter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	4, t :put a charge counter on magistrate's scepter.
+	t, remove three charge counters from magistrate's scepter: take an extra turn after this one.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type='this'/>
+				<repeat value="3"/>
+				<add-object object-name='charge'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<ability ref="extra-turn"/>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

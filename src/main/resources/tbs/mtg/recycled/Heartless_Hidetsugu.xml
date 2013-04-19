@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Heartless Hidetsugu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	legendary creature - ogre shaman
+	4/3
+	t :heartless hidetsugu deals damage to each player equal to half that player's life total, rounded down.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend ogre shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='player' mode='all'/>
+				<assign-damage type='damage-normal'>
+					<value>
+						<div-truncated right="2">
+							<left register='target' index='life'/>
+						</div-truncated>
+					</value>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

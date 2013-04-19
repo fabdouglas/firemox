@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dogpile">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	instant
+	dogpile deals damage to target creature or player equal to the number of attacking creatures you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<test ref="tested-is-attacking"/>
+								<has-idcard idcard="creature"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

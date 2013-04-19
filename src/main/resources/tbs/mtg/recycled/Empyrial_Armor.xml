@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Empyrial Armor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +x/+x, where x is the number of cards in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<counter restriction-zone="hand">
+						<controller player="controller" />
+					</counter>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<counter restriction-zone="hand">
+						<controller player="controller" />
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

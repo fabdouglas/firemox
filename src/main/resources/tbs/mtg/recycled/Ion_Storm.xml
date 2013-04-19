@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ion Storm">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {2}{r} {1}{r}, remove a +1/+1 counter or a charge counter from a permanent you control: ion storm deals 2 damage to target creature or player. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" red="1" />
+				<target type="card" mode="choose" restriction-zone="play" raise-event="false" cancel="false"> 
+					<test>
+						<and>
+							<controller player="you"/>
+							<sup right="0">
+								<left>
+									<counter object-name="+1/+1" restriction-zone="play" card="tested"/>
+								</left>
+							</sup>
+						</and>
+					</test>
+				</target>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<!-- TODO remove-object object-name="+1/+1" target-index="0"/ -->
+				<!-- TODO TODO assign-damage value="2" type="damage-normal" target-index="1"/ -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

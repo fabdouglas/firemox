@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Graveborn Muse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - zombie spirit
+	3/3
+	at the beginning of your upkeep, you draw x cards and you lose x life, where x is the number of zombies you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='you'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="zombie"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<action ref='lose-life'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="zombie"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

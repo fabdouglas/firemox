@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sawtooth Thresher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact creature
+	1/1
+	sunburst 
+	remove two +1/+1 counters from sawtooth thresher: sawtooth thresher gets +4/+4 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>sunburst construct</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<remove-object object-name="+1+1"/>
+				<remove-object object-name="+1+1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<register-modifier index='power' value='4' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' value='4' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

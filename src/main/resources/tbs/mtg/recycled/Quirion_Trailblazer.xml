@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Quirion Trailblazer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - elf
+	1/2
+	when quirion trailblazer comes into play, you may search your library for a basic land card and put that card into play tapped. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf scout</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib' value="1">
+							<test>
+								<test ref="is-basic-land"/>
+							</test>
+						</action>
+						<move-card destination="playANDtapped" controller="you"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

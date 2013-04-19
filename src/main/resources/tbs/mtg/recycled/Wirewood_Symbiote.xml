@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wirewood Symbiote">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - insect
+	1/1
+	return an elf you control to its owner's hand: untap target creature. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="elf"/>
+						</and>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='use-once-each-turn'/>
+				<target-list operation="clear"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

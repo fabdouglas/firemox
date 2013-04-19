@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Journeyer's Kite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	3, t :search your library for a basic land card, reveal it, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<test ref="is-basic-land"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

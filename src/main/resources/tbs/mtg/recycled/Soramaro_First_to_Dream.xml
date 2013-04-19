@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soramaro, First to Dream">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uu
+	legendary creature - spirit
+	*/*
+	flying
+	soramaro, first to dream's power and toughness are each equal to the number of cards in your hand.
+	4, return a land you control to its owner's hand: draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='you'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='you'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref="target-land">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

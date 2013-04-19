@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Heritage Druid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - elf druid
+	1/1
+	tap three untapped elves you control: add ggg to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="3" />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<has-property property="elf"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap />
+			</cost>
+			<effects>
+				<give-mana green='3' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

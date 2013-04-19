@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Illuminated Wings">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	enchantment - aura
+	enchant creature
+	enchanted creature has flying.
+	2, sacrifice illuminated wings: draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="flying"/>
+</card>

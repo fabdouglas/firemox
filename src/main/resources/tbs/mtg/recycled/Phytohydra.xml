@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phytohydra">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gww
+	creature - plant hydra
+	1/1
+	if damage would be dealt to phytohydra, put that many +1/+1 counters on it instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>plant hydra </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

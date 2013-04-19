@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mobilization">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	all soldier creatures have vigilance.
+	2w: put a 1/1 white soldier creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Soldier'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token soldier </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="vigilance" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+					<has-property property="soldier"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Skyshroud Elf">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  1g t add g to your mana pool. 1: add w or r to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf druid</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="tap-add-G"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+			</cost>
+			<effects>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+			</cost>
+			<effects>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

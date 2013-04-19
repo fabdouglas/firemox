@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Hallowed Ground">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{w} 
+
+{w}{w}: return target non-snow-covered land you control to its owner's hand. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana white="2" />
+				<action ref="target-land">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="snow"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

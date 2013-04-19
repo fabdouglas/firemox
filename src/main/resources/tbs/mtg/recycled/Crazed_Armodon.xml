@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crazed Armodon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - elephant
+	3/3
+	g: crazed armodon gets +3/+0 and gains trample until end of turn. destroy crazed armodon at end of turn. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elephant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+3+0-until-eot"/>
+				<action ref="trample-until-eot"/>
+				<action ref='destroy-target-eot'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

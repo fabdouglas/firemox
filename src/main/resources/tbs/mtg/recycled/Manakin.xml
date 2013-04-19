@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Manakin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  2 t add 1 to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature construct</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana colorless="1" />
+				</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lys Alana Bowmaster">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - elf archer
+	2/2
+	reach 
+	whenever you play an elf spell, you may have lys alana bowmaster deal 2 damage to target creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf archer reach </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-property property="elf"/>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage value='2' type='damage-normal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

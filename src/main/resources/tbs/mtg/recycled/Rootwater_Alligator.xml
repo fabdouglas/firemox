@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rootwater Alligator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - alligator
+	3/2
+	sacrifice a forest: regenerate rootwater alligator.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>crocodile</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

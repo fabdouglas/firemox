@@ -1,0 +1,3 @@
+emperor_crocodile;20
+Ali Baba;20
+Super_card;20

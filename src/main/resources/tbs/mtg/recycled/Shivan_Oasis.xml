@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Shivan Oasis">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land shivan oasis comes into play tapped. t add r or g to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-G"/>
+	</abilities>
+</card>

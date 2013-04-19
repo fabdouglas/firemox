@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Consuming Bonfire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	tribal sorcery - elemental
+	choose one - consuming bonfire deals 4 damage to target non-elemental creature; or consuming bonfire deals 7 damage to target treefolk creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>tribal sorcery </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-property property='elemental'/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property='treefolk'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='7' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

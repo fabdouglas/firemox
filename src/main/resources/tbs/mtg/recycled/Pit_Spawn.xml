@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pit Spawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bbb
+	creature - beast
+	6/4
+	first strike
+	at the beginning of your upkeep, sacrifice pit spawn unless you pay bb.
+	whenever pit spawn deals damage to a creature, remove that creature from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>demon first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana black="2"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<has-idcard idcard='creature'/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Destructive Flow">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  brg 
+		at the beginning of each player's upkeep, that player sacrifices a nonbasic 
+		land.   
+	-->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+			<register index="green" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>red green black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep" />
+			<cost>
+				<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play"
+					name="%" cancel="false" hop="1">
+					<test>
+						<and>
+							<test ref="is-nonbasic-land" />
+							<controller player="opponent" />
+						</and>
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard"
+					name="sacrifice-%n-creature" />
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

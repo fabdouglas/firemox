@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Infernal Contract">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bbb
+	sorcery
+	draw four cards. you lose half your life, rounded up.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='4'/>
+				<action ref='draw-a-card'/>
+				<action ref='lose-life'>
+					<value>
+						<div-rounded right="2">
+							<left register="you" index="life"/>
+						</div-rounded>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="March of the Machines">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-indirection index="power" operation="set" linked="true">
+			 		<value register="this" index="manacost"/>
+			 	</register-indirection>
+				<register-indirection index="toughness" operation="set" linked="true">
+			 		<value register="this" index="manacost"/>
+			 	</register-indirection>
+				<idcard-modifier idcard="artifact-creature" operation="set" linked="true"/>
+			</modifiers>
+			<while>
+		 		<and>
+					<has-idcard idcard="artifact"/>
+					<not>
+			 			<has-idcard idcard="creature"/>
+			 		</not>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

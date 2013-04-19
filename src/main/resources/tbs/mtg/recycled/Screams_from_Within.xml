@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Screams from Within">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	enchantment - aura
+	enchant creature
+	enchanted creature gets -1/-1.
+	when enchanted creature is put into a graveyard, return screams from within from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this"/>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="-1/-1"/>
+</card>

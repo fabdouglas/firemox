@@ -1,0 +1,4 @@
+super_card;10
+throne of bone;10
+Abyssal_Specter;10
+black lotus;10

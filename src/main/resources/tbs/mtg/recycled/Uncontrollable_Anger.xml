@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Uncontrollable Anger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	enchantment - aura
+	flash 
+	enchant creature 
+	enchanted creature gets +2/+2 and attacks each turn if able.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura flash </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant-flash"/>
+	</abilities>
+	<attachment ref='+2/+2'>
+		<modifiers>
+			<property-modifier linked="true" property="attacks-if-able" />
+		</modifiers>
+	</attachment>
+</card>

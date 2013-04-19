@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Crystal Quarry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land t add 1 to your mana pool. 5, t add wubrg to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana colorless="1" />
+				</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<pay-mana colorless="5"/>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana white="1" blue="1" black="1" red="1" green="1"/>
+				</effects>
+		</activated-ability>
+	</abilities>
+</card>

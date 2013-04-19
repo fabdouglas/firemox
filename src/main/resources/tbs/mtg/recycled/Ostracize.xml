@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ostracize">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	sorcery
+	target opponent reveals his or her hand. choose a creature card from it. that player discards that card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref="discard-a-player" value="1">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

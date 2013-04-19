@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nettling Imp">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{b} {t}: target non-wall creature the active player controls attacks 
+this turn, if able. 
+at end of turn, if that creature didn't attack this turn, destroy it. 
+ignore this effect if that player didn't control the creature continuously since the beginning of the turn. 
+play this ability only during an opponent's turn before attackers are declared. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>imp</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<test>
+				<and>
+					<controller player="currentplayer"/>
+					<or>
+						<phase-is phase="upkeep"/>
+						<phase-is phase="draw"/>
+						<phase-is phase-index="precombat-main"/>
+						<phase-is phase="declare-attack"/>
+					</or>					
+				</and>
+			</test>
+			<cost>
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="opponent"/>
+							<not>
+								<has-property property="wall"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="attacks-if-able" linked="false">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="nocare">
+							<test>
+								<or>
+									<phase-is phase="cleanup"/>
+									<phase-is phase="declare-attacking"/>
+								</or>
+							</test>
+						</end-of-phase>
+						<effects>
+							<if-then-hop elsehop="3">
+								<test>
+									<phase-is phase="declare-attacking"/>
+								</test>
+							</if-then-hop>
+							<if-then-hop elsehop="abort">
+								<test>
+									<test ref="saved-is-attacking"/>
+								</test>
+							</if-then-hop>
+							<hop value="4"/>
+							<if-then-hop elsehop="3">
+								<test>
+									<not ref="tested-just-summoned"/>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+
+		<triggered-ability zone="play">
+			<end-of-phase phase="cleanup"/>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<not ref="tested-just-summoned"/>
+					</test>
+				</if-then-hop>
+				<target type="saved"/>
+				<action ref="destroy"/>
+				<unregister-this/>
+			</effects>
+		</triggered-ability>
+
+
+
+	</abilities>
+</card>

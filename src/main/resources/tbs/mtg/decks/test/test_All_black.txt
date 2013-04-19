@@ -1,0 +1,16 @@
+Super_Card;20
+Swamp;10
+Mountain;1
+City_of_Brass;1
+Badlands;1
+Bad_Moon;1
+Nightmare;1
+Yawgmoths_Will;1
+Mox_Jet;20
+Final_Fortune;1
+Furnace_of_Rath;1
+Spirit_Shackle;10
+Underworld_Dreams;10
+Abyssal_Specter;1
+Weakness;1
+Black_knight;1

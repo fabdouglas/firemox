@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sacred Mesa">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	at the beginning of your upkeep, sacrifice sacred mesa unless you sacrifice a pegasus.
+	1w: put a 1/1 white pegasus creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<action ref="sacrifice-a-creature" value="1">
+							<test>
+								<has-property property="pegasus"/>
+							</test>
+						</action>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Pegasus'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token pegasus flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

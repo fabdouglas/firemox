@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fervent Charge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wbr
+	enchantment
+	whenever a creature you control attacks, it gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white red black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="context.card"/>
+				<action ref="add+2+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

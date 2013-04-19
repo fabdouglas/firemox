@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Braid of Fire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment
+	cumulative upkeep-add r to your mana pool. 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<give-mana>
+							<red>
+								<counter object-name='age' card='this'/>
+							</red>
+						</give-mana>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

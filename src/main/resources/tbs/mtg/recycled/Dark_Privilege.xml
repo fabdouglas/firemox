@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dark Privilege">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {1}{b} enchanted creature gets +1/+1. 
+		sacrifice a creature: regenerate enchanted creature. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-a-creature" value="1" />
+			</cost>
+			<effects>
+				<target type="attachedto" />
+				<action ref="regenerate-target" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="+1/+2" />
+</card>

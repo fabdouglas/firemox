@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Baku Altar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	whenever you play a spirit or arcane spell, you may put a ki counter on baku altar.
+	2, t, remove a ki counter from baku altar: put a 1/1 colorless spirit creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<add-object object-name='ki'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<target type='this'/>
+				<remove-object object-name='ki'/>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Spirit'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token spirit </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

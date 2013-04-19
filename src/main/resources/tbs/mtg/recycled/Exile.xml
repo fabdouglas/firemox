@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Exile">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	instant
+	remove target nonwhite attacking creature from the game. you gain life equal to its toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<not>
+								<has-color color="white"/>
+							</not>
+							<test ref="tested-is-attacking"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value register='target' index='toughness'/>
+				</action>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

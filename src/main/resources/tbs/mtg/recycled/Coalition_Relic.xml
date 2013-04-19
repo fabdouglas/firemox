@@ -1,0 +1,90 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coalition Relic">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	t :add one mana of any color to your mana pool.
+	t :put a charge counter on coalition relic.
+	at the beginning of your precombat main phase, remove all charge counters from coalition relic. add one mana of any color to your mana pool for each counter removed this way.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-U"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='precombat-main'>
+				<test ref='during-your-precombat-main'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">	
+					<either>
+						<give-mana>	
+							<red>
+								<counter object-name="charge" card="this"/>
+							</red>
+						</give-mana>
+					</either>
+					<either>
+						<give-mana>	
+							<white>
+								<counter object-name="charge" card="this"/>
+							</white>
+						</give-mana>
+					</either>
+					<either>
+						<give-mana>	
+							<blue>
+								<counter object-name="charge" card="this"/>
+							</blue>
+						</give-mana>
+					</either>
+					<either>
+						<give-mana>	
+							<black>
+								<counter object-name="charge" card="this"/>
+							</black>
+						</give-mana>
+					</either>
+					<either>
+						<give-mana>	
+							<green>
+								<counter object-name="charge" card="this"/>
+							</green>
+						</give-mana>
+					</either>
+				</choice>
+				<target type="this"/>
+				<repeat>
+					<value>
+						<counter object-name="charge" card="this"/>
+					</value>
+				</repeat>
+				<remove-object object-name="charge"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

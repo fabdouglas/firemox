@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Faerie Noble">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - faerie
+	1/2
+	flying
+	other faerie creatures you control get +0/+1.
+	t :other faerie creatures you control get +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>faerie flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control">
+					<test>
+						<and>
+							<not>
+				 				<is-this/>
+				 			</not>
+					 		<has-property property="faerie"/>
+					 	</and>
+					 </test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>		 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+			 		<has-property property="faerie"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

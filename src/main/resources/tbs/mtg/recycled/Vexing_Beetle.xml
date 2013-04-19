@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vexing Beetle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - insect
+	3/3
+	vexing beetle can't be countered.
+	vexing beetle gets +3/+3 as long as no opponent controls a creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect cannot-be-countered </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="3">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="3">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

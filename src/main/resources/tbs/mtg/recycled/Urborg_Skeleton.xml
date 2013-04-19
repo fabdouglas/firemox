@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urborg Skeleton">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - skeleton
+	0/1
+	kicker 3 
+	b: regenerate urborg skeleton.
+	if the kicker cost was paid, urborg skeleton comes into play with a +1/+1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>skeleton </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="3"/>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

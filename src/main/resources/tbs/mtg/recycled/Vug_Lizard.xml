@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vug Lizard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - lizard
+	3/4
+	mountainwalk
+	echo 1rr 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>lizard mountainwalk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana red='2' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Index">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	sorcery
+	look at the top five cards of your library, then put them back in any order.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="4"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

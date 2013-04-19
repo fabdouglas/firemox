@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sword Dancer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - rebel
+	1/2
+	ww: target attacking creature gets -1/-0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='2' />
+				<action ref='target-creature'>
+					<test>
+						<test ref="tested-is-attacking"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='1' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

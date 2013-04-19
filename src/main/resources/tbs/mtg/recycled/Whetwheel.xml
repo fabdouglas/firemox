@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Whetwheel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	xx, t :target player puts the top x cards of his or her library into his or her graveyard.
+	morph 3 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-xx"/>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="mill-a-card"/>
+			</effects>
+		</activated-ability>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

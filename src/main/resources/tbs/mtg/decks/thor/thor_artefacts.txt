@@ -1,0 +1,25 @@
+#Jeu artefacts
+#
+#John
+#
+#août 16, 2001
+#1
+#4th Edition
+#
+Juggernaut;2
+Sol_Ring;6
+Tetravus;2
+Ivory_Tower;2
+Howling_Mine;2
+Candelabra_of_Tawnos;1
+Mishras_Workshop;4
+Mishras_Factory;4
+Black_Lotus;4
+Ancestral_Recall;2
+Counterspell;4
+Mahamoti_Djinn;3
+Time_Walk;4
+Timetwister;4
+Time_Elemental;2
+Power_Sink;2
+Island;12

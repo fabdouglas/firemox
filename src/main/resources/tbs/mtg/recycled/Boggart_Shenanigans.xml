@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Boggart Shenanigans">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	tribal enchantment - goblin
+	whenever another goblin you control is put into a graveyard from play, you may have boggart shenanigans deal 1 damage to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>tribal global-enchantment </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="goblin"/>
+						<controller player="you"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage type="damage-normal" value="1"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

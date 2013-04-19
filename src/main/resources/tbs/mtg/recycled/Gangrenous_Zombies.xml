@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Gangrenous Zombies">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {1}{b}{b} 
+		{t}, sacrifice gangrenous zombies: 
+		
+		gangrenous zombies deals 1 damage to each creature and each player. 
+		if you control a snow-covered swamp, gangrenous zombies deals 2 damage to 
+		each creature and each player instead. 
+		
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="2" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="sacrifice-this" />
+			</cost>
+			<effects>
+				<target type="player" mode="all" />
+				<action ref="all-creatures" />
+				<assign-damage value="1" type="damage-normal">
+					<value>
+						<if-then-else then="2" else="1">
+							<if>
+								<has restriction-zone="play">
+									<and>
+										<controller player="you" />
+										<has-property property="snow" />
+									</and>
+								</has>
+							</if>
+						</if-then-else>
+					</value>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

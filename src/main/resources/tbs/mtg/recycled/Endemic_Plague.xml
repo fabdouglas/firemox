@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Endemic Plague">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	sorcery
+	as an additional cost to play endemic plague, sacrifice a creature.
+	destroy all creatures that share a creature type with the sacrificed creature. they can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<different right="0">
+							<left>
+								<card-properties operation="intersection.size" card="target-list.first"
+									card2="tested" lower="FIRST_SUB_TYPE" higher="LAST_SUB_TYPE" />
+							</left>
+						</different>
+					</test>
+				</action>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

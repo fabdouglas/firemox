@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Yavimaya Granger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - elf
+	2/2
+	echo 2g 
+	when yavimaya granger comes into play, you may search your library for a basic land card and put that card into play tapped. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana green='1' colorless='2' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib'>
+							<test>
+								<test ref="is-basic-land"/>
+							</test>
+						</action>
+						<move-card destination="playANDtapped" controller="you"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

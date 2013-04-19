@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bound in Silence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	tribal enchantment - rebel aura
+	enchant creature
+	enchanted creature can't attack or block.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>tribal local-enchantment </idcards>
+		<properties>rebel aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='cannot-attack-or-block'/>
+</card>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dingus Egg">
+<rules-author-comment></rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" card="tested"/>
+						<has-idcard idcard="land"/>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="graveyard" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

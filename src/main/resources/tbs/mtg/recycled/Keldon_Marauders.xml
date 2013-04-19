@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Keldon Marauders">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - human warrior
+	3/3
+	vanishing 2 
+	when keldon marauders comes into play or leaves play, it deals 1 damage to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<object name='time'/>
+		<object name='time'/>
+	</modifiers>
+</card>

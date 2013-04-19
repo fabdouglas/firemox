@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nightscape Apprentice">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - wizard
+	1/1
+	u, t :put target creature you control on top of its owner's library.
+	r, t :target creature gains first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

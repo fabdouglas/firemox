@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cyclopean Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - zombie giant
+	4/2
+	when cyclopean giant is put into a graveyard from play, target land becomes a swamp. remove cyclopean giant from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="swamp" operation="set" linked="false"/> 
+					<ability-modifier operation="clear" linked="false"/>
+				</add-modifier>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

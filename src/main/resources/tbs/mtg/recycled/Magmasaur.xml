@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Magmasaur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - elemental
+	0/0
+	magmasaur comes into play with five +1/+1 counters on it.
+	at the beginning of your upkeep, sacrifice magmasaur unless you remove a +1/+1 counter from it. if you sacrifice magmasaur this way, it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental lizard</properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<target type="this"/>
+						<remove-object object-name="+1/+1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+						<target type="player" mode="all"/>
+						<action ref="all-creatures">
+							<test>
+								<not>
+									<has-property property="flying"/>
+								</not>
+							</test>
+						</action>
+						<assign-damage type="damage-normal">
+							<value>
+								<counter object-name="+1/+1" card="this"/>
+							</value>
+						</assign-damage>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

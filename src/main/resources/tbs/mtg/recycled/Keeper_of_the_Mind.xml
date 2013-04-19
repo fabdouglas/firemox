@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Keeper of the Mind">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	creature - human wizard
+	1/2
+	u, t :draw a card. play this ability only if an opponent has at least two more cards in hand than you.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal>
+					<left>
+						<add right="2">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="opponent"/>
+								</counter>
+							</left>
+						</add>
+					</left>
+					<right>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</right>
+				</sup-equal>
+			</test>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

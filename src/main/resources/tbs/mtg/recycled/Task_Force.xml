@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Task Force">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - human rebel
+	1/3
+	whenever task force becomes the target of a spell or ability, it gets +0/+3 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<destination-test>
+					<is-this />
+				</destination-test>
+			</targeted>
+			<effects>
+				<action ref="gain+0+3-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

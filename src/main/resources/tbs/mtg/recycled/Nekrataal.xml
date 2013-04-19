@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nekrataal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - human assassin
+	2/1
+	first strike 
+	when nekrataal comes into play, destroy target nonartifact, nonblack creature. that creature can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human assassin first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-card'>
+					<test>
+						<and>
+							<not>
+								<has-idcard idcard="artifact"/>
+							</not>
+							<not>
+								<has-color color="black"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

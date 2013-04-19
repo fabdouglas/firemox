@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dimir Aqueduct">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<!-- 
+		Dimir Aqueduct
+		Land
+		Dimir Aqueduct comes into play tapped.
+		When Dimir Aqueduct comes into play, return a land you control to its owner's hand.
+		T Add UB to your mana pool.
+	-->
+	<init>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<ability ref="come-into-play-tapped" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<is-this />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-land">
+					<test>
+						<controller player="you" card="tested" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="return-to-hand" />
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<give-mana blue="1" black="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

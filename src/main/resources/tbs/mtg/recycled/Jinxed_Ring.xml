@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jinxed Ring">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	whenever a nontoken permanent is put into your graveyard from play, jinxed ring deals 1 damage to you.
+	sacrifice a creature: target opponent gains control of jinxed ring. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<has-property property="token"/>
+						</not>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<target-list operation="clear"/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<controller-modifier player="target-list.first" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</controller-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

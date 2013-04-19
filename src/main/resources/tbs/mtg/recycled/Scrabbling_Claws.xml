@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scrabbling Claws">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	t :target player removes a card in his or her graveyard from the game.
+	1, sacrifice scrabbling claws: remove target card in a graveyard from the game. draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref="remove-a-card-from-graveyard"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-this'/>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

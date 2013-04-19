@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Demonic Tutor">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{b} search your library for a card and put that card into your hand. then shuffle your library. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="search-lib"/>
+				<action ref="return-to-hand"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

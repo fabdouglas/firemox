@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Impending Disaster">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1r
+		enchantment
+		at the beginning of your upkeep, if there are seven or more lands in play, sacrifice impending disaster. if you do, destroy all lands.
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='colorless' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep' />
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="all">
+					<test>
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="play">
+									<has-idcard idcard="land" />
+								</counter>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this' />
+				<target-list operation='clear' name='%' />
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<has-idcard idcard="land" />
+					</test>
+				</target>
+				<action ref='destroy' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

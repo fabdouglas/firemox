@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Body of Jukai">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7gg
+	creature - spirit
+	8/5
+	trample
+	soulshift 8 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='7'/>
+			<register index='power' value='8'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spirit trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='soulshift8'/>
+	</abilities>
+</card>

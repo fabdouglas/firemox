@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Blizzard">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {g}{g} 
+
+	cumulative upkeep {2} 
+	you can't play blizzard unless you control a snow-covered land. 
+	
+	creatures with flying don't untap during their controllers' untap steps. 
+-->
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="snow"/>
+					</and>
+				</has>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+		
+		<ability ref="cumulative-upkeep"/>
+		
+		<triggered-ability resolution="normal" zone="play" name="cumulative-upkeep">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana>
+							<colorless>
+								<mult right="2">
+									<left>
+										<counter object-name="age" card="this"/>
+									</left>
+								</mult>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="does-not-untap" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-property property="flying"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

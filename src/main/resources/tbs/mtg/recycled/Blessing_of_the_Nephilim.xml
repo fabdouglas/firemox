@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	xsi:noNamespaceSchemaLocation="../../validator.xsd" name="Blessing of the Nephilim">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--  w enchant creature enchanted creature gets +1/+1 for each of its colors.   -->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+		<properties></properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<bit-count>
+						<value>
+							<card-colors card="this" />
+						</value>
+					</bit-count>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<bit-count>
+						<value>
+							<card-colors card="this" />
+						</value>
+					</bit-count>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

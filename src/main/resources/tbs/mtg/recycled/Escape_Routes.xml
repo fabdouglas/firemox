@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Escape Routes">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment
+	2u: return target white or black creature you control to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='2' />
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<or>
+								<has-color color="white"/>
+								<has-color color="black"/>
+							</or>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

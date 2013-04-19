@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Golgari Brownscale">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - lizard
+	2/3
+	when golgari brownscale is put into your hand from your graveyard, you gain 2 life.
+	dredge 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>lizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='dredge2'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='hand' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='2'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

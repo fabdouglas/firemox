@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rain of Daggers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	sorcery
+	destroy all creatures target opponent controls. you lose 2 life for each creature destroyed this way.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='lose-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="creature"/>
+										<controller player="target-list.first"/>
+									</and>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

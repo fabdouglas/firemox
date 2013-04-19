@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cleanse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	sorcery
+	destroy all black creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="all-creatures">
+					<test>
+						<has-color color="black"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

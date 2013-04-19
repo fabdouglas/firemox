@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Maraxus of Keld">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rr
+	legendary creature - human warrior
+	*/*
+	maraxus of keld's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='playANDuntapped'>
+						<and>
+							<or>
+								<has-idcard idcard='artifact'/>
+								<has-idcard idcard='creature'/>
+								<has-idcard idcard='land'/>
+							</or>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='playANDuntapped'>
+						<and>
+							<or>
+								<has-idcard idcard='artifact'/>
+								<has-idcard idcard='creature'/>
+								<has-idcard idcard='land'/>
+							</or>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend human warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

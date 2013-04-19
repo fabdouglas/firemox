@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kinsbaile Cavalier">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - kithkin knight
+	2/2
+	knight creatures you control have double strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="double-strike" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<has-property property="knight"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gerrard's Battle Cry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	enchantment
+	2w: creatures you control get +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

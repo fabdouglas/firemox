@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+      name="Pendelhaven">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+    <init>
+        <idcards>land</idcards>
+        <properties>legend</properties>
+    </init>
+    <abilities>
+        <ability ref="cast-land"/>
+        <ability ref="tap-add-G"/>
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <action ref="T"/>
+                <action ref="target-creature">
+                    <test>
+                        <and>
+                            <equal right="1">
+                                <left register="tested" index="toughness"/>
+                            </equal>
+                            <equal right="1">
+                                <left register="tested" index="power"/>
+                            </equal>
+                        </and>
+                    </test>
+                </action>
+            </cost>
+            <effects>
+                <action ref="add+1+2-until-eot"/>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

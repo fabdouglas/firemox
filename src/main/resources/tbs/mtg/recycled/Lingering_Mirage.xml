@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lingering Mirage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	enchantment - aura
+	enchant land
+	enchanted land is an island.
+	cycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<idcard-modifier idcard="island" operation="set" linked="true" />
+			<property-modifier property="basic-land" operation="add" linked="true" />
+			<ability-modifier operation="clear" linked="true">
+				<abilities />
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-land-to-enchant" />
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

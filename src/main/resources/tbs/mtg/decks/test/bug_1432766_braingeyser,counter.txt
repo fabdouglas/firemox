@@ -1,0 +1,3 @@
+Braingeyser;30
+super card;30
+counterspell;30

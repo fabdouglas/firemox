@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zhang He, Wei General">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	legendary creature
+	4/2
+	horsemanship
+	whenever zhang he, wei general attacks, each other creature you control gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend horsemanship human soldier</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="creatures-you-control">
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

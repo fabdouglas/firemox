@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Clockwork Condor">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4} flying clockwork condor comes into play with three +1/+1 counters on it. 
+whenever clockwork condor attacks or blocks, remove a +1/+1 counter from it at end of combat. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="0"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>flying bird</properties>
+	</init>
+
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	
+	<actions>
+		<!-- Action removing one +1/+1 counter at the end of combat and only once -->
+		<action reference-name="create-removal">
+			<modify-register register="this" index="free0" operation="clear" name="%"/>
+			<create-ability>
+				<triggered-ability zone="play">
+					<end-of-phase phase="eoc"/>
+					<effects>
+						<if-then-hop elsehop="4">
+							<test>
+								<equal left="0">
+									<right register="this" index="free0"/>
+								</equal>
+							</test>
+						</if-then-hop>
+						<target type="this"/>
+						<remove-object object-name="+1/+1"/>
+						<modify-register register="this" index="free0" operation="add" value="1"/>
+						<unregister-this/>
+					</effects>
+				</triggered-ability>
+			</create-ability>
+		</action>
+	</actions>
+
+	<abilities>
+	
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="create-removal"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="create-removal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

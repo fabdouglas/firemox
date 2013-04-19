@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Riptide Director">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	creature - wizard
+	2/3
+	2uu, t :draw a card for each wizard you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' colorless='2' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="wizard"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

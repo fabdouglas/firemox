@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Leonin Squire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - cat soldier
+	2/2
+	when leonin squire comes into play, return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>cat soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="artifact"/>
+							<inf-equal right="1">
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

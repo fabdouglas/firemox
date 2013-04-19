@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Night's Whisper">
+<rules-author-comment></rules-author-comment>
+
+<!--  1b you draw two cards and you lose 2 life. -->
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="draw-a-card"/>
+				<action ref="lose-life"  value="2"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

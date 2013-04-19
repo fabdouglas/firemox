@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vulturous Zombie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bg
+	creature - plant zombie
+	3/3
+	flying
+	whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on vulturous zombie.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>creature </idcards>
+		<properties>plant zombie flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<destination-test>
+					<and>
+						<controller player="opponent"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

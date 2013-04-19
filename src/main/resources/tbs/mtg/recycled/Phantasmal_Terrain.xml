@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Phantasmal Terrain">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {u}{u} as phantasmal terrain comes into play, choose a basic land type. 
+		enchanted land's type is the chosen type. -->
+
+	<init>
+		<registers>
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand" name="play-enchant-land">
+			<cost>
+				<pay-mana value="manacost" />
+				<input-color register="stack" index="0" operation="set" />
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<idcard-modifier operation="set" linked="true" live-update="false">
+				<idcard>
+					<add left="land">
+						<right>
+							<mult right="256">
+								<left register="stack" index="0" />
+							</mult>
+						</right>
+					</add>
+				</idcard>
+			</idcard-modifier>
+			<property-modifier property="basic-land" operation="add" linked="true" />
+			<ability-modifier operation="clear" linked="true">
+				<abilities />
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-land-to-enchant" />
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

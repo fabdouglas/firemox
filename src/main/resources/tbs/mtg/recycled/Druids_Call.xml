@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Druid's Call">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{g} whenever enchanted creature is dealt damage, 
+its controller puts that many 1/1 green squirrel creature tokens into play. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is target="attachedto"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<repeat value="context.int"/>
+				<create-card>
+					<card name="Squirrel">
+						<rules-author-comment>By fabdouglas</rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>squirrel token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="attachedto.controller" destination="play"/>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

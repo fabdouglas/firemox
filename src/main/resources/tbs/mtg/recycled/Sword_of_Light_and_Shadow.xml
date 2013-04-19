@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sword of Light and Shadow">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact - equipment
+	equipped creature gets +2/+2 and has protection from white and from black.
+	whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
+	equip 2
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+				<action ref='gain-life' value='3'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+				<property-modifier property="protection-from-white" linked="true" />
+				<property-modifier property="protection-from-black" linked="true" />
+			<register-modifier index='power' operation='add' linked='true' value='2' />
+			<register-modifier index='toughness' operation='add' linked='true' value='2' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

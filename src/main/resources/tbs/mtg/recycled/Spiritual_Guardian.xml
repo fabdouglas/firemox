@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spiritual Guardian">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - guardian
+	3/4
+	when spiritual guardian comes into play, you gain 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='4'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

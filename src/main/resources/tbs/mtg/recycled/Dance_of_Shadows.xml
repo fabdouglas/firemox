@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dance of Shadows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	sorcery - arcane
+	creatures you control get +1/+0 and gain fear until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="add+1+0-until-eot"/>
+				<action ref="fear-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

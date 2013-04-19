@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Walking Desecration">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - zombie
+	1/1
+	b, t :creatures of the type of your choice attack this turn if able.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<action ref="all-creatures">
+					<test>
+						<has-property>
+							<property register="this" index="free0" />
+						</has-property>
+					</test>
+				</action>
+				<action ref="attacks-if-able-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

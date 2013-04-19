@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diplomatic Immunity">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {1}{u} 
+		enchanted creature can't be the target of spells or abilities. 
+		diplomatic immunity can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+		<properties>shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="shroud" linked="true" />
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spectral Lynx">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - cat
+	2/1
+	protection from green
+	b: regenerate spectral lynx.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>cat spirit protection-from-green </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

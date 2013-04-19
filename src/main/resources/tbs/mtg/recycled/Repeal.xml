@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Repeal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xu
+	instant
+	return target nonland permanent with converted mana cost x to its owner's hand.
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref='target-permanent'>
+					<test>
+						<and>
+							<not>
+								<has-idcard idcard="land"/>
+							</not>
+							<equal>
+								<right register="tested" index="manacost"/>
+								<left register="stack" index="0"/>
+							</equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

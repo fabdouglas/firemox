@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Viashino Sandstalker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - viashino warrior
+	4/2
+	haste 
+	at end of turn, return viashino sandstalker to its owner's hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>viashino warrior haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot" />
+			<effects>
+				<target type="this"/>
+				<action ref="return-to-hand"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

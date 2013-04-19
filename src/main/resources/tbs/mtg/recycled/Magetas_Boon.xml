@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mageta's Boon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment - aura
+	flash
+	enchant creature
+	enchanted creature gets +1/+2.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura flash </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant-flash"/>
+	</abilities>
+	<attachment ref='+1/+2'/>
+</card>

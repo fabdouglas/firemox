@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Merchant Ship">
+<rules-author-comment></rules-author-comment>
+
+<!--  {u} 
+merchant ship can't attack unless defending player controls an island. 
+whenever merchant ship attacks and isn't blocked, you gain 2 life. 
+when you control no islands, sacrifice merchant ship. -->
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack human</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home"/>
+		<ability ref="island-home-attack"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<action ref="gain-life"  value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

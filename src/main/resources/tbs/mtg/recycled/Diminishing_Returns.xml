@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diminishing Returns">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{u}{u} 
+each player shuffles his or her hand and graveyard into his or her library. 
+you remove the top ten cards of your library from the game. 
+then each player draws up to seven cards. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="hand"/>
+				<target type="card" mode="all" restriction-zone="graveyard"/>
+				<action ref="shuffle-in-libs"/>
+				<target-list operation="clear" name="%"/>
+				<target type="player" mode="all"/>
+				<shuffle zone="library"/>				
+				<repeat value="10"/>
+				<move-player-card controller="owner" to="graveyard" from="library"/>
+				<repeat value="7"/>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

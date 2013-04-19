@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fiery Mantle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment - aura
+	enchant creature
+	when fiery mantle is put into a graveyard from play, return fiery mantle to its owner's hand.
+	r: enchanted creature gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

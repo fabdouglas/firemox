@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Righteous War">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wb
+	enchantment
+	white creatures you control have protection from black.
+	black creatures you control have protection from white.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="protection-from-white" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<has-color color="black"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="protection-from-black" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<has-color color="white"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

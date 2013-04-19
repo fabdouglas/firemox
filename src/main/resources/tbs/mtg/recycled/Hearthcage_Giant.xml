@@ -1,0 +1,91 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hearthcage Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rr
+	creature - giant warrior
+	5/5
+	when hearthcage giant comes into play, put two 3/1 red elemental shaman creature tokens into play.
+	sacrifice an elemental: target giant creature gets +3/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value='2'/>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental shaman</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='elemental'/>
+					</test>
+				</action>
+				<action ref='target-creature'>
+					<test>
+						<has-property property='giant'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='3' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' value='1' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

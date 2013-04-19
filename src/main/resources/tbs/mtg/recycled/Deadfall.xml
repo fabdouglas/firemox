@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deadfall">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {2}{g} creatures with forestwalk may be blocked as though they didn't have forestwalk. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

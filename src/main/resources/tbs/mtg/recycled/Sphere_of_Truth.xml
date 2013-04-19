@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sphere of Truth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	enchantment
+	if a white source would deal damage to you, prevent 2 of that damage.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<source-test>
+					<has-color color="white"/>
+				</source-test>
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!-- this shield is removed -->
+				<unregister-this/>
+				<target type="context.player"/>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="2" left="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Clearwater Goblet">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	sunburst 
+	at the beginning of your upkeep, you may gain 1 life for each charge counter on clearwater goblet.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>sunburst </properties>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<counter object-name="charge" card="this"/>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

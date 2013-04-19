@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Venser, Shaper Savant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	legendary creature - human wizard
+	2/2
+	flash 
+	when venser, shaper savant comes into play, return target spell or permanent to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard flash </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" >
+					<test>
+						<or>
+							<test ref="is-targetable-spell" />
+							<and>
+								<test ref="is-target"/>
+								<in-zone zone="play"/>
+							</and>
+						</or>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

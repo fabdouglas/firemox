@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scroll of Origins">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	2, t :draw a card if you have seven or more cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

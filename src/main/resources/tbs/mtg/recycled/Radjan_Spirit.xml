@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Radjan Spirit">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - spirit
+	3/2
+	t :target creature loses flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="flying" linked="false" operation="remove">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

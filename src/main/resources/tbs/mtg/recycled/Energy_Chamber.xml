@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Energy Chamber">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	at the beginning of your upkeep, choose one - put a +1/+1 counter on target artifact creature; or put a charge counter on target noncreature artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="target-artifact-creature"/>
+						<add-object object-name='+1/+1'/>
+					</either>
+					<either>
+						<action ref="target-artifact">
+							<test>
+								<not>
+									<has-idcard idcard="creature"/>
+								</not>
+							</test>
+						</action>
+						<add-object object-name='charge'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

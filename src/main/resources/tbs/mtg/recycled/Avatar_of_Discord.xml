@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Avatar of Discord">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+<!--+ 
+    | flying when avatar of discord comes into play,
+    |   sacrifice it unless you discard two cards.
+    +-->
+
+	<init>
+		<registers>
+			<register index="power" value="5"/>
+			<register index="toughness" value="3"/>
+			<register value="3" index="0">
+				<!--  TODO 
+					<index>
+						<enumeration>
+							<value value="black"/>
+							<value value="red"/>
+						</enumeration>
+					</index>
+				-->
+			</register>
+		</registers>
+		<colors>red black</colors>
+		<idcards>creature</idcards>
+		<properties>flying avatar</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup-equal right="2">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<choice cancel="false" controller="you">
+					<either>
+						<action ref="discard" value="2"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+				<hop value="2"/>
+				<action ref="sacrifice-this"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

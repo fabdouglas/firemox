@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Copy Artifact">
+<rules-author-comment></rules-author-comment>
+
+<!--
+		1u
+	enchantment
+	as copy artifact comes into play, you may choose an artifact in play. 
+	if you do, copy artifact comes into play as a copy of that artifact. 
+	it's still an enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" restriction-zone="play" raise-event="false" mode="choose"
+					cancel="true" hop="2">
+					<test>
+						<has-idcard idcard="artifact" />
+					</test>
+				</target>
+				<copy-card card="target-list.last" to="this">
+					<excludes idcards="global-enchantment"/>
+				</copy-card>
+				<action ref="put-in-play" />
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

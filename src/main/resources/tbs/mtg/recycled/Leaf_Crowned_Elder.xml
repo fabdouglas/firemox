@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Leaf-Crowned Elder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - treefolk shaman
+	3/5
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with leaf-crowned elder, you may reveal it. if you do, you may play that card without paying its mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="target-list.last"/>
+				<action ref="move-to-play"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,9 @@
+super card;20
+bad moon;4
+swamp;4
+Nightmare;4
+Yawgmoths_Will;4
+Black_knight;4
+Rally the Righteous;4
+Demonfire;4
+Aluren;4

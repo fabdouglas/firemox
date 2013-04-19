@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bringer of the White Dawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7ww
+	creature - bringer
+	5/5
+	you may pay wubrg rather than pay bringer of the white dawn's mana cost.
+	trample
+	at the beginning of your upkeep, you may return target artifact card from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='7'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bringer trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable="this" zone="hand">
+				<cost>
+					<pay-mana white="1" blue="1" red="1" black="1" green="1"/>
+				</cost>
+				<effects>
+					<action ref="put-in-play" />
+				</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="artifact"/>
+								</and>
+							</test>
+						</target>
+						<move-card controller="you" destination="play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

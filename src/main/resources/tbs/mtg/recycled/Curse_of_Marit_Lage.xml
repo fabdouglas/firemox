@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Curse of Marit Lage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	enchantment
+	when curse of marit lage comes into play, tap all islands.
+	islands don't untap during their controllers' untap steps.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<has-idcard idcard="island"/>
+					</test>
+				</target>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="does-not-untap" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+				<has-idcard idcard="island"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

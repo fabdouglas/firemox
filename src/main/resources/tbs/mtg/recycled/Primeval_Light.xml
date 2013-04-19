@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Primeval Light">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	sorcery
+	destroy all enchantments target player controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<has-idcard idcard="enchantment"/>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

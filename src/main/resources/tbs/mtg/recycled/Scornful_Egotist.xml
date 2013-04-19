@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scornful Egotist">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		7u
+		creature - wizard
+		1/1
+		morph u 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='7' />
+			<register index='power' value='1' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

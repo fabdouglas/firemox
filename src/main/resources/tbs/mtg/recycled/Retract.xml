@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Retract">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	instant
+	return all artifacts you control to their owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-artifacts">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

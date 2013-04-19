@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Complex Automaton">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - golem
+	4/4
+	at the beginning of your upkeep, if you control seven or more permanents, return complex automaton to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<test ref='during-your-upkeep'/>
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="play">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</sup-equal>
+					</and>
+				</test>	
+			</beginning-of-phase>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jandor's Saddlebags">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	3, t :untap target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

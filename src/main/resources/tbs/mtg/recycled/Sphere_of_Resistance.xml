@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sphere of Resistance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	spells cost 1 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<is-spell/>
+			</test>
+			<cost>
+		<!-- Update the additional cost amount -->
+				<pay-mana colorless='1' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

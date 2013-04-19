@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Etched Oracle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	0/0
+	sunburst 
+	1, remove four +1/+1 counters from etched oracle: target player draws three cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>sunburst wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type="this"/>
+				<repeat value="4"/>
+				<remove-object object-name="+1/+1"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value='3'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

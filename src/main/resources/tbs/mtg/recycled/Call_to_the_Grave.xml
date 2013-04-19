@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Call to the Grave">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	enchantment
+	at the beginning of each player's upkeep, that player sacrifices a non-zombie creature.
+	at end of turn, if no creatures are in play, sacrifice call to the grave.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" raise-event="false" restriction-zone="play" name="%" cancel="false">
+					<test>
+						<and>
+							<controller player="target-list.first"/> 
+							<has-idcard idcard="creature"/>
+							<not>
+								<has-property property="zombie"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+				<end-of-phase phase="eot">
+					<test>
+						<not>
+							<has restriction-zone="play">
+								<has-idcard idcard="creature"/>
+							</has>
+						</not>
+					</test>
+				</end-of-phase>
+				<effects>
+					<action ref="sacrifice-this" />
+				</effects>
+			</triggered-ability>
+	</abilities>
+</card>

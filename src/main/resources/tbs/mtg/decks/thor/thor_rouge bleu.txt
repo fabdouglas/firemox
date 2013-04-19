@@ -1,0 +1,30 @@
+#jeu rouge bleu
+#
+#John
+#
+#mars 10, 2000
+#1
+#4th Edition
+#
+Ancestral_Recall;4
+Braingeyser;1
+Clone;1
+Counterspell;4
+Power_Sink;2
+Time_Walk;4
+Vesuvan_Doppelganger;1
+Disintegrate;2
+Fireball;2
+Fork;1
+Lightning_Bolt;3
+Volcanic_Island;15
+Black_Lotus;4
+Mox_Ruby;5
+Mox_Sapphire;5
+Sol_Ring;2
+Timetwister;4
+Wheel_of_Fortune;1
+Dragon_Whelp;1
+Shivan_Dragon;1
+Mana_Flare;2
+Rukh_Egg;1

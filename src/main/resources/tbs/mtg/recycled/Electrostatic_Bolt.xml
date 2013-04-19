@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Electrostatic Bolt">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	instant
+	electrostatic bolt deals 2 damage to target creature. if it's an artifact creature, electrostatic bolt deals 4 damage to it instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<if-then-else then="4" else="2">
+							<if>
+								<has-idcard idcard="artifact" card="target-list.first"/>
+							</if>
+						</if-then-else>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

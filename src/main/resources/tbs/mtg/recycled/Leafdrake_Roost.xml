@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Leafdrake Roost">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gu
+	enchantment - aura
+	enchant land
+	enchanted land has "gu, t :put a 2/2 green and blue drake creature token with flying into play."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-land'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<pay-mana green="1" blue="1"/>
+							<action ref='T'/>
+						</cost>
+						<effects>
+							<create-card>
+								<card name='Drake'>
+									<rules-author-comment></rules-author-comment>
+									<init>
+										<registers>
+											<register index='power' value='2'/>
+											<register index='toughness' value='2'/>
+										</registers>
+										<colors>green blue</colors>
+										<idcards>creature</idcards>
+										<properties>token drake flying </properties>
+									</init>
+								</card>
+							</create-card>
+							<move-card controller='you' destination='play'/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

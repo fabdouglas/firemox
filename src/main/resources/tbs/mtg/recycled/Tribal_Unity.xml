@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tribal Unity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		x2g
+	instant
+	creatures of the type of your choice get +x/+x until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>	
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<action ref="all-creatures">
+					<test>
+						<has-property>
+							<property register="this" index="free0"/>
+						</has-property>
+					</test>
+				</action>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register="this" index="free0"/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register="this" index="free0"/>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

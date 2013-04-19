@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aspect of Wolf">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="green" value="1" />
+			<register index="colorless" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="add-half-truncated" linked="true">
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<has-idcard idcard="forest" />
+							<controller player="controller" />
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add-half-rounded" linked="true">
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<has-idcard idcard="forest" />
+							<controller player="controller" />
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

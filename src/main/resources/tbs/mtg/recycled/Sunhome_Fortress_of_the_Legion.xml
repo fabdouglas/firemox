@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sunhome, Fortress of the Legion">
+	<rules-author-comment>Surtur2/Hoani</rules-author-comment>
+
+	<init>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<ability ref="tap-add-C" />
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="2" red="1" white="1" />
+				<action ref="T" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="double-strike">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

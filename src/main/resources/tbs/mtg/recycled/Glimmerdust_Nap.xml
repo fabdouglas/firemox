@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glimmerdust Nap">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment - aura
+	enchant tapped creature
+	enchanted creature doesn't untap during its controller's untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="does-not-untap" linked="true" />
+		</modifiers>
+		<valid-target>
+			<and>
+				<test ref="valid-to-enchant" />
+				<in-zone zone="playANDtapped" card="tested"/>
+				<test ref="is-targetable-creature" />
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

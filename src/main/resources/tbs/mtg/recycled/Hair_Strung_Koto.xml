@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hair-Strung Koto">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	tap an untapped creature you control: target player puts the top card of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped" card="tested" />
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="mill-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

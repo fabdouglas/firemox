@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pyromancer's Swath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment
+	if an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
+	at end of turn, discard your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play" layer="1">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<or>
+						<is-player/>
+						<has-idcard idcard="creature"/>
+					</or>
+				</destination-test>
+				<source-test>
+					<and>
+						<controller player="you"/>
+						<or>
+							<has-idcard idcard="instant"/>
+							<has-idcard idcard="sorcery"/>
+						</or>
+					</and>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<assign-damage type="context.int2">
+					<value>
+						<add left="2" right="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot" />
+			<effects>
+				<action ref="discard" value="all"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Erhnam Djinn">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{g} at the beginning of your upkeep, target non-wall creature an opponent controls gains forestwalk until your next upkeep. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="1"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>djinn</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="opponent"/>
+							<not>
+								<has-property property="wall"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="forestwalk" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

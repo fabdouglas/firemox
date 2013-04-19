@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cultbrand Cinder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4(b/r)
+	creature - elemental shaman
+	3/3
+	when cultbrand cinder comes into play, put a -1/-1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='-1/-1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

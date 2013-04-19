@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blind with Anger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	instant - arcane
+	untap target nonlegendary creature and gain control of it until end of turn. that creature gains haste until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-property property="legend"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</controller-modifier>
+				</add-modifier>
+				<untap/>
+				<action ref="haste-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

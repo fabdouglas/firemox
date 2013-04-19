@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Safewright Quest">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(g/w)
+	sorcery
+	
+	search your library for a forest or plains card, reveal it, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana green="1"/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<or>
+							<has-idcard idcard='forest'/>
+							<has-idcard idcard='plains'/>
+						</or>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<or>
+							<has-idcard idcard='forest'/>
+							<has-idcard idcard='plains'/>
+						</or>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

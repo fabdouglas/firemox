@@ -1,0 +1,110 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fable of Wolf and Owl">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3(g / u)(g / u)(g / u)
+	enchantment
+	whenever you play a green spell, you may put a 2/2 green wolf creature token into play.
+	whenever you play a blue spell, you may put a 1/1 blue bird creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>green blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' blue='3' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' blue='2' green='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' blue='1' green='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' green='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="green"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<create-card>
+					<card name='Wolf'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token wolf </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<create-card>
+					<card name='Bird'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>blue</colors>
+							<idcards>creature</idcards>
+							<properties>token bird flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

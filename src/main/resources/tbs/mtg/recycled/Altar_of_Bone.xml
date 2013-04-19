@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Altar of Bone">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gw
+	sorcery
+	as an additional cost to play altar of bone, sacrifice a creature.
+	search your library for a creature card, reveal that card, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+				<action ref="reveal"/>
+				<move-card controller="you" destination="hand"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

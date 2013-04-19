@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cabal Executioner">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		2bb
+		creature - cleric
+		2/2
+		whenever cabal executioner deals combat damage to a player, that player sacrifices a creature.
+		morph 3bb 
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='2' />
+			<register index='colorless' value='2' />
+			<register index='power' value='2' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<is-player />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play"
+					name="%" cancel="false">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<controller player="context.player" />
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice" />
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana black='2' colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

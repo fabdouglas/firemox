@@ -1,0 +1,31 @@
+#Jeu blanc rouge bleu
+#
+#John
+#
+#septembre 07, 2000
+#1
+#4th Edition
+#
+Plateau;4
+Volcanic_Island;4
+Tundra;4
+Black_Lotus;4
+Mox_Pearl;4
+Mox_Ruby;4
+Mox_Sapphire;4
+Sol_Ring;3
+Ancestral_Recall;4
+Counterspell;2
+Time_Walk;4
+Timetwister;4
+Power_Sink;2
+Circle_of_Protection:_Red;1
+Disenchant;2
+Swords_to_Plowshares;2
+Disintegrate;2
+Fireball;2
+Fork;2
+Inferno;2
+Wheel_of_Fortune;2
+Howling_Mine;2
+Lightning_Bolt;2

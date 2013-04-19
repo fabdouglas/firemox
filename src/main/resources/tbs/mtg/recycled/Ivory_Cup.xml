@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ivory Cup">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability zone="play" resolution="normal">
+			<casting>
+				<test>
+					<and>
+						<is-spell/>
+						<has-color color="white" card="tested"/>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<action ref="gain-life" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

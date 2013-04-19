@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Greatbow Doyen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - elf archer
+	2/4
+	other archer creatures you control get +1/+1.
+	whenever an archer you control deals damage to a creature, that archer deals that much damage to that creature's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf archer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<and>
+						<has-property property="archer"/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<has-idcard idcard='creature'/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage type='damage-normal' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+			 		<has-property property="archer"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

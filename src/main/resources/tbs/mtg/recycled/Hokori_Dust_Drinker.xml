@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hokori, Dust Drinker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	legendary creature - spirit
+	2/2
+	lands don't untap during their controllers' untap steps.
+	at the beginning of each player's upkeep, that player untaps a land he or she controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="currentplayer"/>
+							<test ref="is-targetable-land" />
+						</and>
+					</test>
+				</target>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="does-not-untap" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="land"/>
+		 	</while>
+		</static-modifier>
+	</modifiers>
+</card>

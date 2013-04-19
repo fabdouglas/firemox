@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aven Brigadier">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3www
+	creature - bird soldier
+	3/5
+	flying
+	other bird creatures get +1/+1.
+	other soldier creatures get +1/+1.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bird soldier flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+					<has-property property="bird"/>
+					<not>
+						<is-this/>
+					</not>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+					<has-property property="soldier"/>
+					<not>
+						<is-this/>
+					</not>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

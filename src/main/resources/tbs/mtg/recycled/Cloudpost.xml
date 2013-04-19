@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cloudpost">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land - locus
+	cloudpost comes into play tapped.
+	t :add 1 to your mana pool for each locus in play.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>locus </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<colorless>
+						<counter restriction-zone="play">
+							<has-property property="locus"/>
+						</counter>
+					</colorless>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

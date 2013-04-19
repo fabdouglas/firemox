@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Clay Statue">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	3/1
+	2: regenerate clay statue.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>golem</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

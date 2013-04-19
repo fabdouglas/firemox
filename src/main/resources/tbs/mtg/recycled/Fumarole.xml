@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fumarole">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3br
+	sorcery
+	as an additional cost to play fumarole, pay 3 life.
+	destroy target creature and target land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='pay-life' value='3'/>
+				<action ref="target-creature"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Qumulox">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		6uu
+		creature - beast
+		5/4
+		affinity for artifacts 
+		flying
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='colorless' value='6' />
+			<register index='power' value='5' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>beast flying</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="artifact" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

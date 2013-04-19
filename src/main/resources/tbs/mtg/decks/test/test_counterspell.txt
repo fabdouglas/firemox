@@ -1,0 +1,11 @@
+super card;20
+lifeforce;10
+counterspell;10
+Spell_Blast;10
+fallen angel;5
+Horobi Deaths Wail;5
+disenchant;5
+sinkhole;5
+spirit_shackle;5
+Unyaro Griffin;20
+Mons's Goblin Raiders;20

@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sachi, Daughter of Seshiro">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	legendary creature - snake shaman
+	1/3
+	other snake creatures you control get +0/+1.
+	shamans you control have "t :add gg to your mana pool."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend snake shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<has-property property="snake"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable="instant" name="" zone="play">
+							<cost>
+								<action ref="T"/>
+							</cost>
+							<effects>
+								<give-mana green="2"/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<and>
+			 		<has-property property="shaman"/>
+			 		<controller player="you"/>
+			 	</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

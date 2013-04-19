@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deathcurse Ogre">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5b
+	creature - ogre warrior
+	3/3
+	when deathcurse ogre is put into a graveyard from play, each player loses 3 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>ogre warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="player" mode="all"/>
+				<action ref='lose-life-target' value='3'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

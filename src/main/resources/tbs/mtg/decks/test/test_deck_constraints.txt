@@ -1,0 +1,2 @@
+Island;20;set=9e
+Counterspell;40;set=5e

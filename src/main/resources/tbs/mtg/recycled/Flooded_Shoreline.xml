@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flooded Shoreline">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	enchantment
+	uu, return two islands you control to their owner's hand: return target creature to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' />
+				<action ref="target-land">
+					<test>
+						<and>
+							<has-idcard idcard="island"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="target-land">
+					<test>
+						<and>
+							<has-idcard idcard="island"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Circle of Protection: White">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<idcards>global-enchantment</idcards>
+		<colors>white</colors>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="put-white-shield" zone="play">
+			<cost>
+				<pay-mana colorless="1"/>
+				<!-- target a card in stack or in play -->
+				<action ref="choose-damage-source">
+					<test>
+						<has-color color="white"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<create-ability>
+					<!-- save the card we have targeted -->
+					<save target="target-list.first"/>
+					<ability ref="prevent-all-from-once"/>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

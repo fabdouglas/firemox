@@ -1,0 +1,22 @@
+#Jeu dragon
+#
+#John
+#
+#août 26, 2001
+#1
+#4th Edition
+#
+Black_Lotus;4
+Howling_Mine;2
+Mox_Ruby;4
+Mox_Sapphire;4
+Sol_Ring;2
+Counterspell;4
+Time_Walk;4
+Timetwister;4
+Mana_Flare;3
+Shivan_Dragon;4
+Volcanic_Island;15
+Ancestral_Recall;3
+Wheel_of_Fortune;3
+Dragon_Whelp;4

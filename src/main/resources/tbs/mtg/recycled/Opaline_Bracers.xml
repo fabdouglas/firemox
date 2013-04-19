@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Opaline Bracers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact - equipment
+	sunburst 
+	equipped creature gets +x/+x, where x is the number of charge counters on opaline bracers.
+	equip 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment sunburst </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index='power' operation='add' linked='true'>
+				<value>
+					<counter object-name="charge" card="this"/>
+				</value>
+			</register-modifier>
+			<register-modifier index='toughness' operation='add' linked='true'>
+				<value>
+					<counter object-name="charge" card="this"/>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

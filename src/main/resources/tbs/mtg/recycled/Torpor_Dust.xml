@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Torpor Dust">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(u/b)
+	enchantment - aura
+	
+	flash enchant creature enchanted creature gets -3/-0.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura  </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant-flash'/>
+	</abilities>
+	<attachment ref='-3/-0'/>
+</card>

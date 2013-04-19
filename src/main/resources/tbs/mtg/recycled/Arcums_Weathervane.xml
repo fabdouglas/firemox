@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Arcum's Weathervane">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2} 
+{2}, {t}: target snow-covered land loses snow-covered.  
+{2}, {t}: target basic land without snow-covered gains snow-covered. 
+
+# Oct 4, 2004 - Gives the "Snow" or removes the "Snow" attribute from a land. It is possible to have Snow-Covered non-basic lands. This card can't give Snow-Covered to a non-basic land, so it takes some tricks to make it happen.
+# Oct 4, 2004 - can't be used on a multiland to add Snow-Coveredness even if it "is a" basic land type. You can use it on any land to remove Snow-Coveredness.
+
+ -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<action ref="target-land">
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="plains"/>
+								<has-idcard idcard="mountain"/>
+								<has-idcard idcard="island"/>
+								<has-idcard idcard="swamp"/>
+								<has-idcard idcard="forest"/>
+							</or>
+							<not>
+								<has-property property="snow"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="snow" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<action ref="target-land">
+					<test>
+						<has-property property="snow"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="snow" operation="remove" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

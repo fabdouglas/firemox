@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Haunted Cadaver">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3b
+		creature - zombie
+		2/2
+		whenever haunted cadaver deals combat damage to a player, you may sacrifice it. if you do, that player discards three cards.
+		morph 1b 
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='2' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<is-player />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='sacrifice-this' />
+						<target type="context.player" />
+						<action ref='player-discard' value="3" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana black='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

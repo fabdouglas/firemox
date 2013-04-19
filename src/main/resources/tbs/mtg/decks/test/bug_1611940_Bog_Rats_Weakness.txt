@@ -1,0 +1,3 @@
+Bog Rats;20
+Weakness;20
+super card;20

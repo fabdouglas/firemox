@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Howl of the Night Pack">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6g
+	sorcery
+	
+	put a 2/2 green wolf creature token into play for each forest you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="forest"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<create-card>
+					<card name='Wolf'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token wolf </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

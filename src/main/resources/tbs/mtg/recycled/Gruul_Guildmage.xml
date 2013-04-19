@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Gruul Guildmage">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red green</colors>
+		<idcards>creature</idcards>
+		<properties>human shaman</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana red="2"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana red="1" green="1"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana green="2"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" red="1"/>
+				<action ref="sacrifice-a-land" value="1"/>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" green="1"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

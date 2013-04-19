@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hornet Harasser">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - goblin shaman
+	2/2
+	when hornet harasser is put into a graveyard from play, target creature gets -2/-2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add-2-2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

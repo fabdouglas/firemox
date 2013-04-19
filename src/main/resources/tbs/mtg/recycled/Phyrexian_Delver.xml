@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phyrexian Delver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - zombie
+	3/2
+	when phyrexian delver comes into play, return target creature card from your graveyard to play. you lose life equal to that card's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>	
+			</cost>
+			<effects>
+				<move-card destination="play" controller="you"/>
+				<action ref='lose-life'>
+					<value register='target-list.first' index='manacost'/>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

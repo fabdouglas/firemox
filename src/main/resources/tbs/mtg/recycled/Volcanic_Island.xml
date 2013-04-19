@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Volcanic Island">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>island mountain </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+	</abilities>
+</card>

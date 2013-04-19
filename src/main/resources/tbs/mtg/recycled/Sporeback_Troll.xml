@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sporeback Troll">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - troll mutant
+	0/0
+	graft 2 
+	1g: regenerate target creature with a +1/+1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>troll mutant </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="graft" />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref="target-creature">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='regenerate-target'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

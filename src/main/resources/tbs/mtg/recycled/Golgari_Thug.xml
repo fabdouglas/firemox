@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Golgari Thug">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - human warrior
+	1/1
+	when golgari thug is put into a graveyard from play, put target creature card in your graveyard on top of your library.
+	dredge 4 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='dredge4'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<move-card controller="you" destination="library" position="top"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

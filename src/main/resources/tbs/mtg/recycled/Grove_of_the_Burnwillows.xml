@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grove of the Burnwillows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	t :add r or g to your mana pool. each opponent gains 1 life.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red='1' />
+				<target type="opponent"/>
+				<action ref='gain-life-target' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green='1' />
+				<target type="opponent"/>
+				<action ref='gain-life-target' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

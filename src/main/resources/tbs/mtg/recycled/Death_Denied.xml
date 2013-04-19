@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Death Denied">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xbb
+	instant - arcane
+	return x target creature cards from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deftblade Elite">
+<rules-author-comment></rules-author-comment>
+
+<!-- 
+Creature - Soldier
+P/T: 	1/1
+Rules Text (Oracle): 	
+Provoke (When this attacks, you may have target creature defending player 
+controls untap and block it if able.)
+1 ManaWhite Mana: Prevent all combat damage that would be dealt to and dealt 
+by Deftblade Elite this turn.
+-->
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="provoke"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" white="1" />
+			</cost>
+			<effects>
+				<action ref="prevent-all-on-this"/>
+				<action ref="prevent-all-from-this"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Royal Herbalist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - cleric
+	1/1
+	2, remove the top card of your library from the game: you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<target type="card" mode="all" restriction-zone="library">		
+					<test>
+						<and>
+							<position position="top"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

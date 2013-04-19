@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Marble Diamond">
+<!-- Tested ok 0.82.31 06/01/2005 -->
+	<rules-author-comment>By jods</rules-author-comment>	
+	
+    <init>
+        <registers>
+            <register index="colorless" value="2"/>
+        </registers>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+        <ability ref="cast-spell"/>
+		<ability ref="tap-add-W"/>
+		<ability ref="come-into-play-tapped"/>
+	</abilities>
+</card>

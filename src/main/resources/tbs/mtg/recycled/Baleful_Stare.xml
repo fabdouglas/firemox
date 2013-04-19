@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Baleful Stare">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	sorcery
+	target opponent reveals his or her hand. you draw a card for each mountain and red card in it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you"/>
+					<msg type="ok">
+					<text>%ok_when_finished</text>
+				</msg>
+				<action ref="restore-hand-visibility"/>
+				<target type='you'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="hand">
+							<and>
+								<controller player="opponent"/>
+								<or>
+									<has-color color="red"/>
+									<has-idcard idcard="mountain"/>
+								</or>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

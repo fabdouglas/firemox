@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Wizard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - goblin
+	1/1
+	t :put a goblin card from your hand into play.
+	r: target goblin gains protection from white until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="goblin"/>
+						</and>
+					</test>
+				</target>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='goblin'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property='protection-from-white' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

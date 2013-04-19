@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fire Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rrr
+	creature - dragon
+	6/6
+	flying
+	when fire dragon comes into play, it deals damage equal to the number of mountains you control to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="mountain"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

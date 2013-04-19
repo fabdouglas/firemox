@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grave Peril">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	enchantment
+	when a nonblack creature comes into play, sacrifice grave peril. if you do, destroy that creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<has-color color="black"/>
+						</not>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+						<has-idcard idcard="creature"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='sacrifice-this'/>
+				<target type="context.card"/>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

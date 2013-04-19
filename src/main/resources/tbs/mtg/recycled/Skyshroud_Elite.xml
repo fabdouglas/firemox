@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skyshroud Elite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - elf
+	1/1
+	skyshroud elite gets +1/+2 as long as an opponent controls a nonbasic land.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="opponent"/>
+						<test ref="is-nonbasic-land"/>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="2">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="opponent"/>
+						<test ref="is-nonbasic-land"/>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

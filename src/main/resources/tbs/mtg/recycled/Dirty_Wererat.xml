@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dirty Wererat">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{b} 
+{b}, discard a card from your hand: regenerate dirty wererat. 
+threshold - dirty wererat gets +2/+2 and can't block.  
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>human rat minion</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+				<action ref="discard" value="1"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+
+	<modifiers>
+		<property-modifier property="cannot-block">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</property-modifier>
+		<register-modifier index="power" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

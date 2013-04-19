@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<!--[[apt lang=en header]] ______
+ Blades of Velis Vel
+ ______
+ Fabrice Daugan
+ ______
+ October 22 2007
+
+Blades of Velis Vel
+-->
+<!--[[apt lang=fr header]] ______
+ Blades of Velis Vel
+ ______
+ Fabrice Daugan
+ ______
+ 22 Octobre 2007
+
+Blades of Velis Vel
+-->
+<!--[[apt lang=en]]
+ This card is an example of effect adding a <changeling> to a card.
+ This effect ends at the end of turn.
+
+[http://magiccards.info/scans/en/lw/152.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+ Cette carte est un exemple d'implémentation d'un effat ajoutant <changeling> à une carte.
+ Cet effet prend fin à la fin du tour.
+
+[http://magiccards.info/scans/en/lw/152.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blades of Velis Vel">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1r
+		tribal instant - shapeshifter
+		changeling 
+		up to two target creatures each get +2/+0 and gain all creature types until end of turn.
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='colorless' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>tribal instant</idcards>
+		<properties>shapeshifter changeling</properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+				<repeat value="2" />
+				<target type="card" mode="choose" restriction-zone="play" hop="1">
+					<test ref="is-targetable-creature" />
+				</target>
+			</cost>
+			<effects>
+				<action ref="add+2+0-until-eot" />
+				<action ref="changeling-until-eot" />
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

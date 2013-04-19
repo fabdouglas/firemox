@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Anthroplasm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	creature - shapeshifter
+	0/0
+	anthroplasm comes into play with two +1/+1 counters on it.
+	x, t :remove all +1/+1 counters from anthroplasm and put x +1/+1 counters on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>shapeshifter </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<repeat value="all"/>
+				<remove-object object-name="+1/+1"/>
+				<repeat>
+					<value register='stack' index='0'/>
+				</repeat>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

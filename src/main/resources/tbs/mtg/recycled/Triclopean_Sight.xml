@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Triclopean Sight">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment - aura
+	flash
+	enchant creature
+	when triclopean sight comes into play, untap enchanted creature.
+	enchanted creature gets +1/+1 and has vigilance.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant-flash'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='attachedto'/>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='+1/+1'>
+		<modifiers>
+			<property-modifier property='vigilance' linked='true'/>
+		</modifiers>
+	</attachment>
+</card>

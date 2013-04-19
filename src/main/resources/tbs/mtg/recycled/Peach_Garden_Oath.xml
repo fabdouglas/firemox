@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Peach Garden Oath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	sorcery
+	you gain 2 life for each creature you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="creature"/>
+									</and>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

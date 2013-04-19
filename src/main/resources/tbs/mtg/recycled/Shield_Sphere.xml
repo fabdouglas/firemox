@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shield Sphere">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		0
+	artifact creature - wall
+	0/6
+	defender 
+	whenever shield sphere blocks, put a -0/-1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='power' value='0'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<add-object object-name='-0/-1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

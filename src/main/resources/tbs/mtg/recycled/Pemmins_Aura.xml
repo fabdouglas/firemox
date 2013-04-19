@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pemmin's Aura">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	enchantment - aura
+	enchant creature
+	u: untap enchanted creature.
+	u: enchanted creature gains flying until end of turn.
+	u: enchanted creature gains shroud until end of turn. 
+	1: enchanted creature gets +1/-1 or -1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<untap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="shroud-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+1-1-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add-1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

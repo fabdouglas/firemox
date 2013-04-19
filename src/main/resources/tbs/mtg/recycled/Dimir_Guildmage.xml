@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dimir Guildmage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	creature - human wizard
+	2/2
+	
+	3u: target player draws a card. play this ability only any time you could play a sorcery.
+	3b: target player discards a card. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>creature </idcards>
+		<properties>human wizard  </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='3' />
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='3' />
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

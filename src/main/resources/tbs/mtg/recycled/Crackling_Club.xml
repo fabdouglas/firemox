@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crackling Club">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+0.
+	sacrifice crackling club: crackling club deals 1 damage to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='+1/+0'/>
+</card>

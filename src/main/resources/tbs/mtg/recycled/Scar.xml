@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(b/r)
+	instant
+	
+	put a -1/-1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>instant </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>	
+				<pay-mana red="1"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-object object-name='-1/-1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>	
+				<pay-mana black="1"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-object object-name='-1/-1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

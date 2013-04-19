@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Utopia Vow">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	enchantment - aura
+	enchant creature
+	enchanted creature can't attack or block.
+	enchanted creature has "t :add one mana of any color to your mana pool."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='cannot-attack-or-block'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<ability ref="tap-add-B"/>
+					<ability ref="tap-add-U"/>
+					<ability ref="tap-add-G"/>
+					<ability ref="tap-add-R"/>
+					<ability ref="tap-add-W"/>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

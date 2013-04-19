@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Absolver Thrull">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--  3w haunt  when absolver thrull comes into play or the creature it haunts is put into a graveyard, destroy target enchantment.   -->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+			<register index="colorless" value="3" />
+			<register index="power" value="2" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>thrull cleric</properties>
+	</init>
+	<actions>
+		<action reference-name="haunt-cost">
+			<action ref="target-enchantment" />
+		</action>
+		<action reference-name="haunt-effects">
+			<action ref="destroy" />
+		</action>
+	</actions>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="haunt-cost" />
+			</cost>
+			<effects>
+				<action ref="haunt-effects" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<has-private-object object-name="haunting" target="tested" />
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="graveyard" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="haunt-cost" />
+			</cost>
+			<effects>
+				<action ref="haunt-effects" />
+			</effects>
+		</triggered-ability>
+		<ability ref="haunting" />
+	</abilities>
+</card>

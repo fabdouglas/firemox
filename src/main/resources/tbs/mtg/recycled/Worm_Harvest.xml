@@ -1,0 +1,138 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Worm Harvest">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(b / g)(b / g)(b / g)
+	sorcery
+	put a 1/1 black and green worm creature token into play for each land card in your graveyard.
+	retrace (you may play this card from your graveyard by discarding a land card in addition to paying its other costs.) 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<repeat>
+				<value>
+					<counter restriction-zone="graveyard">
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="land"/>
+						</and>
+					</counter>
+				</value>
+			</repeat>
+			<create-card>
+				<card name='Worm'>
+					<rules-author-comment></rules-author-comment>
+					<init>
+						<registers>
+							<register index='power' value='1'/>
+							<register index='toughness' value='1'/>
+						</registers>
+						<colors>black green</colors>
+						<idcards>creature</idcards>
+						<properties>token worm </properties>
+					</init>
+				</card>
+			</create-card>
+			<move-card controller='you' destination='play'/>
+			<action ref='finish-spell'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="2" green="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="2" green="2" black="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="2" green="1" black="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="2" black="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="2" green="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="2" green="2" black="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="2" green="1" black="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="2" black="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Recumbent Bliss">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment - aura
+	enchant creature
+	enchanted creature can't attack or block.
+	at the beginning of your upkeep, you may gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='gain-life' value='1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='cannot-attack-or-block'/>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spidersilk Armor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment
+	creatures you control get +0/+1 and have reach. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='toughness' operation='add' value='1' linked='true' layer='global'/>
+				<property-modifier property="reach" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

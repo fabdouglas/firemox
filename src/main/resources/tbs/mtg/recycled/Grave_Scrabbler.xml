@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grave Scrabbler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - zombie
+	2/2
+	madness 1b 
+	when grave scrabbler comes into play, if its madness cost was paid, you may return target creature card in a graveyard to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='madness'>
+			<actions>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+			</actions>
+			<actions>
+				<pay-mana black='1' colorless='1' />
+			</actions>
+			<actions>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="return-to-hand"/>
+					</either>
+				</choice>
+				<action ref="put-in-play"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

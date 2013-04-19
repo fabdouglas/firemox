@@ -1,0 +1,65 @@
+mirroring:
+http://sales.starcitygames.com/cardscans/MAGMDN/deadironsledge.jpg
+http://www.wizards.com/default.asp?x=mtgcom/daily/rh95,,en
+http://www.wizards.com/global/images/magic/general/Dead_Iron_Sledge.jpg
+http://www.magic-einzelkartenshop.de/images/medium/dead_iron_sledge.jpg
+http://www.magicdeckvortex.com/thumbs_a_h/dead_iron_sledge_small.jpg
+http://www.magicdeckvortex.com/cardpics/ARTIFACTS/Dead_Iron_Sledge.jpg
+http://www.findmagiccards.com/GF/USC/MTGC/MI/DEANDGE1.jpeg
+http://www.magictrade.dk/images/kort/mirrodin/artifact/Dead_Iron_Sledge.jpg
+http://gry.e-kramik.pl/galerie/f0f283339d25c80d6c00b10b5d54d87b2982_m.jpg
+http://www.magic-einzelkartenshop.de/images/medium/dead_iron_sledge.jpg
+http://ww2.wizards.com/gatherer/CardDetails.aspx?name=Volcanic_Island
+
+Features:
+
+*** FEATURE : mailing list add : magic-project-card-dev@lists.sourceforge.net, magic-project-user@lists.sourceforge.net, magic-project-team@lists.sourceforge.net
+test "previous-zone" : Treachery
+
+add "clear cache" option for cards/arts
+display a "proxy" warning when failed to init many TBS pictures...
+
+Leylines ..
+add mana cost in tooltip of card in play or hand
+increase insest dimension for container : hand and play
+remove-from-combat
+remove-all-damage
+add constraint test for "remove-object" action.
+add combobox for recently use deck
+Add the option 'sort cards by... cost,type, color, statistics...'
+Animation for card move
+When mouse enters in a 'damage card', highlight source and put "source" text of it
+When mouse enters in a 'triggered card', highlight the reffered card and put "context" text of it.
+When mouse enters in a 'spell of stack', highlight the reffered card and put "context" text of it, and highlight the cards/players currently in the target list.
+"Il faudrait regrouper les terrains de même type 4 à 4..."
+Put deck constraints in TBS XML rules
+More features for sounds (delay, effects,...)
+Add a random angle to [un]tapped cards, and a perspective view (size & shadow) -> require more CPU & Memory
+Add window for "rebuilb tbs..." with a progressbarr
+add borders in "input*" wizards
+modifier on player : Library_of_Leng - test_activated_abilities_on_player.txt
+test "previous-zone" : Treachery
+
+use cache to manage card to be drawn, avoiding this way drawing several times the same card.
+
+add menu 'Online resources' :
+ web site
+ email FKeyToolGUI.java/composeEmail()
+ mailing list
+ check for update : FKeyToolGUI.java/checkForUpdate
+
+Bugs:
+
+'skip phase', 'continue', 'breakpoints' marks
+Clicking on any (following) phase should go to this phase 
+Sounds might not work.
+
+use options in input-color : -selecting is validating --> disable "ok" button
+
+morph : Aphetto Alchemist
+
+Auto decline :
+une option "Auto skip" avec comme valeurs possibles "immediate", "delay Xs" et "disabled"
+immediate : = fonctionnement actuel
+delay X sec : = si rien à faire, un message annulable et à réponse automatique au bout de X sec + random (pour augmenter le bluff)
+disabled : = logo_flare_MP_24.gif ne répond pas automatiquement "ESC" ou le bouton "skip" doivent être utilisés.

@@ -1,0 +1,4 @@
+Darkblast;20
+super card;20
+Consult the Necrosages;20
+Shambling Shell;20

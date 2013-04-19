@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Brainstorm">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat value="3"/>
+				<action ref="draw-a-card"/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<owner player="you"/>
+					</test>
+				</target>
+				<move-card controller="you" destination="library" position="top"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

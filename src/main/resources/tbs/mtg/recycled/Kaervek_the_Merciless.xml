@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kaervek the Merciless">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5br
+	legendary creature - human shaman
+	5/4
+	whenever an opponent plays a spell, kaervek the merciless deals damage to target creature or player equal to that spell's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<controller player="opponent" />
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='context.card' index='manacost'/>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

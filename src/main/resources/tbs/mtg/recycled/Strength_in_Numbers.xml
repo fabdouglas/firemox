@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Strength in Numbers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	until end of turn, target creature gains trample and gets +x/+x, where x is the number of attacking creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="trample-until-eot"/>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<value>
+							<counter restriction-zone="play">
+								<test ref="tested-is-attacking"/>
+							</counter>
+						</value>
+					</register-modifier>
+					<register-modifier index='toughness' operation='add' linked='false'>
+						<value>
+							<counter restriction-zone="play">
+								<test ref="tested-is-attacking"/>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

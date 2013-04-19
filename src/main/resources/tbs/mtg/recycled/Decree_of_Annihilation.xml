@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decree of Annihilation">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<!--  {8}{r}{r} remove all artifacts, creatures, lands, graveyards, and hands from the game. 
+		cycling {5}{r}{r} when you cycle decree of annihilation, destroy all lands. -->
+	<init>
+		<registers>
+			<register index="colorless" value="8" />
+			<register index="red" value="2" />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<or>
+							<has-idcard idcard="creature" />
+							<has-idcard idcard="artifact" />
+							<has-idcard idcard="land" />
+						</or>
+					</test>
+				</target>
+				<action ref="remove-from-game" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="5" red="2" />
+			</actions>
+			<actions>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<has-idcard idcard="land" />
+					</test>
+				</target>
+				<action ref="destroy" />
+				<target-list operation="clear" name="%" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

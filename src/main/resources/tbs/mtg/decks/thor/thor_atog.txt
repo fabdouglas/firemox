@@ -1,0 +1,24 @@
+#Jeu atog
+#
+#John
+#
+#août 26, 2001
+#1
+#4th Edition
+#
+Atog;4
+Black_Lotus;4
+Howling_Mine;2
+Ivory_Tower;1
+Mox_Ruby;4
+Mox_Sapphire;4
+Sol_Ring;2
+The_Hive;2
+Counterspell;4
+Time_Walk;4
+Timetwister;4
+Mana_Flare;2
+Shivan_Dragon;2
+Volcanic_Island;15
+Ancestral_Recall;3
+Wheel_of_Fortune;3

@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jareth, Leonine Titan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3www
+	legendary creature - cat giant
+	4/7
+	whenever jareth, leonine titan blocks, it gets +7/+7 until end of turn.
+	w: jareth gains protection from the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend cat giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<action ref="add+7+7-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

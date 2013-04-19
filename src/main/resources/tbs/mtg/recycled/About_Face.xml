@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="About Face">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+<!--  {r} switch target creature's power and toughness until end of turn. 
+effects that alter the creature's power alter its toughness instead, 
+and vice versa, this turn. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>instant 
+</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<!-- PUT HERE THE COST OF THIS SPELL -->
+			</cost>
+			<effects>
+				<target mode="choose" type="card" restriction-zone="play">
+					<!-- COMPLETE THIS TEST ON CREATURE TO TARGET -->
+					<test ref="is-targetable-creature"/>
+				</target>
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

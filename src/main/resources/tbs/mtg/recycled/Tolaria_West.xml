@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tolaria West">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	tolaria west comes into play tapped.
+	t :add u to your mana pool.
+	transmute 1uu 
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='transmute'>
+			<actions>
+				<pay-mana blue='2' colorless='1' />
+			</actions>
+		</ability>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref="tap-add-U"/>
+	</abilities>
+</card>

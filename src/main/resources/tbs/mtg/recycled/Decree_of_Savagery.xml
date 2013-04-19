@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decree of Savagery">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {7}{g}{g} put four +1/+1 counters on each creature you control. 
+		cycling {4}{g}{g} when you cycle decree of savagery, 
+		you may put four +1/+1 counters on target creature. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="7" />
+			<register index="green" value="2" />
+		</registers>
+		<colors>green</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="you" />
+					</test>
+				</action>
+				<repeat value="4" />
+				<add-object object-name="+1/+1" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="4" green="2" />
+				<action ref="target-creature" />
+			</actions>
+			<actions>
+				<repeat value="4" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="4" green="2" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

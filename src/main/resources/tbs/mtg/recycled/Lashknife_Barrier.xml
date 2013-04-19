@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lashknife Barrier">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	when lashknife barrier comes into play, draw a card.
+	if a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<in-zone zone="play"/>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!-- this shield is removed -->
+				<unregister-this/>
+				<target type="context.card"/>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="1" left="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

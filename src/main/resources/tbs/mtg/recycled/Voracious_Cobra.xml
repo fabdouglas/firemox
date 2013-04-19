@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Voracious Cobra">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rg
+	creature - snake
+	2/2
+	first strike
+	whenever voracious cobra deals combat damage to a creature, destroy that creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>snake first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<has-idcard idcard='creature'/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divining Witch">
+	<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+	<!--  {1}{b} {1}{b}, {t}, discard a card from your hand: name a card. remove the top six cards of your library from the game. reveal cards from the top of your library until you reveal the named card, then put that card into your hand. remove all other cards revealed this way from the game. -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>human spellshaper</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+				<pay-mana colorless="1" black="1" />
+				<action ref="T" />
+				<action ref="discard-random" value='1' />
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+				<action ref="return-to-hand" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

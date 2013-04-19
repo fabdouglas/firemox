@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Defender of the Order">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+					<!-- UPDATE THE EVENT OF THIS TRIGGERED ABILITY -->
+			<become-tapped>
+				<test>
+					<!-- COMPLETE THE TEST APPLIED ON TAPPING CARD -->
+					<is-this/>
+				</test>
+			</become-tapped>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

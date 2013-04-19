@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Daru Encampment">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  land {t}: add {1} to your mana pool. {w}, {t}: target soldier gets +1/+1 until end of turn. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana white="1" />
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test>
+						<has-property property="soldier"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

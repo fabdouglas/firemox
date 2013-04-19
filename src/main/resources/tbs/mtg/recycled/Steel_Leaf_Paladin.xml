@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Steel Leaf Paladin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gw
+	creature - knight
+	4/4
+	first strike
+	when steel leaf paladin comes into play, return a green or white creature you control to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>elf knight first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<or>
+								<has-color color="green"/>
+								<has-color color="white"/>
+							</or>
+						</and>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wall of Shards">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	snow creature - wall
+	1/8
+	defender, flying
+	cumulative upkeep-an opponent gains 1 life. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='8'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>snow wall defender flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<target type="opponent"/>
+						<action ref='gain-life-target'>
+							<value>
+								<counter object-name='age' card='this'/>
+							</value>
+						</action>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

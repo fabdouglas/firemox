@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Winter's Night">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {g}{w}{r}
+
+ whenever a snow-covered land is tapped for mana, 
+ its controller adds one mana of that type to his or her mana pool. 
+ 
+ that land doesn't untap during its controller's next untap step. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="white" value="1"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>green white red</colors>
+		<idcards>global-enchantment</idcards>
+		<properties>enchant-world</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="land"/>
+						<has-property property="snow"/>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<give-mana color="context.int" value="1" to="context.player">
+								<restriction ref="context.test"/>
+							</give-mana>
+							<action ref="does-not-untap-next-untap"/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,31 @@
+#Jeu blanc
+#
+#John
+#
+#août 10, 2000
+#1
+#4th Edition
+#
+Serra_Angel;4
+Sol_Ring;3
+Holy_Armor;1
+Balance;1
+Blessing;1
+Feldons_Cane;2
+Crusade;2
+Disenchant;3
+Holy_Strength;2
+Spirit_Link;2
+Black_Lotus;4
+Howling_Mine;3
+Wall_of_Swords;1
+Northern_Paladin;2
+Swords_to_Plowshares;4
+Plains;15
+Ivory_Tower;2
+Divine_Transformation;1
+Veteran_Bodyguard;3
+Library_of_Leng;1
+Mox_Pearl;8
+Wrath_of_God;2
+Island_Sanctuary;2

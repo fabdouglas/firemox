@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dovescape">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3 
+	enchantment
+	
+	whenever a player plays a noncreature spell, counter that spell. that player puts x 1/1 white and blue bird creature tokens with flying into play, where x is the spell's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>white blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="3" white="3"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="3" white="2" blue="1"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="3" white="1" blue="2"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="3" blue="3"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+	
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<not>
+						<has-idcard idcard="creature"/>
+					</not>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card"/>
+				<action ref='counter'/>
+				<repeat>
+					<value register="target-list.first" index="manacost"/>
+				</repeat>
+	            <create-card>
+	                <card name="Bird">
+	                    <init>
+	                        <registers>
+	                            <register index="power" value="1"/>
+	                            <register index="toughness" value="1"/>
+	                        </registers>
+	                        <colors>white blue</colors>
+	                        <idcards>creature</idcards>
+	                        <properties>bird flying token</properties>
+	                    </init>
+	                </card>
+	            </create-card>
+	            <move-card controller="target-list.first.controller" destination="play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Livonya Silone">
+<rules-author-comment></rules-author-comment>
+
+<!--  2rrgg first strike, legendary landwalk -->
+
+	<init>
+		<registers>
+			<register index="red" value="2"/>
+			<register index="green" value="2"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>first-strike legend legendary-landwalk human warrior</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

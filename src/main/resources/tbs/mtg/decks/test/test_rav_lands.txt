@@ -1,0 +1,14 @@
+Island;3;card.set=rav
+Mountain;3;card.set=rav
+Plains;3;card.set=rav
+Forest;3;card.set=rav
+Swamp;3;card.set=rav
+Boros_Garrison;4;card.set=rav
+Dimir_Aqueduct;4;card.set=rav
+Golgari_Rot_Farm;4;card.set=rav
+Selesnya_Sanctuary;4;card.set=rav
+Duskmantle_House_of_Shadow;4;card.set=rav
+Overgrown_Tomb;4;card.set=rav
+Sacred_Foundry;4;card.set=rav
+Temple_Garden;4;card.set=rav
+Watery_Grave;4;card.set=rav

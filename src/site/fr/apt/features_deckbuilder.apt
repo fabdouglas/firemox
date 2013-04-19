@@ -1,0 +1,39 @@
+ ----
+Constructeur de deck
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+9 Avril 2007
+
+Fenêtre principale
+
+[../images/guides/user/deckbuilder_full.png] Principal
+
+Validation du deck en temps réel
+
+[../images/guides/user/deckbuilder_validate.png] Validation
+
+    La validation s'effectue à la volé suivant les formats exitant du jeu.
+    Un chiffre indique également le nombre de cartes dans le deck courant.
+
+Statistiques
+
+[../images/guides/user/deckbuilder_stats1.png] Couleurs
+
+[../images/guides/user/deckbuilder_stats2.png] Types
+
+[../images/guides/user/deckbuilder_stats3.png] Coût de mana
+
+Filtres
+
+[../images/guides/user/deckbuilder_filter1.png] Filtres
+
+[../images/guides/user/deckbuilder_filter1.png] Filtres
+
+    Un chiffre indique également le nombre de cartes filtrées.
+
+Converteur
+
+[../images/guides/user/deckbuilder_converter.png] converteur de deck
+
+    Converteur de deck depuis certains formats tels que Shandalar. D'autres viendront sur demande.

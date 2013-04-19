@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Salvaging Station">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	t :return target noncreature artifact card with converted mana cost 1 or less from your graveyard to play.
+	whenever a creature is put into a graveyard from play, you may untap salvaging station.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<not>
+								<has-idcard idcard="creature"/>
+							</not>
+							<has-idcard idcard="artifact"/>
+							<inf-equal right="1">
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>	
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

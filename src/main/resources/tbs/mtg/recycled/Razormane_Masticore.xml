@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Razormane Masticore">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact creature - masticore
+	5/5
+	first strike 
+	at the beginning of your upkeep, sacrifice razormane masticore unless you discard a card.
+	at the beginning of your draw step, you may have razormane masticore deal 3 damage to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>masticore first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<action ref="discard" value="1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='draw'>
+				<test ref='during-your-draw'/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage type="damage-normal" value="3"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

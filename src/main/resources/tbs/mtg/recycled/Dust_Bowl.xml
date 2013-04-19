@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dust Bowl">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  land 
+{t}: add {1} to your mana pool. 
+{3}, {t}, sacrifice a land: destroy target nonbasic land. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="T"/>
+				<action ref="target-land">
+					<test ref="is-nonbasic-land"/>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

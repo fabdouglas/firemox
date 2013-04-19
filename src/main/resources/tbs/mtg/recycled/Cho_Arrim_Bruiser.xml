@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cho-Arrim Bruiser">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5w
+	creature - ogre rebel
+	3/4
+	whenever cho-arrim bruiser attacks, you may tap up to two target creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>ogre rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<cost>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="play" hop="1">
+					<test ref="is-targetable-creature" />
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<tap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

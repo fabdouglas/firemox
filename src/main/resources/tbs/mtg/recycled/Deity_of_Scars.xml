@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deity of Scars">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(b / g)(b / g)(b / g)(b / g)(b / g)
+	creature - spirit avatar
+	7/7
+	trample
+	deity of scars comes into play with two -1/-1 counters on it.
+	o(b/g), remove a -1/-1 counter from deity of scars: regenerate deity of scars.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit avatar trample </properties>
+	</init>
+	<modifiers>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+	</modifiers>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='5' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='4' green='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='3' green='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='2' green='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='1' green='4'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana green='5'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black="1"/>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1"/>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

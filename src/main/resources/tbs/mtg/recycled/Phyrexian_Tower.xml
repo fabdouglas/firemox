@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Phyrexian Tower">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  legendary land t add 1 to your mana pool. t, sacrifice a creature: add bb to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana colorless="1" />
+				</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-a-creature" value="1"/>
+			</cost>
+			<effects>
+				<give-mana black="2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

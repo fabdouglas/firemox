@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desertion">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+	<keywords>TO_TEST</keywords>
+	<!-- 
+		Card Type:  	 Instant
+		P/T: 	
+		Rules Text (Oracle): 	Counter target spell. 
+		If an artifact or creature spell is countered this way, put that card 
+		into play under your control instead of into its owner's graveyard.
+		
+		* 04/10/2004 The card is put into play, but any effects that check if 
+		the original card was "played from your hand" will not trigger or 
+		otherwise consider the card to have been played from your hand. 
+		The card was put into play by the effect of Desertion instead.
+		* 04/10/2004 This spell includes a replacement effect. If the target 
+		is an artifact or creature, it never goes to the graveyard.
+		* 04/10/2004 If the spell is not countered (because the spell it 
+		targets can't be countered), then this card's ability does not put 
+		the card into play. The card continues to resolve as normal.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first" target2="this"/>
+					<replacement-ability zone="play">
+						<moved-card>
+							<source-test>
+								<and>
+									<action-source name="counter" />
+									<is-aborting card="tested" by="saved2"/>
+									<is target="saved"/>
+									<in-zone zone="stack"/>
+									<or>
+										<has-idcard idcard="creature" />
+										<has-idcard idcard="artifact" />
+									</or>
+								</and>
+							</source-test>
+							<destination-test>
+								<in-zone zone="graveyard" />
+							</destination-test>
+						</moved-card>
+						<effects>
+							<add-modifier>
+								<controller-modifier linked="false" player="you" layer="internal"/>
+							</add-modifier>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+				<action ref="counter" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

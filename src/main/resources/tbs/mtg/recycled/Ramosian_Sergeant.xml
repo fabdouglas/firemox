@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ramosian Sergeant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - rebel
+	1/1
+	3, t :search your library for a rebel permanent card with converted mana cost 2 or less and put that card into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="search-lib" value="1">
+					<test>
+						<and>
+							<has-idcard idcard="permanent"/>
+							<has-property property="rebel"/>
+							<sup left="3">
+								<right register="tested" index="manacost"/>
+							</sup>
+						</and>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

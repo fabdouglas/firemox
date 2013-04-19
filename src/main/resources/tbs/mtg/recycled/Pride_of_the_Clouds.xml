@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pride of the Clouds">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wu
+	creature - elemental cat
+	1/1
+	flying
+	pride of the clouds gets +1/+1 for each other creature in play with flying.
+	forecast - 2wu, reveal pride of the clouds from your hand: put a 1/1 white and blue bird creature token with flying into play. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>elemental cat flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='reset-forecast' />
+		<ability ref='forecast'>
+			<actions>
+				<pay-mana white='1' blue='1' colorless='2' />
+			</actions>
+			<actions>
+				<create-card>
+	                <card name="Bird">
+	                    <init>
+	                        <registers>
+	                            <register index="power" value="1"/>
+	                            <register index="toughness" value="1"/>
+	                        </registers>
+	                        <colors>blue white</colors>
+	                        <idcards>creature</idcards>
+	                        <properties>bird flying token</properties>
+	                    </init>
+	                </card>
+	            </create-card>
+	            <move-card controller="you" destination="play"/>
+			</actions>
+		</ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add">
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="flying"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add">
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="flying"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

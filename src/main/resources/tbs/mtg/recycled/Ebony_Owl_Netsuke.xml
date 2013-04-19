@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ebony Owl Netsuke">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		2
+		artifact
+		at the beginning of each opponent's upkeep, if that player has seven or more 
+		cards in hand, ebony owl netsuke deals 4 damage to him or her.
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<test ref='during-oppponent-upkeep' />
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="opponent" />
+								</counter>
+							</left>
+						</sup-equal>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer" />
+				<assign-damage value='4' type='damage-normal' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

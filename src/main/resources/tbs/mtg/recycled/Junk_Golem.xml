@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Junk Golem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - golem
+	0/0
+	junk golem comes into play with three +1/+1 counters on it.
+	at the beginning of your upkeep, sacrifice junk golem unless you remove a +1/+1 counter from it.
+	1, discard a card: put a +1/+1 counter on junk golem.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<repeat value="3"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false' controller="you">
+					<either>
+						<target type="this"/>
+						<remove-object object-name="+1/+1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

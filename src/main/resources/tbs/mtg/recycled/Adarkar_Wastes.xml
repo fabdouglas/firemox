@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Adarkar Wastes">
+	<!-- tested 12/6/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>land</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-land"/>
+	
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="controller"/>
+				<assign-damage value="1"/>
+				<give-mana blue="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="controller"/>
+				<assign-damage value="1"/>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

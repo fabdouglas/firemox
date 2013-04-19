@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tarox Bladewing">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rrr
+	legendary creature - dragon
+	4/3
+	flying, haste
+	grandeur - discard another card named tarox bladewing: tarox bladewing gets +x/+x until end of turn, where x is its power.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend dragon flying haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard' value='1'>
+					<test>
+						<has-name name="tarox_bladewing"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='this' index='power'/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='this' index='power'/>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

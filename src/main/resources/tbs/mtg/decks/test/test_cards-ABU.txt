@@ -1,0 +1,27 @@
+super_card;40
+mountain;10
+forest;10
+volcanic island;10
+tundra;10
+fastbond;10
+Savannah_Lions;10
+Mana_Short;10
+Mana_Leak;10
+Drain Power;10
+Balduvian_Hydra;10
+Rock_Hydra;10
+The_Hive;10
+Fungusaur;10
+juggernaut;10
+Nettling_Imp;10
+Wild_Growth;10
+Healing_Salve;10
+Gaeas_Liege;10
+Island_Sanctuary;10
+personal incarnation;10
+Decompose;10
+Ashen_Ghoul;10
+Nether_Shadow;10
+Spell_Blast;10
+Kudzu;10
+Icy_Manipulator;10

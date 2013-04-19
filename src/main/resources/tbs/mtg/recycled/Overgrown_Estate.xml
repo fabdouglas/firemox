@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Overgrown Estate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bgw
+	enchantment
+	sacrifice a land: you gain 3 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>white green black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-land' value='1'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='3'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Savage Twister">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xrg
+	sorcery
+	savage twister deals x damage to each creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'/>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

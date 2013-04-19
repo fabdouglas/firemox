@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Duskmantle, House of Shadow">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="this" zone="play">
+			<cost>
+				<pay-mana blue="1" black="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="target-player"/>
+				<target type="card" mode="contextchoose" hop="2" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<position position="top"/>
+						</and>
+					</test>
+				</target>
+				<target-list operation="remove-first"/>
+				<move-card destination="graveyard" controller="target.owner" position="top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

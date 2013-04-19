@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Bathe in Light">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+	<keywords>TESTED_0.91</keywords>
+
+	<!--  
+		1w radiance - choose a color. 
+		target creature and each other creature that shares a color with it gain 
+		protection from the chosen color until end of turn.   
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="white" value="1" />
+		</registers>
+		<idcards>instant</idcards>
+		<colors>white</colors>
+	</init>
+
+	<abilities>
+		<activated-ability name="Protection from White" playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<add-modifier>
+					<property-modifier property="protection-from-white" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability name="Protection from Blue" playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<add-modifier>
+					<property-modifier property="protection-from-blue" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability name="Protection from Black" playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<add-modifier>
+					<property-modifier property="protection-from-black" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability name="Protection from Red" playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<add-modifier>
+					<property-modifier property="protection-from-red" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability name="Protection from Green" playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<add-modifier>
+					<property-modifier property="protection-from-green" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

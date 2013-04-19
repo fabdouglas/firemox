@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darksteel Forge">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {9} artifacts you control are indestructible.  -->
+	<init>
+		<registers>
+			<register index="colorless" value="9"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="global">
+					<abilities>
+						<ability ref="indestructible"/>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="artifact"/>
+			 		<controller player="controller"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

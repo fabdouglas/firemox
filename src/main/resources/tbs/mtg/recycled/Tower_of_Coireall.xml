@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tower of Coireall">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {2} {t}: target creature can't be blocked by walls this turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="cannot-be-blocked-by-walls" linked="false"
+						layer="global">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

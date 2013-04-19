@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Homarid Spawning Bed">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	enchantment
+	1uu, sacrifice a blue creature: put x 1/1 blue camarid creature tokens into play, where x is the converted mana cost of the sacrificed creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' colorless='1' />
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<has-color color="blue"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat>
+					<value register="target-list.first" index="manacost"/>
+				</repeat>						
+				<create-card>
+					<card name='Camarid'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>blue</colors>
+							<idcards>creature</idcards>
+							<properties>token camarid </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Veteran Bodyguard">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{w}{w} 
+
+as long as veteran bodyguard is untapped, 
+all damage that would be dealt to you by unblocked creatures is dealt to veteran 
+bodyguard instead. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-redirected">
+				<test>
+					<in-zone zone="playANDuntapped" card="this"/>
+				</test>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<in-zone zone="play"/>
+						<test ref="tested-is-unblocked"/>
+						<controller player="opponent"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<is-this player="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<assign-damage value="context.int" type="context.int2"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

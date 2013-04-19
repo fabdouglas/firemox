@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ratcatcher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	creature - ogre rogue
+	4/4
+	fear
+	at the beginning of your upkeep, you may search your library for a rat card, reveal it, and put it into your hand. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>ogre rogue fear </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib-reveal' value="1">
+							<test>
+								<has-property property="rat"/>
+							</test>
+						</action>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

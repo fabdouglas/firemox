@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abu Ja'far">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {w} when abu ja'far is put into a graveyard from play, destroy all 
+		creatures blocking or blocked by it. they can't be regenerated. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+			<register index="power" value="0" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<test ref="is-blocking" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register register="stack" index="1" operation="set">
+					<value>
+						<add left="2">
+							<right register="game.static" index="beginning-of-combat-target-lists" />
+						</add>
+					</value>
+				</modify-register>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<test ref="tested-is-attacking" />
+							<target-list operation="contains" target="this">
+								<list-index>
+									<add left="1">
+										<right>
+											<target-list operation="index-of-saved-list"
+												target="tested">
+												<list-index register="stack" index="1" />
+											</target-list>
+										</right>
+									</add>
+								</list-index>
+							</target-list>
+						</and>
+					</test>
+				</target>
+				<action ref="bury" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<test ref="is-attacking" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register register="stack" index="1" operation="set">
+					<value>
+						<add left="2">
+							<right register="game.static" index="beginning-of-combat-target-lists" />
+						</add>
+					</value>
+				</modify-register>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<test ref="tested-is-blocking" />
+							<target-list operation="contains" target="tested">
+								<list-index>
+									<add left="1">
+										<right>
+											<target-list operation="index-of-saved-list"
+												target="this">
+												<list-index register="stack" index="1" />
+											</target-list>
+										</right>
+									</add>
+								</list-index>
+							</target-list>
+						</and>
+					</test>
+				</target>
+				<action ref="bury" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Promise of Bunrei">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	whenever a creature you control is put into a graveyard from play, sacrifice promise of bunrei. if you do, put four 1/1 colorless spirit creature tokens into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<repeat value='4'/>
+				<create-card>
+					<card name='Spirit'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token spirit </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

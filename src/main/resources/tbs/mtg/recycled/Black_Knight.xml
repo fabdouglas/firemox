@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Black Knight">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>first-strike protection-from-white human knight</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

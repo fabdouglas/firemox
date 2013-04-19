@@ -1,0 +1,42 @@
+ ----
+XML Building
+ ----
+Fabrice Daugan
+ ----
+September 11 2007
+
+How XML cards are managed
+
+* XML Format
+
+** XML Standard
+
+** XSD Validation
+
+** XML Limitation
+
+** MDB Format
+
+** XML building process
+
+[../images/uml/uml-buildxml.png]\
+
+	
+** XML building command
+
+  Full options are :
+  
+   <<-d>> (debug)     : debug activation
+   
+   <<-f>> (force)     : force XML compile even if MDB is up to date
+   
+   <<-g>> (game) GAME : game short name like : mtg
+   
+   <<-h>> (help)      : print this help message and exit
+   
+   <<-n>> (nopaymana) : ignore all 'paya-mana' actions
+   
+   <<-v>> (version)   : print product version and exit
+   
+   <<-x>> (xsd)       : enable XSD validation
+   

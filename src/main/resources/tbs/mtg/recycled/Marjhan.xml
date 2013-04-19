@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Marjhan">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {5}{u}{u} marjhan doesn't untap during your untap step. 
+marjhan can't attack unless defending player controls an island. 
+when you control no islands, sacrifice marjhan. 
+{u}{u}, sacrifice a creature: untap marjhan. 
+play this ability only during your upkeep.
+
+{u}{u}: marjhan gets -1/-0 until end of turn and deals 1 damage to target 
+attacking creature without flying. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="blue" value="2"/>
+			<register index="power" value="8"/>
+			<register index="toughness" value="8"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack does-not-untap leviathan</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home"/>
+		<ability ref="island-home-attack"/>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<action ref="sacrifice-a-creature" value="1"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</triggered-ability>
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="2" />
+				<target type="this"/>
+				<add-modifier>
+					<register-modifier index="power" value="1" operation="minus" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<test ref="tested-is-attacking"/>
+							<not>
+								<has-property property="flying"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

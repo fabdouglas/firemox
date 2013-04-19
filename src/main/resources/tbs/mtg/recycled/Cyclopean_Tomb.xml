@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cyclopean Tomb">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4} 
+{2}, {t}: put a mire counter on target land. 
+that land is a swamp as long as it has a mire counter on it. 
+play this ability only during your upkeep. 
+when cyclopean tomb leaves play, 
+at the beginning of each of your upkeeps until the end of the game, 
+remove one of those mire counters. 
+
+    * Oct 4, 2004 - Will not add or remove Snow-Covered nature from a land.
+    * Oct 4, 2004 - If by any chance more than one counter is on the same land, you can remove older ones before newer ones. For example Mountain changed to Swamp by the Tomb, then someone changes the land to Island, then you change it to a Swamp again. Removing the newest counter reverts the land to an Island. Removing the oldest one leaves the newer one in effect.
+    * Oct 4, 2004 - After leaving play, the ability will only remove counters that this instance of the card created.
+    * See also: Conversion, Evil Presence, Gaea's Liege, Illusionary Terrain, Phantasmal Terrain, Thelonite Monk
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play"/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<!-- no mire object to remove -->
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<sup right="0">
+								<left>
+									<counter object-name="mire">
+										<is-this/>
+									</counter>
+								</left>
+							</sup>
+						</has>
+					</test>
+				</if-then-hop>
+				<create-ability>
+					<save target="this"/>
+					<triggered-ability zone="play">
+						<beginning-of-phase phase="upkeep">
+							<test ref="during-your-upkeep"/>
+						</beginning-of-phase>
+						<cost>
+							<target type="card" raise-event="false" restriction-zone="play">
+								<test>
+									<sup right="0">
+										<left>
+											<counter object-name="mire">
+												<is-this/>
+											</counter>
+										</left>
+									</sup>
+								</test>
+							</target>
+						</cost>
+						<effects>
+							<remove-object object-name="mire">
+								<test>
+									<sup right="0">
+										<left>
+											<counter object-name="mire">
+												<is-this/>
+											</counter>
+										</left>
+									</sup>
+								</test>
+							</remove-object>
+							
+							<!-- no more mire object to remove -->
+							<if-then-hop elsehop="2">
+								<test>
+									<has restriction-zone="play">
+										<sup right="0">
+											<left>
+												<counter object-name="mire">
+													<is-this/>
+												</counter>
+											</left>
+										</sup>
+									</has>
+								</test>
+							</if-then-hop>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<unregister-this/>
+			</effects>
+		</triggered-ability>
+	
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<action ref="target-land">
+					<test>
+						<not>
+							<has-idcard idcard="swamp"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-object object-name="mire"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Edge of Autumn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	sorcery
+	if you control four or fewer lands, search your library for a basic land card, put it into play tapped, then shuffle your library.
+	cycling-sacrifice a land. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<inf-equal right="4">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="land"/>
+									</and>
+								</counter>
+							</left>
+						</inf-equal>
+					</test>
+				</if-then-hop>
+				<action ref='search-lib'>
+					<test ref="is-basic-land"/>
+				</action>
+				<move-card destination="playANDtapped" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<action ref='sacrifice-a-land' value='1'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

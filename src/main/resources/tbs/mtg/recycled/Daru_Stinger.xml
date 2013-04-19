@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Daru Stinger">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+	<!--  Amplify 1
+		T: Daru Stinger deals damage equal to the number of +1/+1 counters on it to 
+		target attacking or blocking creature. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="white" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="amplify-1"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature">
+					<test>
+						<or>
+							<test ref="tested-is-blocking" />
+							<test ref="tested-is-attacking" />
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type="damage">
+					<value>
+						<counter object-name="+1/+1" card="this"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Renegade Warlord">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - soldier
+	3/3
+	first strike
+	whenever renegade warlord attacks, each other attacking creature gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human warrior first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<test ref="tested-is-attacking"/>
+						</and>
+					</test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

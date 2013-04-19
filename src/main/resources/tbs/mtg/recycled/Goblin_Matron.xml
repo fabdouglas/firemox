@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Goblin Matron'>
+	<rules-author-comment>ashsaver</rules-author-comment>
+	<!-- 
+		When comes into play, you may search your library for a Goblin card, 
+		reveal that card and put it into your hand. If you do, shuffle your 
+		library.
+	-->
+	<init>
+		<registers>
+			<register index='colorless' value='2' />
+			<register index='red' value='1' />
+			<register index='power' value='1' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>goblin</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone='play' />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel='true'>
+					<either>
+						<action ref='search-lib'>
+							<test>
+								<has-property property='goblin' />
+							</test>
+						</action>
+						<action ref='reveal' />
+						<action ref='return-to-hand' />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>
+
+

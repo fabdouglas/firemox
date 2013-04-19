@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jotun Grunt">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - giant soldier
+	4/4
+	cumulative upkeep-put two cards in a single graveyard on the bottom of their owner's library. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>giant soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<action ref="target-player"/>
+						<repeat>
+							<value>
+								<mult right="2">
+									<left>
+										<counter object-name="ice" card="this"/>
+									</left>
+								</mult>
+							</value>
+						</repeat>
+						<target type="card" mode="choose" restriction-zone="graveyard">
+							<test>
+								<controller player="target-list.first"/>
+							</test>
+						</target>
+						<action ref="move-library-bottom"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

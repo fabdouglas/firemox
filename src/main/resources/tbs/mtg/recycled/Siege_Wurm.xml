@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Siege Wurm">
+<rules-author-comment></rules-author-comment>
+
+<!--  5gg convoke  trample -->
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="5"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>trample convoke wurm</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

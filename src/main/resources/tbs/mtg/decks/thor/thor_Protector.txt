@@ -1,0 +1,30 @@
+#Jeu Protector
+#
+#John
+#
+#octobre 04, 2000
+#1
+#4th Edition
+#
+Circle_of_Protection:_Blue;1
+Circle_of_Protection:_Black;1
+Circle_of_Protection:_Artifacts;1
+Circle_of_Protection:_Green;1
+Circle_of_Protection:_Red;1
+Circle_of_Protection:_White;1
+Disenchant;2
+Serra_Angel;2
+Spirit_Link;2
+Swords_to_Plowshares;2
+Ancestral_Recall;2
+Counterspell;3
+Mahamoti_Djinn;2
+Time_Walk;4
+Timetwister;4
+Power_Sink;2
+Black_Lotus;4
+Howling_Mine;2
+Mox_Sapphire;5
+Mox_Pearl;5
+Sol_Ring;3
+Tundra;15

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desperate Gambit">
+	<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- Choose a source you control and flip a coin. If you win the flip, the 
+		next time that source would deal damage this turn, it deals double that damage 
+		instead. If you lose the flip, the next time it would deal damage this turn, 
+		prevent that damage. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<assign-damage type="context.int2">
+					<value>
+						<mult right="2" left="context.int"/>
+					</value>
+				</assign-damage>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

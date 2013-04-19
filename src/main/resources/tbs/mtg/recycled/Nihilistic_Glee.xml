@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nihilistic Glee">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	enchantment
+	2b, discard a card: target opponent loses 1 life and you gain 1 life.
+	hellbent - 1, pay 2 life: draw a card. play this ability only if you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='2' />
+				<action ref='discard' value='1'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="hellbent"/>
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref='pay-life' value='2'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

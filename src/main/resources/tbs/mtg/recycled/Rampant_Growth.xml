@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rampant Growth">
+	<rules-author-comment>By tureba</rules-author-comment>
+<!--  {1}{g} search your library for a basic land card and put that card into play tapped. 
+then shuffle your library. -->
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test ref="is-basic-land"/>
+				</action>
+				<move-card controller="you" destination="playANDtapped"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

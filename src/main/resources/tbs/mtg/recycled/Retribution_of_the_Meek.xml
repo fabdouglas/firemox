@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Retribution of the Meek">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	sorcery
+	destroy all creatures with power 4 or greater. they can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<sup-equal right="4">
+							<left register="tested" index="power"/>
+						</sup-equal>
+					</test>
+				</action>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mindless Automaton">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - construct
+	0/0
+	mindless automaton comes into play with two +1/+1 counters on it.
+	1, discard a card: put a +1/+1 counter on mindless automaton.
+	remove two +1/+1 counters from mindless automaton: draw a card.
+ -->
+
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>construct </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<repeat value="2"/>
+				<remove-object object-name="+1/+1"/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

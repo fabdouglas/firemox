@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nicol Bolas">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uubbrr
+	legendary creature - elder dragon
+	7/7
+	flying
+	at the beginning of your upkeep, sacrifice nicol bolas unless you pay ubr.
+	whenever nicol bolas deals damage to an opponent, that player discards his or her hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='blue' value='2'/>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>red blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend elder dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana blue='1' black="1" red="1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is target="opponent"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.player"/>
+				<action ref='player-discard' value='all'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

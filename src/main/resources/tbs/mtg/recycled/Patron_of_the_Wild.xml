@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Patron of the Wild">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - elf
+	1/1
+	morph 2g 
+	when patron of the wild is turned face up, target creature gets +3/+3 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='1' colorless='2' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+3+3-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

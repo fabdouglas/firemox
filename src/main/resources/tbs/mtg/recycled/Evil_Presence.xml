@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Evil Presence">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {b} enchanted land is a swamp. -->
+	<init>
+		<registers>
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<idcard-modifier idcard="swamp" operation="set" linked="true" />
+			<property-modifier property="basic-land" operation="add" linked="true" />
+			<ability-modifier operation="clear" linked="true">
+				<abilities />
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-land-to-enchant" />
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

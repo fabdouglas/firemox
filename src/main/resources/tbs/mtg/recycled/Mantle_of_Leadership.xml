@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mantle of Leadership">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment - aura
+	flash 
+	enchant creature
+	whenever a creature comes into play, enchanted creature gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura flash </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant-flash"/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<has-idcard idcard="creature"/>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+2+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

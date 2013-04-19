@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Balduvian War-Makers">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4}{r} haste rampage 1  -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="red" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>haste human barbarian</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="rampage1"/>
+	</abilities>
+</card>

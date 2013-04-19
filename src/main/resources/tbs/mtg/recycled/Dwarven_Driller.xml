@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dwarven Driller">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{r} 
+{t}: destroy target land unless its controller has dwarven driller deal 2 damage 
+to him or her. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>dwarf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref="destroy"/>
+					</either>
+					<either>
+						<target type="target-list.first.controller"/>
+						<target-list operation="remove-first"/>
+						<assign-damage value="2" type="damage-normal"/>
+					</either>
+				</choice>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

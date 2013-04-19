@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Adarkar Sentinel">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+<!--  {5} {1}: adarkar sentinel gets +0/+1 until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="add+0+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

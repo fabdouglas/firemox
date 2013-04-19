@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psychic Vortex">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	enchantment
+	cumulative upkeep-draw a card. 
+	at the end of your turn, sacrifice a land and discard your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<target type="you"/>
+						<repeat>
+							<value>
+								<counter object-name='age' card='this'/>
+							</value>
+						</repeat>
+						<action ref="draw-a-card"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone="play">
+			<end-of-phase phase="eot">
+				<test ref="during-your-eot"/>
+			</end-of-phase>
+			<effects>
+				<action ref="sacrifice-a-land" value="1"/>
+				<action ref="discard" value="all"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

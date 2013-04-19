@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Essence Vortex">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ub
+	instant
+	destroy target creature unless its controller pays life equal to its toughness. if destroyed this way, the creature can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="target.controller" cancel="false">
+					<either>
+						<action ref='bury'/>
+					</either>
+					<either>
+						<modify-register register="target.controller" index="life" operation="minus">
+							<value register="target" index="toughness" />
+						</modify-register>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

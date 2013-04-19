@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Proper Burial">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	enchantment
+	whenever a creature you control is put into a graveyard from play, you gain life equal to that creature's toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life'>
+					<value register='context.card' index='toughness'/>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

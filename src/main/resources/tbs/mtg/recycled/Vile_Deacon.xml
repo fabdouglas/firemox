@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vile Deacon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - cleric
+	2/2
+	whenever vile deacon attacks, it gets +x/+x until end of turn, where x is the number of clerics in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<has-property property="cleric"/>
+							</counter>
+						</value>
+					</register-modifier>
+					<register-modifier index='toughness' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<has-property property="cleric"/>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

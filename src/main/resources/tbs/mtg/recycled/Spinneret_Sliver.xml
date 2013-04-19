@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spinneret Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - sliver
+	2/2
+	all sliver creatures have reach. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property='reach' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

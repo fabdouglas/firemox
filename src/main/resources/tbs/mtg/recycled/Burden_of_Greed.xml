@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Burden of Greed">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	instant
+	target player loses 1 life for each tapped artifact he or she controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<in-zone zone="playANDtapped"/>
+								<has-idcard idcard="artifact"/>
+								<controller player="target-list.first"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

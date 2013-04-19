@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Runner">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - kavu
+	3/3
+	kavu runner has haste as long as no opponent controls a white or blue creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<property-modifier property="haste">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent"/>
+							<has-idcard idcard="creature"/>
+							<or>
+								<has-color color="white"/>
+								<has-color color="blue"/>
+							</or>
+						</and>
+					</has>
+				</not>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

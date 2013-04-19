@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Tyrant">
+<rules-author-comment></rules-author-comment>
+
+<!--  {8}{r}{r} flying, trample double strike  
+at the beginning of your upkeep, sacrifice dragon tyrant unless you pay {r}{r}{r}{r}. 
+{r}: dragon tyrant gets +1/+0 until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="8"/>
+			<register index="red" value="2"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>double-strike flying trample dragon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana red="4"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+				<target type="this"/>
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

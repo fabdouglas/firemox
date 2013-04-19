@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Anthem of Rakdos">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2brr
+	enchantment
+	whenever a creature you control attacks, it gets +2/+0 until end of turn and anthem of rakdos deals 1 damage to you.
+	hellbent - as long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<controller player="you"/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="context.card"/>
+				<action ref="add+2+0-until-eot"/>
+				<target-list operation="clear"/>
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<replacement-ability zone="play" layer="1">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<or>
+						<is-player/>
+						<has-idcard idcard="creature"/>
+					</or>
+				</destination-test>
+				<source-test>
+					<and>
+						<controller player="you"/>
+						<test ref="hellbent"/>
+					</and>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<assign-damage type="context.int2">
+					<value>
+						<mult left="2" right="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

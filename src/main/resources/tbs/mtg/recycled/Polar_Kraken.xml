@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Polar Kraken">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		8uuu
+	creature - kraken
+	11/11
+	polar kraken comes into play tapped.
+	cumulative upkeep-sacrifice a land. 
+	trample
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='3'/>
+			<register index='colorless' value='8'/>
+			<register index='power' value='11'/>
+			<register index='toughness' value='11'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>kraken trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<action ref='sacrifice-a-land'>
+							<value>
+								<counter object-name='age' card='this'/>
+							</value>
+						</action>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

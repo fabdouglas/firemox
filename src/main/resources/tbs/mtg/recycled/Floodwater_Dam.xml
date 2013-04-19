@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Floodwater Dam">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	xx1, t :tap x target lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref="pay-xx"/>
+				<action ref='T'/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

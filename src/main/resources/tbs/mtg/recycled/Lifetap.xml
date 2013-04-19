@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Lifetap">
+<rules-author-comment></rules-author-comment>
+
+<!--  {u}{u} whenever a forest an opponent controls becomes tapped, you gain 1 life. -->
+
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="forest" card="tested"/>
+						<controller player="opponent" card="tested"/>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<action ref="gain-life" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Yomiji, Who Bars the Way">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ww
+	legendary creature - spirit
+	4/4
+	whenever a legendary permanent other than yomiji, who bars the way is put into a graveyard from play, return that card to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="legend"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card"/>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

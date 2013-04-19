@@ -1,0 +1,4 @@
+Addle;20
+Phantasmal Terrain;20
+island;20
+Super_card;10

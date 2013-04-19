@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<deck-constraints xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../validator.xsd"
+	deckbuilder-min-property="FIRST_SUB_TYPE" 
+	deckbuilder-max-property="LAST_SUB_TYPE"
+	master="changeling">
+	<deck-constraint name="basic">
+		<!-- 
+			Constructed decks must contain a minimum of sixty cards. There is no maximum 
+			deck size; however, you must be able to shuffle your deck with no assistance. 
+			If a player wishes to use a sideboard, it must contain exactly fifteen cards.
+			With the exception of basic land cards, a player's combined deck and 
+			sideboard may not contain more than four of any individual card, counted by 
+			its English card title equivalent. All cards named Plains, Island, Swamp, 
+			Mountain, and Forest are basic.
+			
+			The following card sets are permitted in Standard tournaments:
+			* Ninth Edition
+			* Ravnica: City of Guilds
+			* Guildpact
+			* Dissension
+			* Coldsnap
+			* Time Spiral
+			
+			There are currently no banned cards in Standard tournaments.		
+		-->
+		<and>
+			<sup-equal right="60">
+				<left>
+					<deck-counter />
+				</left>
+			</sup-equal>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<has-name name="Relentless Rats" />
+					<deck-counter threshold="4">
+						<has-name card="super.tested" />
+					</deck-counter>
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="standard" extends="basic">
+		<!-- 
+			Constructed decks must contain a minimum of sixty cards. There is no maximum 
+			deck size; however, you must be able to shuffle your deck with no assistance. 
+			If a player wishes to use a sideboard, it must contain exactly fifteen cards.
+			With the exception of basic land cards, a player's combined deck and 
+			sideboard may not contain more than four of any individual card, counted by 
+			its English card title equivalent. All cards named Plains, Island, Swamp, 
+			Mountain, and Forest are basic.
+			
+			The following card sets are permitted in Standard tournaments:
+			* Ninth Edition
+			* Ravnica: City of Guilds
+			* Guildpact
+			* Dissension
+			* Coldsnap
+			* Time Spiral
+			
+			There are currently no banned cards in Standard tournaments.		
+		-->
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="9e" />
+				<database property="card.set" value="rav" />
+				<database property="card.set" value="gp" />
+				<database property="card.set" value="dis" />
+				<database property="card.set" value="cs" />
+				<database property="card.set" value="ts" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="extended" extends="basic">
+		<!-- 
+			Constructed decks must contain a minimum of sixty cards. There is no maximum 
+			deck size; however, you must be able to shuffle your deck with no assistance. 
+			If a player wishes to use a sideboard, it must contain exactly fifteen cards.
+			With the exception of basic land cards, a player's combined deck and 
+			sideboard may not contain more than four of any individual card, counted by 
+			its English card title equivalent. All cards named Plains, Island, Swamp, 
+			Mountain, and Forest are basic.
+			
+			The following card sets are permitted in Extended tournaments:
+			* Seventh Edition
+			* Eighth Edition
+			* Ninth Edition
+			* Invasion
+			* Planeshift
+			* Apocalypse
+			* Odyssey
+			* Torment
+			* Judgment
+			* Onslaught
+			* Legions
+			* Scourge
+			* Mirrodin
+			* Darksteel
+			* Fifth Dawn
+			* Champions of Kamigawa
+			* Betrayers of Kamigawa
+			* Saviors of Kamigawa
+			* Ravnica: City of Guilds
+			* Guildpact
+			* Dissension
+			* Coldsnap
+			* Time Spiral
+			
+			The following cards are banned in Extended tournaments:
+			* Aether Vial
+			* Disciple of the Vault
+			* Entomb
+			* Skullclamp
+		-->
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="7e" />
+					<database property="card.set" value="8e" />
+					<database property="card.set" value="9e" />
+					<database property="card.set" value="in" />
+					<database property="card.set" value="ps" />
+					<database property="card.set" value="ap" />
+					<database property="card.set" value="od" />
+					<database property="card.set" value="tr" />
+					<database property="card.set" value="ju" />
+					<database property="card.set" value="on" />
+					<database property="card.set" value="le" />
+					<database property="card.set" value="sc" />
+					<database property="card.set" value="mi" />
+					<database property="card.set" value="ds" />
+					<database property="card.set" value="5dn" />
+					<database property="card.set" value="chk" />
+					<database property="card.set" value="bok" />
+					<database property="card.set" value="sok" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<or>
+					<has-name name="Aether Vial" />
+					<has-name name="Disciple of the Vault" />
+					<has-name name="Entomb" />
+					<has-name name="Skullclamp" />
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="legacy" extends="basic">
+		<!-- 
+			Constructed decks must contain a minimum of sixty cards. There is no 
+			maximum deck size; however, you must be able to shuffle your deck with no 
+			assistance. If a player wishes to use a sideboard, it must contain exactly 
+			fifteen cards.
+			
+			With the exception of basic land cards, a player's combined deck and 
+			sideboard may not contain more than four of any individual card, counted 
+			by its English card title equivalent. All cards named Plains, Island, 
+			Swamp, Mountain, and Forest are basic. (The five Ice Age snow-covered 
+			lands - Snow-Covered Plains, Snow-Covered Island, Snow-Covered Swamp, 
+			Snow-Covered Mountain, and Snow-Covered Forest - are also basic lands. 
+			Note that snow-covered lands are permitted only in formats that allow the 
+			Ice Age set to be used.)
+			
+			The following cards are banned in Legacy tournaments:
+			* Amulet of Quoz
+			* Ancestral Recall
+			* Balance
+			* Bazaar of Baghdad
+			* Black Lotus
+			* Black Vise
+			* Bronze Tablet
+			* Channel
+			* Chaos Orb
+			* Contract from Below
+			* Darkpact
+			* Demonic Attorney
+			* Demonic Consultation
+			* Demonic Tutor
+			* Dream Halls
+			* Earthcraft
+			* Entomb
+			* Falling Star
+			* Fastbond
+			* Frantic Search
+			* Goblin Recruiter
+			* Grim Monolith
+			* Gush
+			* Hermit Druid
+			* Illusionary Mask
+			* Imperial Seal
+			* Jeweled Bird
+			* Land Tax
+			* Library of Alexandria
+			* Mana Crypt
+			* Mana Drain
+			* Mana Vault
+			* Memory Jar
+			* Metalworker
+			* Mind Over Matter
+			* Mind Twist
+			* Mind's Desire
+			* Mishra's Workshop
+			* Mox Emerald
+			* Mox Jet
+			* Mox Pearl
+			* Mox Ruby
+			* Mox Sapphire
+			* Necropotence
+			* Oath of Druids
+			* Rebirth
+			* Replenish
+			* Skullclamp
+			* Sol Ring
+			* Strip Mine
+			* Tempest Efreet
+			* Time Spiral
+			* Time Walk
+			* Timetwister
+			* Timmerian Fiends
+			* Tinker
+			* Tolarian Academy
+			* Vampiric Tutor
+			* Wheel of Fortune
+			* Windfall
+			* Worldgorger Dragon
+			* Yawgmoth's Bargain
+			* Yawgmoth's Will
+		-->
+		<deck-counter threshold="0">
+			<or>
+				<has-name name="Amulet of Quoz" />
+				<has-name name="Ancestral Recall" />
+				<has-name name="Balance" />
+				<has-name name="Bazaar of Baghdad" />
+				<has-name name="Black Lotus" />
+				<has-name name="Black Vise" />
+				<has-name name="Bronze Tablet" />
+				<has-name name="Channel" />
+				<has-name name="Chaos Orb" />
+				<has-name name="Contract from Below" />
+				<has-name name="Darkpact" />
+				<has-name name="Demonic Attorney" />
+				<has-name name="Demonic Consultation" />
+				<has-name name="Demonic Tutor" />
+				<has-name name="Dream Halls" />
+				<has-name name="Earthcraft" />
+				<has-name name="Entomb" />
+				<has-name name="Falling Star" />
+				<has-name name="Fastbond" />
+				<has-name name="Frantic Search" />
+				<has-name name="Goblin Recruiter" />
+				<has-name name="Grim Monolith" />
+				<has-name name="Gush" />
+				<has-name name="Hermit Druid" />
+				<has-name name="Illusionary Mask" />
+				<has-name name="Imperial Seal" />
+				<has-name name="Jeweled Bird" />
+				<has-name name="Land Tax" />
+				<has-name name="Library of Alexandria" />
+				<has-name name="Mana Crypt" />
+				<has-name name="Mana Drain" />
+				<has-name name="Mana Vault" />
+				<has-name name="Memory Jar" />
+				<has-name name="Metalworker" />
+				<has-name name="Mind Over Matter" />
+				<has-name name="Mind Twist" />
+				<has-name name="Mind's Desire" />
+				<has-name name="Mishra's Workshop" />
+				<has-name name="Mox Emerald" />
+				<has-name name="Mox Jet" />
+				<has-name name="Mox Pearl" />
+				<has-name name="Mox Ruby" />
+				<has-name name="Mox Sapphire" />
+				<has-name name="Necropotence" />
+				<has-name name="Oath of Druids" />
+				<has-name name="Rebirth" />
+				<has-name name="Replenish" />
+				<has-name name="Skullclamp" />
+				<has-name name="Sol Ring" />
+				<has-name name="Strip Mine" />
+				<has-name name="Tempest Efreet" />
+				<has-name name="Time Spiral" />
+				<has-name name="Time Walk" />
+				<has-name name="Timetwister" />
+				<has-name name="Timmerian Fiends" />
+				<has-name name="Tinker" />
+				<has-name name="Tolarian Academy" />
+				<has-name name="Vampiric Tutor" />
+				<has-name name="Wheel of Fortune" />
+				<has-name name="Windfall" />
+				<has-name name="Worldgorger Dragon" />
+				<has-name name="Yawgmoth's Bargain" />
+				<has-name name="Yawgmoth's Will" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="vintage" extends="basic">
+		<!-- 
+			Constructed decks must contain a minimum of sixty cards. There is no 
+			maximum deck size; however, you must be able to shuffle your deck with no 
+			assistance. If a player wishes to use a sideboard, it must contain exactly 
+			fifteen cards.
+			
+			With the exception of basic land cards, a player's combined deck and 
+			sideboard may not contain more than four of any individual card, counted 
+			by its English card title equivalent. All cards named Plains, Island, 
+			Swamp, Mountain, and Forest are basic. (The five Ice Age snow-covered 
+			lands - Snow-Covered Plains, Snow-Covered Island, Snow-Covered Swamp, 
+			Snow-Covered Mountain, and Snow-Covered Forest - are also basic lands. 
+			Note that snow-covered lands are permitted only in formats that allow the 
+			Ice Age set to be used.)
+			
+			The following cards are banned in Vintage tournaments:
+			* Any ante card
+			* Chaos Orb
+			* Falling Star
+			
+			The following cards are restricted in Vintage tournaments:
+			* Ancestral Recall
+			* Balance
+			* Black Lotus
+			* Black Vise
+			* Burning Wish
+			* Channel
+			* Chrome Mox
+			* Crop Rotation
+			* Demonic Consultation
+			* Demonic Tutor
+			* Dream Halls
+			* Enlightened Tutor
+			* Entomb
+			* Fact or Fiction
+			* Fastbond
+			* Frantic Search
+			* Grim Monolith
+			* Gush
+			* Imperial Seal
+			* Library of Alexandria
+			* Lion's Eye Diamond
+			* Lotus Petal
+			* Mana Crypt
+			* Mana Vault
+			* Memory Jar
+			* Mind Twist
+			* Mind's Desire
+			* Mox Diamond
+			* Mox Emerald
+			* Mox Jet
+			* Mox Pearl
+			* Mox Ruby
+			* Mox Sapphire
+			* Mystical Tutor
+			* Necropotence
+			* Personal Tutor
+			* Regrowth
+			* Sol Ring
+			* Strip Mine
+			* Time Spiral
+			* Time Walk
+			* Timetwister
+			* Tinker
+			* Tolarian Academy
+			* Trinisphere
+			* Vampiric Tutor
+			* Voltaic Key
+			* Wheel of Fortune
+			* Windfall
+			* Yawgmoth's Bargain
+			* Yawgmoth's Will
+		-->
+		<and>
+			<deck-counter threshold="0">
+				<or>
+					<has-keyword name="ante" />
+					<has-name name="Chaos Orb" />
+					<has-name name="Falling Star" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Ancestral Recall" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Balance" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Black Lotus" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Black Vise" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Burning Wish" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Channel" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Chrome Mox" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Crop Rotation" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Demonic Consultation" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Demonic Tutor" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Dream Halls" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Enlightened Tutor" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Entomb" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Fact or Fiction" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Fastbond" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Frantic Search" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Grim Monolith" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Gush" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Imperial Seal" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Library of Alexandria" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Lion's Eye Diamond" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Lotus Petal" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mana Crypt" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mana Vault" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Memory Jar" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mind Twist" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mind's Desire" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Diamond" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Emerald" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Jet" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Pearl" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Ruby" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mox Sapphire" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Mystical Tutor" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Necropotence" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Personal Tutor" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Regrowth" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Sol Ring" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Strip Mine" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Time Spiral" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Time Walk" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Timetwister" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Tinker" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Tolarian Academy" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Trinisphere" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Vampiric Tutor" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Voltaic Key" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Wheel of Fortune" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Windfall" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Yawgmoth's Bargain" />
+			</deck-counter>
+			<deck-counter threshold="1">
+				<has-name name="Yawgmoth's Will" />
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="TimeSpiralBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="ts" />
+				<database property="card.set" value="plc" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="RavnicaBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="rav" />
+				<database property="card.set" value="gp" />
+				<database property="card.set" value="dis" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="KamigawaBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="chk" />
+				<database property="card.set" value="bok" />
+				<database property="card.set" value="sok" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="MirrodinBlock" extends="basic">
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="mi" />
+					<database property="card.set" value="ds" />
+					<database property="card.set" value="5dn" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<or>
+					<has-name name="AEther Vial" />
+					<has-name name="Ancient Den" />
+					<has-name name="Arcbound Ravager" />
+					<has-name name="Darksteel Citadel" />
+					<has-name name="Disciple of the Vault" />
+					<has-name name="Great Furnace" />
+					<has-name name="Seat of the Synod" />
+					<has-name name="Tree of Tales" />
+					<has-name name="Vault of Whispers" />
+					<has-name name="Skullclamp" />
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="OnslaughtBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="on" />
+				<database property="card.set" value="le" />
+				<database property="card.set" value="sc" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="InvasionBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="in" />
+				<database property="card.set" value="ps" />
+				<database property="card.set" value="ap" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="MasquesBlock" extends="basic">
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="mm" />
+					<database property="card.set" value="ne" />
+					<database property="card.set" value="pr" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<or>
+					<has-name name="Lin Sivvi, Defiant Hero" />
+					<has-name name="Rishadan Port" />
+					<has-name name="Squandered Resources" />
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="UrzaBlock" extends="basic">
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="us" />
+					<database property="card.set" value="ud" />
+					<database property="card.set" value="ul" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<or>
+					<has-name name="Gaea's Cradle" />
+					<has-name name="Memory Jar" />
+					<has-name name="Serra's Sanctum" />
+					<has-name name="Time Spiral" />
+					<has-name name="Tolarian Academy" />
+					<has-name name="Voltaic Key" />
+					<has-name name="Windfall" />
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="TempestBlock" extends="basic">
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="tp" />
+					<database property="card.set" value="sh" />
+					<database property="card.set" value="ex" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<has-name name="Cursed Scroll" />
+			</deck-counter>
+		</and>
+	</deck-constraint>
+	<deck-constraint name="MirageBlock" extends="basic">
+		<deck-counter threshold="all">
+			<or>
+				<has-property property="basic-land" />
+				<database property="card.set" value="mr" />
+				<database property="card.set" value="vi" />
+				<database property="card.set" value="wl" />
+			</or>
+		</deck-counter>
+	</deck-constraint>
+	<deck-constraint name="IceAgeBlock" extends="basic">
+		<and>
+			<deck-counter threshold="all">
+				<or>
+					<has-property property="basic-land" />
+					<database property="card.set" value="ia" />
+					<database property="card.set" value="ai" />
+					<database property="card.set" value="cs" />
+				</or>
+			</deck-counter>
+			<deck-counter threshold="0">
+				<or>
+					<has-name name="Amulet of Quoz" />
+					<has-name name="Thawing Glaciers" />
+					<has-name name="Timmerian Fiends" />
+					<has-name name="Zuran Orb" />
+				</or>
+			</deck-counter>
+		</and>
+	</deck-constraint>
+</deck-constraints>

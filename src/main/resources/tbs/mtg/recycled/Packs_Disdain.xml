@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pack's Disdain">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	instant
+	choose a creature type. target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<input-property operation='set' index='free0' register='this' values='FIRST_SUB_TYPE..LAST_SUB_TYPE' />
+				<add-modifier>
+					<register-modifier index='power' operation='minus' linked='false'>
+						<value>
+							<counter restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-property>
+										<property register="this" index="free0"/>
+									</has-property>
+								</and>
+							</counter>
+						</value>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' operation='minus' linked='false'>
+						<value>
+							<counter restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-property>
+										<property register="this" index="free0"/>
+									</has-property>
+								</and>
+							</counter>
+						</value>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

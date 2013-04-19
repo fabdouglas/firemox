@@ -1,0 +1,11 @@
+Island;8;card.set=uh
+Mountain;6;card.set=uh
+Swamp;8;card.set=uh
+Savannah_Lions;4;card.set=9e
+Sengir_Vampire;4;card.set=9e
+Bottled_Cloister;4;card.set=rav
+Bloodletter_Quill;4;card.set=rav
+Cloudstone_Curio;4;card.set=rav
+Betatester_Toolbox;4
+Super_Card;4
+Grifters_Blade;4;card.set=rav

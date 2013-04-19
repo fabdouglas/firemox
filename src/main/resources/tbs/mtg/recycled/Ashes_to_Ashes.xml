@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ashes to Ashes">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{b}{b} 
+remove two target nonartifact creatures from the game. 
+ashes to ashes deals 5 damage to you. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-idcard idcard="artifact"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<target type="you"/>
+				<assign-damage value="5" type="damage-normal"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

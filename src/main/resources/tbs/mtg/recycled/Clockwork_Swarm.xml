@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Clockwork Swarm">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4} 
+clockwork swarm comes into play with four +1/+0 counters on it. 
+clockwork swarm can't be blocked by walls. 
+clockwork swarm can't have more than four +1/+0 counters on it. 
+at end of combat, if clockwork swarm attacked or blocked this turn, 
+remove a +1/+0 counter from it. {x}, {t}: put x +1/+0 counters on clockwork swarm. 
+
+play this ability only during your upkeep. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>cannot-be-blocked-by-walls insect</properties>
+	</init>
+
+	<modifiers>
+		<object name="+1/+0"/>
+		<object name="+1/+0"/>
+		<object name="+1/+0"/>
+		<object name="+1/+0"/>
+	</modifiers>
+	
+	<actions>
+		<!-- Action removing one +1/+0 counter at the end of combat and only once -->
+		<action reference-name="create-removal">
+			<modify-register register="this" index="free0" operation="clear" name="%"/>
+			<create-ability>
+				<triggered-ability zone="play">
+					<end-of-phase phase="eoc"/>
+					<effects>
+						<if-then-hop elsehop="4">
+							<test>
+								<equal left="0">
+									<right register="this" index="free0"/>
+								</equal>
+							</test>
+						</if-then-hop>
+						<target type="this"/>
+						<remove-object object-name="+1/+0"/>
+						<modify-register register="this" index="free0" operation="add" value="1"/>
+						<unregister-this/>
+					</effects>
+				</triggered-ability>
+			</create-ability>
+		</action>
+	</actions>
+
+	<abilities>
+	
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="pay-x" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<modify-register register="stack" index="0" operation="set">
+					<value>
+						<minus left="4">
+							<right>
+								<counter card="this" object-name="+1/+0"/>
+							</right>
+						</minus>
+					</value>
+				</modify-register>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="+1/+0"/>
+			</effects>
+		</activated-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="create-removal"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="create-removal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

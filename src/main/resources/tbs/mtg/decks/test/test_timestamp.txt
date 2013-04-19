@@ -1,0 +1,6 @@
+Super_Card;20
+Creature_Bond;20
+Savannah_Lions;20
+Crusade;10
+Wrath_of_God;10
+Swords_to_Plowshares;5

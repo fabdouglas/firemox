@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Idle Thoughts">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	2: draw a card if you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<equal right="0">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

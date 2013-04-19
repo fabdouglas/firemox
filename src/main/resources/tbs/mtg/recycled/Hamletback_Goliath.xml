@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hamletback Goliath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6r
+	creature - giant warrior
+	6/6
+	whenever another creature comes into play, you may put x +1/+1 counters on hamletback goliath, where x is that creature's power.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-idcard idcard="creature"/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>	
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="this"/>
+						<repeat>
+							<value register='context.card' index='power'/>
+						</repeat>
+						<add-object object-name='+1/+1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

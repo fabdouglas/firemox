@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Konda's Hatamoto">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - human samurai
+	1/2
+	bushido 1 
+	as long as you control a legendary samurai, konda's hatamoto gets +1/+2 and has vigilance. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human samurai </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bushido1-blocked'/>
+		<ability ref='bushido1-blocking'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="samurai" />
+						<has-property property="legend" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="2">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="samurai" />
+						<has-property property="legend" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<property-modifier property="vigilance">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="samurai" />
+						<has-property property="legend" />
+					</and>
+				</has>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

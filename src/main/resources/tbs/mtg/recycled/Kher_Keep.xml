@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kher Keep">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add 1 to your mana pool.
+	1r, t :put a 0/1 red kobold creature token named kobolds of kher keep into play.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Kobolds of Kher Keep'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='0'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token kobold </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

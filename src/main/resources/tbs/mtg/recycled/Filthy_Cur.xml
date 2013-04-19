@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Filthy Cur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - hound
+	2/2
+	whenever filthy cur is dealt damage, you lose that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>hound </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref='lose-life' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

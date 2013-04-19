@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Feast of Worms">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	sorcery - arcane
+	destroy target land. if that land is legendary, its controller sacrifices another land.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<has-property property="legend" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<action ref="opponent-sacrifice-a-land" value="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

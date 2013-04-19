@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Blazing Archon">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+    <init>
+        <registers>
+            <register index="white" value="3"/>
+            <register index="colorless" value="6"/>
+            <register index="power" value="5"/>
+            <register index="toughness" value="6"/>
+        </registers>
+        <colors>white</colors>
+        <idcards>creature</idcards>
+        <properties>flying archon</properties>
+    </init>
+    <abilities>
+        <ability ref="cast-spell"/>
+    </abilities>
+    <modifiers>
+        <static-modifier filter-zone="play">
+            <modifiers>
+                <property-modifier property="cannot-attack" linked="true" layer="global"/>
+            </modifiers>
+            <while>
+                <and>
+                    <has-idcard idcard="creature"/>
+                    <controller player="opponent"/>
+                </and>
+            </while>
+        </static-modifier>
+    </modifiers>
+</card>

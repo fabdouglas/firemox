@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Duct Crawler">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {r} {1}{r}: target creature can't block duct crawler this turn. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>insect</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+				<pay-mana colorless="1" red="1" />
+				<action ref="target-creature">
+					<test>
+					<!-- COMPLETE THIS TEST ON CREATURE TO TARGET -->
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Anavolver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - volver
+	3/3
+	kicker 1u and/or b
+	if the 1u kicker cost was paid, anavolver comes into play with two +1/+1 counters on it and with flying.
+	if the b kicker cost was paid, anavolver comes into play with a +1/+1 counter on it and with "pay 3 life: regenerate anavolver."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>volver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana black="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-ability>
+					<activated-ability zone="play" playable="instant">
+						<cost>
+							<action ref="pay-life" value="3"/>
+						</cost>
+						<effects>
+							<action ref="regenerate"/>
+						</effects>
+					</activated-ability>
+				</add-ability>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker2">
+			<actions>
+				<pay-mana blue="1" colorless="1"/>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="add" property="flying"/>
+				</add-modifier>
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker12">
+			<actions>
+				<pay-mana red="1" />
+			</actions>
+			<actions>
+				<pay-mana colorless="1" black="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-ability>
+					<activated-ability zone="play" playable="instant">
+						<cost>
+							<action ref="pay-life" value="3"/>
+						</cost>
+						<effects>
+							<action ref="regenerate"/>
+						</effects>
+					</activated-ability>
+				</add-ability>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="add" property="flying"/>
+				</add-modifier>
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

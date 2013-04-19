@@ -1,0 +1,29 @@
+#Jeu blanc bleu
+#
+#John
+#
+#août 10, 2000
+#1
+#4th Edition
+#
+Tundra;15
+Swords_to_Plowshares;3
+Veteran_Bodyguard;1
+Spirit_Link;2
+Serra_Angel;3
+Mahamoti_Djinn;2
+Time_Walk;4
+Timetwister;4
+Vesuvan_Doppelganger;1
+Clone;1
+Braingeyser;1
+Black_Lotus;4
+Howling_Mine;2
+Mox_Pearl;5
+Mox_Sapphire;5
+Sol_Ring;3
+Island_Sanctuary;1
+Counterspell;3
+Power_Sink;2
+Ancestral_Recall;2
+Disenchant;2

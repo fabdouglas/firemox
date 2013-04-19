@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thelonite Monk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - insect monk cleric
+	1/2
+	t, sacrifice a green creature: target land becomes a forest. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect monk cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref="sacrifice-a-creature" value="1">
+					<test>
+						<has-color color="green"/>
+					</test>
+				</action>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="forest" operation="set" linked="false"/>
+					<ability-modifier operation="clear" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

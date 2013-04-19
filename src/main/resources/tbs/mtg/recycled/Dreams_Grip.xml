@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dream's Grip">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {u} choose one - tap target permanent; or untap target permanent. entwine {1}  -->
+
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-card" />
+			</cost>
+			<effects>
+				<tap />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-card" />
+			</cost>
+			<effects>
+				<untap />
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="entwine" />
+				<pay-mana colorless="1" />
+				<action ref="target-card" />
+				<action ref="target-card" />
+			</cost>
+			<effects>
+				<private-object object="target-list.last" operation="add" object-name="%" name="%" />
+				<tap />
+				<target-list operation="clear" name="%" />
+				<target type="private-object" name="%" />
+				<untap />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

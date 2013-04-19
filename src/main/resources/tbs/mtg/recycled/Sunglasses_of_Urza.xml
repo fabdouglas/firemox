@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sunglasses of Urza">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3} {w}: add {r} to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" name="" zone="play">
+			<cost>
+				<pay-mana white="1" />
+			</cost>
+			<effects>
+				<give-mana red="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

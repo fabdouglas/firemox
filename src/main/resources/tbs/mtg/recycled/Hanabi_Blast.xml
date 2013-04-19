@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hanabi Blast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	instant
+	hanabi blast deals 2 damage to target creature or player. return hanabi blast to its owner's hand, then discard a card at random.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<action ref='discard-random' value="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

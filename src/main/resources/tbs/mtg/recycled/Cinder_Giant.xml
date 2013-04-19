@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cinder Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - giant
+	5/3
+	at the beginning of your upkeep, cinder giant deals 2 damage to each other creature you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="creatures-you-control">
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</action>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

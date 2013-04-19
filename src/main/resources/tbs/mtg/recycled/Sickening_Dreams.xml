@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sickening Dreams">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	sorcery
+	as an additional cost to play sickening dreams, discard x cards.
+	sickening dreams deals x damage to each creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%minimum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</maximum>
+				</input-number>
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+			</cost>
+			<effects>
+				<target-list operation="clear"/>
+				<action ref="all-creatures"/>
+				<target type="player" mode="all"/>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0"/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

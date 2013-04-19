@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Iceberg">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xuu
+	enchantment
+	iceberg comes into play with x ice counters on it.
+	3: put an ice counter on iceberg.
+	remove an ice counter from iceberg: add 1 to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="ice"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='ice'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type='this'/>
+				<remove-object object-name='ice'/>
+			</cost>
+			<effects>
+				<give-mana colorless='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

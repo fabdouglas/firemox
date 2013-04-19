@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Snap">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {3}{b}{b} remove all counters from all permanents and remove all tokens from the game. -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<!-- PUT HERE THE COST OF THIS SPELL -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

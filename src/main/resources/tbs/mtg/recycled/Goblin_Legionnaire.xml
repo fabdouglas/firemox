@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Goblin Legionnaire">
+<rules-author-comment></rules-author-comment>
+
+<!--  {r}{w} 
+{r}, sacrifice goblin legionnaire: 
+goblin legionnaire deals 2 damage to target creature or player. 
+
+{w}, sacrifice goblin legionnaire: 
+prevent the next 2 damage that would be dealt to target creature or player this turn. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="white" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red white</colors>
+		<idcards>creature </idcards>
+		<properties>goblin soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+				<action ref="sacrifice-this"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana white="1" />
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<action ref="prevent-2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sickening Shoal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xbb
+	instant - arcane
+	you may remove a black card with converted mana cost x in your hand from the game rather than pay sickening shoal's mana cost.
+	target creature gets -x/-x until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='stack' index='0'/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='stack' index='0'/>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<target type="card" restriction-zone="hand" mode="choose">
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<has-color color="black"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='stack' index='0'/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='stack' index='0'/>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Orchard Warden">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	creature - treefolk shaman
+	4/6
+	whenever another treefolk creature comes into play under your control, you may gain life equal to that creature's toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="treefolk"/>
+						<has-idcard idcard="creature"/>
+					</and>	
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='gain-life'>
+							<value register='context.card' index='toughness'/>
+						</action>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

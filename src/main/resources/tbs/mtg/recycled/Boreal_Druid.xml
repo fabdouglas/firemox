@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Boreal Druid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  g t add 1 to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>druid elf snow</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="tap-add-C"/>
+	</abilities>
+</card>

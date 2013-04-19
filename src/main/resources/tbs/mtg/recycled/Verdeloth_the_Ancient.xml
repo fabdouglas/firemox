@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Verdeloth the Ancient">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="4" />
+			<register index="green" value="2" />
+			<register index="power" value="4" />
+			<register index="toughness" value="7" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>treefolk legend</properties>
+	</init>
+	<abilities>
+		<activated-ability zone="hand" playable="this">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="play" />
+						<is-this />
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup right="0">
+							<left register="stack" index="0" />
+						</sup>
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="0" />
+				</repeat>
+				<create-card>
+					<card name="Saproling">
+						<rules-author-comment>Hoani CROSS</rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1" />
+								<register index="toughness" value="1" />
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>saproling token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="toughness" operation="add" value="1" linked="true"
+					layer="global" />
+				<register-modifier index="power" operation="add" value="1" linked="true"
+					layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<in-zone zone="play" />
+					<or>
+						<has-property property="saproling" />
+						<and>
+							<has-property property="treefolk" />
+							<not>
+								<is-this />
+							</not>
+						</and>
+					</or>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

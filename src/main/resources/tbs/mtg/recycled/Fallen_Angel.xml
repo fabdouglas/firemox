@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="US-ASCII" ?> 
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Fallen Angel">
+    <rules-author-comment>By jods</rules-author-comment>
+    
+    <init>
+        <registers>
+            <register index="colorless" value="3"/>
+            <register index="black" value="2"/>
+            <register index="power" value="3"/>
+            <register index="toughness" value="3"/>
+        </registers>
+        <colors>black</colors>
+        <idcards>creature</idcards>
+        <properties>angel flying</properties>
+    </init>
+    
+    <abilities>
+        <ability ref="cast-spell"/>        
+        
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <target mode="choose" type="card" raise-event="false">
+                    <test>
+                        <and>
+                            <in-zone zone="play"/>
+                            <has-idcard idcard="creature"/>
+                            <controller player="you"/>
+                        </and>
+                    </test>
+                </target>
+				<action ref="sacrifice"/>
+            </cost>
+            <effects>
+            	<target type="this"/>
+            	<add-modifier>
+                    <register-modifier index="power" operation="add" value="2" linked="false">
+	                    <until>
+	                        <end-of-phase phase="cleanup"/>
+	                    </until>
+	                </register-modifier>
+                    <register-modifier index="toughness" operation="add" value="1" linked="false">
+	                    <until>
+	                        <end-of-phase phase="cleanup"/>
+	                    </until>
+	                </register-modifier>
+                </add-modifier>                    
+            </effects>
+        </activated-ability>
+    </abilities>   
+</card>

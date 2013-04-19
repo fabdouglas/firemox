@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Countryside Crusher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - giant warrior
+	3/3
+	at the beginning of your upkeep, reveal the top card of your library. if it's a land card, put it into your graveyard and repeat this process.
+	whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on countryside crusher.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="land" card="target-list.last"/>
+					</test>
+				</if-then-hop>
+				<action ref="put-in-graveyard"/>
+				<hop value="-4"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<has-idcard idcard="land"/>
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target-list operation='clear'/>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

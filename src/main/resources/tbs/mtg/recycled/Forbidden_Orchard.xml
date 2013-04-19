@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forbidden Orchard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add one mana of any color to your mana pool.
+	whenever you tap forbidden orchard for mana, put a 1/1 colorless spirit creature token into play under target opponent's control.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-B"/>
+		<triggered-ability zone='play'>
+			<become-tapped>
+				<test>
+					<is-this/>
+				</test>
+			</become-tapped>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Spirit'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token spirit </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='target-list.first' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

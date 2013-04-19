@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cemetery Gate">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b}  protection from black -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>protection-from-black black  wall</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

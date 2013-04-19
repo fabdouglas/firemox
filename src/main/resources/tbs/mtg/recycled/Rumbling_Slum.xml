@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rumbling Slum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rgg
+	creature - elemental
+	5/5
+	at the beginning of your upkeep, rumbling slum deals 1 damage to each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type="player" mode="all"/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

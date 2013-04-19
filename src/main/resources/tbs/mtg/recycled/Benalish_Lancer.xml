@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Benalish Lancer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - knight
+	2/2
+	kicker 2w 
+	if the kicker cost was paid, benalish lancer comes into play with two +1/+1 counters on it and with first strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="2" white="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="add" property="first-strike"/>
+				</add-modifier>
+			</actions>
+		</ability>
+	</abilities>
+</card>

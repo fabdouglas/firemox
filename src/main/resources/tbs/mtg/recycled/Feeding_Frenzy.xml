@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Feeding Frenzy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	instant
+	target creature gets -x/-x until end of turn, where x is the number of zombies in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<has-property property="zombie"/>
+							</counter>
+						</value>
+					</register-modifier>
+					<register-modifier index='toughness' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<has-property property="zombie"/>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

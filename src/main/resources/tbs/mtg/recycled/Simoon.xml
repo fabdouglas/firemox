@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Simoon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		rg
+	instant
+	simoon deals 1 damage to each creature target opponent controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="target-list.first"/>
+					</test>
+				</action>
+				<target-list operation="remove-first"/>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

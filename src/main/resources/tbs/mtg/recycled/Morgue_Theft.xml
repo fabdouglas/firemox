@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Morgue Theft">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	sorcery
+	return target creature card from your graveyard to your hand.
+	flashback 4b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<action ref='return-to-hand'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<pay-mana black='1' colorless='4' />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='flashback'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

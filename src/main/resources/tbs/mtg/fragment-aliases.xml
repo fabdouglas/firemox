@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2007 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Fabrice Daugan
+	* @author Hoani Cross
+-->
+<!--[[apt lang=en]]
+	* Aliases
+	
+	`Most of the elements of the <<Magic the Gathering>> game implementation in
+	`<<Magic Project>> are referenced by integer values. To make rules readable by
+	`a human, we can also use aliases for specific integer values, which are
+	`declared within the <<<\<aliases\>>>> element.
+	
+	`Let's look at the different available aliases.
+	
+	** Global aliases
+	
+	`These aliases are used in many different situations :
+	
+	*___________________________+
+	| <<Name of the alias>>     |
+	*___________________________+
+-->
+<!--[[apt lang=fr]]
+	* Les alias
+	
+	`La plupart des élément de l'implémentation du jeu de cartes
+	`<<Magic : l'Assemblée>> dans <<Magic Project>> sont référencés par des valeurs
+	`entières. Afin de rendre les règles lisibles pour un humain, on peut également
+	`utiliser des alias pour certaines valeurs entières spécifiques, qui sont déclarées
+	`au sein de l'élément <<<\<aliases\>>>>.
+	
+	`Voyons les différents alias disponibles.
+	
+	** Les alias globaux
+	
+	`Ces alias sont utilisés dans diverses situations :
+	
+	*___________________________+
+	| <<Nom de l'alias>>        |
+	*___________________________+
+-->
+<aliases xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../validator.xsd">
+
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="none" value="0" />
+	<alias name="all" value="65535" />
+	<alias name="abortme" value="65535" />
+	<alias name="abort" value="65535" />
+	<alias name="destroy" value="65535" />
+	<alias name="manapool" value="255" />
+	<alias name="manacost" value="255" />
+	<alias name="threshold" value="7" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The damage types
+		
+		`All the different types of damage can be tested using this set of available aliases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les types de dommages
+		
+		`Tous les différents types de dommages peuvent être testés en utilisant les alias
+		`suivants :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="damage-normal" value="1" export="damage-types" />
+	<alias name="damage-combat" value="2" export="damage-types" />
+	<alias name="damage-cannot-be-prevented" value="4" export="damage-types" />
+	<alias name="damage-cannot-be-redirected" value="8" export="damage-types" />
+	<alias name="damage-cannot-be-regenerated" value="16" export="damage-types" />
+	<alias name="damage-cannot-be-prevented-redirected" value="12" export="damage-types" />
+	<alias name="damage-can-prevent" value="0" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The card positions
+		
+		`The position of a card in a zone can be referenced using these aliases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les positions d'une carte
+		
+		`La position d'une carte dans une zone peut être référencée en utilisant les alias
+		`suivants :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="top" value="0" />
+	<alias name="bottom" value="65535" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases used in damage prevention
+		
+		`The following aliases are used in damage prevention :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour la prévention de dommages
+		
+		`Les alias suivants sont utilisés pour la prévention de dommages :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="damage-any" value="127" />
+	<alias name="damage-combat-only" value="126" />
+	<alias name="damage-combat-can-be-prevented" value="121" />
+	<alias name="damage-can-be-prevented" value="123" />
+	<alias name="damage-can-be-redirected" value="115" />
+	<alias name="damage-can-be-regenerated" value="111" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases for phase indexes
+		
+		`The following aliases are used for phase indexes :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les index de phase
+		
+		`Les alias suivants sont utilisés pour les index de phase :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="precombat-main" value="3" />
+	<alias name="eoc.index" value="8" />
+	<alias name="postcombat-main" value="9" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- game.static indexes, reseted each turn -->
+	<!--[[apt lang=en]]
+		** Aliases for game static indexes
+		
+		`The following aliases are used for game static indexes, they are reseted
+		`each turn :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les index de jeu statiques
+		
+		`Les alias suivants sont utilisés pour les index de jeu statiques, il sont
+		`mis à zéro au début de chaque tour :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="attack-step-index" value="24" />
+	<alias name="nb-attacking-group" value="25" />
+	<alias name="assignment-configuration" value="26" />
+	<alias name="assignment-configuration-int" value="27" />
+	<alias name="beginning-of-combat-target-lists" value="28" />
+	<alias name="normal-next-player" value="29" />
+	<alias name="skipping-turn" value="30" />
+	<alias name="turnid" value="31" />
+	<alias name="nbattacking" value="9" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- card/player registers -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to cards or players
+		
+		`The following aliases are used for registers dedicated to cards or players :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux cartes et aux joueurs
+		
+		`Les alias suivants sont utilisés pour les registres liés aux cartes et aux joueurs :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="colorless" value="0" />
+	<alias name="black" value="1" />
+	<alias name="blue" value="2" />
+	<alias name="green" value="3" />
+	<alias name="red" value="4" />
+	<alias name="white" value="5" />
+	<alias name="state" value="7" />
+	<alias name="damage" value="8" />
+	<alias name="combat.assignedto" value="9" />
+	<alias name="free0" value="16" />
+	<alias name="free1" value="17" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- Only for cards -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to cards
+		
+		`The following aliases are used for registers dedicated to cards :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux cartes
+		
+		`Les alias suivants sont utilisés pour les registres liés aux cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="combat.toassign" value="10" />
+	<alias name="power" value="11" />
+	<alias name="toughness" value="12" />
+	<alias name="loyalty" value="13" />	
+	<alias name="planeswalker-ability" value="14" />
+	<alias name="special-abilities" value="15" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- Only for players -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to players
+		
+		`The following aliases are used for registers dedicated to players :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux joueurs
+		
+		`Les alias suivants sont utilisés pour les registres liés aux joueurs :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="poison" value="11" />
+	<alias name="life" value="12" />
+	<alias name="mulligan" value="22" />
+	<alias name="creatures-moved-in-graveyard-from-play-this-turn" value="23" />
+	<alias name="damage-dealt-this-turn" value="24" />
+	<alias name="hand-vibility-modifiers" value="25" />
+	<alias name="initialized" value="26" />
+	<alias name="land-remain-to-cast" value="27" />
+	<alias name="maxi-cards-in-hand" value="28" />
+	<alias name="playedland" value="29" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- card state bits -->
+	<alias name="just-summoned" value="1" />
+	<alias name="not-just-summoned" value="65534" />
+	<!-- = ~0x0001 -->
+	<alias name="untapped-under-condition" value="8" />
+	<alias name="declared-as-attacking" value="16" />
+	<alias name="declared-as-blocking" value="32" />
+	<alias name="declared-as-blocked" value="64" />
+	<alias name="declared-as-unblocked" value="128" />
+	<!-- special-abilities bits -->
+	<alias name="flashback-used" value="1" />
+	<alias name="buyback-used" value="2" />
+	<alias name="suspend-triggered" value="4" />
+	<alias name="kicker-used" value="8" />
+	<alias name="kicker2-used" value="16" />
+	<alias name="entwine-used" value="32" />
+	
+	<!-- id cards -->
+	<alias name="supra" value="0" />
+
+	<!-- WARNING : here '+' is binary 'or' operator, not arythmetic -->
+	<!--[[apt lang=en]]
+		** Aliases for card types
+		
+		`The following aliases are used for card types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de cartes
+		
+		`Les alias suivants sont utilisés pour les types de cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="mana-source" value="1" export="types" />
+	<alias name="permanent" value="2" export="types" />
+	<alias name="instant" value="4" export="types" />
+	<alias name="tribal" value="5" export="types" />
+	<alias name="sorcery" value="8" export="types" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases for permanent types
+		
+		`The following aliases are used for permanent types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de permanents
+		
+		`Les alias suivants sont utilisés pour les types de permanents :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<!-- = is a permanent -->
+	<alias name="enchantment" value="18" export="types" />
+	<!-- = is an enchantment -->
+	<alias name="local-enchantment" value="50" export="types" />
+	<!-- = is an enchantment -->
+	<alias name="global-enchantment" value="82" export="types" />
+	<!-- = is a permanent -->
+	<alias name="land" value="130" export="types" />
+	<!-- = is a land -->
+	<alias name="swamp" value="386" export="types" />
+	<!-- = is a land -->
+	<alias name="island" value="642" export="types" />
+	<!-- = is a land -->
+	<alias name="forest" value="1154" export="types" />
+	<!-- = is a land -->
+	<alias name="mountain" value="2178" export="types" />
+	<!-- = is a land -->
+	<alias name="plains" value="4226" export="types" />
+	<!-- = is a permanent -->
+	<alias name="creature" value="8194" export="types" />
+	<!-- = is a permanent -->
+	<alias name="artifact" value="16386" export="types" />
+	<!-- = artifact+creature -->
+	<alias name="artifact-creature" value="24578" export="types" />
+	<!-- = is a permanent -->
+	<alias name="planeswalker" value="32770" export="types" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- phases -->
+	<!--[[apt lang=en]]
+		** Aliases for phases
+		
+		`The following aliases are used for phases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les phases
+		
+		`Les alias suivants sont utilisés pour les phases:
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="untap" value="0" export="phases" />
+	<alias name="upkeep" value="1" export="phases" />
+	<alias name="draw" value="2" export="phases" />
+	<alias name="main" value="3" export="phases" />
+	<alias name="declare-attack" value="5" export="phases" />
+	<alias name="declare-attacking" value="6" export="phases" />
+	<alias name="declare-blocking" value="7" export="phases" />
+	<alias name="combat-deals" value="8" export="phases" />
+	<alias name="eoc" value="9" export="phases" />
+	<alias name="eot" value="10" export="phases" />
+	<alias name="cleanup" value="4" export="phases" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- properties -->
+
+	<!--[[apt lang=en]]
+		** Aliases for protection types
+		
+		`The following aliases are used for protection types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de protection
+		
+		`Les alias suivants sont utilisés pour les types de protection :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+
+	<!-- protection from card types 32768 -->
+	<alias name="protection-from-idcard" value="32768" export="properties" />
+	<alias name="protection-from-enchantments" value="32882" export="properties" />
+	<alias name="protection-from-creatures" value="40962" export="properties" />
+	<alias name="protection-from-artifacts" value="49154" export="properties" />
+
+	<!-- protection from card colors 16384 -->
+	<alias name="protection-from-color" value="16384" export="properties" />
+	<alias name="protection-from-black" value="16385" export="properties"
+		picture="protection-from-black.gif" />
+	<alias name="protection-from-blue" value="16386" export="properties"
+		picture="protection-from-blue.gif" />
+	<alias name="protection-from-green" value="16387" export="properties"
+		picture="protection-from-green.gif" />
+	<alias name="protection-from-red" value="16388" export="properties"
+		picture="protection-from-red.gif" />
+	<alias name="protection-from-white" value="16389" export="properties"
+		picture="protection-from-white.gif" />
+
+	<!-- protection from card properties 8192 -->
+	<alias name="protection-from-property" value="8192" export="properties" />
+	<alias name="protection-from-goblins" value="8370" export="properties" />
+	<alias name="protection-from-kavu" value="8405" export="properties" />
+	<alias name="protection-from-gorgons" value="8372" export="properties" />
+	<alias name="protection-from-clerics" value="8304" export="properties" />
+	<alias name="protection-from-beasts" value="8270" export="properties" />
+	<alias name="protection-from-dragons" value="8323" export="properties" />
+	<alias name="protection-from-spirits" value="8548" export="properties" />
+	<alias name="protection-from-arcane" value="8624" export="properties" />
+	<alias name="protection-from-snow" value="8198" export="properties" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- untargetable by idcard 4096 -->
+	<!--[[apt lang=en]]
+		** Aliases for categories of <shroud> property
+		
+		`The following aliases are used for categories of <shroud> property :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les catégories de la propriété <inciblable>
+		
+		`Les alias suivants sont utilisés pour les catégories de la propriété <inciblable> :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="untargetable-by-idcard" value="4096" export="properties" />
+	<alias name="untargetable-by-creature" value="4097" export="properties" />
+	<alias name="untargetable-by-sorcery" value="4224" export="properties" />
+	<alias name="untargetable-by-enchant" value="5632" export="properties" />
+	<alias name="untargetable-by-artifact" value="6145" export="properties" />
+	<alias name="shroud" value="8191" export="properties" picture="untargetable.gif" />
+	<!-- protection from sub properties 4096 -->
+	<!--[[apt end-multiref]]-->
+
+	<!-- properties -->
+	<!--[[apt lang=en]]
+		** Aliases for card properties
+		`The following aliases are used for card properties :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les propriétés des cartes
+		
+		`Les alias suivants sont utilisés pour les propriétés des cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="double-strike" value="1" export="properties" picture="double-strike.gif" />
+	<alias name="first-strike" value="2" export="properties" picture="first-strike.gif" />
+	<alias name="flying" value="3" export="properties" picture="flying.gif" />
+	<alias name="rampage" value="4" export="properties" picture="rampage.gif" />
+	<alias name="trample" value="5" export="properties" picture="trample.gif" />
+	<alias name="snow" value="6" export="properties" picture="snow-covered.gif" />
+	<alias name="protection-from-spells" value="7" export="properties" />
+	<alias name="protection-from-abilities" value="8" export="properties" />
+	<alias name="untap-under-condition" value="9" export="properties" />
+	<alias name="basic-land" value="10" export="properties" />
+	<alias name="attacks-if-able" value="15" export="properties" picture="attacks-if-able.gif" />
+	<alias name="banding" value="16" export="properties" picture="banding.gif" />
+	<alias name="shadow" value="17" export="properties" />
+	<alias name="fear" value="18" export="properties" />
+	<alias name="islandwalk" value="19" export="properties" />
+	<alias name="forestwalk" value="20" export="properties" />
+	<alias name="swampwalk" value="21" export="properties" />
+	<alias name="plainswalk" value="22" export="properties" />
+	<alias name="mountainwalk" value="23" export="properties" />
+	<alias name="reach" value="24" export="properties" picture="block-as-flying.gif" />
+	<alias name="vigilance" value="30" />
+	<alias name="haste" value="31" export="properties" picture="haste.gif" />
+	<alias name="does-not-untap" value="32" export="properties" />
+	<alias name="wall-can-attack" value="33" export="properties" />
+	<alias name="cannot-attack" value="34" export="properties" />
+	<alias name="cannot-block" value="35" export="properties" />
+	<alias name="artifact-damage-reduced-to-0" value="36" export="properties" />
+	<alias name="spell-damage-reduced-to-0" value="37" export="properties" />
+	<alias name="creature-damage-reduced-to-0" value="38" export="properties" />
+	<alias name="damage-reduced-to-0" value="39" export="properties" />
+	<alias name="sorcery-damage-reduced-to-0" value="40" export="properties" />
+	<alias name="token" value="41" export="properties" />
+	<alias name="defender" value="42" export="properties" />
+
+	<alias name="indestructible" value="1000" export="properties" />
+	<alias name="unblockable" value="1001" export="properties" />
+	<alias name="cannot-be-enchanted" value="1002" export="properties" />
+	<alias name="enchant-world" value="1003" export="properties" />
+	<alias name="desert" value="1004" export="properties" />
+	<alias name="lair" value="1005" export="properties" />
+	<alias name="locus" value="1006" export="properties" />
+	<alias name="equipment" value="1007" export="properties" />
+	<alias name="desertwalk" value="1008" export="properties" />
+	<alias name="cannot-be-countered" value="1009" export="properties" />
+	<alias name="cannot-use-T" value="1010" export="properties" />
+	<alias name="sunburst" value="1011" export="properties" />
+	<alias name="protection-from-monocolored" value="1012" export="properties" />
+	<alias name="protection-from-multicolored" value="1013" export="properties" />
+	<alias name="protection-from-all-colors" value="1014" export="properties" />
+	<alias name="flash" value="1015" export="properties" />
+	<alias name="morph" value="1016" export="properties" />
+	<alias name="snow-islandwalk" value="1019" export="properties" />
+	<alias name="snow-forestwalk" value="1020" export="properties" />
+	<alias name="snow-swampwalk" value="1021" export="properties" />
+	<alias name="snow-plainswalk" value="1022" export="properties" />
+	<alias name="snow-mountainwalk" value="1023" export="properties" />
+	<alias name="nonbasic-landwalk" value="1024" export="properties" />
+	<alias name="convoke" value="1025" export="properties" />
+	<alias name="may-not-untap" value="1026" export="properties" />
+	<alias name="legendary-landwalk" value="1027" export="properties" />
+	<alias name="cannot-be-blocked-by-artifacts" value="1028" export="properties" />
+	<alias name="cannot-be-blocked-by-walls" value="1029" export="properties" />
+	<alias name="phasing" value="1030" export="properties" />
+	<alias name="aura" value="1031" export="properties" />
+	<alias name="block-as-shadow" value="1032" export="properties" />
+	<alias name="block-only-flying" value="1033" export="properties" />
+	<alias name="horsemanship" value="1034" export="properties" />
+	<alias name="arcane" value="1035" export="properties" />
+	<alias name="shrine" value="1036" export="properties" />
+	<alias name="legend" value="1037" export="properties" />
+	<alias name="changeling" value="1038" export="properties" />
+	<alias name="jace" value="1039" export="properties" />
+	<alias name="garruk" value="1040" export="properties" />
+	<alias name="ajani" value="1041" export="properties" />
+	<alias name="liliana" value="1042" export="properties" />
+	<alias name="chandra" value="1043" export="properties" />
+	<alias name="wither" value="1044" export="properties" />
+
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The creature types
+		 
+		`All the declared creatures types available in <<Magic Project>> are listed below :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les types de créatures
+		
+		`Tous les types de créatures déclarés dans <<Magic Project>> sont listés ci-dessous :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="FIRST_SUB_TYPE" value="44" /><!-- should be 43 -->
+	<alias name="advisor" value="44" export="properties" />
+	<alias name="angel" value="45" export="properties" />
+	<alias name="anteater" value="46" export="properties" />
+	<alias name="antelope" value="47" export="properties" />
+	<alias name="ape" value="48" export="properties" />
+	<alias name="archer" value="49" export="properties" />
+	<alias name="archon" value="50" export="properties" />
+	<alias name="artificer" value="51" export="properties" />
+	<alias name="assassin" value="52" export="properties" />
+	<alias name="assembly-worker" value="53" export="properties" />
+	<alias name="atog" value="54" export="properties" />
+	<alias name="aurochs" value="55" export="properties" />
+	<alias name="avatar" value="56" export="properties" />
+	<alias name="badger" value="57" export="properties" />
+	<alias name="barbarian" value="58" export="properties" />
+	<alias name="basilisk" value="59" export="properties" />
+	<alias name="bat" value="60" export="properties" />
+	<alias name="bear" value="61" export="properties" />
+	<alias name="beast" value="62" export="properties" />
+	<alias name="beeble" value="63" export="properties" />
+	<alias name="berserker" value="64" export="properties" />
+	<alias name="bird" value="65" export="properties" />
+	<alias name="blinkmoth" value="66" export="properties" />
+	<alias name="boar" value="67" export="properties" />
+	<alias name="bringer" value="68" export="properties" />
+	<alias name="brushwagg" value="69" export="properties" />
+	<alias name="camarid" value="70" export="properties" />
+	<alias name="camel" value="71" export="properties" />
+	<alias name="caribou" value="72" export="properties" />
+	<alias name="carrier" value="73" export="properties" />
+	<alias name="cat" value="74" export="properties" />
+	<alias name="centaur" value="75" export="properties" />
+	<alias name="cephalid" value="76" export="properties" />
+	<alias name="chimera" value="77" export="properties" />
+	<alias name="citizen" value="78" export="properties" />
+	<alias name="cleric" value="79" export="properties" />
+	<alias name="cockatrice" value="80" export="properties" />
+	<alias name="construct" value="81" export="properties" />
+	<alias name="coward" value="82" export="properties" />
+	<alias name="crab" value="83" export="properties" />
+	<alias name="crocodile" value="84" export="properties" />
+	<alias name="cyclops" value="85" export="properties" />
+	<alias name="dauthi" value="86" export="properties" />
+	<alias name="demon" value="87" export="properties" />
+	<alias name="deserter" value="88" export="properties" />
+	<alias name="devil" value="89" export="properties" />
+	<alias name="djinn" value="90" export="properties" />
+	<alias name="dragon" value="91" export="properties" />
+	<alias name="drake" value="92" export="properties" />
+	<alias name="dreadnought" value="93" export="properties" />
+	<alias name="drone" value="94" export="properties" />
+	<alias name="druid" value="95" export="properties" />
+	<alias name="dryad" value="96" export="properties" />
+	<alias name="dwarf" value="97" export="properties" />
+	<alias name="efreet" value="98" export="properties" />
+	<alias name="egg" value="99" export="properties" />
+	<alias name="elder" value="100" export="properties" />
+	<alias name="elemental" value="101" export="properties" />
+	<alias name="elephant" value="102" export="properties" />
+	<alias name="elf" value="103" export="properties" />
+	<alias name="elk" value="104" export="properties" />
+	<alias name="eye" value="105" export="properties" />
+	<alias name="faerie" value="106" export="properties" />
+	<alias name="ferret" value="107" export="properties" />
+	<alias name="fish" value="108" export="properties" />
+	<alias name="flagbearer" value="109" export="properties" />
+	<alias name="fox" value="110" export="properties" />
+	<alias name="frog" value="111" export="properties" />
+	<alias name="fungus" value="112" export="properties" />
+	<alias name="gargoyle" value="113" export="properties" />
+	<alias name="giant" value="114" export="properties" />
+	<alias name="gnome" value="115" export="properties" />
+	<alias name="goat" value="116" export="properties" />
+	<alias name="goblin" value="117" export="properties" />
+	<alias name="golem" value="118" export="properties" />
+	<alias name="gorgon" value="119" export="properties" />
+	<alias name="graveborn" value="120" export="properties" />
+	<alias name="hyena" value="121" export="properties" />
+	<alias name="griffin" value="122" export="properties" />
+	<alias name="hag" value="123" export="properties" />
+	<alias name="harpy" value="124" export="properties" />
+	<alias name="hellion" value="125" export="properties" />
+	<alias name="hippo" value="126" export="properties" />
+	<alias name="homarid" value="127" export="properties" />
+	<alias name="homunculus" value="128" export="properties" />
+	<alias name="horror" value="129" export="properties" />
+	<alias name="horse" value="130" export="properties" />
+	<alias name="hound" value="131" export="properties" />
+	<alias name="human" value="132" export="properties" />
+	<alias name="hydra" value="133" export="properties" />
+	<alias name="illusion" value="134" export="properties" />
+	<alias name="imp" value="135" export="properties" />
+	<alias name="incarnation" value="136" export="properties" />
+	<alias name="insect" value="137" export="properties" />
+	<alias name="jellyfish" value="138" export="properties" />
+	<alias name="juggernaut" value="139" export="properties" />
+	<alias name="kavu" value="140" export="properties" />
+	<alias name="kirin" value="141" export="properties" />
+	<alias name="kithkin" value="142" export="properties" />
+	<alias name="knight" value="143" export="properties" />
+	<alias name="kobold" value="144" export="properties" />
+	<alias name="kor" value="145" export="properties" />
+	<alias name="kraken" value="146" export="properties" />
+	<alias name="lammasu" value="147" export="properties" />
+	<alias name="leech" value="148" export="properties" />
+	<alias name="leviathan" value="149" export="properties" />
+	<alias name="lhurgoyf" value="150" export="properties" />
+	<alias name="licid" value="151" export="properties" />
+	<alias name="lizard" value="152" export="properties" />
+	<alias name="manticore" value="153" export="properties" />
+	<alias name="masticore" value="154" export="properties" />
+	<alias name="mercenary" value="155" export="properties" />
+	<alias name="merfolk" value="156" export="properties" />
+	<alias name="metathran" value="157" export="properties" />
+	<alias name="minion" value="158" export="properties" />
+	<alias name="minotaur" value="159" export="properties" />
+	<alias name="monger" value="160" export="properties" />
+	<alias name="mongoose" value="161" export="properties" />
+	<alias name="monk" value="162" export="properties" />
+	<alias name="moonfolk" value="163" export="properties" />
+	<alias name="mutant" value="164" export="properties" />
+	<alias name="myr" value="165" export="properties" />
+	<alias name="mystic" value="166" export="properties" />
+	<alias name="nautilus" value="167" export="properties" />
+	<alias name="nephilim" value="168" export="properties" />
+	<alias name="nightmare" value="169" export="properties" />
+	<alias name="nightstalker" value="170" export="properties" />
+	<alias name="ninja" value="171" export="properties" />
+	<alias name="nomad" value="172" export="properties" />
+	<alias name="octopus" value="173" export="properties" />
+	<alias name="ogre" value="174" export="properties" />
+	<alias name="ooze" value="175" export="properties" />
+	<alias name="orb" value="176" export="properties" />
+	<alias name="orc" value="177" export="properties" />
+	<alias name="orgg" value="178" export="properties" />
+	<alias name="ouphe" value="179" export="properties" />
+	<alias name="ox" value="180" export="properties" />
+	<alias name="oyster" value="181" export="properties" />
+	<alias name="pegasus" value="182" export="properties" />
+	<alias name="pentavite" value="183" export="properties" />
+	<alias name="pest" value="184" export="properties" />
+	<alias name="phelddagrif" value="185" export="properties" />
+	<alias name="phoenix" value="186" export="properties" />
+	<alias name="pincher" value="187" export="properties" />
+	<alias name="pirate" value="188" export="properties" />
+	<alias name="plant" value="189" export="properties" />
+	<alias name="prism" value="190" export="properties" />
+	<alias name="rabbit" value="191" export="properties" />
+	<alias name="rat" value="192" export="properties" />
+	<alias name="rebel" value="193" export="properties" />
+	<alias name="reflection" value="194" export="properties" />
+	<alias name="rhino" value="195" export="properties" />
+	<alias name="rigger" value="196" export="properties" />
+	<alias name="rogue" value="197" export="properties" />
+	<alias name="rukh" value="198" export="properties" />
+	<alias name="salamander" value="199" export="properties" />
+	<alias name="samurai" value="200" export="properties" />
+	<alias name="sand" value="201" export="properties" />
+	<alias name="saproling" value="202" export="properties" />
+	<alias name="satyr" value="203" export="properties" />
+	<alias name="scarecrow" value="204" export="properties" />
+	<alias name="scorpion" value="205" export="properties" />
+	<alias name="scout" value="206" export="properties" />
+	<alias name="serf" value="207" export="properties" />
+	<alias name="serpent" value="208" export="properties" />
+	<alias name="shade" value="209" export="properties" />
+	<alias name="shaman" value="210" export="properties" />
+	<alias name="shapeshifter" value="211" export="properties" />
+	<alias name="sheep" value="212" export="properties" />
+	<alias name="skeleton" value="213" export="properties" />
+	<alias name="slith" value="214" export="properties" />
+	<alias name="sliver" value="215" export="properties" />
+	<alias name="slug" value="216" export="properties" />
+	<alias name="snake" value="217" export="properties" />
+	<alias name="soldier" value="218" export="properties" />
+	<alias name="soltari" value="219" export="properties" />
+	<alias name="spawn" value="220" export="properties" />
+	<alias name="specter" value="221" export="properties" />
+	<alias name="spellshaper" value="222" export="properties" />
+	<alias name="sphinx" value="223" export="properties" />
+	<alias name="spider" value="224" export="properties" />
+	<alias name="spike" value="225" export="properties" />
+	<alias name="spirit" value="226" export="properties" />
+	<alias name="splinter" value="227" export="properties" />
+	<alias name="sponge" value="228" export="properties" />
+	<alias name="squid" value="229" export="properties" />
+	<alias name="squirrel" value="230" export="properties" />
+	<alias name="starfish" value="231" export="properties" />
+	<alias name="survivor" value="232" export="properties" />
+	<alias name="tetravite" value="233" export="properties" />
+	<alias name="thalakos" value="234" export="properties" />
+	<alias name="thopter" value="235" export="properties" />
+	<alias name="thrull" value="236" export="properties" />
+	<alias name="treefolk" value="237" export="properties" />
+	<alias name="triskelavite" value="238" export="properties" />
+	<alias name="troll" value="239" export="properties" />
+	<alias name="turtle" value="240" export="properties" />
+	<alias name="unicorn" value="241" export="properties" />
+	<alias name="vampire" value="242" export="properties" />
+	<alias name="vedalken" value="243" export="properties" />
+	<alias name="viashino" value="244" export="properties" />
+	<alias name="volver" value="245" export="properties" />
+	<alias name="wall" value="246" export="properties" picture="wall.gif" />
+	<alias name="warrior" value="247" export="properties" />
+	<alias name="weird" value="248" export="properties" />
+	<alias name="whale" value="249" export="properties" />
+	<alias name="wildebeest" value="250" export="properties" />
+	<alias name="will-o'-the-wisp" value="251" export="properties" />
+	<alias name="witch" value="252" export="properties" />
+	<alias name="wizard" value="253" export="properties" />
+	<alias name="wolf" value="254" export="properties" />
+	<alias name="wolverine" value="255" export="properties" />
+	<alias name="wombat" value="256" export="properties" />
+	<alias name="worm" value="257" export="properties" />
+	<alias name="wraith" value="258" export="properties" />
+	<alias name="wurm" value="259" export="properties" />
+	<alias name="yeti" value="260" export="properties" />
+	<alias name="zombie" value="261" export="properties" />
+	<alias name="zubera" value="262" export="properties" />
+	<alias name="fillette" value="263" export="properties" />
+	<alias name="noggle" value="264" export="properties" />
+	
+	<alias name="LAST_SUB_TYPE" value="264" />
+	<!--[[apt end-multiref]]-->
+
+</aliases>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tidal Wave">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	instant
+	put a 5/5 blue wall creature token with defender into play. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Wall'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='5'/>
+								<register index='toughness' value='5'/>
+							</registers>
+							<colors>blue</colors>
+							<idcards>creature</idcards>
+							<properties>token wall defender </properties>
+						</init>
+						<abilities>
+							<ability ref="eot-sacrifice"/>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

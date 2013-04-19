@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thalakos Lowlands">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	t :add w or u to your mana pool. thalakos lowlands doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1' />
+				<target type="this"/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1' />
+				<target type="this"/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

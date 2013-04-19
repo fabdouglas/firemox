@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Wall of Ice">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="7"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties> wall</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

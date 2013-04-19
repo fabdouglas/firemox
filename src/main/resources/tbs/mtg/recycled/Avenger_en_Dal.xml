@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avenger en-Dal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - spellshaper
+	1/1
+	2w, t, discard a card: remove target attacking creature from the game. its controller gains life equal to its toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<action ref='target-creature'>
+					<test>
+						<test ref="tested-is-attacking"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<target type="target-list.first.controller"/>
+				<action ref='gain-life-target'>
+					<value register='target-list.first' index='toughness'/>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avalanche Riders">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - human nomad
+	2/2
+	haste
+	echo 3r 
+	when avalanche riders comes into play, destroy target land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human nomad haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana red='1' colorless='3' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

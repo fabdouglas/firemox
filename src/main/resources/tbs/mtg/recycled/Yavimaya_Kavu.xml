@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Yavimaya Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rg
+	creature - kavu
+	*/*
+	yavimaya kavu's power is equal to the number of red creatures in play.
+	yavimaya kavu's toughness is equal to the number of green creatures in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='creature'/>
+							<has-color color="red"/>
+						</and>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='creature'/>
+							<has-color color="green"/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

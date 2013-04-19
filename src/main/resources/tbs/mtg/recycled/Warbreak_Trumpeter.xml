@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Warbreak Trumpeter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - goblin
+	1/1
+	morph xxr 
+	when warbreak trumpeter is turned face up, put x 1/1 red goblin creature tokens into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='1' />
+				<action ref="pay-xx"/>
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<effects>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<create-card>
+					<card name='Goblin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token goblin </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

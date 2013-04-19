@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dueling Grounds">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{g}{w} 
+	no more than one creature may attack each turn. no more than one creature may block each turn. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>green white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<declared-attacking/>
+			<effects>
+				<add-modifier>
+					<static-modifier>
+						<modifiers>
+							<property-modifier operation="add" property="cannot-attack"/>
+						</modifiers>
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</static-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<declared-blocking/>
+			<effects>
+				<add-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+							<property-modifier operation="add" property="cannot-block"/>
+						</modifiers>
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</static-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

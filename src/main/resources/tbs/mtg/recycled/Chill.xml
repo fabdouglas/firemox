@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chill">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	enchantment
+	red spells cost 2 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<has-color color="red"/>
+			</test>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

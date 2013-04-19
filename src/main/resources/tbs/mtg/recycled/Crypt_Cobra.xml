@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Crypt Cobra">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b} whenever crypt cobra attacks and isn't blocked, 
+defending player gets a poison counter.  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>snake</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<modify-register register="opponent" index="poison" operation="add" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

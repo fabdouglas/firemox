@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wolf-Skull Shaman">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf shaman
+	2/2
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with wolf-skull shaman, you may reveal it. if you do, put a 2/2 green wolf creature token into play. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<create-card>
+					<card name='Wolf'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token wolf </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

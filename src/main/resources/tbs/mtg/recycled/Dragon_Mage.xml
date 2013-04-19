@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Mage">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {5}{r}{r} flying 
+whenever dragon mage deals combat damage to a player, 
+each player discards his or her hand and draws seven cards. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="red" value="2"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>flying dragon wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat-only">
+				<source-test>
+		  			<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="all" restriction-zone="hand"/>
+				<action ref="discard-cards"/>
+				<target-list operation="clear" name="%"/>
+				<target type="player" mode="all">
+					<test>
+						<controller player="context.player"/>
+					</test>
+				</target>
+				<repeat value="7"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

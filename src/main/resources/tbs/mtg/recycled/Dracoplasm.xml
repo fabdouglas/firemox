@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dracoplasm">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		Flying
+		
+		As Dracoplasm comes into play, sacrifice any number of creatures.
+		
+		Dracoplasm's power is equal to the total power of the sacrificed creatures and 
+		its toughness is equal to the total toughness of those creatures.
+		
+		Red Mana: Dracoplasm gets +1/+0 until end of turn.
+	-->
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+			<register index="red" value="1" />
+			<register index="power" value="0" />
+			<register index="toughness" value="0" />
+		</registers>
+		<colors>blue red</colors>
+		<idcards>creature</idcards>
+		<properties>flying shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="sacrifice-any-creature" value="1"/>
+			</actions>
+			<actions>
+				<modify-register operation="add" register="this" index="power">
+					<value>
+						<target-list operation="add">
+							<value register="tested" index="power" />
+						</target-list>
+					</value>
+				</modify-register>
+				<modify-register operation="add" register="this" index="toughness">
+					<value>
+						<target-list operation="add">
+							<value register="tested" index="toughness" />
+						</target-list>
+					</value>
+				</modify-register>
+			</actions>
+		</ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+			</cost>
+			<effects>
+				<target type="this" />
+				<action ref="add+1+0-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

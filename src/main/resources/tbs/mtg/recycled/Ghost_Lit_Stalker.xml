@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghost-Lit Stalker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - spirit
+	1/1
+	4b, t :target player discards two cards. play this ability only any time you could play a sorcery.
+	channel - 5bb, discard ghost-lit stalker: target player discards four cards. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='4' />
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value='2'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="5" black="2"/>
+				<target type="this"/>
+				<action ref="put-in-graveyard"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value='4'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

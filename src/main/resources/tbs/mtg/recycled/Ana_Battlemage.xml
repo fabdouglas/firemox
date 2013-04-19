@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ana Battlemage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - human wizard
+	2/2
+	kicker 2u and/or 1b
+	when ana battlemage comes into play, if the 2u kicker cost was paid, target player discards three cards.
+	when ana battlemage comes into play, if the 1b kicker cost was paid, tap target untapped creature and that creature deals damage equal to its power to its controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" black="1" />
+				<action ref="target-creature">
+					<test>
+						<in-zone zone="playANDuntapped" card="tested"/>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<tap/>
+				<assign-damage type="damage-normal" from="target-list.last" to="target-list.last.controller">
+					<value register="target-list.last" index="power"/>
+				</assign-damage>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker2">
+			<actions>
+				<pay-mana blue="1" colorless="2"/>
+				<action ref="target-player"/>
+			</actions>
+			<actions>
+				<action ref="player-discard" value="3"/>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker12">
+			<actions>
+				<pay-mana blue="1" colorless="2"/>
+				<action ref="target-player"/>
+			</actions>
+			<actions>
+				<pay-mana colorless="1" black="1" />
+				<action ref="target-creature">
+					<test>
+						<in-zone zone="playANDuntapped" card="tested"/>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref="player-discard" value="3"/>
+			</actions>
+			<actions>
+				<tap/>
+				<assign-damage type="damage-normal" from="target-list.last" to="target-list.last.controller">
+					<value register="target-list.last" index="power"/>
+				</assign-damage>
+			</actions>
+		</ability>
+	</abilities>
+</card>

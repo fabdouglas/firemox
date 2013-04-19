@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nim Devourer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - zombie
+	4/1
+	nim devourer gets +1/+0 for each artifact you control.
+	bb: return nim devourer from your graveyard to play, then sacrifice a creature. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana black='2' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="move-to-play"/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<has-idcard idcard="artifact"/>
+						<controller player="you"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Riptide Pilferer">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1u
+		creature - merfolk rogue
+		1/1
+		whenever riptide pilferer deals combat damage to a player, that player discards a card.
+		morph u 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='1' />
+			<register index='power' value='1' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>merfolk rogue</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<is-player />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.player" />
+				<action ref='player-discard' value="1" />
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Airborne Aid">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{u} draw a card for each bird in play. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<has-property property="bird"/>
+						</counter>
+					</value>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

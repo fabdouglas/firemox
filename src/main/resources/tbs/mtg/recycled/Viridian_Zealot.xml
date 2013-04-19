@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Viridian Zealot">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gg
+
+	creature - elf warrior
+
+	2/1
+
+	1g, sacrifice viridian zealot: destroy target artifact or enchantment.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>warrior elf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana green="1" colorless="1" />
+				<action ref="sacrifice-this"/>
+				<action ref="target-card">
+					<test>
+						<or> 
+							<test ref="is-targetable-artifact"/>
+							<test ref="is-targetable-enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

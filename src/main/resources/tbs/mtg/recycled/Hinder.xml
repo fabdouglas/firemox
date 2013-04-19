@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hinder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	instant
+	counter target spell. if that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="move-library-top"/>
+					</either>
+					<either>
+						<action ref="move-library-bottom"/>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

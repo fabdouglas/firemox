@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grassland Crusader">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5w
+	creature - cleric soldier
+	2/4
+	t :target elf or soldier gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<has-property property="elf"/>
+							<has-property property="soldier"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='2' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' value='2' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

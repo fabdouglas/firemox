@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashen Firebeast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rr
+	creature - beast
+	6/6
+	1r: ashen firebeast deals 1 damage to each creature without flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<not>
+								<has-property property="flying"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

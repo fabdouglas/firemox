@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soldevi Adnate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - cleric
+	1/2
+	t, sacrifice a black or artifact creature: add an amount of black mana equal to the sacrificed creature's converted mana cost to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<or>
+							<has-color color="black"/>
+							<has-idcard idcard="artifact"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<give-mana>
+					<black register="target-list.first" index="manacost"/>
+				</give-mana> 
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

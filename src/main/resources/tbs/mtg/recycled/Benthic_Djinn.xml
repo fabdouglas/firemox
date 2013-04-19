@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Benthic Djinn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  2ub islandwalk at the beginning of your upkeep, you lose 2 life. -->
+
+
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="black" value="1"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>islandwalk djinn</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="lose-life"  value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

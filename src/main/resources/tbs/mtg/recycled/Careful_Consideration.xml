@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Careful Consideration">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	instant
+	target player draws four cards, then discards three cards. if you played this spell during your main phase, instead that player draws four cards, then discards two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value='4'/>
+				<action ref='draw-a-card'/>
+				<action ref='player-discard'>
+					<value>
+						<if-then-else then="2" else="3">
+							<if ref="during-your-main"/>
+						</if-then-else>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Wanderlust">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {2}{g} at the beginning of the upkeep of enchanted creature's controller, wanderlust deals 1 damage to that player. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<phase-is phase="upkeep" />
+						<is-this player="attachedto.controller" />
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="attachedto.controller" />
+				<assign-damage type="damage-normal" value="1" />
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

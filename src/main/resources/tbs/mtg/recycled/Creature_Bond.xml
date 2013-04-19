@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Creature Bond">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{u} when enchanted creature is put into a graveyard, 
+creature bond deals damage equal to that creature's toughness to the creature's 
+controller. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage type="damage-normal">
+					<value register="context.card" index="toughness"/>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

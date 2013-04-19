@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hidetsugu's Second Rite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	instant
+	if target player has exactly 10 life, hidetsugu's second rite deals 10 damage to that player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="10">
+							<left register="target" index="life"/>
+						</equal>
+					</test>
+				</if-then-hop>
+				<assign-damage value='10' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arcbound Reclaimer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - golem
+	0/0
+	remove a +1/+1 counter from arcbound reclaimer: put target artifact card from your graveyard on top of your library.
+	modular 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='modular'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="artifact"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

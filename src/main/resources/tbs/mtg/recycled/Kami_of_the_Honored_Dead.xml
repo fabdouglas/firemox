@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kami of the Honored Dead">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ww
+	creature - spirit
+	3/5
+	flying
+	whenever kami of the honored dead is dealt damage, you gain that much life.
+	soulshift 6 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref='gain-life' value="context.int"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='soulshift6'/>
+	</abilities>
+</card>

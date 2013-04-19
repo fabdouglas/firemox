@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Assert Authority">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5uu
+	instant
+	affinity for artifacts 
+	counter target spell. if that spell is countered this way, remove it from the game instead of putting it into its owner's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='affinity'>
+					<counter-test>
+						<has-idcard idcard='artifact'/>
+					</counter-test>
+				</action>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

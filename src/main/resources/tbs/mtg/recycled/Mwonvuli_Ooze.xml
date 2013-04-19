@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mwonvuli Ooze">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - ooze
+	1+*/1+*
+	cumulative upkeep 2 
+	mwonvuli ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power'>
+				<value>
+					<add right="1">
+						<left>
+							<mult right="2">
+								<left>
+									<counter object-name='age' card='this'/>
+								</left>
+							</mult>
+						</left>
+					</add>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<add right="1">
+						<left>
+							<mult right="2">
+								<left>
+									<counter object-name='age' card='this'/>
+								</left>
+							</mult>
+						</left>
+					</add>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>ooze </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana>
+							<colorless>
+								<mult right="2">
+									<left>
+										<counter object-name='age' card='this'/>
+									</left>
+								</mult>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

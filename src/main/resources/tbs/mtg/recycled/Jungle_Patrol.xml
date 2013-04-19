@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jungle Patrol">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - human soldier
+	3/2
+	1g, t :put a 0/1 green plant wall creature token with defender into play.
+	sacrifice a plant wall token: add r to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Plant'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='0'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token plant wall defender </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<and>
+							<has-property property='plant'/>
+							<has-property property='wall'/>
+							<has-property property='token'/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<give-mana red='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

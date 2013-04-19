@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stuffy Doll">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact creature - construct
+	0/1
+	as stuffy doll comes into play, choose a player.
+	stuffy doll is indestructible.
+	whenever damage is dealt to stuffy doll, it deals that much damage to the chosen player.
+	t :stuffy doll deals 1 damage to itself.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>construct indestructible </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-player"/>
+				<create-ability>
+					<save target="target-list.first" />
+					<triggered-ability zone='play'>
+						<assigned-damage type="damage-any">
+							<destination-test>
+								<is-this/>
+							</destination-test>
+						</assigned-damage>
+						<effects>	
+							<target type="saved"/>
+							<assign-damage type='damage-normal' value="context.int"/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

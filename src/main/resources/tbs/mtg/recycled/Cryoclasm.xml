@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cryoclasm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	sorcery
+	destroy target plains or island. cryoclasm deals 3 damage to that land's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-property property='plains'/>
+							<has-property property='island'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type="target.controller"/>
+				<assign-damage value='3' type='damage-normal'/>
+				<target-list operation="remove-last"/>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

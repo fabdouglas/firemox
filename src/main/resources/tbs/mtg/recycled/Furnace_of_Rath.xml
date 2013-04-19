@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Furnace of Rath">
+	<!-- tested 11/27/2004 , v0.80.27 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<init>
+		<registers>
+			<register index="red" value="3"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<idcards>global-enchantment</idcards>
+		<colors>red</colors>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<replacement-ability zone="play" layer="1">
+			<!-- Y assigned damage -> Y x 2 assigned -->
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<or>
+						<is-player/>
+						<has-idcard idcard="creature"/>
+					</or>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<assign-damage type="context.int2">
+					<value>
+						<mult left="2" right="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

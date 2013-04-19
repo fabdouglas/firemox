@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Boldwyr Heavyweights">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - giant warrior
+	8/8
+	trample
+	when boldwyr heavyweights comes into play, each opponent may search his or her library for a creature card and put it into play. then each player who searched his or her library this way shuffles it.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='8'/>
+			<register index='toughness' value='8'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="opponent" cancel="true">
+					<either>
+						<target type="opponent"/>
+						<action ref='search-lib-player' value='1'>
+							<test>
+								<has-idcard idcard='creature'/>
+							</test>
+						</action>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

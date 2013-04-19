@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shower of Sparks">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	instant
+	shower of sparks deals 1 damage to target creature and 1 damage to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

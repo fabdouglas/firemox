@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vampire Hounds">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - hound
+	2/2
+	discard a creature card: vampire hounds gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>vampire hound </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value='1'/>
+				<target type='card' mode='choose' raise-event='false' restriction-zone='hand'>
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<register-modifier index='power' value='2' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' value='2' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

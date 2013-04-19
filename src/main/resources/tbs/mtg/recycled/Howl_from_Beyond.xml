@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Howl from Beyond">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant 
+</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum register="you" index="manapool"/>
+				</input-number>
+				<pay-mana>
+					<colorless register="stack" index="0"/>
+				</pay-mana>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value register="stack" index="0"/>
+					</register-modifier>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

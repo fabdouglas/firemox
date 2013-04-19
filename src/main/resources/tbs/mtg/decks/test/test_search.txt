@@ -1,0 +1,5 @@
+Defense_of_the_Heart;10
+Demonic tutor;10
+Savannah_Lions;20
+Super_card;10
+Enlightened Tutor;20

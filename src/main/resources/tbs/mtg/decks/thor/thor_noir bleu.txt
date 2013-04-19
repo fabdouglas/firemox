@@ -1,0 +1,27 @@
+#Jeu noir bleu
+#
+#John
+#
+#mars 17, 2000
+#1
+#4th Edition
+#
+Ancestral_Recall;3
+Counterspell;4
+Power_Sink;2
+Time_Walk;4
+Timetwister;3
+Dark_Ritual;2
+Demonic_Tutor;3
+Hypnotic_Specter;2
+Royal_Assassin;2
+Sengir_Vampire;2
+Black_Lotus;4
+Ivory_Tower;2
+Mox_Jet;6
+Mox_Sapphire;6
+Sol_Ring;3
+Underground_Sea;15
+Arena;1
+Clone;1
+Vesuvan_Doppelganger;1

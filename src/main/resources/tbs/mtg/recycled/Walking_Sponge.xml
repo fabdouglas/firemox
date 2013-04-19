@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Walking Sponge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - sponge
+	1/1
+	t :target creature loses flying, first strike, or trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>sponge </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<add-modifier>
+							<property-modifier property="flying" linked="false" operation="remove">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property="first-strike" linked="false" operation="remove">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property="trample" linked="false" operation="remove">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

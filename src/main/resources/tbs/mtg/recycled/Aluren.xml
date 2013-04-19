@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Aluren'>
+	<rules-author-comment>Oracle2Xml generator 0.93 beta</rules-author-comment>
+
+	<!--
+		2gg
+		enchantment
+		any player may play creature cards with converted mana cost 3 or less
+		without paying their mana cost and as though they had flash.
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='2' />
+			<register index='colorless' value='2' />
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier operation="add">
+					<abilities>
+						<activated-ability playable="instant" zone="hand">
+							<cost />
+							<effects>
+								<action ref="put-in-play" />
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<inf-equal right="3">
+						<left register="tested" index="manacost" />
+					</inf-equal>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

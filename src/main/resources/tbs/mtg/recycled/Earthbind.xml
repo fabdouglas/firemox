@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Earthbind">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="attachedto.controller" />
+				<assign-damage value="2" type="damage" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="flying" />
+</card>

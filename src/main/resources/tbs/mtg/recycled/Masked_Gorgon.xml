@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Masked Gorgon">
+<rules-author-comment></rules-author-comment>
+
+<!--
+		4b
+
+	creature - gorgon
+
+	5/5
+
+	green creatures and white creatures have protection from gorgons.
+	threshold - masked gorgon has protection from green and from white as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>gorgon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="protection-from-gorgons" operation="add" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<or>
+				 		<has-color color="green"/>
+				 		<has-color color="white"/>
+				 	</or>
+		 		</and>
+			</while>
+		</static-modifier>
+		<property-modifier property="protection-from-green" linked="true">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</property-modifier>
+		<property-modifier property="protection-from-white" linked="true">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

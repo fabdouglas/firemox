@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Caldera Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - kavu
+	2/2
+	1b: caldera kavu gets +1/+1 until end of turn.
+	g: caldera kavu becomes the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+			</cost>
+			<effects>
+				<input-color operation="or" index="0" register="stack" multiselect="false" />
+				<target type="this"/>
+				<add-modifier>
+					<color-modifier operation="set" linked="false" live-update="false">
+						<color register="stack" index="0" />
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

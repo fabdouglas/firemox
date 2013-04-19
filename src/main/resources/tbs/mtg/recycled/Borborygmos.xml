@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Borborygmos">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rrgg
+	legendary creature - cyclops
+	6/7
+	trample
+	whenever borborygmos deals combat damage to a player, put a +1/+1 counter on each creature you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>legend cyclops trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

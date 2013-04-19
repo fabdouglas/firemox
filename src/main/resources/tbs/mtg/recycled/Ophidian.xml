@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ophidian">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - snake
+	1/3
+	whenever ophidian attacks and isn't blocked, you may draw a card. if you do, ophidian deals no combat damage this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>snake </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='you'/>
+						<action ref='draw-a-card'/>
+						<target type="this"/>
+						<action ref="deals-no-combat-damage"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

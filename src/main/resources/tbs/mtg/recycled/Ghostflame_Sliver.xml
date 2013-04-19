@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghostflame Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		br
+	creature - sliver
+	2/2
+	all slivers are colorless.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<color-modifier operation="clear" linked="true" live-update="false"/>
+			</modifiers>
+			<while>
+				<has-property property='sliver'/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

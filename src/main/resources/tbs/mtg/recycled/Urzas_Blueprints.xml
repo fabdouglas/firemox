@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urza's Blueprints">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	echo 6 
+	t :draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana colorless='6' />
+			</actions>
+		</ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

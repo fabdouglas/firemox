@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blockbuster">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	enchantment
+	1r, sacrifice blockbuster: blockbuster deals 3 damage to each tapped creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type='player' mode='all'/>
+				<action ref="all-creatures">
+					<test>
+						<in-zone zone="playANDtapped"/>
+					</test>
+				</action>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

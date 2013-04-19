@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dispersal Shield">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{u} counter target spell if its converted mana cost is less than or 
+equal to the highest converted mana cost among permanents you control. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-spell">
+					<test>
+						<inf-equal>
+							<left register="tested" index="manacost"/>
+							<right>
+								<highest-among restriction-zone="play" expression="manacost">
+									<test>
+										<controller player="you"/>
+									</test>
+								</highest-among>
+							</right>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

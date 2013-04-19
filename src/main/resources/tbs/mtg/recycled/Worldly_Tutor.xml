@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Worldly Tutor">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  g 
+		search your library for a creature card and reveal that card. 
+		shuffle your library, then put the revealed card back on top of it.  
+	-->
+
+	<init>
+		<registers>
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</action>
+				<action ref="reveal" />
+				<action ref="move-library-top" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

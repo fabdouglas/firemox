@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Volrath the Fallen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bbb
+	legendary creature - shapeshifter
+	6/4
+	1b, discard a creature card: volrath the fallen gets +x/+x until end of turn, where x is the discarded card's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend shapeshifter </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<action ref='discard' value='1'>
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='target-list.first' index='manacost'/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='target-list.first' index='manacost'/>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flagstones of Trokair">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add w to your mana pool.
+	when flagstones of trokair is put into a graveyard from play, you may search your library for a plains card and put it into play tapped. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-W"/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="true" controller="you">
+					<either>
+						<action ref='search-lib'>
+							<test>
+								<has-idcard idcard='plains'/>
+							</test>
+						</action>
+						<move-card destination="playANDtapped" controller="you"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

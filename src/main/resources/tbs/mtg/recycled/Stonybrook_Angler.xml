@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stonybrook Angler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - merfolk wizard
+	1/2
+	1u, t :you may tap or untap target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<tap/>
+					</either>
+					<either>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

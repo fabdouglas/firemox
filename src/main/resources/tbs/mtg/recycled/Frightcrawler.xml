@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Frightcrawler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - horror
+	1/1
+	fear
+	threshold - as long as seven or more cards are in your graveyard, frightcrawler gets +2/+2 and can't block.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror fear </properties>
+	</init>
+	
+	<modifiers>
+		<register-modifier index='power' value='2' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='2' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<property-modifier property='cannot-block' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

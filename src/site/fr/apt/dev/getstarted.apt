@@ -1,0 +1,25 @@
+ ----
+Get started
+ ----
+Fabrice Daugan
+ ----
+09 September 2007
+
+Pour créer des carte et aider Firemox
+
+	Vous trouverez toutes les instructions pour {{{eclipse.html} l'installation 
+	d'Eclipse et ses plugins}} (environ 10 minutes)
+
+	Une fois Eclipse installé, vous pouvez {{{project.html} configurer Firemox}} : 
+	en récupérant les sources et configurer vos lanceurs (environ 5 minutes)
+
+	Maintenant, vous pouvez tout faire :
+	
+      * {{{create_cards.html} Créer des cartes}}
+		
+      * {{{../mtg/mtg.html} Modifier/Créer des règles}}.
+
+	Une description complète de cartes de fichier de définition de TBS 
+	(Turn Based Strategy) sont disponibles ici :
+	{{{../mtg/mtg.html} Magic the Gathering}}
+	

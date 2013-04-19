@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Weathered Bodyguards">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5w
+	creature - human soldier
+	2/5
+	as long as weathered bodyguards is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to weathered bodyguards instead.
+	morph 3w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-combat">
+				<test>
+					<and>
+						<is-face-up card="this"/>
+						<in-zone zone="playANDuntapped" card="this"/>
+					</and>
+				</test>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<in-zone zone="play"/>
+						<test ref="tested-is-unblocked"/>
+						<controller player="opponent"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<is-this player="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<assign-damage value="context.int" type="context.int2"/>
+			</effects>
+		</replacement-ability>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana white='1' colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

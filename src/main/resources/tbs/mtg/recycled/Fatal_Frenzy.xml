@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fatal Frenzy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	instant
+	until end of turn, target creature you control gains trample and gets +x/+0, where x is its power. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value register="target-list.first" index="power"/>
+					</register-modifier>
+				</add-modifier>
+				<action ref="trample-until-eot"/>
+				<action ref="sacrifice-target-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

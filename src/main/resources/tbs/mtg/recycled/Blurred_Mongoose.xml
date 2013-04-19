@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Blurred Mongoose">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{g} 
+blurred mongoose can't be countered. 
+blurred mongoose can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>mongoose cannot-be-countered shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

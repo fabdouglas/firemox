@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Life Burst'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--
+		1w
+		instant
+		target player gains 4 life, then gains 4 life for each card named life 
+		burst in each graveyard.
+	-->
+
+	<init>
+		<registers>
+			<register index='white' value='1' />
+			<register index='colorless' value='1' />
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<action ref='gain-life-target'>
+					<value>
+						<mult right='4'>
+							<left>
+								<add left='1'>
+									<right>
+										<counter restriction-zone="graveyard">
+											<has-name name="Life Burst" card="tested" />
+										</counter>
+									</right>
+								</add>
+							</left>
+						</mult>
+					</value>
+				</action>
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

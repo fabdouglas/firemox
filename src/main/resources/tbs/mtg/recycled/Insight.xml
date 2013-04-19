@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Insight">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment
+	whenever an opponent plays a green spell, you draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="opponent"/>
+						<has-color color="green"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

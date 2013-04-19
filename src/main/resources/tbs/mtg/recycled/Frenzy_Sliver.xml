@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Frenzy Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - sliver
+	1/1
+	all sliver creatures have frenzy 1. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability name="" zone="play">
+							<modified-register operation="or" register="card" index="state">
+								<destination-test>
+									<and>
+										<is-this/>
+										<test ref="tested-is-unblocked"/>
+									</and>
+								</destination-test>
+							</modified-register>
+							<effects>
+								<action ref="gain+1+0-until-eot"/>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

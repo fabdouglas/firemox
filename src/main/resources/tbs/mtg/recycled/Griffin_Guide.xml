@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Griffin Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +2/+2 and has flying.
+	when enchanted creature is put into a graveyard, put a 2/2 white griffin creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+					<source-test>
+						<is-this card="attachedto"/>
+					</source-test>
+					<destination-test>
+						<in-zone zone="graveyard"/>
+					</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Griffin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token griffin flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="+2/+2">
+		<modifiers>
+			<property-modifier property="flying" linked="true"/>
+		</modifiers>
+	</attachment>
+</card>

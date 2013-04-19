@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Floodbringer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - moonfolk wizard
+	1/2
+	flying
+	2, return a land you control to its owner's hand: tap target land.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>moonfolk wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-land'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

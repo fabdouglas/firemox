@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Engineered Explosives">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		x
+	artifact
+	sunburst 
+	2, sacrifice engineered explosives: destroy each nonland permanent with converted mana cost equal to the number of charge counters on engineered explosives.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>sunburst </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<equal>
+							<left register="tested" index="manacost"/>
+							<right>
+								<counter object-name="charge" card="this"/>
+							</right>
+						</equal>
+					</test>
+				</target>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Unmake">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(w / b)(w / b)(w / b)
+	instant
+	remove target creature from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana white="3"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana white="2" black="1"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana white="1" black="2"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="3"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

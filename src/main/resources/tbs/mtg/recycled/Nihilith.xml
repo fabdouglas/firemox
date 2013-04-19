@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nihilith">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	creature - horror
+	4/4
+	fear
+	suspend 7-1b
+	whenever a card is put into an opponent's graveyard from anywhere, if nihilith is suspended, you may remove a time counter from nihilith.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror fear </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana black='1' colorless='1' />
+			</actions>
+			<actions>
+				<repeat value='7'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='side'>
+			<moved-card>
+				<source-test>
+					<controller player="opponent"/>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="this"/>
+						<remove-object object-name="time"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

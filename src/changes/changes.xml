@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+	<properties>
+		<title>Firemox release notes</title>
+		<author email="fabdouglas(at)users.sourceforge.net">Fabrice Daugan</author>
+	</properties>
+	<body>
+		<release version="0.96.53" date="...." desc="Main goal : ....">
+			<action dev="riclas" type="fix">[Core] Position test now accepts Min and Max registers.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml now writes hybrid mana costs on cards, not yet on abilities.</action>
+			<action dev="fabdouglas" type="fix">[XML] &quot;is-ability&quot; failed to compile when 'type' attribute was not provided</action>
+			<action dev="fabdouglas" type="fix">[Core] System ability with attached UI like &quot;discard&quot; MTG ability should not allow rollback.</action>
+			<action dev="fabdouglas" type="fix">[UI] First card picture might fail with some ID on Windows</action>
+		</release>
+		<release version="0.95.51" date="2007-11-15" desc="Main goal : Documentation and fixes">
+			<action dev="fabdouglas" type="remove">[MTG] Unused/old properties, types.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;amplify&quot; implementation. See Daru_Stinger.xml</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;entwine&quot; implementation. See Dream&quot;s Grip.xml</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;kicker&quot; implementation. See Duskwalker.xml</action>
+			<action dev="fabdouglas" type="add">[MTG] Cost reduction are managed. See Dragonspeaker_Shaman.xml</action>
+			<action dev="fabdouglas" type="add">[MTG] Translation of all properties in French.</action>
+			<action dev="fabdouglas" type="fix">[MTG] &quot;fading&quot; was not removing counter.</action>
+			<action dev="fabdouglas" type="fix">[MTG] &quot;wizard&quot; proxy did not get correctly printing data causing some constraint validator failing.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml generates best code for &quot;morph&quot;.</action>
+			<action dev="fabdouglas" type="update">[MTG] Enhanced performance for filter and first load. </action>
+			<action dev="riclas" type="fix" issue="1709629">[MTG] Creatures with trample deal no damage. Also automatic combat damage assignment has been updated.</action>
+			<action dev="riclas" type="add">[MTG] Added a &quot;MASTER&quot; property that is all properties between &quot;FIRST_SUB_TYPE&quot; and &quot;LAST_SUB_TYPE&quot;. In MTG it is all creature types.</action>
+			<action dev="riclas" type="add">[MTG] Card type and Property filters done for deck builder. </action>
+			<action dev="riclas" type="fix">[MTG] Some loading time taken from filtering to deck builder loading. Reorganization/redesign of the deckbuilder.</action>
+			<action dev="riclas" type="fix">[MTG] Cards in &quot;morph&quot; didn't show face down.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml now detects equipment modifiers and writes the &quot;equip&quot; ability on the cards.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml now detects &quot;madness&quot; ability and &quot;soulshift&quot;.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml now detects &quot;vanishing&quot; and &quot;lifelink&quot;.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml now detects attachment references on creatures. Many small fixes and detections added.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml discard actions optimized detection.</action>
+			<action dev="riclas" type="add">[MTG] Property alias updated, namely &quot;shroud&quot; and &quot;reach&quot;.</action>
+			<action dev="riclas" type="add">[MTG] New properties for creatures implemented: &quot;block-as-shadow&quot; and &quot;block-only-flying&quot;</action>
+			<action dev="riclas" type="add">[MTG] Action references added for discard actions, pump actions and property changes.</action>
+			<action dev="riclas" type="add">[MTG] Several attachment references added.</action>
+			<action dev="riclas" type="add">[MTG] &quot;mill-a-card&quot; and &quot;move-library-bottom&quot; actions added.</action>
+			<action dev="riclas" type="add">[MTG] &quot;madness&quot; and &quot;soulshift&quot; implementation added. </action>
+			<action dev="riclas" type="add">[MTG] &quot;vanishing&quot; implementation.</action>
+			<action dev="riclas" type="add">[MTG] &quot;lifelink&quot; implementation.</action>
+			<action dev="riclas" type="add">[MTG] &quot;flashback&quot; fixed. card was not removed from game.</action>
+			<action dev="fabdouglas" type="add">[XML] &quot;target-list&quot; test &quot;contains&quot; operation supports &quot;raise-event&quot; constraint and &quot;container&quot;. See Daru_Stinger.xml</action>
+			<action dev="fabdouglas" type="add">[XML] New &quot;card-properties&quot; expression. See mtg.xml/amplify</action>
+			<action dev="fabdouglas" type="fix">[XML] unsupported actions/tests/... were not reported during the build.</action>
+			<action dev="fabdouglas" type="add">[XML] &quot;target-list&quot; expression supports &quot;add&quot; (sum), &quot;maximum&quot; and &quot;minimum&quot; operations. See Dracoplasm.xml</action>
+			<action dev="fabdouglas" type="add">[XML] &quot;assign-damage&quot; action has been expanded with &quot;from&quot; and &quot;to&quot; attributes. See Arena.xml for example.</action>
+			<action dev="fabdouglas" type="fix" issue="1778602">[Core] Proxy settings could not be read.</action>
+			<action dev="fabdouglas" type="fix" issue="1722311">[Core] Spell played without using the stack did not generate the &quot;moved-card event&quot;.</action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;choice&quot; action might not work correctly with &quot;hop&quot; attribute.</action>
+			<action dev="fabdouglas" type="fix">[Core] Triggered abilities were not highlighted.</action>
+			<action dev="amc_grim" type="fix" issue="1795965">[Core] magic.sh launcher was in DOS format. Also it has been simplified.</action>
+			<action dev="fabdouglas" type="fix">[Core] Looping actions (with more than one looping size) caused game crash during the replay phase.</action>
+			<action dev="fabdouglas" type="update">[Core] Use args4j 2.0.8 version.</action>
+			<action dev="fabdouglas" type="fix">[UI] TBS switch did not work as required depending on the previous settings.</action>
+			<action dev="fabdouglas" type="fix" issue="1806485">[UI] The Instant Messaging is back and support correctly the smileys.</action>
+			<action dev="fabdouglas" type="fix">[UI] Some cards may not be visible as needed with face-up/down actions.</action>
+			<action dev="fabdouglas" type="add">[UI] Cards in a visible zone, but with private status are painted with transparency with back picture.</action>
+			<action dev="fabdouglas" type="add">[UI] Enhanced deck builder load.</action>
+			<action dev="fabdouglas" type="fix">[UI] Counter were not painted on cards.</action>
+			<action dev="fabdouglas" type="add">[UI] Best text for &quot;assign-damage&quot; action in tooltip.</action>
+			<action dev="hcross" type="fix">[UI] Empty password for proxy was not supported.</action>
+			<action dev="fabdouglas" type="fix">[UI] In the database properties, the &quot; original picture&quot; link did not work.</action>
+			<action dev="fabdouglas" type="update">[UI] Use Substance 4.0 version.</action>
+			<action dev="fabdouglas" type="fix">[UI] Password was not checked correctly during connection.</action>
+			<action dev="fabdouglas" type="update">[UI] Magic-Project become Firemox.</action>
+		</release>
+		<release version="0.94.50" date="2007-04-14" desc="Main goal : Load fix">
+			<action dev="fabdouglas" type="fix">[Core] Application does not start when placed in firemox-.... directory.</action>
+			<action dev="riclas" type="fix">[Deck] Could not save deck.</action>
+		</release>
+		<release version="0.94.49" date="2007-04-10" desc="Main goal : Deck constraints">
+			<action dev="fabdouglas" type="add">[Deck] Real-time constraint validation.</action>
+			<action dev="fabdouglas" type="add">[Deck] Amounts of cards in left and right panels are now displayed.</action>
+			<action dev="fabdouglas" type="add">[Deck] Anti-alias for card picture.</action>
+			<action dev="fabdouglas" type="add" issue="1651898">[Deck] Selected card in the deck panel is now displayed.</action>
+			<action dev="fabdouglas" type="add" issue="1079416">[Deck] deck constraints.</action>
+			<action dev="riclas" type="add">[Deck] Now the number of cards in a deck can be changed by clicking on it, better deck list presentation.</action>
+			<action dev="riclas" type="add" issue="1079401">[Deck] color filters.</action>
+			<action dev="riclas" type="fix">[Deck] if a deck was loaded and &quot;new deck&quot; was clicked statistics did not restart</action>
+			<action dev="riclas" type="add">[Deck] deck builder now shows the name of the loaded deck</action>
+			<action dev="riclas" type="fix">[Deck] an empty deck could not be loaded</action>
+			<action dev="riclas" type="fix">[Deck] after saving a deck if &quot;new deck&quot; was clicked it showed the &quot;changed after saved&quot; dialog</action>
+			<action dev="riclas" type="fix">[Deck] after loading a deck adding cards was not done correctly</action>
+			<action dev="riclas" type="fix">[Deck] sometimes could not save deck correctly</action>
+			<action dev="riclas" type="fix">[Deck] card names were not loaded correctly</action>
+			<action dev="fabdouglas" type="fix" >[Deck] Some pictures might not be loaded since, the proxies were not used.</action>
+			<action dev="fabdouglas" type="add" >[Deck] Progress bar added when a picture is loading.</action>
+			<action dev="fabdouglas" type="fix">[Web] French and English web sites broken links.</action>
+			<action dev="fabdouglas" type="fix" issue="1657163">[MTG] When defending a creature was died by the first damage of doule-strike creatures, there was no way to leave the assigment damage step.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;ww2.wizards.com&quot; proxy.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;affinity&quot; implementation.</action>
+			<action dev="fabdouglas" type="fix" issue="1650288">[MTG] Response after attackers declared</action>
+			<action dev="fabdouglas" type="add" issue="1634547">[MTG] &quot;transmute&quot; implementation. See Perplex.xml</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;phasing&quot; implementation.</action>
+			<action dev="fabdouglas" type="add" issue="1668224">[MTG] Oracle2Xml detects &quot;forecast - [..]&quot;.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml detects &quot;affinity for [..]&quot;.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml detects &quot;transmute [..]&quot;.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml detects &quot;put [n] [..] counter&quot;.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml detects &quot;whenever .. deals [combat] damage to [a player]&quot;.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Oracle2Xml did not write some &quot;target&quot; actions.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Oracle2Xml detects &quot;sacrifice&quot; better.</action>
+			<action dev="fabdouglas" type="add">[MTG] Oracle2Xml detects now player &quot;loses/gains n life&quot; in addition of &quot;you gain/lose n life&quot;.</action>
+			<action dev="riclas" type="add">[UI] Added Portuguese of Portugal translation. Created from Brazilian one (thanks tureba).</action>
+			<action dev="fabdouglas" type="add" issue="1250783">[UI] Zone configuration sharing.</action>
+			<action dev="fabdouglas" type="add" issue="1685714">[UI] Firefox browser was not tried on Linux OS for URL</action>
+			<action dev="fabdouglas" type="add" issue="1386493">[UI] Custom colors of P/T.</action>
+			<action dev="fabdouglas" type="add" issue="1062310">[UI] Random angle for cards.</action>
+			<action dev="fabdouglas" type="fix" issue="1652756">[UI] Changing theme causes crash.</action>
+			<action dev="fabdouglas" type="fix" issue="1653746">[UI] Invalid data from data proxies were not detected and caused corruption of database.</action>
+			<action dev="fabdouglas" type="add">[UI] New renderer for scaled cards for a nicer effect.</action>
+			<action dev="fabdouglas" type="add">[UI] New renderer for cards for faster painting.</action>
+			<action dev="fabdouglas" type="fix">[UI] Increased TBS zone configuration.</action>
+			<action dev="fabdouglas" type="fix">[UI] i18n did not work for zones.</action>
+			<action dev="fabdouglas" type="fix">[UI] i18n did not work for profile values.</action>
+			<action dev="fabdouglas" type="add">[UI] Tooltip indicating profile values can be modified.</action>
+			<action dev="fabdouglas" type="fix">[XML] unsupported actions/tests/... were not reported during the build.</action>
+			<action dev="fabdouglas" type="add">[XML] Macro accept &quot;counter-test&quot; test in &quot;action&quot; node. See Dross Golem.</action>
+			<action dev="fabdouglas" type="add">[XML] &quot;this&quot; ability reference can be used to identify the current ability in actions such as &quot;add-ability&quot;. See Vesuvan_Doppelganger.xml</action>
+			<action dev="fabdouglas" type="fix" issue="1653746">[XML] Empty card name is now forbidden.</action>
+			<action dev="fabdouglas" type="fix" issue="1662120">[Core] Modify required-mana action did not work as expected.</action>
+			<action dev="fabdouglas" type="fix" issue="1657629">[Core] Targets (really targeted ones) may not be rechecked during the resolution.</action>
+			<action dev="fabdouglas" type="fix" issue="1668031">[Core] modifying a player value with ModyfyTargetListRegister action caused the came crashing</action>
+			<action dev="fabdouglas" type="fix" issue="1660289">[Core] Game was desynchronized with multiple replacement choice.</action>
+			<action dev="fabdouglas" type="add" issue="1496870">[Core] Server can now decides the first player.</action>
+			<action dev="fabdouglas" type="add">[Core] New MDB format for best DeckBuilder and 1v1 game load.</action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;move-[player-]card&quot; action did not consider the &quot;bottom&quot; position.</action>
+			<action dev="fabdouglas" type="fix">[Core] When application was installed in a directory containing some spaces, the game could not start.</action>
+			<action dev="fabdouglas" type="fix" issue="1641320">[Core] The players could not play something between 2 spell resolution, so no triggered-ability was able to be stacked.</action>
+			<action dev="fabdouglas" type="fix" issue="1652734">[Core] &quot;choice&quot; action with &quot;target-list.[first/last]&quot; dependency causes error.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;silent&quot; option for &quot;move-card&quot; action, triggering only modifier effects.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;is-copy&quot; test.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;restore-card&quot; action.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;copy-card&quot; action.</action>
+			<action dev="fabdouglas" type="fix">[Core] refreshIdColor did not work.</action>
+			<action dev="fabdouglas" type="add">[Core] Copying card and ability.</action>
+		</release>
+		<release version="0.93.47" date="2007-02-03" desc="Main goal : Block fix">
+			<action dev="fabdouglas" type="fix" issue="1650306">[MTG] non-provoke creatures could not block</action>
+			<action dev="fabdouglas" type="fix">[UI] some i18n parameters were not used correctly.</action>
+		</release>
+		<release version="0.93.46" date="2007-02-01" desc="Main goal : Deck Builder">
+			<action dev="fabdouglas" type="add">[MTG] New &quot;provoke&quot;. See Goblin Grappler</action>
+			<action dev="fabdouglas" type="fix">[MTG] New &quot;protection-from-all-color&quot;,&quot;protection-from-colored&quot;,&quot;protection-from-monocolored&quot;,&quot;protection-from-multicolored&quot; implementation.</action>
+			<action dev="fabdouglas" type="fix">[MTG] New &quot;may-not-untap&quot; implementation to support Winter_Orb+Sand_Silos rules.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Graveyard cards were not correctly placed.</action>
+			<action dev="fabdouglas" type="add">[MTG] Graft. See Cytoplast_Manipulator.xml.</action>
+			<action dev="fabdouglas" type="add">[MTG] Imprint. See Chrom_Mox.xml.</action>
+			<action dev="ashsaver" type="add" issue="1617826">[MTG] Forecast. Govern_the_Guildless.xml.</action>
+			<action dev="ashsaver" type="fix" issue="1617577">[MTG] &quot;cancel&quot; was available during the damage assignments.</action>
+			<action dev="fabdouglas" type="add" issue="1601444">[MTG] new echo implementation.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;Convoke&quot;. See Siege_Wurm.xml.</action>
+			<action dev="fabdouglas" type="add">[MTG] nonbasic-landwalk, snow-moutain/island/..-walk.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;Flash&quot;. See Needlebug.xml.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;Sunburst&quot;. See Suntouched_Myr.xml.</action>
+			<action dev="fabdouglas" type="update">[MTG] &quot;snow-covered&quot; property becomes &quot;snow&quot;.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml detects now the properties, and new controller of created token.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml adds now &quot;cost&quot; part for triggered ability containing some target actions.</action>
+			<action dev="riclas" type="add">[MTG] Oracle2Xml brings 400 more cards.</action>
+			<action dev="fabdouglas" type="fix" issue="1567644">[MTG] Double strike creatures cancel other damage.</action>
+			<action dev="fabdouglas" type="fix" >[Deck] DCK file converter did not work.</action>
+			<action dev="fabdouglas" type="add" issue="1177170">[Deck] Translate jDeckBuilder form.</action>
+			<action dev="fabdouglas" type="add" issue="1570324">[Deck] Go to text while typing.</action>
+			<action dev="fabdouglas" type="fix" issue="1565926">[Deck] Could not open or save deck.</action>
+			<action dev="fabdouglas" type="fix" issue="1642068">[UI] Drag N drop should not be possible in library and graveyard.</action>
+			<action dev="fabdouglas" type="fix">[UI] Exception when the total width of cards in play was too high.</action>
+			<action dev="fabdouglas" type="fix" issue="1577593">[UI] On Linux, Life/Poison buttons do not appears completely</action>
+			<action dev="fabdouglas" type="fix" issue="1577592">[UI] Some sectors of play zone were shared with all players causing some spaces to appear.</action>
+			<action dev="fabdouglas" type="fix" issue="1618581">[UI] Expanded zones card order was wrong.</action>
+			<action dev="fabdouglas" type="update">[UI] Nicer &quot;input-color&quot; and &quot;input-number&quot; small pictures.</action>
+			<action dev="fabdouglas" type="fix">[UI] Clicking twice on an expanded cause it to be moved on the left of screen.</action>
+			<action dev="fabdouglas" type="add">[UI] Zone names and configuration are now TBS dependent.</action>
+			<action dev="fabdouglas" type="fix">[UI] Graveyard cards were not correctly placed.</action>
+			<action dev="fabdouglas" type="fix">[UI] Complete French and English spelling check review.</action>
+			<action dev="fabdouglas" type="fix">[UI] Port number field was cleared when it loses focus without modification.</action>
+			<action dev="fabdouglas" type="add">[UI] Recent decks are now saved in combobox</action>
+			<action dev="fabdouglas" type="update">[UI] Use Substance 3.1 version.</action>
+			<action dev="fabdouglas" type="fix" issue="1577732">[UI] When both players have the same card card in their deck, modifiers were duplicated.</action>
+			<action dev="fabdouglas" type="fix">[UI] Existing Skin LF names are now cached to increase startup time.</action>
+			<action dev="fabdouglas" type="fix">[UI] several downloading cards with the same name may not be refresh when finished.</action>
+			<action dev="fabdouglas" type="fix">[UI] All dialogs have been fixed.</action>
+			<action dev="fabdouglas" type="add">[XML] Empty &quot;Blank&quot; TBS has been created for TBS creation tutorial.</action>
+			<action dev="fabdouglas" type="add">[XML] Builder can now detect broken references from cards.</action>
+			<action dev="fabdouglas" type="add">[XML] Now, macro accepts actions as parameter.</action>
+			<action dev="fabdouglas" type="add">[XML] Abilities accept actions as macro.</action>
+			<action dev="fabdouglas" type="add">[Core] move-object feature. See Simic_Guildmage.xml</action>
+			<action dev="fabdouglas" type="fix">[Core] Abilities/modifiers depending on cards in the Hand zone did not work for cards outcoming from this zone.</action>
+			<action dev="ashsaver" type="add" issue="1617712">[Core] &quot;static-modifier&quot; can now be activated from any from.</action>
+			<action dev="fabdouglas" type="add" issue="1632622">[Core] TBS switching improved.</action>
+			<action dev="fabdouglas" type="add" issue="1479492">[Core] &quot;additional-cost-modifier&quot; feature.</action>
+			<action dev="fabdouglas" type="fix" issue="1630171">[Core] &quot;has-property &quot; with  &quot;color-mask &quot; feature did not work has expected.</action>
+			<action dev="fabdouglas" type="fix" issue="1630167">[Core] Unregistered ability by a modifier was definitely removed from the card.</action>
+			<action dev="fabdouglas" type="fix">[Core] support of &quot;modifier.creator&quot; [.controller|.owner] to implement cards like Island_Sanctuary.</action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;repeat&quot; action, played in the advanced mode made the next action repeat x+1 times.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;choice&quot; action has a &quot;hop&quot; attribute for cancel option.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;play-as-spell&quot; (true/false/auto) attribute added to activated ability to play then as in play from hand.</action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;abort&quot; action did not work and might crash the game.</action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;abort&quot; action did not work and might crash the game.</action>
+			<action dev="fabdouglas" type="fix" issue="1616151">[Core] Activated abilities played from an attached card crashed the game.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;required-mana&quot; register access.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;to-code&quot;/&quot;to-index&quot; expressions.</action>
+			<action dev="fabdouglas" type="fix">[Core] Cached abilities were not updated correctly in event manager.</action>
+			<action dev="fabdouglas" type="fix">[Core] Deadlock (no player has priority) when an attachment comes into play.</action>
+			<action dev="fabdouglas" type="add">[Core] multi selection is now available in the &quot;input-color&quot; wizard.</action>
+			<action dev="fabdouglas" type="add">[Core] colorless mana is now available in the &quot;input-color&quot; wizard.</action>
+			<action dev="fabdouglas" type="fix" issue="1567523">[Core] Log4j might not work with some configuration. The logger will be disabled if it failed to setup.</action>
+			<action dev="fabdouglas" type="add" issue="1092822">[Core] input-property and input-zone action have been added. See An-Zerrin Ruins.</action>
+			<action dev="fabdouglas" type="delete">[Core] &quot;me&quot; and &quot;myself&quot; words become &quot;this&quot;.</action>
+			<action dev="fabdouglas" type="fix">[Core] The tap action triggered event before the card was really tapped.</action>
+			<action dev="fabdouglas" type="fix">[Core] The tap action triggered event even if the state did not change.</action>
+			<action dev="fabdouglas" type="add">[Core] Settings are now configured in the unique file &quot;settings.xml&quot;.</action>
+			<action dev="fabdouglas" type="add">[Core] Prevent a system ability to be selected.</action>
+			<action dev="fabdouglas" type="fix">[XML] The XSD/XML validator was so laxy. Additional checks added.</action>
+			<action dev="fabdouglas" type="fix">[XML] XML files were checked twice at startup.</action>
+			<action dev="fabdouglas" type="fix">[XML] Builder crashed when there was no mdb file.</action>
+		</release>
+		<release version="0.92" date="2006-09-28" desc="Main goal : Fix">
+			<action dev="fabdouglas" type="fix" issue="1565969">[UI] When user&quot;s language is unknown, the game did not start.</action>
+			<action dev="fabdouglas" type="fix" issue="1566349">[Core] Could not use first card in recycled directory.</action>
+			<action dev="fabdouglas" type="fix" issue="1565455">[Core] Bad library loading, can now exclude oldest libraries from classpath.</action>
+			<action dev="fabdouglas" type="fix" issue="1565926">[Core] Stop downloading mana pictures when one failed.</action>
+			<action dev="fabdouglas" type="fix">[Core] tar gz compressed files may not be compatible with some tools.</action>
+			<action dev="fabdouglas" type="fix">[Core] Manage the manual installation update with several firemox jar versions in lib directory.</action>
+		</release>
+		<release version="0.91" date="2006-09-24" desc="Main goal : drag&quot;drop">
+			<action dev="fabdouglas" type="add" issue="1079420">[UI] All cards can be moved inside a zone.</action>
+			<action dev="fabdouglas" type="fix" issue="1497501">[UI] Reversing opponent side option did not work.</action>
+			<action dev="fabdouglas" type="fix" issue="1497498">[UI] Reversing opponent art option did not work.</action>
+			<action dev="fabdouglas" type="update">[UI] Update substance (default) L&quot;F to 3.0.01 </action>
+			<action dev="fabdouglas" type="update">[UI] Updated SkinLF version to 6.7 </action>
+			<action dev="fabdouglas" type="update">[UI] Updated l2fprod components version to 6.9.1 </action>
+			<action dev="fabdouglas" type="add">[UI] New table top using substance &quot;watermarks&quot; </action>
+			<action dev="fabdouglas" type="fix">[UI] &quot;Sacrifice&quot; word was not entirely translated in French.</action>
+			<action dev="fabdouglas" type="add">[UI] Pictures have been associated to input-... actions.</action>
+			<action dev="fabdouglas" type="fix">[UI] SMTP connection did not use proxy identification (to test again).</action>
+			<action dev="fabdouglas" type="fix">[UI] Prevent useless hourglass glass pane to repaint to use less CPU.</action>
+			<action dev="fabdouglas" type="add">[UI] Progress bar added during the picture download.</action>
+			<action dev="fabdouglas" type="add">[UI] Language (i18n) is now automatically detected.</action>
+			<action dev="fabdouglas" type="add" issue="1564403">[Core] Looking at cards in a zone without opponent.</action>
+			<action dev="fabdouglas" type="fix" issue="1546225">[Core] In fact all interrupted (partially replaced) abilities such as &quot;Ancestral Recall&quot; could not restore the previous &quot;repeat&quot; value.</action>
+			<action dev="fabdouglas" type="fix" issue="1556007">[Core] It was not possible to respond to some abilities generating several events during the cost.</action>
+			<action dev="fabdouglas" type="fix" issue="1496594">[Core] &quot;unregister-ability&quot; action remove reference between delayed ability and the saved object such as the creatures previously targeted. This is required to free the references of unused object.</action>
+			<action dev="fabdouglas" type="fix" issue="1496903">[Core] Couple of modifiers were not aggregated correctly.</action>
+			<action dev="fabdouglas" type="fix" issue="1502237">[Core] Mana actions were using static registers instead of dynamic ones.</action>
+			<action dev="fabdouglas" type="fix" issue="1511710">[Core] Wrong ability instance reference might occur. mtg/Regenerate could not work.</action>
+			<action dev="fabdouglas" type="fix" issue="1523350">[Core] Color index was used instead of color bytes in &quot;has-property&quot; intersection with color-mask test, such as &quot;protection-from-color&quot; MTG test.</action>
+			<action dev="fabdouglas" type="fix" issue="https://sourceforge.net/forum/message.php?msg_id=3833230">[Core] UTF-8 charset cause some errors with non-ASCII chars.</action>
+			<action dev="fabdouglas" type="fix" issue="1496558">[Core] First card could not be used in the game.</action>
+			<action dev="fabdouglas" type="fix" issue="1496861">[Core] For input-number, enterinteger="Enter a number" was used instead of "Enter an integer".</action>
+			<action dev="fabdouglas" type="add" issue="1496861">[Core] For input-number, constraint check on edit.</action>
+			<action dev="fabdouglas" type="add" issue="1496861">[Core] For input-number, default value, strict-max option.</action>
+			<action dev="fabdouglas" type="add">[Core] Update automatically the mdb when a XML card is newer than the compiled MDB.</action>
+			<action dev="fabdouglas" type="fix">[Core] When firemox is installed in a directory containing any spaces, the application can not start.</action>
+			<action dev="fabdouglas" type="add">[Core] Attachment object added to card. No more attachment condition in &quot;attach-list&quot; action.</action>
+			<action dev="fabdouglas" type="fix">[Core] Picture lookup process has been optimized : does not download any picture if a local one exists, even from a proxy with an highest priority.</action>
+			<action dev="fabdouglas" type="add">[Core] &quot;keywords&quot; feature added for cards. &quot;has-keyword&quot; test also added.</action>
+			<action dev="fabdouglas" type="fix">[Core] Increased buffer size for small Strings up to 200 chars.</action>
+			<action dev="fabdouglas" type="add">[Core] When requesting &quot;target-list.size&quot; or &quot;int-list.size&quot; with an empty stack, the game crashed. Now return &quot;0&quot;</action>
+			<action dev="fabdouglas" type="fix">[Core] Database content was not well cached.</action>
+			<action dev="fabdouglas" type="fix">[Core] For target action to repeat an undefined times, games may crash.</action>
+			<action dev="fabdouglas" type="add">[Core] For target action to repeat an undefined times, at least one target must be valid.</action>
+			<action dev="fabdouglas" type="fix">[Core] Avoid empty file to be created if download did not succeed.</action>
+			<action dev="fabdouglas" type="fix">[Core] The program could not work on Linux and MacOS systems.</action>
+			<action dev="fabdouglas" type="fix" issue="1479485">[MTG] &quot;unregister-ability&quot; action was not well placed in some cards including prevention/redirection abilities.</action>
+			<action dev="fabdouglas" type="fix" issue="1496864">[MTG] When &quot;Sacrifice&quot; action failed to find all the required targets, the previously selected targets were not sacrified.</action>
+			<action dev="fabdouglas" type="fix" issue="1496787">[MTG] Dredge&quot;s counter was applied on hand instead of library.</action>
+			<action dev="fabdouglas" type="fix" issue="1496828">[MTG][Wasteland] wrong land type match.</action>
+			<action dev="fabdouglas" type="fix" issue="1496828">[MTG][Vampiric Tutor] The searched card was revealed to opponent.</action>
+			<action dev="fabdouglas" type="fix" issue="1496857">[MTG][Carnophage] The triggered ability required {1} instead of 1 life.</action>
+			<action dev="fabdouglas" type="fix" issue="1496861">[MTG][Fireball] Only one question to dealt X damage.</action>
+			<action dev="fabdouglas" type="fix" issue="1502466">[MTG] Legendary rules updated.</action>
+			<action dev="fabdouglas" type="fix" issue="1496910">[MTG][Necropotence] Miss placed unregister-ability ability caused a crash.</action>
+			<action dev="fabdouglas" type="add">[MTG] &quot;Hellbent&quot; test reference is available.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Regression, &quot;black vise&quot; did not work.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Database preference of MWS art changed.</action>
+		</release>
+		<release version="0.90" date="2006-05-14" desc="Main goal : Database">
+			<action dev="fabdouglas" type="update">[UI] Update substance (default) L&quot;F to 2.3.01 </action>
+			<action dev="fabdouglas" type="add">[UI] Liquid L&quot;F 0.2.9beta </action>
+			<action dev="fabdouglas" type="add">[UI] Database panel. </action>
+			<action dev="fabdouglas" type="add">[UI] Settings panel (shortcut F4). </action>
+			<action dev="fabdouglas" type="add">[UI] Card border is dependent on the first pixel of card. </action>
+			<action dev="fabdouglas" type="add">[UI] Mouse wheel on cards allow user to increase/decrease the gap of attached cards. </action>
+			<action dev="fabdouglas" type="add">[UI] Targets and context are now highlighted when a spell is under the cursor. </action>
+			<action dev="fabdouglas" type="add">[UI] Anti-Aliasing option activated to all components. </action>
+			<action dev="fabdouglas" type="add">[UI] Enhanced scaled pictures activated to all cards. </action>
+			<action dev="fabdouglas" type="add">[UI] The stack zone is bring to front as often as it is not empty. </action>
+			<action dev="fabdouglas" type="add">[UI] Context menu added to the cards to access to the amount of cards placed in the same zone, and to display the database panel. </action>
+			<action dev="fabdouglas" type="fix">[UI] Content of About MDB form, contained may not been translated. </action>
+			<action dev="fabdouglas" type="fix">[UI] Useless border removed in some zones. </action>
+			<action dev="fabdouglas" type="fix">[UI] FileChooser was not skinned. </action>
+			<action dev="fabdouglas" type="fix">[UI] Could not browse in directories for a deck file. </action>
+			<action dev="fabdouglas" type="update">[Core] Update to Maven2 structure. </action>
+			<action dev="fabdouglas" type="add" issue="1486886">[Core] Optional &apos;card&apos; attribute added in the &apos;is-me&apos; test. </action>
+			<action dev="fabdouglas" type="add">[Core] Objects map(Key=string as object name, Value=object) on target (player/card). </action>
+			<action dev="fabdouglas" type="fix" issue="1483232">[Core] Deadlock when several triggered abilities trigger for the same event. </action>
+			<action dev="fabdouglas" type="fix" issue="1479482">[Core] Casting costs on stack are zero. </action>
+			<action dev="fabdouglas" type="fix" issue="1479491">[Core] Java error when a modifier could not be unregistered since the card has moved.</action>
+			<action dev="fabdouglas" type="fix" issue="1441018">[Core] Attached card may not been detached when the destination moved before all events were registered.</action>
+			<action dev="fabdouglas" type="fix" issue="1440965, 1437452">[Core] Aborting a targeted spell did not work.</action>
+			<action dev="fabdouglas" type="fix" issue="1437388">[Core] Background option use make a deadlock.</action>
+			<action dev="fabdouglas" type="fix" issue="1441002">[Core] Priorities were not restored to players correctly after a message box action was displayed.</action>
+			<action dev="fabdouglas" type="fix" issue="1479483">[Core] A message box could not be controlled by target-list.first.controller,owner.</action>
+			<action dev="fabdouglas" type="fix" issue="1479483">[Core] It was not possible to roll back a mana pay in the effect part.</action>
+			<action dev="fabdouglas" type="fix">[Core] Card source of a spell can be inconsistent and relating an old played triggered ability. </action>
+			<action dev="fabdouglas" type="fix">[Core] NullPointer of action to roll back that has not yet been played. </action>
+			<action dev="fabdouglas" type="fix">[Core] Muti-target actions could not be finished causing a crash. </action>
+			<action dev="fabdouglas" type="fix">[Core] Targets were added twice in multi-target mode. </action>
+			<action dev="hcross" type="add">[Core] Face-up/Face-down related actions, tests and events. </action>
+			<action dev="fabdouglas" type="fix" issue="1479477">[MTG] &quot;trample&quot; damage were done to the attacking creature </action>
+			<action dev="fabdouglas" type="add" issue="1486059">[MTG] Bloodthirst ability. see Skarrgan_Pit_Skulk.xml</action>
+			<action dev="fabdouglas" type="fix" issue="1486059">[MTG] &quot;mulligan&quot; and &quot;damage-dealt-this-turn&quot; registers where shared.</action>
+			<action dev="fabdouglas" type="add">[MTG] Haunt ability. </action>
+			<action dev="fabdouglas" type="add" issue="1483232">[MTG] Dredge ability. see Grave_Shell_Scarab.xml </action>
+			<action dev="fabdouglas" type="add" issue="1488175">[MTG] Radiance action. see Rally_the_Righteous.xml </action>
+			<action dev="fabdouglas" type="fix" issue="1488112">[MTG] Untargetable property made a creature could not block.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Fly property was used instead of flying.</action>
+			<action dev="fabdouglas" type="fix">[MTG] Some damage prevention cards could not play their ability as instant. </action>
+			<action dev="fabdouglas" type="fix">[MTG] Card type (idCard) hierarchy moved. </action>
+		</release>
+			
+		<release version="0.86" date="2006-02-14" desc="Main goal : UI review">
+			<action dev="fabdouglas" type="update">[UI] Updated SkinLF version to 1.2.3. </action>
+			<action dev="fabdouglas" type="update">[UI] Move to Java 5.0</action>
+			<action dev="fabdouglas" type="remove">[UI] XML API since included in Java 5.0.</action>
+			<action dev="fabdouglas" type="fix">[UI] Current L&quot;F was not selected in the L&quot;F menu. </action>
+			<action dev="fabdouglas" type="fix">[UI] Full screen hidden option add, and turned on by default. </action>
+			<action dev="fabdouglas" type="fix">[UI] In detailed log wizard the scroll might be hidden or partially displayed. </action>
+			<action dev="fabdouglas" type="fix" issue="1303603">[UI] game could not be restarted. </action>
+			<action dev="fabdouglas" type="fix">[UI] Some big cards were not correctly scaled. </action>
+			<action dev="fabdouglas" type="fix">[UI] Case sensitive problem for pictures with Linux. </action>
+			<action dev="fabdouglas" type="fix">[UI] newline missed in tooltip displaying abilities. </action>
+			<action dev="fabdouglas" type="fix">[UI] In the &quot;Arrange&quot; dialog, the wizard picture was not displayed. </action>
+			<action dev="fabdouglas" type="fix">[UI] useless repainting components </action>
+			<action dev="fabdouglas" type="fix" issue="1260340">[UI] The problem was in Log frame (Menu : Tools/Detailed Logs...). The debug file was not well parsed. </action>
+			<action dev="fabdouglas" type="fix">[UI] shuffle action was not translated. </action>
+			<action dev="fabdouglas" type="fix">[UI] add-modifier action was not translated. </action>
+			<action dev="fabdouglas" type="fix">[UI] Tooltip delay dialog was set to 0ms using &quot;cancel&quot; button. </action>
+			<action dev="fabdouglas" type="fix">[UI] Tooltip&apos;s content of ability&apos;s tooltip placed in the stack was not displayed correctly. </action>
+			<action dev="fabdouglas" type="fix">[UI] In detailed log wizard the scroll might be hidden or partially displayed. </action>
+			<action dev="fabdouglas" type="fix" issue="1260343">[UI] Exception were not displayed in detailed log window. </action>
+			<action dev="fabdouglas" type="fix">[UI] card name did not appear in the debug file. </action>
+			<action dev="fabdouglas" type="fix" issue="1432769">[UI] &quot;Bug report&quot; dialog did not work without screen shot option </action>
+			<action dev="fabdouglas" type="fix">[UI] &quot;Bug report&quot; dialog send twice screen shot picture </action>
+			<action dev="fabdouglas" type="fix">[UI] &quot;Bug report&quot; dialog could not be closed with &quot;cancel&quot; button </action>
+			<action dev="fabdouglas" type="add">[UI] Pictures associated to properties are now displayed on the card and in the tooltip. </action>
+			<action dev="fabdouglas" type="add">[UI] SkinLF skins are supported. About 15 skins added - more skins here : http://javootoo.l2fprod.com/plaf/skinlf/index.php </action>
+			<action dev="fabdouglas" type="add">[UI] Card&apos;s picture is added to the title of all messages of abilities. </action>
+			<action dev="fabdouglas" type="add">[UI] Updated Log4j library 1.12. </action>
+			<action dev="fabdouglas" type="add">[UI] &apos;reload picture&apos; menu item added to card.</action>
+			<action dev="fabdouglas" type="fix" issue="1432750">[Core] Cards moving together in a zone may cause MP to crash </action>
+			<action dev="fabdouglas" type="fix" issue="11253094">[Core] Valid targets are locked during cost and effects. </action>
+			<action dev="fabdouglas" type="fix" issue="11259169">[Core] Triggered abilities with empty context failed during resolution. </action>
+			<action dev="fabdouglas" type="fix">[Core] Object with no attached modifier (ie. storage, corpse,...) made the game crashing. </action>
+			<action dev="fabdouglas" type="fix">[Core] &apos;add-modifier-register-Add-11-Lose-12&apos; was displayed instead of &apos;Add +X/-X&apos; in the tooltips. </action>
+			<action dev="fabdouglas" type="fix">[Core] A canceled spell made return the card to the previous zone but no more abilities were playable with this card. </action>
+			<action dev="fabdouglas" type="fix">[Core] Colors of activated abilities were not activated. </action>
+			<action dev="fabdouglas" type="fix">[Core] in XML parser, syntax errors were not counted in final report. </action>
+			<action dev="fabdouglas" type="fix">[Core] Logging stuff optimized, INFO, WARN, ERROR and FATAL messages where threaten several times. </action>
+			<action dev="fabdouglas" type="fix">[Core] tapped cards moving at the same moment in an arrangeable zone were displayed as tapped in the &quot;Arrange&quot; dialog. </action>
+			<action dev="fabdouglas" type="fix">[Core] lose/win messages were displayed twice. </action>
+			<action dev="fabdouglas" type="fix">[Core] ability-modifier where not removed correctly from card when the modifier could no more be applied on this card. </action>
+			<action dev="fabdouglas" type="fix">[Core] multi-modifier unregistering did not work. </action>
+			<action dev="fabdouglas" type="fix">[Core] input-color dialog did not work. </action>
+			<action dev="fabdouglas" type="fix" issue="11260354">[Core] Many mana source were not playable while instant could. </action>
+			<action dev="fabdouglas" type="fix" issue="11260336">[Core] Player in target list are ignored by &quot;move-card-list&quot; action. </action>
+			<action dev="fabdouglas" type="fix">[Core] Opponent&apos;s avatar was not highlighted when opponent was a valid target. </action>
+			<action dev="fabdouglas" type="fix">[Core] &quot;target-list.first&quot; and &quot;target-list.last&quot; did not work in the tests. </action>
+			<action dev="fabdouglas" type="fix">[Core] When several cards are moving from library to zone at the same moment cards where shown returned in the &quot;Arrange&quot; dialog. </action>
+			<action dev="fabdouglas" type="fix">[Core] Cards moved in the library coudn&apos;t be placed on the top. </action>
+			<action dev="fabdouglas" type="fix">[Core] possible dead lock when answering to a dialog box </action>
+			<action dev="fabdouglas" type="fix">[Core] NPE in tooltip message of spell did not use PayMana action </action>
+			<action dev="fabdouglas" type="add">[Core] You can make playable an ability for a player different from the controller of the card (see Personnal_Incarnation.xml). </action>
+			<action dev="fabdouglas" type="add">[Core] You can force an opponent to pay mana (see Mana_Leak.xml). </action>
+			<action dev="fabdouglas" type="add">[Core] Mana with restriction usage supported. See Mishra&apos;s workshop </action>
+			<action dev="fabdouglas" type="add">[Core] Give mana with dynamic color supported. See Mana Flare </action>
+			<action dev="fabdouglas" type="add">[Core] New algorithm to determine valid targets </action>
+			<action dev="fabdouglas" type="add">[Core] A target cannot be added twice in the target-list </action>
+			<action dev="fabdouglas" type="add">[Core] test on name of ability generating an event </action>
+			<action dev="fabdouglas" type="add">[Core] New expanding zones support. </action>
+			<action dev="fabdouglas" type="add">[Core] More than ONE requested target supported. </action>
+			<action dev="fabdouglas" type="add">[Core] &quot;and-not&quot; operation added. </action>
+			<action dev="fabdouglas" type="add">[Core] &quot;give-mana&quot; action can give mana to non-controller of ability. </action>
+			<action dev="fabdouglas" type="add">[Core] Layer feature for modifiers : internal (for text replacement, see Autumn_Willow.xml), normal (enchantment), global (see Gravity_Sphere.xml) </action>
+			<action dev="fabdouglas" type="add">[Core] Faster stack resolution and stack overflow prevent : transform recursive to iteration calls of &quot;resolveStack()&quot; method. </action>
+			<action dev="fabdouglas" type="add" issue="1259173, 1202897">[Core] Fast spell (mana source for Magic) can played during the cost process of any ability </action>
+			<action dev="fabdouglas" type="add">[Core] Illegal actions are now handled by the system, and player is able to cancel a spell to make it return in it&apos;s previous place </action>
+			<action dev="fabdouglas" type="add">[Core] Costs can be played in any order. </action>
+			<action dev="fabdouglas" type="add">[Core] Mnemonic/icon char added to all dialogs. </action>
+			<action dev="fabdouglas" type="fix">[MTG] &quot;Black_Vise&quot; did not work </action>
+			<action dev="fabdouglas" type="fix" issue="1432246">[MTG] &quot;The abyss&quot; could not be played </action>
+			<action dev="fabdouglas" type="fix" issue="1432257">[MTG] &quot;Basalt_Monolith&quot; was triggering when untapped </action>
+			<action dev="fabdouglas" type="fix" issue="1432257">[MTG] Triggered ability choice may crash MP in non-automatic mode. </action>
+			<action dev="fabdouglas" type="fix" issue="1432282">[MTG] Event &quot;assigned-damage&quot; did not work for cards appearing more than once in a deck. </action>
+			<action dev="fabdouglas" type="fix">[MTG] assigned combat damage were not clearly visible </action>
+			<action dev="fabdouglas" type="fix">[MTG] Creature with could not attack if it has &apos;haste&apos;. </action>
+			<action dev="fabdouglas" type="fix">[MTG] Damages were not cleared when a card leave play. </action>
+			<action dev="fabdouglas" type="fix">[MTG] In combat phase, assigned damage were all equals to the first assignment. </action>
+			<action dev="fabdouglas" type="fix">[MTG] could not target spell, countering did not work </action>
+			<action dev="fabdouglas" type="fix">[MTG] Prevent an activated ability to be added twice to the same card. </action>
+			<action dev="fabdouglas" type="fix">[MTG] power and toughness are displayed on cards. </action>
+			<action dev="fabdouglas" type="fix" issue="1260349">[MTG] The combat damage was always dealt to attacking. </action>
+			<action dev="fabdouglas" type="fix">[MTG] Basic land, non-basic land, local, global enchantment were not translated. </action>
+			<action dev="fabdouglas" type="fix">[MTG] Enhanced echo ability (see Acridian.xml) </action>
+			<action dev="fabdouglas" type="fix">[MTG] Card types of artifact[-creature] and also complex types were not displayed correctly in tooltips. </action>
+			<action dev="fabdouglas" type="add">[MTG] Rampage supported (see Balduvian_WarMakers.xml) </action>
+			<action dev="fabdouglas" type="add">&quot;Draw a cards at the beginning of the next turn&apos;s upkeep&quot; feature </action>
+			<action dev="fabdouglas" type="add">[MTG] Attacks-if-able property added (see Juggernaut.xml). </action>
+			<action dev="fabdouglas" type="add" issue="1259179">[MTG] Threshold implemented (see Aboshans_Desire.xml) </action>
+			<action dev="fabdouglas" type="add">[MTG] A counter for the died creatures from the beginning of turn has been added (see Scavenging_Ghoul.xml) </action>
+			<action dev="fabdouglas" type="add" issue="1252417">[MTG] Test a creature is &quot;1/1&quot; </action>
+			<action dev="fabdouglas" type="add">[MTG] {X} value/Mana cost/targets are fixed when the spell is played. </action>
+			<action dev="fabdouglas" type="add" issue="1304230">[MTG] Abortion supported for invalid enchant/no more valid target during resolution. </action>
+			<action dev="fabdouglas" type="add">[MTG] Faster XML parsing, and errors/warnings reporting. </action>
+			<action dev="fabdouglas" type="add">[MTG] snow-covered ability added. </action>
+		</release>
+	</body>
+</document>

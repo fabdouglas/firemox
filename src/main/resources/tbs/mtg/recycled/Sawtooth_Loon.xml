@@ -1,0 +1,88 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sawtooth Loon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2wu
+	creature - bird
+	2/2
+	flying
+	when sawtooth loon comes into play, return a white or blue creature you control to its owner's hand.
+	when sawtooth loon comes into play, draw two cards, then put two cards from your hand on the bottom of your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>bird flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<or>
+								<has-color color="blue"/>
+								<has-color color="white"/>
+							</or>
+						</and>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="move-library-bottom"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

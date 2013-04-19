@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Planeswalker's Mirth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	3w: target opponent reveals a card at random in his or her hand. you gain life equal to that card's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='3' />
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<target type="card" mode="random" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<action ref='gain-life'>
+					<value register='target-list.last' index='manacost'/>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

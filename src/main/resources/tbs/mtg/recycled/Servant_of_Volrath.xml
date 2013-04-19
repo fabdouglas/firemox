@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Servant of Volrath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - minion
+	3/3
+	when servant of volrath leaves play, sacrifice a creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

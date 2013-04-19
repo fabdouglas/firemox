@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ivory Tower">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	at the beginning of your upkeep, you gain x life, where x is the number of cards in your hand minus four.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<minus right="4">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</minus>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

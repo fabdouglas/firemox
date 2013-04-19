@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mishra's Bauble">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		0
+	artifact
+	t, sacrifice mishra's bauble: look at the top card of target player's library. draw a card at the beginning of the next turn's upkeep.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">		
+					<test>
+						<and>
+							<position position="top"/>
+							<controller player="target-list.last"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<action ref='draw-a-card-next-upkeep'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

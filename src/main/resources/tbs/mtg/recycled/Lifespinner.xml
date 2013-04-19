@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lifespinner">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - spirit
+	3/3
+	t, sacrifice three spirits: search your library for a legendary spirit permanent card and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value="3">
+					<test>
+						<has-property property='spirit'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<and>
+							<has-property property='spirit'/>
+							<has-property property='legend'/>
+						</and>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

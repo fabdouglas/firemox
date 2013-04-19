@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Garruk Wildspeaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	planeswalker - garruk
+	3
+	+1: untap two target lands.
+	-1: put a 3/3 green beast creature token into play.
+	-4: creatures you control get +3/+3 and gain trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='loyalty' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>planeswalker </idcards>
+		<properties>garruk</properties>
+	</init>
+	<modifiers>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<add-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<repeat value="2"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<untap/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="loyalty"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Beast'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='3'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token beast </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="4"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="add+3+3-until-eot"/>
+				<action ref="trample-until-eot"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

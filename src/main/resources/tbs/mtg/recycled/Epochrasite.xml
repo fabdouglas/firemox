@@ -1,0 +1,94 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Epochrasite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact creature - construct
+	1/1
+	epochrasite comes into play with three +1/+1 counters on it if you didn't play it from your hand.
+	when epochrasite is put into a graveyard from play, remove it from the game with three time counters on it and it gains suspend.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>construct </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='hand' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this" />
+				<repeat value='3'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this" />
+				<action ref="remove-from-game" />
+				<repeat value='3'/>
+				<add-object object-name='time'/>
+				<target-list operation="clear" />
+				<target type="this" />
+				<add-modifier>
+					<ability-modifier linked="false" operation="add" layer="global">
+						<abilities>
+							<ability ref="suspend" />
+							<ability ref="suspend-trigger" />
+							<activated-ability name="suspend-play" playable="instant"
+								zone="side">
+								<test>
+									<equal left="suspend-triggered">
+										<right>
+											<and left="suspend-triggered">
+												<right register="this"
+													index="special-abilities" />
+											</and>
+										</right>
+									</equal>
+								</test>
+								<effects>
+									<action ref="put-in-play" />
+								</effects>
+							</activated-ability>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

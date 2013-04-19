@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gaea's Embrace">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +3/+3 and has trample.
+	g: regenerate enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<target type="attachedto"/>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="+3/+3">
+		<modifiers>
+			<property-modifier property="trample" linked="true"/>
+		</modifiers>
+	</attachment>
+</card>

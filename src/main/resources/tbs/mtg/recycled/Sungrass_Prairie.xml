@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sungrass Prairie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	1, t :add gw to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1' green='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ringskipper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - faerie wizard
+	1/1
+	flying
+	when ringskipper is put into a graveyard from play, clash with an opponent. if you win, return ringskipper to its owner's hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="clash">
+					<actions>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</actions>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

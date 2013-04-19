@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cackling Flames">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	instant
+	cackling flames deals 3 damage to target creature or player.
+	hellbent - cackling flames deals 5 damage to that creature or player instead if you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test>
+				<not>
+					<test ref="hellbent"/>
+				</not>
+			</test>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test>
+				<test ref="hellbent"/>
+			</test>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='5' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forbidding Watchtower">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	forbidding watchtower comes into play tapped.
+	t :add w to your mana pool.
+	1w: forbidding watchtower becomes a 1/5 white creature until end of turn. it's still a land.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref="tap-add-W"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" value="1" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<register-indirection index="toughness" value="5" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<idcard-modifier idcard="creature" operation="or" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<color-modifier color="white" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cloudseeder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - faerie spellshaper
+	1/1
+	flying
+	u, t, discard a card: put a 1/1 blue faerie creature token named cloud sprite into play with flying and "cloud sprite can block only creatures with flying."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie spellshaper flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref='T'/>
+				<action ref='discard' value='1'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Cloud Sprite'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>blue</colors>
+							<idcards>creature</idcards>
+							<properties>token faerie flying block-only-flying</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

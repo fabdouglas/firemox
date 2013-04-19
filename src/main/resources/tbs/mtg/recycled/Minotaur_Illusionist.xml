@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Minotaur Illusionist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ur
+	creature - minotaur
+	3/4
+	1u: minotaur illusionist gains shroud until end of turn. 
+	r, sacrifice minotaur illusionist: minotaur illusionist deals damage equal to its power to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>creature </idcards>
+		<properties>minotaur wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="shroud-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='this' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

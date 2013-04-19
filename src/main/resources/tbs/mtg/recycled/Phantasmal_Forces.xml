@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Phantasmal Forces">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{u} flying 
+at the beginning of your upkeep, 
+sacrifice phantasmal forces unless you pay {u}. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>flying illusion</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller"/>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana colorless="1"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

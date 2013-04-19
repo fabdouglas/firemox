@@ -1,0 +1,25 @@
+#Jeu flare
+#
+#John
+#
+#août 25, 2001
+#1
+#4th Edition
+#
+Fireball;3
+Fork;2
+Disintegrate;3
+Mox_Ruby;5
+Mox_Sapphire;5
+Sol_Ring;2
+Howling_Mine;2
+Black_Lotus;4
+Mana_Flare;3
+Shivan_Dragon;2
+Ancestral_Recall;4
+Counterspell;4
+Time_Walk;4
+Timetwister;4
+Wheel_of_Fortune;2
+Volcanic_Island;12
+Mishras_Factory;3

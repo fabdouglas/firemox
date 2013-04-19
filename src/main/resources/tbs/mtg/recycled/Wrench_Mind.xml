@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wrench Mind">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bb
+	sorcery
+	target player discards two cards unless he or she discards an artifact card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<choice controller="target-list.first" cancel="false">	
+					<either>
+						<action ref='player-discard' value='2'/>
+					</either>
+					<either>
+						<action ref='player-discard' value='1'>
+							<test>
+								<has-idcard idcard="artifact"/>
+							</test>
+						</action>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

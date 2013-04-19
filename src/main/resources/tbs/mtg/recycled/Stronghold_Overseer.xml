@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stronghold Overseer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bbb
+	creature - demon
+	5/5
+	flying
+	shadow 
+	bb: creatures with shadow get +1/+0 until end of turn and creatures without shadow get -1/-0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>demon flying shadow </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='2' />
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="shadow"/>
+					</test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+				<action ref="all-creatures">
+					<test>
+						<not>
+							<has-property property="shadow"/>
+						</not>
+					</test>
+				</action>
+				<action ref="add-1-0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

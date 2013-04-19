@@ -1,0 +1,7 @@
+super card;20
+volcanic island;5
+mox pearl;10
+mox emerald;10
+Mishra's Workshop;5
+Cyclopean tomb;5
+Mishras_Factory;5

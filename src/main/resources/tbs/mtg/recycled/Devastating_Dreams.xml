@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Devastating Dreams">
+<rules-author-comment></rules-author-comment>
+
+<!--  {r}{r} as an additional cost to play devastating dreams, discard x cards at random from your hand. each player sacrifices x lands. devastating dreams deals x damage to each creature. -->
+	
+	<init>
+		<registers>
+			<register index="red" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%minimum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</maximum>
+				</input-number>
+				<action ref="discard-random">
+					<value register="stack" index="0"/>
+				</action>
+			</cost>
+			<effects>
+				<action ref="sacrifice-a-land">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="opponent-sacrifice-a-land">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<action ref="all-creatures"/>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0"/>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

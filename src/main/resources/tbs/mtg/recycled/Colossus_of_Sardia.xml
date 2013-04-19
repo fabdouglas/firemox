@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Colossus of Sardia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		9
+	artifact creature
+	9/9
+	trample
+	colossus of sardia doesn't untap during your untap step.
+	at the beginning of your upkeep, you may pay 9. if you do, untap colossus of sardia.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='9'/>
+			<register index='power' value='9'/>
+			<register index='toughness' value='9'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>trample does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<pay-mana colorless="9"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

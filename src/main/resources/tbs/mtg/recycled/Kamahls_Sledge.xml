@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kamahl's Sledge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5rr
+	sorcery
+	kamahl's sledge deals 4 damage to target creature.
+	threshold - if seven or more cards are in your graveyard, instead kamahl's sledge deals 4 damage to that creature and 4 damage to that creature's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test ref="threshold"/>
+				</if-then-hop>
+				<target type="target-list.first.controller"/>
+				<assign-damage value='4' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

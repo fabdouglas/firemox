@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Revive the Fallen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	sorcery
+	return target creature card in a graveyard to its owner's hand. clash with an opponent. if you win, return revive the fallen to its owner's hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<action ref="clash">
+					<actions>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</actions>
+					<actions>
+						<action ref='finish-spell'/>
+					</actions>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

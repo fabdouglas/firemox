@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blind-Spot Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - giant warrior
+	4/3
+	blind-spot giant can't attack or block unless you control another giant.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<property-modifier property="cannot-attack">
+			<while>
+				<equal right="1">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="giant"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</equal>
+			</while>
+		</property-modifier>
+		<property-modifier property="cannot-block">
+			<while>
+				<equal right="1">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="giant"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</equal>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

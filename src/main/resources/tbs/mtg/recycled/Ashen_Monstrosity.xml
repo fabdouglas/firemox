@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashen Monstrosity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5rr
+	creature - spirit
+	7/4
+	haste
+	ashen monstrosity attacks each turn if able.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>spirit haste attacks-if-able</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

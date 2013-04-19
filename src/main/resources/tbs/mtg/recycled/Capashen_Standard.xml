@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Capashen Standard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+1.
+	2, sacrifice capashen standard: draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='+1/+1'/>
+</card>

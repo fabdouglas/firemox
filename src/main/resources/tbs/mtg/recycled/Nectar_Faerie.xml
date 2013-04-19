@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nectar Faerie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - faerie wizard
+	1/1
+	flying
+	b, t :target faerie or elf gains lifelink until end of turn. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>faerie wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-property property='faerie'/>
+							<has-property property='elf'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<ability-modifier operation="add" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<ability ref="lifelink"/>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

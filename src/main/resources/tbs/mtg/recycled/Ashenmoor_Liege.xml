@@ -1,0 +1,107 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashenmoor Liege">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(b/r)(b/r)(b/r)
+	creature - elemental knight
+	4/1
+	other black creatures you control get +1/+1. other red creatures you control get +1/+1. whenever ashenmoor liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental knight </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' black='3' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' black='2' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' black='1' red='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' red='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<targeted>
+				<source-test>
+					<controller player="opponent"/>
+				</source-test>
+				<destination-test>
+					<is-this />
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type="opponent"/>
+				<action ref='lose-life-target' value='4'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+		 			<has-color color="black"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+		 			<has-color color="red"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

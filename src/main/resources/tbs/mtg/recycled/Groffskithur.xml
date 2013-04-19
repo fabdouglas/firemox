@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Groffskithur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5g
+	creature - beast
+	3/3
+	whenever groffskithur becomes blocked, you may return target card named groffskithur from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<has-name name="groffskithur"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mark of Fury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment - aura
+	enchant creature
+	enchanted creature has haste.
+	at end of turn, return mark of fury to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot" />
+			<effects>
+				<target type="this"/>
+				<action ref="return-to-hand"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="haste"/>
+</card>

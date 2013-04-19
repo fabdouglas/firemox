@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Akron Legionnaire">
+<rules-author-comment></rules-author-comment>
+
+<!--  {6}{w}{w} 
+except for creatures named akron legionnaire and artifact creatures, 
+creatures you control can't attack. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6"/>
+			<register index="white" value="2"/>
+			<register index="power" value="8"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>giant soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="cannot-attack" operation="add" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<controller player="you"/>
+	 				<not>
+				 		<has-name name="akron_legionnaire"/>
+				 	</not>
+	 				<not>
+				 		<has-idcard idcard="artifact-creature"/>
+				 	</not>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

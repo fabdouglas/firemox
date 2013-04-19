@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mana Leak">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u} counter target spell unless its controller pays {3}. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="controller">
+					<either>
+						<action ref="counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="3" controller="opponent"/>
+					</either>
+				</choice>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

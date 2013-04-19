@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blood Funnel">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1b
+		enchantment
+		noncreature spells you play cost 2 less to play.
+		whenever you play a noncreature spell, counter that spell unless you sacrifice a creature.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='1' />
+			<register index='colorless' value='1' />
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<not>
+							<has-idcard idcard="creature" />
+						</not>
+						<controller player="you" />
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="context.card" />
+						<action ref='counter' />
+					</either>
+					<either>
+						<action ref='sacrifice-a-creature' value='1' />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+					<not>
+						<has-idcard idcard="creature" />
+					</not>
+					<controller player="you" />
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless="-2" />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

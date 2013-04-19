@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darkblast">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+	<keywords>TESTED_0.91</keywords>
+	<!--  b target creature gets -1/-1 until end of turn. dredge 3    -->
+
+	<init>
+		<registers>
+			<register index="black" value="1" />
+		</registers>
+		<idcards>instant</idcards>
+		<colors>black</colors>
+	</init>
+
+	<abilities>
+		<ability ref="dredge3" />
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="add-1-1-until-eot" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

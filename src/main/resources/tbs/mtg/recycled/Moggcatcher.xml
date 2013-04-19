@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Moggcatcher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - mercenary
+	2/2
+	3, t :search your library for a goblin permanent card and put that card into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human mercenary </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='search-lib' value="1">
+					<test>
+						<has-property property='goblin'/>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

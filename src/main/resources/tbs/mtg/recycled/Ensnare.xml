@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ensnare">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	instant
+	you may return two islands you control to their owner's hand rather than pay ensnare's mana cost.
+	tap all creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<tap/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<action ref="target-land">
+					<test>
+						<and>
+							<has-idcard idcard="island"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="target-land">
+					<test>
+						<and>
+							<has-idcard idcard="island"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<tap/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

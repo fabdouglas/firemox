@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wormwood Dryad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - dryad
+	3/1
+	g: wormwood dryad gains forestwalk until end of turn and deals 1 damage to you.
+	b: wormwood dryad gains swampwalk until end of turn and deals 1 damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>dryad </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property='forestwalk' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property='swampwalk' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Worldslayer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact - equipment
+	whenever equipped creature deals combat damage to a player, destroy all permanents other than worldslayer.
+	equip 5 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='card' mode='choose' raise-event='false' restriction-zone='play'>
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</target>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

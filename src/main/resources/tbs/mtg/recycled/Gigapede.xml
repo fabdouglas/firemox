@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gigapede">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - insect
+	6/1
+	gigapede can't be the target of spells or abilities.
+	at the beginning of your upkeep, if gigapede is in your graveyard, you may discard a card. if you do, return gigapede to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect shroud </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='graveyard'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='discard' value="1"/>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

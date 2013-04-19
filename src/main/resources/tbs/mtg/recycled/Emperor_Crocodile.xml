@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Emperor Crocodile'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+	<keywords>TESTED_0.93+</keywords>
+	<!--
+		3g
+		creature - crocodile
+		5/5
+		when you control no other creatures, sacrifice emperor crocodile.
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='5' />
+			<register index='toughness' value='5' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>crocodile</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability name="" zone="play">
+			<when>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="controller" />
+							<has-idcard idcard="creature" />
+							<not>
+								<is-this/>
+							</not>
+						</and>
+					</has>
+				</not>
+			</when>
+			<effects>
+				<action ref="sacrifice-this" />
+				<unregister-this/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deadly Insect">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4}{g} deadly insect can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="green" value="1"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>insect shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

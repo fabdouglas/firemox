@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abomination">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{b}{b} 
+whenever abomination blocks or becomes blocked by a green or white creature, 
+destroy that creature at end of combat. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<or>
+						<has-color color="green"/>
+						<has-color color="white"/>
+					</or>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card2"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-property property="wall" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<or>
+						<has-color color="green"/>
+						<has-color color="white"/>
+					</or>
+				</blocking-test>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<unregister-this/>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-property property="wall" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

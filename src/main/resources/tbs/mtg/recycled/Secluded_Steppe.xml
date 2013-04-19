@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Secluded Steppe">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land secluded steppe comes into play tapped. t add w to your mana pool. cycling w  -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-W"/>
+		<ability ref="cycling">
+    			<actions>
+      				<pay-mana white="1" />
+    			</actions>
+  		</ability>
+	</abilities>
+</card>

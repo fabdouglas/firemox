@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rolling Earthquake">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xr
+	sorcery
+	rolling earthquake deals x damage to each creature without horsemanship and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'>
+					<test>
+						<not>
+							<has-property property="horsemanship"/>
+						</not>
+					</test>
+				</action>	
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mad Auntie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - goblin shaman
+	2/2
+	other goblin creatures you control get +1/+1.
+	t :regenerate another target goblin.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-permanent'>
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<has-property property='goblin'/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+			 		<has-property property="goblin"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

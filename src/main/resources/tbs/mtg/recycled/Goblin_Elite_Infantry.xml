@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Elite Infantry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - goblin warrior
+	2/2
+	whenever goblin elite infantry blocks or becomes blocked, it gets -1/-1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain-1-1-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain-1-1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

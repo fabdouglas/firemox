@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soulcatchers' Aerie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment
+	whenever a bird is put into your graveyard from play, put a feather counter on soulcatchers' aerie.
+	bird creatures get +1/+1 for each feather counter on soulcatchers' aerie.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-property property="bird"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='feather'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" linked="true" layer="global">	
+			 		<value>
+			 			<counter object-name="feather" card="this"/>
+			 		</value>
+			 	</register-modifier>		 		
+			 	<register-modifier index="toughness" operation="add" linked="true" layer="global">
+					<value>
+			 			<counter object-name="feather" card="this"/>
+			 		</value>
+			 	</register-modifier>		
+			</modifiers>
+			<while>
+				<and>
+			 		<has-property property="bird"/>
+			 		<has-idcard idcard="creature"/>
+			 	</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

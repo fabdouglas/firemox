@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="New Frontiers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xg
+	sorcery
+	each player may search his or her library for up to x basic land cards and put them into play tapped. then each player who searched his or her library this way shuffles it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref='search-lib-up-to-player' >
+					<value register="stack" index="0"/>
+					<test ref="is-basic-land"/>
+				</action>
+				<target type="opponent"/>
+				<action ref='search-lib-up-to-player' >
+					<value register="stack" index="0"/>
+					<test ref="is-basic-land"/>
+				</action>
+				<move-card controller="target.owner" destination="playANDtapped"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

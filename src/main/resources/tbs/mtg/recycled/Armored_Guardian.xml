@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Armored Guardian">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{w}{u} 
+{1}{w}{w}: target creature you control gains protection from the color of your choice until end of turn. 
+{1}{u}{u}: armored guardian can't be the target of spells or abilities this turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>white blue</colors>
+		<idcards>creature </idcards>
+		<properties>cat soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" white="2" />
+				<action ref="target-creature">
+					<test>
+						<controller player="you" card="tested"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" blue="2" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="shroud-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

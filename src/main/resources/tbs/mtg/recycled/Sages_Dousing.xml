@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sage's Dousing">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	tribal instant - wizard
+	counter target spell unless its controller pays 3. if you control a wizard, draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>tribal instant </idcards>
+		<properties>wizard </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="controller">
+					<either>
+						<action ref="counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="3" controller="opponent"/>
+					</either>
+				</choice>
+				<if-then-hop elsehop="3">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="wizard"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Acceptable Losses">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {3}{r} 
+		as an additional cost to play acceptable losses, discard a card at random from your hand. 
+		acceptable losses deals 5 damage to target creature. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="discard-random" value='1' />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<assign-damage value="5" type="damage-normal" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

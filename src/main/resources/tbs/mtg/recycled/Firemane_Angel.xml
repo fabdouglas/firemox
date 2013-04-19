@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Firemane Angel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rww
+	creature - angel
+	4/3
+	flying, first strike
+	at the beginning of your upkeep, if firemane angel is in your graveyard or in play, you may gain 1 life.
+	6rrww: return firemane angel from your graveyard to play. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>creature </idcards>
+		<properties>angel flying first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='graveyard'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test>
+				<test ref='during-your-upkeep'/>
+			</test>
+			<cost>
+				<pay-mana white='2' red='2' colorless='6' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

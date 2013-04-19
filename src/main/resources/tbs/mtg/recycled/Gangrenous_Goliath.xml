@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gangrenous Goliath">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3bb
+	creature - zombie giant
+	4/4
+	tap three untapped clerics you control: return gangrenous goliath from your 
+		graveyard to your hand.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='2' />
+			<register index='colorless' value='3' />
+			<register index='power' value='4' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>zombie giant</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<cost>
+				<repeat value="3" />
+				<action ref="target-creature">
+					<test>
+						<has-property property="cleric" />
+					</test>
+				</action>
+				<tap />
+			</cost>
+			<effects>
+				<action ref='return-to-hand' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flame Burst">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	instant
+	flame burst deals x damage to target creature or player, where x is 2 plus the number of cards named flame burst in all graveyards.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<add right="2">
+							<left>
+								<counter restriction-zone="graveyard">	
+									<has-name name="flame_burst"/>
+								</counter>
+							</left>
+						</add>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Monarch">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - kavu
+	3/3
+	all kavu creatures have trample.
+	whenever another kavu comes into play, put a +1/+1 counter on kavu monarch.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="trample" linked="false"/>
+			</modifiers>
+			<while>
+			 	<has-property property="kavu"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="kavu"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

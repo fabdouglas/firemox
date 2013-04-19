@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shields of Velis Vel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	tribal instant - shapeshifter
+	changeling 
+	creatures target player controls get +0/+1 and gain all creature types until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>tribal instant </idcards>
+		<properties>shapeshifter changeling </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref="add+0+1-until-eot"/>
+				<action ref="changeling-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

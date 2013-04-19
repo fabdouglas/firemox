@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mikokoro, Center of the Sea">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  legendary land t add 1 to your mana pool. 2, t each player draws a card. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana colorless="1" />
+				</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<pay-mana colorless="2" />
+			</cost>
+			<effects>
+				<target type="player" mode="all" />
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

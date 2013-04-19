@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krosan Warchief">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - beast
+	2/2
+	beast spells you play cost 1 less to play.
+	1g: regenerate target beast.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='beast'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='regenerate-target'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+					<has-property property="beast"/>
+		       		<controller player="you"/> 
+	            </and>
+			</test>
+			<cost>
+				<pay-mana colorless="-1" />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

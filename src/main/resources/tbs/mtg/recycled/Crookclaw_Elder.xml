@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crookclaw Elder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5u
+	creature - bird wizard
+	3/2
+	flying
+	tap two untapped birds you control: draw a card.
+	tap two untapped wizards you control: target creature gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>bird wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="bird"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="wizard"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

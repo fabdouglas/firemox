@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fire Ants">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - insect
+	2/1
+	t :fire ants deals 1 damage to each other creature without flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>insect </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<not>
+								<has-property property="flying"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Keldon Necropolis">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  legendary land 
+{t}: add {1} to your mana pool. 
+{4}{r}, {t}, sacrifice a creature: keldon necropolis deals 2 damage to target 
+creature or player. -->
+	<init>
+		<properties>legend</properties>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="4" red="1" />
+				<action ref="T"/>
+				<action ref="sacrifice-a-creature" value="1"/>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

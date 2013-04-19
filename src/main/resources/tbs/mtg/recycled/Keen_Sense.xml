@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Keen Sense">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	enchantment - aura
+	enchant creature
+	whenever enchanted creature deals damage to an opponent, you may draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+				<destination-test>
+					<is other="opponent"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='you'/>
+						<action ref='draw-a-card'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

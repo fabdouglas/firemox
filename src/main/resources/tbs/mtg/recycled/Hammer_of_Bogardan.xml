@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hammer of Bogardan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	sorcery
+	hammer of bogardan deals 3 damage to target creature or player.
+	2rrr: return hammer of bogardan from your graveyard to your hand. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana colorless="2" red="3"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

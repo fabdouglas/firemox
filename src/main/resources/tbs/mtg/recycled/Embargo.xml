@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Embargo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	nonland permanents don't untap during their controllers' untap steps.
+	at the beginning of your upkeep, you lose 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='lose-life' value='2'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="does-not-untap" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+				<not>
+					<has-idcard idcard="land"/>
+				</not>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

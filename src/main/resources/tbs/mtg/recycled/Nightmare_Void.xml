@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nightmare Void">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	sorcery
+	target player reveals his or her hand. choose a card from it. that player discards that card.
+	dredge 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='discard-a-player' value="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='dredge2'/>
+	</abilities>
+</card>

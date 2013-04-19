@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Worry Beads">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	at the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="currentplayer"/>
+				<action ref="mill-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Unstable Hulk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - goblin mutant
+	2/2
+	morph 3rr 
+	when unstable hulk is turned face up, it gets +6/+6 and gains trample until end of turn. you skip your next turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin mutant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='2' colorless='3' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<effects>
+				<target type="this"/>
+				<action ref="add+6+6-until-eot"/>
+				<action ref="trample-until-eot"/>
+				<action ref="skip-next-turn"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

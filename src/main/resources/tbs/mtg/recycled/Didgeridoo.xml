@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Didgeridoo">
+<rules-author-comment></rules-author-comment>
+
+<!--  1 3: put a minotaur card from your hand into play.   -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3"/>
+				<target type="card" raise-event="false" restriction-zone="hand">
+					<test>
+						<has-property property="minotaur"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Crusade">
+	<!-- tested 12/03/2004 , v0.80.27 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 	
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-color color="white"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

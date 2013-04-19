@@ -1,0 +1,3 @@
+Serendib_Efreet;60
+Basalt_Monolith;60
+Super_card;20

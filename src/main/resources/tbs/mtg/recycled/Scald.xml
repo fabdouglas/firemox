@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scald">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment
+	whenever a player taps an island for mana, scald deals 1 damage to that player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<has-idcard idcard="island" />
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source" />
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved" />
+							</source-test>
+						</given-mana>
+						<effects>
+							<target type="context.player"/>
+							<assign-damage value='1' type='damage-normal'/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare" />
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

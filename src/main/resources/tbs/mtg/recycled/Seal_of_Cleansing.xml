@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Seal of Cleansing">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+
+	enchantment
+
+	sacrifice seal of cleansing: destroy target artifact or enchantment.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+				<action ref="target-card">
+					<test>
+						<or> 
+							<test ref="is-targetable-artifact"/>
+							<test ref="is-targetable-enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

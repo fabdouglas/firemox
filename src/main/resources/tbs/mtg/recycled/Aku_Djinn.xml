@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aku Djinn">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+<!--  {3}{b}{b} trample at the beginning of your upkeep, put a +1/+1 counter on each creature you don't control. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>trample djinn</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<not>
+							<controller player="you"/>
+						</not>
+					</test>
+				</target>
+				<add-object object-name="+1/+0"/>
+		</effects>
+		</triggered-ability>
+	</abilities>
+</card>

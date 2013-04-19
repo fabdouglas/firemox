@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sylvan Safekeeper">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+<!--  {g} sacrifice a land: target creature you control can't be the target of spells or abilities this turn. -->
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-a-land" value="1"/>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature">
+					<test>
+						<controller player="controller"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="shroud-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

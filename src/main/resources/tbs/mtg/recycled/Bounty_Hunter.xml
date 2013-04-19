@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bounty Hunter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - human archer minion
+	2/2
+	t :put a bounty counter on target nonblack creature.
+	t :destroy target creature with a bounty counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human archer minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-object object-name='bounty'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="bounty" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

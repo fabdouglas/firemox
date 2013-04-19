@@ -1,0 +1,108 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Call the Skybreaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5(u / r)(u / r)
+	sorcery
+	put a 5/5 blue and red elemental creature token with flying into play.
+	retrace 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<create-card>
+				<card name='Elemental'>
+					<rules-author-comment></rules-author-comment>
+					<init>
+						<registers>
+							<register index='power' value='5'/>
+							<register index='toughness' value='5'/>
+						</registers>
+						<colors>blue red</colors>
+						<idcards>creature</idcards>
+						<properties>token elemental flying </properties>
+					</init>
+				</card>
+			</create-card>
+			<move-card controller='you' destination='play'/>
+			<action ref='finish-spell'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="5" red="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="5" red="1" blue="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="5" blue="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="5" red="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="5" red="1" blue="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='graveyard'>
+			<cost>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<pay-mana colorless="5" blue="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,52 @@
+ ----
+Planned Features
+ ----
+Fabrice Daugan
+ ----
+September 24 2006
+
+Planned Features
+
+* Interface
+
+** Autoscale card's size depending the amount a cards in a zone
+
+** Move, reduce, iconize a zone
+
+** Clear cache option to force pictures update
+
+** Progress bar for picture download with "retry/cancel" buttons
+
+** Display text of cards without available picture.
+
+** Advanced phase control using profiles
+
+* Core
+
+** Actions and tests using database content
+
+** Activated abilities for player, without using a card
+
+** Modifier on player
+
+** Naming a card
+
+** Copying a card / an ability with include/exclude tags for properties/actions/...
+
+* Magic The Gathering
+
+** Add deck restriction on deck to play with real constraints (Type I, II,..)
+
+** Change targets of spells (deflection, ...)
+
+** Re-arrange blockers
+
+** Control oppponent's turn
+
+** Constrain the amount of blockers up to...
+
+** Assigning damage as if was not blocked
+
+** Check the 'cannot be countered' by counter spells
+
+** Add half-half mana cost for Oracle2xml tool

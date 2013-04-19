@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ragged Veins">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	enchantment - aura
+	flash
+	enchant creature
+	whenever enchanted creature is dealt damage, its controller loses that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura flash </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant-flash"/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>	
+				<target type="attachedto.controller"/>
+				<action ref="lose-life-target" value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="King Crab">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uu
+	creature - crab
+	4/5
+	1u, t :put target green creature on top of its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>crab </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property='green'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

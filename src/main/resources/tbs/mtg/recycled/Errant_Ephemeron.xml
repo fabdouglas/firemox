@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Errant Ephemeron">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6u
+	creature - illusion
+	4/4
+	flying
+	suspend 4-1u 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>illusion flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana blue='1' colorless='1' />
+			</actions>
+			<actions>
+				<repeat value='4'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

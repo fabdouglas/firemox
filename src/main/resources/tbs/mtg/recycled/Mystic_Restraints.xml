@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mystic Restraints">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	enchantment - aura
+	flash
+	enchant creature
+	when mystic restraints comes into play, tap enchanted creature.
+	enchanted creature doesn't untap during its controller's untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura flash </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant-flash"/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='attachedto'/>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="does-not-untap"/>
+</card>

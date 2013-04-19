@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dakmor Salvage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	dakmor salvage comes into play tapped.
+	t :add b to your mana pool.
+	dredge 2 
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='dredge2'/>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref="tap-add-B"/>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rite of Flame">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	sorcery
+	add rr to your mana pool, then add r to your mana pool for each card named rite of flame in each graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<give-mana red='2' />
+				<give-mana>
+					<red>
+						<counter restriction-zone="graveyard">
+							<has-name name="rite_of_flame"/>
+						</counter>
+					</red>
+				</give-mana>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

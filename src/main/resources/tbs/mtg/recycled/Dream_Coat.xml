@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dream Coat">
+	<rules-author-comment></rules-author-comment>
+
+<!--  u enchant creature 
+	0: enchanted creature becomes the color or colors of your choice. 
+	play this ability only once each turn.   
+-->
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="init-counter"/>
+		<ability ref="reset-counter"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<action ref="use-once-each-turn"/>
+				<target type="attachedto" />
+				<add-modifier>
+					<color-modifier color="black" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<action ref="use-once-each-turn"/>
+				<target type="attachedto" />
+				<add-modifier>
+					<color-modifier color="blue" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<action ref="use-once-each-turn"/>
+				<target type="attachedto" />
+				<add-modifier>
+					<color-modifier color="green" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<action ref="use-once-each-turn"/>
+				<target type="attachedto" />
+				<add-modifier>
+					<color-modifier color="red" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<action ref="use-once-each-turn"/>
+				<target type="attachedto" />
+				<add-modifier>
+					<color-modifier color="white" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

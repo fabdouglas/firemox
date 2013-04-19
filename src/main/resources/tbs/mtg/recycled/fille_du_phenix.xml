@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Fille du Phenix">
+	<rules-author-comment>dungeon-keeper</rules-author-comment>
+	<init>
+		<registers>
+			<register index="red" value="2" />
+			<register index="toughness" value="0" />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>legend fillette</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability zone="play" playable="instant">
+			<test>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you" />
+							<has-property property="phoenix" />
+						</and>
+					</has>
+				</not>
+			</test>
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<assign-damage value="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability zone="play" playable="instant">
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you" />
+						<has-property property="phoenix" />
+					</and>
+				</has>
+			</test>
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you" />
+							<has-property property="phoenix" />
+						</and>
+					</test>
+				</action>
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<assign-damage from="target-list.first" to="target-list.last">
+					<value register="target-list.first" index="power" />
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<object name="phoenix" />
+		<object name="phoenix" />
+		<object name="phoenix" />
+	</modifiers>
+</card>

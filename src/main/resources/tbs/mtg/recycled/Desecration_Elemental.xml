@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desecration Elemental">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  3b fear 
+		whenever a player plays a spell, sacrifice a creature.  
+	-->
+
+	<init>
+		<registers>
+			<register index="black" value="1" />
+			<register index="colorless" value="3" />
+			<register index="power" value="8" />
+			<register index="toughness" value="8" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>fear elemental</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<is-spell />
+				</test>
+			</casting>
+			<cost>
+				<action ref="sacrifice-a-creature" value="1" />
+			</cost>
+			<effects />
+		</triggered-ability>
+	</abilities>
+</card>

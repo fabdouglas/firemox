@@ -1,0 +1,90 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Seize the Soul">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	instant
+	destroy target nonwhite nonblack creature. put a 1/1 white spirit creature token with flying into play.
+	haunt
+	when the creature seize the soul haunts is put into a graveyard, destroy target nonwhite nonblack creature. put a 1/1 white spirit creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name="haunt-cost">
+			<action ref="target-creature">
+				<test>
+					<and>
+						<not>
+							<has-color color="white"/>
+						</not>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</and>
+				</test>
+			</action>
+		</action>
+		<action reference-name="haunt-effects">
+			<action ref="destroy" />
+			<create-card>
+				<card name='Spirit'>
+					<rules-author-comment></rules-author-comment>
+					<init>
+						<registers>
+							<register index='power' value='1'/>
+							<register index='toughness' value='1'/>
+						</registers>
+						<colors>white</colors>
+						<idcards>creature</idcards>
+						<properties>token spirit flying </properties>
+					</init>
+				</card>
+			</create-card>
+			<move-card controller='you' destination='play'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="haunt-cost"/>
+			</cost>
+			<effects>
+				<action ref="haunt-effects"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='haunting'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<has-private-object object-name="haunting" target="tested" />
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="graveyard" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="haunt-cost" />
+			</cost>
+			<effects>
+				<action ref="haunt-effects" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

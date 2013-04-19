@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Candles of Leng">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	4, t :reveal the top card of your library. if it has the same name as a card in your graveyard, put it into your graveyard. otherwise, draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="card" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you"/>
+							<position position="1"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has restriction-zone="graveyard">
+							<and>
+								<controller player="you"/>
+								<has-name name="target-list.first.name"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="put-in-graveyard"/>
+				<hop value="2"/>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

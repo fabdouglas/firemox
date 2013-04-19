@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Clutch of the Undercity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uub
+	instant
+	return target permanent to its owner's hand. its controller loses 3 life.
+	transmute 1ub 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target type="target-list.first.controller"/>
+				<action ref='lose-life-target' value='3'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='transmute'>
+			<actions>
+				<pay-mana blue='1' black='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

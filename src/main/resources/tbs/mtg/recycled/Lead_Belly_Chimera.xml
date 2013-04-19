@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lead-Belly Chimera">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - chimera
+	2/2
+	trample
+	sacrifice lead-belly chimera: put a +2/+2 counter on target chimera and that chimera gains trample. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>chimera trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="chimera"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-object object-name='+2/+2'/>
+				<add-modifier>
+					<property-modifier property='trample' linked='false'/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

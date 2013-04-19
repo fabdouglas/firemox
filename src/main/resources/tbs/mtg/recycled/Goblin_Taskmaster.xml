@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Taskmaster">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		r
+		creature - goblin
+		1/1
+		1r: target goblin gets +1/+0 until end of turn.
+		morph r 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='power' value='1' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>goblin</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='target-creature'>
+					<test>
+						<has-property property="goblin" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='1' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup' />
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

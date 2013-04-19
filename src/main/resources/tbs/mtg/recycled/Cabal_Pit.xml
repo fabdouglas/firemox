@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cabal Pit">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		land
+		t :add b to your mana pool. cabal pit deals 1 damage to you.
+		threshold - b, t, sacrifice cabal pit: target creature gets -2/-2 until end of turn. play this ability only if seven or more cards are in your graveyard.
+	-->
+
+	<init>
+		<registers></registers>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T' />
+			</cost>
+			<effects>
+				<give-mana black='1' />
+				<target type='you' />
+				<assign-damage value='1' type='damage-normal' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold" />
+			<cost>
+				<action ref='T' />
+				<action ref='sacrifice-this' />
+				<action ref='target-creature' />
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='2' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup' />
+						</until>
+					</register-modifier>
+					<register-modifier index='toughness' value='2' operation='minus'
+						linked='false'>
+						<until>
+							<end-of-phase phase='cleanup' />
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

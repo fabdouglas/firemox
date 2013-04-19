@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Serra Avatar'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--
+		4www
+	creature - avatar
+	*/*
+	serra avatar's power and toughness are each equal to your life total.
+	if serra avatar would be put into a graveyard from anywhere, reveal serra 
+		avatar, then shuffle it into its owner's library instead.
+	-->
+
+	<init>
+		<registers>
+			<register index='white' value='3' />
+			<register index='colorless' value='4' />
+			<register index='power'>
+				<value register="you" index="life" />
+			</register>
+			<register index='toughness'>
+				<value register="you" index="life" />
+			</register>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>avatar</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<replacement-ability zone="graveyard">
+			<moved-card>
+				<destination-test>
+					<is-this />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this" />
+				<action ref="reveal"/>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

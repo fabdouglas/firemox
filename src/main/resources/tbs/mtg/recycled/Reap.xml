@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reap">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	return any number of target cards from your graveyard to your hand. you can't choose more cards than the number of black permanents your opponents control.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-color color="black"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="graveyard" hop="1">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

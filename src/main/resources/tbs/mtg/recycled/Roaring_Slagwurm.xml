@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Roaring Slagwurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gg
+	creature - wurm
+	6/4
+	whenever roaring slagwurm attacks, tap all artifacts.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>wurm </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<has-idcard idcard="artifact"/>
+					</test>
+				</target>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

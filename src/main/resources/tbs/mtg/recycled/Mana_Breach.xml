@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mana Breach">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment
+	whenever a player plays a spell, that player returns a land he or she controls to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<target type="card" mode="contextchoose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="context.player"/>
+							<test ref="is-targetable-land" />
+						</and>
+					</test>
+				</target>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cloudcrest Lake">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	t :add w or u to your mana pool. cloudcrest lake doesn't untap during your next untap step.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1' />
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property="does-not-untap" linked="false">
+				 		<until>
+				 			<end-of-phase phase="untap"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1' />
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property="does-not-untap" linked="false">
+				 		<until>
+				 			<end-of-phase phase="untap"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

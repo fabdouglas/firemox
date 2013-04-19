@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Somber Hoverguard">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		5u
+		creature - drone
+		3/2
+		affinity for artifacts 
+		flying
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='5' />
+			<register index='power' value='3' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>drone flying</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="artifact" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

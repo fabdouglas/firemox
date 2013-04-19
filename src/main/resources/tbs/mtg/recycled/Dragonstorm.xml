@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragonstorm">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {8}{r} search your library for a dragon card and put it into play. 
+then shuffle your library. 
+
+TODO : storm  -->
+
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="8"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="dragon"/>
+					</test>
+				</action>
+				<target type="you"/>
+				<show-zone zone="library" for="you"/>
+				<target mode="choose" type="card" raise-event="false" restriction-zone="library" hop="1">
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<has-property property="dragon"/>
+						</and>
+					</test>
+				</target>
+				<action ref="restore-library-visibility"/>
+				<shuffle zone="library"/>
+					<!-- INSERT HERE ACTIONS PERFORMED WHEN LIBRARY HAS DEFAULT VISIBILITY -->
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Raging Kavu">
+<rules-author-comment></rules-author-comment>
+
+<!--  1rg flash haste -->
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="green" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>haste flash kavu</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

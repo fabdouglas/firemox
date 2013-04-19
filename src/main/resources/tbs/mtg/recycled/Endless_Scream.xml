@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Endless Scream">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xb
+	enchantment - aura
+	enchant creature
+	endless scream comes into play with x scream counters on it.
+	enchanted creature gets +1/+0 for each scream counter on endless scream.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x"/>
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="scream"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<counter object-name="scream" card="this"/>
+				</value>
+			</register-modifier>
+		</modifiers>
+	</attachment>
+</card>

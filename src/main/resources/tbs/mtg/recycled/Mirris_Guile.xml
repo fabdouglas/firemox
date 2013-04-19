@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mirri's Guile">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  g 
+		at the beginning of your upkeep, you may look at the top three cards of your 
+		library, then put them back in any order.   
+	-->
+
+	<init>
+		<registers>
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep" />
+			</beginning-of-phase>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<target type="card" restriction-zone="library" mode="all"
+							raise-event="false">
+							<test>
+								<and>
+									<controller player="you" />
+									<or>
+										<position position="0" />
+										<position position="1" />
+										<position position="2" />
+									</or>
+								</and>
+							</test>
+
+						</target>
+						<action ref="move-library-top" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

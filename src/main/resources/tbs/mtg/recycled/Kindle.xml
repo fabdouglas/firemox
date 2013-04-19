@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Kindle">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{r} 
+kindle deals to target creature or player damage equal to the number of cards 
+named kindle in all graveyards plus 2. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal">
+					<value>
+						<add right="2">
+							<left>
+								<counter restriction-zone="graveyard">
+									<has-name name="kindle"/>
+								</counter>
+							</left>
+						</add>
+					</value>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

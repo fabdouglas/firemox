@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reaping the Rewards">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	instant
+	buyback-sacrifice a land. 
+	you gain 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='buyback%a' zone='hand'>
+			<cost>
+				<action ref='buyback'/>
+				<action ref='sacrifice-a-land' value='1'/>
+				<insert-ability ref='main-ability'/>
+			</cost>
+		</activated-ability>
+	</abilities>
+</card>

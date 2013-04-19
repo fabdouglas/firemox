@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kilnmouth Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5rr
+	creature - dragon
+	5/5
+	amplify 3 
+	flying
+	t :kilnmouth dragon deals damage equal to the number of +1/+1 counters on it to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref="amplify-3"/>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter object-name="+1/+1" card="this"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

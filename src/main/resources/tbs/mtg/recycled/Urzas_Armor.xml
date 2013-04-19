@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urza's Armor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	if a source would deal damage to you, prevent 1 of that damage.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!-- this shield is removed -->
+				<unregister-this/>
+				<target type="context.player"/>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="1" left="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,23 @@
+# *Créatures :*
+Keldon Marauders;4
+Rakdos Guildmage;4
+Scorched Rusalka;4
+Dark Confidant;4
+Giant Solifuge;4
+
+# *Sorts :*
+Rift Bolt;4
+Incinerate;4
+Seal of Fire;4
+Char;4
+Demonfire;2
+
+#*Terrains :*
+Rakdos Carnarium;3
+Snow-Covered Swamp;1
+Snow-Covered Mountain;4
+Keldon Megaliths;2
+Graven Cairns;3
+Blood Crypt;4
+Sulfurous Springs;4
+Urborg, Tomb of Yawgmoth;1

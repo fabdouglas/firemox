@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Harrow">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	instant
+	as an additional cost to play harrow, sacrifice a land.
+	search your library for up to two basic land cards and put them into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-land' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-up-to' value='2'>
+					<test>
+						<test ref="is-basic-land"/>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<faqs title="Magic-Project Faqs">
+  <part id="faqs">
+    <faq id="card-pictures-are-black">
+      <question>I cannot see card pictures, some cards appear as black rectangle, or mana symbols are not displayed</question>
+      <answer>
+        <p>The associated picture could not be downloaded. 
+        <br/>This often dues to a bad internet configuration, check that :
+        <ul>
+        <li>You must be connected to internet to cache the pictures, or manually getting the pictures.</li>
+        <li>You are behind a proxy. Go to the game->proxy menu, and configure your proxy login.</li>
+        <li>You are using a 'non official' card. Meaning there is no public picture corresponding to this card. You have to place your picture in the tbs/xxx/images directory, and optionally send it to us to include it to the next release.</li>
+        <li>No public picture proxy share the picture associated to this card. Maybe this picture has not yet been published, or the card name is wrong.</li>
+        <li>You are running two instances of Magic-project at the same time the same file, one instance is downloading the picture but the second cannot.</li>
+        </ul>
+        </p>
+      </answer>
+    </faq>
+    <faq id="language">
+      <question>Magic-project is displayed in English but i'm not English </question>
+      <answer>
+        <p>Magic-Project supports some language, but your language is not. Post a feature request, we'll try to translate the application into your language. 
+        <br/>Also you can do it by translating the two 'en-lang.properties' files located in installation root and tbs/xxx directories.
+        </p>
+      </answer>
+    </faq>
+    <faq id="breakpoints">
+      <question>I can't respond to a spell, i should get priority</question>
+      <answer>
+        <p>Magic-Project indroduce the breakpoint and decline option on all phases. Yours and the the opponent's ones. 
+        <br/>To play in real flow, remove all flags of phases.
+        </p>
+      </answer>
+    </faq>
+    <faq id="crash">
+      <question>Magic-Project says : No player has priority</question>
+      <answer>
+        <p>This can append when :
+        <ul>
+        	<li>There is an infinite loop in a rule of the game of a card. </li>
+        	<li>The connection is broken but Magic-Project did not detect it</li>
+        	<li>The game crashed, and so, send this bug to us throw the bug repport menu.</li>
+        </ul>
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

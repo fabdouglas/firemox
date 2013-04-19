@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bloodfire Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - kavu
+	2/2
+	r, sacrifice bloodfire kavu: bloodfire kavu deals 2 damage to each creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='sacrifice-this'/>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

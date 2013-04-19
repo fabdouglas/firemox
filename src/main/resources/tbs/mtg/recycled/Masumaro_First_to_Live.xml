@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Masumaro, First to Live">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ggg
+	legendary creature - spirit
+	*/*
+	masumaro, first to live's power and toughness are each equal to twice the number of cards in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power'>
+				<value>
+					<mult right="2">
+						<left>
+							<counter restriction-zone='hand'>
+								<controller player='you'/>
+							</counter>
+						</left>
+					</mult>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<mult right="2">
+						<left>
+							<counter restriction-zone='hand'>
+								<controller player='you'/>
+							</counter>
+						</left>
+					</mult>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

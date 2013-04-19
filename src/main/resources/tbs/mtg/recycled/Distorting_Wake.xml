@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Distorting Wake">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{u}{u}{u} return x target nonland permanents to their owners' hands. -->
+
+	<init>
+		<registers>
+			<register index="blue" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum>
+						<minimum>
+							<left register="you" index="manapool"/>
+							<right>
+								<counter restriction-zone="play">
+									<not>
+										<has-idcard idcard="land"/>
+									</not>
+								</counter>
+							</right>
+						</minimum>
+					</maximum>
+				</input-number>
+				<pay-mana>
+					<colorless register="stack" index="0"/>
+				</pay-mana>
+				<action ref="target-card">
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,4 @@
+Plains;30
+Super card;20
+Fastbond;20
+storm cauldron;20

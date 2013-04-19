@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stream of Unconsciousness">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	tribal instant - wizard
+	target creature gets -4/-0 until end of turn. if you control a wizard, draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>tribal instant </idcards>
+		<properties>wizard </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add-4-0-until-eot"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="wizard"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

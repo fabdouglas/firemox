@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lancers en-Kor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - soldier
+	3/3
+	trample
+	0: the next 1 damage that would be dealt to lancers en-kor this turn is dealt to target creature you control instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kor soldier trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref="redirect-1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

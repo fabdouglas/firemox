@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gutwrencher Oni">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - demon spirit
+	5/4
+	trample
+	at the beginning of your upkeep, discard a card if you don't control an ogre.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>demon spirit trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-property property="ogre"/>
+								</and>
+							</has>
+						</not>
+					</test>
+				</if-then-hop>
+				<action ref='discard' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

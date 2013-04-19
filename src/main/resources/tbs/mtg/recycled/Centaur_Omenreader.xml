@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Centaur Omenreader">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	snow creature - centaur shaman
+	3/3
+	as long as centaur omenreader is tapped, creature spells you play cost 2 less to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>snow centaur shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+	    <static-modifier filter-zone="hand">
+	        <modifiers>
+	            <register-modifier index="colorless" operation="minus" value="2" linked="true" layer="global"/>
+	        </modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature"/>
+		       		<controller player="you"/> 
+		       		<in-zone zone="playANDtapped" card="this"/>
+	            </and>
+			</while>
+	    </static-modifier>
+	</modifiers>
+</card>

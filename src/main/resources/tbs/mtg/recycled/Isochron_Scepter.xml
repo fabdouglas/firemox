@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Isochron Scepter'>
+	<rules-author-comment>Oracle2Xml generator 0.93 beta</rules-author-comment>
+
+	<!--
+		2
+		artifact
+		imprint - when isochron scepter comes into play, you may remove an instant card with converted mana cost 2 or less in your hand from the game. 
+		2, t :you may copy the imprinted instant card. if you do, you may play the copy without paying its mana cost.
+	-->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone='play' card='tested' />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested' />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" cancel="true" raise-event="false" mode="choose" hop="3"
+					restriction-zone="hand">
+					<test>
+						<and>
+							<has-idcard idcard="instant" />
+							<inf-equal right="2">
+								<left register="tested" index="manacost" />
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+				<action ref="imprint-card" />
+				<!-- 
+				<copy-card card="target-list.last">
+					<excludes>
+						<exlude-actions>
+							<pay-mana value="manacost"/>
+						</exlude-actions>
+					</excludes>
+				</copy-card>
+				-->
+				<action ref="remove-from-game" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

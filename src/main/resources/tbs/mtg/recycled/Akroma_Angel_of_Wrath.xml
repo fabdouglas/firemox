@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Akroma, Angel of Wrath">
+<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="white" value="3"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>vigilance flying first-strike trample haste protection-from-black protection-from-red angel legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

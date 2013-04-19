@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elvish Vanguard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf
+	1/1
+	whenever another elf comes into play, put a +1/+1 counter on elvish vanguard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf warrior</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="elf"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

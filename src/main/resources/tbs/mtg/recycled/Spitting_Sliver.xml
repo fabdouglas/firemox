@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spitting Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - sliver
+	3/3
+	all sliver creatures have first strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property='first-strike' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

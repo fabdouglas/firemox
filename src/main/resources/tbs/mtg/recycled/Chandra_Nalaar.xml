@@ -1,0 +1,106 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chandra Nalaar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	planeswalker - chandra
+	6
+	+1: chandra nalaar deals 1 damage to target player.
+	-x: chandra nalaar deals x damage to target creature.
+	-8: chandra nalaar deals 10 damage to target player and each creature he or she controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='loyalty' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>planeswalker</idcards>
+		<properties>chandra</properties>
+	</init>
+	<modifiers>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<add-object object-name="loyalty"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%maximum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter object-name="loyalty" card="this"/>
+					</maximum>
+				</input-number>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register="stack" index="0"/>
+				</assign-damage>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="8"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="target-list.last"/>
+					</test>
+				</action>
+				<assign-damage value='10' type='damage-normal'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

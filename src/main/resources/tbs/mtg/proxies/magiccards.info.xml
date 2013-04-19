@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	xmlns:mp="http://sourceforge.net/projects/firemox"
+	name="MagicCards.Info" home="http://magiccards.info" language="francais"
+	encoding="iso-8859-1">
+	<pictures>
+		<picture url="en/${card.proxy-set}/${card.id+card.version}.jpg"
+			base="http://magiccards.info/scans" />
+		<picture url="en/${card.proxy-set}/${card.id}.jpg"
+			base="http://magiccards.info/scans" />
+	</pictures>
+	<data>
+		<!--  Streams. Order is important -->
+		<streams base="http://magiccards.info/query?">
+			<!-- 
+				http://magiccards.info/query.php?cardname_language=en&cardname_match=exactly&cardname=Mishra%27s%20Factory&editions[]=aq_en
+			-->
+			<stream
+				url="q=${card.name}%20e%3A${card.set}%2Fen&amp;v=card&amp;s=cname" />
+			<stream
+				url="q=${card.name}&amp;v=card&amp;s=cname" />
+			<!-- stream
+				url="cardname_language=en&amp;cardname_match=exactly&amp;cardname=${card.name}&amp;editions[]=${card.set}_${card.language}" />
+			<stream
+				url="cardname_language=en&amp;cardname_match=exactly&amp;cardname=${card.name}&amp;editions[]=${card.set}_en" />
+			<stream
+				url="cardname_language=en&amp;cardname_match=exactly&amp;cardname=${card.name}" />
+			<stream
+				url="cardname_match=exactly&amp;cardname=${card.name}&amp;editions=${card.set}_fr" />
+			<stream
+				url="cardname_language=&amp;cardname_match=exactly&amp;cardname=${card.name}" /-->
+		</streams>
+		<!-- Managed properties for this proxy. Order is important -->
+		<properties>
+			<property name="proxy-set">
+				<starting-offset>
+					<mp:add right="9">
+						<mp:left>
+							<mp:method name="indexOf" arg0="scans/en/"
+								arg0-class="java.lang.String" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="/"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="id">
+				<starting-offset>
+					<mp:add right="1" left="%last-offset" />
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0=".jpg"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="text">
+				<starting-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;br /&gt;&lt;b&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:add right="3">
+								<mp:left>
+									<mp:method name="indexOf" arg0="&lt;b&gt;"
+										arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:add>
+						</mp:then>
+					</mp:if-then-else>
+				</starting-offset>
+				<ending-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;/b&gt;&lt;br /&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:method name="indexOf" arg0="&lt;/b&gt;&lt;br /&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:then>
+					</mp:if-then-else>
+				</ending-offset>
+			</property>
+			<property name="flavor-text">
+				<starting-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;br /&gt;&lt;i&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:add right="3">
+								<mp:left>
+									<mp:method name="indexOf" arg0="&lt;i&gt;"
+										arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:add>
+						</mp:then>
+					</mp:if-then-else>
+				</starting-offset>
+				<ending-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;/i&gt;&lt;br /&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:method name="indexOf" arg0="&lt;/i&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:then>
+					</mp:if-then-else>
+				</ending-offset>
+			</property>
+			<property name="artist-credit">
+				<starting-offset>
+					<mp:add right="7">
+						<mp:left>
+							<mp:method name="indexOf" arg0="Illus."
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/td&gt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="local-name">
+				<starting-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf" arg0="/fr/"
+										arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:add right="3">
+								<mp:left>
+									<mp:method name="indexOf" arg0="&gt;"
+										arg0-class="java.lang.String">
+										<mp:arg1>
+											<mp:method name="indexOf" arg0="/fr/"
+												arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+										</mp:arg1>
+									</mp:method>
+								</mp:left>
+							</mp:add>
+						</mp:then>
+					</mp:if-then-else>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="sets" delimiter-left="http://magiccards.info/"
+				delimiter-right="/">
+				<starting-offset>
+					<mp:add right="3">
+						<mp:left>
+							<mp:method name="indexOf" arg0="&lt;li&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/ol&gt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+		</properties>
+	</data>
+</proxy>

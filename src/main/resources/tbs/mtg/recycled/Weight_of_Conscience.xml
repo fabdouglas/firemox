@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Weight of Conscience">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment - aura
+	enchant creature
+	enchanted creature can't attack.
+	tap two untapped creatures you control that share a creature type: remove enchanted creature from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+							<different right="0">
+								<left>
+									<card-properties operation="intersection.size" card="target-list.first"
+										card2="tested" lower="FIRST_SUB_TYPE" higher="LAST_SUB_TYPE" />
+								</left>
+							</different>
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='cannot-attack'/>
+</card>

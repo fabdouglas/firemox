@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Leveler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact creature
+	10/10
+	when leveler comes into play, remove your library from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='10'/>
+			<register index='toughness' value='10'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>juggernaut</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

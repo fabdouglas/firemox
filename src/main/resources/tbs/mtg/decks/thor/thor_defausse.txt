@@ -1,0 +1,28 @@
+#Jeu défausse
+#
+#John
+#
+#novembre 01, 2000
+#1
+#4th Edition
+#
+Dark_Ritual;2
+Demonic_Tutor;4
+Hypnotic_Specter;4
+Royal_Assassin;2
+Raise_Dead;2
+Animate_Dead;2
+Black_Lotus;4
+Disrupting_Scepter;2
+Mox_Jet;4
+Mox_Sapphire;4
+Sol_Ring;2
+Underground_Sea;15
+Ancestral_Recall;2
+Braingeyser;1
+Counterspell;3
+Power_Sink;2
+Time_Walk;4
+Terror;2
+Mind_Twist;2
+The_Rack;3

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Drekavac">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - beast
+	3/3
+	when drekavac comes into play, sacrifice it unless you discard a noncreature card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+					<either>
+						<action ref='discard' value="1">
+							<test>
+								<not>
+									<has-idcard idcard="creature"/>
+								</not>
+							</test>
+						</action>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

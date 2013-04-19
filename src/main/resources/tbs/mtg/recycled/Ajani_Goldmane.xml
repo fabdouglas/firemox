@@ -1,0 +1,102 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ajani Goldmane">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	planeswalker - ajani
+	4
+	+1: you gain 2 life.
+	-1: put a +1/+1 counter on each creature you control. those creatures gain vigilance until end of turn.
+	-6: put a white avatar creature token into play with "this creature's power and toughness are each equal to your life total."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='loyalty' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>planeswalker</idcards>
+		<properties>ajani</properties>
+	</init>
+	<modifiers>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<add-object object-name="loyalty"/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<add-object object-name="+1/+1"/>
+				<action ref="vigilance-until-eot"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="6"/>
+				<remove-object object-name="loyalty"/>
+			</cost>
+			<effects>
+	            <create-card>
+	                <card name="Avatar">
+	                    <init>
+	                        <registers>
+	                            <register index="power">
+	                            	<value register="you" index="life"/>
+	                            </register>
+	                            <register index="toughness">
+	                            	<value register="you" index="life"/>
+	                            </register>
+	                        </registers>
+	                        <colors>white</colors>
+	                        <idcards>creature</idcards>
+	                        <properties>avatar token</properties>
+	                    </init>
+	                </card>
+	            </create-card>
+	            <move-card controller="you" destination="play"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

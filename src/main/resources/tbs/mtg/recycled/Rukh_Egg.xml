@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rukh Egg">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - egg
+	0/3
+	when rukh egg is put into a graveyard from play, put a 4/4 red bird creature token with flying into play at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>egg </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<create-card>
+								<card name='Bird'>
+									<rules-author-comment></rules-author-comment>
+									<init>
+										<registers>
+											<register index='power' value='4'/>
+											<register index='toughness' value='4'/>
+										</registers>
+										<colors>red</colors>
+										<idcards>creature</idcards>
+										<properties>token bird flying </properties>
+									</init>
+								</card>
+							</create-card>
+							<move-card controller='you' destination='play'/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

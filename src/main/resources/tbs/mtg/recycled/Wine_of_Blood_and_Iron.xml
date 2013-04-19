@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wine of Blood and Iron">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	4: target creature gets +x/+0 until end of turn, where x is its power. sacrifice wine of blood and iron at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='target-list.first' index='power'/>
+					</register-modifier>
+				</add-modifier>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<action ref="sacrifice-this" />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

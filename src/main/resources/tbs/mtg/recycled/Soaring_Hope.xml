@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soaring Hope">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	enchantment - aura
+	enchant creature
+	when soaring hope comes into play, you gain 3 life.
+	enchanted creature has flying.
+	w: put soaring hope on top of its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='3'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='flying'/>
+</card>

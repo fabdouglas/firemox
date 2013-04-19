@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spitting Spider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - spider
+	3/5
+	reach 
+	sacrifice a land: spitting spider deals 1 damage to each creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spider reach </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-land' value='1'/>
+				<action ref='all-creatures'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

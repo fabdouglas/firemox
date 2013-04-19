@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tolsimir Wolfblood">
+	<rules-author-comment>Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="4" />
+			<register index="green" value="1" />
+			<register index="white" value="1" />
+			<register index="power" value="3" />
+			<register index="toughness" value="4" />
+		</registers>
+		<colors>green white</colors>
+		<idcards>creature</idcards>
+		<properties>elf warrior legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<create-card>
+					<card name="Voja">
+						<init>
+							<registers>
+								<register index="power" value="2" />
+								<register index="toughness" value="2" />
+							</registers>
+							<colors>green white</colors>
+							<idcards>creature</idcards>
+							<properties>wolf token legend</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="power" operation="add" value="1" linked="true" />
+				<register-modifier index="toughness" operation="add" value="1" linked="true" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<controller player="you" />
+					<has-color color="green" />
+					<not>
+						<is-this />
+					</not>
+				</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="power" operation="add" value="1" linked="true" />
+				<register-modifier index="toughness" operation="add" value="1" linked="true" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<controller player="you" />
+					<has-color color="white" />
+					<not>
+						<is-this />
+					</not>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,27 @@
+#jeu bleu
+#
+#John
+#
+#juin 16, 2000
+#1
+#4th Edition
+#
+Ancestral_Recall;3
+Braingeyser;2
+Counterspell;4
+Mahamoti_Djinn;3
+Power_Sink;3
+Stasis;2
+Time_Elemental;3
+Time_Walk;4
+Timetwister;4
+Vesuvan_Doppelganger;2
+Clone;2
+Black_Lotus;4
+Black_Vise;1
+Howling_Mine;2
+Ivory_Tower;2
+Library_of_Leng;1
+Mox_Sapphire;8
+Sol_Ring;3
+Island;15

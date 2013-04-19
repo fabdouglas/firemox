@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Time Vault">
+	<!-- tested 11/27/2004 , v0.80.27 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {2} 
+time vault comes into play tapped. 
+time vault doesn't untap during your untap step. 
+skip your next turn: untap time vault and put a time counter on it. 
+{t}, remove all time counters from time vault: take an extra turn after this one. 
+play this ability if only there's a time counter on time vault. -->
+
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<idcards>artifact</idcards>
+		<properties>does-not-untap</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="come-into-play-tapped"/>
+		
+		<!-- Untap , skip the next turn -->
+		<activated-ability playable="instant" name="skip-turn" zone="play">
+			<test>
+				<in-zone zone="playANDtapped"/>
+			</test>
+			<effects>
+				<action ref="skip-next-turn"/>
+				<target type="this"/>
+				<add-object object-name="time"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+		
+		<!-- If has TIME counter: {T},remove them & gain an extra turn -->
+		<activated-ability playable="instant" name="extra-turn" zone="play">
+			<test>
+				<sup right="0">
+					<left>
+						<counter object-name="time" card="this"/>
+					</left>
+				</sup>
+			</test>
+			<cost>
+				<action ref="T"/>
+				<target type="this"/>
+				<repeat>
+					<value>
+						<counter object-name="time" card="this"/>					
+					</value>
+				</repeat>
+				<remove-object object-name="time"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<ability ref="extra-turn"/>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

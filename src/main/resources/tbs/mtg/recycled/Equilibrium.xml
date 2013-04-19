@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Equilibrium">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	enchantment
+	whenever you play a creature spell, you may pay 1. if you do, return target creature to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+						<action ref='target-creature'/>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

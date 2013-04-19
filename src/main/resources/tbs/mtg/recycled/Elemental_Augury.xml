@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elemental Augury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ubr
+	enchantment
+	3: look at the top three cards of target player's library and put them back on top of that player's library in any order.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>red blue black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="target-list.first" />
+							<or>
+								<position position="0"/>
+								<position position="1"/>
+								<position position="2"/>
+							</or>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="target-list.first"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

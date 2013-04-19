@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Anurid Brushhopper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gw
+	creature - beast
+	3/4
+	discard two cards: remove anurid brushhopper from the game. return it to play under its owner's control at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard' value='2'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<action ref="return-to-play-target-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

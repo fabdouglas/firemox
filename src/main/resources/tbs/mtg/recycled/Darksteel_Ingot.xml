@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darksteel Ingot">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3} darksteel ingot is indestructible.  
+{t}: add one mana of any color to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="indestructible"/>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

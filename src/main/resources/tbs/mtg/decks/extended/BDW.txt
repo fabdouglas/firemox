@@ -1,0 +1,16 @@
+Barbarian Ring;2
+Blistering Firecat;4
+Bloodstained Mire;4
+Firebolt;4
+Grim Lavamancer;4
+Incinerate;4
+Isamaru, Hound of Konda;3
+Kird Ape;4
+Lightning Helix;4
+Paladin en-Vec;4
+Rift Bolt;3
+Sacred Foundry;4
+Savannah Lions;4
+Stomping Ground;4
+Windswept Heath;4
+Wooded Foothills;4

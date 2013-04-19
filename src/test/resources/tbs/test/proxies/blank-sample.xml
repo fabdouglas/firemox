@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	xmlns:mp="http://sourceforge.net/projects/firemox"
+	name="Blank Proxy Sample" home="http://www.blank.com" language="english"
+	encoding="iso-8859-1">
+
+	<!-- 
+		Aliases are some private values for this proxy. Indeed, there is a 
+		referential the TBS aliases, but some proxies may use a different name to 
+		point to a TBS's alias.
+	-->
+	<alias>
+		<alias property="card.set" local-value="the-proxy-name" ref="the-tbs-alias" />
+		<alias property="card.set" local-value="the-proxy-name2" ref="another-tbs-alias" />
+	</alias>
+	
+	<!-- 
+		Picture streams. Order is important.
+			The streams are sequentially checked until a valid picture is found.
+	-->
+	<pictures>
+		<!-- 
+			The picture url can contain any ${property} of this proxy.
+			The base attribute is the base of url of picture to download.
+		-->
+		<picture url="${card.id}.jpg" base="http://cards.blank-home/cards" />
+	</pictures>
+	
+	<data>
+		<!--  
+			Data streams. Order is important.
+			The streams are sequentially checked until a valid response is returned.
+		-->
+		<streams base="http://cards.blank-home/search.php?">
+			<stream url="text=${card.name}" />
+			<stream url="cardname_language=en&amp;cardname_match=exactly&amp;cardname=${card.name}&amp;editions[]=${card.set}_${card.language}" />
+		</streams>
+		
+		<!-- 
+			Managed properties for this proxy. Order is important.
+			You can reuse the expressions defined in the validator.xsd (mp prefix).
+			starting-offset defines the first offset of property to retrieve.
+			ending-offset defines the last offset of property to retrieve.
+		-->
+		<properties>
+			<property name="set">
+				<starting-offset>
+					<mp:add right="9">
+						<mp:left>
+							<mp:method name="indexOf" arg0="scans/en/"
+								arg0-class="java.lang.String" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="/"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="id">
+				<starting-offset>
+					<mp:add right="1" left="%last-offset" />
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0=".jpg"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="text">
+				<starting-offset>
+					<mp:if-then-else>
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;/b&gt;&lt;br /&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:add right="3">
+								<mp:left>
+									<mp:method name="indexOf" arg0="&lt;b&gt;"
+										arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:add>
+						</mp:then>
+						<mp:else>
+							<mp:method name="indexOf" arg0="&lt;br /&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:else>
+					</mp:if-then-else>
+				</starting-offset>
+				<ending-offset>
+					<mp:if-then-else else="%last-offset">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf"
+										arg0="&lt;/b&gt;&lt;br /&gt;" arg0-class="java.lang.String"
+										arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:method name="indexOf" arg0="&lt;/b&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:then>
+					</mp:if-then-else>
+				</ending-offset>
+			</property>
+			<property name="flavor-text">
+				<starting-offset>
+					<mp:add right="10" left="%last-offset" />
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="Illus. "
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="artist-credit" starting-offset="%last-offset">
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/td&gt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="local-name">
+				<starting-offset>
+					<mp:if-then-else else="-1">
+						<mp:if>
+							<mp:sup right="0">
+								<mp:left>
+									<mp:method name="indexOf" arg0="/fr/"
+										arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+								</mp:left>
+							</mp:sup>
+						</mp:if>
+						<mp:then>
+							<mp:add right="3">
+								<mp:left>
+									<mp:method name="indexOf" arg0="&gt;"
+										arg0-class="java.lang.String">
+										<mp:arg1>
+											<mp:method name="indexOf" arg0="/fr/"
+												arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+										</mp:arg1>
+									</mp:method>
+								</mp:left>
+							</mp:add>
+						</mp:then>
+					</mp:if-then-else>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="sets" delimiter-left="http://magiccards.info/"
+				delimiter-right="/">
+				<starting-offset>
+					<mp:add right="3">
+						<mp:left>
+							<mp:method name="indexOf" arg0="&lt;li&gt;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/ol&gt;"
+						arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+		</properties>
+	</data>
+
+</proxy>

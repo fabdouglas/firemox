@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arashi, the Sky Asunder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	legendary creature - spirit
+	5/5
+	xg, t :arashi, the sky asunder deals x damage to target creature with flying.
+	channel - xgg, discard arashi: arashi deals x damage to each creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='hand'>
+			<cost>
+				<pay-mana green='2'/>
+				<action ref="pay-x"/>
+				<target type="this"/>
+				<action ref="put-in-graveyard"/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

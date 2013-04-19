@@ -1,0 +1,8 @@
+Mirri's Guile;20
+swamp;4
+forest;4
+island;4
+plains;4
+jump;4
+mountain;4
+super card;20

@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vivid Crag">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	vivid crag comes into play tapped with two charge counters on it.
+	t :add r to your mana pool.
+	t, remove a charge counter from vivid crag: add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref="tap-add-R"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana black='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana blue='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana red='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana green='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana white='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<object name="charge"/>
+		<object name="charge"/>
+	</modifiers>
+</card>

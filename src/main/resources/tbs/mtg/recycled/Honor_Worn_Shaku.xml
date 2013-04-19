@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Honor-Worn Shaku">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	t :add 1 to your mana pool.
+	tap an untapped legendary permanent you control: untap honor-worn shaku.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-permanent">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="legend"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

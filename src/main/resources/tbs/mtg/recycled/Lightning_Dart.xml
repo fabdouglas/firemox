@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lightning Dart">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	instant
+	lightning dart deals 1 damage to target creature. if that creature is white or blue, lightning dart deals 4 damage to it instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<if-then-else then="4" else="1">
+							<if>
+								<or>
+									<has-color color="white" card="target-list.first"/>
+									<has-color color="blue" card="target-list.first"/>
+								</or>
+							</if>
+						</if-then-else>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

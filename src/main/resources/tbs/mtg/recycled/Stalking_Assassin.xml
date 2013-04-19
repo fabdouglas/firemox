@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stalking Assassin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ub
+	creature - assassin
+	1/1
+	3u, t :tap target creature.
+	3b, t :destroy target tapped creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>human assassin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='3' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='3' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<in-zone zone="playANDtapped"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

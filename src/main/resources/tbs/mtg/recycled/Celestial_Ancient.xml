@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Celestial Ancient">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - elemental
+	3/3
+	flying
+	whenever you play an enchantment spell, put a +1/+1 counter on each creature you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>elemental flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="enchantment"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

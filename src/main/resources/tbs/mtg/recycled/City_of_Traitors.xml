@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="City of Traitors">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	when you play another land, sacrifice city of traitors.
+	t :add 2 to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<has-idcard idcard="land"/>
+						<controller player="you" />
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana colorless='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

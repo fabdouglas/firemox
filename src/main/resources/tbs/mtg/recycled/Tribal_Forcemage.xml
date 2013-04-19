@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tribal Forcemage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf wizard
+	1/1
+	morph 1g 
+	when tribal forcemage is turned face up, creatures of the type of your choice get +2/+2 and gain trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='1' colorless='1' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<action ref="all-creatures">
+					<test>
+						<has-property>
+							<property register="this" index="free0"/>
+						</has-property>
+					</test>
+				</action>
+				<action ref="add+2+2-until-eot"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

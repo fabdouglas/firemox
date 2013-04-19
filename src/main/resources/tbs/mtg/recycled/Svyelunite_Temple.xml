@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Svyelunite Temple">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  land dwarven ruins comes into play tapped. 
+{t}: add {r} to your mana pool. 
+{t}, sacrifice dwarven ruins: add {w}{w} to your mana pool. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-U"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana blue="2" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

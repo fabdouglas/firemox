@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Touchstone">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	t :tap target artifact you don't control.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-artifact'>
+					<test>
+						<not>
+							<controller player="you"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

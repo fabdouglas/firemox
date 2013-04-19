@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nantuko Blightcutter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - insect druid
+	2/2
+	protection from black
+	threshold - nantuko blightcutter gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect druid protection-from-black </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<has-color color="black"/>
+						<controller player="opponent"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+		<register-modifier index='toughness' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<has-color color="black"/>
+						<controller player="opponent"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

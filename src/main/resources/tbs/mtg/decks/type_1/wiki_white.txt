@@ -1,0 +1,26 @@
+Balance;1
+Crusade;4
+Enlightened Tutor;1
+Mana Vault;1
+Mesa Pegasus;2
+Mishra's Factory;4
+Mox Diamond;1
+Mox Pearl;1
+Northern Paladin;2
+Pikemen;3
+Plains;12
+Resurrection;2
+Reverse Damage;2
+Righteousness;2
+Samite Healer;4
+Savannah Lions;4
+Serra Angel;3
+Sol Ring;1
+Soltari Visionary;2
+Spirit Link;2
+Strip Mine;2
+Swords to Plowshares;4
+Wall of Swords;2
+White Knight;4
+Wrath of God;3
+Zuran Orb;1

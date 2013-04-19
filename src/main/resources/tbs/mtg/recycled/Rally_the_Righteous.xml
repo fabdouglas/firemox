@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rally the Righteous">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<!-- Radiance - Untap target creature and each other creature that shares a color with it. 
+		Those creatures get +2/+0 until end of turn.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="red" value="1" />
+			<register index="white" value="1" />
+		</registers>
+		<idcards>instant</idcards>
+		<colors>red white</colors>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="radiance" />
+				<untap />
+				<action ref="add+2+0-until-eot" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

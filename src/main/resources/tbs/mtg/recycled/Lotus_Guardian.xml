@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Lotus Guardian">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  7 flying t add one mana of any color to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="7"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>dragon flying</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-G"/>
+	</abilities>
+</card>

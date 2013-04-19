@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glen Elendra Pranksters">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - faerie wizard
+	1/3
+	flying
+	whenever you play a spell during an opponent's turn, you may return target creature you control to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<not>
+							<controller player="currentplayer" card="this" />
+						</not>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

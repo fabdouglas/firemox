@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sparkspitter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental spellshaper
+	1/3
+	r, t, discard a card: put a 3/1 red elemental creature token named spark elemental into play with trample, haste, and "at end of turn, sacrifice spark elemental."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental haste trample</properties>
+						</init>
+						<abilities>
+							<ability ref="eot-sacrifice"/>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kamahl, Pit Fighter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rr
+	legendary creature - barbarian
+	6/1
+	haste
+	t :kamahl, pit fighter deals 3 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend barbarian haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

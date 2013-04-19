@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Final Strike">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	sorcery
+	as an additional cost to play final strike, sacrifice a creature.
+	final strike deals damage to target opponent equal to the sacrificed creature's power.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal" from="target-list.first" to="target-list.last">
+					<value register="target-list.first" index="power"/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

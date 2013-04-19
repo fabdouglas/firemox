@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coffin Purge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	instant
+	remove target card in a graveyard from the game.
+	flashback b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+			<target type="card" restriction-zone="graveyard" mode="choose" raise-event="false" />
+			<action ref="remove-from-game" />
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

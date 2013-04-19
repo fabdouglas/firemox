@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Incandescent Soulstoke">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental shaman
+	2/2
+	other elemental creatures you control get +1/+1.
+	1r, t :you may put an elemental creature card from your hand into play. that creature gains haste until end of turn. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<has-property property="elemental"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+				<action ref="haste-until-eot"/>
+				<action ref="sacrifice-target-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+			 		<has-property property="elemental"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

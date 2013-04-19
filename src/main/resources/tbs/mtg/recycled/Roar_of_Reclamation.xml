@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Roar of Reclamation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ww
+	sorcery
+	each player returns all artifact cards from his or her graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="artifact"/>
+					</test>
+				</target>
+				<move-card destination="play" controller="target.controller"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

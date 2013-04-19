@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rain of Filth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	instant
+	until end of turn, lands you control gain "sacrifice this land: add b to your mana pool."
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="play">
+					<test>	
+						<and>
+							<has-idcard idcard="land"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<add-modifier>
+					<ability-modifier operation="add" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<activated-ability playable='instant' name='' zone='play'>
+								<cost>
+									<action ref="sacrifice-this"/>
+								</cost>
+								<effects>
+									<give-mana black="1"/>
+								</effects>
+							</activated-ability>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

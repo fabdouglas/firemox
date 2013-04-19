@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deathgazer">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b} whenever deathgazer blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>lizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card2"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<unregister-this/>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-color color="black" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<unregister-this/>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-color color="black" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

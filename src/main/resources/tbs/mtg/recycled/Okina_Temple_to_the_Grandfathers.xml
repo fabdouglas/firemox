@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Okina, Temple to the Grandfathers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add g to your mana pool.
+	g, t :target legendary creature gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-G"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="legend"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

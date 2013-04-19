@@ -1,0 +1,38 @@
+<shortcuts>
+<skipIfNotSupported/>
+  <programGroup defaultName="Magic - Project" location="applications"/>
+  <shortcut
+    name="Magic - Project GUI"
+    target="$INSTALL_PATH\magic.bat"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH"
+    description="Magic - Project"
+    iconFile="$INSTALL_PATH\images\mp.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications="no"
+    startMenu="no"
+    startup="no"categories="" 
+    createForAll="true">
+  </shortcut>
+    
+  <shortcut
+    name="Uninstall Magic - Project GUI"
+    target="$INSTALL_PATH\uninstaller.bat"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH"
+    description="Uninstall Magic - Project"
+    iconFile="$INSTALL_PATH\images\Uninstall.ico"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="no"
+    applications="no"
+    startMenu="no"
+    startup="no"
+    categories="" 
+    createForAll="true">
+  </shortcut>
+</shortcuts>

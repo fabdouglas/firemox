@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dromar's Charm">
+<rules-author-comment></rules-author-comment>
+
+<!--  {w}{u}{b} choose one
+you gain 5 life; 
+or counter target spell; 
+or target creature gets -2/-2 until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>white blue black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="gain-life"  value="5"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<action ref="counter"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add-2-2-until-eot"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wellgabber Apothecary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - merfolk cleric
+	2/3
+	1w: prevent all damage that would be dealt to target tapped merfolk or kithkin creature this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+				<action ref='target-permanent'>
+					<test>
+						<and>
+							<in-zone zone="playANDtapped"/>
+							<or>
+								<has-property property='merfolk'/>
+								<has-property property='kithkin'/>
+							</or>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='prevent-all'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

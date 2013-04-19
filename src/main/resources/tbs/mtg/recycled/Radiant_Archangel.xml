@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Radiant, Archangel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature - angel
+	3/3
+	flying, vigilance
+	radiant, archangel gets +1/+1 for each other creature with flying in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend angel flying vigilance </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="flying"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+		<register-modifier index='toughness' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="flying"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

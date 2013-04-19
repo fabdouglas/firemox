@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sliversmith">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact creature - spellshaper
+	1/1
+	1, t, discard a card: put a 1/1 sliver artifact creature token named metallic sliver into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Mettalic Sliver'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>artifact-creature</idcards>
+							<properties>token sliver </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psionic Entity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - entity
+	2/2
+	t :psionic entity deals 2 damage to target creature or player and 3 damage to itself.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>illusion</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+				<target type="this"/>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

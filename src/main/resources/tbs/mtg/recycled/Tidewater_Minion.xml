@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tidewater Minion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	creature - elemental
+	4/4
+	defender 
+	4: tidewater minion loses defender until end of turn.
+	t :untap target permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>elemental minion defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="defender" linked="false" operation="remove">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

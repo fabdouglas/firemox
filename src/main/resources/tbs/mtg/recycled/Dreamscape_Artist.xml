@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dreamscape Artist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - human spellshaper
+	1/1
+	2u, t, discard a card, sacrifice a land: search your library for up to two basic land cards and put them into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='2' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-land' value='1'/>
+				<action ref='discard' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-up-to' value='2'>
+					<test ref="is-basic-land"/>
+				</action>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

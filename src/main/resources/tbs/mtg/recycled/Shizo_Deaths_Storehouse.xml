@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shizo, Death's Storehouse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add b to your mana pool.
+	b, t :target legendary creature gains fear until end of turn.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<ability ref="tap-add-B"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="legend"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property='fear' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Meadowboon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	creature - elemental
+	3/3
+	when meadowboon leaves play, put a +1/+1 counter on each creature target player controls.
+	evoke 3w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="target-list.last"/>
+					</test>
+				</action>
+				<target-list operation="remove-first"/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana white='1' colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

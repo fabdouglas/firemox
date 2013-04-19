@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Academy Rector">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{w} 
+when academy rector is put into a graveyard from play, 
+you may remove academy rector from the game. if you do, 
+search your library for an enchantment card and put that card into play. 
+
+then shuffle your library. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="enchantment"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<move-card controller="target.owner" destination="play" name=""/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

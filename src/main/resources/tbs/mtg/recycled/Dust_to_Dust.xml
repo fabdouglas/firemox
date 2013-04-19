@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dust to Dust">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{w}{w} remove two target artifacts from the game. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="2"/>
+				<action ref="target-artifact"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

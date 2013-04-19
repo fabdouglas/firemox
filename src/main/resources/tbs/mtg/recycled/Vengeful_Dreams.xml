@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vengeful Dreams">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ww
+	instant
+	as an additional cost to play vengeful dreams, discard x cards.
+	remove x target attacking creatures from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%minimum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</maximum>
+				</input-number>
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-creature">
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

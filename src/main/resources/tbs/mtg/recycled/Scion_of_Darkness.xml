@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scion of Darkness">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5bbb
+	creature - avatar
+	6/6
+	trample
+	whenever scion of darkness deals combat damage to a player, you may put target creature card from that player's graveyard into play under your control.
+	cycling 3 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>avatar trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="context.player"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>	
+						<move-card destination="play" controller="you"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

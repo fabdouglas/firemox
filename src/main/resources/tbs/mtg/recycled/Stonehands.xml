@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stonehands">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +0/+2.
+	r: enchanted creature gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="+0/+2"/>
+</card>

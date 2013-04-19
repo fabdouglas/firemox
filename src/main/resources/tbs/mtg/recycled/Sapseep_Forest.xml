@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sapseep Forest">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	land - forest
+	
+	 sapseep forest comes into play tapped. g, t :you gain 1 life. play this ability only if you control two or more green permanents.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>forest </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal right="2">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<has-color color="green"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</test>
+			<cost>
+				<pay-mana green="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

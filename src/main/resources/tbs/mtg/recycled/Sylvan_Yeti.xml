@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sylvan Yeti">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - elemental
+	*/4
+	sylvan yeti's power is equal to the number of cards in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='you'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>yeti</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

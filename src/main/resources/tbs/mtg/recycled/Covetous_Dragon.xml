@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Covetous Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - dragon
+	6/5
+	flying
+	when you control no artifacts, sacrifice covetous dragon.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<when>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="controller" />
+							<has-idcard idcard="artifact" />
+						</and>
+					</has>
+				</not>
+			</when>
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

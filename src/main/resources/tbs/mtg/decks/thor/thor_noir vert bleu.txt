@@ -1,0 +1,29 @@
+#Jeu noir vert bleu
+#
+#John
+#
+#octobre 08, 2000
+#1
+#4th Edition
+#
+Living_Artifact;3
+Wanderlust;4
+Fog;2
+Fastbond;2
+Drop_of_Honey;2
+Cursed_Land;4
+Warp_Artifact;2
+Psychic_Venom;4
+Timetwister;4
+Time_Walk;4
+Ancestral_Recall;3
+Black_Lotus;4
+Howling_Mine;2
+Mox_Sapphire;4
+Mox_Jet;4
+Mox_Emerald;4
+Sol_Ring;3
+Demonic_Tutor;2
+Underground_Sea;4
+Tropical_Island;4
+Bayou;4

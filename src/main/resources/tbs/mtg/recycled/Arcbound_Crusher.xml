@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arcbound Crusher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	0/0
+	trample
+	whenever another artifact comes into play, put a +1/+1 counter on arcbound crusher.
+	modular 1 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>trample juggernaut</properties>
+	</init>
+	
+	<modifiers>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="modular"/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+						<has-idcard idcard="artifact"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

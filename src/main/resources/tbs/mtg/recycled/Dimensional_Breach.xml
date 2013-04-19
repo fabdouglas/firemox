@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dimensional Breach">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {5}{w}{w} 
+remove all permanents from the game. 
+as long as any of those cards remain removed from the game, 
+at the beginning of each player's upkeep, 
+that player returns one of the removed cards he or she owns to play. -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play"/>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<!-- UPDATE PHASE NAME, TYPE and RESOLUTION -->
+					<triggered-ability resolution="normal" zone="play">
+						<beginning-of-phase phase="upkeep"/>
+						<effects>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

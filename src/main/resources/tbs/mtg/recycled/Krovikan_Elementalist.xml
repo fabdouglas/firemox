@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krovikan Elementalist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bb
+	creature - human wizard
+	1/1
+	2r: target creature gets +1/+0 until end of turn.
+	uu: target creature you control gains flying until end of turn. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='2' />
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' />
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+				<action ref="sacrifice-target-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

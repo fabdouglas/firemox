@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Emberwilde Caliph">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ur
+	creature - djinn
+	4/4
+	flying, trample
+	emberwilde caliph attacks each turn if able.
+	whenever emberwilde caliph deals damage, you lose that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>creature </idcards>
+		<properties>djinn flying trample attacks-if-able </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+				<assigned-damage type="damage-any">
+					<source-test>
+						<is-this />
+					</source-test>
+				</assigned-damage>
+				<effects>
+					<action ref="lose-life" value="context.int" />
+				</effects>
+			</triggered-ability>
+	</abilities>
+</card>

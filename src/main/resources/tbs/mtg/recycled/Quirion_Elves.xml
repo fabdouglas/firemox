@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Quirion Elves">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf druid
+	1/1
+	as quirion elves comes into play, choose a color.
+	t :add g to your mana pool.
+	t :add one mana of the chosen color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-color operation="or" index="free0" register="this" multiselect="false" />
+			</effects>
+		</triggered-ability>
+		<ability ref="tap-add-G"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana value="1">
+					<color register="this" index="free0"/>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

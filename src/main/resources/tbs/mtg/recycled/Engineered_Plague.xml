@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Engineered Plague">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	enchantment
+	as engineered plague comes into play, choose a creature type.
+	all creatures of the chosen type get -1/-1.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<add-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+							<register-modifier index="power" operation="minus" value="1" linked="true" layer="global"/>			 		
+			 				<register-modifier index="toughness" operation="minus" value="1" linked="true" layer="global"/>
+						</modifiers>
+						<while>
+							<and>
+								<in-zone zone="play"/>
+								<has-idcard idcard="creature" />
+								<has-property>
+									<property register="this" index="free0"/>
+								</has-property>
+							</and>
+						</while>
+					</static-modifier>
+				</add-modifier>
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

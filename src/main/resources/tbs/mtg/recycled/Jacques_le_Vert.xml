@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jacques le Vert">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rgw
+	legendary creature
+	3/2
+	green creatures you control get +0/+2.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white red green </colors>
+		<idcards>creature </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="toughness" operation="add" value="2" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+			 		<has-color color="green"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

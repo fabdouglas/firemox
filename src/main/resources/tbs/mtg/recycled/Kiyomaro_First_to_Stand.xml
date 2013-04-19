@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kiyomaro, First to Stand">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature - spirit
+	*/*
+	kiyomaro, first to stand's power and toughness are each equal to the number of cards in your hand.
+	as long as you have four or more cards in hand, kiyomaro has vigilance.
+	whenever kiyomaro deals damage, if you have seven or more cards in hand, you gain 7 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='you'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='you'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<source-test>
+					<is-this/>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you" />
+								</counter>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<action ref='gain-life' value='7'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<property-modifier property="vigilance">
+			<while>
+				<sup-equal right="4">
+					<left>
+						<counter restriction-zone="hand">
+							<controller player="you" />
+						</counter>
+					</left>
+				</sup-equal>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

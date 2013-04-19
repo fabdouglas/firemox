@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tectonic Fiend">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rr
+	creature - elemental
+	7/7
+	echo 4rr 
+	tectonic fiend attacks each turn if able.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental attacks-if-able </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana red='2' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

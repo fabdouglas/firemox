@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gustcloak Cavalier">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - human knight
+	2/2
+	flanking 
+	whenever gustcloak cavalier attacks, you may tap target creature.
+	whenever gustcloak cavalier becomes blocked, you may untap gustcloak cavalier and remove it from combat.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<tap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<untap/>
+						<action ref="remove-from-combat"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

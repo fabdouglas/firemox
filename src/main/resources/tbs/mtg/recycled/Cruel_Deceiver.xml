@@ -1,0 +1,76 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cruel Deceiver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - spirit
+	2/1
+	1: look at the top card of your library.
+	2: reveal the top card of your library. if it's a land card, cruel deceiver gains deathtouch until end of turn. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<action ref="look-at-the-top"/>
+				<msg type="ok" controller="you">
+					<text>%ok_when_finished</text>
+				</msg>
+				<face-down for="you" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<target type="card" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you"/>
+							<position position="1"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="land" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<target type="this"/>
+				<add-modifier>
+					<ability-modifier operation="add" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<ability ref="deathtouch"/>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

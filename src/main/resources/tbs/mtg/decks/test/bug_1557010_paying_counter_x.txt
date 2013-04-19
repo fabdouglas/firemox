@@ -1,0 +1,4 @@
+Overrule;20
+lightning bolt;20
+super card;20
+Adarkar Wastes;20

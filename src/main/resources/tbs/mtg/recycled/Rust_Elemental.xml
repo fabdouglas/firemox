@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rust Elemental">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - elemental
+	4/4
+	flying
+	at the beginning of your upkeep, sacrifice an artifact other than rust elemental. if you can't, tap rust elemental and you lose 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>elemental flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='sacrifice-an-artifact' value='1'>
+							<test>
+								<not>
+									<is-this/>
+								</not>
+							</test>
+						</action>
+					</either>
+					<either>
+						<target type='this'/>
+						<tap/>
+						<action ref='lose-life' value='4'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

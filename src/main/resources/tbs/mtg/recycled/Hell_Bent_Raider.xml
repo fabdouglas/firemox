@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hell-Bent Raider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - barbarian
+	2/2
+	first strike, haste
+	discard a card at random: hell-bent raider gains protection from white until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human barbarian first-strike haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard-random' value="1"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property='protection-from-white' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

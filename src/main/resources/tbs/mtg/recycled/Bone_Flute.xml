@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bone Flute">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	2, t :all creatures get -1/-0 until end of turn.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<static-modifier filter-zone='play'>
+						<modifiers>
+							<register-modifier index='power' operation='minus' value='1' linked='true' layer='global'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</register-modifier>
+						</modifiers>
+						<while>
+							<has-idcard idcard="creature"/>
+						</while>
+					</static-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

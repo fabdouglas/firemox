@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crop Rotation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	as an additional cost to play crop rotation, sacrifice a land.
+	search your library for a land card and put that card into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-land' value='1'/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

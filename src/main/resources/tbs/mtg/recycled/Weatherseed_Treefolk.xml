@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Weatherseed Treefolk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ggg
+	creature - treefolk
+	5/3
+	trample
+	when weatherseed treefolk is put into a graveyard from play, return weatherseed treefolk to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

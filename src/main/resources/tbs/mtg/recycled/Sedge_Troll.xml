@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sedge Troll">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>troll</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana black="1"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index="toughness" operation="add" value="1" linked="false">
+			<while>
+				<has restriction-zone="play">
+					<has-idcard idcard="swamp"/>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="power" operation="add" value="1" linked="false">
+			<while>
+				<has restriction-zone="play">
+					<has-idcard idcard="swamp"/>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

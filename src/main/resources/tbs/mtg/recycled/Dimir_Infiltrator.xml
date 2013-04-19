@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dimir Infiltrator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ub
+	creature - spirit
+	1/3
+	dimir infiltrator is unblockable.
+	transmute 1ub 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit unblockable </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='transmute'>
+			<actions>
+				<pay-mana blue='1' black='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

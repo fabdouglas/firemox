@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Clock of Omens">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	tap two untapped artifacts you control: untap target artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="2"/>
+				<action ref='target-artifact'>
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+				<action ref="target-artifact"/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

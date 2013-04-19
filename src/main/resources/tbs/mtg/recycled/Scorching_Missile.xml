@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Scorching Missile">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+
+	sorcery
+
+	scorching missile deals 4 damage to target player.
+	flashback 9r 
+ -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+				<action ref="target-player"/>
+				<assign-damage value="4"/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana red="1" colorless="9" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fortitude">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	enchantment - aura
+	enchant creature
+	when fortitude is put into a graveyard from play, return fortitude to its owner's hand.
+	sacrifice a forest: regenerate enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-land' value='1'>
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

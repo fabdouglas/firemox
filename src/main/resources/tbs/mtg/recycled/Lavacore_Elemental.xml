@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lavacore Elemental">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental
+	5/3
+	vanishing 1 
+	whenever a creature you control deals combat damage to a player, put a time counter on lavacore elemental.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<controller player="you"/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='time'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<object name='time'/>
+	</modifiers>
+</card>

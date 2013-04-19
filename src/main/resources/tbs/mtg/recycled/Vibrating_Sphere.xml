@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vibrating Sphere">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	as long as it's your turn, creatures you control get +2/+0.
+	as long as it's not your turn, creatures you control get -0/-2.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="2" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<controller card="this" player="currentplayer"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="toughness" operation="minus" value="2" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<controller card="this" player="currentplayer"/>
+		 			</not>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

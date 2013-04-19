@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Day of the Dragons">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {4}{u}{u}{u} when day of the dragons comes into play, remove all creatures you control from the game. then put that many 5/5 red dragon creature tokens with flying into play. when day of the dragons leaves play, sacrifice all dragons you control. then return the removed cards to play under your control. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="blue" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+						<!-- PUT HERE ADDITIONAL TEST ON CARD BEFORE IT GOES TO PLAY -->
+					</and>
+				</source-test>
+				<destination-test>
+					<!-- PUT HERE ADDITIONAL TEST ON CARD WHEN IT GOES TO PLAY -->
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+				<action ref="target-creature">
+					<test>
+					<!-- COMPLETE THIS TEST ON TARGET -->
+					</test>
+				</action>
+				<action ref="sacrifice"/>
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+				<target-list operation="clear" name="%"/>
+				<!-- UPDATE TYPE, ZONE OF THIS TEST -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+				<!-- COMPLETE THE TEST TO DETERMINE OBJECTS USED BY THE NEXT ACTION -->
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<!-- COMPLETE TEST ON CARD BEFORE IT LEAVE PLAY -->
+							<in-zone zone="play" card="tested"/>
+				</source-test>
+			</moved-card>
+			<effects>
+				<target-list operation="clear" name="%"/>
+				<!-- UPDATE TYPE, ZONE OF THIS TEST -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+				<!-- COMPLETE THE TEST TO DETERMINE OBJECTS USED BY THE NEXT ACTION -->
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

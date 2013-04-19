@@ -1,0 +1,27 @@
+ ----
+Interactions avec les zones
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+27 Mai 2006
+
+Interactions avec les zones
+
+    Les capacités activées jouables apparaîssent dans une fenêtre flottante
+    contextuelle :
+
+[../images/guides/user/activated_abilities3.png] total
+
+    Les capacités activées partiellement jouables apparaîssent également dans
+    la fenêtre flottante contextuelle :
+
+[../images/guides/user/activated_abilities1.png] partiel
+
+    Les capacités activées jouables apparaîssent aussi dans le menu contextuel :
+
+[../images/guides/user/activated_abilities2.png] menu
+
+    Les informations relatives à la carte apparaîssent aussi dans la fenêtre
+    flottante contextuelle :
+
+[../images/guides/user/valid-target0.png] target0

@@ -1,0 +1,168 @@
+ ----
+Configuration de l'espace de travail
+ ----
+Fabrice Daugan
+ ----
+09 février 2007
+
+Configurer Eclipse pour faire des cartes et aider Firemox : environ 10 
+minutes (téléchargement non compris).
+
+  Il ya certains logiciels à intaller et à configurer :
+ 
+ 	Java : le langage
+ 	 
+  Eclipse (lui même) : l'environnement de développement (IDE)
+  
+  Subversion (SVN) : le gestionnaire de source
+    
+  Maven 2 : le gestionnaire de compilation
+
+* Installer Java JDK 6.0 (recommandé)
+
+	Récupérer la dernière version de {{{http://java.com/fr/download/index.jsp} Java JDK 6.0}} depuis 
+	le site de Sun.
+	
+	Installer le.
+
+* Récupérer Eclipse
+
+	Depuis le site {{{http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/20070927/eclipse-java-europa-fall-win32.zip} Eclipse 3.3+}}.
+	
+  Décompressez le fichier zip téléchargé dans n'importe quel répertoire.
+  
+  Lancer <<<eclipse.exe>>> ou <<<eclipse.sh>>>.
+
+  Notez que si vous êts sur une distribution moderne de Linux, il est fort 
+  probable que vous ayez déjà Eclipse ou que vous puissiez l'installer en 
+  utilisant votre gestionnaire de package (eg. APT, yum, etc.)
+
+* Récupérer le plugin SVN depuis Eclipse
+
+  Subversion (en abrégé svn) est un logiciel libre de gestion de version (publié 
+  sous licence Apache/BSD). Il a été conçu pour remplacer CVS.
+  
+	Vous pouvez trouver les instruction d'installation du pligin 
+	{{{http://subclipse.tigris.org/install.html} here}} (en)
+	
+	Ici, vous trouverez les captures d'écrans de la procédure d'installation de
+	Subclipse, le plugin pour Eclipse 3.x.
+	Ces captures ont été réalisée dans Eclipse 3.2 tournant sur Windows XP.
+
+** Step 1:
+
+	Démarrer l'installation depuis le menu Help d'Eclipse.
+
+[../images/guides/dev/subclipse_install-1.png]
+
+** Step 2:
+
+	Cette capture d'écran montre l'écran à son état initial, si ce n'est pas le 
+	cas, choisissez l'option <new install>.
+
+[../images/guides/dev/subclipse_install-2.png]
+
+** Step 3:
+
+	Cet écran varie suivant les fonctionnalités que vous déjà installés.
+	Vous devez cliquer sur le bouton <New Remote Site>. Si vous êtes derrière un 
+	proxy ou si le mécanisme d'installation d'Eclipse échoue, vous pouvez récupérer
+	la version compressée depuis le site de {{{http://subclipse.tigris.org/servlets/ProjectDocumentList?folderID=2240&expandFolder=2240&folderID=0} subclipse}}
+	pour cette fois ci utiliser le bouton <New Local Site>.
+
+[../images/guides/dev/subclipse_install-3.png]
+
+** Step 4:
+
+	Cet écran montre la fenêtre <New Remote Site>, remplie avec les information correcte 
+	pour installer Subclipse.
+	
+	Name: <<<Subclipse>>>
+	
+	URL:  <<<http://subclipse.tigris.org/update_1.2.x>>>
+
+[../images/guides/dev/subclipse_install-4.png]
+
+
+** Step 5:
+
+	Lorsque vous revenez pour la première fois vers cet écran, le site que vous venez
+	d'ajouter n'est pas sélectionné. 
+	Soyez sur de le sélectionner avant de cliquer sur <Next>.
+
+[../images/guides/dev/subclipse_install-5.png]
+
+** Step 6:
+
+	L'écran suivant montre toutes les fonctionnalités qui sont disponibles pour 
+	être installer.
+
+[../images/guides/dev/subclipse_install-6.png]
+
+** Step 7:
+
+	Vous devez accepter la license pour continuer.
+
+[../images/guides/dev/subclipse_install-7.png]
+
+** Step 8:
+
+	Confirmez l'installation
+
+[../images/guides/dev/subclipse_install-8.png]
+
+** Step 9:
+
+	Il y a une préférence dans Eclipse pour désactiver l'écran suivant, mais je n'ai
+	vu ni Eclipse.org, ni IBM signer leur propre fonctionnalités.
+
+[../images/guides/dev/subclipse_install-9.png]
+
+** Step 10:
+
+	Juste une capture d'écran sur la procédure encours d'installation.
+
+[../images/guides/dev/subclipse_install-10.png]
+
+** Step 11:
+
+	Eclipse a besoin de redémarrer après l'installation de Subversive.
+
+[../images/guides/dev/subclipse_install-11.png]
+
+** Step 12:
+
+	Finallement, après avoir redémarré Eclipse, la première choise que vous voudrez faire
+	sera d'ouvrir la perspective 'Subclipse Repository' où vous pouvez définir vos
+	resources distantes.
+
+[../images/guides/dev/subclipse_install-12.png]
+
+* Récupérer Maven2
+
+	Apache Maven est un outil logiciel pour la gestion et l'automatisation de 
+	production des projets logiciels Java. L'objectif recherché est comparable au 
+	système Make sous Unix: produire un logiciel à partir de ses sources, en 
+	optimisant les taches réalisées à cette fin, en garantissant le bon ordre de 
+	fabrication. (wikipedia)
+	
+	Vous télécharger Maven 2.x depuis ce site :
+	{{{http://maven.apache.org/download.html}http://maven.apache.org/download.html}}
+	
+	Le version minimale est 2.0.7.
+
+* Récupérer le plugin m2eclipse depuis Eclipse
+
+  m2eclipse est un plugin pour Eclipse qui permet d'intégrer Maven dans l'IDE.
+  
+	Comme pour SVN, vous devez ajouter une location distante :
+	{{{http://m2eclipse.codehaus.org/}http://m2eclipse.codehaus.org}}
+	
+	Les instructions détaillée peuvent être trouvée {{{http://maven.apache.org/eclipse-plugin.html} ici}}
+	Il y a une démonstration Flash montrant une installation détaillée du plugin dans Eclipse : 
+	{{{http://m2eclipse.codehaus.org/Installing_Maven_2.0_plugin_for_Eclipse.html}http://m2eclipse.codehaus.org/Installing_Maven_2.0_plugin_for_Eclipse.html}}
+	
+	Optionellement, vous pouvez jetter un oeil sur ce que le plugin Maven pour Eclipse peut faire 
+	dans cette vidé Flash:
+	{{{http://m2eclipse.codehaus.org/Maven_2.0_Plugin_for_Eclipse.html}http://m2eclipse.codehaus.org/Maven_2.0_Plugin_for_Eclipse.html}}
+

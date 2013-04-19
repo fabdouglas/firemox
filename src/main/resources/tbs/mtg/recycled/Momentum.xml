@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Momentum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment - aura
+	enchant creature
+	at the beginning of your upkeep, you may put a growth counter on momentum.
+	enchanted creature gets +1/+1 for each growth counter on momentum.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<add-object object-name='growth'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<counter object-name="growth" card="this"/>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<counter object-name="growth" card="this"/>
+				</value>
+			</register-modifier>
+		</modifiers>
+	</attachment>
+</card>

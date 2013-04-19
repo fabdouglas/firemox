@@ -1,0 +1,283 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reaper King">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(2/w)(2/u)(2/b)(2/r)(2/g)
+	legendary artifact creature - scarecrow
+	6/6
+	 other scarecrow creatures you control get +1/+1. whenever another scarecrow comes into play under your control, destroy target permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='10'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white red green blue black </colors>
+		<idcards>artifact-creature </idcards>
+		<properties>legend scarecrow </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='10'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='8' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='8' white='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='8' green='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='8' red='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='8' blue='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' white='1' black="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' white='1' blue="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' white='1' green="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' white='1' red="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' blue='1' black="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' green='1' black="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' red='1' black="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' red='1' green="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' red='1' blue="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='6' blue='1' green="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' blue='1' green="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' blue='1' green="1" red="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' blue='1' green="1" black="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' blue='1' red="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' blue='1' black="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' black='1' green="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='1' green="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='1' black="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='1' blue="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='1' green="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana blue="1" black="1" red='1' green="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="scarecrow"/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+		 			<not>
+		 				<is-this/>
+		 			</not>
+		 			<controller player="you"/>
+		 			<has-property property="scarecrow"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

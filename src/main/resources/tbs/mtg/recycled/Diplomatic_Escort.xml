@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diplomatic Escort">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {1}{u} 
+{u}, {t}, discard a card from your hand: 
+counter target spell or ability that targets a creature. 
+-->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="T"/>
+				<action ref="discard" value="1"/>
+				<action ref="target-spell"/>
+				<!-- UPDATE THE NUMBER OF CARD PLAYER HAVE TO DISCARD, OR REMOVE REPEAT ACTION IF IS ONE -->
+				<repeat value="1"/>
+				<!-- UPDATE TARGET MODE (PLAYER THAT CHOOSE THE CARD, ALL, RANDOM,...) -->
+				<target type="card" mode="choose" raise-event="false" restriction-zone="hand">
+					<test>
+						<!-- UPDATE THE PLAYER THAT CHOOSE HAVe TO DISCARD IT'S CARD -->
+						<controller player="you"/>
+						<!-- COMPLETE THE TEST TO DETERMINE CARD TO DISCARD -->
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

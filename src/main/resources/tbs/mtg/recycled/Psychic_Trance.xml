@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psychic Trance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	instant
+	until end of turn, wizards you control gain "t :counter target spell."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="play">
+					<test>	
+						<and>
+							<has-property property="wizard"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<add-modifier>
+					<ability-modifier operation="add" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<activated-ability playable='instant' name='' zone='play'>
+								<cost>
+									<action ref="T"/>
+									<action ref="target-spell"/>
+								</cost>
+								<effects>
+									<action ref='counter'/>
+								</effects>
+							</activated-ability>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

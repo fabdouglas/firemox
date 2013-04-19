@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Alabaster Leech">
+<rules-author-comment></rules-author-comment>
+
+<!--  {w} white spells you play cost {w} more to play. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>leech</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+	            	<has-color color="white"/>
+		       		<controller player="you"/> 
+	            </and>
+			</test>
+			<cost>
+				<pay-mana white="1" />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

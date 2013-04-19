@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Doom Cannon">
+	<rules-author-comment></rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="6" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<triggered-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="T" />
+				<action ref="target-creature">
+					<test>
+						<has-property>
+							<property register="this" index="free0" />
+						</has-property>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value="3" type="damage" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

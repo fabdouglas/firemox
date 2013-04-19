@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deconstruct">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{g} destroy target artifact. then add {g}{g}{g} to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-artifact"/>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<give-mana green="3" />
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

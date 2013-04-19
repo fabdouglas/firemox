@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kiri-Onna">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - spirit
+	2/2
+	when kiri-onna comes into play, return target creature to its owner's hand.
+	whenever you play a spirit or arcane spell, you may return kiri-onna to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

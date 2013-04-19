@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spike Breeder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - spike
+	0/0
+	spike breeder comes into play with three +1/+1 counters on it.
+	2, remove a +1/+1 counter from spike breeder: put a +1/+1 counter on target creature.
+	2, remove a +1/+1 counter from spike breeder: put a 1/1 green spike creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spike </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Spike'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token spike </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

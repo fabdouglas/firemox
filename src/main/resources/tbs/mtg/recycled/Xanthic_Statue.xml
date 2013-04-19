@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Xanthic Statue">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		8
+	artifact
+	5: until end of turn, xanthic statue becomes an 8/8 golem artifact creature with trample.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='8'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+			</cost>
+			<effects><target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" value="8" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<register-indirection index="toughness" value="8" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<idcard-modifier idcard="artifact-creature" operation="or" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<property-modifier property="golem" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+					<property-modifier property="trample" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

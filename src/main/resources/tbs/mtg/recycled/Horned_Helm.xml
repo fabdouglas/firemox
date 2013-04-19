@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Horned Helm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact - equipment
+	equipped creature gets +1/+1 and has trample.
+	gg: attach horned helm to target creature you control.
+	equip 1 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='2' />
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="trample" linked="true" />
+			<register-modifier index='power' operation='add' linked='true' value='1' />
+			<register-modifier index='toughness' operation='add' linked='true' value='1' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

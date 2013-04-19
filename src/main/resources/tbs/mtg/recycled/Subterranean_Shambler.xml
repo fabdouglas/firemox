@@ -1,0 +1,82 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Subterranean Shambler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - elemental
+	2/3
+	echo 3r 
+	when subterranean shambler comes into play or leaves play, it deals 1 damage to each creature without flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana red='1' colorless='3' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

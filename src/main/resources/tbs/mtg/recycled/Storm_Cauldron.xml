@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Storm Cauldron">
+<rules-author-comment></rules-author-comment>
+
+<!--  {5} each player may play an additional land during each of his or her turns. 
+whenever a land is tapped for mana, return it to its owner's hand. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play" resolution="hidden">
+			<before-phase phase="untap"/>
+			<effects>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="add" value="1"/>
+			</effects>
+		</triggered-ability>
+		
+		<triggered-ability zone="play" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play"/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="minus" value="1"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<unregister-this/>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="add" value="1"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<has-idcard idcard="land"/>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<target type="context.card2"/>
+							<action ref="return-to-hand"/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Word of Binding">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xbb
+	sorcery
+	tap x target creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<tap/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

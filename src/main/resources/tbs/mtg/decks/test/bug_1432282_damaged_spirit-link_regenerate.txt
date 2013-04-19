@@ -1,0 +1,6 @@
+super card;20
+spirit link;30
+Will-o-the-Wisp;30
+Juzam djinn;30
+Basalt_Monolith;30
+mox jet;30

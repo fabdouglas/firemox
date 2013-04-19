@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skirk Marauder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - goblin
+	2/1
+	morph 2r 
+	when skirk marauder is turned face up, it deals 2 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='1' colorless='2' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<cost>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

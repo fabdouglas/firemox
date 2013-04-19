@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dregs of Sorrow">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{4}{b} destroy x target nonblack creatures. draw x cards. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum>
+						<minimum>
+							<left register="you" index="manapool"/>
+							<right>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="creature"/>
+										<not>
+											<has-color color="black"/>
+										</not>
+									</and>
+								</counter>
+							</right>
+						</minimum>
+					</maximum>
+				</input-number>
+				<pay-mana>
+					<colorless register="stack" index="0"/>
+				</pay-mana>
+				<repeat>
+					<value  register="stack" index="0"/>
+				</repeat>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<not>
+								<has-color color="black"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<target type="you"/>
+				<repeat>
+					<value  register="stack" index="0"/>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

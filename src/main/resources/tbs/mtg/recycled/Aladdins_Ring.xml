@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="US-ASCII" ?> 
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Aladdin's Ring">
+    <rules-author-comment>By jods</rules-author-comment>
+    
+    <init>
+        <registers>
+            <register index="colorless" value="8"/>
+        </registers>
+        <idcards>artifact</idcards>
+    </init>
+
+    <abilities>
+        <ability ref="cast-spell"/>
+        
+        <!-- 8, TAP: Aladdin s Ring does 4 damage to any target (player/creature). -->
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <pay-mana colorless="8"/>
+                <action ref="T"/>
+                <target type="dealtable" mode="choose">                        
+                    <test ref="is-targetable-dealtable"/>
+                </target>
+            </cost>
+            <effects>
+                <assign-damage value="4"/>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Anurid Barkripper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+
+	creature - beast
+
+	2/2
+
+	threshold - anurid barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>frog beast</properties>
+	</init>
+	
+	<modifiers>
+		<register-modifier index="power" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</register-modifier>
+	</modifiers>
+			
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hostile Realm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant land
+	enchanted land has "t :target creature can't block this turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-land'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<action ref="T"/>
+							<action ref='target-creature'/>
+						</cost>
+						<effects>
+							<action ref="cannot-block-until-eot"/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

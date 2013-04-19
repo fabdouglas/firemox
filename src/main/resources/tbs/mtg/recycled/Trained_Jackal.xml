@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Trained Jackal">
+<rules-author-comment></rules-author-comment>
+
+<!--  g -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>hound</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

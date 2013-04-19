@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Feldon's Cane">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	t, remove feldon's cane from the game: shuffle your graveyard into your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

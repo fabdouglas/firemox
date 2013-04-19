@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sokenzan Spellblade">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - ogre samurai shaman
+	2/3
+	bushido 1 
+	1r: sokenzan spellblade gets +x/+0 until end of turn, where x is the number of cards in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>ogre samurai shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bushido1-blocked'/>
+		<ability ref='bushido1-blocking'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="hand">
+								<controller player="you"/>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

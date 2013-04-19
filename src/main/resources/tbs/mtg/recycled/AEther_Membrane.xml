@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="AEther Membrane">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - wall
+	0/5
+	defender, reach 
+	whenever aether membrane blocks a creature, return that creature to its owner's hand at end of combat.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender reach </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card" />
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc" />
+						<effects>
+							<target type="saved" />
+							<action ref='return-to-hand'/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

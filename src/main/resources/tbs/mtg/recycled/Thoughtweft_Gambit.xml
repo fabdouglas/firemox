@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thoughtweft Gambit">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4(w/u)(w/u)
+	instant
+	
+	tap all creatures your opponents control and untap all creatures you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>instant </idcards>
+		<properties> </properties>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<action ref="all-creatures">
+				<test>
+					<controller player="opponent"/>
+				</test>
+			</action>
+			<tap/>
+			<target-list operation='clear' name='%'/>
+			<action ref="all-creatures">
+				<test>
+					<controller player="you"/>
+				</test>
+			</action>
+			<untap/>
+			<action ref='finish-spell'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="4" blue="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="4" blue="1" white="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="4" white="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

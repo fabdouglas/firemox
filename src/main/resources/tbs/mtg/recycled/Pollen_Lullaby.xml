@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pollen Lullaby">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	prevent all combat damage that would be dealt this turn. clash with an opponent. if you win, creatures that player controls don't untap during the player's next untap step. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='prevent-all-combat-damage'/>
+				<action ref="clash">
+					<actions>
+						<action ref="all-creatures">
+							<test>
+								<controller player="opponent"/>
+							</test>
+						</action>
+						<add-modifier>
+							<property-modifier property="does-not-untap" linked="false">
+						 		<until>
+						 			<end-of-phase phase="untap"/>
+						 		</until>
+						 	</property-modifier>
+						</add-modifier>
+					</actions>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

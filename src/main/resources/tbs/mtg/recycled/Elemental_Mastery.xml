@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elemental Mastery">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	enchantment - aura
+	
+	enchant creature enchanted creature has "t :put x 1/1 red elemental creature tokens with haste into play, where x is this creature's power. remove them from the game at end of turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura  </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<action ref="T"/>
+						</cost>
+						<effects>
+							<repeat>
+								<value register="this" index="power"/>
+							</repeat>
+							<create-card>
+								<card name='Elemental'>
+									<rules-author-comment></rules-author-comment>
+									<init>
+										<registers>
+											<register index='power' value='1'/>
+											<register index='toughness' value='1'/>
+										</registers>
+										<colors>red</colors>
+										<idcards>creature</idcards>
+										<properties>token elemental haste </properties>
+									</init>
+									<abilities>
+										<ability ref="eot-sacrifice"/>
+									</abilities>
+								</card>
+							</create-card>
+							<move-card controller='you' destination='play'/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

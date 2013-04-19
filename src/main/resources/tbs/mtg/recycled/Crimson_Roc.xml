@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crimson Roc">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - bird
+	2/2
+	flying
+	whenever crimson roc blocks a creature without flying, crimson roc gets +1/+0 and gains first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>bird flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<not>
+						<has-property property="flying"/>
+					</not>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type='this'/>
+				<action ref="add+1+0-until-eot"/>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

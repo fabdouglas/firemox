@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mortiphobia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	enchantment
+	1b, discard a card: remove target card in a graveyard from the game.
+	1b, sacrifice mortiphobia: remove target card in a graveyard from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<action ref='discard' value="1"/>
+				<target type="card" restriction-zone="graveyard" mode="choose"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<action ref='sacrifice-this'/>
+				<target type="card" restriction-zone="graveyard" mode="choose"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

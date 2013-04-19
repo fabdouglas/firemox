@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skirk Fire Marshal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - goblin 
+	2/2
+	protection from red
+	tap five untapped goblins you control: skirk fire marshal deals 10 damage to each creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin protection-from-red </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="5"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<has-property property="goblin"/>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'/>
+				<tap/>
+			</cost>
+			<effects>
+				<assign-damage value='10' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

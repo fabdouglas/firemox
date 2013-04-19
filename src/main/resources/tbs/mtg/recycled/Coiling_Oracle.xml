@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Coiling Oracle">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="1" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>blue green</colors>
+		<idcards>creature</idcards>
+		<properties>snake elf druid</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" restriction-zone="library" raise-event="false">
+					<test>
+						<and>
+							<controller player="you" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<action ref="reveal" />
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard card="target-list.last" idcard="land" />
+					</test>
+				</if-then-hop>
+				<move-card controller="target.owner" destination="play"/>
+				<hop value="2" />
+				<action ref="return-to-hand" />
+				<unregister-this/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

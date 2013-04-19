@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mogg Maniac">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - goblin
+	1/1
+	whenever mogg maniac is dealt damage, it deals that much damage to target opponent.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

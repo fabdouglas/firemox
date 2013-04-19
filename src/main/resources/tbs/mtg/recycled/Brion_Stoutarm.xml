@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Brion Stoutarm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rw
+	legendary creature - giant warrior
+	4/4
+	lifelink 
+	r, t, sacrifice a creature other than brion stoutarm: brion stoutarm deals damage equal to the sacrificed creature's power to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>creature </idcards>
+		<properties>legend giant warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='lifelink'/>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

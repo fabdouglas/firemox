@@ -1,0 +1,110 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sturdy Hatchling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3(g / u)
+	creature - elemental
+	6/6
+	sturdy hatchling comes into play with four -1/-1 counters on it.
+	o(g/u): sturdy hatchling gains shroud until end of turn.
+	whenever you play a green spell, remove a -1/-1 counter from sturdy hatchling.
+	whenever you play a blue spell, remove a -1/-1 counter from sturdy hatchling.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green blue </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<modifiers>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+	</modifiers>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' blue='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' green='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<property-modifier property='shroud' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue="1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-modifier>
+					<property-modifier property='shroud' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="green"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sheltering Ancient">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - treefolk
+	5/5
+	trample
+	cumulative upkeep-put a +1/+1 counter on a creature an opponent controls. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<action ref="target-creature">
+							<test>
+								<not>
+									<controller player="you"/>
+								</not>
+							</test>
+						</action>
+						<repeat>
+							<value>
+								<counter object-name='age' card='this'/>
+							</value>
+						</repeat>
+						<add-object object-name="+1/+1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

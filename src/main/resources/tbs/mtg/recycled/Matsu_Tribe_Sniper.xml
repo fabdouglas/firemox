@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Matsu-Tribe Sniper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - snake warrior archer
+	1/1
+	t :matsu-tribe sniper deals 1 damage to target creature with flying.
+	whenever matsu-tribe sniper deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>snake warrior archer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<has-idcard idcard='creature'/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<tap/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

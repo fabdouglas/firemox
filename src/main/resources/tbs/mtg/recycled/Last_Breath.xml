@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Last Breath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	remove target creature with power 2 or less from the game. its controller gains 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<inf-equal right="2">
+							<left register="tested" index="power"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<target type="target-list.first.controller"/>
+				<action ref='gain-life-target' value='4'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

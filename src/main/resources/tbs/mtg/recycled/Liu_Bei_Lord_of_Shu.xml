@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Liu Bei, Lord of Shu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature - human soldier
+	2/4
+	horsemanship
+	liu bei, lord of shu gets +2/+2 as long as you control a permanent named guan yu, sainted warrior or a permanent named zhang fei, fierce warrior.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human soldier horsemanship </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' value='2' operation='add' linked='false'>
+			<while>
+				<has restriction-zone="play">
+					<and>	
+						<controller player="you"/>
+						<or>	
+							<has-name name="guan yu, sainted warrior"/>
+							<has-name name="zhang fei, fierce warrior"/>
+						</or>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='2' operation='add' linked='false'>
+			<while>
+				<has restriction-zone="play">
+					<and>	
+						<controller player="you"/>
+						<or>	
+							<has-name name="guan yu, sainted warrior"/>
+							<has-name name="zhang fei, fierce warrior"/>
+						</or>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

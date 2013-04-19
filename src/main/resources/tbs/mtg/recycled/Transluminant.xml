@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Transluminant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - dryad shaman
+	2/2
+	w, sacrifice transluminant: put a 1/1 white spirit creature token with flying into play at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>dryad shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<create-card>
+								<card name='Spirit'>
+									<rules-author-comment></rules-author-comment>
+									<init>
+										<registers>
+											<register index='power' value='1'/>
+											<register index='toughness' value='1'/>
+										</registers>
+										<colors>white</colors>
+										<idcards>creature</idcards>
+										<properties>token spirit flying </properties>
+									</init>
+								</card>
+							</create-card>
+							<move-card controller='you' destination='play'/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

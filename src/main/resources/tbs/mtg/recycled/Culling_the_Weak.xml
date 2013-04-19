@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Culling the Weak">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	instant
+	as an additional cost to play culling the weak, sacrifice a creature.
+	add bbbb to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<give-mana black='4' />
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

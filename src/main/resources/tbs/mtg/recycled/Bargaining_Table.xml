@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bargaining Table">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	x, t :draw a card. x is the number of cards in an opponent's hand as you play this ability.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana>
+					<colorless>
+						<counter restriction-zone="hand">
+							<controller player="opponent"/>
+						</counter>
+					</colorless>
+				</pay-mana>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

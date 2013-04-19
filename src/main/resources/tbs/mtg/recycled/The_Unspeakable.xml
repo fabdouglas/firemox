@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="The Unspeakable">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6uuu
+	legendary creature - spirit
+	6/7
+	flying, trample
+	whenever the unspeakable deals combat damage to a player, you may return target arcane card from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='3'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit flying trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="arcane"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

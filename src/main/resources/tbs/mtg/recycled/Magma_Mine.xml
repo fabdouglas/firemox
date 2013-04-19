@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Magma Mine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	4: put a pressure counter on magma mine.
+	t, sacrifice magma mine: magma mine deals damage equal to the number of pressure counters on it to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='pressure'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter object-name="pressure" card="this"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

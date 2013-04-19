@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Agonizing Memories">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!--  {2}{b}{b} look at target player's hand and choose two cards from it. 
+		put them on top of that player's library in any order. 
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="black" value="2" />
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you" />
+				<repeat value="2" />
+				<target type="card" restriction-zone="hand" hop="1">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="restore-hand-visibility" />
+				<move-card destination="library" controller="target.owner" position="top" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soultether Golem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact creature - golem
+	3/3
+	vanishing 1 
+	whenever another creature comes into play under your control, put a time counter on soultether golem.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='time'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<object name='time'/>
+	</modifiers>
+</card>

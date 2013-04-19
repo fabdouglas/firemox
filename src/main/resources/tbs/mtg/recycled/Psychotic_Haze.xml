@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psychotic Haze">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	instant
+	psychotic haze deals 1 damage to each creature and each player.
+	madness 1b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'/>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='madness'>
+			<actions/>
+			<actions>
+				<pay-mana black='1' colorless='1' />
+			</actions>
+			<actions>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'/>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

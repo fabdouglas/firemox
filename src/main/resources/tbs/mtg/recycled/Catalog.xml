@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Catalog">
+<!-- Draw two cards, then discard a card from your hand. -->
+<!-- test ok -->
+	<rules-author-comment>By Brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability zone="hand" playable="this" >
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<!-- Draw 2 cards. -->
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="draw-a-card"/>
+				<target-list operation="clear" name="%"/>
+
+				<!-- Let the player choose one card to discard. -->
+				<action ref="discard" value="1"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

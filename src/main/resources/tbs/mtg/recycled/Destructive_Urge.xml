@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Destructive Urge">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {1}{r}{r} 
+		whenever enchanted creature deals combat damage to a player, that player sacrifices a land. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="red" value="2" />
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat-only">
+				<source-test>
+					<is target="attachedto" />
+				</source-test>
+				<destination-test>
+					<is-player target="tested" />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="contextchoose" raise-event="false"
+					restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="land" />
+							<controller player="context.player" />
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice" />
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

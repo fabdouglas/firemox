@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Fastbond">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {g} 
+you may play as many lands as you choose on your turn. 
+whenever you play a land other than the first land of the turn, 
+fastbond deals 1 damage to you. 
+-->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability zone="play" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+						<controller player="currentplayer"/>
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<sup right="0">
+							<left register="controller" index="playedland"/>
+						</sup> 
+					</test>
+				</if-then-hop>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="minus" value="1"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="play"/>
+						<controller player="currentplayer"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<equal right="0">
+							<left register="currentplayer" index="land-remain-to-cast"/>
+						</equal> 
+					</test>
+				</if-then-hop>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="add" value="1"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<and>
+						<controller player="currentplayer"/>
+						<controller player="currentplayer" card="this"/>
+						<has-idcard idcard="land"/>
+						<is-spell/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<sup right="1">
+							<left register="controller" index="playedland"/>
+						</sup> 
+					</test>
+				</if-then-hop>
+				<target type="you"/>
+				<assign-damage value="1"/>
+			</effects>
+		</triggered-ability>
+		
+		<replacement-ability zone="play">
+			<modified-register register="player" index="land-remain-to-cast" operation="minus">
+				<destination-test>
+					<and>
+						<is-this player="currentplayer"/>
+						<is-this player="controller"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<equal right="0">
+							<left register="currentplayer" index="land-remain-to-cast"/>
+						</equal> 
+					</test>
+				</if-then-hop>
+				<modify-register register="currentplayer" index="land-remain-to-cast" operation="add" value="1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

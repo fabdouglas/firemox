@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	xmlns:mp="http://sourceforge.net/projects/firemox" name="ww2.wizards.com"
+	home="http://ww2.wizards.com/gatherer" language="english" encoding="iso-8859-1">
+	<alias>
+		<alias property="card.set" local-value="dst" ref="ds" />
+		<alias property="card.set" local-value="tsp" ref="ts" />
+		<alias property="card.set" local-value="unh" ref="uh" />
+		<alias property="card.set" local-value="9ed" ref="9e" />
+		<alias property="card.set" local-value="8ed" ref="9e" />
+	</alias>
+	<pictures>
+		<picture url="${card.id}"
+			base="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&amp;multiverseid=" />
+	</pictures>
+	<data>
+		<!--  Streams. Order is important -->
+		<streams base="http://gatherer.wizards.com/Pages/Card/Details.aspx?">
+			<stream url="name=${card.name}&amp;set=${card.set}" />
+			<stream url="name=${card.name}" />
+		</streams>
+		<!-- Managed properties for this proxy. Order is important -->
+		<properties>
+			<property name="set">
+				<starting-offset>
+					<mp:add right="0">
+						<mp:left>
+							<mp:method name="indexOf"
+								arg0="/Pages/Search/Default.aspx?action=advanced&amp;set=[%22" arg0-class="java.lang.String" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="%22]" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="id">
+				<starting-offset>
+					<mp:add right="0">
+						<mp:left>
+							<mp:method name="indexOf" arg0="../../Handlers/Image.ashx?multiverseid=" arg0-class="java.lang.String" 
+								arg1="%last-offset" arg1-class="int"/>
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&amp;type=card" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+
+			<property name="sets" delimiter-left="/exp_sym_" delimiter-right="_">
+				<starting-offset>
+					<mp:add right="100">
+						<mp:left>
+							<mp:method name="indexOf" arg0="_lblPrintings"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/span" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			
+			<property name="text">
+				<starting-offset>
+					<mp:add right="15">
+						<mp:left>
+							<mp:method name="indexOf" arg0="_lblRulesText&quot;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/span" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="flavor-text">
+				<starting-offset>
+					<mp:add right="16">
+						<mp:left>
+							<mp:method name="indexOf" arg0="_lblFlavorText&quot;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/span" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+			<property name="artist-credit">
+				<starting-offset>
+					<mp:add right="18">
+						<mp:left>
+							<mp:method name="indexOf" arg0="_lblArtistCredit&quot;"
+								arg0-class="java.lang.String" arg1="%last-offset" arg1-class="int" />
+						</mp:left>
+					</mp:add>
+				</starting-offset>
+				<ending-offset>
+					<mp:method name="indexOf" arg0="&lt;/span" arg0-class="java.lang.String"
+						arg1="%last-offset" arg1-class="int" />
+				</ending-offset>
+			</property>
+		</properties>
+	</data>
+</proxy>

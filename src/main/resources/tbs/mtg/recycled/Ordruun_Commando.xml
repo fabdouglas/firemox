@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Ordruun Commando'>
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="red" value="1" />
+			<register index="power" value="4" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>minotaur soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana white="1" />
+			</cost>
+			<effects>
+				<action ref="prevent-1-on-this" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

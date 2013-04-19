@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Corrupt Official">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - human minion
+	3/1
+	2b: regenerate corrupt official.
+	whenever corrupt official becomes blocked, defending player discards a card at random.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='2' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="opponent"/>
+				<action ref='player-discard-random' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

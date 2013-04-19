@@ -1,0 +1,55 @@
+ ------
+ Create cards
+ ------
+ Fabrice Daugan, Hoani CROSS
+ ------
+ April 9 2007
+
+Create cards
+
+* Introduction
+
+ The main additional functionality compared to other card game simulation
+ programs is that <<Magic Project>> understands the rules of the game. Rules are
+ human-written using a specific XML pseudo-language, giving the <<Magic Project>>
+ game engine all the necessary information to properly simulate the card game.
+ For card games with static rules (like <No Limit Texas Hold 'Em Poker>), writing
+ the rules file is not a too difficult task. For collectible
+ card games (<CCG>), we often encounter a base set of rules that describes the
+ game and one or more specific set of rules corresponding to each card.
+
+* The game rules files
+
+ A card game is described by a main XML file and a set of other XML files for
+ each card in that game. For example, in a <<Magic the Gathering>> card game,
+ you'll have a big file named <<<mtg.xml>>> in the <<<src/main/resources/tbs>>>
+ directory. Each implemented cards have a dedicated XML file in the
+ <<<src/main/resources/tbs/mtg/recycled>>> directory. The name of the file is
+ the name of the card in English with the spaces replaced by an underscore and
+ the simple quote removed. For example, for the card "<Abu Ja'far>", you will
+ have the file <<<src/main/resources/tbs/mtg/recycled/Abu_Jafar.xml>>>.
+
+* Implemented games
+
+ For now, only the game {{{mtg/mtg.html}Magic: the Gathering}} is implemented in
+ <<Firemox>>.
+ 
+* Creating cards
+
+ A really useful tool has been created in order to increase the XML card creation process.
+ The 'oracle2xml' command allows you to create the whole XML of all cards from a text Oracle 
+ file. You can get it from the regularly updated site 
+ {{{http://www.yawgatog.com/resources/oracle/} here}} or from a ready to use file 
+ {{{Allsets-2007-03-11.txt}there}} and place it in the directory to create <<etc>> in the 
+ root directory of FM.
+ Then, you can launch the 'oracle2xml' command from the root directory of FM; then, 
+ have a look in the <<etc/xml>> to see the generated XML files. 
+ They can be edited and moved in the <<tbs/mtg/recycled>> directory when you think they are 
+ well formed and suit to the rules to have FM considering them.
+ 
+ It's advised to build all new cards from this tool since it will save you a lot of time 
+ and assure that you are creating cards the right way.
+ 
+ PS: since the Oracle file may have a different name on the the day we created this document, you 
+ might have to edit the 'oracle2xml' or 'oracle2xml.bat' command an update the Oracle file name.
+ 

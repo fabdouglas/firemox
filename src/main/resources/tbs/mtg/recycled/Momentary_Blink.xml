@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Momentary Blink">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+    <init>
+        <registers>
+            <register index="colorless" value="1"/>
+            <register index="white" value="1"/>
+        </registers>
+        <colors>white</colors>
+        <idcards>instant</idcards>
+    </init>
+    <actions>
+        <action reference-name="main-cost">
+            <action ref="target-creature">
+                <test>
+                    <controller player="you"/>
+                </test>
+            </action>
+        </action>
+        <action reference-name="main-effects">
+            <move-card controller="you" destination="side"/>
+            <move-card controller="you" destination="play"/>
+        </action>
+    </actions>
+    <abilities>
+        <activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+            <cost>
+                <pay-mana value="manacost"/>
+                <action ref="main-cost"/>
+            </cost>
+            <effects>
+                <action ref="main-effects"/>
+                <action ref="finish-spell"/>
+            </effects>
+        </activated-ability>
+        <activated-ability playable="this" name="flashback%a" zone="graveyard">
+            <cost>
+                <pay-mana colorless="3" blue="1" />
+                <action ref="main-cost"/>
+            </cost>
+            <effects>
+                <action ref="main-effects"/> 
+                <action ref="flashback"/>               
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

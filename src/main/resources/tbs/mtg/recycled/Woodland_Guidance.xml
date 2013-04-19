@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Woodland Guidance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	sorcery
+	return target card from your graveyard to your hand. clash with an opponent. if you win, untap all forests you control. 
+	remove woodland guidance from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<action ref="clash">
+					<actions>
+						<target type="card" mode="all" restriction-zone="play">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="forest"/>
+								</and>
+							</test>
+						</target>
+						<untap/>
+					</actions>
+				</action>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref='remove-from-game'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

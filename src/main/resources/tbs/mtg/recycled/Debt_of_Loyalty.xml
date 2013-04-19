@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Debt of Loyalty">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- 
+Card Type:  	 Instant
+P/T: 	
+Rules Text (Oracle): 	Regenerate target creature. 
+You gain control of that creature if it regenerates this way this turn.
+ -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant 
+</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

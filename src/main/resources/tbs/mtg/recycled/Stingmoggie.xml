@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stingmoggie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - elemental
+	0/0
+	stingmoggie comes into play with two +1/+1 counters on it.
+	3r, remove a +1/+1 counter from stingmoggie: destroy target artifact or land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='3' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

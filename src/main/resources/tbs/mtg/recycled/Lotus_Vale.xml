@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lotus Vale">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	if lotus vale would come into play, sacrifice two untapped lands instead. if you do, put lotus vale into play. if you don't, put it into its owner's graveyard.
+	t :add three mana of any one color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice>
+					<either>
+						<action ref="sacrifice-a-land" value="2">
+							<test>
+								<in-zone zone="playANDuntapped"/>
+							</test>
+						</action>
+						<action ref="put-in-play"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red='3'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

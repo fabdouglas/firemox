@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Might of Old Krosa">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	target creature gets +2/+2 until end of turn. if you played this spell during your main phase, that creature gets +4/+4 until end of turn instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test ref="during-your-main"/>
+				</if-then-hop>
+				<action ref="add+4+4-until-eot"/>
+				<hop value="2"/>
+				<action ref="add+2+2-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

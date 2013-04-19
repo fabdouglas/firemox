@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Downdraft">
+<rules-author-comment></rules-author-comment>
+
+	<!-- 
+Green Mana: Target creature loses flying until end of turn.
+
+Sacrifice Downdraft: Downdraft deals 2 damage to each creature with flying.
+ -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana green="1" />
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property="flying" linked="false" operation="remove">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage value="2" type="damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

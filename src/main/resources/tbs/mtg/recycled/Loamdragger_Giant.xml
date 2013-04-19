@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Loamdragger Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4(r/g)(r/g)(r/g)
+	creature - giant warrior
+	7/6
+	
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior  </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='3' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='2' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='1' red='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

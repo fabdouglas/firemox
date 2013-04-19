@@ -1,0 +1,1 @@
+The pictures downloaded from the proxy "blank-sample"

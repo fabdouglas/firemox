@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wooded Foothills">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t, pay 1 life, sacrifice wooded foothills: search your library for a mountain or forest card and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='pay-life' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<or>
+							<has-idcard idcard='forest'/>
+							<has-idcard idcard='mountain'/>
+						</or>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

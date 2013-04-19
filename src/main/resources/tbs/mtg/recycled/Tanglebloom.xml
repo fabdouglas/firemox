@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tanglebloom">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	1, t :you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

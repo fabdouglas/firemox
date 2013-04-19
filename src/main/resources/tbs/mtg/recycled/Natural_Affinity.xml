@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Natural Affinity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	instant
+	until end of turn, all lands become 2/2 creatures that are still lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<has-idcard idcard="land" />
+					</test>
+				</target>
+				<add-modifier>
+					<register-indirection index="power" value="2" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<register-indirection index="toughness" value="2" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<idcard-modifier idcard="creature" operation="or" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

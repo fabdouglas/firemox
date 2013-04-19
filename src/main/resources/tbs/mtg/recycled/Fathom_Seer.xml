@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fathom Seer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - illusion
+	1/3
+	morph-return two islands you control to their owner's hand. 
+	when fathom seer is turned face up, draw two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>illusion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-morph"/>
+		<ability ref='morph'>
+			<actions>
+				<repeat value="2"/>
+				<action ref="target-land">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="island"/>
+						</and>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

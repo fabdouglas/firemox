@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amnesia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uuu
+	sorcery
+	target player reveals his or her hand and discards all nonland cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='3'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you" name="%" />
+				<target type='card' mode='all' raise-event='false' restriction-zone='hand'>
+					<test>
+						<and>
+							<controller player='target-list.first'/>
+							<not>
+								<has-idcard idcard="land"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="restore-hand-visibility" name="%" />
+				<action ref="discard-cards_noname" name="%" />
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

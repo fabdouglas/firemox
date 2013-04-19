@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tolarian Academy">
+	<!-- tested 09/05/2005 , v0.85.36 -->
+	<rules-author-comment>By fabdouglas (corrected by Hoani CROSS : count all artifacts and not just artifact creatures)</rules-author-comment>
+
+	<init>
+		<idcards>land</idcards>
+		<properties>legend</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-land"/>
+	
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana>
+					<blue>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="controller"/>
+								<has-idcard idcard="artifact"/>
+							</and>
+						</counter>
+					</blue>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

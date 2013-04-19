@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>firemox</groupId>
+	<artifactId>firemox</artifactId>
+	<packaging>jar</packaging>
+	<name>Firemox</name>
+	<version>0.95.52.0</version>
+	<description>Firemox: play with a judge to Magic The Gathering and any other CCG, anywhere with anyone.
+	</description>
+	<url>http://firemox.sourceforge.net</url>
+	<prerequisites>
+		<maven>2.0.9</maven>
+	</prerequisites>
+	<properties>
+		<launch4j.dir>C:/Program Files/Launch4j</launch4j.dir>
+		<izpack.dir>C:/Program Files/IzPack</izpack.dir>
+	</properties>
+	<ciManagement>
+		<system>continuum</system>
+		<url>http://localhost:8080/continuum/</url>
+		<notifiers>
+			<notifier>
+				<type>mail</type>
+				<configuration>
+					<address>fabdouglas at users.sourceforge.net</address>
+				</configuration>
+			</notifier>
+			<notifier>
+				<address>fabdouglas at users.sourceforge.net</address>
+				<configuration>
+					<address>fabdouglas at users.sourceforge.net</address>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+	<inceptionYear>2003</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>Firemox User List</name>
+			<!-- Commented because of French site bug 
+				<subscribe>http://lists.sourceforge.net/lists/listinfo/firemox-user</subscribe>
+				<unsubscribe>http://lists.sourceforge.net/lists/listinfo/firemox-user</unsubscribe>
+			-->
+			<post>firemox-user@lists.sourceforge.net</post>
+			<archive>http://sourceforge.net/mailarchive/forum.php?forum_id=43287</archive>
+		</mailingList>
+		<mailingList>
+			<name>Firemox Developer List</name>
+			<!-- Commented because of French site bug 
+				<subscribe>http://lists.sourceforge.net/lists/listinfo/firemox-team</subscribe>
+				<unsubscribe>http://lists.sourceforge.net/lists/listinfo/firemox-team</unsubscribe>
+			-->
+			<post>firemox-team@lists.sourceforge.net</post>
+			<archive>http://sourceforge.net/mailarchive/forum.php?forum_id=36432</archive>
+		</mailingList>
+	</mailingLists>
+	<developers>
+		<developer>
+			<id>fabdouglas</id>
+			<name>Fabrice Daugan</name>
+			<email>fabdouglas at users.sourceforge.net</email>
+			<organization>gfi</organization>
+			<organizationUrl>http://www.gfi.fr</organizationUrl>
+			<roles>
+				<role>Admin</role>
+				<role>Developper</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>hoani</id>
+			<name>Hoani Cross</name>
+			<email>hoani.cross at gmail.com</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Doc Manager</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>-10</timezone>
+		</developer>
+		<developer>
+			<id>seingalt_tm</id>
+			<name>Carlouet Mathieu</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Graphic/Other Designer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>nico100</id>
+			<name>Nicolas Vacher</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Magic expert</role>
+				<role>Tester</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>truelink</id>
+			<name>Matthew Cortes</name>
+			<email>truelink at sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Tester</role>
+			</roles>
+			<timezone>-6</timezone>
+		</developer>
+		<developer>
+			<id>surtur2</id>
+			<name>Surtur2</name>
+			<email>surtur2 at users.sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Tester</role>
+			</roles>
+			<timezone>-6</timezone>
+		</developer>
+		<developer>
+			<id>riclas</id>
+			<name>Ricardo Filipe</name>
+			<email>riclas at users.sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+0</timezone>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Stefano "Kismet" Lenzi</name>
+			<email>kismet-sl at users.sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+				<role>Magic expert</role>
+			</roles>
+			<timezone>+1</timezone>
+		</contributor>
+		<contributor>
+			<name>Rajmahendra</name>
+			<email>rajmahendra at users.sourceforge.net</email>
+			<url></url>
+			<organization>EDS</organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Installer</role>
+			</roles>
+			<timezone></timezone>
+		</contributor>
+		<contributor>
+			<name>Olivier Verelst</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</contributor>
+		<contributor>
+			<name>Bojan Jovicic</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+2</timezone>
+		</contributor>
+		<contributor>
+			<name>Jan Blaha</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone></timezone>
+		</contributor>
+		<contributor>
+			<name>jods4</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Magic expert</role>
+			</roles>
+			<timezone></timezone>
+		</contributor>
+		<contributor>
+			<name>Arthur Nascimento</name>
+			<email></email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone></timezone>
+		</contributor>
+		<contributor>
+			<name>tureba</name>
+			<email>tureba at users.sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Translator</role>
+			</roles>
+			<timezone>-3</timezone>
+		</contributor>
+		<contributor>
+			<name>Sergio Bonifoglio</name>
+			<email>drakyoko at users.sourceforge.net</email>
+			<url></url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>Translator</role>
+			</roles>
+			<timezone>+1</timezone>
+		</contributor>
+	</contributors>
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE, Version 2.0</name>
+			<url>http://www.gnu.org/licenses/gpl.txt</url>
+			<distribution>repo</distribution>
+			<comments>
+				GNU GENERAL PUBLIC LICENSE Version 2, June 1991 Copyright (C) 1989, 1991 Free
+				Software Foundation, Inc. 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+			</comments>
+		</license>
+	</licenses>
+	<scm>
+		<connection>
+			scm:svn:https://firemox.svn.sourceforge.net/svnroot/firemox/trunk
+		</connection>
+		<developerConnection>
+			scm:svn:https://firemox.svn.sourceforge.net/svnroot/firemox/trunk/
+		</developerConnection>
+		<url>http://svn.sourceforge.net/viewcvs.cgi/firemox</url>
+	</scm>
+	<organization>
+		<name>Firemox</name>
+		<url>http://firemox.sourceforge.net/</url>
+	</organization>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+		<defaultGoal>package</defaultGoal>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>LICENSE.txt</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.0-alpha-3</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>firemox</groupId>
+				<artifactId>maven-docgen-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<phase>site</phase>
+						<goals>
+							<goal>docgen</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <configuration>
+          <instrumentation>
+            <excludes>
+              <exclude>fabdouglas/*.class</exclude>
+              <exclude>net/sf/firemox/ui/**/*Test.class</exclude>
+            </excludes>
+          </instrumentation>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>fabdouglas.Starter</mainClass>
+							<packageName>test</packageName>
+						</manifest>
+					</archive>
+					<descriptors>
+						<!-- Important note : use pack200 to trim release like :
+							pack200 -r -G -E10 commons-collections-3.1.jar
+						-->
+						<descriptor>src/main/assembly/starter.xml</descriptor>
+						<descriptor>src/main/assembly/bin.xml</descriptor>
+						<descriptor>src/main/assembly/src.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+				<!-- 
+					<execution>
+						<id>launch4j</id>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="launch4j"
+									classname="net.sf.launch4j.ant.Launch4jTask"
+									classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
+								<launch4j>
+									<config jar="target/${artifactId}-${version}-/starter.jar"
+										outfile="target/${name}.exe" errTitle="${name}" chdir="." customProcName="true"
+										icon="src/main/resources/images/mp.ico">
+										<jre minVersion="1.5.0" />
+									</config>
+								</launch4j>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					-->
+					<execution>
+						<id>izpack</id>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="izpack" classpath="${izpack.dir}/lib/compiler.jar"
+									classname="com.izforge.izpack.ant.IzPackTask" />
+								<mkdir dir="target/installer" />
+								<unzip src="target/${artifactId}-${version}-bin.zip"
+									dest="target/installer" overwrite="true" />
+								<copy todir="target/installer">
+									<fileset dir="src/main/installer" />
+								</copy>
+								<copy file="target/installer/starter.jar"
+									tofile="src/main/resources/starter.jar" />
+								<izpack input="src/main/installer/install.xml"
+									output="target/${artifactId}-${version}-install.jar" installerType="standard"
+									basedir="target/installer" izPackDir="${izpack.dir}" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>checksum</id>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<checksum algorithm="MD5" forceOverwrite="yes" fileext=".md5">
+									<fileset dir="target" includes="${artifactId}-${version}-*.*"
+										excludes="*.md5" />
+								</checksum>
+								<checksum algorithm="MD5" verifyProperty="isSHAok">
+									<fileset dir="target" includes="${artifactId}-${version}-*.*"
+										excludes="*.md5" />
+								</checksum>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<!-- exec dir="target/installer" executable="pack200">
+						<arg line="-r -G -E10 starter.jar lib/"/>
+						</exec -->
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<locales>en,fr</locales>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>firemox_dependencies_snapshot</id>
+			<name>Firemox dependencies</name>
+			<url>file://${basedir}/m2/repository/</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>central2</id>
+			<name>Maven Repository Switchboard</name>
+			<url>http://www.ibiblio.org/maven2</url>
+		</repository>
+		<repository>
+			<id>geotools.fr</id>
+			<name>maven.geotools.fr</name>
+			<url>http://maven.geotools.fr/repository</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots />
+			<id>Maven Snapshots</id>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>Maven Mirror</id>
+			<url>http://mirrors.dotsrc.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>Maven Mirror2</id>
+			<url>http://apache.osuosl.org/maven-repository</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Maven repo1</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>mavenregistry</id>
+			<url>http://www.mavenregistry.com/maven2/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots />
+			<id>Maven Snapshots</id>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>mp-plugins</id>
+			<url>file://${basedir}/m2/pluginRepository/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>Codehaus Snapshots</id>
+			<url>http://snapshots.repository.codehaus.org/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>Maven Snapshots</id>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jcommon</artifactId>
+			<version>1.0.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>chart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>l2fprod</groupId>
+			<artifactId>skinlf</artifactId>
+			<version>6.7.pack200</version>
+		</dependency>
+		<dependency>
+			<groupId>l2fprod</groupId>
+			<artifactId>common-totd</artifactId>
+			<version>7.3.pack200</version>
+		</dependency>
+		<dependency>
+			<groupId>l2fprod</groupId>
+			<artifactId>common-tasks</artifactId>
+			<version>7.3.pack200</version>
+		</dependency>
+		<dependency>
+			<groupId>l2fprod</groupId>
+			<artifactId>common-buttonbar</artifactId>
+			<version>7.3.pack200</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet</groupId>
+			<artifactId>substance</artifactId>
+			<version>4.0.0.pack200</version>
+		</dependency>
+		<dependency>
+			<groupId>args4j</groupId>
+			<artifactId>args4j</artifactId>
+			<version>2.0.23</version>
+		</dependency>
+	</dependencies>
+	<reporting>
+		<plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+      </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>dashboard-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+				<configuration></configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<configLocation>src/plugin-config/permissive_checks.xml</configLocation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<targetJdk>1.5</targetJdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+					</rulesets>
+					<linkXref>true</linkXref>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<quiet>true</quiet>
+					<stylesheetfile>${basedir}/src/site/resources/css/javadoc.css</stylesheetfile>
+					<show>public</show>
+					<reportSets>
+						<reportSet>
+							<id>html</id>
+							<configuration>
+								<show>public</show>
+							</configuration>
+							<reports>
+								<report>javadoc</report>
+							</reports>
+						</reportSet>
+					</reportSets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jdepend-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>changes-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>surefire-report-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>javancss-maven-plugin</artifactId>
+				<version>2.0-beta-2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+				<version>2.0-beta-1</version>
+				<configuration>
+					<multipleLineComments>true</multipleLineComments>
+					<tags>TODO, FIXME, @deprecated</tags>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+	<distributionManagement>
+		<!-- 
+		<repository>
+			<id>firemox.org</id>
+			<name>firemox</name>
+			<url>ftp://firemox.org/release</url>
+		</repository>
+		<snapshotRepository>
+			<id>firemox.org</id>
+			<name>firemox</name>
+			<url>ftp://firemox.org/snapshot</url>
+		</snapshotRepository>
+		<site>
+			<id>firemox.org</id>
+			<name>firemox</name>
+			<url>ftp://firemox.org/www</url>
+		</site>
+			<site>
+			<id>shell.sourceforge.net</id>
+			<url>scp://shell.sourceforge.net/home/groups/f/fi/firemox/htdocs</url>
+			</site>
+		-->
+	</distributionManagement>
+	<issueManagement>
+		<url>http://www2.hosted-projects.com/trac/hcross/corefiremox/</url>
+	</issueManagement>
+</project>

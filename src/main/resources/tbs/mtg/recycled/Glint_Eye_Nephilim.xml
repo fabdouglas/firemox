@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glint-Eye Nephilim">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ubrg
+	creature - nephilim
+	2/2
+	whenever glint-eye nephilim deals combat damage to a player, draw that many cards.
+	1, discard a card: glint-eye nephilim gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red green blue black </colors>
+		<idcards>creature </idcards>
+		<properties>nephilim </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='you'/>
+				<repeat value='context.int'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

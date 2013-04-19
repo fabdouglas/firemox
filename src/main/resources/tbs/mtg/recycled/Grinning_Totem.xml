@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Grinning Totem">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {4} 
+{2}, {t}, sacrifice grinning totem: search target opponent's library for a card 
+and remove that card from the game. then that player shuffles his or her library. 
+you may play the card as though it were in your hand. 
+at the beginning of your next upkeep, if you haven't played the card, 
+put it into its owner's graveyard. 
+-->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<action ref="search-lib-player" value="1"/>
+					<!-- INSERT HERE ACTIONS PERFORMED WHEN CARDS HAVE BEEN CHOSEN -->
+			</effects>
+		</activated-ability>
+		
+			<!-- UPDATE PHASE NAME, TYPE and RESOLUTION -->
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller"/>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

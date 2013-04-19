@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Trolls of Tel-Jilad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gg
+	creature - troll shaman
+	5/6
+	1g: regenerate target green creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>troll shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='target-creature'>
+					<test>
+						<has-color color="green"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

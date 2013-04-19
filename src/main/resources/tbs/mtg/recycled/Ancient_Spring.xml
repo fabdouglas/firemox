@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ancient Spring">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land ancient spring comes into play tapped. t add u to your mana pool. t, sacrifice ancient spring: add wb to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-U"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="1" black="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

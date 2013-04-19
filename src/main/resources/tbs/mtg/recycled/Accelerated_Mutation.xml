@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Accelerated Mutation">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{g}{g} target creature gets +x/+x until end of turn, where x is the 
+highest converted mana cost among permanents you control. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value>
+							<highest-among expression="manacost" restriction-zone="play">
+								<test>
+									<controller player="you"/>
+								</test>
+							</highest-among>
+						</value>
+					</register-modifier>
+					<register-modifier index="toughness" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value>
+							<highest-among expression="manacost" restriction-zone="play">
+								<test>
+									<controller player="you"/>
+								</test>
+							</highest-among>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Binding Grasp">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {3}{u} at the beginning of your upkeep, 
+		sacrifice binding grasp unless you pay {1}{u}. 
+		you control enchanted creature. enchanted creature gets +0/+1. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep" />
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana colorless="1" blue="1"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this" />
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="control">
+		<modifiers>
+			<register-modifier index="toughness" operation="add" value="1" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

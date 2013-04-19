@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shard Phoenix">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - phoenix
+	2/2
+	flying 
+	sacrifice shard phoenix: shard phoenix deals 2 damage to each creature without flying.
+	rrr: return shard phoenix from your graveyard to your hand. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>phoenix flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'>
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana red='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

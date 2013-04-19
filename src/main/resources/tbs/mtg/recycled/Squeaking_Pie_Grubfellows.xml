@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Squeaking Pie Grubfellows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - goblin shaman
+	3/2
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with squeaking pie grubfellows, you may reveal it. if you do, each opponent discards a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="opponent"/>
+				<action ref='player-discard' value='1'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nature's Kiss">
+	<rules-author-comment>By jods</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<move-player-card from="graveyard" to="side" controller="you" />
+			</cost>
+			<effects>
+				<target type="attachedto" />
+				<add-modifier>
+					<register-modifier index="toughness" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-modifier>
+				</add-modifier>
+				<add-modifier>
+					<register-modifier index="toughness" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-modifier>
+					<register-modifier index="power" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature" />
+
+</card>

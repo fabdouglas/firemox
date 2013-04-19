@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hymn of Rebirth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gw
+	sorcery
+	put target creature card from a graveyard into play under your control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card controller="you" destination="play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

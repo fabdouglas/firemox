@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aerial Caravan">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {4}{u}{u} flying {1}{u}{u}: remove the top card of your library from the game. until end of turn, you may play that card as though it were in your hand.  -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="blue" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>flying human soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+				<pay-mana colorless="1" blue="2" />
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Null Brooch">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	2, t, discard your hand: counter target noncreature spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='discard' value='all'/>
+				<action ref="target-spell">
+					<test>
+						<not>
+							<has-idcard idcard="creature"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

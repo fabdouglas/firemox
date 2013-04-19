@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zombie Assassin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - zombie assassin
+	3/2
+	t, remove two cards in your graveyard and zombie assassin from the game: destroy target nonblack creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie assassin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="remove-a-card-from-graveyard"/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

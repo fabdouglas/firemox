@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Glare of Subdual">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+
+    <init>
+        <registers>
+            <register index="white" value="1"/>
+            <register index="green" value="1"/>
+            <register index="colorless" value="2"/>
+        </registers>
+        <colors>white green</colors>
+        <idcards>global-enchantment</idcards>
+    </init>
+    <abilities>
+        <ability ref="cast-spell"/>
+        <activated-ability zone="play" playable="instant">
+            <cost>
+                <target type="card" cancel="false" raise-event="false"
+                        restriction-zone="playANDuntapped">
+                    <test>
+                        <controller player="you"/>
+                    </test>
+                </target>
+                <tap/>
+                <target-list operation="clear"/>
+                <target type="card" cancel="false" restriction-zone="play">
+                    <test>
+                        <or>
+                            <has-idcard idcard="creature"/>
+                            <has-idcard idcard="artifact"/>
+                        </or>
+                    </test>
+                </target>
+            </cost>
+            <effects>
+                <tap/>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Perilous Forays">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	enchantment
+	1, sacrifice a creature: search your library for a land card with a basic land type and put it into play tapped. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<or>
+							<has-idcard idcard="forest"/>
+							<has-idcard idcard="mountain"/>
+							<has-idcard idcard="plains"/>
+							<has-idcard idcard="swamp"/>
+							<has-idcard idcard="island"/>
+						</or>
+					</test>
+				</action>
+				<move-card destination="playANDtapped" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

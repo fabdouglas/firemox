@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cold-Eyed Selkie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(g / u)(g / u)
+	creature - merfolk rogue
+	1/1
+	islandwalk
+	whenever cold-eyed selkie deals combat damage to a player, you may draw that many cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk rogue islandwalk </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='2' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='1' green='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' green='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<repeat value='1'/>
+						<action ref='draw-a-card'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

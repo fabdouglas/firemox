@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vedalken AEthermage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - vedalken wizard
+	1/2
+	flash 
+	when vedalken aethermage comes into play, return target sliver to its owner's hand.
+	wizardcycling 3 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>vedalken wizard flash </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='sliver'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" zone="hand">
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<target type="this" name="%" />
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%" />
+				<action ref="search-lib-reveal" value="1">
+					<test>
+						<has-property property="wizard"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

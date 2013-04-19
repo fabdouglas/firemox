@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desperate Charge">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} creatures you control get +2/+0 until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="all-creatures">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+2+0-until-eot"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

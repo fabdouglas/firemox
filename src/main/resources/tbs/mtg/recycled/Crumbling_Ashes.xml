@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crumbling Ashes">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	enchantment
+	at the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="-1/-1" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

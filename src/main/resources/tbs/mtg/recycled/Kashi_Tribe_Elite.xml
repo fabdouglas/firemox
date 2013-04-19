@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kashi-Tribe Elite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - snake warrior
+	2/3
+	legendary snakes you control have shroud. 
+	whenever kashi-tribe elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>snake warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<has-idcard idcard='creature'/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<tap/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="shroud" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+					<has-property property="legend"/>
+					<has-property property="snake"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

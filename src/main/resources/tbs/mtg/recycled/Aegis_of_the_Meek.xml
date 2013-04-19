@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aegis of the Meek">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3} {1}, {t}: target 1/1 creature gets +1/+2 until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<equal right="1">
+								<left register="tested" index="power" base="true"/>
+							</equal>
+							<equal right="1">
+								<left register="tested" index="toughness" base="true"/>
+							</equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+2-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

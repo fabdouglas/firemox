@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Balthor the Defiled">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	legendary creature - zombie dwarf
+	2/2
+	minion creatures get +1/+1.
+	bbb, remove balthor the defiled from the game: each player returns all black and all red creature cards from his or her graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend zombie dwarf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='3' />
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<and>
+							<or>
+								<has-color color="red"/>
+								<has-color color="black"/>
+							</or>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+					<has-property property="minion"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

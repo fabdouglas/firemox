@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Far Wanderings">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	sorcery
+	search your library for a basic land card and put that card into play tapped. then shuffle your library.
+	threshold - if seven or more cards are in your graveyard, instead search your library for three basic land cards and put them into play tapped. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value>
+						<if-then-else then="3" else="1">
+							<if ref="threshold" />
+						</if-then-else>
+					</value>
+				</repeat>
+				<action ref='search-lib'>
+					<test ref="is-basic-land"/>
+				</action>
+				<move-card destination="playANDtapped" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

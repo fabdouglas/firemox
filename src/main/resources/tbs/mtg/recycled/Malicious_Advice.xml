@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Malicious Advice">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xub
+	instant
+	tap x target artifacts, creatures, and/or lands. you lose x life.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<tap/>
+				<action ref='lose-life'>
+					<value register='stack' index='0'/>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

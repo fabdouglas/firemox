@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thrull Wizard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+
+	creature - thrull
+
+	1/1
+
+	1b: counter target black spell unless that spell's controller pays b or 3.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>thrull wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" colorless="1" />
+				<action ref="target-spell">
+					<test>
+						<has-color color="black"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="3" controller="target-list.first.controller"/>
+					</either>
+					<either>
+						<pay-mana black="1" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

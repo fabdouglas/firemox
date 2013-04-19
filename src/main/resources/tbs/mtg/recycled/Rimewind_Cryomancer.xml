@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rimewind Cryomancer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - human wizard
+	2/3
+	1, t :counter target activated ability. play this ability only if you control four or more snow permanents. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal right="4">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="snow"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</test>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+				<action ref='target-activated-ability'/>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

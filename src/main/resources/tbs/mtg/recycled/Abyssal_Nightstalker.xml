@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abyssal Nightstalker">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b} whenever abyssal nightstalker attacks and isn't blocked, 
+defending player discards a card from his or her hand. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>nightstalker</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<target type="card" mode="opponentchoose" restriction-zone="hand">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<action ref="opponent-discards" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

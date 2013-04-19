@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spur Grappler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - beast
+	2/1
+	spur grappler gets +2/+1 as long as you control no untapped lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="2">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped"/>
+							<has-idcard idcard="land"/>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped"/>
+							<has-idcard idcard="land"/>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

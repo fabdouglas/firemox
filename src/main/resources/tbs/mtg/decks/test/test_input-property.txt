@@ -1,0 +1,5 @@
+Addle;20
+An-Zerrin Ruins;20
+Savannah_Lions;20
+Benalish_Hero;20
+Super_card;20

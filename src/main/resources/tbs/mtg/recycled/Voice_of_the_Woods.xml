@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Voice of the Woods">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - elf 
+	2/2
+	tap five untapped elves you control: put a 7/7 green elemental creature token with trample into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="5"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="elf"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='7'/>
+								<register index='toughness' value='7'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental trample </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

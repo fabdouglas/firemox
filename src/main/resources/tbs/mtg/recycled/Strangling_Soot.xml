@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Strangling Soot">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	instant
+	destroy target creature with toughness 3 or less.
+	flashback 5r 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+				<action ref='target-creature'>
+					<test>
+						<inf-equal right="3">
+							<left register="tested" index="toughness"/>
+						</inf-equal>
+					</test>
+				</action>
+				<action ref='destroy'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<pay-mana red='1' colorless='5' />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='flashback'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

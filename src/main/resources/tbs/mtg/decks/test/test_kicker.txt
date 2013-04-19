@@ -1,0 +1,13 @@
+super card;20
+Duskwalker;20
+Dream Prowler;20
+Degavolver;20
+Dralnu's Pet;20
+Dragon Shadow;20
+Dragon Scales;20
+Dragon Fangs;20
+Dragon Breath;20
+Dracoplasm;20
+Downhill Charge;20
+Dismantling_Blow;20
+Desolation Giant;20

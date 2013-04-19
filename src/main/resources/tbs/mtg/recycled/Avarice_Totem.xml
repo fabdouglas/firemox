@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avarice Totem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	5: exchange control of avarice totem and target nonland permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+				<action ref='target-permanent'>
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<add-modifier>
+					<controller-modifier player="opponent" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

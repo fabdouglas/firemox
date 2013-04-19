@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cursed Monstrosity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - horror
+	4/3
+	flying
+	whenever cursed monstrosity becomes the target of a spell or ability, sacrifice it unless you discard a land card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</targeted>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+					<either>
+						<action ref='discard' value='1'>
+							<test>
+								<has-idcard idcard="land"/>
+							</test>
+						</action>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

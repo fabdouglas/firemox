@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Opal Guardian">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		www
+	enchantment
+	when an opponent plays a creature spell, if opal guardian is an enchantment, opal guardian becomes a 3/4 gargoyle creature with flying and protection from red.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<has-idcard idcard="enchantment" card="this"/>
+						<has-idcard idcard="creature"/>
+						<controller player="opponent"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" value="3" operation="set" linked="false"/>
+					<register-indirection index="toughness" value="4" operation="set" linked="false"/>
+					<idcard-modifier idcard="creature" operation="set" linked="false"/>
+					<property-modifier property="gargoyle" linked="false"/>
+				 	<property-modifier property="flying" linked="false"/>
+				 	<property-modifier property="protection-from-red" linked="false"/>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

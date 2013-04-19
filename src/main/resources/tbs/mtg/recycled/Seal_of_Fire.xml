@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Seal of Fire">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+<!--  r 
+	sacrifice seal of fire: seal of fire deals 2 damage to target creature or 
+	player.   
+-->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

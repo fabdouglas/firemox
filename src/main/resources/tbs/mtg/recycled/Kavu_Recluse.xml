@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Recluse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - kavu
+	2/2
+	t :target land becomes a forest until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="forest" operation="set" linked="false"> 
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<ability-modifier operation="clear" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

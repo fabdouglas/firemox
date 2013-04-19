@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mindwarper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - spirit
+	0/0
+	mindwarper comes into play with three +1/+1 counters on it.
+	2b, remove a +1/+1 counter from mindwarper: target player discards a card. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='2' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

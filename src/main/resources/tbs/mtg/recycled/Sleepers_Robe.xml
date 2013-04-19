@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sleeper's Robe">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ub
+	enchantment - aura
+	enchant creature
+	enchanted creature has fear.
+	whenever enchanted creature deals combat damage to an opponent, you may draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+				<destination-test>
+					<is target="opponent"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='you'/>
+						<action ref='draw-a-card'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='fear'/>
+</card>

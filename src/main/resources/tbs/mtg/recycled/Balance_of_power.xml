@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Balance of Power">
+<!-- If target opponent has more cards in hand than you, draw cards equal to the difference. -->
+<!-- Test ok 28/12/2004 0.81.30 
+but I use here "opponent" to check with. 
+In the card definition, I'm supposed to let choose a target player. 
+If I want to do it, the cleartargetlist needed are going to break everything'...
+-->
+	<rules-author-comment>By Brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability zone="hand" playable="this" >
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<target-list operation="clear" name="%"/>
+				<target type="you"/>
+				<repeat>
+					<value>
+						<minus>
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="opponent"/>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</right>
+						</minus>
+					</value>
+				</repeat>
+				<action ref="draw-a-card"/>
+
+				<!-- Put Balance_of_power to graveyard. -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

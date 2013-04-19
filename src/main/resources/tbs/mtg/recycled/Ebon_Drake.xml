@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ebon Drake">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - drake
+	3/3
+	flying
+	whenever a player plays a spell, you lose 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>drake flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell />
+				</test>
+			</casting>
+			<effects>
+				<action ref='lose-life' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

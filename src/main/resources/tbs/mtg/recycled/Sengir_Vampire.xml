@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sengir Vampire">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<!-- because it is a 4/4 creature -->
+			<register index="black" value="2"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<idcards>creature</idcards>
+		<properties>flying vampire</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play" resolution="hidden">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<has-idcard idcard="creature"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<create-ability>
+					<!-- save the damaged creature -->
+					<save target="context.card"/>
+					<triggered-ability zone="play">
+						<moved-card>
+							<source-test>
+								<and>
+									<is target="saved"/>
+									<!-- we recheck it is a creature -->
+									<has-idcard idcard="creature" card="tested"/>
+								</and>
+							</source-test>
+							<destination-test>
+								<in-zone zone="graveyard" card="tested"/>
+							</destination-test>
+						</moved-card>
+						<effects>
+							<target type="this"/>
+							<add-object object-name='+1/+1'/>
+							<!-- we remove directly this ability. Anyway, it
+							     would be removed automatically at the end of
+							     with the <until>
+							-->
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Illusions of Grandeur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	cumulative upkeep 2
+	when illusions of grandeur comes into play, you gain 20 life.
+	when illusions of grandeur leaves play, you lose 20 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana>
+							<colorless>
+								<mult right="2">
+									<left>
+										<counter object-name='age' card='this'/>
+									</left>
+								</mult>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='20'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='lose-life' value='20'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Borderland Behemoth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5rr
+	creature - giant warrior
+	4/4
+	trample
+	borderland behemoth gets +4/+4 for each other giant you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<value>
+				<mult right="4">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<not>
+									<is-this/>
+								</not>
+								<has-property property="giant"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</mult>
+			</value>
+		</register-modifier>
+		<register-modifier index='toughness' operation='add' linked='false'>
+			<value>
+				<mult right="4">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<not>
+									<is-this/>
+								</not>
+								<has-property property="giant"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</left>
+				</mult>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

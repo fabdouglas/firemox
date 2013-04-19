@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Eladamri's Call">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gw
+	instant
+	search your library for a creature card, reveal that card, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+				<action ref="reveal"/>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

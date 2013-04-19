@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deadly Grub">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - insect
+	3/1
+	vanishing 3 
+	when deadly grub is put into a graveyard from play, if it had no time counters on it, put a 6/1 green insect creature token into play with shroud. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>insect </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="time" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<create-card>
+					<card name='Insect'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='6'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token insect shroud</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<object name='time'/>
+		<object name='time'/>
+		<object name='time'/>
+	</modifiers>
+</card>

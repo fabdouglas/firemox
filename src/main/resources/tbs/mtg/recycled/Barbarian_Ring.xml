@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Barbarian Ring">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add r to your mana pool. barbarian ring deals 1 damage to you.
+	threshold - r, t, sacrifice barbarian ring: barbarian ring deals 2 damage to target creature or player. play this ability only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red='1' />
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold" />
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Order of Whiteclay">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	creature - kithkin cleric
+	1/4
+	1ww, oq: return target creature card with converted mana cost 3 or less from your graveyard to play. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='2' colorless='1' />
+				<target type="this"/>
+				<untap/>
+				<target-list operation="clear"/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<inf-equal right="3">
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

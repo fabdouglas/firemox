@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cinder Elemental">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - elemental
+	2/2
+	xr, t, sacrifice cinder elemental: cinder elemental deals x damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

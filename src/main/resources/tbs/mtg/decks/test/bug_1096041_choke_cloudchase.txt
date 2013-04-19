@@ -1,0 +1,5 @@
+Aven_Cloudchaser;20
+super_card;10
+choke;20
+tropical_island;10
+plains;10

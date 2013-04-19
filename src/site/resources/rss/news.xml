@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<channel>
+		<title>Firemox news</title>
+		<link>http://firemox.sourceforge.net/rss/news.xml</link>
+		<description>News of Firemox</description>
+		<language>en-us</language>
+		<copyright>Copyright 2003 - 2007 Firemox</copyright>
+		<generator>Firemox</generator>
+		<docs>http://firemox.sourceforge.net/</docs>
+		<ttl>20</ttl>
+		<image>
+			<title>http://firemox.sourceforge.net</title>
+			<url>http://firemox.sourceforge.net/images/rss.gif</url>
+			<link>http://firemox.sourceforge.net/rss/news.xml</link>
+			<width>88</width>
+			<height>30</height>
+		</image>
+		<item>
+			<title>Firemox 0.95 has been released (old Magic-Project).</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.95 of Firemox has been released. Some features added and a lot of bugs fixed.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>15 Nov 07 01:00:00 GMT</pubDate>
+		</item>
+		<item>
+			<title>Firemox 0.94 has been released.</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.94 of Firemox has been released. Some features added and a lot of bugs fixed.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>Mon, 9 Apr 07 22:00:00 GMT</pubDate>
+		</item>
+		<item>
+			<title>Firemox 0.93 has been released.</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.93 of Firemox has been released. Some features added and a lot of bugs fixed.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>Fri, 2 Feb 07 22:00:00 GMT</pubDate>
+		</item>
+		<item>
+			<title>Firemox 0.92 has been released.</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.92 of Firemox has been released. A major fix of 0.91 version and some minor bugs fixed.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>Sun, 28 Sept 06 22:00:00 GMT</pubDate>
+		</item>
+		<item>
+			<title>Firemox 0.91 has been released.</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.91 of Firemox has been released. A revised UI (table top, alpha
+				composite usage), drag and drop feature, and as usual a lot of fixed bugs.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>Sun, 24 Sept 06 20:00:00 GMT</pubDate>
+		</item>
+		<item>
+			<title>Firemox 0.90 has been released.</title>
+			<link>http://firemox.sourceforge.net/</link>
+			<description>
+				The version 0.90 of Firemox has been released. A revised UI (target links are
+				shown, alpha composite usage), the database feature is implemented, so you can use
+				several art sources.
+			</description>
+			<author>fabdouglas@users.sourceforge.net (Fabrice Daugan)</author>
+			<pubDate>Fri, 26 May 06 17:09:00 GMT</pubDate>
+		</item>
+	</channel>
+</rss>

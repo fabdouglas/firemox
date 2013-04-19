@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Penumbra Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gg
+	creature - wurm
+	6/6
+	trample
+	when penumbra wurm is put into a graveyard from play, put a 6/6 black wurm creature token with trample into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>wurm trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Wurm'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='6'/>
+								<register index='toughness' value='6'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token wurm trample </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

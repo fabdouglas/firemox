@@ -1,0 +1,3 @@
+skarrgan_pit_skulk;20
+super card;20
+Rock_Hydra;20

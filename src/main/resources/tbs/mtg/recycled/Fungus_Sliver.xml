@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fungus Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - fungus sliver
+	2/2
+	all slivers have "whenever this creature is dealt damage, put a +1/+1 counter on it." 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>fungus sliver </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability zone="play">
+							<assigned-damage type="damage-any">
+								<destination-test>
+									<and>
+										<is-this/>
+										<in-zone zone="play"/>
+									</and>
+								</destination-test>
+							</assigned-damage>
+							<effects>
+								<target type="this"/>
+								<add-object object-name="+1/+1"/>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

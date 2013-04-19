@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pit Trap">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	2, t, sacrifice pit trap: destroy target attacking creature without flying. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<test ref="tested-is-attacking"/>
+							<not>
+								<has-property property="flying"/>
+							</not>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nether Void">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	world enchantment
+	whenever a player plays a spell, counter it unless its controller pays 3.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>enchant-world </idcards>
+		<properties>enchant-world </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card"/>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="3" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

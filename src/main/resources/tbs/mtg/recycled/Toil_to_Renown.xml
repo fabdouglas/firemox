@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Toil to Renown">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	sorcery
+	
+	you gain 1 life for each tapped artifact, creature, and land you control.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<or>
+									<has-idcard idcard="creature"/>
+									<has-idcard idcard="land"/>
+									<has-idcard idcard="artifact"/>
+								</or>
+								<in-zone zone="playANDtapped"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amphibious Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - kavu
+	2/2
+	whenever amphibious kavu blocks or becomes blocked by one or more blue and/or black creatures, amphibious kavu gets +3/+3 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<or>
+						<has-color color="blue"/>
+						<has-color color="black"/>
+					</or>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type='this'/>
+				<action ref="add+3+3-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<or>
+						<has-color color="blue"/>
+						<has-color color="black"/>
+					</or>
+				</blocking-test>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type='this'/>
+				<action ref="add+3+3-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

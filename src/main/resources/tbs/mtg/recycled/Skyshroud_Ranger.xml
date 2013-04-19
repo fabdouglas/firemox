@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skyshroud Ranger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - elf
+	1/1
+	t :you may put a land card from your hand into play. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="card" mode="choose" restriction-zone="hand">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="land"/>
+								</and>
+							</test>
+						</target>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

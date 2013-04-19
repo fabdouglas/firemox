@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Manta Ray">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u}{u} 
+manta ray can't attack unless defending player controls an island. 
+manta ray can't be blocked except by blue creatures. 
+when you control no islands, sacrifice manta ray. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="2"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack fish</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home"/>
+		<ability ref="island-home-attack"/>
+
+				<replacement-ability name="declared-blocking[unblockable-except-blue-creature]" zone="play" layer="4">
+					<declared-blocking>
+						<blocking-test>
+							<and>
+								<in-zone zone="play"/>
+								<has-idcard idcard="creature"/>
+								<not>
+									<has-color color="blue"/>
+								</not>
+							</and>
+						</blocking-test>
+						<attacking-test>
+							<is-this/>
+						</attacking-test>
+					</declared-blocking>
+					<effects/><!-- Disable blocking -->
+				</replacement-ability>
+	</abilities>
+</card>

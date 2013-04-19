@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ancestral Vision">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		sorcery
+	ancestral vision is blue.
+	suspend 4-u 
+	target player draws three cards.
+ -->
+
+	<init>
+		<colors>blue </colors>
+		<idcards></idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana blue='1' />
+			</actions>
+			<actions>
+				<repeat value='4'/>
+				<add-object object-name='time'/>
+			</actions>
+			<actions>
+				<action ref="target-player"/>
+			</actions>
+			<actions>
+				<repeat value="3"/>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

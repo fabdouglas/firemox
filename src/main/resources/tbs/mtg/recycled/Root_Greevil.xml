@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Root Greevil">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - beast
+	2/3
+	2g, t, sacrifice root greevil: destroy all enchantments of the color of your choice.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='2' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="this" index="free0"/>
+				<action ref="all-enchantments">
+					<test>
+						<has-color>
+							<color register="this" index="free0"/>
+						</has-color>
+					</test>
+				</action>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ignorant Bliss">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	instant
+	remove all cards in your hand from the game face down. at end of turn, return those cards to your hand, then draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+				<face-down for="everyone" />
+				<target-list operation="save"/>
+				<modify-register operation="set" register="this" index="free0" value="saved-target-list.size"/>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<target-list operation="load">
+								<list-index register="this" index="free0"/>
+							</target-list>
+							<action ref='return-to-hand'/>
+							<target type='you'/>
+							<action ref='draw-a-card'/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

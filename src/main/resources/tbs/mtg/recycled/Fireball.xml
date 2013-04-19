@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Fireball">
+
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<idcards>sorcery</idcards>
+		<colors>red</colors>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<repeat>
+					<value>
+						<add right="1">
+							<left register="stack" index="0" />
+						</add>
+					</value>
+				</repeat>
+				<target type="dealtable" mode="choose" restriction-zone="play" hop="1"
+					cancel="true">
+					<test ref="is-targetable-dealtable" />
+				</target>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<sup right="0" left="target-list.size" />
+					</test>
+				</if-then-hop>
+				<assign-damage>
+					<value>
+						<div-truncated right="target-list.size">
+							<left>
+								<minus>
+									<left register="stack" index="0" />
+									<right>
+										<minus right="1" left="target-list.size" />
+									</right>
+								</minus>
+							</left>
+						</div-truncated>
+					</value>
+				</assign-damage>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

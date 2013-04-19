@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Marrow-Gnawer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	legendary creature - rat rogue
+	2/3
+	all rat creatures have fear.
+	t, sacrifice a rat: put x 1/1 black rat creature tokens into play, where x is the number of rats you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend rat rogue </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="fear" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+					<has-property property="rat"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='rat'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="rat"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<create-card>
+					<card name='Rat'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token rat </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

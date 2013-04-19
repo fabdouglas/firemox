@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diabolic Vision">
+	<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- 
+		Look at the top five cards of your library. Put one of them into your hand and 
+		the rest on top of your library.
+	-->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>blue black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target type="you" />
+				<repeat value="5" />
+				<action ref="draw-a-card" />
+				<target-list operation="clear" />
+				<target type="card" mode="choose" restriction-zone="hand" raise-event="false" />
+				<move-card destination="library" position="top" controller="you" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

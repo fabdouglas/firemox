@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Alpha Status">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +2/+2 for each other creature in play that shares a creature type with it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref="enchant-creature">
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<mult right="2">
+						<left>
+							<counter restriction-zone="play">
+								<and>
+									<not>
+										<is-this/>
+									</not>
+									<has-idcard idcard="creature"/>
+									<different right="0">
+										<left>
+											<card-properties operation="intersection.size" card="attachedto"
+												card2="tested" lower="FIRST_SUB_TYPE" higher="LAST_SUB_TYPE" />
+										</left>
+									</different>
+								</and>
+							</counter>
+						</left>
+					</mult>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<mult right="2">
+						<left>
+							<counter restriction-zone="play">
+								<and>
+									<not>
+										<is-this/>
+									</not>
+									<has-idcard idcard="creature"/>
+									<different right="0">
+										<left>
+											<card-properties operation="intersection.size" card="attachedto"
+												card2="tested" lower="FIRST_SUB_TYPE" higher="LAST_SUB_TYPE" />
+										</left>
+									</different>
+								</and>
+							</counter>
+						</left>
+					</mult>
+				</value>
+			</register-modifier>
+		</modifiers>
+	</attachment>
+</card>

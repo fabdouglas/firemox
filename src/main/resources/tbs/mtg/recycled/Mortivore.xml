@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mortivore">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - lhurgoyf
+	*/*
+	mortivore's power and toughness are each equal to the number of creature cards in all graveyards.
+	b: regenerate mortivore. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='graveyard'>
+						<has-idcard idcard='creature'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='graveyard'>
+						<has-idcard idcard='creature'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>lhurgoyf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wand of the Elements">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	t, sacrifice an island: put a 2/2 blue elemental creature token with flying into play.
+	t, sacrifice a mountain: put a 3/3 red elemental creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value="1">
+					<test>
+						<has-idcard idcard="island"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>blue</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-idcard idcard='mountain'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='3'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

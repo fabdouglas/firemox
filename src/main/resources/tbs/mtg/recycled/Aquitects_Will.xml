@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aquitect's Will">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	tribal sorcery - merfolk
+	put a flood counter on target land. that land is an island in addition to its other types as long as it has a flood counter on it. if you control a merfolk, draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>tribal sorcery </idcards>
+		<properties>merfolk </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-object object-name='flood'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="merfolk"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

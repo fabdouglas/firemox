@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Unerring Sling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	3, t, tap an untapped creature you control: unerring sling deals damage equal to the tapped creature's power to target attacking or blocking creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='T'/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<or>
+								<test ref='tested-is-attacking'/>
+								<test ref='tested-is-blocking'/>
+							</or>
+							<has-property property="flying"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

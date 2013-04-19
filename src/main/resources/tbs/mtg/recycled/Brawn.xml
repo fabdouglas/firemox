@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Brawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - incarnation
+	3/3
+	trample
+	as long as brawn is in your graveyard and you control a forest, creatures you control have trample.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>incarnation trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="graveyard">
+			<modifiers>
+				<property-modifier property="trample" operation="add" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<controller player="you" />
+					<has restriction-zone="play">
+						<and>
+							<controller player="you" />
+							<has-idcard idcard="island" />
+						</and>
+					</has>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

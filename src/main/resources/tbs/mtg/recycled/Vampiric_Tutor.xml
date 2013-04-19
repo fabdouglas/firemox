@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Vampiric Tutor">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  b 
+		search your library for a card, then shuffle your library and put that 
+		card on top of it. 
+		you lose 2 life.   
+	-->
+
+	<init>
+		<registers>
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="search-lib"/>
+				<action ref="move-library-top"/>
+				<action ref="lose-life" value="2" />
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

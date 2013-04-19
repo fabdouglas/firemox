@@ -1,0 +1,3528 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2007 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Fabrice Daugan
+	* @author Hoani Cross
+-->
+
+<!--[[apt lang=en header]]		______
+	Magic the Gathering game XML file description
+	`______
+	Fabrice Daugan, Hoani CROSS
+	`______
+	October 1st 2007
+	
+	The Magic the Gathering game rules file
+-->
+<!--[[apt lang=fr header]]		______
+	Description du fichier XML du jeu Magic : l'Assemblée
+	`______
+	Fabrice Daugan, Hoani CROSS
+	`______
+	01 octobre 2007
+	
+	Le fichier de description des règles de Magic : l'Assemblée
+-->
+
+<!--[[apt lang=en]]
+	`As said before, the rules of the games are described in the file <<<mtg.xml>>>
+	`in the <<<src/main/resources/tbs>>> directory. You will often search within this
+	`file to get some already written tests, actions or abilities, so let's see the
+	`structure of this file.
+	
+	* Header
+	
+	`The <<<mtg.xml>>> starts with the <<<\<tbs\>>>> element, which stands for
+	`"<Turn Based Strategy>". Some of the attributes specify the XML schema location,
+	`the XML name space, some others specify the name of the game, the version and
+	`the author. We also have information about the picture of the back of the cards
+	`file.
+-->
+<!--[[apt lang=fr]]
+	`Comme cela a été précisé plus haut, les règles de ce jeu de cartes sont
+	`décrites dans le fichier <<<mtg.xml>>> du répertoire
+	`<<<src/main/resources/tbs>>>. Vous chercherez souvent dans ce fichier afin
+	`d'obtenir des tests, actions ou capacités déjà écrites, alors analysons la
+	`structure de ce fichier.
+	
+	* En-tête
+	
+	`Le fichier <<<mtg.xml>>> commence avec l'élément <<<\<tbs\>>>>, qui est
+	`l'abbréviation de "<Turn Based Strategy>" (ou <stratégie basée sur des tours>).
+	`Certains attributs spécifient l'emplacement du schéma XML du fichier,
+	`l'espace de nommage XML, d'autres spécifient le nom du jeu, la version et
+	`l'auteur. On trouvera également des informations concernant le fichier
+	`contenant l'image du dos des cartes de ce jeu.
+-->
+<tbs xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox validator.xsd"
+	name="Magic The Gathering (R)" version="0.95-SNAPSHOT" author="fabdouglas"
+	comment="By fabdouglas@users.sourceforge.net"
+	art-url="http://www.wizards.com/magic/images/mtgcom/fcpics/making/" back-picture="mr224_back.jpg"
+	damage-picture="damage.jpg">
+	<!-- Mirroring : .... for later
+		http://www.magictrade.org/index.php3?mod=picviewcrd3201
+		http://magiccards.info/query.php?cardname_match=exactly&cardname=Mishra%27s+Factory
+		http://magiccards.info/query.php?cardname=Cemetery_Gate
+		http://magiccards.info/query.php?cardname=black_lotus
+		http://magiccards.info/al/en/232/
+		http://magiccards.info/scans/en/hl/5.jpg
+		http://www.magicotw.com/voir_carte.php?id=245
+		http://www.yavipengs.com/
+		http://www.magic-ville.com/fr/carte.php?fda086
+		http://www.magictrade.org/index.php3?mod=picviewcrd3489
+		http://www.smfcorp.net/
+	-->
+	<!-- http://www.wizards.com/global/images/magic/general/Soldier_Token.jpg -->
+
+	<!--[[apt lang=en]]
+		* Database management
+		
+		`<<Magic Project>> also implements a database management for informations on
+		`cards not related to the rules, like the picture of the card, the <flavor text>
+		`or the artist. All these informations can be grabbed automatically from various
+		`sites by just providing a well formed XML proxy file.
+		
+		`The <<<\<database-properties\>>>> element in the <<<mtg.xml>>> file is used to
+		`declare the different informations understood by <<Magic Project>>. You will
+		`find below an extract of this element from the <<<mtg.xml>>> file.
+	-->
+	<!--[[apt lang=fr]]
+		* Base de données des informations complémentaires
+		
+		`<<Magic Project>> inclu également une base données des informations concernant
+		`les cartes qui n'ont pas de relations avec les règles comme l'image d'une carte,
+		`le <texte d'ambiance> ou l'artiste. Toutes ces informations sont téléchargées
+		`automatiquement depuis plusieurs sites par la fourniture de fichier XML de
+		`proxy valides.
+		
+		`L'élément <<<\<database-properties\>>>> dans le fichier <<<mtg.xml>>> est
+		`utilisé pour déclarer les différentes informations interprétées par
+		`<<Magic Project>>. Vous trouverez ci-dessous un extrait du contenu de cet
+		`élément prélevé depuis le fichier <<<mtg.xml>>>.
+	-->
+	<!--[[apt start-code]] -->
+	<database-properties>
+		<property name="card.artist-credit" type="java.lang.String" translate="false" />
+		<property name="card.flavor-text" type="java.lang.String" translate="false" />
+		<property name="card.sets" type="java.util.List" translate="true" />
+		<property name="card.text" type="java.lang.String" translate="false" />
+		<property name="card.id" type="java.lang.String" translate="false" />
+		<property name="card.set" type="java.lang.String" translate="true" />
+		<property name="card.version" type="java.lang.String" translate="false" />
+	</database-properties>
+	<!--[[apt end-code]] -->
+
+	<!--[[apt lang=en]]
+		* Mana symbols
+		
+		`<<Magic Project>> dynamically download the <mana symbols> needed to display the
+		`abilities from the <<Wizards of the Coast>> web site for copyright considerations.
+		`The <<<\<mana-symbols\>>>> element stands for giving <<Magic Project>> all
+		`the information needed to properly download these symbols.
+	-->
+	<!--[[apt lang=fr]]
+		* Les symboles de mana
+		
+		`<<Magic Project>> télécharge dynamiquement les <symboles de mana> nécessaires
+		`à l'affichage des capacités depuis le site web de <<Wizards of the Coast>> pour
+		`des raisons de propriété intellectuelle. L'élément <<<\<mana-symbols\>>>>
+		`permet de fournir à <<Magic Project>> toutes les informations permettant de
+		`télécharger ces symboles.
+	-->
+
+	<mana-symbols>
+		<!-- http://www.cs.utk.edu/~mcsurley/images -->
+		<!-- http://www.mutantswarm.org/magic/images/smilies -->
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colored url="http://www.wizards.com/images/Symbols/"
+			big-url="http://www.wizards.com/magic/advanced/7e/images/">
+			<mana name="black" picture="black_mana.gif" big-picture="black_mana_40w.jpg" />
+			<mana name="blue" picture="blue_mana.gif" big-picture="blue_mana_40w.jpg" />
+			<mana name="green" picture="green_mana.gif" big-picture="green_mana_40w.jpg" />
+			<mana name="red" picture="red_mana.gif" big-picture="red_mana_40w.jpg" />
+			<mana name="white" picture="white_mana.gif" big-picture="white_mana_40w.jpg" />
+		</colored>
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colorless url="http://www.wizards.com/images/Symbols/" big-url="colorlessmana.gif"
+			unknown="Symbol_X_mana.gif">
+			<mana amount="0" picture="Symbol_0_mana.gif" />
+			<mana amount="1" picture="Symbol_1_mana.gif" />
+			<mana amount="2" picture="Symbol_2_mana.gif" />
+			<mana amount="3" picture="Symbol_3_mana.gif" />
+			<mana amount="4" picture="Symbol_4_mana.gif" />
+			<mana amount="5" picture="Symbol_5_mana.gif" />
+			<mana amount="6" picture="Symbol_6_mana.gif" />
+			<mana amount="7" picture="Symbol_7_mana.gif" />
+			<mana amount="8" picture="Symbol_8_mana.gif" />
+			<mana amount="9" picture="Symbol_9_mana.gif" />
+			<mana amount="10" picture="Symbol_10_mana.gif" />
+		</colorless>
+	</mana-symbols>
+
+	<!--[[apt lang=en]]
+		* License
+		
+		`The element <<<\<license\>>>> just give a description of the license linked to
+		`the game referenced in the <<<mtg.xml>>> file. You will find an extract
+		`of this license description below :
+	-->
+	<!--[[apt lang=fr]]
+		* Licence
+		
+		`L'élément <<<\<license\>>>> fourni une description de la licence du jeu auquel
+		`est associé le fichier <<<mtg.xml>>>. Vous trouverez ci-dessous un extrait de
+		`la description de la license :
+	-->
+
+	<!--[[apt start-code]]-->
+	<licence>
+		This program is not published, produced or supported by Wizards Of The Coast(TM), Inc. Magic
+		The Gathering(TM) and Wizards Of The Coast(R) Inc. are registered trademarks owned by
+		Wizards Of The Coast(R) Inc., a subsidiary of Hasbro, Inc.
+	</licence>
+	<!--[[apt end-code]]-->
+
+	<aliases file="tbs/mtg/fragment-aliases.xml" />
+
+	<!--[[apt lang=en]]
+		* Initialization of the players registers
+		
+		`A bunch of integer registers (like life) are allocated to each player. the elements
+		`<<<\<registers-first-player\>>>> and <<<\<registers-first-player\>>>> are
+		`declared to the initialization of these registers. You will find below an
+		`extract of theses elements from the <<<mtg.xml>>> file :
+	-->
+	<!--[[apt lang=fr]]
+		* Initialisation des registres des joueurs
+		
+		`Une série de registres de valeurs entières (comme les points de vie) est
+		`allouée pour chaque joueur. Les éléments <<<\<registers-first-player\>>>> et
+		`<<<\<registers-first-player\>>>> sont dédiés à l'initialisation de ces
+		`registres. Vous trouverez ci-dessous un extrait de ces éléments issus du fichier
+		`<<<mtg.xml>>> :
+	-->
+
+	<!--[[apt start-code]]-->
+	<registers-first-player>
+		<register index="life" value="20" />
+		<register index="maxi-cards-in-hand" value="7" />
+		<register index="land-remain-to-cast" value="1" />
+		<register index="hand-vibility-modifiers" value="0" />
+		<register index="playedland" value="0" />
+		<register index="mulligan" value="7" />
+	</registers-first-player>
+	<registers-second-player>
+		<register index="life" value="20" />
+		<register index="maxi-cards-in-hand" value="7" />
+		<register index="hand-vibility-modifiers" value="0" />
+		<register index="playedland" value="0" />
+		<register index="mulligan" value="7" />
+	</registers-second-player>
+	<!--[[apt end-code]]-->
+
+	<!--[[apt lang=en]]
+		* Phases declaration
+		
+		`The next element <<<\<phases\>>>> declare the different phases of a turn
+		`in the implemented game. It also specifies which type of spells are playable
+		`during these phases.
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des phases
+		
+		`L'élément suivant <<<\<phases\>>>> déclare les différentes phases qui composent
+		`un tour dans le jeu de carte implémenté. Il spécifie également quels types de
+		`sorts sont jouables durant ces différentes phases.
+	-->
+
+	<phases start="1"
+		turn-structure="untap upkeep draw main declare-attack declare-attacking declare-blocking combat-deals eoc main eot cleanup">
+		<phase name="untap" playable-empty-stack-you="none" playable-middle-resolution-you="none"
+			playable-empty-stack-opponent="none" playable-middle-resolution-opponent="none" />
+		<phase name="upkeep" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="draw" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="main" playable-empty-stack-you="all" playable-middle-resolution-you="instant"
+			playable-empty-stack-opponent="instant" playable-middle-resolution-opponent="instant" />
+		<phase name="declare-attack" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="declare-attacking" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="declare-blocking" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="none" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="combat-deals" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="eoc" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="eot" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="cleanup" playable-empty-stack-you="none" playable-middle-resolution-you="none"
+			playable-empty-stack-opponent="none" playable-middle-resolution-opponent="none" />
+	</phases>
+
+	<!--[[apt lang=en]]
+		* States pictures
+		
+		`For any card in game with a specific state (like <summoning sickness>),
+		`<<Magic Project>> interprets the <<<\<state-pictures\>>>> element to get the
+		`picture and the test associated to each state.
+		`If the <<<index>>> and <<<state>>> attributes are provided, <<Magic Project>> will make a
+		`bitwise compare with the index value of card's registers and the given state
+		`value. <<<width>>> and <<<height>>> values determines the size of the picture to
+		`display on the card. You can make <<Magic Project>> positioning automatically
+		`the picture (trailing) by setting the <<<x>>> and the <<<y>>> attributes to
+		`<<<-1>>>.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux états
+		
+		`Pour chaque carte en jeu avec un état spécique (comme le <mal d'invocation>),
+		`<<Magic Project>> interprète l'élément <<<\<state-pictures\>>>> pour
+		`récupérer et associer une image relative à cet état.
+		`Si les attributs <<<index>>> et <<<state>>> sont fournis, <<Magic Project>>
+		`va faire une comparaison bit à bit entre la valeur entière à la position
+		`désignée par <<<index>>> dans les registres de la carte et la valeur contenue
+		`dans <<<state>>>. Les attributs <<<width>>> et <<<height>>> permettent de
+		`renseigner <<Magic Project>> sur respectivement la largeur et la hauteur de
+		`l'image à afficher sur la carte. Il est possible de faire en sorte que
+		`<<Magic Project>> positionne automatiquement les images (en les séquençant)
+		`en mettant la valeur <<<-1>>> pour les attributs <<<x>>> et <<<y>>>.
+	-->
+
+	<state-pictures>
+		<state-picture name="state-haste" picture="summon.gif" state="just-summoned" index="state"
+			x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="state-attacking" picture="isattacking.gif"
+			state="declared-as-attacking" index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="state-blocking" picture="isblocking.gif" state="declared-as-blocking"
+			index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="state-blocked" picture="isblocked.gif" state="declared-as-blocked"
+			index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="state-unblocked" picture="isunblocked.gif"
+			state="declared-as-unblocked" index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="untapped-under-condition" picture="untapped-under-condition.gif"
+			state="untapped-under-condition" index="state" x="-1" y="-1" width="12" height="12" />
+		<state-picture name="toassign" picture="toassign.gif" state="0" index="combat.toassign"
+			x="50" y="35" width="16" height="16">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+		<state-picture name="assignedto" picture="assignedto.gif" state="0"
+			index="combat.assignedto" x="34" y="35" width="16" height="16">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="creature" />
+				</and>
+			</display-test>
+		</state-picture>
+	</state-pictures>
+
+	<!-- Associated picture to actions. For undeclared actions, no picture will be used
+		12 x 12 Pictures are advised.
+	-->
+
+	<!--[[apt lang=en]]
+		* Action pictures
+		
+		`In <<Magic the Gathering>> game, some actions are linked to a picture. This is
+		`true for the action "<tap>" for example. The element <<<\<action-pictures\>>>>
+		`declares the different pictures associated to actions.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux actions
+		
+		`Dans le jeu de cartes <<Magic : l'Assemblée>>, certaines actions sont liées à
+		`une image. Cela est vrai pour l'action "<engager>" par exemple. L'élément
+		`<<<\<action-pictures\>>>> déclare les différentes images associées aux actions.
+	-->
+
+	<action-pictures url="http://www.wizards.com/images/Symbols/">
+		<action name="@T" picture="tap.gif" />
+	</action-pictures>
+
+	<!--[[apt lang=en]]
+		* Tooltip filters
+		
+		`The element <<<\<tooltip-filters\>>>> informs <<Magic Project>> of the amount of
+		`informations to show on cards depending on various tests (for example, it is
+		`not necessary to show the colors of a land card since all of them are colorless).
+	-->
+	<!--[[apt lang=fr]]
+		* Les filtres des informations affichées sur les cartes
+		
+		`L'élément <<<\<tooltip-filters\>>>> informe <<Magic Project>> de la quantité
+		`d'informations à afficher sur les cartes en fonction de tests divers (par
+		`exemple, il est inutile d'afficher les couleurs d'un terrain étant donné qu'ils
+		`sont tous incolores).
+	-->
+
+	<tooltip-filters>
+		<tooltip-filter powerANDtoughness="true" states="true" types="true" colors="true"
+			properties="true" damage="true">
+			<filter>
+				<has-idcard idcard="creature" />
+			</filter>
+		</tooltip-filter>
+		<tooltip-filter types="true" properties="true">
+			<filter>
+				<has-idcard idcard="land" />
+			</filter>
+		</tooltip-filter>
+		<!-- the default filter (when previous filters not been verified) -->
+		<tooltip-filter types="true" colors="true" properties="true">
+			<filter />
+		</tooltip-filter>
+	</tooltip-filters>
+
+	<!--[[apt lang=en]]
+		* Static modifiers
+		
+		`The static modifiers are modifications that apply to cards automatically since
+		`they verify the associated test. They are declared with the <<<\<static-modifiers\>>>>
+		`element. We will find in this element, for example, the static modifiers that
+		`give any basic land type the ability to produce the associated mana by tapping it,
+		`the static modifier for a play-using-morph creature or the ability of cards
+		`with <flash> to be cast at any time.
+		
+		`You will find below an example of the static modifier for creatures with
+		`the <morph> ability :
+	-->
+	<!--[[apt lang=fr]]
+		* Les modifieurs statiques
+		
+		`Les modifieurs statiques sont des modifications qui s'appliquent automatiquement
+		`à certaines cartes à partir du moment où ces dernières vérifient les règles
+		`qui sont attachées à ces modifieurs. Il sont déclarés au sein de l'élément
+		`<<<\<static-modifiers\>>>>. On trouve par exemple dans cette élément un modifieur
+		`statique qui permer à tout terrain basique en jeu de produire un mana de la
+		`couleur à laquelle il est associée, un modifieur statique pour pouvoir jouer
+		`les cartes avec la capacité <morph> ou un modifieur statique qui permet aux
+		`cartes qui ont la capacité <flash> d'être jouées à tout moment où un <éphémère>
+		`pourrait être joué.
+		
+		`Vous trouverez ci-dessous l'exemple du modifieur statique relatifs aux
+		`crétures avec la capacité <mue> :
+	-->
+
+	<!-- static modifiers
+		212.6d The basic land types are Plains, Island, Swamp, Mountain, and
+		Forest. If an object uses the words "basic land type," it's referring to
+		one of these sub types. A land with a basic land type has an intrinsic
+		ability to produce colored mana. (See rule 406, "Mana Abilities.") The
+		land is treated as if its text box included, "{oT}: Add [mana symbol] to
+		your mana pool," even if the text box doesn't actually contain text.
+		Plains produce white mana; Islands, blue; Swamps, black; Mountains, red;
+		and Forests, green.
+		
+		212.6e If an effect changes a land's type to one or more of the basic
+		land types, the land no longer has its old land type. It loses any rules
+		text it had in its text box, other than the rules text for the
+		snow-covered ability, and it gains the rules text for the appropriate
+		mana ability for each of its basic land types. Note that this doesn't
+		remove any abilities that were granted to the land by other effects.
+		Changing a land's type doesn't add or remove any types (such as creature)
+		or super types (such as basic and legendary) the land may have. If a land
+		gains one or more land types in addition to its own, it keeps its land
+		types and rules text, and it gains the new land types and mana abilities.
+	-->
+
+	<static-modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="internal" name="add-W-to-plains">
+					<abilities>
+						<ability ref="tap-add-W" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="plains" />
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="internal" name="add-R-to-mountain">
+					<abilities>
+						<ability ref="tap-add-R" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="mountain" />
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="internal" name="add-G-to-forest">
+					<abilities>
+						<ability ref="tap-add-G" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="forest" />
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="internal" name="add-B-to-swamp">
+					<abilities>
+						<ability ref="tap-add-B" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="swamp" />
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="internal" name="add-U-to-island">
+					<abilities>
+						<ability ref="tap-add-U" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="island" />
+			</while>
+		</static-modifier>
+		<!--[[apt start-code]]-->
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-indirection index="power" value="2" operation="set" layer="internal" />
+				<register-indirection index="toughness" value="2" operation="set" layer="internal" />
+				<idcard-modifier idcard="creature" operation="set" layer="internal" />
+				<property-modifier operation="remove" property="all" layer="internal"/>
+				<color-modifier operation="clear" />
+			</modifiers>
+			<while>
+				<and>
+					<has-property property="morph" />
+					<not>
+						<is-face-up />
+					</not>
+				</and>
+			</while>
+		</static-modifier>
+		<!--[[apt end-code]]-->
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="flash">
+					<abilities>
+						<ability ref="cast-flash" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<and>
+					<not>
+						<has-property property="aura"/>
+					</not>
+					<has-property property="flash" />
+				</and>
+			</while>
+		</static-modifier>
+	</static-modifiers>
+
+	<!--[[apt lang=en]]
+		* Abilities declaration
+		
+		`In the element <<<\<abilities\>>>>, we can find all the abilities associated
+		`directly to the general management of the game.
+		
+		`The element starts with the system abilities (declared with the
+		`<<<\<system-ability\>>>> elements) that allow players to play the attack phase,
+		`initializes the game, implements the draw and the discard phase, implements the
+		`mulligan, manages and initializes the turn, manages the lethal damage or the
+		`manaburn, implements the <legend> rule, implements the <enchant world> rules
+		`or the limitation while playing lands.
+		
+		`These declarations are followed by the replacement abilities, which stand for
+		`abilities that trigger on specific actions and replace theses actions dynamically
+		`by other actions. They are declared using the <<<\<replacement-ability\>>>>
+		`element. We will find here the replacement abilities that trigger when a token
+		`goes to the graveyard (in fact it is put out of the game), that trigger when
+		`a card is played using <flashback> (when the spell resolves, it goes out of the
+		`game) or that trigger when a card is played with <buyback> (when the spell
+		`resolves, it goes to its owner's hand).
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des capacités
+		
+		`Dans l'élément <<<\<abilities\>>>>, on peut trouver toutes les capacités
+		`directement associées avec la gestion générale du jeu.
+		
+		`Le contenu de cet élément débute avec les capacités système (déclarées à l'aide
+		`d'éléments <<<\<system-ability\>>>>) qui permettent entre autres aux joueurs
+		`de jouer durant la phase d'attaque, d'initialiser le jeu, d'implémenter les
+		`phases de pioche et de défausse, d'implémenter le <mulligan>, de gérer et
+		`d'initialiser le tour, de gérer les dommages mortels ou les <brûlures de mana>,
+		`d'implémenter la règle des <légendes>, d'implémenter la règles des <enchantements
+		`du monde> ou encore d'imposer la limitation concernant le nombre de terrains
+		`que l'on peut jouer par tour.
+		
+		`Ces déclarations sont suivies par les capacités de remplacement, qui sont
+		`des capacités qui se déclenchent sur l'occurence de certaines actions et
+		`remplacent dynamiquement ces actions par d'autres actions. Elles sont
+		`déclarées via l'élément <<<\<replacement-ability\>>>>. On trouve entre autres
+		`les capacités de remplacement qui gère le déplacement d'une carte <jeton> vers
+		`le cimetière (en réalité une telle carte est retirée de la partie à la place), qui
+		`gère le fait de jouer une carte avec la capacité <flashback> (lorsque le sort
+		`se résout, la carte associée est retirée de la partie) ou qui gère le fait
+		`de jouer une carte avec la capacité <buyback> (lorsque le sort se résout, la
+		`carte associée retourne dans la main de son propriétaire).
+	-->
+
+	<abilities abortionzone="graveyard">
+		<!-- ATTACK DECLARATION : if there is no available attacker,
+			the combat phases are skiped
+		-->
+		<system-ability name="attack-skipper" resolution="hidden">
+			<before-phase phase="declare-attack">
+				<test>
+					<not>
+						<has restriction-zone="play">
+							<test ref="can-attack" />
+						</has>
+					</not>
+				</test>
+			</before-phase>
+			<effects>
+				<target type="currentplayer" />
+				<skip-phase phase="declare-attack" />
+				<skip-phase phase="declare-attacking" />
+				<skip-phase phase="declare-blocking" />
+				<skip-phase phase="combat-deals" />
+				<skip-phase phase="eoc" />
+			</effects>
+		</system-ability>
+		<!-- ATTACK STEP :
+			1) Set the combat step we are (1 = Attacking declaration started)
+			2) We save the beginning of lists corresponding to the combat
+			processes to be able to restore the saved lists as they were
+			before the combat.
+			3) Current players picks one attacking creature. On cancel or on
+			case of no attacking creature found, GOTO (10)
+			4) Set the combat step we are (2 = At least one attacking)
+			5) Modify the state of picked creature as "declared as attacking
+			creature"
+			6) Tap as needed the attacking creature
+			7) If the picked creature has band ability, current player
+			can pick another creature to band with.
+			8) We save this list of attacking creatures.
+			9) Retry another process : GOTO (3)
+			10) End of process.
+		-->
+		<system-ability picture="attack" name="attack-phase" resolution="high">
+			<beginning-of-phase phase="declare-attacking">
+				<test>
+					<equal right="0">
+						<left register="game.static" index="attack-step-index" />
+					</equal>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<!--
+					1) Set the combat step we are (1 = Attacking declaration started)
+					2) Initialize the number of attacking bands to zero.
+					3) To be able to restore the saved lists as they were before
+					the combat we save the state of this list.
+					To accelerate the combat process, we save the first index of
+					saved list containing block assignments :
+					[{assignment source, assignment destination}*]. -->
+				<modify-register register="game.static" index="attack-step-index" value="1"
+					operation="set" />
+				<modify-register register="game.static" index="nb-attacking-group"
+					operation="clear" />
+				<modify-register register="game.static" index="beginning-of-combat-target-lists"
+					value="saved-target-list.size" operation="set" />
+				<modify-register register="game.static" index="assignment-configuration"
+					operation="set">
+					<value>
+						<add right="1" left="saved-target-list.size" />
+					</value>
+				</modify-register>
+				<!--
+					4) To be able to restore the saved int lists as they were
+					before the combat we save the state of this list. :
+					[#damage from source to destination *] -->
+				<modify-register register="game.static" index="assignment-configuration-int"
+					operation="set" value="saved-int-list.size" />
+				<int-list operation="clear" />
+				<int-list operation="save" />
+				<!--
+					
+					MAIN_LOOP :
+					5) Current players picks one attacking creature. On cancel or on
+					case of no attacking creature found, GOTO (10) -->
+				<target type="card" mode="choose" raise-event="false" restriction-zone="play"
+					hop="13" cancel="true">
+					<test ref="can-attack" />
+				</target>
+				<!--
+					
+					6) Generate the event "declared-attacking" -->
+				<generate-event name="declared-attacking" attacking="target-list.last" />
+				<!--
+					
+					7)
+					IF (picked creature has been validated to attack) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<equal left="declared-as-attacking">
+							<right>
+								<and left="declared-as-attacking">
+									<right register="target-list.last" index="state" />
+								</and>
+							</right>
+						</equal>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN
+					BAND_PROCESS :
+					IF (the picked creature has band ability)  -->
+				<if-then-hop elsehop="3">
+					<test>
+						<has-property property="banding" card="target-list.last" />
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (current player can pick another creature to band with) -->
+				<target type="card" hop="2" mode="choose" raise-event="false"
+					restriction-zone="play" cancel="true">
+					<test ref="can-attack" />
+				</target>
+				<hop value="-4" />
+				<!--
+					ENDIF
+					
+					1) We save this band of attacking creatures. -->
+				<target-list operation="save" />
+				<target-list operation="clear" />
+				<!--
+					
+					2) Increment the number of attacking bands. -->
+				<modify-register operation="add" register="game.static" index="nb-attacking-group"
+					value="1" />
+				<!--
+					
+					3) Retry another process : GOTO MAIN_LOOP (5) -->
+				<hop value="-9" />
+				<!--
+					ELSE (remove if from our target list) -->
+				<target-list operation="remove-last" />
+				<!--
+					IF (we are in "BAND_PROCESS" process) THEN (GOTO BAND_PROCESS) -->
+				<if-then-hop elsehop="-8">
+					<test>
+						<equal right="0" left="target-list.size" />
+					</test>
+				</if-then-hop>
+				<!--
+					ENDIF
+					ENDIF
+					
+					8) Retry another process : GOTO MAIN_LOOP (5) -->
+				<hop value="-12" />
+				<!--
+					
+					IF (it exist any "attacks if able" non attacking creatures) -->
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<test ref="can-attack" />
+								<has-property property="attacks-if-able" />
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (go to the attacking creature choice) -->
+				<hop value="-14" />
+				<!--
+					ENDIF
+					
+					<target type="card" mode="all" restriction-zone="play"
+					
+					IF (no picked creature has been validated to attack) -->
+				<if-then-hop elsehop="2">
+					<test>
+						<equal left="0">
+							<right register="game.static" index="nb-attacking-group" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (all attack phases are skipped) -->
+				<next-phase phase-index="postcombat-main" />
+				<!--
+					ENDIF
+					
+					11) Prepare the "block-X-if-able" target-list -->
+				<target-list operation="clear" />
+				<target-list operation="save" /><!-- 
+					
+					12) End of process. -->
+			</effects>
+		</system-ability>
+		<!-- BLOCK STEP :
+			1) Set the combat step we are (3 = the blocking declaration)
+			2) Defending player chooses an attacking creature. On cancel or
+			on case of no more attacking creature can be picked GOTO (9)
+			3) Then defending player chooses the blocking creature. On
+			cancel or on case of no blocking creature able to block the
+			previously creature GOTO (2)
+			4) Add the state "blocked" to the picked attacking creature.
+			5) Add the state "blocking creature" to the picked blocking creature.
+			6) Save this configuration.
+			7) Restart the process GOTO MAIN_LOOP (2)
+			8) End process : made the state "unblocked creature" to
+			attacking not blocked during this process.
+		-->
+		<system-ability picture="block" name="block-phase" resolution="high">
+			<beginning-of-phase phase="declare-blocking">
+				<test>
+					<equal right="2">
+						<left register="game.static" index="attack-step-index" />
+					</equal>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<!--
+					0) Save the saved target-list state-->
+				<modify-register operation="set" register="stack" index="0">
+					<value>
+						<minus left="saved-target-list.size" right="1" />
+					</value>
+				</modify-register>
+
+				<!--
+					1) Set the combat step we are (3 = the blocking declaration)-->
+				<modify-register operation="set" register="game.static" index="attack-step-index"
+					value="3" />
+
+				<!-- 
+					2) Consider "attacks if able" abilities
+				-->
+				<target-list operation="clear" />
+				<if-then-hop elsehop="11">
+					<test>
+						<sup right="0">
+							<left>
+								<target-list operation="size">
+									<list-index register="stack" index="0" />
+								</target-list>
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+
+				<!-- 
+					2a) Load the couple {blocking-if-able creature / attacking creature}
+				-->
+				<target-list operation="load" index="0">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<target-list operation="load" index="1">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<if-then-hop elsehop="4">
+					<test>
+						<and>
+							<replace-tested by="target-list.last" ref="tested-is-attacking" />
+							<replace-tested by="target-list.first"
+								ref="is-valid-blocking-creature-for-targeted-attacking" />
+						</and>
+					</test>
+				</if-then-hop>
+				<!-- 
+					2b) The blocking-if-able creature is valid -->
+				<target-list operation="clear" />
+				<target-list operation="load" index="1">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<target-list operation="load" index="0">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<target-list operation="remove-first">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<target-list operation="remove-first">
+					<list-index register="stack" index="0" />
+				</target-list>
+				<!-- 
+					2c) Generate the event "declared-blocking" -->
+				<generate-event name="declared-blocking" blocking="target-list.last"
+					attacking="target-list.first" />
+				<hop value="-11" />
+
+				<!-- 
+					2d) Remove the "block-X-if-able target-list -->
+				<target-list operation="remove">
+					<list-index register="stack" index="0" />
+				</target-list>
+
+				<!--
+					
+					MAIN_LOOP :
+					1bis) Is there at least one untapped creature in play and
+					controlled by non-current player -->
+				<target-list operation="clear" />
+				<if-then-hop elsehop="5">
+					<test ref="has-at-least-one-valid-blocking-creature" />
+				</if-then-hop>
+				<!--
+					
+					2) Defending player chooses an attacking creature. On cancel or
+					on case of no more attacking creature can be picked
+					GOTO END_PROCESS  -->
+				<target type="card" mode="opponentchoose" hop="4" raise-event="false"
+					restriction-zone="play" cancel="true">
+					<test ref="tested-is-attacking" />
+				</target>
+				<!--
+					
+					3) Then defending player chooses the blocking creature. On
+					cancel or on case of no blocking creature able to block the
+					previously creature GOTO (2) -->
+				<target type="card" mode="opponentchoose" hop="-3" raise-event="false"
+					restriction-zone="play" cancel="true">
+					<test ref="is-valid-blocking-creature-for-targeted-attacking" />
+				</target>
+				<!--
+					
+					4) Generate the event "declared-blocking" -->
+				<generate-event name="declared-blocking" blocking="target-list.last"
+					attacking="target-list.first" />
+				<!--
+					
+					5) Restart the process GOTO MAIN_LOOP -->
+				<hop value="-5" />
+				<!--
+					
+					END_PROCESS    :
+					
+					8) Add the state "unblocked creature" to attacking creatures
+					not blocked during this process -->
+				<target type="card" mode="all" restriction-zone="play" cancel="true">
+					<test>
+						<and>
+							<test ref="tested-is-attacking" />
+							<not ref="tested-is-blocked" />
+						</and>
+					</test>
+				</target>
+				<modify-register operation="or" register="target" index="state"
+					value="declared-as-unblocked" />
+			</effects>
+		</system-ability>
+
+		<!--
+			
+			END OF COMBAT STEP :
+			1) re-arrange attacking and blocking grouping creatures blocking
+			a creature of the same group to obtain a list of targets :
+			{'group of attacking i','group of blocking i',
+			'group of attacking i+1','group of blocking i+1',...}.
+			3) Initialize the "combat.to-assign" register of all attacking/
+			blocking creatures to the power value.
+			4) Initialize the "combat.assigned-to" register of all attacking/
+			blocking creatures to 0.
+			COMBAT : start the native combat process : exchange
+			power/toughness of attacking list and blocker list -->
+		<system-ability name="combat-phase" resolution="hidden">
+			<beginning-of-phase phase="eoc" />
+			<effects>
+				<!-- To accelerate the combat process, we save the first index of
+					saved list containing block assignments :
+					{[attacking*] [blocking*]}*. -->
+				<modify-register register="stack" index="1" operation="set">
+					<value>
+						<add left="2">
+							<right register="game.static" index="beginning-of-combat-target-lists" />
+						</add>
+					</value>
+				</modify-register>
+				<!-- To avoid to have to duplicate the code of this process, we
+					use a part of our registers as flag for target action :
+					<target mode="stack0-choose".../> -->
+				<modify-register register="stack" index="0" operation="set" value="currentplayer" />
+				<!--
+					
+					IF (it's the first damage assignment sub step )'-->
+				<if-then-hop elsehop="9">
+					<test>
+						<equal right="3">
+							<left register="game.static" index="attack-step-index" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (
+					1) Set the combat step we are (4 = the end of combat - sub-step1) -->
+				<modify-register register="game.static" index="attack-step-index" operation="set"
+					value="4" />
+				<!--
+					
+					2) Group creatures attacking/blocking to obtain a list of target list :
+					{'group of attacking i','group of blocking i',
+					'group of attacking i+1','group of blocking i+1',...}. -->
+				<target-list operation="collapse-combat">
+					<list-index register="game.static" index="beginning-of-combat-target-lists" />
+					<nb-attacking-group register="game.static" index="nb-attacking-group" />
+				</target-list>
+				<!--
+					
+					3) Create an empty list that would contain the assignment configurations -->
+				<target-list operation="save">
+					<list-index register="game.static" index="beginning-of-combat-target-lists" />
+				</target-list>
+				<!--
+					
+					3bis) Check for first-strike and double strike creature in
+					play and we save this list to be able to support the
+					502.28c rule. -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<or>
+								<has-property property="first-strike" />
+								<has-property property="double-strike" />
+							</or>
+							<or>
+								<test ref="tested-is-attacking" />
+								<test ref="tested-is-blocking" />
+							</or>
+						</and>
+					</test>
+				</target>
+				<!--
+					
+					4) Save the first-strike/double strike list -->
+				<target-list operation="save">
+					<list-index register="game.static" index="beginning-of-combat-target-lists" />
+				</target-list>
+				<!-- ....... FROM THIS POINT SAVED TARGET LISTS ARE .......................
+					|..................................|.....................................|
+					| INDEX                            |  CONTENT                            |
+					|..................................|.....................................|
+					| beginning-of-combat-target-lists | Double/First strike having attacked |
+					| (in register 'game.static') = T  | during the first sub step.          |
+					|..................................|.....................................|
+					| assignment-configuration         | assignment configuration, a pair of|
+					| = T+1                            | targets : {source,destination}      |
+					|..................................|.....................................|
+					| T+2                              | First declared band of attacking    |
+					|                                  | creatures.                          |
+					|..................................|.....................................|
+					| T+3                              | First declared band of creatures    |
+					|                                  | blocking the previous band of       |
+					|                                  | attacking creatures.                |
+					|..................................|.....................................|
+					| T+ 2n, n=[1..m], m=amount block  | n the declared band of attacking    |
+					| done in the block phase          | creatures.                          |
+					|..................................|.....................................|
+					| T+ 2n+1, n=[1..m], m=amount block| n the declared band of creatures    |
+					| done in the block phase          | blocking the previous band of       |
+					|                                  | attacking creatures.                |
+					|__________________________________|_____________________________________|-->
+				<!--........ FROM THIS POINT SAVED INTEGER LISTS ARE ......................
+					|..................................|.....................................|
+					| INDEX                            |  CONTENT                            |
+					|..................................|.....................................|
+					| assignment-configuration-int     | Contains a list of integer (index i)|
+					| (in register 'game.static')      | corresponding to the assigned       |
+					|                                  | damages from the creature A to the  |
+					|                                  | target B (creature or defending     |
+					|                                  | player). i is the the index of      |
+					|                                  | integer. {A,B} is the saved pair at |
+					|                                  | the index 2i in the saved list T+1  |
+					|__________________________________|_____________________________________|-->
+				<!--
+					
+					IF (There is one or several first-strike, double strike creatures) -->
+				<if-then-hop elsehop="3">
+					<test>
+						<different right="0" left="target-list.size" />
+					</test>
+				</if-then-hop>
+				<!--
+					THEN ( Add a second sub step by replacing the next end of combat step. -->
+				<next-phase phase="eoc" />
+				<hop value="3" />
+				<!--
+					ELSE ( Skip the step reserved to the first-strike or double
+					strike creatures and restart the process from the
+					beginning)
+					END IF -->
+				<!--
+					ELSE (
+					1) Set the combat step we are (5 = the end of combat - sub-step2) -->
+				<modify-register register="game.static" index="attack-step-index" operation="set"
+					value="5" />
+				<!--
+					
+					2) Check for double strike and creatures having not yet
+					assigned damage during the first step. -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<!-- 502.28c Removing double strike from a creature during
+								the first combat damage step will stop it from
+								assigning combat damage in the second combat damage
+								step.
+								
+								502.28d Giving double strike to a creature with first
+								strike after it has already put first strike combat
+								damage onto the stack in the first combat damage step
+								will allow the creature to assign combat damage in
+								the second combat damage step.
+							-->
+							<or>
+								<has-property property="double-strike" />
+								<not>
+									<target-list operation="contains" target="tested">
+										<list-index register="game.static"
+											index="beginning-of-combat-target-lists" />
+									</target-list>
+								</not>
+							</or>
+							<or>
+								<test ref="tested-is-attacking" />
+								<test ref="tested-is-blocking" />
+							</or>
+						</and>
+					</test>
+				</target>
+				<!--
+					END IF -->
+				<!--
+					
+					2) Initialize with creature's power, the amount of combat damage to
+					be assigned . -->
+				<modify-register register="target" index="combat.toassign" operation="set">
+					<value register="tested" index="power" />
+				</modify-register>
+				<!--
+					
+					3) First, unblocked creatures do damage to defending player. -->
+				<target-list operation="filter">
+					<test>
+						<and>
+							<test ref="tested-is-unblocked" />
+							<test ref="tested-has-combat-damage-to-assign" />
+						</and>
+					</test>
+				</target-list>
+				<!--
+					WHILE (size of list > 0) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<!--
+					DO -->
+				<!--
+					1) Save the configuration attacking -> defending player -->
+				<target-list operation="save" target="target-list.last">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<target-list operation="save" target="currentplayer.opponent">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<!--
+					
+					2) Save the amount of assigned damage -->
+				<int-list operation="save">
+					<value register="target-list.last" index="combat.toassign" />
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+				<!--
+					
+					3) Set to 0 the amount of remaining damage to be assigned
+					by this attacking creature. -->
+				<modify-register register="target-list.last" index="combat.toassign"
+					operation="clear" />
+				<!--
+					
+					4) Remove this attacking creature from the current list -->
+				<target-list operation="remove-last" />
+				<hop value="-6" />
+				<!--
+					END WHILE -->
+				<!--
+					
+					MAIN_PROCESS :
+					
+					5) Attacking player picks attacking, blocking creatures where
+					the attacking player can choose the damage assignment.
+				-->
+				<target-list operation="clear" />
+				<target type="card" hop="32" mode="stack0-choose" raise-event="false"
+					restriction-zone="play" cancel="false">
+					<test>
+						<and>
+							<test ref="tested-has-combat-damage-to-assign" />
+							<or>
+								<and>
+									<test ref="tested-is-blocking" />
+									<!-- Manage case of band attacking creature :
+										Attacking player can choose damage assignment
+										from a blocking creature to an attacking one
+										only if this one has band property or is
+										grouped with a band one.-->
+									<or>
+										<and>
+											<equal right="currentplayer">
+												<left register="stack" index="0" />
+											</equal>
+											<has restriction-zone="play">
+												<and>
+													<test ref="priv_blocked-by-tested-counter" />
+													<has-property property="banding" />
+												</and>
+											</has>
+										</and>
+										<and>
+											<equal right="currentplayer.opponent">
+												<left register="stack" index="0" />
+											</equal>
+											<not>
+												<has restriction-zone="play">
+													<and>
+														<test ref="priv_blocked-by-tested-counter" />
+														<has-property property="banding" />
+													</and>
+												</has>
+											</not>
+										</and>
+									</or>
+								</and>
+								<and>
+									<test ref="tested-is-attacking" />
+									<!-- Manage case of band blocking creature :
+										Attacking player can choose damage assignment
+										from an attacking creature to the blocking one
+										only if this one has not band property and
+										is not banded with another one with band.-->
+									<or>
+										<and>
+											<equal right="currentplayer">
+												<left register="stack" index="0" />
+											</equal>
+											<not>
+												<has restriction-zone="play">
+													<and>
+														<test ref="priv_blocking-tested-counter" />
+														<has-property property="banding" />
+													</and>
+												</has>
+											</not>
+										</and>
+										<and>
+											<equal right="currentplayer.opponent">
+												<left register="stack" index="0" />
+											</equal>
+											<has restriction-zone="play">
+												<and>
+													<test ref="priv_blocking-tested-counter" />
+													<has-property property="banding" />
+												</and>
+											</has>
+										</and>
+									</or>
+								</and>
+							</or>
+						</and>
+					</test>
+				</target>
+				<!--
+					
+					6) Before prompting to the player the destination of damages
+					from the previous creature (attacking or blocking one), we
+					verify there is more than one blocking or blocked creature
+					possibility of destination. If there is only one possibility,
+					we do it automatically. If attacking creature has trample we
+					ignore this process.
+					IF (Picked creature is attacking and has not trample) -->
+				<if-then-hop elsehop="3">
+					<test ref="first-target-is-attacking" />
+				</if-then-hop>
+				<!--
+					THEN( -->
+				<target type="dealtable" mode="all" restriction-zone="play">
+					<test>
+						<or>
+							<!-- Attacking player can pick the defending player
+								but only if all creatures have received enough
+								damage and if the previous creature was
+								attacking with trample ability.
+							-->
+							<and>
+								<has-property property="trample" card="target-list.first" />
+								<is-player target="tested" />
+								<is-this player="currentplayer.opponent" />
+								<not>
+									<has restriction-zone="play">
+										<and>
+											<test ref="tested-is-blocking" />
+											<inf>
+												<left>
+													<add>
+														<left register="tested"
+															index="combat.assignedto" />
+														<right register="tested" index="damage" />
+													</add>
+												</left>
+												<right register="tested" index="toughness" />
+											</inf>
+											<target-list operation="contains" target="tested">
+												<list-index>
+													<add right="1">
+														<left>
+															<target-list
+																operation="index-of-saved-list" target="target-list.first">
+																<list-index register="stack"
+																	index="1" />
+															</target-list>
+														</left>
+													</add>
+												</list-index>
+											</target-list>
+										</and>
+									</has>
+								</not>
+							</and>
+							<and>
+								<not>
+									<is-player target="tested" />
+								</not>
+								<has-idcard idcard="creature" />
+								<and>
+									<!-- Attacking player has to pick a blocking creature.
+									-->
+									<test ref="tested-is-blocking" />
+									<target-list operation="contains" target="tested">
+										<list-index>
+											<add right="1">
+												<left>
+													<target-list operation="index-of-saved-list"
+														target="target-list.first">
+														<list-index register="stack" index="1" />
+													</target-list>
+												</left>
+											</add>
+										</list-index>
+									</target-list>
+								</and>
+							</and>
+						</or>
+					</test>
+				</target>
+				<hop value="3" />
+				<!--
+					ELSE IF (Picked creature is blocking) -->
+				<if-then-hop elsehop="2">
+					<test ref="first-target-is-blocking" />
+				</if-then-hop>
+				<!--
+					THEN( -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<test ref="tested-is-attacking" />
+							<target-list operation="contains" target="target-list.first">
+								<list-index>
+									<add left="1">
+										<right>
+											<target-list operation="index-of-saved-list"
+												target="tested">
+												<list-index register="stack" index="1" />
+											</target-list>
+										</right>
+									</add>
+								</list-index>
+							</target-list>
+						</and>
+					</test>
+				</target>
+				<!--
+					END IF -->
+				<!--
+					
+					7) If only one possibility has been found, we automatically
+					save the configuration and restart the process.
+					
+					IF (number of blocked is ONE -> target-list.size=2) -->
+				<if-then-hop elsehop="7">
+					<test>
+						<and>
+							<equal right="2" left="target-list.size" />
+							<or>
+								<test ref="first-target-is-blocking" />
+								<is-player target="target-list.last" />
+								<and>
+									<has-property property="trample" card="target-list.first" />
+									<inf-equal>
+										<left>
+											<add>
+												<left register="target-list.last"
+													index="combat.assignedto" />
+												<right>
+													<add>
+														<left register="target-list.first"
+															index="combat.toassign" />
+														<right register="target-list.last" index="damage" />
+													</add>
+											</right>
+											</add>
+										</left>
+										<right register="target-list.last" index="toughness" />
+									</inf-equal>
+								</and>
+							</or>
+						</and>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (
+					1) Save the configuration : source -> destination ) -->
+				<target-list operation="save" target="target-list.first">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<target-list operation="save" target="target-list.last">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<int-list operation="save">
+					<value register="target-list.first" index="combat.toassign" />
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+				<!--
+					2) Set combat damages assigned to the other creature -->
+				<modify-register register="target-list.last" index="combat.assignedto"
+					operation="add">
+					<value register="target-list.first" index="combat.toassign" />
+				</modify-register>
+				<!--
+					3) Set combat damages to assign to 0 for the creature source -->
+				<modify-register register="target-list.first" index="combat.toassign"
+					operation="clear" />
+				<!--
+					
+					4) Restart the main process, GOTO MAIN_PROCESS -->
+				<hop value="-13" />
+				<!--
+					ELSE IF (there is no available destination of damage : abortion)-->
+				<if-then-hop elsehop="3">
+					<test>
+						<equal right="1" left="target-list.size" />
+					</test>
+				</if-then-hop>
+				<!-- 
+					1) Set combat damages to assign to 0 for the creature source -->
+				<modify-register register="target-list.first" index="combat.toassign"
+					operation="clear" /><!-- 
+					
+					2) Restart the main process, GOTO MAIN_PROCESS -->
+				<hop value="-16" />
+				<!--
+					END IF -->
+				<!--
+					
+					SKIP_AUTOMATIC_assignment    :
+					
+					8) Attacking player picks the [blocking, attacking] creatures
+					to damage. The creature must be :
+					* in play, blocking, in the group placed at index i+1
+					where i is the index of the group containing the
+					attacking creature picked previously.
+					* in play, attacking, in the group placed at index i-1
+					where i is the index of the group containing the
+					blocking creature picked previously.
+					* He/She can picks a player too if the previously picked
+					creature was attacking with trample ability and only if
+					all defending creatures have (damage damage+assigned >=
+					toughness).
+					* If no possible choice, or cancel, GOTO MAIN_PROCESS -->
+				<target-list operation="remove-queue" />
+				<target type="dealtable" hop="-18" mode="stack0-choose" raise-event="false"
+					restriction-zone="play" cancel="false">
+					<test>
+						<or>
+							<!-- Attacking player can pick the defending player
+								but only if all creatures have received enough
+								damage and if the previous creature was
+								attacking with trample ability.
+							-->
+							<and>
+								<test ref="first-target-is-attacking" />
+								<has-property property="trample" card="target-list.first" />
+								<is-player target="tested" />
+								<is-this player="currentplayer.opponent" />
+								<not>
+									<has restriction-zone="play">
+										<and>
+											<test ref="tested-is-blocking" />
+											<inf>
+												<left>
+													<add>
+														<left register="tested"
+															index="combat.assignedto" />
+														<right register="tested" index="damage" />
+													</add>
+												</left>
+												<right register="tested" index="toughness" />
+											</inf>
+											<target-list operation="contains" target="tested">
+												<list-index>
+													<add right="1">
+														<left>
+															<target-list
+																operation="index-of-saved-list" target="target-list.first">
+																<list-index register="stack"
+																	index="1" />
+															</target-list>
+														</left>
+													</add>
+												</list-index>
+											</target-list>
+										</and>
+									</has>
+								</not>
+							</and>
+							<and>
+								<not>
+									<is-player target="tested" />
+								</not>
+								<has-idcard idcard="creature" />
+								<or>
+									<and>
+										<!-- The precedent creature was an blocking
+											one. So attacking player has to pick an
+											attacking creature.
+										-->
+										<test ref="first-target-is-blocking" />
+										<test ref="tested-is-attacking" />
+										<target-list operation="contains"
+											target="target-list.first">
+											<list-index>
+												<add right="1">
+													<left>
+														<target-list operation="index-of-saved-list"
+															target="tested">
+															<list-index register="stack" index="1" />
+														</target-list>
+													</left>
+												</add>
+											</list-index>
+										</target-list>
+									</and>
+									<and>
+										<!-- The precedent creature was an attacking
+											one. So attacking player has to pick a
+											blocking creature.
+										-->
+										<test ref="first-target-is-attacking" />
+										<test ref="tested-is-blocking" />
+										<target-list operation="contains" target="tested">
+											<list-index>
+												<add right="1">
+													<left>
+														<target-list operation="index-of-saved-list"
+															target="target-list.first">
+															<list-index register="stack" index="1" />
+														</target-list>
+													</left>
+												</add>
+											</list-index>
+										</target-list>
+									</and>
+								</or>
+							</and>
+						</or>
+					</test>
+				</target>
+				<!--
+					
+					9) decrement the amount of combat damage remaining to assign -->
+				<modify-register register="target-list.first" index="combat.toassign"
+					operation="minus" value="1" />
+				<!--
+					
+					10) increment the amount of combat damage assigned to this card -->
+				<modify-register register="target-list.last" index="combat.assignedto"
+					operation="add" value="1" />
+				<!--
+					
+					11) Save the configuration : source -> destination
+					
+					IF (the creature source has already assigned damage) -->
+				<!--
+					1) Prepare the list of integer that would contain the
+					occurrences. -->
+				<int-list operation="clear" />
+				<!--
+					
+					2) List occurrences of the current target list within the
+					saved containing current list of assignments done.
+					The list of occurrence is appended in the current list
+					of integer list.-->
+				<target-list operation="counter">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<!--
+					
+					3) Check all occurrences and verify the indexes are even. -->
+				<if-then-hop elsehop="6">
+					<test>
+						<sup right="0" left="int-list.size" />
+					</test>
+				</if-then-hop>
+				<if-then-hop elsehop="3">
+					<test>
+						<different>
+							<left>
+								<div-truncated right="2" left="int-list.first" />
+							</left>
+							<right>
+								<div-rounded right="2" left="int-list.first" />
+							</right>
+						</different>
+					</test>
+				</if-then-hop>
+				<int-list operation="remove-first" />
+				<hop value="-3" />
+				<!--
+					THEN (Increment the damage assignment of the precedent configuration) -->
+				<int-list operation="add" value="1">
+					<list-index register="game.static" index="assignment-configuration-int" />
+					<index>
+						<div-truncated right="2" left="int-list.first" />
+					</index>
+				</int-list>
+				<hop value="4" />
+				<!--
+					ELSE (add the new configuration source -> destination ) -->
+				<target-list operation="save" target="target-list.first">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<target-list operation="save" target="target-list.last">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<int-list operation="save" value="1">
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+				<!--
+					END IF -->
+				<!--
+					
+					12) Restart the main process, GOTO MAIN_PROCESS -->
+				<hop value="-32" />
+				<!--
+					
+					END_PROCESS : -->
+				<!--
+					
+					IF (The active player is the attacking player) -->
+				<if-then-hop elsehop="3">
+					<test>
+						<equal right="currentplayer">
+							<left register="stack" index="0" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (Now the defending player can choose assignments -->
+				<modify-register register="stack" index="0" operation="set"
+					value="currentplayer.opponent" />
+				<hop value="-35" />
+				<!--
+					END IF -->
+			</effects>
+		</system-ability>
+
+		<!-- END OF COMBAT : resolve the damage assignment of combat -->
+		<system-ability name="do-combat-assignment" resolution="hidden">
+			<end-of-phase phase="eoc">
+				<test>
+					<sup right="0">
+						<left register="game.static" index="attack-step-index" />
+					</sup>
+				</test>
+			</end-of-phase>
+			<effects>
+				<!--
+					1) Load the list containing the configuration of assignments :
+					(source -> destination) -->
+				<target-list operation="load">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+				<target-list operation="clear">
+					<list-index register="game.static" index="assignment-configuration" />
+				</target-list>
+
+				<!--
+					2) Load the list containing the configuration of assignments :
+					damage amount -->
+				<int-list operation="load">
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+				<int-list operation="clear">
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+
+				<!--
+					3) Do damage source -> destination of first configuration
+					WHILE (target-list.size >0) -->
+				<if-then-hop elsehop="11">
+					<test>
+						<different left="0" right="target-list.size" />
+					</test>
+				</if-then-hop>
+				<!--
+					DO -->
+				<!-- check wither -->
+				<if-then-hop elsehop="5">
+					<test>
+						<has-property property="wither" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<!-- IF 
+						first creature has wither, add -1/-1 counters  -->
+				<target-list operation="remove-first" />
+				<repeat value="int-list.first"/>
+				<!-- BUG: add-object adds to the whole list, we only want to add to the first element -->
+				<add-object object-name="-1/-1"/>	
+				<hop value="3"/>
+				<!--
+					ELSE 
+						do damage -->
+				<assign-damage-list value="int-list.first" type="damage-combat" />
+				<target-list operation="remove-first" />
+				
+				<!--
+					2) Remove the first configuration -->
+				<target-list operation="remove-first" />
+				<int-list operation="remove-first" />
+				<hop value="-10" />
+				<!--
+					END WHILE -->
+			</effects>
+		</system-ability>
+
+		<!-- 306.2. A creature is removed from combat if it leaves play (such
+			as by being destroyed or removed from the game), if it regenerates
+			(see rule 419.6b), if its controller changes, if it stops being a
+			creature, or if an effect removes it from combat. Removed from
+			combat means the creature stops being an attacking, blocking,
+			blocked, and/or unblocked creature.
+		-->
+		<system-ability name="remove-from-combat-moved" resolution="hidden_high">
+			<moved-card>
+				<source-test ref="tested-in-combat" />
+			</moved-card>
+			<effects>
+				<modify-register operation="and" register="context.card" index="state" value="15" />
+			</effects>
+		</system-ability>
+		<system-ability name="remove-from-combat-no-more-creature" resolution="hidden_high">
+			<modified-idcard idcard="creature">
+				<test ref="tested-in-combat" />
+			</modified-idcard>
+			<effects>
+				<modify-register operation="and" register="context.card" index="state" value="15" />
+			</effects>
+		</system-ability>
+
+		<!-- REMOVE FROM COMBAT : at the beginning of second main phase, we
+			remove from combat the creatures -->
+		<system-ability name="remove-from-combat" resolution="hidden">
+			<before-phase phase="main">
+				<test>
+					<sup right="0">
+						<left register="game.static" index="attack-step-index" />
+					</sup>
+				</test>
+			</before-phase>
+			<effects>
+				<!--
+					1) Remove all "blocking", "attacking","unblocked" and "blocked"
+					state. -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test ref="tested-in-combat" />
+				</target>
+				<modify-register register="target" operation="and" index="state" value="15" />
+				<!--
+					
+					2) Ensure there is no more damage to assign or assigned -->
+				<modify-register register="target" operation="clear" index="combat.toassign" />
+				<modify-register register="target" operation="clear" index="combat.assignedto" />
+				<!--
+					
+					2) Restore the the target-lists as they were before the combat.
+					WHILE (saved-target-list.size > beginning-of-combat-target-lists) -->
+				<if-then-hop elsehop="3">
+					<test>
+						<different left="saved-target-list.size">
+							<right register="game.static" index="beginning-of-combat-target-lists" />
+						</different>
+					</test>
+				</if-then-hop>
+				<!--
+					DO (Remove the last saved list)-->
+				<target-list operation="remove">
+					<list-index register="game.static" index="beginning-of-combat-target-lists" />
+				</target-list>
+				<hop value="-2" />
+				<!--
+					END WHILE -->
+				<!--
+					
+					3) Restore the integer lists as they were before the combat.
+					WHILE (saved-target-list.size > beginning-of-combat-target-lists) -->
+				<if-then-hop elsehop="3">
+					<test>
+						<different left="saved-int-list.size">
+							<right register="game.static" index="assignment-configuration-int" />
+						</different>
+					</test>
+				</if-then-hop>
+				<!--
+					DO (Remove the last saved list)-->
+				<int-list operation="remove">
+					<list-index register="game.static" index="assignment-configuration-int" />
+				</int-list>
+				<hop value="-2" />
+				<!--
+					END WHILE -->
+			</effects>
+		</system-ability>
+		<!-- UPDATE DAMAGE of CARD : when receive signal, add damage to card -->
+		<system-ability name="damaged-card" resolution="hidden">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<not>
+							<is-player target="tested" />
+						</not>
+						<in-zone zone="play" />
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!--
+					IF (it is not a destruction
+					or is a simple damage, check protection) -->
+				<if-then-hop elsehop="2">
+					<test>
+						<or>
+							<equal left="destroy" right="context.int" />
+							<and>
+								<in-zone zone="play" card="context.card" />
+								<sup left="context.int" right="0" />
+								<not>
+									<has-property property="damage-reduced-to-0"
+										card="context.card" />
+								</not>
+								<not>
+									<has-property property="protection-from-color"
+										card="context.card2" color-mask="context.card" />
+								</not>
+								<not>
+									<has-property property="protection-from-idcard"
+										card="context.card2" idcard-mask="context.card" />
+								</not>
+								<not>
+									<has-property property="protection-from-property"
+										card="context.card2" property-mask="context.card" />
+								</not>
+								<or>
+									<not>
+										<has-property property="creature-damage-reduced-to-0"
+											card="context.card" />
+									</not>
+									<not>
+										<has-idcard idcard="creature" card="context.card2" />
+									</not>
+								</or>
+							</and>
+						</or>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN -->
+				<modify-register operation="add" register="context.card" index="damage"
+					value="context.int" />
+				<!--
+					ENDIF -->
+			</effects>
+		</system-ability>
+		<!-- UPDATE DAMAGE : when receive signal, add damage to player -->
+		<system-ability name="damaged-player" resolution="hidden">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-player target="tested" />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<modify-register operation="add" register="context.player" index="damage"
+					value="context.int" />
+			</effects>
+		</system-ability>
+		<!-- DISCARD : if (#cards > maximum) -> discard, restart a cleanup phase -->
+		<system-ability picture="discard" name="discard-phase" resolution="high">
+			<beginning-of-phase phase="cleanup">
+				<test ref="priv_currentplayer-has-to-discard" />
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="5">
+					<test ref="priv_currentplayer-has-to-discard" />
+				</if-then-hop>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="currentplayer" />
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+				<target-list operation="clear" />
+				<hop value="-4" />
+			</effects>
+		</system-ability>
+		<!-- DRAW : current player draw a card -->
+		<system-ability name="draw-phase" picture="draw">
+			<beginning-of-phase phase="draw" />
+			<effects>
+				<target type="currentplayer" />
+				<action ref="draw-a-card" />
+			</effects>
+		</system-ability>
+		<!-- INIT GAME : each player draw seven cards -->
+		<system-ability name="game-init" resolution="hidden">
+			<beginning-of-phase phase="upkeep" />
+			<!-- set the zone visibility for players -->
+			<effects>
+				<target type="player" mode="all" />
+				<!-- shuffle the libraries -->
+				<shuffle zone="library" />
+				<!-- set the zone visibility for players -->
+				<show-zone zone="stack" for="controller" />
+				<show-zone zone="stack" for="opponent" />
+				<show-zone zone="play" for="controller" />
+				<show-zone zone="play" for="opponent" />
+				<show-zone zone="phased-out" for="controller" />
+				<show-zone zone="phased-out" for="opponent" />
+				<show-zone zone="hand" for="controller" />
+				<show-zone zone="graveyard" for="controller" />
+				<show-zone zone="graveyard" for="opponent" />
+				<!-- side, stack, DBZ, TBZ are always visible for both players-->
+				<!-- useless since, by default, zone are hidden -->
+				<hide-zone zone="hand" for="opponent" />
+				<hide-zone zone="library" for="controller" />
+				<hide-zone zone="library" for="opponent" />
+				<!-- each player draws 7 cards -->
+				<repeat value="7" />
+				<move-player-card from="library" to="hand" controller="controller" />
+				<!-- initialize the turn ID to 0 -->
+				<modify-register register="game.static" index="turnid" operation="clear" />
+				<!-- 101.5. Once both players are satisfied with their hands, the
+					starting player takes his or her turn. The player who plays
+					first skips the draw step (see rule 304, "Draw Step") of his
+					or her first turn.
+				-->
+				<target-list operation="clear" />
+				<target type="currentplayer" />
+				<skip-phase phase="draw" />
+				<unregister-this />
+			</effects>
+		</system-ability>
+		<!-- MULLIGAN for the non starting player -->
+		<system-ability name="mulligan" resolution="hidden_low">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller" />
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer.opponent" />
+				<!-- IF (can do mulligan one more time) -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup right="0">
+							<left register="currentplayer.opponent" index="mulligan" />
+						</sup>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- is this player wants to take a mulligan? -->
+				<msg type="yesno" controller="currentplayer.opponent">
+					<text>%mulligan_question</text>
+				</msg>
+				<!-- IF (answer==yes) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<equal right="0">
+							<left register="stack" index="0" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- put cards of hand and put them in the library -->
+				<repeat>
+					<value register="currentplayer.opponent" index="mulligan" />
+				</repeat>
+				<move-player-card from="hand" to="library" controller="currentplayer.opponent" />
+				<!-- shuffle the library -->
+				<shuffle zone="library" />
+				<!-- decrement the amount of cards to draw the next mulligan -->
+				<modify-register register="currentplayer.opponent" index="mulligan"
+					operation="minus" value="1" />
+				<!-- draw the new hand -->
+				<repeat>
+					<value register="currentplayer.opponent" index="mulligan" />
+				</repeat>
+				<move-player-card from="library" to="hand" controller="currentplayer.opponent" />
+				<hop value="-9" />
+				<!-- ELSE -->
+				<!-- Cannot do "mulligan" the next time -->
+				<unregister-this />
+				<!-- END IF -->
+			</effects>
+		</system-ability>
+		<!-- MULLIGAN for starting player -->
+		<system-ability name="mulligan" resolution="hidden_low">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller" />
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer" />
+				<!-- IF (can do mulligan one more time) -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup right="0">
+							<left register="currentplayer" index="mulligan" />
+						</sup>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- is this player wants to take a mulligan? -->
+				<msg type="yesno">
+					<text>%mulligan_question</text>
+				</msg>
+				<!-- IF (answer==yes) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<equal right="0">
+							<left register="stack" index="0" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- put cards of hand and put them in the library -->
+				<repeat>
+					<value register="currentplayer" index="mulligan" />
+				</repeat>
+				<move-player-card from="hand" to="library" controller="currentplayer" />
+				<!-- shuffle the library -->
+				<shuffle zone="library" />
+				<!-- decrement the amount of cards to draw the next mulligan -->
+				<modify-register register="currentplayer" index="mulligan" operation="minus"
+					value="1" />
+				<!-- draw the new hand -->
+				<repeat>
+					<value register="currentplayer" index="mulligan" />
+				</repeat>
+				<move-player-card from="library" to="hand" controller="currentplayer" />
+				<hop value="-9" />
+				<!-- ELSE -->
+				<!-- Cannot do "mulligan" the next time -->
+				<unregister-this />
+				<!-- END IF -->
+			</effects>
+		</system-ability>
+		<!-- TURN INIT : reset registers
+			212.3d A creature's activated ability with the tap symbol in its
+			activation cost can't be played unless the creature has been under its
+			controller's control since the start of his or her most recent turn. A
+			creature can't attack unless it has been under its controller's control
+			since the start of his or her most recent turn. This rule is informally
+			called the "summoning sickness" rule. Ignore this rule for creatures
+			with haste (see rule 502.5).
+		-->
+		<system-ability name="turn-init" resolution="hidden_high">
+			<before-phase phase="untap" />
+			<effects>
+				<modify-register operation="clear" register="game.static" index="attack-step-index" />
+				<modify-register operation="clear" register="currentplayer"
+					index="damage-dealt-this-turn" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="damage-dealt-this-turn" />
+				<modify-register operation="clear" register="currentplayer"
+					index="creatures-moved-in-graveyard-from-play-this-turn" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="creatures-moved-in-graveyard-from-play-this-turn" />
+				<modify-register value="1" operation="set" register="currentplayer"
+					index="land-remain-to-cast" />
+				<modify-register operation="clear" register="currentplayer" index="playedland" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="playedland" />
+				<!-- We remove the "summoning sickness" state of cards controlled by current player and all damages
+					for card in play and controlled by current player -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<controller player="currentplayer" />
+					</test>
+				</target>
+				<modify-register operation="clear" register="target" index="state" />
+				<target-list operation="clear"/>
+				<!-- we reset the "planeswalker-ability" register for planeswalkers controlled by current player -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="planeswalker"/>
+							<controller player="currentplayer"/>
+						</and>
+					</test>
+				</target>
+				<modify-register register="target" index="planeswalker-ability" operation="set"
+				value="0"/>
+			</effects>
+		</system-ability>
+		<!-- TURN MANAGER
+			314.2. After discarding, the following actions happen simultaneously:
+			all damage is removed from permanents and all "until end of turn" and
+			"this turn" effects end (this game action doesn't use the stack).
+		-->
+		<system-ability name="turn-manager" resolution="hidden_low">
+			<end-of-phase phase="cleanup" />
+			<effects>
+				<!-- useless since this not change the current player,
+					but notify the event manager that we have handled
+					the turn chaining.
+					@see firemox.stack.EventManager#gotonext-phase()
+				-->
+				<next-current-player player="currentplayer" />
+				<if-then-hop elsehop="2">
+					<test>
+						<or>
+							<!-- no extra turn, normal turn chaining :
+								The opponent become the next current player -->
+							<equal left="0">
+								<right register="game.static" index="normal-next-player" />
+							</equal>
+							<!-- it was an extra turn, an this one was inserted
+								before the opponent's turn whom become the
+								next current player. '-->
+							<equal left="3">
+								<right register="game.static" index="normal-next-player" />
+							</equal>
+						</or>
+					</test>
+				</if-then-hop>
+				<next-current-player player="currentplayer.opponent" />
+				<!-- We restore the normal turn chaining -->
+				<modify-register register="game.static" index="normal-next-player"
+					operation="clear" />
+				<!-- Increment the turn ID -->
+				<modify-register register="game.static" index="turnid" operation="add" value="1" />
+				<!-- remove damages from permanents in pay -->
+				<target type="card" mode="all" restriction-zone="play" />
+				<modify-register operation="clear" register="target" index="damage" />
+			</effects>
+		</system-ability>
+		<!-- LETHAL DAMAGE : move card in the graveyard -->
+		<system-ability name="lethal-damage" resolution="hidden">
+			<lethal-damage />
+			<effects>
+				<if-then-hop elsehop="abort">
+					<test ref="died-card" />
+				</if-then-hop>
+				<target type="context.card-share" />
+				<sound file="destroyed.wav" />
+				<move-card destination="graveyard" controller="target.owner" position="top" />
+			</effects>
+		</system-ability>
+		<!-- MANABURN : if (mana>0) -> damage(mana)
+			300.3. When a phase ends (but not a step), any unused mana left in a
+			player's mana pool is lost. That player loses 1 life for each one mana
+			lost this way. This is called mana burn. Mana burn is loss of life, not
+			damage, so it can't be prevented or altered by effects that affect damage.
+			This game action doesn't use the stack. (See rule 406, "Mana Abilities.")
+		-->
+		<system-ability name="manaburn" resolution="hidden">
+			<end-of-phase phase="nocare">
+				<test>
+					<or>
+						<sup right="0">
+							<left register="you" index="manapool" />
+						</sup>
+						<sup right="0">
+							<left register="opponent" index="manapool" />
+						</sup>
+					</or>
+				</test>
+			</end-of-phase>
+			<effects>
+				<modify-register register="you" index="life" operation="minus">
+					<value register="you" index="manapool" />
+				</modify-register>
+				<modify-register register="opponent" index="life" operation="minus">
+					<value register="opponent" index="manapool" />
+				</modify-register>
+				<modify-register register="you" index="manapool" operation="clear" />
+				<modify-register register="opponent" index="manapool" operation="clear" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5e If two or more legendary permanents with the
+			same name are in play, all are put into their owners'
+			graveyards. This is called the "legend rule." If only
+			one of those permanents is legendary, this rule does
+			not apply.
+		-->
+		<system-ability name="state-based-legendary" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-property property="legend" />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<has-property property="legend" />
+						<in-zone zone="play" />
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<has-name card="super.tested" />
+								</counter>
+							</left>
+						</sup>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target mode="all" restriction-zone="play" type="card">
+					<test>
+						<has-name card="context.card" />
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5q If two or more planeswalkers permanents with the
+			same name are in play, all are put into their owners'
+			graveyards.
+		-->
+		<system-ability name="state-based-planeswalker" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="planeswalker" />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<has-idcard idcard="planeswalker" />
+						<in-zone zone="play" />
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<has-name card="super.tested" />
+								</counter>
+							</left>
+						</sup>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target mode="all" restriction-zone="play" type="card">
+					<test>
+						<has-name card="context.card" />
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			503.10a A copy of a spell in a zone other than the stack ceases to exist. 
+			A copy of a card in any zone other than the stack or the in-play zone 
+			ceases to exist. This is a state-based effect. See rule 420.
+		-->
+		<system-ability name="state-based-copy" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<is-copy />
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<restore-card card="context.card" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5i If two or more enchant worlds are in play, all except the one
+			that has been an enchant world in play for the shortest amount of
+			time are put into their owners' graveyards. In the event of a tie for
+			the shortest amount of time, all are put into their owners'
+			graveyards.
+		-->
+		<system-ability name="state-based-enchant-world" resolution="hidden" optimize="follow">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="global-enchantment" />
+						<has-property property="enchant-world" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="global-enchantment" />
+							<has-property property="enchant-world" />
+							<not>
+								<is target="context.card" />
+							</not>
+						</and>
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5h A player with ten or more poison counters loses the game.
+		-->
+		<system-ability name="state-based-modified-poison" resolution="hidden">
+			<modified-register register="player" index="poison" operation="add">
+				<destination-test>
+					<inf-equal right="9">
+						<left register="tested" index="poison" />
+					</inf-equal>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<lose-game player="context.player" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5a A player with 0 or less life loses the game.
+		-->
+		<system-ability name="state-based-modified-life" resolution="hidden">
+			<modified-register register="player" index="life" operation="minus">
+				<destination-test>
+					<inf-equal right="0">
+						<left register="tested" index="life" />
+					</inf-equal>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<lose-game player="context.player" />
+			</effects>
+		</system-ability>
+		<!-- PLAYED LAND : decrement the amount of playable land -->
+		<system-ability name="played-land" resolution="hidden">
+			<casting>
+				<test>
+					<and>
+						<controller player="currentplayer" />
+						<has-idcard idcard="land" />
+						<is-spell />
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<modify-register value="1" operation="add" register="currentplayer"
+					index="playedland" />
+				<modify-register value="1" operation="minus" register="currentplayer"
+					index="land-remain-to-cast" />
+			</effects>
+		</system-ability>
+
+		<!-- UNTAP : phasing, untap cards in play -->
+		<system-ability picture="untap" name="untap-cards" resolution="hidden">
+			<beginning-of-phase phase="untap" />
+			<effects>
+				<!--  'Phasing' out static ability -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="currentplayer" />
+							<has-property property="phasing" />
+						</and>
+					</test>
+				</target>
+				<target-list operation="save" />
+				<target-list operation="clear" />
+				<target type="card" mode="all" restriction-zone="phased-out">
+					<test>
+						<controller player="currentplayer" />
+					</test>
+				</target>
+				<move-card destination="play" controller="you" silent="true" />
+				<target-list operation="clear" />
+				<target-list operation="load" list-index="-1" />
+				<target-list operation="remove" list-index="-1" />
+				<action ref="phase-out" />
+				<target-list operation="clear" />
+
+				<!--  'Untap' static ability -->
+				<target type="card" hop="2" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<in-zone zone="playANDtapped" />
+							<controller player="currentplayer" />
+							<not>
+								<has-property property="does-not-untap" />
+							</not>
+							<not>
+								<has-property property="untap-under-condition" />
+							</not>
+						</and>
+					</test>
+				</target>
+				<target-list operation="save" />
+				<target-list operation="filter">
+					<test>
+						<has-property property="may-not-untap" card="tested" />
+					</test>
+				</target-list>
+				<!-- 
+					
+					FOR EACH (Card in target-list) -->
+				<if-then-hop elsehop="5">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<!-- 
+					DO (ask 'untap or not' ) -->
+				<choice cancel="true" hop="1">
+					<either>
+						<target-list operation="remove" list-index="-1" target="target-list.last"
+							name="do-not-untap" />
+					</either>
+				</choice>
+				<target-list operation="remove-last" />
+				<hop value="-4" />
+				<!-- 
+					END FOR -->
+
+				<target-list operation="load" list-index="-1" />
+				<target-list operation="remove" list-index="-1" />
+				<untap />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5a A player with 0 or less life loses the game.
+		-->
+		<system-ability name="update-life" resolution="hidden" optimize="follow">
+			<modified-register register="player" index="damage" operation="add" />
+			<effects>
+				<modify-register register="context.player" index="damage-dealt-this-turn"
+					operation="add">
+					<value register="context.player" index="damage" />
+				</modify-register>
+				<modify-register register="context.player" index="life" operation="minus">
+					<value register="context.player" index="damage" />
+				</modify-register>
+				<modify-register register="context.player" index="damage" operation="clear" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5b A creature with toughness 0 or less is put into its owner's graveyard.
+			Regeneration can't replace this event.
+		-->
+		<system-ability name="state-based-toughness0" resolution="hidden_low" optimize="context">
+			<modified-register register="card" index="toughness">
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</modified-register>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<and>
+							<has-idcard idcard="creature" card="context.card" />
+							<inf-equal right="0">
+								<left register="context.card" index="toughness" />
+							</inf-equal>
+						</and>
+					</test>
+				</if-then-hop>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5c A creature with lethal damage, but greater than 0 toughness, is destroyed.
+			Lethal damage is an amount of damage greater than or equal to a creature's
+			toughness. Regeneration can replace this event.
+		-->
+		<system-ability name="state-based-damaged-card" resolution="hidden_low"
+			optimize="context">
+			<modified-register register="card" index="damage">
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</modified-register>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test ref="died-card" />
+				</if-then-hop>
+				<target type="context.card" />
+				<lethal-damage />
+			</effects>
+		</system-ability>
+		<!-- EXPLICICT UPDATE TOUGHNESS -->
+		<system-ability name="delayed-explicit-update-toughness" resolution="hidden">
+			<update-toughness />
+			<effects>
+				<if-then-hop elsehop="abort">
+					<test ref="died-card" />
+				</if-then-hop>
+				<target type="context.card" />
+				<lethal-damage />
+			</effects>
+		</system-ability>
+		<!-- AUTO SUMMONNING SICKNESS ADD & VERIFY THE TOUGHNESS -->
+		<system-ability name="move-in-play-update-state" resolution="hidden">
+			<moved-card>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<!-- if is a creature, we verify again the toughness -->
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="creature" card="context.card" />
+					</test>
+				</if-then-hop>
+				<target type="context.card" />
+				<update-toughness />
+				<!-- add the byte 'just summoned' on this card even for a non-creature card.
+					This flag is set and will be visible only for creatures.
+				-->
+				<modify-register index="state" register="context.card" operation="or"
+					value="just-summoned" />
+			</effects>
+		</system-ability>
+		<!--  Summoning sickness bit removed if moved out from the play zone -->
+		<system-ability name="remove-just-summoned-if-quit-play" resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" />
+						<test ref="tested-just-summoned" />
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register index="state" register="context.card" operation="and-not"
+					value="just-summoned" />
+			</effects>
+		</system-ability>
+		<!-- verify the toughness for cards becoming creature -->
+		<system-ability name="become-creature-state" resolution="hidden">
+			<modified-idcard idcard="creature">
+				<test>
+					<and>
+						<has-idcard idcard="creature" />
+						<in-zone zone="play" />
+					</and>
+				</test>
+			</modified-idcard>
+			<effects>
+				<!-- if is a creature, we verify again the toughness -->
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="creature" card="context.card" />
+					</test>
+				</if-then-hop>
+				<target type="context.card" />
+				<update-toughness />
+			</effects>
+		</system-ability>
+		<!-- creatures-moved-in-graveyard-from-play-this-turn counter for this turn -->
+		<system-ability name="creatures-moved-in-graveyard-from-play-this-turn"
+			resolution="hidden">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register register="context.card.owner"
+					index="creatures-moved-in-graveyard-from-play-this-turn" operation="add" value="1" />
+			</effects>
+		</system-ability>
+		<!-- When a card is detached from another, it moves to graveyard
+			420.5d A local enchantment that enchants an illegal or nonexistent
+			permanent is put into its owner's graveyard. '
+		-->
+		<system-ability name="state-based-detached-enchantment" resolution="hidden">
+			<detached>
+				<detached-test>
+					<has-idcard idcard="local-enchantment" card="tested" />
+				</detached-test>
+			</detached>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		<system-ability name="state-based-detached-equipment" resolution="hidden">
+			<detached>
+				<detached-test>
+					<has-property property="equipment" card="tested" />
+				</detached-test>
+			</detached>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="play" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5g A player who was required to draw more cards than were in his
+			or her library since the last time state-based effects were checked
+			loses the game. -->
+		<system-ability name="state-based-no-card-to-draw" resolution="hidden">
+			<catch-exception name="NoSuchElement">
+				<test>
+					<action-source name="draw-%n-card" />
+				</test>
+			</catch-exception>
+			<effects>
+				<lose-game player="context.player" />
+			</effects>
+		</system-ability>
+		
+		<!-- STATE BASED :
+		420.5p A planeswalker with loyalty 0 is put into its owner's graveyard.
+		-->
+		<system-ability name="state-based-loyalty0" resolution="hidden_low" optimize="context">
+			<modified-register register="card" index="loyalty">
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</modified-register>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<and>
+							<has-idcard idcard="planeswalker" card="context.card" />
+							<inf-equal right="0">
+								<left register="context.card" index="loyalty" />
+							</inf-equal>
+						</and>
+					</test>
+				</if-then-hop>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</system-ability>
+		
+		<!-- When a token card moves to graveyard, put it into the 'nowhere' place : completly removed
+			420.5f A token in a zone other than the in-play zone ceases to exist.
+		-->
+		<replacement-ability name="state-based-token" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" />
+						<has-property property="token" />
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="nowhere" />
+			</effects>
+		</replacement-ability>
+		
+		<!--A creature is declared as blocking -->
+		<replacement-ability name="declared-attacking" zone="play">
+			<declared-attacking>
+				<test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+					</and>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="context.card" />
+				<!--
+					
+					1) Set the combat step we are (2 = At least one attacking)-->
+				<modify-register operation="set" register="game.static" index="attack-step-index"
+					value="2" />
+				<!--
+					
+					2) Modify the state of picked creature as "declared as attacking creature" -->
+				<modify-register operation="or" register="target-list.last" index="state"
+					value="declared-as-attacking" />
+				<!--
+					
+					3) Tap the attacking
+					IF (has not Vigilance) -->
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<has-property property="vigilance"
+								card="target-list.last" />
+						</not>
+					</test>
+				</if-then-hop>
+				<!--
+					THEN (tap it) -->
+				<tap />
+				<!--
+					END IF
+					4) Regenerate this event -->
+				<generate-event name="declared-attacking" attacking="target-list.last" />
+			</effects>
+		</replacement-ability>
+
+		<!--A creature is declared as blocking -->
+		<replacement-ability name="declared-blocking" zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+					</and>
+				</blocking-test>
+				<attacking-test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+					</and>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<!--
+					1) Add the state "blocked" to the picked attacking creature. -->
+				<modify-register operation="or" register="context.card2" index="state"
+					value="declared-as-blocked" />
+				<!--
+					
+					2) Add the state "blocking creature" to the picked blocking creature. -->
+				<modify-register operation="or" register="context.card" index="state"
+					value="declared-as-blocking" />
+				<!--
+					
+					3) Add the cards to our list -->
+				<target type="context.card2" />
+				<target type="context.card" />
+				<!--
+					
+					4) Save this configuration. -->
+				<target-list operation="save" />
+				<!--
+					
+					5) Regenerate this event -->
+				<generate-event name="declared-blocking" blocking="target-list.last"
+					attacking="target-list.first" />
+				<!--
+					
+					6) Also generate this event for each other creature banded with the attacking creature,
+					and for each other blocking creature of this band -->
+				<target-list operation="clear" />
+				<!--
+					
+					7) Load the band containing the attacking creature -->
+				<target-list operation="load">
+					<list-index>
+						<target-list operation="index-of-saved-list" target="context.card2">
+							<list-index register="game.static"
+								index="beginning-of-combat-target-lists" />
+						</target-list>
+					</list-index>
+				</target-list>
+				<!--
+					
+					8) remove from the list the attacking creature we have already proceeded -->
+				<target-list operation="filter">
+					<test>
+						<not>
+							<is target="context.card2" />
+						</not>
+					</test>
+				</target-list>
+				<!--
+					
+					9) Generate the "declared-blocking" event for each creature of this list
+					WHILE (size of list > 0) -->
+				<if-then-hop elsehop="4">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<!--
+					DO -->
+				<generate-event name="declared-blocking" blocking="context.card"
+					attacking="target-list.first" />
+				<target-list operation="remove-first" />
+				<hop value="-3" />
+				<!--
+					END WHILE -->
+			</effects>
+		</replacement-ability>
+
+		<!--
+			502.37. Sunburst
+			
+			502.37a Sunburst is a static ability that functions as an object is
+			coming into play from the stack. "Sunburst" means "If this object is
+			coming into play from the stack as a creature, it comes into play with
+			a +1/+1 counter on it for each color of mana used to pay its cost. If
+			this object is coming into play from the stack and isn't coming into
+			play as a creature, it comes into play with a charge counter on it for
+			each color of mana used to pay its cost."
+			
+			502.37b Sunburst applies only as the spell is resolving and only if one
+			or more colored mana was paid for its costs. Mana paid for additional
+			or alternative costs applies.
+			
+			502.37c Sunburst can also be used to set a variable number for another
+			ability. If the keyword is used in this way, it doesn't matter whether
+			the ability is on a creature spell or on a non creature spell.
+			Example: The ability "Modular-Sunburst" means "This permanent comes into
+			play with a +1/+1 counter on it for each color of mana used to pay its
+			cost" and "When this permanent is put into a graveyard from play, you
+			may put a +1/+1 counter on target artifact creature for each +1/+1
+			counter on this permanent."
+			
+			502.37d If an object has multiple instances of sunburst, each one works
+			separately.
+		-->
+		<replacement-ability name="sunburst" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-property property="sunburst" />
+						<has-idcard idcard="creature" />
+						<previous-zone zone="stack" />
+						<different>
+							<left>
+								<mana-paid card="tested" color="colorless" />
+							</left>
+							<right register="tested" index="manacost" />
+						</different>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="2" name="%">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="context.card" color="black" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register operation="add" index="0" register="stack" value="1" />
+				<if-then-hop elsehop="2" name="%">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="context.card" color="blue" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register operation="add" index="0" register="stack" value="1" />
+				<if-then-hop elsehop="2" name="%">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="context.card" color="green" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register operation="add" index="0" register="stack" value="1" />
+				<if-then-hop elsehop="2" name="%">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="context.card" color="red" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register operation="add" index="0" register="stack" value="1" />
+				<if-then-hop elsehop="2" name="%">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="context.card" color="white" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register operation="add" index="0" register="stack" value="1" />
+				<target type="context.card" />
+				<if-then-hop elsehop="4">
+					<test>
+						<has-idcard idcard="creature" card="context.card" />
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="0" />
+				</repeat>
+				<add-object object-name="+1/+1" />
+				<hop value="3" />
+				<repeat>
+					<value register="stack" index="0" />
+				</repeat>
+				<add-object object-name="charge" />
+				<move-card destination="play" controller="context.int" />
+			</effects>
+		</replacement-ability>
+
+		<!-- FLASHBACK
+			When a card with flash-back paid leave stack, we remove it from game.
+			502.22a Flashback is a static ability of some instant and sorcery cards that
+			functions while the card is in a player's graveyard. The phrase "Flashback [cost]"
+			means "You may play this card from your graveyard by paying [cost] rather than
+			paying its mana cost. If you do, remove this card from the game instead of putting
+			it anywhere else any time it would leave the stack." Playing a spell using its
+			flashback ability follows the rules for paying alternative costs in rules 409.1b
+			and 409.1f-h.'
+		-->
+		<replacement-ability name="flashback-replacement" zone="play" layer="0">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="stack" />
+						<test ref="flashback-used" />
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="nowhere" />
+			</effects>
+		</replacement-ability>
+		<!-- BUYBACK
+			When a card with 'buyback' activated moves to graveyard, put it into the hand.
+			502.16a Buyback is a static ability of some instants and sorceries that functions
+			while the spell is on the stack. The phrase "Buyback [cost]" means "You may pay
+			an additional [cost] as you play this spell. If you do, put the spell into your
+			hand instead of into your graveyard as it resolves." Paying a spell's buyback cost
+			follows the rules for paying additional costs in rules 409.1b and 409.1f-h.'
+		-->
+		<replacement-ability name="buyback-replacement" zone="play" layer="0">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="stack" />
+						<test ref="buyback-used" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="hand" />
+			</effects>
+		</replacement-ability>
+		
+		<!-- Whenever damage is assigned to a player the assigning player may choose to deal it 
+		to a planeswalker that player controls
+		-->
+		<replacement-ability name="planeswalker-choose-replacement" zone="play" layer="0">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is-player/>
+						<has restriction-zone="play">
+							<and>
+								<has-idcard idcard="planeswalker"/>
+								<controller player="tested"/>
+							</and>
+						</has>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="context.card2.controller" cancel="false">
+					<either>
+						<target type="context.player"/>
+						<assign-damage type="context.int2" value="context.int"/>
+					</either>
+					<either>
+						<target type="context.card2.controller"/>
+						<target type="card" mode="target-choose" restriction-zone="play">
+							<test>
+								<and>
+									<has-idcard idcard="planeswalker"/>
+									<controller player="context.player"/>
+								</and>
+							</test>
+						</target>
+						<target-list operation="remove-first"/>
+						<assign-damage type="context.int2" value="context.int"/>
+					</either>
+				</choice>
+			</effects>
+		</replacement-ability>
+		
+		<!-- Whenever damage is assigned to a planeswalker it removes that many
+		loyalty counters from it.
+		-->
+		<replacement-ability name="planeswalker-damage-replacement" zone="play" layer="0">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<has-idcard idcard="planeswalker"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<repeat value="context.int"/> 
+				<remove-object object-name="loyalty"/>
+				<modify-register register="context.card" index="loyalty" operation="minus" value="context.int"/>
+			</effects>
+		</replacement-ability>
+		
+	</abilities>
+
+	<!--[[apt lang=en]]
+		* Game layout
+		
+		`The layout of the game is also described in the XML file using the
+		`<<<\<layout\>>>> element. Common panels and zones are declared within.
+	-->
+	<!--[[apt lang=fr]]
+		* Disposition de l'espace de jeu
+		
+		`La disposition de l'espace de jeu est également décrite dans le fichier
+		`XML à l'aide de l'élément <<<\<layout\>>>>. Les zones et cadres communs
+		`y sont déclarés.
+	-->
+
+	<layouts>
+		<!-- Would contain more components with XML definition -->
+		<common-panel>
+			<card-details>
+				<properties>
+					<menu-element name="database.main">
+						<menu-attribute name="card.local-name" value="card.database.local-name"
+							type="string" />
+						<menu-attribute name="card.text" value="card.database.property[card.text]"
+							type="text" />
+						<menu-attribute name="card.flavor-text"
+							value="card.database.property[card.flavor-text]" type="text" />
+					</menu-element>
+					<menu-element name="database.credits">
+						<menu-attribute name="card.artist-credit"
+							value="card.database.property[card.artist-credit]" type="string" />
+						<menu-attribute name="card.rules-credit" value="card.database.rules-credit"
+							type="string" />
+					</menu-element>
+					<menu-element name="database.proxy">
+						<menu-attribute name="card.proxy.name"
+							value="card.database.picture-proxy.name" type="string" />
+						<menu-attribute name="card.proxy.home"
+							value="card.database.picture-proxy.home" type="string" />
+						<menu-attribute name="card.proxy.language"
+							value="card.database.picture-proxy.language" type="string" />
+						<menu-attribute name="card.proxy.encoding"
+							value="card.database.picture-proxy.encoding" type="string" />
+						<menu-attribute name="card.stream" value="card.database.picture-stream"
+							type="link" />
+					</menu-element>
+					<menu-element name="database.properties">
+						<menu-attribute name="card.set" value="card.database.property[card.set]"
+							type="string" />
+						<menu-attribute name="card.version"
+							value="card.database.property[card.version]" type="string" />
+						<menu-attribute name="card.sets" value="card.database.property[card.sets]"
+							type="string" />
+						<menu-attribute name="card.id" value="card.database.property[card.id]"
+							type="string" />
+						<!-- TODO Add private properties in this nested element
+							<element name="database.private.properties">
+							</menu-element>
+						-->
+					</menu-element>
+				</properties>
+			</card-details>
+		</common-panel>
+		<zones enable-stack="true" enable-dbz="true" enable-tbz="true" enable-play="true"
+			enable-hand="true" default-zone="library">
+			<play>
+				<sector constraint="South">
+					<has-idcard idcard="land" />
+				</sector>
+				<sector constraint="West">
+					<has-idcard idcard="enchantment" />
+				</sector>
+				<sector constraint="East">
+					<and>
+						<has-idcard idcard="artifact" />
+						<not>
+							<has-idcard idcard="creature" />
+						</not>
+					</and>
+				</sector>
+				<sector constraint="Center" />
+			</play>
+			<additional-zones>
+				<additional-zone name="graveyard" layout-class="" constraint-you="East"
+					constraint-opponent="West" />
+				<additional-zone name="library" layout-class="" constraint-you="West"
+					constraint-opponent="East" />
+				<additional-zone name="phased-out" layout-class="java.awt.FlowLayout" />
+			</additional-zones>
+		</zones>
+	</layouts>
+
+	<references file="tbs/mtg/fragment-references.xml" />
+
+	<!--[[apt lang=en]]
+		* Action constraints
+		
+		`<<Magic Project>> is also capable to apply constraints on actions if they match
+		`the <<<\<action\>>>> child elements. These constraints are dynamically <appended>
+		`using the given operation (usually set to <<<"and">>>) to the test associated
+		`with the matched action. Theses constraints are declared using the
+		`<<<\<action-constraints\>>>> element. You will find here constraints concerning
+		`the ability to equip a creature with an equipment artifact for example
+		`(it's impossible to equip a creature if the equipment is also a creature in
+		`addition to its artifact type) :
+	-->
+	<!--[[apt lang=fr]]
+		* Contraintes d'actions
+		
+		`<<Magic Project>> est également capable d'appliquer des contraintes sur les
+		`actions si elles correspondent aux éléments fils de l'élément <<<\<action\>>>>.
+		`Ces contraintes sont ajoutées dynamiquement à l'aide de l'opération fournie
+		`(génégalement renseignée à <<<"and">>>) au test associé au sein de l'action
+		`correspondante. Ces contraintes sont déclarées via l'élément <<<\<action-constraints\>>>>.
+		`Vous trouverez ici par exemple les contraintes concernant la capacité d'un
+		`équipement d'équiper une créature (il est impossible pour un équipement qui est
+		`également une créature d'équiper une créature) :
+	-->
+	<action-constraints>
+		<constraint operation="and">
+			<test ref="can-use-T" />
+			<actions>
+				<tap name="@T" />
+			</actions>
+		</constraint>
+		<constraint operation="and">
+			<test>
+				<inf-equal left="%value">
+					<right register="you" index="life" />
+				</inf-equal>
+			</test>
+			<actions>
+				<modify-register register="you" index="life" operation="minus" value="?" />
+			</actions>
+		</constraint>
+		<!--[[apt start-code]]-->
+		<constraint operation="and">
+			<test>
+				<and>
+					<!-- 212.2i An Equipment that's also a creature can't equip a creature. (...) -->
+					<not>
+						<has-idcard idcard="creature" card="this" />
+					</not>
+					<!--  212.2i (...) Equipment that loses the sub type "Equipment" can't equip a creature. (...) -->
+					<has-property property="equipment" card="this" />
+				</and>
+			</test>
+			<actions>
+				<attach name="equip" />
+			</actions>
+		</constraint>
+		<constraint operation="and">
+			<test>
+				<and>
+					<!-- 212.2i An Equipment that's also a creature can't equip a creature. (...) -->
+					<not>
+						<has-idcard idcard="creature" card="this" />
+					</not>
+					<!--  212.2i (...) Equipment that loses the sub type "Equipment" can't equip a creature. (...) -->
+					<has-property property="equipment" card="this" />
+				</and>
+			</test>
+			<actions>
+				<pay-mana />
+			</actions>
+		</constraint>
+		<!--[[apt end-code]]-->
+	</action-constraints>
+
+	<!--[[apt lang=en]]
+		* Additional costs
+		
+		`<<Magic Project>> can manage additional costs using the
+		`<<<\<additional-costs\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Coûts additionnels
+		
+		`<<Magic Project>> est capable de gérer les coûts additionnels à l'aide de
+		`l'élément <<<\<additional-costs\>>>>.
+	-->
+
+	<additional-costs>
+		<!--
+			
+			502.46a Convoke is a static ability that functions while the spell is on
+			the stack. "Convoke" means "As an additional cost to play this spell,
+			you may tap any number of untapped creatures you control. Each creature
+			tapped this way reduces the cost to play this spell by {1} or by one mana
+			of any of that creature's colors." Using the convoke ability follows the
+			rules for paying additional costs in rules 409.1b and 409.1f-h.
+			
+			Example: You play Guardian of Vitu-Ghazi, a spell with convoke that costs
+			{6}{G}{W}. You announce that you're going to tap a colorless creature, a
+			red creature, and a green-and-white creature to help pay for it. The
+			colorless creature and the red creature each reduce the spell's cost by
+			{1}. You choose whether the green-white creature reduces the spell's
+			cost by {1},{G}, or {W}. Then the creatures become tapped as you pay
+			Guardian of Vitu-Ghazi's cost.
+		-->
+		<additional-cost name="convoke">
+			<test>
+				<has-property property="convoke" />
+			</test>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="play" hop="4" cancel="true">
+					<test>
+						<and>
+							<controller player="you" />
+							<test ref="is-targetable-creature" />
+							<in-zone zone="playANDuntapped" />
+						</and>
+					</test>
+				</target>
+				<input-color colorless="true" operation="set" index="0" register="stack">
+					<values>
+						<value>
+							<card-colors card="target-list.last" />
+						</value>
+					</values>
+				</input-color>
+				<modify-register register="required-mana" operation="minus" value="1">
+					<index>
+						<to-index>
+							<value register="stack" index="0" />
+						</to-index>
+					</index>
+				</modify-register>
+				<hop value="-3" />
+				<tap />
+				<target-list operation="clear" />
+			</cost>
+		</additional-cost>
+	</additional-costs>
+
+	<!--[[apt lang=en]]
+		* Objects
+		
+		`The last part of the XML file is dedicated to the objects, which can be
+		`considered as counters (<ice>, <poison>, <+1/+1>, etc.). These are declared
+		`using the <<<\<objects\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Les objets
+		
+		`La dernière partie du fichier XML est dédiée aux objets, qui peuvent être
+		`considérés comme des compteurs (<glace>, <poison>, <+1/+1>, etc.). Ils sont
+		`déclarés via l'élément <<<\<objects\>>>>.
+	-->
+
+	<objects>
+		<object name="+1/+0">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+		</object>
+		<object name="+1/+2">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+2/+0">
+			<register-modifier index="power" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+3/+0">
+			<register-modifier index="power" operation="add" value="3" linked="false" />
+		</object>
+		<object name="+1/+1">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+			<register-modifier index="toughness" operation="add" value="1" linked="false" />
+		</object>
+		<object name="-1/-1">
+			<register-modifier index="power" operation="minus" value="1" linked="false" />
+			<register-modifier index="toughness" operation="minus" value="1" linked="false" />
+		</object>
+		<object name="-0/-1">
+			<register-modifier index="toughness" operation="minus" value="1" linked="false" />
+		</object>
+		<object name="+2/+2">
+			<register-modifier index="power" operation="add" value="2" linked="false" />
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+0/+1">
+			<register-modifier index="toughness" operation="add" value="1" linked="false" />
+		</object>
+		<object name="+0/+2">
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+0/+3">
+			<register-modifier index="toughness" operation="add" value="3" linked="false" />
+		</object>
+		<object name="loyalty">
+			<register-modifier index="loyalty" operation="add" value="1" linked="false" />
+		</object>
+		<object name="mire">
+			<idcard-modifier idcard="swamp" operation="set" linked="false" />
+			<property-modifier property="basic-land" operation="add" linked="false" />
+			<ability-modifier operation="clear" linked="false"/>
+		</object>
+		<object name="flood">
+			<idcard-modifier idcard="island" operation="set" linked="false" />
+		</object>
+		<object name="paralyzation">
+			<property-modifier property="does-not-untap" operation="add" linked="false" />
+			<ability-modifier operation="add" linked="false">
+				<abilities >
+					<activated-ability zone="play" playable="instant">
+						<cost>
+							<pay-mana colorless="4"/>
+						</cost>
+						<effects>
+							<target type="this"/>
+							<remove-object object-name="paralyzation"/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</object>
+		<object name="cube" />
+		<object name="storage" />
+		<object name="page" />
+		<object name="age" />
+		<object name="charge" />
+		<object name="depletion" />
+		<object name="fade" />
+		<object name="delay" />
+		<object name="verse" />
+		<object name="infection" />
+		<object name="intervention" />
+		<object name="spore" />
+		<object name="time" />
+		<object name="arrow" />
+		<object name="doom" />
+		<object name="gold" />
+		<object name="ki" />
+		<object name="devotion" />
+		<object name="fuse" />
+		<object name="omen" />
+		<object name="luck" />
+		<object name="sleight" />
+		<object name="pupa" />
+		<object name="polyp" />
+		<object name="rust" />
+		<object name="poison" />
+		<object name="wind" />
+		<object name="healing" />
+		<object name="mining" />
+		<object name="glyph" />
+		<object name="javelin" />
+		<object name="ice" />
+		<object name="matrix" />
+		<object name="vitality" />
+		<object name="net" />
+		<object name="fungus" />
+		<object name="divinity" />
+		<object name="ore" />
+		<object name="dream" />
+		<object name="shell" />
+		<object name="corpse" />
+		<object name="arrowhead" />
+		<object name="echo" />
+		<object name="sleep" />
+		<object name="blood" />
+		<object name="plague" />
+		<object name="phoenix" />
+		<object name="shred" />
+		<object name="petal" />
+		<object name="pressure" />
+		<object name="shield" />
+		<object name="feather" />
+	</objects>
+	<deck-constraints file="tbs/mtg/fragment-deck-constraints.xml" />
+</tbs>
+
+<!--[[apt lang=en]]
+	* The Magic the Gathering cards rules files
+	
+	`As mentioned before, each card in a game such <<Magic the Gathering>> can
+	`hold its own specific rules. In <<Magic Project>>, we have to write one XML
+	`file per card to implement. The content of the file describe the rules of
+	`the card in the same language than the large XML file of the card game.
+	
+	* Card rules XML file description
+	
+	`The best way to describe the structure of these files is to look at an example,
+	`why not coding the card from the <Starter> edition, <Angel of Light> ?
+-->
+<!--[[apt lang=fr]]
+	* Les fichiers des règles des cartes de Magic : l'Assemblée
+	
+	`Comme cela a été précisé avant, chaque carte dans un jeu comme
+	`<<Magic : l'Assemblée>> peut faire référence à ses propres règles spécifiques.
+	`Dans <<Magic Project>>, il faut écrire un fichier XML par carte à implémenter.
+	`Le contenu du fichier décrit les règles de la carte dans la même syntaxe utilisée
+	`dans le fichier <<<mtg.xml>>>.
+	
+	* Description des règles de syntaxe XML des règles des cartes
+	
+	`La meilleure façon de décrire la structure de ces fichier est d'examiner un
+	`exemple. Pourquoi ne pas coder la carte <Angel of Light> de l'édition <Starter>
+	`?
+-->
+<!--[[apt include-card=Angel_of_Light]]-->
+<!--[[apt lang=en]]
+	* Other examples
+	
+	`Now you are aware of the basic structure of a card, it's a good idea to look
+	`at example of cards somewhat more complicated to implement.
+	
+	** Cloudstone Curio
+-->
+<!--[[apt lang=fr]]
+	* Autre exemples
+	
+	`Maintenant que vous connaissez la structure de base d'une carte, il serait
+	`judicieux de regarder des exemples de cartes un peu plus complexes à
+	`implémenter.
+	
+	** Cloudstone Curio
+-->
+<!--[[apt include-card=Cloudstone_Curio]]-->
+<!-- END OF FILE -->

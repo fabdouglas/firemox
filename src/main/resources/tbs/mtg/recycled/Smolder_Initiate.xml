@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Smolder Initiate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - elemental shaman
+	1/1
+	whenever a player plays a black spell, you may pay 1. if you do, target player loses 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-color color="black"/>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+						<action ref="lose-life-target" value="1"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

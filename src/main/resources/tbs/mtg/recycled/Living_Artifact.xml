@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Living Artifact">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {g} whenever you're dealt damage, put that many vitality counters on living artifact. 
+at the beginning of your upkeep, you may remove a vitality counter from living artifact. 
+if you do, you gain 1 life. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is-this player="controller"/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<add-object object-name="vitality"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<test ref="during-your-upkeep"/>
+						<sup right="0">
+							<left>
+								<counter object-name="vitality" card="this"/>
+							</left>
+						</sup>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<target type="this"/>
+						<remove-object object-name="vitality"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<action ref="gain-life" value="1"/>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-artifact"/>
+</card>

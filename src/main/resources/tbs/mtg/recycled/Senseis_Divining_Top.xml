@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sensei's Divining Top">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	1: look at the top three cards of your library, then put them back in any order.
+	t :draw a card, then put sensei's divining top on top of its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="2"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

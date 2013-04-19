@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Culling Sun">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2wwb
+	sorcery
+	destroy each creature with converted mana cost 3 or less.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='all-creatures'>
+					<test>
+						<inf-equal right="3">
+							<left register="tested" index="manacost"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

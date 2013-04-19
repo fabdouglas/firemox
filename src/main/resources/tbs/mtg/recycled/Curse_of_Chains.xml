@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Curse of Chains">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(w/u)
+	enchantment - aura
+	
+	enchant creature at the beginning of each upkeep, tap enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura  </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana colorless="1" white="1"/>
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana colorless="1" blue="1"/>
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type='attachedto'/>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

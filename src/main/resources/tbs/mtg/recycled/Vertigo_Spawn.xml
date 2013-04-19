@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vertigo Spawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - illusion
+	0/3
+	defender 
+	whenever vertigo spawn blocks a creature, tap that creature. it doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>illusion defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="context.card"/>
+				<tap/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

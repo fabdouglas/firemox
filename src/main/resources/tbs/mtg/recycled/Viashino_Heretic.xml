@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Viashino Heretic">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - viashino
+	1/3
+	1r, t :destroy target artifact. viashino heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>viashino </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target type="target-list.last.controller"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='manacost'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

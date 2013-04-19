@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Songs of the Damned">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	instant
+	add b to your mana pool for each creature card in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<black>
+						<counter restriction-zone="graveyard">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</black>
+				</give-mana>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

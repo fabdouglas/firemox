@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shivan Meteor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	sorcery
+	shivan meteor deals 13 damage to target creature.
+	suspend 2-1rr 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana red='2' colorless='1' />
+			</actions>
+			<actions>
+				<repeat value='2'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='13' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

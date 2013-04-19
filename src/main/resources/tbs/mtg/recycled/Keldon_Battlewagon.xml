@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Keldon Battlewagon">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {5} trample keldon battlewagon can't block. 
+when keldon battlewagon attacks, sacrifice it at end of combat. 
+tap an untapped creature you control: 
+keldon battlewagon gets +x/+0 until end of turn, where x is the tapped creature's power. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>cannot-block trample juggernaut</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<target type="card" mode="choose" raise-event="false" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value register="target-list.first" index="power"/>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="play">
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<action ref="sacrifice-this"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

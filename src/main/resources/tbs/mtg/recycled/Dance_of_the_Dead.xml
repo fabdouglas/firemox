@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dance of the Dead">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {1}{b} when dance of the dead comes into play, 
+		if it's in play, it becomes an enchant creature. 
+		
+		put target creature card from a graveyard into play tapped under your control 
+		enchanted by dance of the dead. 
+		
+		enchanted creature gets +1/+1 and doesn't untap during its controller's untap step. 
+		at the beginning of the upkeep of enchanted creature's controller, 
+		that player may pay {1}{b}. if he or she does, untap that creature. 
+		
+		when dance of the dead leaves play, destroy enchanted creature. it can't be regenerated. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" card="tested" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="graveyard" cancel="false">
+					<test>
+						<has-idcard idcard="creature" card="tested" />
+					</test>
+				</target>
+				<move-card controller="you" destination="play" name="%" />
+				<attach from="this" to="target-list.first" />
+				<target-list operation="clear" name="%" />
+				<target type="this" />
+				<add-modifier>
+					<idcard-modifier idcard="global-enchantment" linked="false" operation="set" />
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" card="tested" />
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" card="tested" />
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="attachedto" />
+				<action ref="bury" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="+1/+1">
+		<modifiers>
+			<property-modifier property="does-not-untap" operation="add" linked="true" />
+			<ability-modifier operation="add">
+				<abilities>
+					<triggered-ability zone="play">
+						<beginning-of-phase phase="upkeep">
+							<test ref="during-your-upkeep" />
+						</beginning-of-phase>
+						<cost>
+							<choice cancel="true">
+								<either>
+									<pay-mana colorless="1" black="1" />
+								</either>
+							</choice>
+						</cost>
+						<effects>
+							<target type="this" />
+							<untap />
+						</effects>
+					</triggered-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

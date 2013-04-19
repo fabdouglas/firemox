@@ -1,0 +1,105 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skeletal Vampire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	creature - vampire skeleton
+	3/3
+	flying
+	when skeletal vampire comes into play, put two 1/1 black bat creature tokens with flying into play.
+	3bb, sacrifice a bat: put two 1/1 black bat creature tokens with flying into play.
+	sacrifice a bat: regenerate skeletal vampire.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>vampire skeleton flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value='2'/>
+				<create-card>
+					<card name='Bat'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token bat flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='2' colorless='3' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='bat'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat value='2'/>
+				<create-card>
+					<card name='Bat'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token bat flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='bat'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

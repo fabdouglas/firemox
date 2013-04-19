@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashenmoor Cohort">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5b
+	creature - elemental warrior
+	4/3
+	ashenmoor cohort gets +1/+1 as long as you control another black creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="black"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="black"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

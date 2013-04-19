@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Resplendent Mentor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - kithkin cleric
+	2/2
+	white creatures you control have "t :you gain 1 life."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable='instant' name='' zone='play'>
+							<cost>
+								<action ref="T"/>
+							</cost>
+							<effects>
+								<action ref='gain-life' value='1'/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<and>
+					<has-color color="white"/>
+					<has-idcard idcard="creature"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

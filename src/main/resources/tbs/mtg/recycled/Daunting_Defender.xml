@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Daunting Defender">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{w} if a source would deal damage to a cleric you control, prevent 1 of that damage. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="white" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<destination-test>
+					<and>
+						<in-zone zone="play"/>
+						<has-property property="cleric"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!-- this shield is removed -->
+				<unregister-this/>
+				<target type="context.card"/>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="1" left="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

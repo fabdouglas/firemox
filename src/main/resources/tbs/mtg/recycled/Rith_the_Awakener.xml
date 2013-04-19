@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rith, the Awakener">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rgw
+	legendary creature - dragon
+	6/6
+	flying
+	whenever rith, the awakener deals combat damage to a player, you may pay 2g. if you do, choose a color. put a 1/1 green saproling creature token into play for each permanent of that color.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white red green </colors>
+		<idcards>creature </idcards>
+		<properties>legend dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="2" green="1"/>
+						<input-color operation='set' index='free0' register='this'/>
+						<repeat>
+							<value>
+								<counter restriction-zone="play">
+									<has-color>
+										<color register="this" index="free0"/>
+									</has-color>
+								</counter>
+							</value>
+						</repeat>
+						<create-card>
+							<card name='Saproling'>
+								<rules-author-comment></rules-author-comment>
+								<init>
+									<registers>
+										<register index='power' value='1'/>
+										<register index='toughness' value='1'/>
+									</registers>
+									<colors>green</colors>
+									<idcards>creature</idcards>
+									<properties>token saproling </properties>
+								</init>
+							</card>
+						</create-card>
+						<move-card controller='you' destination='play'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://sourceforge.net/projects/firemox/database"
+	targetNamespace="http://sourceforge.net/projects/firemox/database"
+	elementFormDefault="qualified" version="0.94-SNAPSHOT">
+	<xsd:import
+		namespace="http://sourceforge.net/projects/firemox"
+		schemaLocation="validator.xsd" />
+	<!-- 
+		*   Firemox is a turn based strategy simulator
+		*   Copyright (C) 2003-2007 Fabrice Daugan
+		*
+		*   This program is free software; you can redistribute it and/or modify it 
+		* under the terms of the GNU General Public License as published by the Free 
+		* Software Foundation; either version 2 of the License, or (at your option) any
+		* later version.
+		*
+		*   This program is distributed in the hope that it will be useful, but WITHOUT
+		* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+		* FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more 
+		* details.
+		*
+		*   You should have received a copy of the GNU General Public License along  
+		* with this program; if not, write to the Free Software Foundation, Inc., 
+		* 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		*
+		* XML Schema for Firemox XML card and XML turn based strategy rules 
+		* definition.
+		*
+		* @author Fabrice Daugan
+	-->
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			Database definition schema file.
+		</xsd:documentation>
+		<xsd:documentation xml:lang="it">
+			Definizione dello schema del Database.
+		</xsd:documentation>
+		<xsd:documentation xml:lang="fr">
+			Schema pour fichier de definition de base de donnees.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="database">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Database definitions.
+			</xsd:documentation>
+			<xsd:documentation xml:lang="it">
+				Definizione del Database.
+			</xsd:documentation>
+			<xsd:documentation xml:lang="fr">
+				Definition de la base de donnee.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+				<xsd:any processContents="lax"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

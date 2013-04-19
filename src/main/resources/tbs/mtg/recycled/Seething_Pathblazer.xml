@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Seething Pathblazer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental warrior
+	2/2
+	sacrifice an elemental: seething pathblazer gets +2/+0 and gains first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='elemental'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+2+0-until-eot"/>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

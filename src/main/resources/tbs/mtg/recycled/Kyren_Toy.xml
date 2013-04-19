@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kyren Toy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	1, t :put a charge counter on kyren toy.
+	t, remove x charge counters from kyren toy: add 1x to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%maximum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter object-name="charge" card="this"/>
+					</maximum>
+				</input-number>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<give-mana>
+					<colorless>
+						<add right="1">
+							<left register="stack" index="0"/>
+						</add>
+					</colorless>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

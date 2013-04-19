@@ -1,0 +1,57 @@
+ ----
+Fonctionnalités prévues
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+24 Septembre 2006
+
+Fonctionnalités prévues
+
+* Interface
+
+** Dimensionnement automatique des images des cartes en fonction du nombre
+   d'éléments dans une zone.
+
+** Déplacer, réduire ou <icônifier> une zone.
+
+** Forcer la libération du tampon pour forcer la mise à jour des images.
+
+** Ajouter une barre de progression pour le téléchargement des images avec des boutons
+   <réessayer> ou <annuler>.
+
+** Afficher le texte des cartes qui n'ont pas d'image disponible.
+
+** Contrôle avancé des phases à l'aide de profiles.
+
+* Noyau de l'application
+
+** Actions et tests qui exploitent le contenu de la base de données
+
+** Capacités activées pour un joueur sans utiliser de cartes
+
+** Modificateurs concernant un joueur
+
+** Pouvoir nommer une carte
+
+** Copier une carte / une capacité avec des filtres
+
+* Magic : l'Assemblée
+
+** Ajout d'un système de restriction sur le format d'un deck permettant de
+   jouer selon les formats connus (Type I, II,..).
+
+** Modifier la cible de sorts (<Deflection>, ...).
+
+** Pouvoir réarranger les bloqueurs.
+
+** Pouvoir contrôler le tour de l'adversaire.
+
+** Contraintes concernant le nombre maximum de bloqueurs.
+
+** Assigner les dommages d'une créature comme si elle n'avait pas été bloquée.
+
+** Vérification de la clause '<~ceci~> ne peut être contrecarré' par les sorts
+   de contre.
+
+** Ajouter la gestion des mana à deux couleurs (<mana half-half> en Anglais) dans
+   l'outil Oracle2xml

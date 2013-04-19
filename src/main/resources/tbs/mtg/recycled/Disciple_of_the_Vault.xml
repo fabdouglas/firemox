@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disciple of the Vault">
+<rules-author-comment></rules-author-comment>
+
+<!--  {b} whenever an artifact is put into a graveyard from play, 
+you may have target opponent lose 1 life. -->
+
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" card="tested"/>
+						<has-idcard idcard="artifact"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<action ref="target-opponent"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

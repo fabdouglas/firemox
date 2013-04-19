@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Emblem of the Warmind">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment - aura
+	enchant creature you control
+	creatures you control have haste.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<valid-target>
+			<and>
+				<test ref="valid-to-enchant" />
+				<test ref="is-targetable-creature" />
+				<controller player="you"/>
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="haste" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

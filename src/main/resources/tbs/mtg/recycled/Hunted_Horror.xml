@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Hunted Horror'>
+	<rules-author-comment>ashsaver</rules-author-comment>
+
+	<!--
+		bb
+		creature - horror
+		7/7
+		trample
+		when hunted horror comes into play, put two 3/3 green centaur creature tokens with protection from black into play under target opponent's control.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='2' />
+			<register index='power' value='7' />
+			<register index='toughness' value='7' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>horror trample</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone='play' card='tested' />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested' />
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-opponent' />
+			</cost>
+			<effects>
+				<repeat value='2' />
+				<create-card>
+					<card name='Centaur'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3' />
+								<register index='toughness' value='3' />
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token centaur protection-from-black</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='target-list.first' destination='play' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

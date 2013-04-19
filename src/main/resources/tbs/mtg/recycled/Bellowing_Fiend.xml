@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bellowing Fiend">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - spirit
+	3/3
+	flying
+	whenever bellowing fiend deals damage to a creature, bellowing fiend deals 3 damage to that creature's controller and 3 damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<has-idcard idcard='creature'/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="you"/>
+				<target type="context.card.controller"/>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

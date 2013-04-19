@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Evangelize">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	sorcery
+	buyback 2ww 
+	gain control of target creature of an opponent's choice that he or she controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="opponentchoose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="opponent"/>
+							<test ref="is-targetable-creature" />
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='buyback%a' zone='hand'>
+			<cost>
+				<action ref='buyback'/>
+				<pay-mana white='2' colorless='2' />
+				<insert-ability ref='main-ability'/>
+			</cost>
+		</activated-ability>
+	</abilities>
+</card>

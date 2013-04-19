@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dream Leash">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	enchantment - aura
+	enchant permanent
+	you may play dream leash only on a tapped permanent.
+	you control enchanted permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<controller-modifier player="you" linked="true" />
+		</modifiers>
+		<valid-target>
+			<and>
+				<test ref="valid-to-enchant" />
+				<in-zone zone="playANDtapped"/>
+				<test ref="is-target" />
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant" />
+	</attachment>
+</card>

@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battle Screech">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	sorcery
+	put two 1/1 white bird creature tokens with flying into play.
+	flashback-tap three untapped white creatures you control. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+				<repeat value='2'/>
+				<create-card>
+					<card name='Bird'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token bird flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<repeat value="3" />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<has-color color="white"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='flashback'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Irini Sengir">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	legendary creature - dwarf wizard
+	2/2
+	white enchantment spells and green enchantment spells cost 2 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend vampire dwarf</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<and>
+					<or>
+						<has-color color="white"/>
+						<has-color color="green"/>
+					</or>
+					<has-idcard idcard="enchantment"/>
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

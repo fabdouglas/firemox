@@ -1,0 +1,82 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kinsbaile Borderguard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	creature - kithkin soldier
+	1/1
+	kinsbaile borderguard comes into play with a +1/+1 counter on it for each other kithkin you control.
+	when kinsbaile borderguard is put into a graveyard from play, put a 1/1 white kithkin soldier creature token into play for each counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you" />
+								<has-property property="kithkin" />
+								<not>
+									<is-this/>
+								</not>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat>
+					<value>
+						<counter object-name="+1/+1" card="this"/>
+					</value>
+				</repeat>
+				<create-card>
+					<card name='Kithkin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token kithkin soldier</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

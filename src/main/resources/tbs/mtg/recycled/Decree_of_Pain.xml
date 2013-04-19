@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decree of Pain">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {6}{b}{b} 
+		destroy all creatures. they can't be regenerated. 
+		draw a card for each creature destroyed this way. 
+		
+		cycling {3}{b}{b} when you cycle decree of pain, all creatures get -2/-2 until 
+		end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6" />
+			<register index="black" value="2" />
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="all-creatures" />
+				<action ref="bury" />
+				<target type="you" />
+				<repeat>
+					<value>
+						<minus right="1" left="target-list.size" />
+					</value>
+				</repeat>
+				<action ref="draw-a-card" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="3" black="2" />
+			</actions>
+			<actions>
+				<action ref="all-creatures" />
+				<add-modifier>
+					<register-modifier index="power" value="2" operation="minus" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-modifier>
+					<register-modifier index="toughness" value="2" operation="minus"
+						linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-modifier>
+				</add-modifier>
+				<target-list operation="clear" name="%" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

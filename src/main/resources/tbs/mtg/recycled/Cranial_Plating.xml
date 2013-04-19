@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cranial Plating">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact - equipment
+	equipped creature gets +1/+0 for each artifact you control.
+	bb: attach cranial plating to target creature you control.
+	equip 1 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='2' />
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index='power' operation='add' linked='true'>
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="artifact"/>
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Howling Mine">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="draw">
+				<test>
+					<in-zone zone="playANDuntapped" card="this"/>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<in-zone zone="playANDuntapped" card="this"/>
+					</test>
+				</if-then-hop>
+				<target type="currentplayer"/>
+				<action ref="draw-a-card"/>
+		</effects>
+		</triggered-ability>
+	</abilities>
+</card>

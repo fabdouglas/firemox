@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zhao Zilong, Tiger General">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature
+	3/3
+	horsemanship
+	whenever zhao zilong, tiger general blocks, it gets +1/+1 until the end of the turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend horsemanship human soldier warrior</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

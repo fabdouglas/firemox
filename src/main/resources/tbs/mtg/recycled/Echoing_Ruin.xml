@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Echoing Ruin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	sorcery
+	destroy target artifact and all other artifacts with the same name as that artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>	
+						<and>
+							<has-idcard idcard="artifact"/>
+							<has-name name="target-list.first.name"/>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

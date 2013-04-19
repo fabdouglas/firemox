@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dauthi Jackal">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>dauthi hound</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana black="2" />
+				<action ref="sacrifice-this"/>
+				<target type="card" restriction-zone="play">
+					<test>
+						<and>
+							<test ref="is-targetable-creature"/>
+							<test ref="tested-is-blocking"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Captain's Maneuver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xrw
+	instant
+	the next x damage that would be dealt to target creature or player this turn is dealt to another target creature or player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref='target-dealtable'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<registers>
+						<register index="0">
+							<value register="stack" index="0"/>
+						</register>
+					</registers>
+					<save target="target-list.first" target2="target-list.last" />
+					<ability ref="redirect-X" />
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

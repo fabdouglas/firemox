@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blind Seer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	legendary creature
+	3/3
+	1u: target spell or permanent becomes the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+				<target type="card" mode="choose" >
+					<test>
+						<or>
+							<test ref="is-targetable-spell" />
+							<and>
+								<test ref="is-target"/>
+								<in-zone zone="play"/>
+							</and>
+						</or>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<input-color operation="or" index="0" register="stack" multiselect="false" />
+				<add-modifier>
+					<color-modifier operation="set" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<color register="stack" index="0" />
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

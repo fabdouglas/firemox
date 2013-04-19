@@ -1,0 +1,8 @@
+Super_Card;20
+winter orb;10
+mox sapphire;10
+smoke;10
+brass man;10
+Icy_Manipulator;10
+Swamp;10
+Kormus_Bell;10

@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Carrion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	instant
+	as an additional cost to play carrion, sacrifice a creature.
+	put x 0/1 black insect creature tokens into play, where x is the sacrificed creature's power.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register="target-list.last" index="power"/>
+				</repeat>
+				<create-card>
+					<card name='Insect'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='0'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token insect </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

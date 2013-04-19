@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://sourceforge.net/projects/firemox/database" xsi:schemaLocation="http://sourceforge.net/projects/firemox/database ../database.xsd">
+	<betatester_toolbox proxy="" language="francais" english-name="Betatester Toolbox">
+		<property name="card.text" value="0 : Draw a card.&lt;br&gt; 0 : Add a colored mana.&lt;br&gt;0 : Return target card from any graveyard to its owner&#39;s hand.&lt;br&gt;0 : Return target permanent to its owner&#39;s hand."/>
+		<property name="card.artist-credit" value="Illus. Magic Project Illustrator"/>
+	</betatester_toolbox>
+	<super_card proxy="" language="francais" english-name="Super Card">
+		<property name="card.text" value="Choose -- Add BBBBBUUUUUGGGGGRRRRRWWWWW.&lt;br &gt;Take an extra turn.&lt;br &gt;Empty your mana pool.&lt;br &gt;Dealt 3 damage to target creature.&lt;br &gt;Destroy target permanent.&lt;br &gt;Draw 20 cards."/>
+		<property name="card.artist-credit" value="Illus. Magic Project Illustrator"/>
+	</super_card>
+	<system proxy="" language="english" english-name="System"/>
+	<attack proxy="" language="english" english-name="Attack"/>
+	<draw proxy="" language="english" english-name="Draw"/>
+	<untap proxy="" language="english" english-name="Untap"/>
+	<discard proxy="" language="english" english-name="Discard"/>
+	<block proxy="" language="english" english-name="Block"/>
+	<combat proxy="" language="english" english-name="Combat"/>
+	<damage proxy="" language="english" english-name="Damage"/>
+	<manaburn proxy="" language="english" english-name="Mana Burn"/>
+	<petit_chaperon_rouge proxy="smf" language="francais" english-name="Petit Chaperon Rouge" local-name="Petit Chaperon Rouge">
+		<property name="card.set" value="smf"/>
+		<property name="card.id" value="2463"/>
+		<property name="card.text" value="Quand le petit chaperon rouge arrive en jeu, mettez en jeu sous votre contrôle un jeton Grand Méchant Loup, créature légendaire 3/3 incolore loup. Les dégats infligés au Petit Chaperon Rouge sont redirigés sur ce jeton."/>
+		<property name="card.flavor-text" value="&lt;i&gt;`Gentil toutou ! Couché, aller... Arg !! Ma jambe !` -Quelqu&#39;un qui s&#39;est approché trop près du Chaperon...&lt;/i&gt;"/>
+		<property name="card.artist-credit" value="Illus. Keren Beyit"/>
+		<property name="card.sets" value="smf"/>
+	</petit_chaperon_rouge>
+	<fille_du_phenix proxy="smf" language="francais" english-name="Fille du Phenix" local-name="Fille du Phénix">
+		<property name="card.set" value="smf"/>
+		<property name="card.id" value="2496"/>
+		<property name="card.text" value="La fille du Phénix arrive en jeu avec trois marqueurs &#39;phénix&#39; sur elle. {T}, retirez un marqueur &#39;phénix&#39; de la Fille du Phénix : infligez 2 blessures à la créature ciblée. Si vous contrôlez au moins un phénix, infligez à la place un nombre de blessures égales à la force du phénix ciblé."/>
+		<property name="card.flavor-text" value="&lt;i&gt;Elle a été recueuillie par l&#39;oiseau de feu lorsqu&#39;elle n&#39;était encore qu&#39;un bébé.&lt;/i&gt;"/>
+		<property name="card.artist-credit" value="Illus. Graun Wattanawessako"/>
+		<property name="card.sets" value="smf"/>
+	</fille_du_phenix>
+	<phenix proxy="smf" language="francais" english-name="Phenix" local-name="hénix">
+		<property name="card.set" value="smf"/>
+		<property name="card.id" value="2496"/>
+		<property name="card.text" value="Vol, vigilance.&lt;br&gt; {1}{R},{T} : Le Phénix inflige 2 blessures à un cible, créature ou joueur.&lt;br&gt; {2}{R}{R}{R} : Renvoyez le Phénix depuis votre cimetière dans votre main. Ne jouez cette capacité que pendant votre entretien."/>
+		<property name="card.flavor-text" value="&lt;i&gt;Il vit l&#39;oiseau de feu de ses propres yeux. Cet être légendaire s&#39;approcha et versa une larme. Les blessures du guerrier furent alors guéries.&lt;/i&gt;"/>
+		<property name="card.artist-credit" value="Illus. Inconnu"/>
+		<property name="card.sets" value="smf"/>
+	</phenix>
+	<cemetery_gate proxy="MagicCards.Info" language="francais" english-name="Cemetery Gate" local-name="Grille du Cimetière">
+		<property name="card.set" value="hl"/>
+		<property name="card.id" value="5"/>
+		<property name="card.text" value="Defender (This creature can&#39;t attack.)&lt;br &gt;Protection from black"/>
+		<property name="card.flavor-text" value="&lt;i&gt;`Just the place for a picnic.` -Murat, Death Speaker&lt;/i&gt;"/>
+		<property name="card.artist-credit" value="Illus. Melissa Benson"/>
+		<property name="card.sets" value="hl"/>
+	</cemetery_gate>
+</database>

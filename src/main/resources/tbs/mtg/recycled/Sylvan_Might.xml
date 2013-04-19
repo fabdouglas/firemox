@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sylvan Might">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+
+	instant
+
+	target creature gets +2/+2 and gains trample until end of turn.
+	flashback 2gg 
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+			<action ref="target-creature"/>
+			<add-modifier>
+				<register-modifier index="power" value="2" operation="add" linked="false">
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</register-modifier>
+				<register-modifier index="toughness" value="2" operation="add" linked="false">
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</register-modifier>
+				<property-modifier property="trample" linked="false">
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</property-modifier>
+			</add-modifier>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana green="2" colorless="2" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

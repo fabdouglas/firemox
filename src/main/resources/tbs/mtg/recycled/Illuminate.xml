@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Illuminate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xr
+	sorcery
+	kicker 2r and/or 3u 
+	illuminate deals x damage to target creature. if the 2r kicker cost was paid, illuminate deals x damage to that creature's controller. if the 3u kicker cost was paid, you draw x cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="2" red="1" />
+				<action ref="pay-x"/>
+				<action ref="target-creature"/>
+			</actions>
+			<actions>
+				<target type="target-list.last.controller"/>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker2">
+			<actions>
+				<pay-mana colorless="3" blue="1" />
+				<action ref="pay-x"/>
+				<action ref="target-creature"/>
+			</actions>
+			<actions>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<target type="you"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker12">
+			<actions>
+				<pay-mana colorless="2" red="1" />
+			</actions>
+			<actions>
+				<pay-mana colorless="3" blue="1" />
+				<action ref="pay-x"/>
+				<action ref="target-creature"/>
+			</actions>
+			<actions>
+				<target type="target-list.last.controller"/>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</actions>
+			<actions>
+				<target type="you"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

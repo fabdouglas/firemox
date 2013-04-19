@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Conch Horn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	1, t, sacrifice conch horn: draw two cards, then put a card from your hand on top of your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<target-list operation="clear"/>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

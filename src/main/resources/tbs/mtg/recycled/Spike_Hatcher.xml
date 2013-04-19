@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spike Hatcher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6g
+	creature - spike
+	0/0
+	spike hatcher comes into play with six +1/+1 counters on it.
+	2, remove a +1/+1 counter from spike hatcher: put a +1/+1 counter on target creature.
+	1, remove a +1/+1 counter from spike hatcher: regenerate spike hatcher.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spike </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

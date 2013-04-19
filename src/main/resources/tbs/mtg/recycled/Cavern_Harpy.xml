@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cavern Harpy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ub
+	creature - beast
+	2/1
+	flying
+	when cavern harpy comes into play, return a blue or black creature you control to its owner's hand.
+	pay 1 life: return cavern harpy to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>harpy beast flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<or>
+								<has-color color="black"/>
+								<has-color color="blue"/>
+							</or>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='pay-life' value='1'/>
+			</cost>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

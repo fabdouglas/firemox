@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Last Gasp">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<idcards>instant</idcards>
+		<colors>black</colors>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="add-3-3-until-eot" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>
+

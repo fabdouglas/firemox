@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Aven Flock">
+<!-- {W}: ~this~ gets +0/+1 until end of turn. -->
+<!-- Test ok 28/12/2004 0.81.30 -->
+	<rules-author-comment>By brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>flying bird soldier</properties>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<ability ref="cast-spell"/>
+<!-- W: Aven Flock gets +0/+1 -->
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+<!-- add +0/+1 until eot -->
+				<target type="this"/>
+				<add-modifier>
+					<register-modifier index="toughness" operation="add" value="1" linked="false">
+						<until>
+							<end-of-phase phase="eot"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

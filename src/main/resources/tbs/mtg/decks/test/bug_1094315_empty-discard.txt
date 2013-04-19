@@ -1,0 +1,2 @@
+#uncheck "use mana" on the server dialog to test this deck
+Abyssal_Specter;40

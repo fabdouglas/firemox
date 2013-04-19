@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ribbons of the Reikai">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	sorcery - arcane
+	draw a card for each spirit you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="spirit"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

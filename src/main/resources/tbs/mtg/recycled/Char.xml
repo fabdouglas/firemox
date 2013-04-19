@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Char">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	instant
+	char deals 4 damage to target creature or player and 2 damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage value="4" type="damage-normal"/>
+				<target-list operation="clear" name="%"/>
+				<target type="you"/>
+				<assign-damage value="2" type="damage-normal"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

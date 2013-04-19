@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pernicious Deed">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bg
+	enchantment
+	x, sacrifice pernicious deed: destroy each artifact, creature, and enchantment with converted mana cost x or less.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="artifact"/>
+								<has-idcard idcard="creature"/>
+								<has-idcard idcard="enchantment"/>
+							</or>
+							<inf-equal>
+								<left register="tested" index="manacost"/>
+								<right register="stack" index="0"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

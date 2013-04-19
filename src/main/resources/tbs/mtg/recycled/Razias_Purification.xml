@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Razia's Purification">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rw
+	sorcery
+	each player chooses three permanents he or she controls, then sacrifices the rest.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<repeat value="3"/>
+				<target type="card" mode="choose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="you"/>
+							<test ref="is-target" />
+						</and>
+					</test>
+				</target>
+				<repeat value="3"/>
+				<target type="card" mode="opponentchoose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="opponent"/>
+							<test ref="is-target" />
+						</and>
+					</test>
+				</target>
+				<target-list operation="save"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="play"/>
+				<target-list operation="remove-all" list-index="-1"/>
+				<target-list operation="remove" list-index="-1"/>
+				<action ref="sacrifice"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

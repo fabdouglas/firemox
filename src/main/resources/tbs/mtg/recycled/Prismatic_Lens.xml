@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Prismatic Lens">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  2 t add 1 to your mana pool. 1, t add one mana of any color to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana black="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana blue="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana green="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Opt">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	instant
+	look at the top card of your library. you may put that card on the bottom of your library.
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="look-at-the-top"/>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="move-library-bottom"/>
+					</either>
+				</choice>
+				<face-down for="everyone"/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

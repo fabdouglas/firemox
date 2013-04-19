@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Defiling Tears">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} until end of turn, target creature becomes black, gets +1/-1, 
+and gains "{b}: regenerate this creature." -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-modifier>
+				 	<register-modifier index="power" value="1" operation="add" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+				 	<register-modifier index="toughness" value="1" operation="minus" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+					<color-modifier color="black" linked="false" operation="set">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</color-modifier>
+					<ability-modifier linked="false" operation="add">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities>
+							<activated-ability playable="instant" zone="play">
+								<cost>
+									<pay-mana black="1"/>
+								</cost>
+								<effects>
+									<action ref="regenerate"/>
+								</effects>
+							</activated-ability>
+						</abilities>
+				 	</ability-modifier>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

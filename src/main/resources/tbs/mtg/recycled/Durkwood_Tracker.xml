@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Durkwood Tracker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - giant
+	4/3
+	1g, t :if durkwood tracker is in play, it deals damage equal to its power to target attacking creature. that creature deals damage equal to its power to durkwood tracker.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal' from="this" to="target-list.first">
+					<value register='this' index='power'/>
+				</assign-damage>
+				<assign-damage type='damage-normal' from="target-list.first" to="this">
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

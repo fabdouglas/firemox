@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kithkin Greatheart">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - kithkin soldier
+	2/1
+	as long as you control a giant, kithkin greatheart gets +1/+1 and has first strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="giant" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="giant" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<property-modifier property="first-strike">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-property property="giant" />
+					</and>
+				</has>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

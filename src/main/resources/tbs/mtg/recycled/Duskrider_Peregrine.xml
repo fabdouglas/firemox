@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Duskrider Peregrine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5w
+	creature - bird
+	3/3
+	flying, protection from black
+	suspend 3-1w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bird flying protection-from-black </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana white='1' colorless='1' />
+			</actions>
+			<actions>
+				<repeat value='3'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

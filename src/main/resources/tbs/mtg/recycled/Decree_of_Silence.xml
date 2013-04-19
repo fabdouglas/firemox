@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decree of Silence">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {6}{u}{u} whenever an opponent plays a spell, 
+		counter that spell and put a depletion counter on decree of silence. 
+		if there are three or more depletion counters on decree of silence, 
+		sacrifice it. 
+		cycling {4}{u}{u} when you cycle decree of silence, you may counter target spell. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6" />
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability name="counter" zone="play">
+			<casting>
+				<test>
+					<and>
+						<test ref="is-targetable-spell" />
+						<controller player="opponent" />
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target type="context.card" />
+				<action ref="counter" />
+				<target-list operation="clear" />
+				<target type="this" />
+				<add-object object-name="depletion" />
+				<if-then-hop elsehop="5">
+					<test>
+						<sup-equal right="3">
+							<left>
+								<counter object-name="depletion" card="this" />
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="4" blue="2" />
+				<action ref="target-spell" />
+			</actions>
+			<actions>
+				<action ref="counter" />
+			</actions>
+		</ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="4" blue="2" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

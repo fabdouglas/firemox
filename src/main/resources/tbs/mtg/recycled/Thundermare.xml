@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thundermare">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5r
+	creature - elemental
+	5/5
+	haste 
+	when thundermare comes into play, tap all other creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental horse haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<not>
+								<is-this/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

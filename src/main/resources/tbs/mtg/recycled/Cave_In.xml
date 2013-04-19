@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cave-In">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	sorcery
+	you may remove a red card in your hand from the game rather than pay cave-in's mana cost.
+	cave-in deals 2 damage to each creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<target type="player" mode="all"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="red"/>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<target type="player" mode="all"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

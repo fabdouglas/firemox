@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Black Carriage">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{b}{b} trample black carriage doesn't untap during your untap step. 
+
+sacrifice a creature: untap black carriage. 
+play this ability only during your upkeep. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>does-not-untap trample horse</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<action ref="sacrifice-a-creature" value="1"/>
+			</cost>
+			<effects>
+				<target-list operation="clear" name="%"/>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

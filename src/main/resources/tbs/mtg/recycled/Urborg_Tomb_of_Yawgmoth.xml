@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urborg, Tomb of Yawgmoth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	each land is a swamp in addition to its other land types.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<idcard-modifier idcard="swamp" operation="or" linked="true"/>
+			</modifiers>
+			<while>
+				<has-idcard idcard="land"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

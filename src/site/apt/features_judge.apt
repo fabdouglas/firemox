@@ -1,0 +1,25 @@
+ ----
+Rules interpretation
+ ----
+Fabrice Daugan
+ ----
+May 27 2006
+
+Rules interpretation
+
+	Firemox is able to parse the rules and apply them. You cannot cheat or missplay a spell.
+
+ Targeting sample for MTG
+	
+[images/guides/user/valid-target.png] validt
+
+
+ Card moving in a non-arrangeable zone
+	
+[images/guides/user/choose-order.png] order
+
+
+ Determining maximum damage / targets for Fireball (MTG card)
+	
+[images/guides/user/input-integer.png] fb
+

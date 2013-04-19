@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Alchor's Tomb">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	2, t :target permanent you control becomes the color of your choice. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='target-permanent'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>	
+				<input-color operation="or" index="0" register="stack" multiselect="false" />
+				<add-modifier>
+					<color-modifier operation="set" linked="false" live-update="false">
+						<color register="stack" index="0" />
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

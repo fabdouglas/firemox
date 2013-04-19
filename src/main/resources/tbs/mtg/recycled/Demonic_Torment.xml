@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Demonic Torment">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{b} enchanted creature can't attack. 
+		prevent all combat damage that would be dealt by enchanted creature. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-combat-can-be-prevented">
+				<source-test>
+					<is target="attachedto" />
+				</source-test>
+			</assigned-damage>
+			<effects />
+		</replacement-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="cannot-attack" linked="true" />
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

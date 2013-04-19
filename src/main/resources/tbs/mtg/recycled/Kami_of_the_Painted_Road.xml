@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kami of the Painted Road">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - spirit
+	3/3
+	whenever you play a spirit or arcane spell, kami of the painted road gains protection from the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type='this'/>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

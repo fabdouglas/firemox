@@ -1,0 +1,16 @@
+clone;10
+Unstable Shapeshifter;10
+super card;50
+Urborg Elf;10
+mishras factory;10
+Vesuvan Doppelganger;10
+Copy Artifact;10
+Dross Golem;10
+Drop of Honey;10
+Dromar, the Banisher;10
+Dream Tides;10
+Dream Fighter;10
+Dream Cache;10
+Door to Nothingness;10
+Divergent Growth;10
+swamp;10

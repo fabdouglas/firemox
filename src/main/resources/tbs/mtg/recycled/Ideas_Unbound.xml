@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ideas Unbound">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	sorcery - arcane
+	draw three cards. discard three cards at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='3'/>
+				<action ref='draw-a-card'/>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<action ref='discard' value='3'/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Everbark Shaman">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - treefolk shaman
+	3/5
+	t, remove a treefolk card in your graveyard from the game: search your library for two forest cards and put them into play tapped. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="treefolk"/>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref='search-lib-up-to' value="2">
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+				<move-card destination="playANDtapped" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

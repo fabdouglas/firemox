@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Strength of Isolation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+2 and has protection from black.
+	madness w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<ability ref='madness'>
+			<actions/>
+			<actions>
+				<pay-mana white='1' />
+			</actions>
+		</ability>
+	</abilities>
+	<attachment ref='+1/+2'>
+		<modifiers>
+			<property-modifier property="protection-from-black" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

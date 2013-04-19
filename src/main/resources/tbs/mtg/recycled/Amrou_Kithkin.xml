@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amrou Kithkin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ww
+	creature - kithkin
+	1/1
+	amrou kithkin can't be blocked by creatures with power 3 or greater.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+						<sup-equal right="3">
+							<left register="tested" index="power" />
+						</sup-equal>
+					</and>
+				</blocking-test>
+				<attacking-test>
+					<is-this />
+				</attacking-test>
+			</declared-blocking>
+			<effects />
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rolling Spoil">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	sorcery
+	destroy target land. if b was spent to play rolling spoil, all creatures get -1/-1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="this" color="black" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<action ref="all-creatures"/>
+				<action ref="add-1-1-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

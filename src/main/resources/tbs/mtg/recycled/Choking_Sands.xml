@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Choking Sands">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	sorcery
+	destroy target non-swamp land. if that land is nonbasic, choking sands deals 2 damage to the land's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'>
+					<test>
+						<not>
+							<has-idcard idcard="swamp"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<and>
+							<has-idcard idcard="land" card="target-list.last" />
+							<not>
+								<has-property property="basic-land" card="target-list.last" />
+							</not>
+						</and>
+					</test>
+				</if-then-hop>
+				<target type="target-list.first.controller"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

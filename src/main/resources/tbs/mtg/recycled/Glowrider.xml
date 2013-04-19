@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glowrider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - cleric
+	2/1
+	noncreature spells cost 1 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+	    <static-modifier filter-zone="hand">
+	        <modifiers>
+	            <register-modifier index="colorless" operation="add" value="1" linked="true" layer="global"/>
+	        </modifiers>
+			<while>
+				<not>
+					<has-idcard idcard="creature"/>
+				</not>
+			</while>
+	    </static-modifier>
+	</modifiers>
+</card>

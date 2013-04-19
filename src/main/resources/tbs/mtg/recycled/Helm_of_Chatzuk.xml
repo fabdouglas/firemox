@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Helm of Chatzuk">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1} {1}, {t}: target creature gains banding until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="banding-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

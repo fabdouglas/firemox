@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urza's Rage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	instant
+	kicker 8r 
+	urza's rage can't be countered by spells or abilities.
+	urza's rage deals 3 damage to target creature or player. if the kicker cost was paid, instead urza's rage deals 10 damage to that creature or player and the damage can't be prevented.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="8" red="1" />
+				<action ref="target-dealtable"/>
+			</actions>
+			<actions>
+				<assign-damage value='10' type='damage-cannot-be-prevented'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

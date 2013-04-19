@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Barbed Shocker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - insect
+	2/2
+	trample, haste
+	whenever barbed shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>insect trample haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<modify-register register="this" index="free0" operation="set" >
+					<value>
+						<counter restriction-zone="hand">
+							<controller player="context.player"/>
+						</counter>
+					</value>
+				</modify-register>
+				<target type="context.player"/>
+				<action ref='player-discard' value='all'/>
+				<repeat>
+					<value register="this" index="free0"/>
+				</repeat>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

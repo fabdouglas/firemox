@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arbiter of Knollridge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6w
+	creature - giant wizard
+	5/5
+	vigilance
+	when arbiter of knollridge comes into play, each player's life total becomes the highest life total among all players.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>giant wizard vigilance </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup-equal>
+							<left register="you" index="life"/>
+							<right register="opponent" index="life"/>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<modify-register register="opponent" index="life" operation="add">
+					<value register="you" index="life"/>
+				</modify-register>
+				<hop value="2"/>
+				<modify-register register="you" index="life" operation="add">
+					<value register="opponent" index="life"/>
+				</modify-register>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

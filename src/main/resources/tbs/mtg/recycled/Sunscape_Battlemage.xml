@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sunscape Battlemage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - wizard
+	2/2
+	kicker 1g and/or 2u
+	when sunscape battlemage comes into play, if the 1g kicker cost was paid, destroy target creature with flying.
+	when sunscape battlemage comes into play, if the 2u kicker cost was paid, draw two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" green="1" />
+				<action ref="target-creature">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref="destroy"/>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker2">
+			<actions>
+				<pay-mana blue="1" colorless="2"/>
+			</actions>
+			<actions>
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="draw-a-card"/>
+			</actions>
+		</ability>
+		<ability ref="cast-spell-kicker12">
+			<actions>
+				<pay-mana colorless="1" green="1" />
+				<action ref="target-creature">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<pay-mana blue="1" colorless="2"/>
+			</actions>
+			<actions>
+				<action ref="destroy"/>
+			</actions>
+			<actions>
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="draw-a-card"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

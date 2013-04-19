@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phantom Flock">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - bird soldier spirit
+	0/0
+	flying
+	phantom flock comes into play with three +1/+1 counters on it.
+	if damage would be dealt to phantom flock, prevent that damage. remove a +1/+1 counter from phantom flock.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bird soldier spirit flying </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blazing Specter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2br
+	creature - specter
+	2/2
+	flying, haste
+	whenever blazing specter deals combat damage to a player, that player discards a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>specter flying haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="contextchoose" restriction-zone="hand"
+					raise-event="false" name="discard-%n-card">
+					<test>
+						<controller player="context.player" />
+					</test>
+				</target>
+				<action ref="discard-cards_noname" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

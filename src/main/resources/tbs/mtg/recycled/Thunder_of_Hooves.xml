@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thunder of Hooves">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{r} 
+thunder of hooves deals x damage to each creature without flying and each player, 
+where x is the number of beasts in play. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target mode="all" type="card" restriction-zone="play">
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</target>
+				<target type="player" mode="all"/>
+				<assign-damage type="damage-normal">
+					<value><counter restriction-zone="play">
+						<has-property property="beast"/>
+					</counter></value>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

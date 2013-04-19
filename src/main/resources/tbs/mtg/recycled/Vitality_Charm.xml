@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vitality Charm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	choose one - put a 1/1 green insect creature token into play; or target creature gets +1/+1 and gains trample until end of turn; or regenerate target beast.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Insect'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token insect </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+				<action ref="trample-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature">
+					<test>
+						<has-property property="beast"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

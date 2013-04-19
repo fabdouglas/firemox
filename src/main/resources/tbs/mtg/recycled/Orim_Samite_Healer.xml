@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Orim, Samite Healer">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{w}{w} 
+{t}: prevent the next 3 damage that would be dealt to target creature or player this turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<action ref="prevent-3"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

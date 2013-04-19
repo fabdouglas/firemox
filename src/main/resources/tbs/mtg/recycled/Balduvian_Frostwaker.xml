@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Balduvian Frostwaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - human wizard
+	1/1
+	u, t :target snow land becomes a 2/2 blue elemental creature with flying. it's still a land.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref='T'/>
+				<action ref='target-land'>
+					<test>
+						<has-property property='snow'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-indirection index="power" value="2" operation="set" linked="false"/>
+				 	<register-indirection index="toughness" value="2" operation="set" linked="false"/>
+				 	<idcard-modifier idcard="creature" operation="or" linked="false"/>
+				 	<property-modifier property="flying" linked="false"/>
+				 	<property-modifier property="elemental" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stampede">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	instant
+	attacking creatures get +1/+0 and gain trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>	
+				<action ref="all-creatures">
+					<test>
+						<test ref="tested-is-attacking"/>
+					</test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+				<action ref="trample-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

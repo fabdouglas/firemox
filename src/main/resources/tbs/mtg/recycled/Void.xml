@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Void">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3br
+	sorcery
+	choose a number. destroy all artifacts and creatures with converted mana cost equal to that number. then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+				<input-number minimum="0" maximum="15" register="stack" index="0" operation="set" default="%maximum"
+					strict-max="false">
+					<text>%value-of-x</text>
+				</input-number>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you" name="%" />
+				<target type="card" mode="all" restriction-zone="hand" raise-event="false"
+					cancel="false" name="discard-%n-card">
+					<test>
+						<and>
+							<equal>
+								<left register="stack" index="0"/>
+								<right register="tested" index="manacost"/>
+							</equal>
+							<controller player="target-list.first" />
+						</and>
+					</test>
+				</target>
+				<action ref="restore-hand-visibility" name="%" />
+				<action ref="discard-cards_noname" name="%" />
+				<target-list operation="clear"/>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="artifact"/>
+								<has-idcard idcard="creature"/>
+							</or>
+							<equal>
+								<left register="stack" index="0"/>
+								<right register="tested" index="manacost"/>
+							</equal>
+						</and>
+					</test>
+				</target>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

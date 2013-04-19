@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Magus of the Coffers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - human wizard
+	4/4
+	2, t :add b to your mana pool for each swamp you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<black>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="swamp"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</black>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

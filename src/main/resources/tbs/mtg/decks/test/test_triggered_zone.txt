@@ -1,0 +1,7 @@
+super card;10
+underground sea;5
+mox jet;5
+Horobi Deaths Wail;10
+Cowardice;10
+Lightning Bolt;10
+

@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Morphling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	creature - shapeshifter
+	3/3
+	u: untap morphling.
+	u: morphling gains flying until end of turn.
+	u: morphling gains shroud until end of turn. 
+	1: morphling gets +1/-1 until end of turn.
+	1: morphling gets -1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>shapeshifter </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<untap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="shroud-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+1-1-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add-1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

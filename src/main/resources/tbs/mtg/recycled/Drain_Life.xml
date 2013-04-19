@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drain Life">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum register="controller" index="black"/>
+				</input-number>
+				<pay-mana>
+					<black register="stack" index="0"/>
+				</pay-mana>
+				<target mode="choose" type="dealtable" restriction-zone="play">
+					<test ref="is-targetable-dealtable"/>
+				</target>
+			</cost>
+			<effects>
+				<create-ability>
+					<registers>
+						<register index="0">
+							<value register="stack" index="0"/>
+						</register>
+					</registers>
+					<save target="target-list.last"/>
+					<triggered-ability zone="play">
+						<assigned-damage type="damage-any">
+							<source-test>
+								<is-this/>
+							</source-test>
+						</assigned-damage>
+						<effects>
+							<action ref="gain-life" >
+								<value>
+									<minimum right="context.int">
+										<left>
+											<if-then-else>
+												<if>
+													<is-player target="context.target"/>
+												</if>
+												<then register="context.player" index="life"/>
+												<else register="context.card" index="toughness"/>
+											</if-then-else>
+										</left>
+									</minimum>
+								</value>
+							</action>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<assign-damage type="damage">
+					<value register="stack" index="0"/>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

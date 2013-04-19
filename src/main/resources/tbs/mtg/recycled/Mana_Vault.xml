@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mana Vault">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+		<properties>does-not-untap</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="draw">
+				<test>
+					<and>
+						<test ref="during-your-draw" />
+						<in-zone zone="playANDtapped" card="this" />
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="you" />
+				<assign-damage value="1" />
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<in-zone zone="playANDtapped" card="this" />
+						<is-this player="controller" />
+					</and>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<pay-mana colorless="4" />
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<target type="this" />
+				<untap />
+			</effects>
+		</triggered-ability>
+
+		<activated-ability playable="mana-source" name="" zone="play"
+			resolution="auto">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<give-mana colorless="3" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

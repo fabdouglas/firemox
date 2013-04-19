@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sulfuric Vapors">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	enchantment
+	if a red spell would deal damage to a creature or player, it deals that much damage plus 1 to that creature or player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play" layer="1">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<has-color color="red"/>
+				</source-test>
+				<destination-test>
+					<or>
+						<is-player/>
+						<has-idcard idcard="creature"/>
+					</or>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<assign-damage type="context.int2">
+					<value>
+						<add left="1" right="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

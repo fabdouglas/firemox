@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Serra's Sanctum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add w to your mana pool for each enchantment you control.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<white>
+						<counter restriction-zone="play">
+							<has-idcard idcard="enchantment"/>
+						</counter>
+					</white>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

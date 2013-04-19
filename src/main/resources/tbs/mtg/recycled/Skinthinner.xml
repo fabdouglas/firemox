@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skinthinner">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - zombie
+	2/1
+	morph 3bb 
+	when skinthinner is turned face up, destroy target nonblack creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana black='2' colorless='3' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color='black'/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

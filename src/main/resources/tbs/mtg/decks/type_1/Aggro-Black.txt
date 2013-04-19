@@ -1,0 +1,20 @@
+#from http://www.wizards.com/default.asp?x=mtgcom/daily/bd102
+# Name : Aggro-Black
+# Entry-level Vintage Deck by Mike Pustilnik
+4  Duress
+# 4  Cabal Therapy --> not yet implmented action "name a card"
+4  Hymn to Tourach
+4  Dark Ritual
+1  Demonic Tutor
+1  Vampiric Tutor
+1  Yawgmoth's Will
+1  Necropotence
+1  Mind Twist
+3  Mishra's Factory
+16  Swamp
+4  Wasteland
+1  Strip Mine
+3  Phyrexian Negator
+4  Carnophage
+4  Hypnotic Specter
+4  Nantuko Shade

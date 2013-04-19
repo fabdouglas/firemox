@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Scabland">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land scabland comes into play tapped. t add 1 to your mana pool. t add r or w to your mana pool. scabland deals 1 damage to you. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="controller"/>
+				<assign-damage value="1"/>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="controller"/>
+				<assign-damage value="1"/>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Quirion Dryad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - dryad
+	1/1
+	whenever you play a white, blue, black, or red spell, put a +1/+1 counter on quirion dryad.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>dryad </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-color color="white"/>
+							<has-color color="blue"/>
+							<has-color color="black"/>
+							<has-color color="red"/>
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

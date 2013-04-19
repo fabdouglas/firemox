@@ -1,0 +1,118 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Duergar Hedge-Mage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(r / w)
+	creature - dwarf shaman
+	2/2
+	when duergar hedge-mage comes into play, if you control two or more mountains, you may destroy target artifact.
+	when duergar hedge-mage comes into play, if you control two or more plains, you may destroy target enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>creature </idcards>
+		<properties>dwarf shaman </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' red='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone='play' card='tested'/>
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="mountain"/>
+									</and>
+								</counter>
+							</left>
+						</sup>
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='destroy'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone='play' card='tested'/>
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="plains"/>
+									</and>
+								</counter>
+							</left>
+						</sup>
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-enchantment'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='destroy'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

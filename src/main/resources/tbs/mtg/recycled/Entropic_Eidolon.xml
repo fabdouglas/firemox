@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Entropic Eidolon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - spirit
+	2/2
+	b, sacrifice entropic eidolon: target player loses 1 life and you gain 1 life.
+	whenever you play a multicolored spell, you may return entropic eidolon from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="graveyard">
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<test ref="is-multicolored"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice cancel="true" controller="you">
+					<either>
+						<target type="this" raise-event="false"/>
+						<action ref="return-to-hand"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

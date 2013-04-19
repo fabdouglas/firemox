@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Talon of Pain">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	whenever a source you control other than talon of pain deals damage to an opponent, put a charge counter on talon of pain.
+	x, t, remove x charge counters from talon of pain: talon of pain deals x damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<and>
+						<controller player="you"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<is target="opponent"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<remove-object object-name="charge"/>
+				<target-list operation="clear"/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

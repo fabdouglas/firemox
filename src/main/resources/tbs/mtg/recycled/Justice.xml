@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Justice">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	enchantment
+	at the beginning of your upkeep, sacrifice justice unless you pay ww.
+	whenever a red creature or spell deals damage, justice deals that much damage to that creature's or spell's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana white='2'/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<source-test>
+					<and>
+						<has-color color="red"/>
+						<or>
+							<is-spell/>
+							<has-idcard idcard="creature"/>
+						</or>
+					</and>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage type="damage-any" value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

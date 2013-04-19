@@ -1,0 +1,31 @@
+#Jeu destruction
+#
+#John
+#
+#août 14, 2001
+#1
+#4th Edition
+#
+Demonic_Tutor;2
+Sinkhole;2
+Black_Lotus;4
+Mox_Jet;4
+Sol_Ring;2
+Howling_Mine;2
+Armageddon;2
+Disenchant;2
+Consecrate_Land;3
+Wrath_of_God;2
+Swords_to_Plowshares;3
+Ancestral_Recall;2
+Time_Walk;3
+Timetwister;3
+Mox_Sapphire;4
+Mox_Pearl;4
+Black_Vise;2
+Drain_Life;1
+Scrubland;5
+Tundra;5
+Underground_Sea;5
+Counterspell;3
+Power_Sink;2

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fade from Memory">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	instant
+	remove target card in a graveyard from the game.
+	cycling b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana black='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Granite Grip">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+0 for each mountain you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true" >
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<has-idcard idcard="mountain"/>
+							<controller player="you"/>
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+	</attachment>
+</card>

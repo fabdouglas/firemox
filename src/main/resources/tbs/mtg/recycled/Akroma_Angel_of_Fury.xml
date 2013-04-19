@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Akroma, Angel of Fury">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		5rrr
+		legendary creature - angel
+		6/6
+		akroma, angel of fury can't be countered.
+		flying, trample, protection from white, protection from blue
+		r: akroma, angel of fury gets +1/+0 until end of turn.
+		morph 3rrr 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='3' />
+			<register index='colorless' value='5' />
+			<register index='power' value='6' />
+			<register index='toughness' value='6' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>
+			legend angel cannot-be-countered flying trample protection-from-white protection-from-blue
+		</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<target type='this' />
+				<add-modifier>
+					<register-modifier index='power' value='1' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup' />
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-morph" />
+		<ability ref="morph">
+			<actions>
+				<pay-mana red='3' colorless='3' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

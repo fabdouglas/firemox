@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Righteous Fury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ww
+	sorcery
+	destroy all tapped creatures. you gain 2 life for each creature destroyed this way.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="creature"/>
+										<in-zone zone="playANDtapped"/>
+									</and>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+				<action ref='all-creatures'>
+					<test>	
+						<in-zone zone="playANDtapped"/>
+					</test>
+				</action>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

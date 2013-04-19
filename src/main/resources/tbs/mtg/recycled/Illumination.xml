@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Illumination">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ww
+	instant
+	counter target artifact or enchantment spell. its controller gains life equal to its converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<target type="target-list.first.controller"/>
+				<action ref='gain-life-target'>
+					<value register='target-list.first' index='manacost'/>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

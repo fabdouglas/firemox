@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nim Grotesque">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6b
+	creature - zombie
+	3/6
+	nim grotesque gets +1/+0 for each artifact you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<has-idcard idcard="artifact"/>
+						<controller player="you"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

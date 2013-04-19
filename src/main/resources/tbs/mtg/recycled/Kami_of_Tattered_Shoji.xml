@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kami of Tattered Shoji">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - spirit
+	2/5
+	whenever you play a spirit or arcane spell, kami of tattered shoji gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

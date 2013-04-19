@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darkwater Catacombs">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  land {1}, {t}: add {u}{b} to your mana pool. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-land"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" black="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Unstable Shapeshifter'>
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3u
+		creature - shapeshifter
+		0/1
+		whenever a creature comes into play, unstable shapeshifter becomes a copy of 
+		that creature and gains this ability. 
+	-->
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='0' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref='shapeshifter-ability' />
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Telekinetic Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	creature - sliver
+	2/2
+	all slivers have "t :tap target permanent."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable='instant' name='' zone='play'>
+							<cost>
+								<action ref='target-permanent'/>
+							</cost>
+							<effects>
+								<tap/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

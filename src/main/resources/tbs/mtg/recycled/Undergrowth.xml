@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Undergrowth">
+<rules-author-comment></rules-author-comment>
+
+<!--  {g} as an additional cost to play undergrowth, you may pay {2}{r}. 
+prevent all combat damage that would be dealt this turn. 
+if its additional cost was paid, undergrowth doesn't affect combat damage that 
+would be dealt by red creatures. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="prevent-all-combat-damage"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<pay-mana colorless="2" red="1"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-combat-can-be-prevented">
+							<source-test>
+								<not>
+									<and>
+										<has-idcard idcard="creature"/>
+										<has-color color="red"/>
+									</and>
+								</not>
+							</source-test>
+						</assigned-damage>
+						<effects/>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

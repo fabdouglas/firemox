@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rejuvenation Chamber">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	fading 2 
+	t :you gain 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='fading'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<object name='fade'/>
+		<object name='fade'/>
+	</modifiers>
+</card>

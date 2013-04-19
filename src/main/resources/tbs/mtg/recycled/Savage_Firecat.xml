@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Savage Firecat">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - cat
+	0/0
+	trample
+	savage firecat comes into play with seven +1/+1 counters on it.
+	whenever you tap a land for mana, remove a +1/+1 counter from savage firecat.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental cat trample </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="land" />
+						<controller player="you"/>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source" />
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved" />
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this />
+							<target type="this"/>
+							<remove-object object-name="+1/+1"/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare" />
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

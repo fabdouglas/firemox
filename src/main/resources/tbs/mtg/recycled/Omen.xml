@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Omen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	sorcery
+	look at the top three cards of your library. you may put them back in any order or shuffle your library.
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="2"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+				<target type='you'/>
+				<choice controller="you" cancel="true">
+					<either>
+						<shuffle zone="library"/>
+					</either>
+				</choice>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

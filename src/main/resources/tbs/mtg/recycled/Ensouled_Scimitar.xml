@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ensouled Scimitar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact - equipment
+	3: ensouled scimitar becomes a 1/5 artifact creature with flying until end of turn. 
+	equipped creature gets +1/+5.
+	equip 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment spirit</properties>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+				<pay-mana colorless='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" value="1" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<register-indirection index="toughness" value="5" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+					<idcard-modifier idcard="artifact-creature" operation="or" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<property-modifier property="flying" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index='power' operation='add' linked='true' value='1' />
+			<register-modifier index='toughness' operation='add' linked='true' value='5' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

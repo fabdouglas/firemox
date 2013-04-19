@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shivan Emissary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - wizard
+	1/1
+	kicker 1b 
+	when shivan emissary comes into play, if the kicker cost was paid, destroy target nonblack creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" black="1" />
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref="bury"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

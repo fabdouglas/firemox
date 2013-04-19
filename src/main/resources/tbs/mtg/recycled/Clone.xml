@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Clone'>
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3u
+		creature - shapeshifter
+		0/0
+		as clone comes into play, you may choose a creature in play. if you do, clone comes into play as a copy of that creature.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='0' />
+			<register index='toughness' value='0' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" restriction-zone="play" raise-event="false" mode="choose"
+					cancel="true" hop="2">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</target>
+				<copy-card card="target-list.last" to="this" />
+				<action ref="put-in-play" />
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

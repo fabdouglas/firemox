@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tainted Isle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	t :add u or b to your mana pool. play this ability only if you control a swamp.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="swamp"/>
+					</and>
+				</has>
+			</test>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="swamp"/>
+					</and>
+				</has>
+			</test>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

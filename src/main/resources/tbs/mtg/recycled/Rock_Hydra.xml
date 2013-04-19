@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rock Hydra">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {x}{r}{r} 
+
+rock hydra comes into play with x +1/+1 counters on it. 
+for each 1 damage that would be dealt to rock hydra, 
+if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage. 
+
+{r}: prevent the next 1 damage that would be dealt to rock hydra this turn. 
+{r}{r}{r}: put a +1/+1 counter on rock hydra. play this ability only during your upkeep. -->
+	<init>
+		<registers>
+			<register index="red" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="0"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>hydra</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+			</cost>
+			<effects>
+				<action ref="prevent-1-on-this"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana red="3" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</activated-ability>
+
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<destination-test>
+					<and>
+						<is-this/>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="this"/>
+							</left>
+						</sup>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<if-then-hop elsehop="5">
+					<test>
+						<sup left="context.int">
+							<right>
+								<counter object-name="+1/+1" card="this"/>
+							</right>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register register="this" index="damage" operation="add">
+					<value><counter object-name="+1/+1" card="this"/></value>
+				</modify-register>
+				<repeat>
+					<value><counter object-name="+1/+1" card="this"/></value>
+				</repeat>
+				<remove-object object-name="+1/+1"/>
+				<hop value="3"/>
+				<repeat value="context.int"/>
+				<remove-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

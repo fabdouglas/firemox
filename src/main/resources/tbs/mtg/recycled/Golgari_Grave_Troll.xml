@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Golgari Grave-Troll">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		4g
+		creature - skeleton troll
+		0/0
+		golgari grave-troll comes into play with a +1/+1 counter on it for each creature card in your graveyard.
+		1, remove a +1/+1 counter from golgari grave-troll: regenerate golgari grave-troll.
+		dredge 6
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='1' />
+			<register index='colorless' value='4' />
+			<register index='power' value='0' />
+			<register index='toughness' value='0' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>skeleton troll</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<repeat>
+					<value>
+						<counter restriction-zone="graveyard">
+							<and>
+								<controller player="you" />
+								<has-idcard idcard="creature" />
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+		<ability ref='dredge6' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<remove-object object-name="+1/+1" />
+			</cost>
+			<effects>
+				<action ref='regenerate' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Library of Alexandria">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  land 
+{t}: add {1} to your mana pool. 
+{t}: draw a card. play this ability only if you have exactly seven cards in your hand. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<test>
+				<equal right="7">
+					<left>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</left>
+				</equal>
+			</test>
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

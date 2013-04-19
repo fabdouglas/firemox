@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Whelp">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>flying dragon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="untap"/>
+			<effects>
+				<modify-register register="this" index="free0" operation="clear"/>
+			</effects>
+		</triggered-ability>
+
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+				<target type="this"/>
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot"/>
+				<modify-register register="this" index="free0"  operation="add" value="1"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal left="4">
+							<right register="this" index="free0"/>
+						</equal>
+					</test>
+				</if-then-hop>
+				<create-ability>
+					<ability ref="eot-sacrifice"/>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

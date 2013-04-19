@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Essence Bottle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	3, t :put an elixir counter on essence bottle.
+	t, remove all elixir counters from essence bottle: you gain 2 life for each elixir counter removed this way.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='elixir'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<modify-register register="this" index="free0" operation="set">
+					<value>
+						<counter object-name="elixir" card="this"/>
+					</value>
+				</modify-register>
+				<target type="this"/>
+				<repeat>
+					<value register="this" index="free0"/>
+				</repeat>
+				<remove-object object-name="elixir"/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left register="this" index="free0"/>
+						</mult>
+					</value>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

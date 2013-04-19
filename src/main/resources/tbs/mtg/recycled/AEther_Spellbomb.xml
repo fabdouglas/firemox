@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Spellbomb">
+	<rules-author-comment>By Seingalt</rules-author-comment>
+	
+<!--  {1} 
+{u}, sacrifice aether spellbomb: return target creature to its owner's hand. 
+{1}, sacrifice aether spellbomb: draw a card. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana blue="1"/>
+				<action ref="sacrifice-this"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+
+	</abilities>
+</card>

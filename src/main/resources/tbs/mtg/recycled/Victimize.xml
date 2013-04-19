@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Victimize">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	sorcery
+	as an additional cost to play victimize, sacrifice a creature.
+	return two target creature cards from your graveyard to play tapped.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<target-list operation="remove-last"/>
+			</cost>
+			<effects>
+				<move-card destination="playANDtapped" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

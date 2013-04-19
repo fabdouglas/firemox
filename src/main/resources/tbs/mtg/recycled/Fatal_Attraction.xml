@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fatal Attraction">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant creature
+	when fatal attraction comes into play, it deals 2 damage to enchanted creature.
+	at the beginning of your upkeep, fatal attraction deals 4 damage to enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='attachedto'/>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='attachedto'/>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

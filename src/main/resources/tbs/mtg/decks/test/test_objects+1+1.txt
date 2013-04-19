@@ -1,0 +1,6 @@
+Super_Card;20
+Goblin_Grenade;10
+Serra_angel;10
+Northern_Paladin;10
+Clockwork_Beast;20
+Scavenging_Ghoul;20

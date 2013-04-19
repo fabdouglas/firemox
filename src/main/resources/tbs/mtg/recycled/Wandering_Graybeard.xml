@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wandering Graybeard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - giant wizard
+	4/4
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with wandering graybeard, you may reveal it. if you do, you gain 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>giant wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<action ref='gain-life' value='4'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

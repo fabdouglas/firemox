@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Noble Purpose">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	enchantment
+	whenever a creature you control deals combat damage, you gain that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<action ref='gain-life' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

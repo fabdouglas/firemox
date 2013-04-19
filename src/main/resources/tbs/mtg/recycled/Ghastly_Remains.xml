@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghastly Remains">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		bbb
+	creature - zombie
+	0/0
+	amplify 1 
+	at the beginning of your upkeep, if ghastly remains is in your graveyard, you may pay bbb. if you do, return ghastly remains to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref="amplify-1"/>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='graveyard'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana black="3"/>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

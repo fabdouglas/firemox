@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Equal Treatment">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	if any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<replacement-ability zone="play" layer="1">
+						<assigned-damage type="damage-any">
+							<destination-test>
+								<or>
+									<is-player/>
+									<has-idcard idcard="creature"/>
+								</or>
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<target type="context.target"/>
+							<assign-damage type="context.int2" value="2"/>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

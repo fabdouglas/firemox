@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ragamuffyn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - zombie cleric
+	2/2
+	hellbent - t, sacrifice a creature or land: draw a card. play this ability only if you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="hellbent"/>
+			<cost>
+				<action ref='sacrifice-a-permanent' value="1">
+					<test>
+						<or>
+							<has-idcard idcard="land"/>
+							<has-idcard idcard="creature"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

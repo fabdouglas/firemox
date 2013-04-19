@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desert">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!-- Text(AN+errata): {Tap}: Add one colorless mana to your mana pool. ; 
+	{Tap}: ~this~ deals 1 damage to target attacking creature.  Play this ability only during end of combat. [Oracle 99/09/03]
+ -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>desert</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="this" name="" zone="play">
+			<test>
+				<phase-is phase="eoc"/>
+			</test>
+			<cost>
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value="1" type="damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

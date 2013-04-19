@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aysen Crusader">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	creature - crusader
+	2+*/2+*
+	aysen crusader's power and toughness are each equal to 2 plus the number of heroes you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power'>
+				<value>
+					<add right="2">
+						<left>
+							<counter restriction-zone='play'>
+								<and>
+									<or>
+										<has-property property="soldier"/>
+										<has-property property="warrior"/>
+									</or>
+									<controller player='you'/>
+								</and>
+							</counter>
+						</left>
+					</add>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<add right="2">
+						<left>
+							<counter restriction-zone='play'>
+								<and>
+									<or>
+										<has-property property="soldier"/>
+										<has-property property="warrior"/>
+									</or>
+									<controller player='you'/>
+								</and>
+							</counter>
+						</left>
+					</add>
+				</value>
+			</register>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

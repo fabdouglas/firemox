@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Delirium">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!-- 
+		Card Type:  	 Instant
+		P/T: 	
+		Rules Text (Oracle): 	Play Delirium only during an opponent's turn.
+		Tap target creature that player controls. 
+		That creature deals damage equal to its power to the player. 
+		Prevent all combat damage that would be dealt to and dealt by the 
+		creature this turn.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="black" value="1" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>black red</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+				<not>
+					<controller player="currentplayer" card="this" />
+				</not>
+			</test>
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature">
+					<test>
+						<controller player="opponent" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<tap />
+				<assign-damage type="damage" from="target-list.first"
+					to="target-list.first.controller">
+					<value register="target-list.first" index="power" />
+				</assign-damage>
+				<action ref="deals-no-combat-damage" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

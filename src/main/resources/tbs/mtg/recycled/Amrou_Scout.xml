@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amrou Scout">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - kithkin rebel scout
+	2/1
+	4, t :search your library for a rebel card with converted mana cost 3 or less and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin rebel scout </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="4" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="search-lib" value="1">
+					<test>
+						<and>
+							<has-property property="rebel"/>
+							<sup left="4">
+								<right register="tested" index="manacost"/>
+							</sup>
+						</and>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

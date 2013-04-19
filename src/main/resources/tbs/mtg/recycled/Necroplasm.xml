@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Necroplasm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	creature - ooze
+	1/1
+	at the beginning of your upkeep, put a +1/+1 counter on necroplasm.
+	at the end of your turn, destroy each creature with converted mana cost equal to the number of +1/+1 counters on necroplasm.
+	dredge 2
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>ooze </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='dredge2'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<end-of-phase phase='eot'>
+				<test ref='during-your-eot'/>
+			</end-of-phase>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<equal>
+							<left register="tested" index="manacost"/>
+							<right>
+								<counter object-name="+1/+1" card="this"/>
+							</right>
+						</equal>
+					</test>
+				</action>
+				<action ref="destroy"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

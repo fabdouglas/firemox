@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Death Cloud">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {x}{b}{b}{b} 
+each player loses x life, 
+then discards x cards from his or her hand, 
+then sacrifices x creatures, 
+then sacrifices x lands. -->
+	<init>
+		<registers>
+			<register index="black" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<target type="player" mode="all"/>
+				<modify-register register="target" index="life" operation="minus" name="lose-%n-life">
+					<value register="stack" index="0"/>
+				</modify-register>
+
+				<action ref="opponent-discards">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+				
+				<action ref="opponent-sacrifice-a-creature">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear" name="%"/>
+				<action ref="sacrifice-a-creature">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear" name="%"/>
+				
+				<action ref="opponent-sacrifice-a-land">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="sacrifice-a-land">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

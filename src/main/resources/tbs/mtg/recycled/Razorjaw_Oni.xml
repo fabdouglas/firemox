@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Razorjaw Oni">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - demon spirit
+	4/5
+	black creatures can't block.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>demon spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="cannot-block" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+					<has-color color="black"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Honorable Scout">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - soldier
+	1/1
+	when honorable scout comes into play, you gain 2 life for each black and/or red creature target opponent controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human soldier scout</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<or>
+											<has-color color="black"/>
+											<has-color color="red"/>
+										</or>
+										<has-idcard idcard="creature"/>
+										<controller player="opponent"/>
+									</and>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

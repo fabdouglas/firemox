@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Withering Gaze">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	sorcery
+	target opponent reveals his or her hand. you draw a card for each forest and green card in it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you" name="%" />
+				<action ref="restore-hand-visibility" name="%" />
+				<target type='you'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="hand">
+							<and>
+								<controller player="target-list.first"/>
+								<or>
+									<has-idcard idcard="forest"/>
+									<has-color color="green"/>
+								</or>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

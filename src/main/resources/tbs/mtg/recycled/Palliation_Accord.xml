@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Palliation Accord">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3wu
+	enchantment
+	whenever a creature an opponent controls becomes tapped, put a shield counter on palliation accord.
+	remove a shield counter from palliation accord: prevent the next 1 damage that would be dealt to you this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="opponent"/>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='shield'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type='this'/>
+				<remove-object object-name='shield'/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref='prevent-1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

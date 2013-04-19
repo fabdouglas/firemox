@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desert Twister">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4}{g}{g} destroy target permanent. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="green" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-card">
+					<test>
+						<has-idcard idcard="permanent"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

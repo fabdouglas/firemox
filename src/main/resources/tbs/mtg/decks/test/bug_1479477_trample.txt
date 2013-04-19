@@ -1,0 +1,3 @@
+super card;30
+war elephant;30
+benalish hero;30

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dawning Purist">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!--  {2}{w} 
+		whenever dawning purist deals combat damage to a player, you may destroy target 
+		enchantment that player controls. morph {1}{w}  
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="1" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana white="1" colorless="1" />
+			</actions>
+		</ability>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<is-player />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref="target-enchantment">
+					<test>
+						<controller player="context.card.controller" />
+					</test>
+				</action>
+				<action ref="destroy" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

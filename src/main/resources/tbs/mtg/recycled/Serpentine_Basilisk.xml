@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Serpentine Basilisk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - basilisk
+	2/3
+	whenever serpentine basilisk deals combat damage to a creature, destroy that creature at end of combat.
+	morph 1gg 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>basilisk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<has-idcard idcard='creature'/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref='destroy-target-eoc'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='2' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,1 @@
+Put here all cards used by this game.

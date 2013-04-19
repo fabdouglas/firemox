@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Azorius Guildmage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	creature - vedalken wizard
+	2/2
+	
+	2w: tap target creature.
+	2u: counter target activated ability. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue</colors>
+		<idcards>creature </idcards>
+		<properties>vedalken wizard  </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana white="2"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana white="1" blue="1"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana blue="2"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='2' />
+				<action ref='target-activated-ability'/>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thoughts of Ruin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	sorcery
+	each player sacrifices a land for each card in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="sacrifice-a-land">
+					<value>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</value>
+				</action>
+				<action ref="opponent-sacrifice-a-land">
+					<value>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

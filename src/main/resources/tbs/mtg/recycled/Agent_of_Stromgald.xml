@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Agent of Stromgald">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>human knight</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana red="1"/>
+			</cost>
+			<effects>
+				<give-mana black="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

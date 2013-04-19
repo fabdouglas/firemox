@@ -1,0 +1,121 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gwyllion Hedge-Mage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(w / b)
+	creature - hag wizard
+	2/2
+	when gwyllion hedge-mage comes into play, if you control two or more plains, you may put a 1/1 white kithkin soldier creature token into play.
+	when gwyllion hedge-mage comes into play, if you control two or more swamps, you may put a -1/-1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>creature </idcards>
+		<properties>hag wizard </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="plains"/>
+									</and>
+								</counter>
+							</left>
+						</sup>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-card>
+					<card name='Kithkin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token kithkin soldier</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<sup right="1">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="swamp"/>
+									</and>
+								</counter>
+							</left>
+						</sup>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='-1/-1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dread Wight">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!-- 
+		Dread Wight
+		3BB
+		Creature - Wight
+		3/4
+		At end of combat, put a paralyzation counter on all creatures blocking 
+		or blocked by Dread Wight and tap those creatures. They gain "If this 
+		creature has a paralyzation counter on it, it doesn't untap during its 
+		controller's untap step" and "4: Remove a paralyzation counter from 
+		this creature."
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="black" value="2" />
+			<register index="power" value="3" />
+			<register index="toughness" value="4" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this />
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card2" />
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc" />
+						<effects>
+							<target type="saved" />
+							<add-object object-name="paralyzation" />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this />
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card" />
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc" />
+						<effects>
+							<target type="saved" />
+							<add-object object-name="paralyzation" />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

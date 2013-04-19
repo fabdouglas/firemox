@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phantom Nishoba">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gw
+	creature - beast spirit
+	0/0
+	trample, lifelink 
+	phantom nishoba comes into play with seven +1/+1 counters on it.
+	if damage would be dealt to phantom nishoba, prevent that damage. remove a +1/+1 counter from phantom nishoba.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>cat beast spirit trample</properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="lifelink"/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

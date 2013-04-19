@@ -1,0 +1,90 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ceta Disciple">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	creature - wizard
+	1/1
+	r, t :target creature gets +2/+0 until end of turn.
+	g, t :add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' value='2' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

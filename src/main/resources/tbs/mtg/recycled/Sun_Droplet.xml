@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sun Droplet">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	whenever you're dealt damage, put that many charge counters on sun droplet.
+	at the beginning of each upkeep, you may remove a charge counter from sun droplet. if you do, you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<add-object object-name="charge"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="this"/>
+						<remove-object object-name="charge"/>
+						<action ref='gain-life' value='1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

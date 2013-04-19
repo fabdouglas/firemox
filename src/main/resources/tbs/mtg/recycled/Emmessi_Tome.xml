@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Emmessi Tome">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	5, t :draw two cards, then discard a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

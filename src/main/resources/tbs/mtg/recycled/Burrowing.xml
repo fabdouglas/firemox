@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Burrowing">
+<rules-author-comment></rules-author-comment>
+
+<!--  {r} enchanted creature has mountainwalk. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="mountainwalk"/>
+</card>

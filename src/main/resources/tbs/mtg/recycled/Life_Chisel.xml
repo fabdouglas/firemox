@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Life Chisel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	sacrifice a creature: you gain life equal to the sacrificed creature's toughness. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value register='target-list.first' index='toughness'/>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

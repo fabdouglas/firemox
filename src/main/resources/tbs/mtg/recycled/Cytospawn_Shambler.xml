@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cytospawn Shambler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6g
+	creature - elemental mutant
+	0/0
+	graft 6 
+	g: target creature with a +1/+1 counter on it gains trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental mutant </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref="target-creature">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property='trample' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

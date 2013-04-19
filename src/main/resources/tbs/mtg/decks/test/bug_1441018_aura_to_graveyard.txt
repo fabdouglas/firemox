@@ -1,0 +1,4 @@
+Spirit Link;20
+Pikemen;20
+Lightning Bolt;20
+super card;20

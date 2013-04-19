@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Greater Gargadon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		9r
+	creature - beast
+	9/7
+	suspend 10-r
+	sacrifice an artifact, creature, or land: remove a time counter from greater gargadon. play this ability only if greater gargadon is suspended.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='9'/>
+			<register index='power' value='9'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana red='1' />
+			</actions>
+			<actions>
+				<repeat value='10'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='side'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<or>	
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="time"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

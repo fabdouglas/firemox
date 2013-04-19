@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Recall">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xxu
+	sorcery
+	discard x cards, then return a card from your graveyard to your hand for each card discarded this way. remove recall from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-xx"/>
+			</cost>
+			<effects>
+				<action ref='discard'>
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

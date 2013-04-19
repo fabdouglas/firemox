@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nullmage Advocate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - insect druid
+	2/3
+	t :return two target cards in an opponent's graveyard to his or her hand. destroy target artifact or enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

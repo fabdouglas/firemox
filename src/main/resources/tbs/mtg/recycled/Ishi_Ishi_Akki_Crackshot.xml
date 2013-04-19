@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ishi-Ishi, Akki Crackshot">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	legendary creature - goblin warrior
+	1/1
+	whenever an opponent plays a spirit or arcane spell, ishi-ishi, akki crackshot deals 2 damage to that player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend goblin warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<not>
+							<controller player="you"/>
+						</not>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

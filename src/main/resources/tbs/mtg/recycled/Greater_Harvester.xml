@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Greater Harvester">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bbb
+	creature - horror
+	5/6
+	at the beginning of your upkeep, sacrifice a permanent.
+	whenever greater harvester deals combat damage to a player, that player sacrifices two permanents.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='sacrifice-a-permanent' value='1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref='opponent-sacrifice-a-permanent' value='2'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blood Clock">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	at the beginning of each player's upkeep, that player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<cost>
+				<choice controller="currentplayer" cancel="false">
+					<either>
+						<target type="currentplayer"/>
+						<target type="card" mode="target-choose" restriction-zone="play">
+							<test>
+								<and>
+									<controller player="context.player"/>
+									<test ref="is-target" />
+								</and>
+							</test>
+						</target>
+						<action ref='return-to-hand'/>
+					</either>
+					<either>
+						<target type="currentplayer"/>
+						<action ref='lose-life-target' value='2'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

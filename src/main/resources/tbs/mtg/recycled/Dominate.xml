@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dominate">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{1}{u}{u} gain control of target creature with converted mana cost x or less.  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<action ref="target-creature">
+					<test>
+						<inf-equal>
+							<left register="tested" index="manapool"/>
+							<right register="stack" index="0"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

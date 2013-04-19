@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sygg, River Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wu
+	legendary creature - merfolk wizard
+	2/2
+	islandwalk
+	1w: target merfolk you control gains protection from the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend merfolk wizard islandwalk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='merfolk'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Petrified Plating">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +2/+2.
+	suspend 2-g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana green='1' />
+			</actions>
+			<actions>
+				<repeat value='2'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='+2/+2'/>
+</card>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Counterbalance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	enchantment
+	whenever an opponent plays a spell, you may reveal the top card of your library. if you do, counter that spell if it has the same converted mana cost as the revealed card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<not>
+						<controller player="you"/>
+					</not>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="card" restriction-zone="library">
+							<test>
+								<and>
+									<controller player="you"/>
+									<position position="1"/>
+								</and>
+							</test>
+						</target>
+						<action ref="reveal"/>
+						<if-then-hop elsehop="3">
+							<test>
+								<equal>
+									<left register="context.card" index="manacost"/>
+									<right register="target-list.first" index="manacost"/>
+								</equal>
+							</test>
+						</if-then-hop>
+						<target type="context.card"/>
+						<action ref="counter"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Groundbreaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ggg
+	creature - elemental
+	6/1
+	trample, haste
+	at end of turn, sacrifice groundbreaker.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental trample haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="eot-sacrifice"/>
+	</abilities>
+</card>

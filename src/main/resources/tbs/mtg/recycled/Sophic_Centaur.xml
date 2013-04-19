@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sophic Centaur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - centaur spellshaper
+	1/1
+	2gg, t, discard a card: you gain 2 life for each card in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>centaur spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='2' colorless='2' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ivory Crane Netsuke">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		2
+		artifact
+		at the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep' />
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="all">
+					<test>
+						<sup-equal right="7">
+							<left>
+								<counter restriction-zone="hand"/>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<action ref='gain-life' value='4' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

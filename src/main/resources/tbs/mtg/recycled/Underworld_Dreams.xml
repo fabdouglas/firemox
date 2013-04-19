@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Underworld Dreams">
+	<!-- tested 12/31/2004 , v0.82.31 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="black" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<controller player="opponent"/>
+						<action-source name="draw-%n-card"/>
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<target type="opponent"/>
+				<assign-damage value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

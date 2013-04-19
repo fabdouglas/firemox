@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mishra's Helix">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	x, t :tap x target lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

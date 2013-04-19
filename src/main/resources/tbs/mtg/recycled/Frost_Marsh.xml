@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Frost Marsh">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  snow land frost marsh comes into play tapped. t add u or b to your mana pool. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>snow</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-B"/>
+	</abilities>
+</card>

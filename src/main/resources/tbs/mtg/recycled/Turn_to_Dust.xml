@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Turn to Dust">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	destroy target equipment. then add g to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-card'>
+					<test>
+						<has-property property="equipment"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<give-mana green="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

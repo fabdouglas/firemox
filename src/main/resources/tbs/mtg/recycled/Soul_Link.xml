@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soul Link">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wb
+	enchantment - aura
+	enchant creature
+	whenever enchanted creature deals damage, you gain that much life.
+	whenever enchanted creature is dealt damage, you gain that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<is target="attachedto" />
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<action ref="gain-life" value="context.int" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref="gain-life" value="context.int" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

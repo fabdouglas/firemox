@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Living Plane">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	world enchantment
+	all lands are 1/1 creatures that are still lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>enchant-world </idcards>
+		<properties>enchant-world </properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-indirection index="power" value="1" operation="set" linked="true"/>
+				<register-indirection index="toughness" value="1" operation="set" linked="true"/>
+				<idcard-modifier idcard="creature" operation="or" linked="true"/>
+			</modifiers>
+			<while>
+		 		<has-idcard idcard="land"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

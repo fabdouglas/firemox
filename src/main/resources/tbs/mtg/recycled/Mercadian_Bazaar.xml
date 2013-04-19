@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mercadian Bazaar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	mercadian bazaar comes into play tapped.
+	t :put a storage counter on mercadian bazaar.
+	t, remove any number of storage counters from mercadian bazaar: add r to your mana pool for each storage counter removed this way.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='storage'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%maximum"
+					strict-max="false">
+					<text>Number of counters to remove</text>
+					<maximum>
+						<counter object-name="storage" card="this"/>
+					</maximum>
+				</input-number>
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<remove-object object-name="storage"/>
+			</cost>
+			<effects>
+				<give-mana>
+					<red register="stack" index="0"/>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,5 @@
+serra angel;20
+super_card;20
+Swords_to_Plowshares;20
+counterspell;20
+black_lotus;20

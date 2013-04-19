@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Waning Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - zombie wurm
+	7/6
+	vanishing 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie wurm </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+	</abilities>
+	<modifiers>
+		<object name='time'/>
+		<object name='time'/>
+	</modifiers>
+</card>

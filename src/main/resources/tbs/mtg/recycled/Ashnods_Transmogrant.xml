@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashnod's Transmogrant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	t, sacrifice ashnod's transmogrant: put a +1/+1 counter on target nonartifact creature. that creature becomes an artifact in addition to its other types.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-idcard idcard="artifact"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-object object-name='+1/+1'/>
+				<add-modifier>
+					<idcard-modifier idcard="artifact" operation="set" linked="false" />
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

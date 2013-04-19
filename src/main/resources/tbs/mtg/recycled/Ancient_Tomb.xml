@@ -1,0 +1,22 @@
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ancient Tomb">
+	<rules-author-comment>By tureba</rules-author-comment>
+	
+	<init>
+		<idcards>land</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-land"/>
+
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<tap/>
+			</cost>
+			<effects>
+				<give-mana colorless="2"/>
+				<action ref="lose-life" value="2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

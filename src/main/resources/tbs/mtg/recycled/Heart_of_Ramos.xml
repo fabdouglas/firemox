@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Heart of Ramos">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  3 t add r to your mana pool. sacrifice heart of ramos: add r to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="tap-add-R"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

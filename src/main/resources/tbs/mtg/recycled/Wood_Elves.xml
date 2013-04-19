@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Wood Elves">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+    <init>
+        <registers>
+            <register index="green" value="1"/>
+            <register index="colorless" value="2"/>
+            <register index="power" value="1"/>
+            <register index="toughness" value="1"/>
+        </registers>
+        <colors>green</colors>
+        <idcards>creature</idcards>
+        <properties>elf</properties>
+    </init>
+    <abilities>
+        <ability ref="cast-spell"/>
+        <triggered-ability zone="play">
+            <moved-card>
+                <source-test>
+                    <not>
+                        <in-zone zone="play"/>
+                    </not>
+                </source-test>
+                <destination-test>
+                    <and>
+                        <is-this/>
+                        <in-zone zone="play"/>
+                       </and>
+                </destination-test>
+            </moved-card>
+            <effects>
+	             <action ref="search-lib">
+	             	<test>
+                        <has-idcard card="tested" idcard="forest"/>
+                    </test>
+                 </action>
+                 <move-card controller="you" destination="play"/>
+            </effects>
+        </triggered-ability>
+    </abilities>
+</card>

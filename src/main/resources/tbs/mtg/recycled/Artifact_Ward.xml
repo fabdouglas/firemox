@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Artifact Ward">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	enchantment - aura
+	enchant creature
+	enchanted creature has protection from artifacts. this effect doesn't remove artifact ward.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="protection-from-artifacts" linked="true" />
+		</modifiers>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

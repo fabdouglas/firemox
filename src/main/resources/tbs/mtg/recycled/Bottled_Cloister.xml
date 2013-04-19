@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Bottled Cloister">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+		  				<phase-is phase="upkeep"/>
+		  				<not>
+							<controller player="currentplayer" card="this"/>
+						</not>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<move-card destination="side" controller="controller"/>
+				<add-modifier>
+					<ability-modifier linked="true" layer="global">
+						<abilities>
+							<triggered-ability zone="play">
+								<beginning-of-phase phase="upkeep">
+									<test ref="during-your-upkeep"/>
+								</beginning-of-phase>
+								<effects>
+									<target type="this"/>
+									<move-card destination="hand" controller="controller"/>
+									<unregister-this/>
+								</effects>
+							</triggered-ability>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+				<face-down for="everyone"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="controller"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

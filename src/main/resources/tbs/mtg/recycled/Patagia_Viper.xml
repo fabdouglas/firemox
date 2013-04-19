@@ -1,0 +1,100 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Patagia Viper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - snake
+	2/1
+	flying
+	when patagia viper comes into play, put two 1/1 green and blue snake creature tokens into play.
+	when patagia viper comes into play, sacrifice it unless u was spent to play it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>snake flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value='2'/>
+				<create-card>
+					<card name='Snake'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green blue</colors>
+							<idcards>creature</idcards>
+							<properties>token snake </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<or>
+							<not>
+								<is other="this" target="currentcard" />
+							</not>
+							<equal right="0">
+								<left>
+									<mana-paid card="this" color="green" />
+								</left>
+							</equal>
+						</or>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<is target="this" other="context.event-source" />
+						</not>
+					</test>
+				</if-then-hop>
+				<action ref="sacrifice-this" />
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

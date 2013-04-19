@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rootrunner">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - spirit
+	3/3
+	gg, sacrifice rootrunner: put target land on the top of its owner's library.
+	soulshift 3 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='2' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+		<ability ref='soulshift3'/>
+	</abilities>
+</card>

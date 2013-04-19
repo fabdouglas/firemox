@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wall of Essence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - wall
+	0/4
+	defender 
+	whenever wall of essence is dealt combat damage, you gain that much life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-combat">
+				<destination-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref='gain-life' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

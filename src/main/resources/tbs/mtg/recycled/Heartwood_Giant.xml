@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Heartwood Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - giant
+	4/4
+	t, sacrifice a forest: heartwood giant deals 2 damage to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

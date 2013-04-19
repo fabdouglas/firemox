@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ith, High Arcanist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5wu
+	legendary creature - human wizard
+	3/5
+	vigilance
+	t :untap target attacking creature. prevent all combat damage that would be dealt to and dealt by that creature this turn.
+	suspend 4-wu
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard vigilance </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana white='1' blue='1' />
+			</actions>
+			<actions>
+				<repeat value='4'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<untap/>
+				<action ref="deals-no-combat-damage"/>
+				<action ref='prevent-all-combat-on-target'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

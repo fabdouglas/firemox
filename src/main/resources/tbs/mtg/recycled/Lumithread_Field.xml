@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lumithread Field">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1w
+		enchantment
+		creatures you control get +0/+1.
+		morph 1w 
+	-->
+
+	<init>
+		<registers>
+			<register index='white' value='1' />
+			<register index='colorless' value='1' />
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana white='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="toughness" operation="add" value="1" linked="true"
+					layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<controller player="you" />
+					<has-idcard idcard="creature" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

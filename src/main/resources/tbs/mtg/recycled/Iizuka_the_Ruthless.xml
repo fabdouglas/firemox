@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Iizuka the Ruthless">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	legendary creature - human samurai
+	3/3
+	bushido 2 
+	2r, sacrifice a samurai: samurai you control gain double strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend human samurai </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bushido2-blocked'/>
+		<ability ref='bushido2-blocking'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='2' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='samurai'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<controller player="you"/>
+							<has-property property="samurai"/>
+						</and>
+					</test>
+				</target>
+				<action ref="double-strike-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

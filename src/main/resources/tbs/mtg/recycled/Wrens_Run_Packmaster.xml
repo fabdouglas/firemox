@@ -1,0 +1,129 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wren's Run Packmaster">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - elf warrior
+	5/5
+	champion an elf 
+	2g: put a 2/2 green wolf creature token into play.
+	each wolf you control has deathtouch. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+					<either>
+						<action ref="target-creature">
+							<test>
+								<and>
+									<not>
+										<is-this/>
+									</not>
+									<has-property property="elf"/>
+									<controller player="you"/>
+								</and>
+							</test>
+						</action>
+						<action ref="remove-from-game"/>
+						<create-ability>
+							<save target="target-list.first"/>
+							<triggered-ability zone="play">
+								<moved-card>
+									<source-test>
+										<and>
+											<is-this />
+											<in-zone zone="play" />
+										</and>
+									</source-test>
+									<destination-test>
+										<not>
+											<in-zone zone="play" />
+										</not>
+									</destination-test>
+								</moved-card>
+								<effects>
+									<target type="saved"/>
+									<action ref="move-to-play" />
+									<unregister-this />
+								</effects>
+							</triggered-ability>
+						</create-ability>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='2' />
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Wolf'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token wolf </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier operation="add" linked="true">
+					<abilities>
+						<ability ref="deathtouch"/>
+					</abilities>
+				</ability-modifier>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+					<has-property property="wolf"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

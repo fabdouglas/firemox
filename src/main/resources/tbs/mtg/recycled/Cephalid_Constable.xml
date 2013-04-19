@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Constable">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	creature - cephalid wizard
+	1/1
+	whenever cephalid constable deals combat damage to a player, return up to that many target permanents that player controls to their owners' hands.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>cephalid wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<repeat value="context.int"/>
+				<target type="card" mode="choose" restriction-zone="play" hop="1">
+					<test>
+						<and>
+							<test ref="is-target" />
+							<controller player="context.player"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spurnmage Advocate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - nomad
+	1/1
+	t :return two target cards in an opponent's graveyard to his or her hand. destroy target attacking creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human nomad </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

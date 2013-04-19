@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dripping Dead">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4}{b}{b} dripping dead can't block. 
+whenever dripping dead deals combat damage to a creature, destroy that creature. 
+it can't be regenerated. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-block zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat-can-be-prevented">
+				<source-test>
+		  			<is-this/>
+				</source-test>
+				<destination-test>
+					<not>
+						<is-player/>
+					</not>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref="bury"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

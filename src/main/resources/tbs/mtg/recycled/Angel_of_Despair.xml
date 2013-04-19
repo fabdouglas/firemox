@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Angel of Despair">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+<!--  3wwbb flying when angel of despair comes into play, destroy target permanent.   -->
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="black" value="2"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>white black</colors>
+		<idcards>creature</idcards>
+		<properties>flying angel</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-permanent"/>
+				<action ref="destroy"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

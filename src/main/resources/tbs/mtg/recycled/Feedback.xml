@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Feedback">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{u} at the beginning of the upkeep of enchanted enchantment's controller, 
+feedback deals 1 damage to that player. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards></idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+		  			<phase-is phase="upkeep"/>
+						<is-this player="attachedto.controller"/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="attachedto.controller"/>
+				<assign-damage type="damage-normal" value="1"/>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

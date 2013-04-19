@@ -1,0 +1,33 @@
+#Jeu vert
+#
+#John
+#
+#août 11, 2000
+#1
+#4th Edition
+#
+Aspect_of_Wolf;2
+Aswan_Jaguar;2
+Birds_of_Paradise;2
+Cockatrice;3
+Craw_Wurm;1
+Cyclone;2
+Elven_Riders;2
+Erhnam_Djinn;2
+Gaeas_Liege;2
+Giant_Growth;3
+Giant_Spider;2
+Killer_Bees;2
+Lure;2
+Llanowar_Elves;2
+Regeneration;2
+Regrowth;2
+Thicket_Basilisk;1
+Venom;1
+Web;1
+Whirling_Dervish;2
+Wild_Growth;2
+Forest;15
+Black_Lotus;4
+Mox_Emerald;8
+Sol_Ring;3

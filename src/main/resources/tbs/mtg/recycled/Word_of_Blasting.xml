@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Word of Blasting">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	instant
+	destroy target wall. it can't be regenerated. word of blasting deals damage equal to that wall's converted mana cost to the wall's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='wall'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+				<target type="target-list.first.controller"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='manacost'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

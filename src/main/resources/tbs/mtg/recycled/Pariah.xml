@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pariah">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment - aura
+	enchant creature 
+	all damage that would be dealt to you is dealt to enchanted creature instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-redirected">
+				<destination-test>
+					<is-this player="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="attachedto"/>
+				<assign-damage value="context.int" type="context.int2"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

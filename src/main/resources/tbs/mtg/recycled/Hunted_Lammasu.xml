@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hunted Lammasu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	creature - lammasu
+	5/5
+	flying
+	when hunted lammasu comes into play, put a 4/4 black horror creature token into play under target opponent's control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>lammasu flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Horror'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='4'/>
+								<register index='toughness' value='4'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token horror </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='target-list.first' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

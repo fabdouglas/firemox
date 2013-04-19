@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mystic Penitent">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - nomad mystic
+	1/1
+	vigilance
+	threshold - mystic penitent gets +1/+1 and has flying as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human nomad mystic vigilance </properties>
+	</init>
+	
+	<modifiers>
+		<register-modifier index='power' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<property-modifier property="flying" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

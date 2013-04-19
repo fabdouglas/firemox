@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Biorhythm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6gg
+	sorcery
+	each player's life total becomes the number of creatures he or she controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<modify-register register="you" index="life" operation="set">
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</modify-register>
+				<modify-register register="opponent" index="life" operation="set">
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</modify-register>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

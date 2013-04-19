@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forcemage Advocate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - centaur
+	2/1
+	t :return target card in an opponent's graveyard to his or her hand. put a +1/+1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>centaur shaman</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<target-list operation="clear"/>
+				<action ref="target-creature"/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

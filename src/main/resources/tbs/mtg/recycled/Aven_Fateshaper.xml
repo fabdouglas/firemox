@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aven Fateshaper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6u
+	creature - bird wizard
+	4/5
+	flying
+	when aven fateshaper comes into play, look at the top four cards of your library, then put them back in any order.
+	4u: look at the top four cards of your library, then put them back in any order.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>bird wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="3"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='4' />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="3"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

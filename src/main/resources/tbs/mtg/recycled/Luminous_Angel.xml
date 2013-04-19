@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Luminous Angel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4www
+	creature - angel
+	4/4
+	flying
+	at the beginning of your upkeep, you may put a 1/1 white spirit creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>angel flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<create-card>
+							<card name='Spirit'>
+								<rules-author-comment></rules-author-comment>
+								<init>
+									<registers>
+										<register index='power' value='1'/>
+										<register index='toughness' value='1'/>
+									</registers>
+									<colors>white</colors>
+									<idcards>creature</idcards>
+									<properties>token spirit flying </properties>
+								</init>
+							</card>
+						</create-card>
+						<move-card controller='you' destination='play'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

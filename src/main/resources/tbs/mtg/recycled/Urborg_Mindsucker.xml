@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urborg Mindsucker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - horror
+	2/2
+	b, sacrifice urborg mindsucker: target opponent discards a card at random. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='player-discard-random' value="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

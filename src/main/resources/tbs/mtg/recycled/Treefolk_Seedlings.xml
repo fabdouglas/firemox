@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Treefolk Seedlings">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - treefolk
+	2/*
+	treefolk seedlings's toughness is equal to the number of forests you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='forest'/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>treefolk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

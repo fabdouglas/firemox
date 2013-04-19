@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nevinyrral's Disk">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="come-into-play-tapped"/>
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<or>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</target>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

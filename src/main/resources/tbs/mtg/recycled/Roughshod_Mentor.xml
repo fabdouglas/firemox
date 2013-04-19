@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Roughshod Mentor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5g
+	creature - giant warrior
+	5/4
+	green creatures you control have trample.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="trample" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<has-color color="green"/>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

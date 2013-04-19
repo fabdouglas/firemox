@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Benthic Behemoth">
+<rules-author-comment></rules-author-comment>
+
+<!--  5uuu islandwalk -->
+
+	<init>
+		<registers>
+			<register index="blue" value="3"/>
+			<register index="colorless" value="5"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>islandwalk serpent</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

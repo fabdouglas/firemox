@@ -1,0 +1,34 @@
+ -----
+ Firemox Vision Statement
+ -----
+ Fabrice Daugan
+ -----
+ September 24 2006
+ 
+Introduction
+
+ This application is a free {{{http://java.com/fr/download/index.jsp}Java}} product. Born in SourceForge in 2003, the main goals have not changed since: provide a way to freely play anywhrere with anyone.
+
+* Rules parse
+
+ Firemox is able to parse any game with the associated XML file provided. The rules (turn definition, actors, properties,...) are defined in a simpe XML file. The optionnaly cards are defined in separate XML files.
+ This way it's very easy to create and share a game.
+
+* Team Communication
+
+ Team communication is an essential part of any project. And wasting time looking for technical
+ project information can be costly and frustrating. Clearly, any IT project will benefit from 
+ having its own dedicated technical web site. Some useful things it provides are:
+ 
+ ** RSS Feed
+ 
+ ** Online javadoc sources and documentation
+ 
+ ** Howto / Faq helps
+ 
+ ** Code metrics
+ 
+ ** Yahoo group
+ 
+ ** French forum
+   

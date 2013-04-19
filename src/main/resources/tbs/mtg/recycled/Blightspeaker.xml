@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blightspeaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - human rebel cleric
+	1/1
+	t :target player loses 1 life.
+	4, t :search your library for a rebel card with converted mana cost 3 or less and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="4" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="search-lib" value="1">
+					<test>
+						<and>
+							<has-property property="rebel"/>
+							<sup left="4">
+								<right register="tested" index="manacost"/>
+							</sup>
+						</and>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

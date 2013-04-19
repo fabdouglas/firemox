@@ -1,0 +1,30 @@
+#Jeu Necromancien
+#
+#John
+#
+#décembre 17, 2000
+#1
+#4th Edition
+#
+Bad_Moon;2
+Dark_Ritual;2
+Drain_Life;1
+Hypnotic_Specter;2
+Khabal_Ghoul;1
+Necropolis_of_Azar;1
+Royal_Assassin;2
+Sengir_Vampire;2
+Ancestral_Recall;2
+Counterspell;3
+Power_Sink;2
+Timetwister;3
+Time_Walk;4
+Black_Lotus;4
+Cyclopean_Tomb;1
+Mox_Sapphire;4
+Mox_Jet;4
+Sol_Ring;2
+The_Hive;1
+Underground_Sea;15
+Arena;1
+Demonic_Tutor;2

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Onslaught">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment
+	whenever you play a creature spell, tap target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

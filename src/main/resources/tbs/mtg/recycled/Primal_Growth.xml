@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Primal Growth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	sorcery
+	kicker-sacrifice a creature. 
+	search your library for a basic land card, put that card into play, then shuffle your library. if the kicker cost was paid, instead search your library for two basic land cards, put them into play, then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</actions>
+			<actions>
+				<repeat value="2"/>
+				<action ref='search-lib'>
+					<test ref="is-basic-land"/>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test ref="is-basic-land"/>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

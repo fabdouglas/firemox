@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Orcish Oriflamme">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{r} attacking creatures you control get +1/+0. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

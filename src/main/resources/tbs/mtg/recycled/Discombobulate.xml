@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Discombobulate">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!-- 
+		Discombobulate
+		Instant
+		
+		Counter target spell. Look at the top four cards of your library, then put them back in any order.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<action ref="counter"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position max="3"/>
+						</and>
+					</test>
+				</target>
+				<move-card destination="library" position="top" controller="you"/>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Loxodon Mender">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5w
+	creature - elephant cleric
+	3/3
+	w, t :regenerate target artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>elephant cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='T'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

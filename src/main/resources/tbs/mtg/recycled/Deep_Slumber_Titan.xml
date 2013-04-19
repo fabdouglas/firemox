@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deep-Slumber Titan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - giant warrior
+	7/7
+	deep-slumber titan comes into play tapped. deep-slumber titan doesn't untap during your untap step. whenever deep-slumber titan is dealt damage, untap it.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant warrior does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='come-into-play-tapped'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

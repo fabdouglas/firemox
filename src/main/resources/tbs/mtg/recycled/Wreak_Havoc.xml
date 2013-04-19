@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Wreak Havoc">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rg
+
+	sorcery
+
+	wreak havoc can't be countered by spells or abilities.
+	destroy target artifact or land.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="green" value="1"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>sorcery </idcards>
+		<properties>cannot-be-countered</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-card">
+					<test>
+						<or> 
+							<test ref="is-targetable-artifact"/>
+							<test ref="is-targetable-land"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

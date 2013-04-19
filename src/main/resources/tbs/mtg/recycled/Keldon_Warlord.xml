@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Keldon Warlord">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{r}{r} keldon warlord's power and toughness are each equal to the 
+number of non-wall creatures you control. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="2"/>
+			<register index="power">
+				<value><counter restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+						<not>
+							<has-property property="wall"/>
+						</not>
+					</and>
+				</counter></value>
+			</register>
+			<register index="toughness">
+				<value><counter restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+						<not>
+							<has-property property="wall"/>
+						</not>
+					</and>
+				</counter></value>
+			</register>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties></properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

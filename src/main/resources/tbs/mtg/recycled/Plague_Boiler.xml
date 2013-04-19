@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Plague Boiler">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<!-- TODO : use a new object-added event to be created soon -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+	<actions>
+		<action reference-name="check-plague-counters">
+			<if-then-hop elsehop="3">
+				<test>
+					<sup-equal right="3">
+						<left>
+							<counter object-name="plague"/>
+						</left>
+					</sup-equal>
+				</test>
+			</if-then-hop>
+			<target type="card" mode="all">
+				<test>
+					<not>
+						<has-idcard idcard="land"/>
+					</not>
+				</test>
+			</target>
+			<action ref="destroy"/>
+		</action>
+	</actions>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="plague"/>
+				<action ref="check-plague-counters"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" black="1" green="1"/>
+			</cost>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<target type="this"/>
+						<add-object object-name="plague"/>
+						<action ref="check-plague-counters"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<remove-object object-name="plague"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

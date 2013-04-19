@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chimeric Coils">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	x1: chimeric coils becomes an x/x artifact creature. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" operation="set" linked="false">
+				 		<value register="stack" index="0"/>
+				 	</register-indirection>
+					<register-indirection index="toughness" operation="set" linked="false">
+				 		<value register="stack" index="0"/>
+				 	</register-indirection>
+					<idcard-modifier idcard="artifact-creature" operation="set" linked="false"/>
+					<property-modifier property="construct" operation="add" linked="false"/>
+				</add-modifier>
+				<create-ability>
+					<ability ref="eot-sacrifice" />
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Walker of the Grove">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6gg
+	creature - elemental
+	7/7
+	when walker of the grove leaves play, put a 4/4 green elemental creature token into play.
+	evoke 4g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+			</moved-card>
+			<effects>
+				<create-card>
+					<card name='Elemental'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='4'/>
+								<register index='toughness' value='4'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token elemental </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana green='1' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

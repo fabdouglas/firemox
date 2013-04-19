@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Svogthos, the Restless Tomb">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana green="1" black="1" colorless="3"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+				 	<register-indirection index="power" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<value>
+							<counter restriction-zone="graveyard">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</counter>
+						</value>
+				 	</register-indirection>
+				 	<register-indirection index="toughness" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<value>
+							<counter restriction-zone="graveyard">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</counter>
+						</value>
+				 	</register-indirection>
+				 	<idcard-modifier idcard="creature" operation="or" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+				 	<property-modifier property="plant" operation="add" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				 	<property-modifier property="zombie" operation="add" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				 	<color-modifier color="green">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</color-modifier>
+				 	<color-modifier color="black">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</color-modifier>
+				 </add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

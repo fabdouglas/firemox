@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Spore Flower">
+<rules-author-comment></rules-author-comment>
+
+<!--  {g}{g} at the beginning of your upkeep, put a spore counter on spore flower. remove three spore counters from spore flower: prevent all combat damage that would be dealt this turn. -->
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>fungus</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="spore"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<target type="this"/>
+				<repeat value="3"/>
+				<remove-object object-name="spore"/>
+			</cost>
+			<effects>
+				<action ref="prevent-all-combat-damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

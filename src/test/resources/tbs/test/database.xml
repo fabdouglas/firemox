@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://sourceforge.net/projects/firemox/database" xsi:schemaLocation="http://sourceforge.net/projects/firemox/database ../database.xsd">
+	<system proxy="" language="english" english-name="System"/>
+	<damage proxy="" language="english" english-name="Damage"/>
+	<card_1 local-name="Card 1" proxy="Blank Proxy Sample">
+		<property name="card.id" value="34"/>
+		<property name="card.text" value="Some verbose text aout abilities"/>
+		<property name="card.artist-credit" value="Illus. Unknown artist"/>
+		<property name="card.flavor-text" value="A flavor text"/>
+		<property name="card.set" value="tr"/>
+		<property name="card.sets" value=""/>
+	</card_1>
+</database>

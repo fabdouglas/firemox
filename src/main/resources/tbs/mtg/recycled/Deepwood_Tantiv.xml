@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deepwood Tantiv">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{g} whenever deepwood tantiv becomes blocked, you gain 2 life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="green" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>beast</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain-life"  value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

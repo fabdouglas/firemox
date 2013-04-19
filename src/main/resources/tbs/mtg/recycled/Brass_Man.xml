@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Brass Man">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1} brass man doesn't untap during your untap step. 
+{1}: untap brass man. play this ability only during your upkeep. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>does-not-untap construct</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana colorless="1" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

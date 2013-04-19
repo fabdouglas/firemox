@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Spiketail Hatchling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+
+	creature - drake
+
+	1/1
+
+	flying
+	sacrifice spiketail hatchling: counter target spell unless its controller pays 1.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>flying drake</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Altar Golem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact creature - golem
+	*/*
+	trample
+	altar golem's power and toughness are each equal to the number of creatures in play.
+	altar golem doesn't untap during your untap step.
+	tap five untapped creatures you control: untap altar golem.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='play'>
+						<has-idcard idcard='creature'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<has-idcard idcard='creature'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem trample does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="5" />
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<controller player="you" />
+							<in-zone zone="playANDuntapped" />
+							<has-property property="cleric" />
+						</and>
+					</test>
+				</action>
+				<tap />
+			</cost>
+			<effects>
+				<target-list operation="clear"/>
+				<target type='this'/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

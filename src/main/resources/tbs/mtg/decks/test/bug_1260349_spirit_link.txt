@@ -1,0 +1,4 @@
+super_card;10
+Spirit_Link;10
+Abyssal_Specter;10
+black lotus;10

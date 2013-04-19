@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aura of Dominion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	enchantment - aura
+	enchant creature
+	1, tap an untapped creature you control: untap enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped" card="tested" />
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

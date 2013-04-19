@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deepwood Legate">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  3b 
+		if an opponent controls a forest and you control a swamp, you may play 
+		deepwood legate without paying its mana cost. 
+		b: deepwood legate gets +1/+1 until end of turn.   
+	-->
+
+	<init>
+		<registers>
+			<register index="black" value="1" />
+			<register index="colorless" value="3" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>shade</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+				<and>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you" card="tested" />
+							<has-idcard idcard="swamp" card="tested" />
+						</and>
+					</has>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent" card="tested" />
+							<has-idcard idcard="forest" card="tested" />
+						</and>
+					</has>
+				</and>
+			</test>
+			<cost />
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blatant Thievery">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uuu
+	sorcery
+	for each opponent, gain control of target permanent that player controls. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='3'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<not>
+							<controller player="you"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

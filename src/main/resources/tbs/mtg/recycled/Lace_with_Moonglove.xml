@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lace with Moonglove">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	instant
+	target creature gains deathtouch until end of turn. 
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<ability-modifier operation="add" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<ability ref="deathtouch"/>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Breath">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  1r enchant creature enchanted creature has haste. 
+		r: enchanted creature gets +1/+0 until end of turn. 
+		when a creature with converted mana cost 6 or more comes into play, you 
+		may return dragon breath from your graveyard to play attached to that 
+		creature.   -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" card="tested" />
+						</not>
+						<sup-equal right="6">
+							<left register="tested" index="manacost" />
+						</sup-equal>
+						<test ref="valid-creature-to-enchant" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<attach from="this" to="context.card" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature">
+		<modifiers>
+			<property-modifier property="haste" linked="true" operation="add" />
+			<ability-modifier>
+				<abilities>
+					<activated-ability playable="instant" zone="play">
+						<cost>
+							<pay-mana red="1" />
+						</cost>
+						<effects>
+							<target type="this"/>
+							<action ref="add+1+0-until-eot"/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

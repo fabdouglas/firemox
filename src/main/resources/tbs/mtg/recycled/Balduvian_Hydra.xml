@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Balduvian Hydra">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {x}{r}{r} balduvian hydra comes into play with x +1/+0 counters on it. 
+
+remove a +1/+0 counter from balduvian hydra: prevent the next 1 damage that would be dealt to balduvian hydra this turn. 
+{r}{r}{r}: put a +1/+0 counter on balduvian hydra. play this ability only 
+during your upkeep. -->
+
+	<init>
+		<registers>
+			<register index="red" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>hydra</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="+1/+0"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="+1/+0"/>
+			</cost>
+			<effects>
+				<action ref="prevent-1-on-this"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana red="3" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="+1/+0"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darksteel Reactor">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4} darksteel reactor is indestructible.  
+at the beginning of your upkeep, you may put a charge counter on darksteel reactor. 
+when darksteel reactor has twenty or more charge counters on it, you win the game. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="indestructible"/>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<target type="this"/>
+				<choice cancel="true">
+					<either>
+						<add-object object-name="charge"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<sup-equal right="20">
+							<left>
+								<counter object-name="charge" card="this"/>
+							</left>
+						</sup-equal>
+					</test>
+				</if-then-hop>
+				<lose-game player="opponent"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

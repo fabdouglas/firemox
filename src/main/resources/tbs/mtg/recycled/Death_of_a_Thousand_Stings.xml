@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Death of a Thousand Stings">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	instant - arcane
+	target player loses 1 life and you gain 1 life.
+	at the beginning of your upkeep, if you have more cards in hand than each opponent, you may return death of a thousand stings from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+				<action ref='gain-life' value='1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution="normal" zone="graveyard">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<sup>
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="hand">
+									<controller player="opponent"/>
+								</counter>
+							</right>
+						</sup>
+					</test>
+				</if-then-hop>
+				<choice cancel="true">
+					<either>
+						<target type="this"/>
+						<action ref="return-to-hand"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

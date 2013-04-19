@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Leashling">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="6"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<idcards>artifact creature</idcards>
+		<properties>hound</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<target type="card" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<move-card destination="library" controller="target.owner" position="top"/>
+			</cost>
+			<effects>
+				<target-list operation="clear" name="%"/>
+				<target type="this"/>
+				<move-card destination="hand" controller="target.owner"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mana Geyser">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{r}{r} 
+add {r} to your mana pool for each tapped land your opponents control. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="mana-source" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<give-mana>
+					<red>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="land"/>
+								<in-zone zone="playANDtapped"/>
+								<controller player="opponent"/>
+							</and>
+						</counter>
+					</red>
+				</give-mana>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

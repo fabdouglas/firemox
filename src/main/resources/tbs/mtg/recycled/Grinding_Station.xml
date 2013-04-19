@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grinding Station">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	t, sacrifice an artifact: target player puts the top three cards of his or her library into his or her graveyard.
+	whenever an artifact comes into play, you may untap grinding station.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-an-artifact' value='1'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value="3"/>
+				<action ref="mill-a-card"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="artifact"/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

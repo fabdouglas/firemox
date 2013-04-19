@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Turbulent Dreams">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		uu
+	sorcery
+	as an additional cost to play turbulent dreams, discard x cards.
+	return x target nonland permanents to their owners' hands.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%minimum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</maximum>
+				</input-number>
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-permanent">
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

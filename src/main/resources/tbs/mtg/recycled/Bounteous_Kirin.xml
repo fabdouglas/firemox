@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bounteous Kirin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gg
+	legendary creature - kirin spirit
+	4/4
+	flying
+	whenever you play a spirit or arcane spell, you may gain life equal to that spell's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend kirin spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+						<either>
+							<action ref='gain-life'>
+								<value register='context.card' index='manacost'/>
+							</action>
+						</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

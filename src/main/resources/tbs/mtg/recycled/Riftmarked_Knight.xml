@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Riftmarked Knight">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	creature - human rebel knight
+	2/2
+	flanking, protection from black
+	suspend 3-1ww
+	when the last time counter is removed from riftmarked knight while it's removed from the game, put a 2/2 black knight creature token with flanking, protection from white, and haste into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel knight protection-from-black</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana white='2' colorless='1' />
+			</actions>
+			<actions>
+				<repeat value='3'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="side" card="tested"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-card>
+					<card name='Knight'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token knight protection-from-white haste</properties>
+						</init>
+						<abilities>
+							<ability ref='flanking'/>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

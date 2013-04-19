@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Serendib Efreet">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{u} flying at the beginning of your upkeep, 
+serendib efreet deals 1 damage to you. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>flying efreet</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="you"/>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

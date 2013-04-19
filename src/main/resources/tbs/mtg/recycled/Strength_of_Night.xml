@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Strength of Night">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	instant
+	kicker b 
+	creatures you control get +1/+1 until end of turn. if the kicker cost was paid, zombie creatures you control get an additional +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana black="1" />
+			</actions>
+			<actions>
+				<action ref="creatures-you-control"/>
+				<action ref="add+1+1-until-eot"/>
+				<target-list operation="clear"/>
+				<action ref="creatures-you-control">
+					<test>
+						<has-property property="zombie"/>
+					</test>
+				</action>
+				<action ref="add+2+2-until-eot"/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="add+1+1-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Invoke the Firemind">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xuur
+	sorcery
+	choose one - draw x cards; or invoke the firemind deals x damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

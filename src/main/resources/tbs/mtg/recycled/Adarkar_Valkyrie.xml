@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Adarkar Valkyrie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ww
+	snow creature - angel
+	4/5
+	flying, vigilance
+	t :when target creature other than adarkar valkyrie is put into a graveyard this turn, return that card to play under your control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>snow angel flying vigilance </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone='graveyard'>
+						<moved-card>
+							<source-test>
+								<and>
+									<is target="saved"/>
+									<in-zone zone='play' card='tested'/>
+								</and>
+							</source-test>
+							<destination-test>
+								<in-zone zone='graveyard' card='tested'/>
+							</destination-test>
+						</moved-card>
+						<effects>
+							<target type="saved"/>
+							<move-card destination="play" controller="you"/>
+							<unregister-this/>	
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

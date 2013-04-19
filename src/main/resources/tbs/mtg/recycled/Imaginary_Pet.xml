@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Imaginary Pet">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1u
+		creature - illusion
+		4/4
+		at the beginning of your upkeep, if you have a card in hand, return imaginary pet to its owner's hand.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='1' />
+			<register index='power' value='4' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>illusion</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep' />
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<not>
+							<has restriction-zone="hand">
+								<controller player="you" />
+							</has>
+						</not>
+					</test>
+				</if-then-hop>
+				<target type='this' />
+				<action ref='return-to-hand' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

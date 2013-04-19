@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forbid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	instant
+	buyback-discard two cards. 
+	counter target spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'/>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='buyback%a' zone='hand'>
+			<cost>
+				<action ref='buyback'/>
+				<action ref="discard" value="2"/>
+				<insert-ability ref='main-ability'/>
+			</cost>
+		</activated-ability>
+	</abilities>
+</card>

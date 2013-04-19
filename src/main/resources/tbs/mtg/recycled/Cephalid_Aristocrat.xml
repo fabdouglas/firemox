@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Aristocrat">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - cephalid
+	3/3
+	whenever cephalid aristocrat becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>cephalid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type="you"/>
+				<repeat value="2"/>
+				<action ref="mill-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spitebellows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5r
+	creature - elemental
+	6/1
+	when spitebellows leaves play, it deals 6 damage to target creature.
+	evoke 1rr 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='6' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana red='2' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

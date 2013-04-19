@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blessed Orator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - human cleric
+	1/4
+	other creatures you control get +0/+1.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='toughness' operation='add' value='1' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+				<and>
+					<not>
+						<is-this/>
+					</not>
+					<has-idcard idcard="creature"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

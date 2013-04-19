@@ -1,0 +1,8 @@
+Plains;10
+Tundra;10
+Taiga;10
+Mountain;10
+Super_Card;20
+Armageddon;20
+Northern_Paladin;20
+Wrath_of_God;20

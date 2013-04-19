@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lava Blister">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	sorcery
+	destroy target nonbasic land unless its controller has lava blister deal 6 damage to him or her.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'>
+					<test>
+						<not>
+							<test ref="is-basic-land"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="target-list.first.controller" cancel="false">
+					<either>
+						<action ref='destroy'/>
+					</either>
+					<either>
+						<target type="target-list.first.controller"/>
+						<assign-damage type='damage-normal' value="6"/>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Molder Slug">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - beast
+	4/6
+	at the beginning of each player's upkeep, that player sacrifices an artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>slug beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" raise-event="false" restriction-zone="play" name="%" cancel="false" hop="2">
+					<test>
+						<and>
+							<controller player="currentplayer"/> 
+							<has-idcard idcard="artifact"/>
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

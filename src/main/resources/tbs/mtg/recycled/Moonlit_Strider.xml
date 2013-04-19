@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Moonlit Strider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - spirit
+	1/4
+	sacrifice moonlit strider: target creature you control gains protection from the color of your choice until end of turn.
+	soulshift 3 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<ability ref='soulshift3'/>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deepwood Ghoul">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{b} pay 2 life: regenerate deepwood ghoul. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<test>
+				<sup right="0">
+					<left>
+						<minus right="2">
+							<left register="controller" index="life"/>
+						</minus>
+					</left>
+				</sup>
+			</test>
+			<cost>
+				<action ref="pay-life" value="2"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

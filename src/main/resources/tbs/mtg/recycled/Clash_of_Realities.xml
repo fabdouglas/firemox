@@ -1,0 +1,164 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Clash of Realities">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	enchantment
+	all spirits have "when this permanent comes into play, you may have it deal 3 damage to target non-spirit creature."
+	non-spirit creatures have "when this creature comes into play, you may have it deal 3 damage to target spirit creature."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-property property='spirit'/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage value="3" type="damage-normal"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+				<!-- PUT HERE ADDITIONAL TEST ON CARD BEFORE IT GOES TO PLAY -->
+				</source-test>
+				<destination-test>
+					<!-- PUT HERE ADDITIONAL TEST ON CARD WHEN IT GOES TO PLAY -->
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-permanent'>
+					<test>
+						<has-property property='spirit'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability zone='play'>
+							<moved-card>
+								<source-test>
+									<and>
+										<is-this/>
+										<not>
+											<in-zone zone='play' card='tested'/>
+										</not>
+									</and>
+								</source-test>
+								<destination-test>
+									<in-zone zone='play' card='tested'/>
+								</destination-test>
+							</moved-card>
+							<cost>
+								<action ref='target-creature'>
+									<test>
+										<not>
+											<has-property property='spirit'/>
+										</not>
+									</test>
+								</action>
+							</cost>
+							<effects>
+								<choice controller="you" cancel="true">
+									<either>
+										<assign-damage value="3" type="damage-normal"/>
+									</either>
+								</choice>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="spirit"/>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability zone='play'>
+							<moved-card>
+								<source-test>
+									<and>
+										<is-this/>
+										<not>
+											<in-zone zone='play' card='tested'/>
+										</not>
+									</and>
+								</source-test>
+								<destination-test>
+									<in-zone zone='play' card='tested'/>
+								</destination-test>
+							</moved-card>
+							<cost>
+								<action ref='target-creature'>
+									<test>
+										<has-property property='spirit'/>
+									</test>
+								</action>
+							</cost>
+							<effects>
+								<choice controller="you" cancel="true">
+									<either>
+										<assign-damage value="3" type="damage-normal"/>
+									</either>
+								</choice>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<not>
+			 		<has-property property="spirit"/>
+			 	</not>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

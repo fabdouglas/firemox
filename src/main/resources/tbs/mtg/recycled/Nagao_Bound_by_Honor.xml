@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nagao, Bound by Honor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	legendary creature - human samurai
+	3/3
+	bushido 1 
+	whenever nagao, bound by honor attacks, samurai creatures you control get +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human samurai </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bushido1-blocked'/>
+		<ability ref='bushido1-blocking'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="creatures-you-control">
+					<test>
+						<has-property property="samurai"/>
+					</test>
+				</action>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

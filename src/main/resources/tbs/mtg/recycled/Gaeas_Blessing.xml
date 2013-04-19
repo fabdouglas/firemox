@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gaea's Blessing">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	sorcery
+	target player shuffles up to three target cards from his or her graveyard into his or her library.
+	draw a card.
+	when gaea's blessing is put into your graveyard from your library, shuffle your graveyard into your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+				<repeat value="3"/>
+				<target type="card" mode="target-choose" restriction-zone="graveyard" hop="1">
+					<test>
+						<controller player="target-list.first"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="shuffle-in-lib"/>
+				<target-list operation="clear"/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='library' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

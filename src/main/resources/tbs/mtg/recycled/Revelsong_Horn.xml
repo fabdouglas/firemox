@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Revelsong Horn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	
+	1, t, tap an untapped creature you control: target creature gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

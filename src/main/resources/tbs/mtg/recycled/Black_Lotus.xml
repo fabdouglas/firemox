@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Black Lotus">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="0"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana black="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana blue="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana green="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana red="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="3"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

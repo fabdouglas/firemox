@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Devastation">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {5}{r}{r} destroy all creatures and lands. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="red" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<or>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</target>
+				<action ref="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Steam Frigate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - ship
+	3/3
+	steam frigate can't attack unless the defending player controls an island.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human pirate cannot-attack </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="island-home-attack"/>
+	</abilities>
+</card>

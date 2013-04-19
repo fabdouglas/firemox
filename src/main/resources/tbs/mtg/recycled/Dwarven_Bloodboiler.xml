@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dwarven Bloodboiler">
+<rules-author-comment></rules-author-comment>
+
+<!--  {r}{r}{r} tap an untapped dwarf you control: 
+target creature gets +2/+0 until end of turn. 
+-->
+
+	<init>
+		<registers>
+			<register index="red" value="3"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>dwarf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<target type="card" mode="choose" raise-event="false" restriction-zone="play">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+							<has-property property="dwarf"/>
+						</and>
+					</test>
+				</target>
+				<tap/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+2+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

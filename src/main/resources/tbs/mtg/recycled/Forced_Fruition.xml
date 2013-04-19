@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forced Fruition">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uu
+	enchantment
+	whenever an opponent plays a spell, that player draws seven cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<not>
+						<controller player="you"/>
+					</not>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.player"/>
+				<repeat value='7'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

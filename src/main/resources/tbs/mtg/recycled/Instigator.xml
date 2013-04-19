@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Instigator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - spellshaper
+	1/1
+	1bb, t, discard a card: creatures target player controls attack this turn if able.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='2' colorless='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref="attacks-if-able-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

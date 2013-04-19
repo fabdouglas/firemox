@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2007 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Fabrice Daugan
+	* @author Hoani Cross
+-->
+<!--[[apt lang=en]]
+	* References
+	
+	`This is the most important part of the XML file for card rules writers.
+	`Identified by the element <<<\<references\>>>>, it contains a set of
+	`tests, actions, abilities or attachments that can be referenced from your
+	`card XML code.
+	Warning : Declaration order is important, you cannot refers
+	to an ability or a test that has not previously
+	been declared.
+-->
+<!--[[apt lang=fr]]
+	* Les références
+	
+	`C'est la partie la plus importante du fichier XML pour les développeurs
+	`de règles de cartes. Identifié par l'élément <<<\<references\>>>>, il
+	`contient un ensemble de tests, d'actions, d'capacités ou d'attaches qui
+	`peuvent être référencées depuis votre code XML d'une carte.
+	Attention : L'ordre de déclaration est important, il n'est pas possible 
+	reférencer un test, capacité,... qui no'a pas été déclaré avant.
+-->
+<references xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../validator.xsd">
+
+	<!--[[apt lang=en]]
+		** Tests references
+		
+		`These are described within the nested <<<\<tests\>>>> element. We can find
+		`the following references :
+		
+		*___________________________+__________________________________________________+
+		| <<Reference name>>        | <<Description>>
+		*___________________________+__________________________________________________+-->
+	<!--[[apt lang=fr]]
+		** Références de test
+		
+		`Elles sont décrites dans l'élément <<<\<tests\>>>>. On trouvera les références
+		`suivantes :
+		
+		*___________________________+__________________________________________________+
+		| <<Nom de la référence>>   | <<Description>>
+		*___________________________+__________________________________________________+-->
+	
+	<tests>
+		<!--[[apt lang=en|fr @reference-name]]
+			Test used during the discard phase to verify if the current
+			player has to discard cards from his hand.
+			| Test utilisé durant la phase de défausse pour vérifier si le
+			joueur courant a des cartes en trop à défausser dans sa main. -->
+		<test reference-name="priv_currentplayer-has-to-discard">
+			<sup>
+				<left>
+					<counter restriction-zone="hand">
+						<controller player="currentplayer" />
+					</counter>
+				</left>
+				<right register="currentplayer" index="maxi-cards-in-hand" />
+			</sup>
+		</test>
+	</tests>
+
+	<!--[[apt lang=en]]
+		** Actions references
+		
+		`These are described within the nested <<<\<actions\>>>> element. Some reference
+		`are <<MACRO(\[value\],\[test\])>>, which means that you can dynamically append
+		`a test to the referenced action or pass a value to the referenced action (if
+		`<<value>> is specified in the parenthesis just after <<MACRO>>). We can find
+		`the following references :
+		
+		*___________________________+__________________________________________________+
+		| <<Reference name>>        | <<Description>>
+		*___________________________+__________________________________________________+-->
+	<!--[[apt lang=fr]]
+		** Les références d'actions
+		
+		`Elles sont décrites au sein de l'élément <<<\<actions\>>>>. Certaines références
+		`sont désignées comme des <<MACRO(\[value\],\[test\])>>, ce qui signifie que vous
+		`pouvez y associer dynamiquement un test additionnel à ajouter au tests de
+		`l'action ou passer une valeur à l'action référencée. On peut trouver les références
+		`suivantes :
+		
+		*___________________________+__________________________________________________+
+		| <<Nom de la référence>>   | <<Description>>
+		*___________________________+__________________________________________________+-->
+
+	<actions>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			<<MACRO(value,test)>> : allows the player in the first position
+			of the target list to search within his library up to <<value>>
+			cards (he cannot cancel the operation).
+			| <<MACRO(value,test)>> : elle permet au joueur en première position
+			dans la liste des cibles de chercher dans sa bibliothèque
+			jusqu'à <<value>> cartes (il ne peut pas annuler l'opération). -->
+		<action reference-name="search-lib-player">
+			<show-zone zone="library" for="you" name="%" />
+			<repeat /><!-- value ? -->
+			<target mode="choose" type="card" raise-event="false" restriction-zone="library" hop="1"
+				cancel="false" name="search-%n-card">
+				<test>
+					<controller player="target-list.first" />
+				</test>
+			</target>
+			<action ref="restore-library-visibility" name="%" />
+			<shuffle zone="library" />
+		</action>
+
+		<action reference-name="search-lib-opponent">
+			<target type="opponent"/>
+			<action ref="search-lib-player"/>
+			<action ref="move-to-play"/>
+		</action>
+		
+		<!--[[apt lang=en @reference-name]]
+			<<MACRO(value,test)>> : allows you to search within your library 
+			up to <<value>> cards and reveal them (you cannot cancel the operation).
+		-->
+		<action reference-name="search-lib-reveal">
+			<target type="you"/>
+			<action ref="search-lib-player"/>
+			<target-list operation="remove-first" name="%" />
+			<action ref="move-library-top"/>
+			<action ref="reveal" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Reveals the cards in the target list to everyone and wait until
+			the opponent decide to stop looking at your revealed cards.
+			| Révèle les cartes de la liste des cibles à tout le monde et
+			attend jusqu'à ce que l'adversaire décide de ne plus regarder les
+			cartes révélées de cette manière. -->
+		<action reference-name="reveal">
+			<face-up for="everyone" name="reveal" />
+			<msg type="ok" controller="opponent" name="%">
+				<text>%ok_when_finished</text>
+			</msg>
+			<face-down for="everyone" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Allows you to look at the cards in the target list and wait
+			until you decide to stop looking at these cards.
+			| Elle vous permet de regarder les cartes dans la liste des cibles
+			et attend jusqu'à ce que vous décidiez de ne plus regarder ces
+			cartes. -->
+		<action reference-name="look">
+			<face-up for="you" />
+			<msg type="ok" controller="you">
+				<text>%ok_when_finished</text>
+			</msg>
+			<face-down for="you" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Allows you to look at the top card of your library. 
+			The 'face-down' action should be call juste after.
+			| Elle vous permet de regarder la carte du dessus de votre
+			bibliothèque. L'action face-down' devrait être appelé par la suite. -->
+		<action reference-name="look-at-the-top">
+			<target type="card" mode="all" restriction-zone="library">
+				<test>
+					<and>
+						<controller player="you" />
+						<position position="top" />
+					</and>
+				</test>
+			</target>
+			<face-up for="you" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the card referencing this action to its owner's graveyard.
+			| Déplace la carte qui référence cette action dans le cimetière de
+			son propriétaire. -->
+		<action reference-name="finish-spell">
+			<!-- TODO instead use target-index feature when implemented -->
+			<target-list operation="clear" name="%" />
+			<target type="this" name="%" />
+			<move-card destination="graveyard" controller="target.owner" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to their owner libraries and
+			shuffle the library of owner of the last card.
+			| Déplace les cartes de la liste des cibles dans les librairies de
+			leurs propriétaires respectifs et mélange la bibliothèque du propriétaire
+			de la dernière carte. -->
+		<action reference-name="shuffle-in-lib">
+			<move-card controller="target.owner" destination="library" />
+			<target type="target-list.last.owner" />
+			<shuffle zone="library" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to their owner libraries and
+			shuffle all libraries.
+			| Déplace les cartes de la liste des cibles dans les librairies de
+			leurs propriétaires respectifs et mélange toutes les bibliothèques. -->
+		<action reference-name="shuffle-in-libs">
+			<move-card controller="target.owner" destination="library" />
+			<target type="player" mode="all" />
+			<shuffle zone="library" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			<Tap> the card referencing this action.
+			| <Engage> la carte qui référence cette action. -->
+		<action reference-name="T">
+			<target type="this" name="%" />
+			<tap name="@T" />
+			<target-list operation="clear" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Restores the visibility for you of the libraries of the players
+			in the target list (<<TODO>>).
+			| Restaure la visibilité pour vous concernant les bibliothèques des
+			joueurs de la liste des cibles (<<TODO>>). -->
+		<action reference-name="restore-library-visibility" name="%">
+			<hide-zone zone="library" for="you" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Restores the visibility of the hands of the players in the target
+			list for the opponent (checks whether the opponent has a special
+			ability to permanently have the right to see your hand).
+			| Restaure la visibilité des mains des joueurs de la liste des
+			cibles pour l'adversaire (vérifie si l'adversaire a une capacité
+			spéciale lui permettant de regarder votre main de manière
+			permanente). -->
+		<action reference-name="restore-hand-visibility" name="%" macro="false">
+			<if-then-hop elsehop="2" name="%">
+				<test>
+					<equal right="0">
+						<left register="target-list.first" index="hand-vibility-modifiers" />
+					</equal>
+				</test>
+			</if-then-hop>
+			<hide-zone zone="hand" for="opponent" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Returns the cards in the target list to their owner's hand.
+			| Retourne les cartes de la liste des cibles dans la main de leurs
+			propriétaires. -->
+		<action reference-name="return-to-hand">
+			<move-card destination="hand" controller="target.owner" name="" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to the top of their owner's
+			library.
+			| Déplace les cartes de la liste des cibles au dessus de la
+			bibliothèque de leurs propriétaires. -->
+		<action reference-name="move-library-top">
+			<move-card destination="library" controller="owner" position="top" name="" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to the bottom of their owner's
+			library. -->
+		<action reference-name="move-library-bottom">
+			<move-card destination="library" controller="owner" position="bottom" name="" />
+		</action> 
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Removes the cards in the target list from the game (they are
+			moved to the <side> zone, <<\[TODO\]>> creating a dedicated zone
+			for such cards should be considered).
+			| Retire les cartes de la liste des cibles du jeu (elles sont
+			déplacées vers la zone <side>, <<\[TODO\]>> créer une zone
+			dédiée pour de telles cartes devrait être considéré). -->
+		<action reference-name="remove-from-game">
+			<move-card destination="side" controller="target.owner" name="" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Puts the cards in the target list in their owner's graveyard.
+			| Déplace les cartes de la liste des cibles dans le cimetière de
+			leurs propriétaires. -->
+		<action reference-name="put-in-graveyard">
+			<move-card destination="graveyard" controller="target.owner" name="" />
+		</action>
+
+		<!--[[apt lang=en @reference-name]]
+			Puts the top card of target player's library to his graveyard.
+			| Déplace la carte du dessus de la bibliothèque du dernier joueur ciblé 
+			dans son cimetière. -->
+		<action reference-name="mill-a-card">
+			<target type="card" mode="all" restriction-zone="library">
+				<test>
+					<and>
+						<position position="top" />
+						<controller player="target-list.last" />
+					</and>
+				</test>
+			</target>
+			<action ref="put-in-graveyard" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Makes the players in the target list draw a card.
+			Example : {{{cards/Bandage.html}Bandage}}
+			| Fait piocher une carte aux joueurs de la liste des cibles. 
+			Exemple : {{{cards/Bandage.html}Bandage}}
+		-->
+		<action reference-name="draw-a-card">
+			<move-player-card from="library" to="hand" controller="owner" name="draw-%n-card" />
+		</action>
+
+		<!-- MACRO (value) : Pay X lives
+			WARNING, according to Magic rules, player must have the required lives to
+			play this action. So a test life the following must be place in ability :
+			<test>
+			<or>
+			<equals right="0" left="%value"/>
+			<sup right="0">
+			<minus right="%value>
+			<left register="controller" index="life"/>
+			</minus>
+			</sup>
+			</or>
+			</test>
+		-->
+		<!--[[apt lang=en|fr @reference-name]]
+			<<MACRO(value)>> : makes the controller of the card referencing
+			this action pay <<value>> points of life. Beware, a test must be
+			used to check whether the player have enough life to play this
+			action (check <<<mtg.xml>>> for more information).
+			| <<MACRO(value)>> : fait payer <<value>> points de vie au
+			contrôleur de la carte qui référence cette action. Attention,
+			un test devra être utilisé afin de vérifier que ce joueur a
+			assez de points de vie pour joueur cette action (vérifiez
+			<<<mtg.xml>>> pour plus d'informations). -->
+		<action reference-name="pay-life" name="pay-%n-life">
+			<modify-register register="controller" index="life" operation="minus" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			<<MACRO(value)>> : makes the controller of the card referencing
+			this action gain <<value>> points of life.
+			| <<MACRO(value)>> : fait gagner <<value>> points de vie au
+			contrôleur de la carte qui référence cette action. -->
+		<action reference-name="gain-life" name="gain-%n-life">
+			<modify-register register="controller" index="life" operation="add" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			<<MACRO(value,test)>> : makes you choose <<value>> cards from
+			the hand of the players in the target list and discard them.
+			| <<MACRO(value,test)>> : elle vous fait choisir et défausser
+			<<value>> cartes depuis la main des joueurs de la liste des
+			cibles. -->
+		<action reference-name="discard-a-player">
+			<show-zone zone="hand" for="you" name="%" />
+			<repeat />
+			<!-- value ? -->
+			<target type="card" mode="choose" restriction-zone="hand" raise-event="false" hop="1"
+				cancel="false" name="discard-%n-card">
+				<test>
+					<controller player="target-list.first" />
+				</test>
+			</target>
+			<action ref="restore-hand-visibility" name="%" />
+			<action ref="discard-cards_noname" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to their owner's graveyard
+			(this action is not named).
+			| Déplace les cartes de la liste des cibles dans le cimetière de
+			leur propriétaires (cette action n'est pas nommée). -->
+		<action reference-name="discard-cards_noname" name="%">
+			<action ref="put-in-graveyard" />
+			<target-list operation="clear" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Moves the cards in the target list to their owner's graveyard.
+			| Déplace les cartes de la liste des cibles dans le cimetière de
+			leur propriétaires. -->
+		<action reference-name="discard-cards">
+			<action ref="put-in-graveyard" />
+			<target-list operation="clear" name="%" />
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Destroys the cards in the target-list.
+			| Détruire les cartes présentes dans la liste de cibles. -->
+		<action reference-name="destroy">
+			<assign-damage value="all"/>
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Destroys the cards in the target-list. The destroyed card cannot be 
+			regenerated.
+			| Détruire les cartes présentes dans la liste de cibles. Les cartes 
+			détruites ne peuvent être régénérées. -->
+		<action reference-name="bury">
+			<assign-damage value="all"/>
+		</action>
+
+		<!--[[apt lang=en|fr @reference-name]]
+			Put in play this card under owner's control.
+			| Met en jeu cette carte sous le contrôle du propriétaire.
+		-->
+		<action reference-name="put-in-play">
+			<target-list operation="clear" name="%" />
+			<target type="this" name="%" />
+			<move-card controller="target.owner" destination="play" name="" />
+		</action>
+
+		<!--[[apt lang=en @reference-name]]
+			Move target cards to play under owner's control.
+		-->
+		<action reference-name="move-to-play">
+			<move-card controller="target.owner" destination="play" name="" />
+		</action>
+
+	</actions>
+
+	<!--[[apt lang=en]]
+		** Abilities references
+		
+		`These are described within the nested <<<\<abilities\>>>> element. Using these
+		`references is the best way to accelerate card developement and maintenance since
+		`repetitive code are place in this place. So if you find some abilities appearing
+		`often in cards, this is the right place to add a reference to share with the
+		`community of card rules developers. The project team will make infinite effort
+		`to add this ability detection in our card generator for the Oracle. Some abilities 
+		`work as	macro by accepting one or two actions lists.
+		`We can find the following references :
+		
+		*___________________________+__________________________________________________+
+		| <<Reference name>>        | <<Description>>
+		*___________________________+__________________________________________________+-->
+	<!--[[apt lang=fr]]
+		** Les références de capacités
+		
+		`Elles sont décrites au sein de l'élément <<<\<abilities\>>>>. Utiliser ces
+		`références est la meilleure manière d'accélérer le développement et la
+		`maintenance du code des cartes car elles centralisent tout le code réutilisable
+		`relatif aux cartes. Ainsi, si vous trouvez des capacités souvent répétées
+		`dans les cartes, c'est le meilleur endroit pour y ajouter une référence afin de
+		`la partager avec l'ensemble de la communauté des développeurs de cartes.
+		`L'équipe de développement fera tout son possible pour inclure la détection
+		`de nouvelles capacités au sein de son générateur de règles de cartes à partir de
+		`l'Oracle. Certaines capacités fonctionnent comme des macros en acceptant une 
+		`ou deux liste d'actions.
+		`On trouve les références suivantes :
+		
+		*___________________________+__________________________________________________+
+		| <<Nom de la référence>>   | <<Description>>
+		*___________________________+__________________________________________________+-->
+
+	<abilities>
+		<ability reference-name="cast-spell">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<action ref="put-in-play" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="tap-this">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<action ref="T" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="put-in-graveyard">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="this"/>
+					<action ref="put-in-graveyard" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="remove-from-game">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="this"/>
+					<action ref="remove-from-game" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="return-to-hand">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="this"/>
+					<action ref="return-to-hand" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="discard-a-player">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="player" mode="choose"/>
+					<action ref="discard-a-player" value="1"/>
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="draw-a-card">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="you"/>
+					<action ref="draw-a-card" />
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="search-lib-opponent">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<action ref="search-lib-opponent" value="1"/>
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="search-lib-reveal">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<action ref="search-lib-reveal" value="1"/>
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="lose-life">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="you"/>
+					<input-number minimum="0" maximum="65500" controller="you" operation="set" register="stack" index="0">
+						<text>%x-value</text>
+					</input-number>
+					<action ref="pay-life" >
+						<value register="stack" index="0"/>
+					</action>
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="gain-life">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="you"/>
+					<input-number minimum="0" maximum="65500" controller="you" operation="set" register="stack" index="0">
+						<text>%x-value</text>
+					</input-number>
+					<action ref="gain-life" >
+						<value register="stack" index="0"/>
+					</action>
+				</effects>
+			</activated-ability>
+		</ability>
+		
+		<ability reference-name="set-power-toughness">
+			<activated-ability playable="instant" zone="anywhere">
+				<effects>
+					<target type="this"/>
+					<input-number minimum="0" maximum="65500" controller="you" operation="set" register="stack" index="0">
+						<text>%set-power</text>
+					</input-number>
+					<add-modifier>
+						<register-indirection index="power" operation="set" linked="false">
+					 		<until>
+					 			<end-of-phase phase="cleanup"/>
+					 		</until>
+							<value register="stack" index="0"/>
+					 	</register-indirection>
+					 </add-modifier>
+					<input-number minimum="0" maximum="65500" controller="you" operation="set" register="stack" index="0">
+						<text>%set-toughness</text>
+					</input-number>
+					 <add-modifier>
+						<register-indirection index="toughness" operation="set" linked="false">
+					 		<until>
+					 			<end-of-phase phase="cleanup"/>
+					 		</until>
+							<value register="stack" index="0"/>
+					 	</register-indirection>
+					 </add-modifier>
+				</effects>
+			</activated-ability>
+		</ability>
+			
+		
+	</abilities>
+
+	<!--[[apt lang=en]]
+		** Attachment references
+		
+		`These are described within the nested <<<\<attachments\>>>> element. We can find
+		`the following references :
+		
+		*___________________________+__________________________________________________+
+		| <<Reference name>>        | <<Description>>
+		*___________________________+__________________________________________________+-->
+	<!--[[apt lang=fr]]
+		** Les références d'attaches
+		
+		`Elles sont décrites au sein de l'élément <<<\<attachments\>>>>. On peut
+		`trouver les références suivantes :
+		
+		*___________________________+__________________________________________________+
+		| <<Nom de la référence>>   | <<Description>>
+		*___________________________+__________________________________________________+-->
+
+</references>

@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Snowfall">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!-- 
+
+ {2}{u} 
+cumulative upkeep {u} 
+whenever an island is tapped for mana, its controller may 
+add {u} to his or her mana pool. 
+if that island is a snow-covered land, its controller may 
+add {u}{u} to his or her mana pool instead. 
+spend this mana only to pay for cumulative upkeep.
+
+ -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="cumulative-upkeep"/>
+
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="island"/>
+						<not>
+							<has-property property="snow"/>
+						</not>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability name="" zone="play" optimize="action">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<choice cancel="true">
+								<either>
+									<give-mana blue="1" to="context.player">
+										<restriction ref="only-for-cumulative-upkeep"/>
+									</give-mana>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+		
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="island"/>
+						<has-property property="snow"/>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability name="" zone="play" optimize="action">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<choice cancel="true">
+								<either>
+									<give-mana blue="2" to="context.player">
+										<restriction ref="only-for-cumulative-upkeep"/>
+									</give-mana>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability resolution="normal" zone="play" name="cumulative-upkeep">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana>
+							<colorless>
+								<counter object-name="age" card="this"/>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

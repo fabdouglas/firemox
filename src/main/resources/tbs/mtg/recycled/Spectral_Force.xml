@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spectral Force">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - elemental spirit
+	8/8
+	trample
+	whenever spectral force attacks, if defending player controls no black permanents, it doesn't untap during your next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='8'/>
+			<register index='toughness' value='8'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental spirit trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<has-color color="black"/>
+									<controller player="opponent"/>
+								</and>
+							</has>
+						</not>
+					</test>
+				</if-then-hop>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property="does-not-untap" linked="false">
+				 		<until>
+				 			<end-of-phase phase="untap">
+				 				<test ref="during-your-untap"/>
+				 			</end-of-phase>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

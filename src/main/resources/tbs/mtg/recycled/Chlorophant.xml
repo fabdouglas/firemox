@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chlorophant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ggg
+	creature - elemental
+	1/1
+	at the beginning of your upkeep, you may put a +1/+1 counter on chlorophant.
+	threshold - as long as seven or more cards are in your graveyard, chlorophant has "at the beginning of your upkeep, you may put another +1/+1 counter on chlorophant."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<test ref="threshold"/>
+						<test ref='during-your-upkeep'/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kjeldoran War Cry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	creatures you control get +x/+x until end of turn, where x is 1 plus the number of cards named kjeldoran war cry in all graveyards.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value>
+							<add right="1">
+								<left>
+									<counter restriction-zone="graveyard">
+										<has-name name="Kjeldoran_War_Cry"/>
+									</counter>
+								</left>
+							</add>
+						</value>
+					</register-modifier>
+					<register-modifier index="toughness" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value>
+							<add right="1">
+								<left>
+									<counter restriction-zone="graveyard">
+										<has-name name="Kjeldoran_War_Cry"/>
+									</counter>
+								</left>
+							</add>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

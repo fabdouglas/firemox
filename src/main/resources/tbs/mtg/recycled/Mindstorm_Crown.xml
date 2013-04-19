@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mindstorm Crown">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	at the beginning of your upkeep, draw a card if you had no cards in hand at the beginning of this turn. if you had a card in hand, mindstorm crown deals 1 damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='you'/>
+				<if-then-hop elsehop="3">
+					<test ref="hellbent"/>
+				</if-then-hop>
+				<action ref='draw-a-card'/>
+				<hop value="2"/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Toxin Sliver">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3b
+	creature - sliver
+	3/3
+	whenever a sliver deals combat damage to a creature, destroy that creature. 
+		it can't be regenerated.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='3' />
+			<register index='toughness' value='3' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>sliver</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<has-property property="sliver" />
+				</source-test>
+				<destination-test>
+					<and>
+						<not>
+							<is-player />
+						</not>
+						<has-idcard idcard='creature' />
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='context.card' />
+				<action ref='bury' />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

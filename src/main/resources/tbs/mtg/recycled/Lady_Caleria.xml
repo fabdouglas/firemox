@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lady Caleria">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ggww
+	legendary creature
+	3/6
+	t :lady caleria deals 3 damage to target attacking or blocking creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>legend human archer</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<test ref='tested-is-attacking'/>
+							<test ref='tested-is-blocking'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

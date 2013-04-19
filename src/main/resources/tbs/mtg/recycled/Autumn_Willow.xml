@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Autumn Willow">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4}{g}{g} 
+autumn willow can't be the target of spells or abilities. 
+{g}: until end of turn, 
+autumn willow may be the target of spells and abilities controlled by target player as though it did not have "autumn willow can't be the target of spells or abilities." -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="green" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>legend shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana green="1" />
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property="shroud" layer="internal">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

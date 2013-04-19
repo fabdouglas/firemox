@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Beseech the Queen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(2/b)(2/b)(2/b)
+	sorcery
+	
+	 search your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<action ref='search-lib' value="1">
+				<test>
+					<inf-equal>
+						<left register="tested" index="manacost"/>
+						<right>
+							<counter restriction-zone="play">
+								<and>
+									<has-idcard idcard="land"/>
+									<controller player="you"/>
+								</and>
+							</counter>
+						</right>
+					</inf-equal>
+				</test>
+			</action>
+			<action ref='return-to-hand'/>
+			<action ref='finish-spell'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="2" colorless="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="1" colorless="4"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="6"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

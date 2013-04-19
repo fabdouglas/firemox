@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pulse of the Grid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	instant
+	draw two cards, then discard a card. then if an opponent has more cards in hand than you, return pulse of the grid to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value='1'/>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup>
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="opponent"/>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</right>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<hop value="2"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

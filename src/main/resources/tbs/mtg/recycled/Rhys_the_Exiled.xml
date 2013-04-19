@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rhys the Exiled">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	legendary creature - elf warrior
+	3/2
+	whenever rhys the exiled attacks, you gain 1 life for each elf you control.
+	b, sacrifice an elf: regenerate rhys the exiled.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend elf warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="elf"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='elf'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jilt">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	instant
+	kicker 1r 
+	return target creature to its owner's hand. if the kicker cost was paid, jilt deals 2 damage to another target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" red="1" />
+				<action ref="target-creature"/>
+			</actions>
+			<actions>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<action ref="target-creature"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

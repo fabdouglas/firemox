@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Unearth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	sorcery
+	return target creature card with converted mana cost 3 or less from your graveyard to play.
+	cycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<inf-equal right="3">
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card controller="you" destination="play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

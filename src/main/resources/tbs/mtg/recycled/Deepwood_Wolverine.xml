@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deepwood Wolverine">
+<rules-author-comment></rules-author-comment>
+
+<!--  g 
+	whenever deepwood wolverine becomes blocked, it gets +2/+0 until end of turn.   
+-->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>wolverine</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain+2+0-until-eot" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

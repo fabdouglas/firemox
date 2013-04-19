@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tel-Jilad Lifebreather">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - troll shaman
+	3/2
+	g, t, sacrifice a forest: regenerate target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>troll shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

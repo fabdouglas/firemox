@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Engine">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		2 : Le Dragon-machine gagne +1/+0 jusqu'à la fin du tour. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="power" value="1" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+			</cost>
+			<effects>
+				<target type="this" />
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

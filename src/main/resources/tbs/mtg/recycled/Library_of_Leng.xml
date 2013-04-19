@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Library of Leng">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {1} 
+you have no maximum hand size. 
+if an effect causes you to discard a card from your hand, discard it, 
+but you may put it on top of your library instead of into your graveyard. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<action-source name="discard-%n-card"/>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="graveyard"/>
+						<controller player="you"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<target type="context.card"/>
+						<action ref="move-library-top"/>
+					</either>
+					<either>
+						<target type="context.card"/>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

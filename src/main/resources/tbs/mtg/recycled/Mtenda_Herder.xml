@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mtenda Herder">
+<rules-author-comment></rules-author-comment>
+
+<!--  w flanking  -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>scout human</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="flanking"/>
+	</abilities>
+</card>

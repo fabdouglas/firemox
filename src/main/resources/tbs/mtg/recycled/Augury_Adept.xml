@@ -1,0 +1,76 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Augury Adept">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(w/u)(w/u)
+	creature - kithkin wizard
+	2/2
+	whenever augury adept deals combat damage to a player, reveal the top card of your library and put that card into your hand. you gain life equal to its converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin wizard </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='2' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='1' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' white='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<action ref='return-to-hand'/>
+				<action ref='gain-life'>
+					<value register='target-list.last' index='manacost'/>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

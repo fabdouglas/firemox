@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cloudskate">
+<rules-author-comment></rules-author-comment>
+
+<!--  1u flying fading 3  -->
+
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>flying illusion</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="fading"/>
+	</abilities>
+	<modifiers>
+		<object name="fade"/>
+		<object name="fade"/>
+		<object name="fade"/>
+	</modifiers>
+</card>

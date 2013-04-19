@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="No Mercy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	enchantment
+	whenever a creature deals damage to you, destroy it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<has-idcard idcard="creature"/>
+				</source-test>
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

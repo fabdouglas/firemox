@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mogg Sentry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - goblin warrior
+	1/1
+	whenever an opponent plays a spell, mogg sentry gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<not>
+						<controller player="you"/>
+					</not>
+				</test>
+			</casting>
+			<effects>
+				<action ref="gain+2+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Telethopter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	3/1
+	tap an untapped creature you control: telethopter gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature thopter</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

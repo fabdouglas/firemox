@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tangle Golem">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		7
+		artifact creature - golem
+		5/4
+		affinity for forests 
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7' />
+			<register index='power' value='5' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>golem</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="forest" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

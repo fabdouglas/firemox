@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Witch-Maw Nephilim">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gwub
+	creature - nephilim
+	1/1
+	whenever you play a spell, you may put two +1/+1 counters on witch-maw nephilim.
+	whenever witch-maw nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white green blue black </colors>
+		<idcards>creature </idcards>
+		<properties>nephilim </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<controller player="you"/>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="this"/>
+						<repeat value='2'/>
+						<add-object object-name='+1/+1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<and>
+						<is-this/>	
+						<sup-equal right="10">
+							<left register="this" index="power"/>
+						</sup-equal>
+					</and>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="this"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

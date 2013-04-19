@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dark Suspicions">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b}{b} 
+at the beginning of each opponent's upkeep, that player loses 1 life for each 
+card in his or her hand more than you have in your hand. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<not>
+						<is-this player="controller"/>
+					</not>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<action ref="lose-life">
+					<value>
+						<minus>
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="opponent"/>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</right>
+						</minus>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

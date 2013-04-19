@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Saprazzan Breaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - beast
+	3/3
+	u: put the top card of your library into your graveyard. if that card is a land card, saprazzan breaker is unblockable this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref="mill-a-card"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="land" card="target-list.last"/>
+					</test>
+				</if-then-hop>
+				<target type="this"/>
+				<action ref="unblockable-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

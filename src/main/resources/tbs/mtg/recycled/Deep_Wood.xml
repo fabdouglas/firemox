@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deep Wood">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{g} play deep wood only during the declare attackers step and only 
+if you are the defending player. 
+prevent all damage that would be dealt to you by attacking creatures this turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+				<and>
+	  			<phase-is phase="declare-attacking"/>
+					<controller player="currentplayer.opponent"/>
+				</and>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-can-be-prevented">
+							<source-test>
+								<and>
+									<has-idcard idcard="creature"/>
+									<test ref="tested-is-attacking"/>
+								</and>
+							</source-test>
+							<destination-test>
+								<is-this player="you"/>
+							</destination-test>
+						</assigned-damage>
+						<effects/>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

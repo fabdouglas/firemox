@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nature's Revolt">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	enchantment
+	all lands are 2/2 creatures that are still lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-indirection index="power" value="2" operation="set" linked="true"/>
+				<register-indirection index="toughness" value="2" operation="set" linked="true"/>
+				<idcard-modifier idcard="creature" operation="or" linked="true"/>
+			</modifiers>
+			<while>
+		 		<has-idcard idcard="land"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

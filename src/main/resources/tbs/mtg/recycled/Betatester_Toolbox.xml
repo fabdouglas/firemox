@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Betatester Toolbox">
+	<rules-author-comment>Hoani CROSS, Fabdouglas</rules-author-comment>
+	<init>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="0"/>
+			</cost>
+			<effects>
+				<give-mana black="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="0"/>
+			</cost>
+			<effects>
+				<give-mana blue="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="0"/>
+			</cost>
+			<effects>
+				<give-mana green="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="0"/>
+			</cost>
+			<effects>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="0"/>
+			</cost>
+			<effects>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="0"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="0"/>
+				<target type="card" restriction-zone="graveyard" mode="choose"/>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="0"/>
+				<action ref="target-permanent"/>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+		
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="0"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="discard-a-player" value="1"/>
+			</effects>
+		</activated-ability>
+		
+		<activated-ability playable="instant" name="extra-turn" zone="play">
+			<effects>
+				<create-ability>
+					<ability ref="extra-turn"/>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

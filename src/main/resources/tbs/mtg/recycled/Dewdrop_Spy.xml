@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dewdrop Spy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	creature - faerie rogue
+	2/2
+	flash
+	flying
+	when dewdrop spy comes into play, look at the top card of target player's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie rogue flash flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all">
+					<test>
+						<and>
+							<in-zone zone="library"/>
+							<position position="top"/>
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

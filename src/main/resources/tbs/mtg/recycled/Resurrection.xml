@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Resurrection">
+	<!-- tested 12/6/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<target mode="choose" type="card" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="controller"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card controller="you" destination="play"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

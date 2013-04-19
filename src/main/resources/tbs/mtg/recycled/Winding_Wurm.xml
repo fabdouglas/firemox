@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Winding Wurm'>
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		4g
+		creature - wurm
+		6/6
+		echo 4g 
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='1' />
+			<register index='colorless' value='4' />
+			<register index='power' value='6' />
+			<register index='toughness' value='6' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>wurm</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref='echo'>
+			<actions>
+				<pay-mana green="1" colorless="4" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

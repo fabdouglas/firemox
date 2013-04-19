@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battlefield Scrounger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - centaur
+	3/3
+	threshold - put three cards from your graveyard on the bottom of your library: battlefield scrounger gets +3/+3 until end of turn. play this ability only once each turn, and only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>centaur </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<and>
+					<test ref="once-each-turn"/>
+					<test ref="threshold"/>
+				</and>
+			</test>
+			<cost>
+				<repeat value="3"/>
+				<target type="card" restriction-zone="graveyard" mode="choose">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="move-library-bottom"/>
+				<target-list operation="clear"/>
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+3+3-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

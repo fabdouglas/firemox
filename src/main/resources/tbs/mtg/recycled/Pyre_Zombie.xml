@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pyre Zombie">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1br
+	creature - zombie
+	2/1
+	at the beginning of your upkeep, if pyre zombie is in your graveyard, you may pay 1bb. if you do, return pyre zombie from your graveyard to your hand.
+	1rr, sacrifice pyre zombie: pyre zombie deals 2 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='graveyard'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="1" black="2"/>
+						<target type="this"/>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='2' colorless='1' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

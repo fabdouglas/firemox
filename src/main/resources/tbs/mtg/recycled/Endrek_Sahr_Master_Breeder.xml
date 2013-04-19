@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Endrek Sahr, Master Breeder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	legendary creature - human wizard
+	2/2
+	whenever you play a creature spell, put x 1/1 black thrull creature tokens into play, where x is that spell's converted mana cost.
+	when you control seven or more thrulls, sacrifice endrek sahr, master breeder.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-idcard idcard="creature"/>
+				</test>
+			</casting>
+			<effects>
+				<repeat>
+					<value register="context.card" index="manacost"/>
+				</repeat>
+				<create-card>
+					<card name='Thrull'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token thrull </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<when>
+				<sup-equal right="7">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="thrull"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</when>
+			<effects>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

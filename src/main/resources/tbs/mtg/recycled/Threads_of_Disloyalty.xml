@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Threads of Disloyalty">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	enchantment - aura
+	enchant creature with converted mana cost 2 or less
+	you control enchanted creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<controller-modifier player="you" linked="true" />
+		</modifiers>
+		<valid-target>
+			<and>
+				<inf-equal right="2">
+					<left register="tested" index="manacost"/>
+				</inf-equal>
+				<test ref="valid-to-enchant" />
+				<test ref="is-targetable-creature" />
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

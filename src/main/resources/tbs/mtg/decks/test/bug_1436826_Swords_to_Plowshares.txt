@@ -1,0 +1,3 @@
+Swords_to_Plowshares;20
+Juzam_Djinn;20
+Super_card;20

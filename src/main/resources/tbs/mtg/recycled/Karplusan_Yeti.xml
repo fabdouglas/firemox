@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Karplusan Yeti">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - yeti
+	3/3
+	t :karplusan yeti deals damage equal to its power to target creature. that creature deals damage equal to its power to karplusan yeti.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>yeti </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='this' index='power'/>
+				</assign-damage>
+				<target type="this"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

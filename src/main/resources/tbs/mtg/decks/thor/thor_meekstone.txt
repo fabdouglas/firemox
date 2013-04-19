@@ -1,0 +1,27 @@
+#Jeu meekstone
+#
+#John
+#
+#août 16, 2001
+#1
+#4th Edition
+#
+Ancestral_Recall;2
+Counterspell;4
+Power_Sink;2
+Timetwister;4
+Time_Walk;4
+Black_Lotus;4
+Howling_Mine;2
+Mox_Sapphire;4
+Sol_Ring;2
+Mox_Pearl;4
+Meekstone;2
+Disenchant;2
+Kismet;2
+Serra_Angel;2
+Spirit_Link;2
+Swords_to_Plowshares;2
+White_Knight;2
+Wrath_of_God;2
+Tundra;15

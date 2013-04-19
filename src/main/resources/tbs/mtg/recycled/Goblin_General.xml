@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin General">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - goblin
+	1/1
+	whenever goblin general attacks, goblins you control get +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin warrior</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<has-property property="goblin"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

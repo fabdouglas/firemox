@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Razia, Boros Archangel">
+	<keywords>TESTED_0.91</keywords>
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--+ [4rrww]
+		| flying, vigilance, haste
+		| t: the next 3 damage that would be dealt to target creature
+		| you control this turn is dealt to another target creature instead.
+		+-->
+
+	<init>
+		<registers>
+			<register index="white" value="2" />
+			<register index="red" value="2" />
+			<register index="colorless" value="4" />
+			<register index="power" value="6" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors>white red</colors>
+		<idcards>creature</idcards>
+		<properties>legend flying vigilance haste angel</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature"/>
+				<action ref="target-creature">
+					<test>
+						<controller player="you" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="redirect-3"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

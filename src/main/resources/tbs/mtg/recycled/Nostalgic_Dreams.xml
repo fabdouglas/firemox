@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nostalgic Dreams">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gg
+	sorcery
+	as an additional cost to play nostalgic dreams, discard x cards.
+	return x target cards from your graveyard to your hand. remove nostalgic dreams from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<input-number minimum="0" register="stack" index="0" operation="set" default="%minimum"
+					strict-max="false">
+					<text>%value-of-x</text>
+					<maximum>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</maximum>
+				</input-number>
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

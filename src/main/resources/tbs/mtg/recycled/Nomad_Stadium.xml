@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nomad Stadium">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add w to your mana pool. nomad stadium deals 1 damage to you.
+	threshold - w, t, sacrifice nomad stadium: you gain 4 life. play this ability only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1' />
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='4'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

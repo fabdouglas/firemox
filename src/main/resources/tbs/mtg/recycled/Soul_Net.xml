@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Soul Net">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1} whenever a creature is put into a graveyard from play, you may pay {1}. if you do, you gain 1 life. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<action ref="gain-life" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

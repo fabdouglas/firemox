@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bringer of the Green Dawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7gg
+	creature - bringer
+	5/5
+	you may pay wubrg rather than pay bringer of the green dawn's mana cost.
+	trample
+	at the beginning of your upkeep, you may put a 3/3 green beast creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='7'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>bringer trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable="this" zone="hand">
+				<cost>
+					<pay-mana white="1" blue="1" red="1" black="1" green="1"/>
+				</cost>
+				<effects>
+					<action ref="put-in-play" />
+				</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+			<choice cancel="true">
+				<either>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Beast'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='3'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token beast </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				</either>
+			</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

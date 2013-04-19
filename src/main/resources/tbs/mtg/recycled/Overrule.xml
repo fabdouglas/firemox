@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Overrule">
+
+	<!-- 
+		Counter target spell unless its controller pays X Mana. 
+		You gain X life. 
+	-->
+
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>white blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="Counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.last.controller">
+					<either>
+						<pay-mana controller="target-list.last.controller">
+							<colorless register="stack" index="0" />
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="counter"/>
+					</either>
+				</choice>
+				<action ref="gain-life">
+					<value register="stack" index="0" />
+				</action>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

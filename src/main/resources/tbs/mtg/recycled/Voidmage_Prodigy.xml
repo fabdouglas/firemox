@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Voidmage Prodigy">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		uu
+		creature - human wizard
+		2/1
+		uu, sacrifice a wizard: counter target spell.
+		morph u 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='power' value='2' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='wizard' />
+					</test>
+				</action>
+				<action ref='target-spell' />
+			</cost>
+			<effects>
+				<action ref='counter' />
+			</effects>
+		</activated-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

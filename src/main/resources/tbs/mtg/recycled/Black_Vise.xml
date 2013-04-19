@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Black Vise">
+	<rules-author-comment>by fabdouglas</rules-author-comment>
+
+	<!--  
+		{1} as black vise comes into play, choose an opponent. at the beginning 
+		of the chosen player's upkeep, black vise deals x damage to that player, where 
+		x is the number of cards greater than four in his or her hand. 
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability resolution="normal" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="player" mode="choose" raise-event="false">
+					<test>
+						<is-this player="opponent" />
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<modify-register register="this" index="free0" operation="set">
+					<value register="target-list.first" index="id" />
+				</modify-register>
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="draw">
+				<test>
+					<equal>
+						<left register="tested" index="id" />
+						<right register="this" index="free0" />
+					</equal>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="abortme">
+					<test>
+						<sup right="4">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="context.player" />
+								</counter>
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type="context.player" />
+				<assign-damage>
+					<value>
+						<minus right="4">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="context.player" />
+								</counter>
+							</left>
+						</minus>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

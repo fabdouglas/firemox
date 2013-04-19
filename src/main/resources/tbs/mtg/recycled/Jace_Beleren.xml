@@ -1,0 +1,89 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jace Beleren">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	planeswalker - jace
+	3
+	+2: each player draws a card.
+	-1: target player draws a card.
+	-10: target player puts the top twenty cards of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='loyalty' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>planeswalker</idcards>
+		<properties>jace</properties>
+	</init>
+	<modifiers>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="2"/>
+				<add-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<target type='player' mode='all'/>
+			</cost>
+			<effects>
+				<action ref='draw-a-card'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='draw-a-card'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="10"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value="20"/>
+				<action ref="mill-a-card"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

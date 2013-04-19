@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Hunting Moa">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+    <init>
+        <registers>
+            <register index="colorless" value="2"/>
+            <register index="green" value="1"/>
+            <register index="power" value="3"/>
+            <register index="toughness" value="2"/>
+        </registers>
+        <colors>green</colors>
+        <idcards>creature</idcards>
+        <properties>bird beast</properties>
+    </init>
+    <actions>
+        <action reference-name="triggered-ability-effects">
+            <add-object object-name="+1/+1"/>
+        </action>
+    </actions>
+    <abilities>
+        <ability ref="cast-spell"/>
+        <ability ref="echo"/>
+        <triggered-ability zone="play">
+            <moved-card>
+                <source-test>
+                    <not>
+                        <in-zone zone="play"/>
+                    </not>
+                </source-test>
+                <destination-test>
+                    <and>
+                        <in-zone zone="play"/>
+                        <is-this/>
+                    </and>
+                </destination-test>
+            </moved-card>
+            <cost>
+                <action ref="target-creature"/>
+            </cost>
+            <effects>
+                <action ref="triggered-ability-effects"/>
+            </effects>
+        </triggered-ability>
+        <triggered-ability zone="play">
+            <moved-card>
+                <source-test>
+                    <in-zone zone="play"/>
+                </source-test>
+                <destination-test>
+                    <and>
+                        <in-zone zone="graveyard"/>
+                        <is-this/>
+                    </and>
+                </destination-test>
+            </moved-card>
+            <cost>
+                <action ref="target-creature"/>
+            </cost>
+            <effects>
+                <action ref="triggered-ability-effects"/>
+            </effects>
+        </triggered-ability>
+    </abilities>
+</card>

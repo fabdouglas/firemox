@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blistering Firecat">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		1rrr
+		creature - cat
+		7/1
+		trample, haste
+		at end of turn, sacrifice blistering firecat.
+		morph rr 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='3' />
+			<register index='colorless' value='1' />
+			<register index='power' value='7' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>elemental cat trample haste</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<create-ability>
+					<ability ref="eot-sacrifice"/>
+				</create-ability>
+			</actions>
+		</ability>
+		<ability ref="cast-morph" />
+		<ability ref="morph">
+			<actions>
+				<pay-mana red='2' />
+				<create-ability>
+					<ability ref="eot-sacrifice"/>
+				</create-ability>
+			</actions>
+		</ability>
+	</abilities>
+</card>

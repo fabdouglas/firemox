@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aura Shards">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gw
+	enchantment
+	whenever a creature comes into play under your control, you may destroy target artifact or enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+					<source-test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature" />
+							<not>
+								<in-zone zone="play" />
+							</not>
+						</and>
+					</source-test>
+					<destination-test>
+						<in-zone zone="play" />
+					</destination-test>
+				</moved-card>
+				<effects>
+					<choice controller="you" cancel="true">
+						<either>
+							<action ref="target-permanent">
+								<test>
+									<or>
+										<has-idcard idcard="artifact"/>
+										<has-idcard idcard="enchantment"/>
+									</or>
+								</test>
+							</action>
+							<action ref='destroy'/>
+						</either>
+					</choice>
+				</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jiwari, the Earth Aflame">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	legendary creature - spirit
+	3/3
+	xr, t :jiwari, the earth aflame deals x damage to target creature without flying.
+	channel - xrrr, discard jiwari: jiwari deals x damage to each creature without flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='hand'>
+			<cost>
+				<pay-mana red='2'/>
+				<action ref="pay-x"/>
+				<target type="this"/>
+				<action ref="put-in-graveyard"/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'>
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

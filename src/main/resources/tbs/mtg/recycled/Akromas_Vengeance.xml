@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Akroma's Vengeance">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<!--  {4}{w}{w} 
+		destroy all artifacts, creatures, and enchantments. cycling {3}  -->
+	<init>
+		<registers>
+			<register index="colorless" value="4" />
+			<register index="white" value="2" />
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target-list operation="clear" name="%" />
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<or>
+							<has-idcard idcard="creature" />
+							<has-idcard idcard="artifact" />
+							<has-idcard idcard="enchantment" />
+						</or>
+					</test>
+				</target>
+				<action ref="destroy" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="3" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

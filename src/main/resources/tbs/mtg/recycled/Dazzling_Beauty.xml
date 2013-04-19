@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dazzling Beauty">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{w} play dazzling beauty only during the declare blockers step. 
+target unblocked attacking creature becomes blocked.  
+draw a card at the beginning of the next turn's upkeep. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+	  		<phase-is phase="declare-blocking"/>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<test ref="tested-is-attacking"/>
+							<not>
+								<test ref="tested-is-blocked"/>
+							</not>
+						</and>
+					</test>	
+				</action>
+			</cost>
+			<effects>
+				<action ref="draw-a-card-next-upkeep"/>
+				<modify-register operation="or" register="tested" index="state" value="declared-as-blocked"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

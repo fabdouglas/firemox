@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Emberwilde Augur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - goblin shaman
+	2/1
+	sacrifice emberwilde augur: emberwilde augur deals 3 damage to target player. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

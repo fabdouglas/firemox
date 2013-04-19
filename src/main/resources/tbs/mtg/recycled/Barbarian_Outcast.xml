@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Barbarian Outcast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - barbarian beast
+	2/2
+	when you control no swamps, sacrifice barbarian outcast.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human barbarian beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<when>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="controller" />
+							<has-idcard idcard="swamp" />
+						</and>
+					</has>
+				</not>
+			</when>
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

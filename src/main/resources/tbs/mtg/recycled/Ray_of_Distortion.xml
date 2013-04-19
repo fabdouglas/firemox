@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ray of Distortion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+
+	instant
+
+	destroy target artifact or enchantment.
+	flashback 4ww 
+ -->
+
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+			<action ref="target-card">
+				<test>
+					<or> 
+						<test ref="is-targetable-artifact"/>
+						<test ref="is-targetable-enchantment"/>
+					</or>
+				</test>
+			</action>
+			<action ref="destroy"/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana white="2" colorless="4" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

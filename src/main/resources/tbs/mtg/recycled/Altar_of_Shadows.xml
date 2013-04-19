@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Altar of Shadows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact
+	at the beginning of your precombat main phase, add b to your mana pool for each charge counter on altar of shadows.
+	7, t :destroy target creature. then put a charge counter on altar of shadows.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='precombat-main'>
+				<test ref='during-your-precombat-main'/>
+			</beginning-of-phase>
+			<effects>
+				<give-mana>
+					<black>
+						<counter object-name="charge" card="this"/>
+					</black>
+				</give-mana>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='7' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target-list operation='clear'/>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

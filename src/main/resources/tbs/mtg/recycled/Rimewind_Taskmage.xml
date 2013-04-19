@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rimewind Taskmage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - human wizard
+	1/2
+	1, t :you may tap or untap target permanent. play this ability only if you control four or more snow permanents.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal right="4">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="snow"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</test>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='T'/>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<tap/>
+					</either>
+					<either>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

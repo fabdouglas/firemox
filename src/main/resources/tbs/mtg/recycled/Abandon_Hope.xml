@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Abandon Hope">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {x}{1}{b} as an additional cost to play abandon hope, discard x cards from your hand. 
+look at target opponent's hand and choose x cards from it. 
+that player discards those cards. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<action ref="discard">
+					<value register="stack" index="0"/>
+				</action>
+				<target-list operation="clear"/>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<action ref="discard-a-player">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

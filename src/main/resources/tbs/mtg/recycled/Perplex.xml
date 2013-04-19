@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Perplex">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<!--  
+		Counter target spell unless its controller discards his or her hand.
+		Transmute 1 ManaBlue ManaBlack Mana 
+		(1 ManaBlue ManaBlack Mana, 
+		Discard this card: Search your library for a card with the same converted 
+		mana cost as this card, reveal it, and put it into your hand. 
+		Then shuffle your library. Play only as a sorcery.
+		)	
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>blue black</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<ability ref="transmute">
+			<actions>
+				<pay-mana blue="1" black="1" />
+			</actions>
+		</ability>
+		<activated-ability playable="this" name="Counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<choice cancel="false" controller="opponent">
+					<either>
+						<target type="card" mode="all" restriction-zone="hand">
+							<test>
+								<controller player="opponent" />
+							</test>
+						</target>
+						<action ref="discard-cards" />
+					</either>
+					<either>
+						<action ref="counter" />
+					</either>
+				</choice>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

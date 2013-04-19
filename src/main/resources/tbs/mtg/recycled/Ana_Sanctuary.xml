@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ana Sanctuary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment
+	at the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. if you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="target-creature"/>
+				<if-then-hop elsehop="5">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-color color="black"/>
+								<has-color color="blue"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="add+5+5-until-eot"/>
+				<hop value="3"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<or>
+									<has-color color="black"/>
+									<has-color color="blue"/>
+								</or>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rusting Golem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature - golem
+	*/*
+	fading 5 
+	rusting golem's power and toughness are each equal to the number of fade counters on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power'>
+				<value>
+					<counter object-name="fade" card="this"/>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter object-name="fade" card="this"/>
+				</value>
+			</register>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>golem </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='fading'/>
+	</abilities>
+	<modifiers>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+	</modifiers>
+</card>

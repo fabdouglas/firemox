@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Earth Surge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	enchantment
+	each land gets +2/+2 as long as it's a creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="2" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="2" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+		 			<has-idcard idcard="land"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

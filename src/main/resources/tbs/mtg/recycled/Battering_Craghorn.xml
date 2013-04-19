@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battering Craghorn">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		2rr
+		creature - beast
+		3/1
+		first strike
+		morph 1rr 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='2' />
+			<register index='colorless' value='2' />
+			<register index='power' value='3' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>goat beast first-strike</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref="morph">
+			<actions>
+				<pay-mana red='2' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

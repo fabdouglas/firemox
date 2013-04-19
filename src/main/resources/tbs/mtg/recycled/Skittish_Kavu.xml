@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skittish Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	creature - kavu
+	1/1
+	skittish kavu gets +1/+1 as long as no opponent controls a white or blue creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent"/>
+							<has-idcard idcard="creature"/>
+							<or>
+								<has-color color="white"/>
+								<has-color color="blue"/>
+							</or>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1">
+			<while>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="opponent"/>
+							<has-idcard idcard="creature"/>
+							<or>
+								<has-color color="white"/>
+								<has-color color="blue"/>
+							</or>
+						</and>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Voyager Staff">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	2, sacrifice voyager staff: remove target creature from the game. return the removed card to play under its owner's control at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="side">
+						<end-of-phase phase="eot" />
+						<effects>
+							<target type="saved"/>
+							<action ref="move-to-play"/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

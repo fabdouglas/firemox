@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chainflinger">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3r
+		creature - beast
+		2/2
+		1r, t :chainflinger deals 1 damage to target creature or player.
+		threshold - 2r, t :chainflinger deals 2 damage to target creature or player. play this ability only if seven or more cards are in your graveyard.
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='2' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>beast</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T' />
+				<action ref='target-dealtable' />
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold" />
+			<cost>
+				<pay-mana red='1' colorless='2' />
+				<action ref='T' />
+				<action ref='target-dealtable' />
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

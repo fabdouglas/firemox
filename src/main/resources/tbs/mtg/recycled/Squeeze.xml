@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Squeeze">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	sorcery spells cost 3 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<has-idcard idcard="sorcery"/>
+			</test>
+			<cost>
+				<pay-mana colorless='3' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wild Research">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment
+	1w: search your library for an enchantment card and reveal that card. put it into your hand, then discard a card at random. then shuffle your library.
+	1u: search your library for an instant card and reveal that card. put it into your hand, then discard a card at random. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-idcard idcard='enchantment'/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='discard-random' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard='instant'/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='discard-random' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

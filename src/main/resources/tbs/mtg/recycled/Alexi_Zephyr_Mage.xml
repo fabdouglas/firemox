@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Alexi, Zephyr Mage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	legendary creature - spellshaper
+	3/3
+	xu, t, discard two cards: return x target creatures to their owners' hands.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='discard' value="2"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

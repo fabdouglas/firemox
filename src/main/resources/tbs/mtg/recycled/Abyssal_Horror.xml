@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abyssal Horror">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {4}{b}{b} flying 
+when abyssal horror comes into play, 
+target player discards two cards from his or her hand. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>flying horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="player-discard" value="2"/>
+				<unregister-this/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Streambed Aquitects">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	creature - merfolk scout
+	2/3
+	t :target merfolk creature gets +1/+1 and gains islandwalk until end of turn.
+	t :target land becomes an island until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk scout </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property='merfolk'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+				<add-modifier>
+					<property-modifier property='islandwalk' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="island" operation="set" linked="false"> 
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<ability-modifier operation="clear" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

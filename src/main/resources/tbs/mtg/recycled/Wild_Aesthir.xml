@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wild Aesthir">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - bird
+	1/1
+	flying, first strike
+	ww: wild aesthir gets +2/+0 until end of turn. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bird flying first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana white='2' />
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<action ref="gain+2+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

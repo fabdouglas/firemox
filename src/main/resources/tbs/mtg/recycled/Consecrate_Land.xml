@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Consecrate Land">
+	<!-- tested 12/20/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<!-- Text(6th+errata): When ~this~ comes into play, destroy all
+		other enchantments enchanting enchanted land. ;  Enchanted
+		land can't be the target of enchantment spells. ; If a 
+		spell would destroy enchanted land, that spell has no 
+		effect on enchanted land. 
+		[Oracle 99/09/03]'
+	-->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-enchant" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<!-- remove all enchantments but me -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<is target="tested.attachedto" other="attachedto" />
+							<not>
+								<is-this />
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="destroy" />
+			</effects>
+		</triggered-ability>
+
+		<replacement-ability zone="play">
+			<lethal-damage>
+				<test>
+					<is target="tested" other="attachedto" />
+				</test>
+			</lethal-damage>
+			<effects />
+		</replacement-ability>
+	</abilities>
+	<attachment ref="cannot-be-enchanted" />
+</card>

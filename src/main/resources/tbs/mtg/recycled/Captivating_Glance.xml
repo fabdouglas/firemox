@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Captivating Glance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment - aura
+	enchant creature
+	at the end of your turn, clash with an opponent. if you win, gain control of enchanted creature. otherwise, that player gains control of enchanted creature. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot">
+				<test ref="during-your-eot"/>
+			</end-of-phase>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="clash">
+					<actions>
+						<add-modifier>
+							<controller-modifier player="you" linked="false"/>
+						</add-modifier>
+					</actions>
+					<actions>
+						<add-modifier>
+							<controller-modifier player="opponent" linked="false"/>
+						</add-modifier>
+					</actions>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

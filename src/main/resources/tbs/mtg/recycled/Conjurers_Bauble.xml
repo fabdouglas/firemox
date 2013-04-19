@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Conjurer's Bauble">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	t, sacrifice conjurer's bauble: put up to one target card from your graveyard on the bottom of your library. draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-library-bottom"/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

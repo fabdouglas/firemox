@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Angelic Shield">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wu
+	enchantment
+	creatures you control get +0/+1.
+	sacrifice angelic shield: return target creature to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='toughness' operation='add' value='1' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

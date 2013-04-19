@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zhalfirin Commander">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - human knight
+	2/2
+	flanking 
+	1ww: target knight gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='2' colorless='1' />
+				<action ref='target-creature'>
+					<test>
+						<has-property property="knight"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

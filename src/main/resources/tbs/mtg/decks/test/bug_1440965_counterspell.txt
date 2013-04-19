@@ -1,0 +1,4 @@
+counterspell;20
+super card;20
+Wrath of God;20
+Wall of Swords;20

@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coordinated Barrage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	instant
+	choose a creature type. coordinated barrage deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<test ref='tested-is-attacking'/>
+							<test ref='tested-is-blocking'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<input-property operation='set' index='free0' register='this' values='FIRST_SUB_TYPE..LAST_SUB_TYPE' />
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property>
+									<property register="this" index="free0"/>
+								</has-property>
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grayscaled Gharial">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	creature - crocodile
+	1/1
+	islandwalk
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>crocodile islandwalk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

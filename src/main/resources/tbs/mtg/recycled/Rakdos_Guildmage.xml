@@ -1,0 +1,96 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rakdos Guildmage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	creature - zombie shaman
+	2/2
+	
+	3b, discard a card: target creature gets -2/-2 until end of turn.
+	3r: put a 2/1 red goblin creature token with haste into play. remove it from the game at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black red</colors>
+		<idcards>creature </idcards>
+		<properties>zombie shaman  </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana red="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana red="1" black="1" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana black="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+	
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='3' />
+				<action ref='discard' value='1'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add-2-2-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='3' />
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Goblin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>red</colors>
+							<idcards>creature</idcards>
+							<properties>token goblin haste </properties>
+						</init>
+						<abilities>
+							<triggered-ability zone="play">
+								<end-of-phase phase="eot" />
+								<effects>
+									<target type="this" />
+									<action ref="remove-from-game" />
+									<unregister-this />
+								</effects>
+							</triggered-ability>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

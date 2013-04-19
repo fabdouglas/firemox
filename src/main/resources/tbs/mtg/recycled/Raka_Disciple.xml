@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--[[apt lang=en header]] ______
+ Raka Disciple
+ ______
+ Fabrice Daugan
+ ______
+ October 22 2007
+
+Raka Disciple
+-->
+<!--[[apt lang=fr header]] ______
+ Raka Disciple
+ ______
+ Fabrice Daugan
+ ______
+ 22 Octobre 2007
+
+Raka Disciple
+-->
+<!--[[apt lang=en]]
+ This card is an example of effect adding a property to a card.
+ This effect ends at the end of turn.
+ 
+[http://magiccards.info/scans/en/ap/66.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+ Cette carte est un exemple d'implémentation d'un effet ajoutant une propriété à une carte.
+ Cet effet prend fin à la fin du tour.
+
+[http://magiccards.info/scans/en/ap/66.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]-->
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Raka Disciple">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {r} 
+		{w}, {t}: prevent the next 1 damage that would be dealt to target creature or player this turn. 
+		{u}, {t}: target creature gains flying until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>minotaur wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana white="1" />
+				<action ref="T" />
+				<action ref="target-dealtable" />
+			</cost>
+			<effects>
+				<action ref="prevent-1" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="T" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="flying-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Wail of the Nim">
+<rules-author-comment></rules-author-comment>
+
+<!-- 
+Choose one - Regenerate each creature you control; 
+or Wail of the Nim deals 1 damage to each creature and each player.
+Entwine Black Mana (Choose both if you pay the entwine cost.)
+-->
+
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="you" />
+					</test>
+				</action>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<action ref="regenerate-target" />
+				<target-list operation="remove-last" />
+				<hop value="-3" />
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<target type="player" mode="all"/>
+				<assign-damage value="1" type="damage-normal"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<pay-mana black="12"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="you" />
+					</test>
+				</action>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<action ref="regenerate-target" />
+				<target-list operation="remove-last" />
+				<hop value="-3" />
+				<target type="player" mode="all"/>
+				<assign-damage value="1" type="damage-normal"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

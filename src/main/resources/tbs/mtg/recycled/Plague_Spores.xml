@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Plague Spores">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4br
+	sorcery
+	destroy target nonblack creature and target land. they can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color='black'/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

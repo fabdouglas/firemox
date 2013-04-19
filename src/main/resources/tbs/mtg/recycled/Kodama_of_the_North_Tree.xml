@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kodama of the North Tree">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ggg
+	legendary creature - spirit
+	6/4
+	trample
+	kodama of the north tree can't be the target of spells or abilities.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit trample shroud </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

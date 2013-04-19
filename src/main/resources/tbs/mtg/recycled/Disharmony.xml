@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disharmony">
+	<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- 
+		Play Disharmony only during combat before the declare blockers step.
+		Untap target attacking creature. Gain control of that creature until end of turn.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<!-- PUT HERE THE COST OF THIS SPELL -->
+			</cost>
+			<effects>
+				<target type="card" restriction-zone="play">
+					<test>
+						<!-- COMPLETE THIS TEST APPLIED ON TARGET -->
+						<and>
+							<has-idcard idcard="artifact-creature" />
+							<test ref="is-target" />
+						</and>
+					</test>
+				</target>
+				<untap />
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pulsating Illusion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - illusion
+	0/1
+	flying
+	discard a card: pulsating illusion gets +4/+4 until end of turn. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>illusion flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="once-each-turn"/>
+			<cost>
+				<action ref='discard' value="1"/>
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+4+4-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

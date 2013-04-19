@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ancient Hydra">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - hydra
+	5/1
+	fading 5 
+	1, remove a fade counter from ancient hydra: ancient hydra deals 1 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>hydra </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='fading'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type="this"/>
+				<remove-object object-name="fade"/>
+				<target-list operation="clear"/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+		<object name='fade'/>
+	</modifiers>
+</card>

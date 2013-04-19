@@ -1,0 +1,27 @@
+ ----
+Base de données
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+27 Mai 2006
+
+Base de données
+
+    Firemox inclu une fonctionnalité de type base de données. Les données
+    ainsi que les images des cartes d'un jeu sont téléchargées depuis un
+    site local ou distant.
+
+ Les préférences concernant la base de données
+
+[../images/guides/user/database_settings_full.png] ordre
+
+ Affichage des données
+
+[../images/guides/user/database0.png] db01
+
+[../images/guides/user/database1.png] db02
+
+ Les données récupérées peuvent être utilisées pour afficher différentes images
+ d'une même carte.
+
+[../images/guides/user/cards_versions.png] versions

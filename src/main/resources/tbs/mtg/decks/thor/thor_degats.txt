@@ -1,0 +1,26 @@
+#Jeu degats
+#
+#John
+#
+#août 15, 2001
+#1
+#4th Edition
+#
+Disintegrate;4
+Fireball;4
+Fork;2
+Lightning_Bolt;4
+Mana_Flare;2
+Ancestral_Recall;2
+Counterspell;4
+Power_Sink;3
+Time_Walk;3
+Timetwister;3
+Black_Lotus;3
+Howling_Mine;2
+Mox_Ruby;4
+Mox_Sapphire;4
+Sol_Ring;2
+Volcanic_Island;16
+Braingeyser;1
+Mana_Vault;2

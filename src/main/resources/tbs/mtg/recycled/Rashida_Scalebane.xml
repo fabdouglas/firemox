@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rashida Scalebane">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature - human soldier
+	3/4
+	t :destroy target attacking or blocking dragon. it can't be regenerated. you gain life equal to its power.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<or>
+								<test ref="tested-is-attacking"/>
+								<test ref="tested-is-blocking"/>
+							</or>
+							<has-property property="dragon"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value register='target-list.first' index='power'/>
+				</action>
+				<action ref='bury'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

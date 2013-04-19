@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Intimidator Initiate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - goblin shaman
+	1/1
+	whenever a player plays a red spell, you may pay 1. if you do, target creature can't block this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-color color="red"/>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+						<action ref="cannot-block-until-eot"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

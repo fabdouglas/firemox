@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Invisibility">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {u}{u} enchanted creature can't be blocked except by walls. -->
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+		<properties>cannot-be-blocked-by-walls</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+</card>

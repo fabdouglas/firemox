@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Shrine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	enchantment
+	whenever a player plays a spell, counter that spell unless that player pays x, where x is the number of cards in all graveyards with the same name as the spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<choice cancel="false" controller="context.player">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana controller="context.player">
+							<colorless>
+								<counter restriction-zone="graveyard">
+									<has-name name="context.card.name"/>
+								</counter>
+							</colorless>
+						</pay-mana>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

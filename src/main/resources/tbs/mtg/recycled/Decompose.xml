@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decompose">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{b} remove up to three target cards in a single graveyard from the game. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="3"/>
+				<target mode="choose" type="card" raise-event="false" restriction-zone="graveyard" hop="1" name="">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="3"/>
+				<target mode="choose" type="card" raise-event="false" restriction-zone="graveyard" hop="1" name="">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

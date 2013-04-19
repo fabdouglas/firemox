@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Keeper of the Light">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ww
+	creature - human wizard
+	1/2
+	w, t :you gain 3 life. play this ability only if you have less life than an opponent.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<inf>
+					<left register="you" index="life"/>
+					<right register="opponent" index="life"/>
+				</inf>
+			</test>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='3'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Springleaf Drum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	t, tap an untapped creature you control: add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<actions>
+		<action reference-name="cost">
+			<action ref='T'/>
+			<action ref="target-creature">
+				<test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone="playANDuntapped"/>
+					</and>
+				</test>
+			</action>
+			<tap/>
+		</action>
+	</actions>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="cost"/>
+			</cost>
+			<effects>
+				<give-mana black='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="cost"/>
+			</cost>
+			<effects>
+				<give-mana blue='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="cost"/>
+			</cost>
+			<effects>
+				<give-mana red='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="cost"/>
+			</cost>
+			<effects>
+				<give-mana green='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="cost"/>
+			</cost>
+			<effects>
+				<give-mana white='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

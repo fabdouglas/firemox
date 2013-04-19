@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Callous Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rr
+	creature - giant
+	4/4
+	if a source would deal 3 damage or less to callous giant, prevent that damage.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<!-- this shield is removed -->
+				<unregister-this/>
+				<target type="context.card"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<inf-equal left="context.int" right="3"/>
+					</test>
+				</if-then-hop>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="context.int" left="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

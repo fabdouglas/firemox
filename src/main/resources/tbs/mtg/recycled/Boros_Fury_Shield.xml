@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Boros Fury-Shield">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	instant
+	prevent all combat damage that would be dealt by target attacking or blocking creature this turn. if r was spent to play boros fury-shield, it deals damage to that creature's controller equal to the creature's power.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<test ref='tested-is-attacking'/>
+							<test ref='tested-is-blocking'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='deals-no-combat-damage'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="this" color="red" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type="target-list.first.controller"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

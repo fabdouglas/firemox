@@ -1,0 +1,76 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arcades Sabboth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ggwwuu
+	legendary creature - elder dragon
+	7/7
+	flying
+	untapped nonattacking creatures you control get +0/+2.
+	at the beginning of your upkeep, sacrifice arcades sabboth unless you pay gwu.
+	w: arcades sabboth gets +0/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='green' value='2'/>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>white green blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend elder dragon flying </properties>
+	</init>
+	
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='toughness' operation='add' value='2' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+				<and>
+					<in-zone zone="playANDuntapped" card="tested" />
+					<not>
+						<test ref="tested-is-attacking"/>
+					</not>
+					<has-idcard idcard="creature"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana green="1" white="1" blue="1"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+			</cost>
+			<effects>
+				<action ref="gain+0+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

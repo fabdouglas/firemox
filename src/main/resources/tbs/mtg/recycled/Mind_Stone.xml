@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mind Stone">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  2 t add 1 to your mana pool. 1, t, sacrifice mind stone: draw a card. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana colorless="1" />
+				</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scalding Tongs">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	at the beginning of your upkeep, if you have three or fewer cards in hand, scalding tongs deals 1 damage to target opponent.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<inf-equal right="3">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="you"/>
+								</counter>
+							</left>
+						</inf-equal>	
+						<test ref='during-your-upkeep'/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Panic Attack">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	sorcery
+	up to three target creatures can't block this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<repeat value="3"/>
+				<target type="card" mode="choose" hop="1" restriction-zone="play">
+					<test ref="is-targetable-creature" />
+				</target>
+			</cost>
+			<effects>
+				<action ref="cannot-block-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

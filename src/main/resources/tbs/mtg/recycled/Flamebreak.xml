@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flamebreak">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		rrr
+	sorcery
+	flamebreak deals 3 damage to each creature without flying and each player. creatures dealt damage this way can't be regenerated this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'>
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-cannot-be-regenerated'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

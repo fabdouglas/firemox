@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sea Scryer">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u} 
+{t}: add {1} to your mana pool. 
+{1}, {t}: add {u} to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>merfolk</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable="mana-source" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

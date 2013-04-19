@@ -1,0 +1,43 @@
+ -----
+ Qu'est ce que Firemox
+ -----
+ Fabrice Daugan (traduit par Hoani CROSS)
+ -----
+ 24 Septembre 2006
+
+Introduction
+
+ Cette application est une un produit libre développé en
+ {{{http://java.com/fr/download/index.jsp}Java}}.
+ Initié au sein du site SourceForge en 2003, les objectifs principaux n'ont pas
+ changé depuis : fournir les moyens de pouvoir jouer gratuitement à n'importe quel
+ jeu de cartes à n'importe quel moment et avec n'importe qui.
+
+* Interprétation des règles
+
+ Firemox est capable d'interpréter les règles de n'importe quel jeu de cartes
+ ou jeu de stratégie basé sur une structure de tour à partir d'un fichier XML
+ de description des règles fourni. Ce fichier contient la descrition d'un tour,
+ les acteurs et les propriétés de ces acteurs. D'éventuelles cartes optionnelles
+ peuvent avoir leurs régles décritent à travers d'autres fichiers XML annexes.
+ Ce principe permet de créer et de partager très facilement un jeu.
+
+* La communication en équipe
+
+ La communication en équipe est une composante essentielle d'un projet. La perte
+ de temps à rechercher une information technique peut être très frustrante et
+ coûter cher à un projet. Tout projet relatif à l'informatique gagnera beaucoup
+ à disposer d'un site web technique. Vous trouverez ci-dessous un exemple de ce
+ l'on peut trouver dans un tel site :
+
+ ** des flux RSS,
+ 
+ ** les sources du projet ainsi que la documentation Javadoc disponible en ligne,
+ 
+ ** des aides du type <Commen-faire ?> ou <Foire Aux Questions>,
+ 
+ ** des métriques concernant le code source,
+ 
+ ** un groupe Yahoo,
+ 
+ ** un forum de discussion en Français.

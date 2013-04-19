@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="New Benalia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	new benalia comes into play tapped.
+	when new benalia comes into play, scry 1. 
+	t :add w to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="look-at-the-top"/>
+				<face-down for="everyone"/>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="move-library-top"/>
+					</either>
+					<either>
+						<action ref="move-library-bottom"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

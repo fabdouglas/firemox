@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Paradise Mantle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		0
+	artifact - equipment
+	equipped creature has "t :add one mana of any color to your mana pool."
+	equip 1 
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<ability ref="tap-add-W"/>
+					<ability ref="tap-add-R"/>
+					<ability ref="tap-add-G"/>
+					<ability ref="tap-add-B"/>
+					<ability ref="tap-add-U"/>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

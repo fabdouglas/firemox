@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disarm">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  u unattach all equipment from target creature.   -->
+
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<is target="tested.attachedto" other="target-list.first.attachedto" />
+					</test>
+				</target>
+				<target-list operation="remove-first" />
+				<move-card controller="target.owner" destination="play" name="" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

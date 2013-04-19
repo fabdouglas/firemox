@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Azorius AEthermage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wu
+	creature - human wizard
+	1/1
+	whenever a permanent is returned to your hand, you may pay 1. if you do, draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='hand'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone='hand' card='tested'/>
+						<controller player="you"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="1"/>
+						<target type='you'/>
+						<action ref='draw-a-card'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

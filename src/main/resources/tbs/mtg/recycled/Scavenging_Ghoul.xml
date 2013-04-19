@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Scavenging Ghoul">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{b} 
+	at end of turn, 
+	put a corpse counter on scavenging ghoul for each creature put into a graveyard from play that turn. 
+	remove a corpse counter from scavenging ghoul: regenerate scavenging ghoul. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability name="" zone="play">
+			<end-of-phase phase="eot"/>
+			<effects>
+				<target type="this"/>
+				<repeat>
+					<value>
+						<add>
+							<left register="you" index="creatures-moved-in-graveyard-from-play-this-turn"/>
+							<right register="opponent" index="creatures-moved-in-graveyard-from-play-this-turn"/>
+						</add>
+					</value>
+				</repeat>
+				<add-object object-name="corpse"/>
+			</effects>
+		</triggered-ability>
+		
+		<activated-ability playable="instant" name="" zone="play">
+			<test>
+				<sup right="0">
+					<left>
+						<counter object-name="corpse" card="this"/>
+					</left>
+				</sup>
+			</test>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="corpse"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

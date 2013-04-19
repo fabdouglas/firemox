@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Barl's Cage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	3: target creature doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

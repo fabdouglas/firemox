@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lord of Tresserhorn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ubr
+	legendary creature
+	10/4
+	when  of tresserhorn comes into play, you lose 2 life and sacrifice two creatures, and an opponent draws two cards.
+	b: regenerate  of tresserhorn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='10'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='lose-life' value='2'/>
+				<action ref='sacrifice-a-creature' value='2'/>
+				<target type="opponent"/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

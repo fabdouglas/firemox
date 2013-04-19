@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dega Sanctuary">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{w} at the beginning of your upkeep, 
+if you control a black or red permanent, you gain 2 life. 
+if you control a black permanent and a red permanent, you gain 4 life instead. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<test ref="during-your-upkeep"/>
+						<has restriction-zone="play">
+							<and>
+								<has-color color="red"/>
+								<has-color color="black"/>
+							</and>
+						</has>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<has-color color="black"/>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="gain-life"  value="2"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<has-color color="red"/>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="gain-life"  value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

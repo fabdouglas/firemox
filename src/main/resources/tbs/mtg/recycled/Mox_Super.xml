@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mox_Super">
+	<rules-author-comment></rules-author-comment>
+	<init>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="tap-add-G"/>
+
+		<activated-ability playable="instant" zone="play">
+			<test>
+				<sup right="0">
+					<left>
+						<minus right="2">
+							<left register="controller" index="life"/>
+						</minus>
+					</left>
+				</sup>
+			</test>
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+				<action ref="sacrifice-an-artifact" value="2"/>
+				<action ref="pay-life" value="2"/>
+				<pay-mana blue="1" colorless="1"/>
+				<target type="card" restriction-zone="play">
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="artifact"/>
+								<has-idcard idcard="enchantment"/>
+							</or>
+							<test ref="is-target"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<assign-damage value="destroy"/>
+				<action ref="gain-life" value="5"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

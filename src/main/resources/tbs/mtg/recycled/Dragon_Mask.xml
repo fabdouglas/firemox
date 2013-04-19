@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Mask">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		3T : Target creature you control gets +2/+2 until end of turn. 
+		Return it to its owner's hand at end of turn. 
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="T" />
+				<action ref="target-creature">
+					<test>
+						<controller player="you" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot" />
+				<create-ability>
+					<save target="target-list.last" />
+					<triggered-ability zone="play">
+						<beginning-of-phase phase="eot" />
+						<effects>
+							<target type="saved" />
+							<action ref="return-to-hand" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

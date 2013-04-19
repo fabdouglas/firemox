@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cinder Marsh">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	t :add b or r to your mana pool. cinder marsh doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties></properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black='1' />
+				<target type="this"/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red='1' />
+				<target type="this"/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

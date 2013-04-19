@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deepwood Elder">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {g}{g} 
+{x}{g}{g}, {t}, discard a card from your hand: x target lands become forests until end of turn. 
+
+-->
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>dryad spellshaper</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana green="2" />
+				<action ref="pay-x" />
+				<action ref="T"/>
+				<action ref="discard" value="1"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="forest" operation="set" linked="true"> 
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<ability-modifier operation="clear" linked="true">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

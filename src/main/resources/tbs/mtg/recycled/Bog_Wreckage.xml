@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Bog Wreckage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land bog wreckage comes into play tapped. t add b to your mana pool. t, sacrifice bog wreckage: add one mana of any color to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-B"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana black="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana blue="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana green="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana red="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

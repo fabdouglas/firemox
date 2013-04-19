@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Epic Proportions">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	enchantment - aura
+	flash
+	enchant creature
+	enchanted creature gets +5/+5 and has trample.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='+5/+5'>
+		<modifiers>
+			<property-modifier property='trample' linked='true'/>
+		</modifiers>
+	</attachment>
+</card>

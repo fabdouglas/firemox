@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Diamond Kaleidoscope">
+    <rules-author-comment></rules-author-comment>
+
+    <!--  {4}
+        {3}, {t}: put a 0/1 prism artifact creature token into play. sacrifice a
+        prism token: add one mana of any color to your mana pool.
+    -->
+    <init>
+        <registers>
+            <register index="colorless" value="4" />
+        </registers>
+        <colors></colors>
+        <idcards>artifact</idcards>
+    </init>
+    <abilities>
+        <ability ref="cast-spell" />
+        <activated-ability playable="this" name="" zone="play">
+            <cost>
+                <pay-mana colorless="3" />
+                <action ref="T" />
+            </cost>
+            <effects>
+                <create-card>
+                    <card name="Prism">
+                        <init>
+                            <registers>
+                                <register index="toughness" value="1" />
+                            </registers>
+                            <colors></colors>
+                            <idcards>creature artifact</idcards>
+                            <properties>prism token</properties>
+                        </init>
+                    </card>
+                </create-card>
+                <move-card controller="you" destination="play" />
+            </effects>
+        </activated-ability>
+        <activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+            <cost>
+                <target type="card" mode="choose" raise-event="false" restriction-zone="play"
+                    name="%" cancel="false" hop="1">
+                    <test>
+                        <has-property property="prism" />
+                    </test>
+                </target>
+                <move-card controller="target.owner" destination="graveyard"
+                    name="sacrifice-%n-creature" />
+            </cost>
+            <effects>
+                <give-mana black="1" />
+            </effects>
+        </activated-ability>
+        <activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+            <cost>
+                <target type="card" mode="choose" raise-event="false" restriction-zone="play"
+                    name="%" cancel="false" hop="1">
+                    <test>
+                        <has-property property="prism" />
+                    </test>
+                </target>
+                <move-card controller="target.owner" destination="graveyard"
+                    name="sacrifice-%n-creature" />
+            </cost>
+            <effects>
+                <give-mana blue="1" />
+            </effects>
+        </activated-ability>
+        <activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+            <cost>
+                <target type="card" mode="choose" raise-event="false" restriction-zone="play"
+                    name="%" cancel="false" hop="1">
+                    <test>
+                        <has-property property="prism" />
+                    </test>
+                </target>
+                <move-card controller="target.owner" destination="graveyard"
+                    name="sacrifice-%n-creature" />
+            </cost>
+            <effects>
+                <give-mana green="1" />
+            </effects>
+        </activated-ability>
+        <activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+            <cost>
+                <target type="card" mode="choose" raise-event="false" restriction-zone="play"
+                    name="%" cancel="false" hop="1">
+                    <test>
+                        <has-property property="prism" />
+                    </test>
+                </target>
+                <move-card controller="target.owner" destination="graveyard"
+                    name="sacrifice-%n-creature" />
+            </cost>
+            <effects>
+                <give-mana red="1" />
+            </effects>
+        </activated-ability>
+        <activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+            <cost>
+                <target type="card" mode="choose" raise-event="false" restriction-zone="play"
+                    name="%" cancel="false" hop="1">
+                    <test>
+                        <has-property property="prism" />
+                    </test>
+                </target>
+                <move-card controller="target.owner" destination="graveyard"
+                    name="sacrifice-%n-creature" />
+            </cost>
+            <effects>
+                <give-mana white="1" />
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

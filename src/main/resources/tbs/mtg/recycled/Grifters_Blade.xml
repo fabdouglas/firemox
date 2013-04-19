@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Grifter's Blade">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+		</registers>
+		<idcards>artifact</idcards>
+		<properties>equipment</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="target-equipable-creature" />
+			</cost>
+			<effects>
+				<action ref="equip" />
+			</effects>
+		</activated-ability>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<is-this />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="play" raise-event="false"
+					hop="3">
+					<test>
+						<valid-attachment from="this" card="tested" />
+					</test>
+				</target>
+				<action ref="equip" />
+				<hop value="2" />
+				<action ref="put-in-play" />
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true" value="1" />
+			<register-modifier index="toughness" operation="add" linked="true" value="1" />
+		</modifiers>
+		<valid-target ref="valid-creature-to-equip" />
+		<valid-attachment ref="valid-equip-creature" />
+	</attachment>
+</card>

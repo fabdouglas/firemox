@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Commander Greven il-Vec">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="black" value="3"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>human warrior legend fear</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" hop="2" raise-event="false">
+					<test>
+						<and>
+							<test ref="is-targetable-creature"/>
+							<controller player="controller"/>
+						</and>
+					</test>
+				</target>
+				<move-card controller="you" destination="graveyard"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

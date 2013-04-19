@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--[[apt lang=en header]] ______
+ Lotus Bloom
+ ______
+ Hoani CROSS
+ ______
+ January 07 2006
+
+Lotus Bloom
+-->
+<!--[[apt lang=fr header]] ______
+ Lotus Bloom
+ ______
+ Hoani CROSS
+ ______
+ 7 janvier 2007
+
+Lotus Bloom
+-->
+<!--[[apt lang=en]]
+ This card is the perfect example for the implementation of the <suspend>
+ ability. The main card effects is equivalent to the <Black Lotus> card ones
+ which is already implemented.
+
+[http://magiccards.info/scans/en/ts/259.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+ Cette carte est le parfait exemple pour l'implémentation de la capacité
+ <suspension>. Les effets principaux sont équivalents à ceux de la carte
+ <Black Lotus> qui est déjà implémentée.
+
+[http://magiccards.info/scans/en/ts/259.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]-->
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Lotus Bloom">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<init>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<!--[[apt lang=en]]
+		`The <suspend> ability is made active by adding one ability to the card :
+		`the <<<\<cast-suspend\>>>> activated ability. It allows the owner of the card to cast it
+		`through the <suspend> ability.
+
+		`Two actions macros must be provided : the first one is dedicated to the cost of the
+		`<suspend> ability to be cast, the second is dedicated to the addition of the <time>
+		`counters on the removed from the game card. This way, dynamic values can be used for
+		`the number of <time> counters to add (like in some card of the next bloc : <Planar Chaos>).
+		-->
+		<!--[[apt lang=fr]]
+		`La capacité <suspension> est rendue active en ajoutant une capacité à la carte :
+		`la capacité activée <<<\<cast-suspend\>>>>. Elle permet au propriétaire de la carte de
+		`la jouer à traver la capacité <suspension>.
+
+		`Deux macros actions doivent être fournies : la première est dédiée au paiement de la
+		`capacité <suspension> à jouer, la seconde est dédiée à l'ajout de compteurs <temps>
+		`sur la carte retirée du jeu. De cette manière, des valeurs dynamiques peuvent être
+		`utilisée pour le nombre de marqueurs <temps> à ajouter (comme c'est le cas pour certaines
+		`cartes du prochain bloc : <Chaos Planaire>).
+		-->
+		<!--[[apt start-code]]-->
+		<ability ref="cast-suspend">
+			<actions>
+				<pay-mana colorless="0"/>
+			</actions>
+			<actions>
+				<repeat value="3"/>
+				<add-object object-name="time"/>
+			</actions>
+		</ability>
+		<!--[[apt end-code]]-->
+
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana black="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana blue="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana green="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana red="3"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="3"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

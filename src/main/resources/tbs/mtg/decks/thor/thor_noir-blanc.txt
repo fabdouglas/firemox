@@ -1,0 +1,31 @@
+#Jeu noir-blanc
+#
+#John
+#
+#février 08, 2000
+#1
+#4th Edition
+#
+Scrubland;15
+Black_Lotus;4
+Black_Vise;1
+Feldons_Cane;1
+Howling_Mine;2
+Ivory_Tower;2
+Library_of_Leng;1
+Mox_Jet;5
+Mox_Pearl;5
+Sol_Ring;3
+Disenchant;2
+Island_Sanctuary;1
+Serra_Angel;2
+Spirit_Link;2
+Swords_to_Plowshares;2
+Dark_Ritual;2
+Demonic_Tutor;4
+Hypnotic_Specter;2
+Royal_Assassin;2
+Sengir_Vampire;2
+Terror;2
+Wrath_of_God;1
+Arena;2

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rakdos Signet">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<pay-mana colorless="1"/>
+			</cost>
+			<effects>
+				<give-mana black="1" red="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

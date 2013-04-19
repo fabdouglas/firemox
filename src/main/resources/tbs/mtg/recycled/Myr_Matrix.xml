@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Myr Matrix">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	myr matrix is indestructible. 
+	all myr creaures get +1/+1.
+	5: put a 1/1 myr artifact creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>indestructible </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Artifact'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>artifact-creature</idcards>
+							<properties>token myr</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='power' operation='add' value='1' linked='true' layer='global'/>
+				<register-modifier index='toughness' operation='add' value='1' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+				<has-property property='myr'/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

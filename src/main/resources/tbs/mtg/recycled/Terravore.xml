@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Terravore">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - lhurgoyf
+	*/*
+	trample
+	terravore's power and toughness are each equal to the number of land cards in all graveyards.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='graveyard'>
+						<has-idcard idcard='land'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='graveyard'>
+						<has-idcard idcard='land'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>lhurgoyf trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

@@ -1,0 +1,111 @@
+ ----
+Firemox configuration
+ ----
+Fabrice Daugan
+ ----
+10 Septembre 2007
+
+Configurer Eclipse pour Firemox 
+
+* Récupérer les sources
+
+** Ouvrir la perspective SVN
+
+[../images/guides/dev/svn_sources1.png]\
+
+** Créer une nouvelle connexion
+
+[../images/guides/dev/svn_sources2.png]\
+
+	Racine du référenciel : <<<https://firemox.svn.sourceforge.net/svnroot/firemox>>>\
+
+[../images/guides/dev/svn_sources3.png]
+
+** Rapatrier les sources
+
+[../images/guides/dev/svn_sources4.png]\
+
+	Le nom du projet est <<<firemox>>>
+	
+[../images/guides/dev/svn_sources5.png]\
+
+* Créer les lanceurs
+
+** Comment créer un lanceur
+
+ Un lancer est très utile pour lancer une application Java. Pour notre projet
+ nous aurons besoin de 3 lanceurs. 
+ 
+ Un pour l'application : il lance le principal programme et sera le plus souvent 
+ lancé.
+
+ Un pour la construction XML : il force l'analyse des fichiers XML et construit 
+ le fichier compilé MDB. pour plus d'information sur la façon dont sont <compilés> les fichiers XML, allez sur {{{../xml_building.html} cette page}}.
+ 
+ Un pour la transformation de fichier texte vers le format XML <<<xxx2Xml>>>. 
+ il y a le lanceur Oracle2Xml pour exemple pour générer à partir d'un fichier
+ texte Oracle plusieurs cartes XML grandement complété. Ce lanceur sera utilisé
+ seulement quelquefois et a vocation de générer une grande quantité de cartes.
+ 
+[../images/guides/dev/eclipse_run1.png]\
+	
+** Lanceur de l'application
+	
+	Ce lanceur lancera <<Firemox>> comme si vous le lanciez avec la command <<<magic>>>. 
+	Mais ce lanceur permettra le mode <deboggage> dans Eclipse.
+	
+[../images/guides/dev/eclipse_main1.png]\
+	
+[../images/guides/dev/eclipse_main2.png]\
+	
+** Le lanceur de compilation XML
+	
+	Ce lanceur permet l'analyse des cartes et des règles pour créer un format plus léger
+	, un fichier MDB. Chaque fois que vous modifiez une carte ou une règle du jeu,
+	au prochain démarrage de l'applicatio, the programme reconstruit ce MDB. 
+	Cependant, vous pouvez forcer cette procédure sans avoir à démarrer l'interface 
+	graphique du programme ni même modifier un fichier XML. 
+	
+	Vous devez exécuter ce lanceur pour forcer la mise à jour du MDB. Seul le MDB
+	est finalement utilisé par Firemox, pas les fichiers XML.
+	
+[../images/guides/dev/eclipse_buildxmlf1.png]\
+	
+[../images/guides/dev/eclipse_buildxmlf2.png]\
+
+	Les fichiers XML sont chacun validés par un fichier XSD ce qui permet également 
+	la complétion automatique dans Eclipse, ce qui est for utile. Le fichier XSD
+	définit la syntaxe des cartes et des règle, mais cette validation peu être longue 
+	lorsqu'elle est exécutée en masse, et de ce fait est desactiver par défaut.
+	
+	pour l'activer, utilisez la configuration de ce lanceur.
+	
+[../images/guides/dev/eclipse_buildxmlfxsd.png]\
+	
+  Vous pouvez trouver d'autres informations complémentaires sur la compilation des
+  cartes et des règles {{{../xml_building.html} ici}}.
+
+** Fichier texte vers XML
+	
+	Créer manuellement ces fichiers XML peut être très long. C'est pour celà qu'un
+	outil vraiment magique permet de créer <<toutes>> les cartes XML correspondantes
+	à un jeu pourvu que celles-ci soient dans un format texte donné. Ce lanceur
+	est capable de créer des cartes à en moyenne 80% complétées. Seul les capacités
+	complexes et pas encore gérées par l'outil restent à charge du développeur.
+	
+	Vous pouvez trouver un fichier compatible {{{http://www.yawgatog.com/resources/oracle} ici dans la section Allsets}}.
+	
+[../images/guides/dev/eclipse_oracle1.png]\
+	
+[../images/guides/dev/eclipse_oracle2.png]\
+	
+  Les options complètes sont :
+  
+   <<-d>> (destination, directory) DESTINATION : destination directory of generated XML files
+   
+   <<-f>> (file, oracle) FILE                  : Oracle file downloaded from sites like 'http://www.yawgatog.com/resources/oracle'
+   
+   <<-h>> (help)                               : print this help message and exit
+   
+   <<-v>> (version)                            : print product version and exit
+   

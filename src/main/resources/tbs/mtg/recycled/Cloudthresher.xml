@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cloudthresher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gggg
+	creature - elemental
+	7/7
+	flash
+	reach 
+	when cloudthresher comes into play, it deals 2 damage to each creature with flying and each player.
+	evoke 2gg 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='4'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental reach flash</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<target type="player" mode="all"/>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke-flash'>
+			<actions>
+				<pay-mana green='2' colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

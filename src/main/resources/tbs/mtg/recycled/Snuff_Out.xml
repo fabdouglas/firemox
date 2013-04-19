@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Snuff Out">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	instant
+	if you control a swamp, you may pay 4 life rather than pay snuff out's mana cost.
+	destroy target nonblack creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="swamp"/>
+					</and>
+				</has>
+			</test>
+			<cost>
+				<action ref='pay-life' value='4'/>
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

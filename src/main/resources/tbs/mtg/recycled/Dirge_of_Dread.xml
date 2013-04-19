@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dirge of Dread">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{b} all creatures gain fear until end of turn. 
+		cycling {1}{b}  when you cycle dirge of dread, you may have target creature 
+		gain fear until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="all-creatures" />
+				<action ref="fear-until-eot" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="1" black="1" />
+			</actions>
+		</ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="1" black="1" />
+				<action ref="target-creature" />
+			</actions>
+			<actions>
+				<action ref="fear-until-eot" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

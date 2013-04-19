@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mesmeric Orb">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<become-untapped/>
+			<effects>
+				<target type="context.card.controller"/>
+				<action ref="mill-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

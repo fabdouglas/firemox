@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wild Pair">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	enchantment
+	whenever a creature comes into play, if you played it from your hand, you may search your library for a creature card with the same total power and toughness and put it into play. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<in-zone zone='hand' card='tested'/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib'>
+							<test>
+								<and>
+									<has-idcard idcard='creature'/>
+									<equal>
+										<right>
+											<add>
+												<left register="context.card" index="power"/>
+												<right register="context.card" index="toughness"/>
+											</add>
+										</right>
+										<left>
+											<add>
+												<left register="tested" index="power"/>
+												<right register="tested" index="toughness"/>
+											</add>
+										</left>
+									</equal>
+								</and>
+							</test>
+						</action>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

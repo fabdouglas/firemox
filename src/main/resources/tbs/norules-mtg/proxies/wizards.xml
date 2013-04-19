@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	name="Wizard of the Coast &#174;" home="http://www.magicworkstation.com"
+	language="english" encoding="iso-8859-1">
+
+	<alias />
+
+	<pictures>
+		<picture url="${card.keyname}.jpg"
+			base="http://mi.wizards.com/global/images/magic/general" />
+	</pictures>
+
+	<!-- 
+		No data stream available for this proxy : only picture.
+	-->
+	<data />
+
+</proxy>

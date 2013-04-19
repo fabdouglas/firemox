@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phage the Untouchable">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bbbb
+	legendary creature - minion
+	4/4
+	when phage the untouchable comes into play, if you didn't play it from your hand, you lose the game.
+	whenever phage deals combat damage to a creature, destroy that creature. it can't be regenerated.
+	whenever phage deals combat damage to a player, that player loses the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='4'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend zombie minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='hand' card='tested'/>
+						</not>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<lose-game player="you" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<has-idcard idcard='creature'/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref='bury'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<lose-game player="context.player" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

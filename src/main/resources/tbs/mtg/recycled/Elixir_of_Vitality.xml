@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elixir of Vitality">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	elixir of vitality comes into play tapped.
+	t, sacrifice elixir of vitality: you gain 4 life.
+	8, t, sacrifice elixir of vitality: you gain 8 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='4'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='8' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='8'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

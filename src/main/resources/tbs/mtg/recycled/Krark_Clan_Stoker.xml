@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krark-Clan Stoker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - goblin shaman
+	2/2
+	t, sacrifice an artifact: add rr to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-an-artifact' value='1'/>
+			</cost>
+			<effects>
+				<give-mana red='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

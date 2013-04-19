@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ashes of the Fallen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	as ashes of the fallen comes into play, choose a creature type.
+	each creature card in your graveyard has the chosen creature type in addition to its other types.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<add-modifier>
+					<static-modifier filter-zone="graveyard">
+						<modifiers>
+							<property-modifier operation="add" linked="true" layer="global">
+								<property register="this" index="free0"/>
+							</property-modifier>
+						</modifiers>
+						<while>
+							<and>
+								<in-zone zone="graveyard"/>
+								<has-idcard idcard="creature" />
+								<controller player="you"/>
+							</and>
+						</while>
+					</static-modifier>
+				</add-modifier>
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

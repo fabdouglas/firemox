@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Animate Wall">
+	<!-- tested 12/6/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<!-- Text(6th+errata): Enchanted creature (wall of not) may attack as though it weren't a Wall. 
+			[Oracle 99/05/01]'
+		-->
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="wall-can-attack" />
+</card>

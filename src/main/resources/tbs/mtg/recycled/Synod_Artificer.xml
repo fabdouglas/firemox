@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Synod Artificer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - vedalken artificer
+	1/2
+	x, t :tap x target noncreature artifacts.
+	x, t :untap x target noncreature artifacts.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>vedalken artificer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref="pay-x"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-noncreature-artifact"/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref="pay-x"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-noncreature-artifact"/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

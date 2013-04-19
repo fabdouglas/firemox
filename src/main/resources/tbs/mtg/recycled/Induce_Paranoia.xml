@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Induce Paranoia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	instant
+	counter target spell. if b was spent to play induce paranoia, that spell's controller puts the top x cards of his or her library into his or her graveyard, where x is the spell's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'/>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup right="0">
+							<left>
+								<mana-paid card="this" color="black" />
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type="target-list.first.controller"/>
+				<repeat>
+					<value register="target-list.first" index="manacost"/>
+				</repeat>
+				<action ref="mill-a-card"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

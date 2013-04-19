@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tibor and Lumia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ur
+	legendary creature - human wizard
+	3/3
+	whenever you play a blue spell, target creature gains flying until end of turn.
+	whenever you play a red spell, tibor and lumia deals 1 damage to each creature without flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="red"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<not>
+							<has-property property="flying"/>
+						</not>
+					</test>
+				</action>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

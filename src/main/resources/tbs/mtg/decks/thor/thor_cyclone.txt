@@ -1,0 +1,30 @@
+#Jeu cyclone
+#
+#John
+#
+#novembre 15, 2000
+#1
+#4th Edition
+#
+Cyclone;4
+Stream_of_Life;1
+Fastbond;2
+Ancestral_Recall;2
+Power_Sink;2
+Counterspell;3
+Time_Walk;4
+Timetwister;4
+Alabaster_Potion;1
+Circle_of_Protection:_Green;2
+Disenchant;2
+Black_Lotus;4
+Howling_Mine;2
+Mox_Emerald;3
+Mox_Pearl;3
+Mox_Sapphire;3
+Savannah;6
+Tropical_Island;6
+Tundra;3
+Sol_Ring;2
+Swords_to_Plowshares;2
+Ivory_Tower;2

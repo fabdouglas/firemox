@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tooth of Chiss-Goria">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3
+		artifact
+		flash
+		affinity for artifacts 
+		t :target creature gets +1/+0 until end of turn.
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+		<properties>flash</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="artifact" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T' />
+				<action ref='target-creature' />
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

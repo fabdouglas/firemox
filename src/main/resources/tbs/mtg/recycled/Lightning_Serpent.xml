@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lightning Serpent">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xr
+	creature - elemental serpent
+	2/1
+	trample, haste
+	lightning serpent comes into play with x +1/+0 counters on it.
+	at end of turn, sacrifice lightning serpent.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental serpent trample haste </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="+1/+0"/>
+			</effects>
+		</activated-ability>
+		<ability ref="eot-sacrifice"/>
+	</abilities>
+</card>

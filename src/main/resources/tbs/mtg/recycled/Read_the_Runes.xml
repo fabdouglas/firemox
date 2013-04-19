@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Read the Runes">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xu
+	instant
+	draw x cards. for each card drawn this way, discard a card unless you sacrifice a permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='discard' value='1'/>
+					</either>
+					<either>
+						<action ref='sacrifice-a-permanent' value='1'/>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

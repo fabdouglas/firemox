@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dromar's Attendant">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {5} {1}, sacrifice dromar's attendant: add {w}{u}{b} to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>golem</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="1" blue="1" black="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

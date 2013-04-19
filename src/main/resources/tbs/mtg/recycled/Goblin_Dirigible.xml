@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Dirigible">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact creature
+	4/4
+	flying
+	goblin dirigible doesn't untap during your untap step.
+	at the beginning of your upkeep, you may pay 4. if you do, untap goblin dirigible.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>flying does-not-untap construct</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="4"/>
+						<target type='this'/>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

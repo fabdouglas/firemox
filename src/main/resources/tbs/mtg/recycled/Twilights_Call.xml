@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Twilight's Call">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	sorcery
+	you may play twilight's call any time you could play an instant if you pay 2 more to play it.
+	each player returns all creature cards from his or her graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<pay-mana colorless="2"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sliver Queen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wubrg
+	legendary creature - sliver
+	7/7
+	2: put a 1/1 colorless sliver creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>white red green blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<repeat value='1'/>
+				<create-card>
+					<card name='Sliver'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token sliver </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

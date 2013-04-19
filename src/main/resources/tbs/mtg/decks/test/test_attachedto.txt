@@ -1,0 +1,6 @@
+Holy_strength;20
+Savannah_Lions;20
+Cursed_Land;20
+super card;20
+plains;20
+Kjeldoran Pride;20

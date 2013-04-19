@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Warp Artifact">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {b}{b} at the beginning of the upkeep of enchanted artifact's controller, 
+warp artifact deals 1 damage to that player. -->
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+		  			<phase-is phase="upkeep"/>
+						<is-this player="attachedto.controller"/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="attachedto.controller"/>
+				<assign-damage type="damage-normal" value="1"/>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-artifact"/>
+</card>

@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flowstone Sculpture">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact creature
+	4/4
+	2, discard a card: put a +1/+1 counter on flowstone sculpture or flowstone sculpture gains flying, first strike, or trample. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature shapeshifter</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<choice controller="you" cancel="false">
+					<either>
+						<add-object object-name='+1/+1'/>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='flying' linked='false'/>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='trample' linked='false'/>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='first-strike' linked='false'/>
+						</add-modifier>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

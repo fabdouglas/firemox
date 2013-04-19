@@ -1,0 +1,30 @@
+Bad Moon;2
+Badlands;4
+Swamp;4
+Black Knight;4
+Black Lotus;1
+Black Vise;1
+City of Brass;4
+Dark Ritual;4
+Disintegrate;4
+Fireball;4
+Juggernaut;4
+Juzam Djinn;4
+Mana Flare;2
+Mana Vault;1
+Mishra's Factory;2;card.version=1;card.set=aq
+Mishra's Factory;2;card.version=2;card.set=aq
+Mishra's Factory;2;card.version=3;card.set=aq
+Mishra's Factory;2;card.version=4;card.set=aq
+Mishra's Workshop;1
+Mox Jet;1
+Mox Ruby;1
+Nevinyrral's Disk;1
+Sinkhole;4
+Sol Ring;1
+Stone Rain;2
+Strip Mine;3
+Terror;4
+Wheel of Fortune;1
+Yawgmoth's Will;1
+Zuran Orb;1

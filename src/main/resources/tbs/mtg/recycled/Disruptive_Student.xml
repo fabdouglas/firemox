@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disruptive Student">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="counter" zone="play">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="controller">
+					<either>
+						<action ref="counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="opponent"/>
+					</either>
+				</choice>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

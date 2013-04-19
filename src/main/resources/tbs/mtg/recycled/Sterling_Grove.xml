@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sterling Grove">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gw
+	enchantment
+	all other enchantments you control have shroud. 
+	1, sacrifice sterling grove: search your library for an enchantment card and reveal that card. shuffle your library, then put the card on top of it.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-idcard idcard='enchantment'/>
+					</test>
+				</action>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="shroud"
+					operation="add" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<in-zone zone="play"/>
+					<has-idcard idcard="enchantment" />
+					<not>
+						<is-this/>
+					</not>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

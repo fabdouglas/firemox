@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Wings">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!-- 
+		Dragon Wings
+		1U
+		Enchantment - Aura
+		Enchant creature
+		Enchanted creature has flying.
+		Cycling 1U (1U, Discard this card: Draw a card.)
+		When a creature with converted mana cost 6 or more comes into play, you may 
+		return Dragon Wings from your graveyard to play attached to that creature.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="1" blue="1" />
+			</actions>
+		</ability>
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" card="tested" />
+						</not>
+						<sup-equal right="6">
+							<left register="tested" index="manacost" />
+						</sup-equal>
+						<test ref="valid-creature-to-enchant" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<attach from="this" to="context.card" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="flying" />
+</card>

@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nightmare Lash">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact - equipment
+	equipped creature gets +1/+1 for each swamp you control.
+	equip-pay 3 life. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<action ref="pay-life" value="3"/>
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index='power' operation='add' linked='true'>
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="swamp"/>
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+			<register-modifier index='toughness' operation='add' linked='true'>
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="swamp"/>
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

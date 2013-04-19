@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skittering Monstrosity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - horror
+	5/5
+	when you play a creature spell, sacrifice skittering monstrosity.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

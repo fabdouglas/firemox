@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Damping Engine">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+<!--  {4} a player who controls more permanents than any other can't play lands or artifact, creature, or enchantment spells. that player may sacrifice a permanent to ignore this effect until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+	</abilities>
+</card>

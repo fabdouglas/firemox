@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Earthbrawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	target creature gets +3/+3 until end of turn.
+	reinforce 1-1g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+3+3-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref="reinforce1">
+			<actions>
+				<pay-mana colorless="1" green="1"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stenchskipper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - elemental
+	6/5
+	flying
+	at end of turn, if you control no goblins, sacrifice stenchskipper.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot">
+				<test>
+					<not>
+						<has restriction-zone="play">
+							<and>
+								<has-property property="goblin"/>
+								<controller player="you"/>
+							</and>
+						</has>
+					</not>
+				</test>
+			</end-of-phase>
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

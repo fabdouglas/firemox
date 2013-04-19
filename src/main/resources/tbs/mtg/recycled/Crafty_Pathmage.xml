@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crafty Pathmage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - human wizard
+	1/1
+	t :target creature with power 2 or less is unblockable this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<inf-equal right="2">
+							<left register="tested" index="power"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="unblockable-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

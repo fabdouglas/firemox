@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Draco">
+	<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!--
+		
+		Draco costs 2 less to play for each basic land type among lands you control.
+		Flying
+		At the beginning of your upkeep, sacrifice Draco unless you pay 10 . 
+		This cost is reduced by 2 for each basic land type among lands 
+		you control.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="16" />
+			<register index="power" value="9" />
+			<register index="toughness" value="9" />
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>flying dragon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-spell" />
+		<!-- UPDATE PHASE NAME, TYPE and RESOLUTION -->
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test></test>
+			</beginning-of-phase>
+			<effects>
+				<target type="this" />
+				<move-card controller="target.owner" destination="graveyard" />
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

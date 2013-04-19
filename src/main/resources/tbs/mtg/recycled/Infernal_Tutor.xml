@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Infernal Tutor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	sorcery
+	reveal a card from your hand. search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.
+	hellbent - if you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test>
+				<not>
+					<test ref="hellbent"/>
+				</not>
+			</test>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-name name="target-list.first.name"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test ref="hellbent"/>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'/>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

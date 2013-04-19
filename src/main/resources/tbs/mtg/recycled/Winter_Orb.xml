@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Winter Orb">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {2} as long as winter orb is untapped, 
+		players can't untap more than one land during their untap steps. -->
+
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability name="" zone="play">
+			<beginning-of-phase phase="untap">
+				<test>
+					<in-zone zone="playANDuntapped" card="this" />
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<if-then-hop elsehop="abort">
+					<test>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<controller player="currentplayer" />
+									<has-idcard idcard="land" />
+									<test ref="is-untapped-under-condition" />
+								</and>
+							</has>
+						</not>
+					</test>
+				</if-then-hop>
+				<if-then-hop elsehop="3">
+					<test>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<controller player="currentplayer" />
+									<has-idcard idcard="land" />
+									<has-property property="may-not-untap" />
+								</and>
+							</has>
+						</not>
+					</test>
+				</if-then-hop>
+				<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play"
+					cancel="false">
+					<test>
+						<and>
+							<has-idcard idcard="land" />
+							<controller player="currentplayer" />
+							<in-zone zone="playANDtapped" />
+							<not>
+								<has-property property="does-not-untap" />
+							</not>
+						</and>
+					</test>
+				</target>
+				<hop value="2" />
+				<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play"
+					cancel="true" hop="abortme">
+					<test>
+						<and>
+							<has-idcard idcard="land" />
+							<controller player="currentplayer" />
+							<in-zone zone="playANDtapped" />
+							<not>
+								<has-property property="does-not-untap" />
+							</not>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<modify-register register="target-list.last" index="state" operation="or"
+					value="untapped-under-condition" />
+				<untap />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="untap-under-condition" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="land" />
+					<in-zone zone="playANDuntapped" card="this" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragonstalker">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{w} flying, protection from dragons -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="white" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>flying protection-from-dragons bird soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

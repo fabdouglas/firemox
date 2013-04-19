@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mogg Cannon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	t :target creature you control gets +1/+0 and gains flying until end of turn. destroy that creature at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot"/>
+				<action ref="flying-until-eot"/>
+				<action ref='destroy-target-eot'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

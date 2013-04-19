@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Primordial Ooze">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - ooze
+	1/1
+	primordial ooze attacks each turn if able.
+	at the beginning of your upkeep, put a +1/+1 counter on primordial ooze. then pay x, where x is equal to the number of +1/+1 counters on primordial ooze, or tap primordial ooze and it deals x damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>ooze attacks-if-able </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana>
+							<colorless>
+								<counter object-name="+1/+1" card="this"/>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<tap/>
+						<target-list operation="clear"/>
+						<target type='you'/>
+						<assign-damage type='damage-normal'>
+							<value>
+								<counter object-name="+1/+1" card="this"/>
+							</value>
+						</assign-damage>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

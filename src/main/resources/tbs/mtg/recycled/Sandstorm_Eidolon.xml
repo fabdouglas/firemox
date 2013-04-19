@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sandstorm Eidolon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - spirit
+	2/2
+	r, sacrifice sandstorm eidolon: target creature can't block this turn.
+	whenever you play a multicolored spell, you may return sandstorm eidolon from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="cannot-block-until-eot"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="graveyard">
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<test ref="is-multicolored"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice cancel="true" controller="you">
+					<either>
+						<target type="this" raise-event="false"/>
+						<action ref="return-to-hand"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

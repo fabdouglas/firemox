@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Convalescent Care">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	enchantment
+	at the beginning of your upkeep, if you have 5 life or less, you gain 3 life and draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="4">
+					<test>
+						<inf-equal right="5">
+							<left register="you" index="life"/>
+						</inf-equal>
+					</test>
+				</if-then-hop>
+				<action ref='gain-life' value='3'/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Pillory of the Sleepless">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="white" value="1" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>white black</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="cannot-block" linked="true" />
+			<property-modifier property="cannot-attack" linked="true" />
+			<ability-modifier linked="true">
+				<abilities>
+					<triggered-ability zone="play">
+						<beginning-of-phase phase="upkeep">
+							<test ref="during-your-upkeep"/>
+						</beginning-of-phase>
+						<effects>
+							<action ref="lose-life" value="1" />
+						</effects>
+					</triggered-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

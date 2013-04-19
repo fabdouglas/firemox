@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Havoc">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment
+	whenever an opponent plays a white spell, he or she loses 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="opponent"/>
+						<has-color color="white"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="opponent"/>
+				<action ref='lose-life-target' value='2'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

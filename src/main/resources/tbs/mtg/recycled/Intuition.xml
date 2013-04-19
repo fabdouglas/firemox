@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Intuition'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--
+		2u
+	instant
+	search your library for any three cards and reveal them. target opponent 
+		chooses one. put that card into your hand and the rest into your graveyard. 
+		then shuffle your library.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='2' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+				<target type="you" name="%" />
+				<action ref="target-opponent" />
+			</cost>
+			<effects>
+				<action ref="search-lib-player" value="3" />
+				<face-up for="everyone" name="reveal" />
+				<target-list operation="save" name="%" />
+				<target-list operation="remove-queue" name="%" />
+				<target type="card" restriction-zone="library" mode="target-choose"
+					raise-event="false">
+					<test>
+						<target-list operation="contains" list-index="-1" target="tested" />
+					</test>
+				</target>
+				<move-card controller="you" destination="hand" />
+				<target-list operation="remove" list-index="-1" target="target-list.last" name="%" />
+				<target-list operation="clear" name="%" />
+				<target-list operation="load" list-index="-1" name="%" />
+				<target-list operation="remove" list-index="-1" name="%" />
+				<action ref="shuffle-in-lib" />
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

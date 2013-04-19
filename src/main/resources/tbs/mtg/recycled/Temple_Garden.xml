@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Temple Garden">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<idcards>forest plains</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<replacement-ability name="come-into-play-tapped-under-conditions" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<action ref="pay-life" value="2"/>
+						<target type="this"/>
+						<move-card destination="play" controller="controller"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<move-card destination="playANDtapped" controller="controller"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Simulacrum">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{b} you gain life equal to the damage dealt to you this turn. 
+simulacrum deals to target creature you control damage equal to the damage dealt 
+to you this turn. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="gain-life">
+					<value register="you" index="damage-dealt-this-turn"/>
+				</action>
+				<assign-damage type="damage-normal">
+					<value register="you" index="damage-dealt-this-turn"/>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

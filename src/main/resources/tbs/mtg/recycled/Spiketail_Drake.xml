@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Spiketail Drake">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+
+	creature - drake
+
+	3/3
+
+	flying
+	sacrifice spiketail drake: counter target spell unless its controller pays 3.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>flying drake</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-this"/>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="3" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

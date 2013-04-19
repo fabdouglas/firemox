@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tinder Farm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land tinder farm comes into play tapped. t add g to your mana pool. t, sacrifice tinder farm: add rw to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-G"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana white="1" red="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

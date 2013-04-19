@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hunting Triad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	tribal sorcery - elf
+	put three 1/1 green elf warrior creature tokens into play.
+	reinforce 3-3g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>tribal sorcery </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<repeat value='3'/>
+				<create-card>
+					<card name='Elf'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token elf warrior</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref="reinforce3">
+			<actions>
+				<pay-mana colorless="3" green="1"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

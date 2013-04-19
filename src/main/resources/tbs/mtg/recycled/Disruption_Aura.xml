@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disruption Aura">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{u} enchanted artifact has "at the beginning of your upkeep, 
+		sacrifice this artifact unless you pay its mana cost." -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<ability-modifier linked="true" operation="add">
+				<abilities>
+					<triggered-ability zone="play">
+						<beginning-of-phase phase="upkeep">
+							<test ref="during-your-upkeep" />
+						</beginning-of-phase>
+						<effects>
+							<choice cancel="false">
+								<either>
+									<pay-mana value="manacost" />
+								</either>
+								<either>
+									<action ref="sacrifice-this" />
+								</either>
+							</choice>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

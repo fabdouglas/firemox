@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Presence of the Master">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	enchantment
+	whenever a player plays an enchantment spell, counter it.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-idcard idcard="enchantment"/>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card"/>
+				<action ref='counter'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

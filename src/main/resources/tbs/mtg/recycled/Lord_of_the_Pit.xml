@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Lord of the Pit">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+<!--  {4}{b}{b}{b} flying, trample 
+at the beginning of your upkeep, sacrifice a creature other than  of the pit. 
+if you can't,  of the pit deals 7 damage to you. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="3"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="7"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>flying trample demon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="currentplayer"/>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="choose" raise-event="false" restriction-zone="play" hop="3">
+					<test>                        
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="you"/>
+							<not>
+								<is-this/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+				<hop value="3"/>
+				<target type="you"/>
+				<assign-damage value="7" type="damage-normal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

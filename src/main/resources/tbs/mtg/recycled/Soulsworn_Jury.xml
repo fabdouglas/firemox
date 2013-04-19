@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Soulsworn Jury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+
+	creature - spirit
+
+	1/4
+
+	defender 
+	1u, sacrifice soulsworn jury: counter target creature spell.
+ -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>defender spirit</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" colorless="1" />
+				<action ref="sacrifice-this"/>
+				<action ref="target-spell">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref= "counter"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

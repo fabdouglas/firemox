@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mirror Wall">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - wall
+	3/4
+	defender 
+	w: mirror wall can attack this turn as though it didn't have defender.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+			</cost>
+			<effects>
+				<action ref='wall-can-attack-until-eot'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

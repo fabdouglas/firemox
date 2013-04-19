@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Avatar of Hope">
+	<rules-author-comment>By brius not tested yet...</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="colorless" value="6"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="9"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>flying spirit</properties>
+	</init>
+
+	<abilities>
+<!-- Normal cost if more than 3 life: put into play -->
+		<activated-ability playable="this" zone="hand">
+			<test>
+				<sup right="3">
+					<left register="you" index="life"/>
+				</sup>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+<!-- Cost = WW if 3 or less life. -->
+		<activated-ability playable="this" zone="hand">
+			<test>
+				<inf right="4">
+					<left register="you" index="life"/>
+				</inf>
+			</test>
+			<cost>
+<!-- 				<pay-mana white="2"/> -->
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

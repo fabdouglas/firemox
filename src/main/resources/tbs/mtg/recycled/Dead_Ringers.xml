@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dead Ringers">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{b} destroy two target nonblack creatures unless either one is a color 
+the other isn't. 
+they can't be regenerated. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<not>
+								<has-color color="black"/>
+							</not>
+							<or>
+								<equal left="target-list.size" right="0"/>
+								<equal>
+									<left>
+										<card-colors card="tested"/>
+									</left>
+									<right>
+										<card-colors card="target-list.first"/>
+									</right>
+								</equal>
+							</or>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

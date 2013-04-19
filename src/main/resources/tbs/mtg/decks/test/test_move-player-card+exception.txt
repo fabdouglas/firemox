@@ -1,0 +1,11 @@
+Betatester_toolbox;60
+forest;20
+living lands;20
+fastbond;20
+meekstone;20
+Winter_Orb;20
+Damping_Field;20
+smoke;20
+sengir vampire;20
+clockwork avian;20
+Relic_Barrier;20

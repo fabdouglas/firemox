@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rustic Clachan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	as rustic clachan comes into play, you may reveal a kithkin card from your hand. if you don't, rustic clachan comes into play tapped.
+	t :add w to your mana pool.
+	reinforce 1-1w 
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="this" />
+						<move-card destination="playANDtapped" controller="controller" />
+					</either>
+					<either>
+						<target type="card" mode="choose" restriction-zone="hand">
+							<test>
+								<and> 
+									<controller player="you"/>
+									<has-property property="kithkin"/>
+								</and>
+							</test>
+						</target>
+						<action ref="reveal"/>
+						<action ref="put-in-play"/>
+					</either>
+				</choice>	
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+		<ability ref="tap-add-W"/>
+		<ability ref="reinforce1">
+			<actions>
+				<pay-mana colorless="1" white="1"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

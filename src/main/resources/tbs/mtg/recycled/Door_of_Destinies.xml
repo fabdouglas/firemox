@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Door of Destinies">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	as door of destinies comes into play, choose a creature type.
+	whenever you play a spell of that type, put a charge counter on door of destinies.
+	creatures you control of that type get +1/+1 for each charge counter on door of destinies.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-property>
+						<property register="this" index="free0"/>
+					</has-property>
+				</test>
+			</casting>
+			<effects>
+				<target-list operation='clear'/>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<add-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+							<register-modifier index="power" operation="add" linked="true" layer="global">	
+								<value>
+									<counter object-name="charge" card="this"/>
+								</value>
+							</register-modifier>		 		
+			 				<register-modifier index="toughness" operation="add" linked="true" layer="global">
+			 					<value>
+									<counter object-name="charge" card="this"/>
+								</value>
+							</register-modifier>
+						</modifiers>
+						<while>
+							<and>
+								<in-zone zone="play"/>
+								<has-idcard idcard="creature" />
+								<has-property>
+									<property register="this" index="free0"/>
+								</has-property>
+							</and>
+						</while>
+					</static-modifier>
+				</add-modifier>
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

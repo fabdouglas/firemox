@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ball Lightning">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  rrr trample, haste at end of turn, sacrifice ball lightning.   -->
+
+	<init>
+		<registers>
+			<register index="red" value="3" />
+			<register index="power" value="6" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>trample haste elemental</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play" resolution="normal">
+			<before-phase phase="eot" />
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

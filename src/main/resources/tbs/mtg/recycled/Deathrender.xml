@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deathrender">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact - equipment
+	equipped creature gets +2/+2.
+	whenever equipped creature is put into a graveyard from play, you may put a creature card from your hand into play and attach deathrender to it.
+	equip 2
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="card" mode="choose" restriction-zone="hand">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</test>
+						</target>
+						<action ref="move-to-play"/>
+						<attach from="this" to="target-list.last" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index='power' operation='add' linked='true' value='2' />
+			<register-modifier index='toughness' operation='add' linked='true' value='2' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

@@ -1,0 +1,10 @@
+Super_Card;20
+Forest;5
+City_of_Brass;1
+Wall_of_Wood;10
+Mox_Emerald;20
+Aspec_of_wolf;10
+Living_Lands;10
+Llanowar_Elves;10
+Tropical_Island;5
+Assault_Battery;10

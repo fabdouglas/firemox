@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Otarian Juggernaut">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4} otarian juggernaut can't be blocked by walls. 
+threshold - otarian juggernaut gets +3/+0 and attacks each turn if able.  -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>cannot-be-blocked-by-walls juggernaut</properties>
+	</init>
+
+	<modifiers>
+		<register-modifier index="power" value="3" operation="add" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<property-modifier property="attacks-if-able">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

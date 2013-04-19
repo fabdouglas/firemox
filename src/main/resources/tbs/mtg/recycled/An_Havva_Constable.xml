@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="An-Havva Constable">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - constable
+	2/1+*
+	an-havva constable's toughness is equal to 1 plus the number of green creatures in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness'>
+				<value>
+					<add left="1">
+						<right>
+							<counter restriction-zone='play'>
+								<and>
+									<has-idcard idcard='creature'/>
+									<has-color color="green"/>
+								</and>
+							</counter>
+						</right>
+					</add>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

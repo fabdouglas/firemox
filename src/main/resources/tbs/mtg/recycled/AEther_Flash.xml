@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Flash">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="red" value="2"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<destination-test>
+					<and>
+						<in-zone zone="play"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card"/>
+				<assign-damage value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

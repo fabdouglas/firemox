@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ceta Sanctuary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	enchantment
+	at the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. if you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="6">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-color color="red"/>
+								<has-color color="green"/>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value='1'/>
+				<hop value="5"/>
+				<if-then-hop elsehop="4">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<or>
+									<has-color color="red"/>
+									<has-color color="green"/>
+								</or>
+							</and>
+						</has>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

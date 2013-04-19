@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Saffi Eriksdotter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gw
+	legendary creature - human scout
+	2/2
+	sacrifice saffi eriksdotter: when target creature is put into your graveyard from play this turn, return that card to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>legend human scout </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone='graveyard'>
+						<moved-card>
+							<source-test>
+								<and>
+									<is target="saved"/>
+									<in-zone zone='play' card='tested'/>
+								</and>
+							</source-test>
+							<destination-test>
+								<and>
+									<controller player="you"/>
+									<in-zone zone='graveyard' card='tested'/>
+								</and>
+							</destination-test>
+						</moved-card>
+						<effects>
+							<target type="saved"/>
+							<action ref="move-to-play"/>
+							<unregister-this/>	
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

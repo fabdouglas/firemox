@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fistful of Force">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	target creature gets +2/+2 until end of turn. clash with an opponent. if you win, that creature gets an additional +2/+2 and gains trample until end of turn. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot"/>
+				<action ref="clash">
+					<actions>
+						<action ref="add+2+2-until-eot"/>
+						<action ref="trample-until-eot"/>
+					</actions>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

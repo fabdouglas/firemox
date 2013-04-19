@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cabal Conditioning">
+<rules-author-comment></rules-author-comment>
+
+<!--  {6}{b} any number of target players each discards cards from his or her 
+hand equal to the highest converted mana cost among permanents you control. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat value="all"/>
+				<target type="player" mode="choose" cancel="true"> 
+					<test ref="is-targetable-player"/>
+				</target>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="6">
+					<test>
+						<is-player target="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<action ref="player-discard">
+					<value>
+						<highest-among restriction-zone="play" expression="manacost">
+							<test>
+								<controller player="you"/>
+							</test>
+						</highest-among>
+					</value>
+				</action>
+				<target-list operation="remove-first"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

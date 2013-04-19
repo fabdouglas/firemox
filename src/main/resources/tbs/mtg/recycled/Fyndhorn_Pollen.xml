@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fyndhorn Pollen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment
+	cumulative upkeep 1
+	all creatures get -1/-0.
+	1g: all creatures get -1/-0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="minus" value="1" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana>
+							<colorless>
+								<counter object-name='age' card='this'/>
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref="all-creatures"/>
+			</cost>
+			<effects>
+				<action ref="add-1-0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="An-Zerrin Ruins">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  2rr 
+		as an-zerrin ruins comes into play, choose a creature type. 
+		creatures of the chosen type don't untap during their controller's untap steps.   
+	-->
+
+	<init>
+		<registers>
+			<register index="red" value="2" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<add-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+							<property-modifier property="does-not-untap"
+								operation="add" linked="true" layer="global" />
+						</modifiers>
+						<while>
+							<and>
+								<in-zone zone="play"/>
+								<has-idcard idcard="creature" />
+								<has-property>
+									<property register="this" index="free0"/>
+								</has-property>
+							</and>
+						</while>
+					</static-modifier>
+				</add-modifier>
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

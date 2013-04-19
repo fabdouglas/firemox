@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Benalish Emissary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - wizard
+	1/4
+	kicker 1g 
+	when benalish emissary comes into play, if the kicker cost was paid, destroy target land.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" green="1" />
+				<action ref="target-land"/>
+			</actions>
+			<actions>
+				<action ref="destroy"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

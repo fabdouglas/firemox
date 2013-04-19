@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pentarch Paladin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2www
+	creature - human knight
+	3/3
+	flanking 
+	as pentarch paladin comes into play, choose a color.
+	ww, t :destroy target permanent of the chosen color.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-color operation="or" index="free0" register="this" multiselect="false" />
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='2' />
+				<action ref='T'/>
+				<action ref='target-permanent'>
+					<test>
+						<has-color>
+							<color register="this" index="free0" />
+						</has-color>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

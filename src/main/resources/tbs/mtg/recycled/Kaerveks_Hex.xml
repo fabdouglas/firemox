@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kaervek's Hex">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	sorcery
+	kaervek's hex deals 1 damage to each nonblack creature and an additional 1 damage to each green creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<not>
+								<has-color color="black"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<assign-damage value='1' type='damage-normal'/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<has-color color="green"/>
+						</and>
+					</test>
+				</target>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

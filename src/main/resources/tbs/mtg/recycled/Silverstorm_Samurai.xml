@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Silverstorm Samurai">
+<rules-author-comment></rules-author-comment>
+
+<!--  4ww flash bushido 1  -->
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>flash samurai fox</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="bushido1-blocked"/>
+		<ability ref="bushido1-blocking"/>
+	</abilities>
+</card>

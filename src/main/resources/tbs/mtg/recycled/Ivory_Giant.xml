@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ivory Giant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ww
+	creature - giant
+	3/4
+	when ivory giant comes into play, tap all nonwhite creatures.
+	suspend 5-w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana white='1' />
+			</actions>
+			<actions>
+				<repeat value='5'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<not>
+								<has-color color="white"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<tap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

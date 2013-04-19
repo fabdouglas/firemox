@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Marsh Crocodile">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ub
+	creature - crocodile
+	4/4
+	when marsh crocodile comes into play, return a blue or black creature you control to its owner's hand.
+	when marsh crocodile comes into play, each player discards a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>crocodile </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<or>
+								<has-color color="black"/>
+								<has-color color="blue"/>
+							</or>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='discard' value="1"/>
+				<action ref='opponent-discards' value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

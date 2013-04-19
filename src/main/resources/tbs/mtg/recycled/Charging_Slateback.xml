@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Charging Slateback">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		4r
+		creature - beast
+		4/3
+		charging slateback can't block.
+		morph 4r 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='colorless' value='4' />
+			<register index='power' value='4' />
+			<register index='toughness' value='3' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>beast cannot-block</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='1' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

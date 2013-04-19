@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sliver Legion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wubrg
+	legendary creature - sliver
+	7/7
+	all sliver creatures get +1/+1 for each other sliver in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors>white red green blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='power' operation='add' linked='true' layer='global'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="sliver"/>
+								<not>
+									<is-this/>
+								</not>
+							</and>
+						</counter>
+					</value>
+				</register-modifier>
+				<register-modifier index='toughness' operation='add' linked='true' layer='global'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="sliver"/>
+								<not>
+									<is-this/>
+								</not>
+							</and>
+						</counter>
+					</value>
+				</register-modifier>
+			</modifiers>
+			<while>
+				<has-property property='sliver'/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

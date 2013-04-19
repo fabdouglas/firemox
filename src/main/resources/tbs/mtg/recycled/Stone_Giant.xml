@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Stone Giant">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{r}{r} 
+{t}: target creature you control with toughness less than stone giant's power 
+gains flying until end of turn. at end of turn, destroy that creature. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="2"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>giant</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<inf>
+								<left register="tested" index="toughness"/>
+								<right register="this" index="power"/>
+							</inf>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot"/>
+						<effects>
+							<unregister-this/>
+							<target type="saved"/>
+							<action ref="destroy"/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

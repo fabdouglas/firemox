@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battle Frenzy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	instant
+	green creatures you control get +1/+1 until end of turn.
+	nongreen creatures you control get +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<has-color color="green"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="add+1+1-until-eot"/>
+				<target-list operation="clear"/>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<not>
+								<has-color color="green"/>
+							</not>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<action ref="add+1+0-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

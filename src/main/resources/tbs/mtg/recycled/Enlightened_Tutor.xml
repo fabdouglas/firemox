@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Enlightened Tutor">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  w 
+		search your library for an artifact or enchantment card and reveal that card. 
+		shuffle your library, then put the card on top of it.   
+	-->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="search-lib">
+					<test>
+						<or>
+							<has-idcard idcard="enchantment" />
+							<has-idcard idcard="artifact" />
+						</or>
+					</test>
+				</action>
+				<action ref="reveal" />
+				<action ref="move-library-top" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

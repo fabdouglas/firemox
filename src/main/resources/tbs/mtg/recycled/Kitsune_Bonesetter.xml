@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kitsune Bonesetter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - fox cleric
+	0/1
+	t :prevent the next 3 damage that would be dealt to target creature this turn. play this ability only if you have more cards in hand than each opponent.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>fox cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup>
+					<left>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</left>
+					<right>
+						<counter restriction-zone="hand">
+							<controller player="opponent"/>
+						</counter>
+					</right>
+				</sup>
+			</test>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='prevent-3'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

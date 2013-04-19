@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hibernation Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ub
+	creature - sliver
+	2/2
+	all slivers have "pay 2 life: return this creature to its owner's hand."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable="instant" name="" zone="play">
+							<cost>
+								<action ref="pay-life" value="2"/>
+							</cost>
+							<effects>
+								<action ref="return-to-hand"/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

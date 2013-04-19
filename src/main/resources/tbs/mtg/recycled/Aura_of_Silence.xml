@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aura of Silence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	enchantment
+	artifact and enchantment spells your opponents play cost 2 more to play.
+	sacrifice aura of silence: destroy target artifact or enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+	    <static-modifier filter-zone="hand">
+	        <modifiers>
+	            <register-modifier index="colorless" operation="add" value="2" linked="true" layer="global"/>
+	        </modifiers>
+			<while>
+				<and>
+					<or>
+						<has-idcard idcard="artifact"/>
+						<has-idcard idcard="enchantment"/>
+					</or>
+					<not>
+		       			<controller player="you"/> 
+		       		</not>
+	            </and>
+			</while>
+	    </static-modifier>
+	</modifiers>
+</card>

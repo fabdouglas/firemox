@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disruptive Pitmage">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!-- 
+		T : Contrecarrez le sort ciblé à moins que son contrôleur ne paye 1.
+		Mue U.
+		
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1'/>
+			</actions>
+		</ability>
+		<activated-ability playable="this" name="" zone="play">
+			<test>
+				<is-face-up card="this"/>
+			</test>
+			<cost>
+				<action ref="T" />
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

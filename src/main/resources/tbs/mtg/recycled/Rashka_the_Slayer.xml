@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rashka the Slayer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature
+	3/3
+	reach 
+	whenever rashka blocks one or more black creatures, rashka gets +1/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend reach human archer</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<has-color color="black"/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<action ref="add+1+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

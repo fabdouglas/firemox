@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forsaken City">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	forsaken city doesn't untap during your untap step.
+	at the beginning of your upkeep, you may remove a card in your hand from the game. if you do, untap forsaken city.
+	t :add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>does-not-untap </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="card" mode="choose" raise-event="true" restriction-zone="hand">
+							<test>
+								<controller player="you"/>
+							</test>
+						</target>
+						<action ref="remove-from-game"/>
+						<target type='this'/>
+						<untap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-R"/>
+	</abilities>
+</card>

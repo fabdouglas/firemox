@@ -1,0 +1,22 @@
+super card;50
+volcanic island;5
+mox jet;10
+mox ruby;10
+mox pearl;10
+mox emerald;10
+Abandon_Hope;5
+Abolish;5
+Abyssal_Horror;5
+Ashes_to_Ashes;5
+Addle;5
+Dawnstrider;5
+Death_Cloud;5
+Deep_Water;5
+Mishra's Workshop;5
+Basalt_Monolith;5
+Mana_Flare;5
+Balduvian_Trading_Post;5
+Dwarven_Recruiter;5
+Animate_Dead;5
+Cyclopean tomb;5
+Mishras_Factory;5

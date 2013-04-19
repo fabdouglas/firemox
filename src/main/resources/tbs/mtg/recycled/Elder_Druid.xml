@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="US-ASCII" ?> 
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Elder Druid">
+    <rules-author-comment>By jods</rules-author-comment>
+    
+    <init>
+        <registers>
+            <register index="colorless" value="3"/>
+            <register index="green" value="1"/>
+            <register index="power" value="2"/>
+            <register index="toughness" value="2"/>
+        </registers>
+        <colors>green</colors>
+        <idcards>creature</idcards>
+        <properties>elf cleric druid</properties>
+    </init>
+    
+    <abilities>
+        <ability ref="cast-spell"/>        
+        
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <pay-mana green="1" colorless="3"/>
+                <action ref="T"/>
+                <target mode="choose" type="card">
+                    <test ref="is-targetable-tappable"/>
+                </target>                
+            </cost>
+            <effects>
+                <tap/>
+            </effects>            
+        </activated-ability>
+        
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <pay-mana green="1" colorless="3"/>
+                <action ref="T"/>
+                <target mode="choose" type="card">
+                    <test ref="is-targetable-tappable"/>
+                </target>                
+            </cost>
+            <effects>
+                <untap/>
+            </effects>            
+        </activated-ability>
+    </abilities>
+</card>

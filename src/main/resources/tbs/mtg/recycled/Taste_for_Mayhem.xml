@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Taste_for_Mayhem">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<!-- Enchant creature
+		Enchanted creature gets +2/+0.
+		Hellbent - Enchanted creature gets an additional +2/+0 as long as you 
+		have no cards in hand.
+	-->
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" value="2" operation="add" linked="true" />
+			<register-modifier index="power" value="2" operation="add" linked="true">
+				<while>
+					<test ref="hellbent" />
+				</while>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

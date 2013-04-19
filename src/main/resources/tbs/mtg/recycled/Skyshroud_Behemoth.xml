@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skyshroud Behemoth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5gg
+	creature - beast
+	10/10
+	fading 2 
+	skyshroud behemoth comes into play tapped.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='10'/>
+			<register index='toughness' value='10'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='fading'/>
+		<ability ref='come-into-play-tapped'/>
+	</abilities>
+	<modifiers>
+		<object name='fade'/>
+		<object name='fade'/>
+	</modifiers>
+</card>

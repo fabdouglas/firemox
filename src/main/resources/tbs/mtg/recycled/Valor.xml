@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Valor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - incarnation
+	2/2
+	first strike
+	as long as valor is in your graveyard and you control a plains, creatures you control have first strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>incarnation first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="graveyard">
+			<modifiers>
+				<property-modifier property="first-strike" operation="add" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<controller player="you" />
+					<has restriction-zone="play">
+						<and>
+							<controller player="you" />
+							<has-idcard idcard="plains" />
+						</and>
+					</has>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

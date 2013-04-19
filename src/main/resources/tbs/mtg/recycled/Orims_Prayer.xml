@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Orim's Prayer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	enchantment
+	whenever a creature attacks you, you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<controller player="opponent"/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

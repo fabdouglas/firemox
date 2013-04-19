@@ -1,0 +1,15 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>l2fprod</groupId>
+  <artifactId>skinlf</artifactId>
+  <version>6.7.pack200</version>
+ 	<name>Skin Look And Feel</name>
+  <description>
+  Skin Look And Feel allows Java developers to write skinnable application using the Swing toolkit. Skin Look And Feel is able to read GTK (The Gimp Toolkit) and KDE (The K Desktop Environment) skins to enhance your application GUI controls such as Buttons, Checks, Radios, Scrollbars, Progress Bar, Lists, Tables, Internal Frames, Colors, Background Textures, Regular Windows. Skin Look And Feel (aka SkinLF) also includes NativeSkin to create irregular windows.
+
+  </description>
+	<url>http://skinlf.l2fprod.com</url>
+	<distributionManagement>
+		<downloadUrl>http://skinlf.l2fprod.com/download/index.php</downloadUrl>
+	</distributionManagement>
+</project>

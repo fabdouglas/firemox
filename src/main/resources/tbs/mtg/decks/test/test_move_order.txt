@@ -1,0 +1,8 @@
+Plains;5
+Super_Card;20
+Savannah_Lions;15
+Wall_of_Swords;15
+Northern_Paladin;15
+Armageddon;15
+Wrath_of_God;15
+Wheel_of_Fortune;15

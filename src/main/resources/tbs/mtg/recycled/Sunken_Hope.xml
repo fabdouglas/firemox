@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sunken Hope">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	enchantment
+	at the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="currentplayer"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

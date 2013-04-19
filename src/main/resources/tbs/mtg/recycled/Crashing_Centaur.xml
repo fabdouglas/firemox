@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crashing Centaur">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	creature - centaur
+	3/4
+	g, discard a card: crashing centaur gains trample until end of turn.
+	threshold - as long as seven or more cards are in your graveyard, crashing centaur gets +2/+2 and can't be the target of spells or abilities.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>centaur </properties>
+	</init>
+	
+	<modifiers>
+		<register-modifier index="power" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" value="2" operation="add" linked="false">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</register-modifier>
+		<property-modifier property="shroud" linked="false">
+			<while>
+				<test ref="threshold" />
+			</while>
+		</property-modifier>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<property-modifier property='trample' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

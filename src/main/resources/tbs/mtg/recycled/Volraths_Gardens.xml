@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Volrath's Gardens">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	enchantment
+	2, tap an untapped creature you control: you gain 2 life. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped" card="tested" />
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

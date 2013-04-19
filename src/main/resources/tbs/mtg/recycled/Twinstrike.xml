@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Twinstrike">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3br
+	instant
+	twinstrike deals 2 damage to each of two target creatures.
+	hellbent - destroy those creatures instead if you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test ref="hellbent"/>
+				</if-then-hop>
+				<action ref='destroy'/>
+				<hop value="2"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

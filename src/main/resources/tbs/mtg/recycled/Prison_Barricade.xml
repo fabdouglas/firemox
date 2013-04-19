@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Prison Barricade">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - wall
+	1/3
+	defender 
+	kicker 1w 
+	if the kicker cost was paid, prison barricade comes into play with a +1/+1 counter on it and with "prison barricade can attack as though it didn't have defender."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" white="1" />
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-modifier>
+					<property-modifier layer="internal" operation="remove" property="defender"/>
+				</add-modifier>
+			</actions>
+		</ability>
+	</abilities>
+</card>

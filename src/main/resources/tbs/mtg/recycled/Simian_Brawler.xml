@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Simian Brawler">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - ape warrior
+	3/3
+	discard a land card: simian brawler gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>ape warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value='1'/>
+				<target type='card' mode='choose' raise-event='false' restriction-zone='hand'>
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

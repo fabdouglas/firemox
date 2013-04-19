@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pandemonium">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	enchantment
+	whenever a creature comes into play, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+						<has-idcard idcard="creature"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="context.card.controller"/>
+				<target type="dealtable" mode="target-choose" restriction-zone="play">
+					<test ref="is-targetable-dealtable" />
+				</target>
+			</cost>
+			<effects>
+				<choice controller="context.card.controller" cancel="true">
+					<either>
+						<assign-damage type="damage-normal" >
+							<value register="context.card" index="power"/>
+						</assign-damage>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

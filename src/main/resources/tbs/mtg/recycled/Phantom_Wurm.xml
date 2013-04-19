@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phantom Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	creature - wurm spirit
+	2/0
+	phantom wurm comes into play with four +1/+1 counters on it.
+	if damage would be dealt to phantom wurm, prevent that damage. remove a +1/+1 counter from phantom wurm.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>wurm spirit </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

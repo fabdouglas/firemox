@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nether Shadow">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {b}{b} haste 
+at the beginning of your upkeep, 
+if nether shadow is in your graveyard with three creature cards above it, you may put nether shadow into play. -->
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>haste spirit</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="graveyard">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<test ref="during-your-upkeep"/>
+						<sup-equal right="3">
+							<left>
+								<counter restriction-zone="graveyard">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="creature"/>
+										<sup>
+											<left>
+												<position card="this"/>
+											</left>
+											<right>
+												<position card="tested"/>
+											</right>
+										</sup>
+									</and>
+								</counter>
+							</left>
+						</sup-equal>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<action ref="put-in-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

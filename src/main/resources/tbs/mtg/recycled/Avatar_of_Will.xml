@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avatar of Will">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6uu
+	creature - avatar
+	5/6
+	if an opponent has no cards in hand, avatar of will costs 6 less to play.
+	flying
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>avatar flying </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+            <test>
+                <equal right="0">
+                    <left>
+                        <counter restriction-zone="hand">
+                        	<controller player="opponent"/>
+                        </counter>
+                    </left>
+                </equal>
+            </test>
+            <cost>
+                <pay-mana blue="2"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+
+        <!-- Normal cost -->
+        <activated-ability playable="this" zone="hand">
+            <test>
+                <equal right="0">
+                    <left>
+                        <counter restriction-zone="hand">
+                        	<controller player="opponent"/>
+                        </counter>
+                    </left>
+                </equal>
+            </test>
+            <cost>
+                <pay-mana value="manacost"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+	</abilities>
+</card>

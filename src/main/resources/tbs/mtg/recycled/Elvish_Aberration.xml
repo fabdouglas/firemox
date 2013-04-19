@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elvish Aberration">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5g
+	creature - elf mutant
+	4/5
+	t :add ggg to your mana pool.
+	forestcycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf mutant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green='3' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="hand">
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<target type="this" name="%" />
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%" />
+				<action ref="search-lib-reveal" value="1">
+					<test>
+						<has-idcard idcard="forest"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

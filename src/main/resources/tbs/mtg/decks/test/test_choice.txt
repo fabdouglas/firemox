@@ -1,0 +1,6 @@
+Super_Card;20
+mountain;20
+Mox_Sapphire;20
+Dwarven_Armorer;20
+Balduvian_Trading_Post;20
+Stasis;20

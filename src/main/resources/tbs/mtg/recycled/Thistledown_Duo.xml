@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thistledown Duo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(w/u)
+	creature - kithkin soldier wizard
+	2/2
+	whenever you play a white spell, thistledown duo gets +1/+1 until end of turn. whenever you play a blue spell, thistledown duo gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin soldier wizard </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' blue='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<has-color color="white"/>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<has-color color="blue"/>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>	
+				<target type="this"/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

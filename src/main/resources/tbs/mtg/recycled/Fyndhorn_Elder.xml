@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="US-ASCII" ?> 
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Fyndhorn Elder">
+    <rules-author-comment>By jods</rules-author-comment>
+    
+    <init>
+        <registers>
+            <register index="colorless" value="2"/>
+            <register index="green" value="1"/>
+            <register index="power" value="1"/>
+            <register index="toughness" value="1"/>
+        </registers>
+        <colors>green</colors>
+        <idcards>creature</idcards>
+        <properties>elf druid</properties>
+    </init>
+    
+    <abilities>
+        <ability ref="cast-spell"/>        
+        
+        <activated-ability playable="mana-source" zone="play" resolution="auto">
+            <cost>
+                <action ref="T"/>
+            </cost>
+            <effects>
+                <give-mana green="2"/>
+            </effects>            
+        </activated-ability>
+    </abilities>
+</card>

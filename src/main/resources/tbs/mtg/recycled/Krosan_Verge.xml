@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krosan Verge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	krosan verge comes into play tapped.
+	t :add 1 to your mana pool.
+	2, t, sacrifice krosan verge: search your library for a forest card and a plains card and put them into play tapped. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard='forest'/>
+					</test>
+				</action>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard='plains'/>
+					</test>
+				</action>
+				<move-card controller="you" destination="playANDtapped"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

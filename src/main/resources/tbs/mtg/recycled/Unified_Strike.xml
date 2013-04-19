@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Unified Strike">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	instant
+	remove target attacking creature from the game if its power is less than or equal to the number of soldiers in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<test ref="tested-is-attacking"/>
+							<inf-equal>
+								<left register="tested" index="power"/>
+								<right>
+									<counter restriction-zone="play">
+										<has-property property="soldier"/>
+									</counter>
+								</right>
+							</inf-equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disciple of Kangee">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{w} {u}, {t}: target creature gains flying and becomes blue until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+				<add-modifier>
+					<color-modifier color="blue" operation="set">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

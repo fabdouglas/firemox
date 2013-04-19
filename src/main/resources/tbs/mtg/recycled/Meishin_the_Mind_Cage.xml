@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Meishin, the Mind Cage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uuu
+	legendary enchantment
+	all creatures get -x/-0, where x is the number of cards in your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='3'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="minus" linked="true" layer="global">
+			 		<value>
+			 			<counter restriction-zone="hand">
+			 				<controller player="you"/>
+			 			</counter>
+			 		</value>
+			 	</register-modifier>			 		
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

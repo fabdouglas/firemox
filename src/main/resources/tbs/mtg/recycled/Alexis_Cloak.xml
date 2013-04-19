@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Alexi's Cloak">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {1}{u} you may play alexi's cloak any time you could play an instant. 
+		enchanted creature can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" zone="hand" name="play-enchant-creature">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-for-attachment" />
+			</cost>
+			<effects>
+				<attach from="this" to="target-list.first" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="shroud" linked="true" />
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ancestor's Prophet">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - cleric 
+	1/5
+	tap five untapped clerics you control: you gain 10 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="5" />
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<controller player="you" />
+							<in-zone zone="playANDuntapped" />
+							<has-property property="cleric" />
+						</and>
+					</test>
+				</action>
+				<tap />
+			</cost>
+			<effects>
+				<action ref='gain-life' value='10'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

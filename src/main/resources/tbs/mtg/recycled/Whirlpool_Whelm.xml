@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Whirlpool Whelm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	instant
+	clash with an opponent, then return target creature to its owner's hand. if you win, you may put that creature on top of its owner's library instead. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="clash">
+					<actions>
+						<choice controller="you" cancel="true">
+							<either>
+								<action ref='return-to-hand'/>
+							</either>
+							<either>
+								<action ref="move-library-top"/>
+							</either>
+						</choice>
+					</actions>
+					<actions>
+						<action ref="return-to-hand"/>
+					</actions>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

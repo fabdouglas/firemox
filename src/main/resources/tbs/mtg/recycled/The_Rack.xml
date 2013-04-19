@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="The Rack">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact
+	as the rack comes into play, choose an opponent.
+	at the beginning of the chosen player's upkeep, the rack deals x damage to that player, where x is 3 minus the number of cards in his or her hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-opponent"/>
+				<create-ability>
+					<save target="target-list.last"/>
+					<triggered-ability resolution='normal' zone='play'>
+						<beginning-of-phase phase='upkeep'>
+							<test>
+								<and>
+									<phase-is phase="upkeep" />
+									<is target="saved" other="currentplayer"/>
+								</and>
+							</test>
+						</beginning-of-phase>
+						<effects>
+							<target type="currentplayer"/>
+							<assign-damage type='damage-normal'>
+								<value>
+									<minus left="3">
+										<right>
+											<counter restriction-zone="hand">
+												<controller player="currentplayer"/>
+											</counter>
+										</right>
+									</minus>
+								</value>
+							</assign-damage>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

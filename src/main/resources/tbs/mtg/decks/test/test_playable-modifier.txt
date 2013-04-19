@@ -1,0 +1,4 @@
+super_card;20
+Nivix, Aerie of the Firemind;30
+Cloudstone Curio;30
+Benalish_Hero;30

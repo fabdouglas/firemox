@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Centaur Glade">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+
+	enchantment
+
+	2gg: put a 3/3 green centaur creature token into play.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana green="2" colorless="2" />
+			</cost>
+			<effects>
+				<create-card>
+					<card name="centaur">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="3"/>
+								<register index="toughness" value="3"/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>centaur token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

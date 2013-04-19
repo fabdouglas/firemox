@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Hurricane">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {x}{g} hurricane deals x damage to each creature with flying and each player. -->
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<target mode="all" type="player"/>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0"/>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

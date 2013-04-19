@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Angus Mackenzie">
+<rules-author-comment></rules-author-comment>
+
+<!--  {g}{w}{u} {g}{w}{u}, {t}: prevent all combat damage that would be dealt this turn. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="white" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green white blue</colors>
+		<idcards>creature </idcards>
+		<properties>legend human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana green="1" white="1" blue="1" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<action ref="prevent-all-combat-damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

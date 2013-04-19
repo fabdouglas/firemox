@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nantuko Shrine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	enchantment
+	whenever a player plays a spell, that player puts x 1/1 green squirrel creature tokens into play, where x is the number of cards in all graveyards with the same name as that spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<repeat>
+					<value>
+						<counter restriction-zone="graveyard">
+							<has-name name="context.card.name"/>
+						</counter>
+					</value>
+				</repeat>
+				<create-card>
+					<card name="Squirrel">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>squirrel token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="context.player" destination="play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

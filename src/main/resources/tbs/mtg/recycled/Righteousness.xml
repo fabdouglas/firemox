@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Righteousness">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature">
+					<test ref="tested-is-blocking"/>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" value="7">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+					<register-modifier index="toughness" operation="add" value="7">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

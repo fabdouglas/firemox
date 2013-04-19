@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Liquify">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	instant
+	counter target spell with converted mana cost 3 or less. if that spell is countered this way, remove it from the game instead of putting it into its owner's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'>
+					<test>
+						<inf-equal right="3">
+							<left register="tested" index="manacost"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="counter"/>
+				<action ref='remove-from-game'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

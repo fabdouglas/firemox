@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vine Dryad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - dryad
+	1/3
+	flash
+	forestwalk
+	you may remove a green card in your hand from the game rather than pay vine dryad's mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>dryad flash forestwalk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="green"/>
+							<not>
+								<is-this/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

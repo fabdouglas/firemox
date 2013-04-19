@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Burst">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u} 
+return up to x target creatures to their owners' hands, 
+where x is one plus the number of cards named aether burst in all graveyards as 
+you play aether burst. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<repeat>
+					<value>
+						<add left="1">
+							<right>
+								<counter restriction-zone="graveyard">
+									<has-name name="aether_burst"/>
+								</counter>
+							</right>
+						</add>
+					</value>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="play" cancel="true" hop="1"> 
+					<test ref="is-targetable-creature"/>
+				</target>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

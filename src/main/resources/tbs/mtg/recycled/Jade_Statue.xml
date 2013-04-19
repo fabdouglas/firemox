@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Jade Statue">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<test>
+				<and>
+					<sup left="current-phase.index" right="precombat-main"/>
+					<inf left="current-phase.index" right="postcombat-main"/>
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless="2" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-indirection index="power" value="3" operation="set">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+					</register-indirection>
+					<register-indirection index="toughness" value="6" operation="set">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+					</register-indirection>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

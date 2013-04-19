@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+      name="Avatar of Woe">
+    <rules-author-comment>Hoani CROSS</rules-author-comment>
+
+    <init>
+        <registers>
+            <register index="black" value="2"/>
+            <register index="colorless" value="6"/>
+            <register index="power" value="6"/>
+            <register index="toughness" value="5"/>
+        </registers>
+        <colors>black</colors>
+        <idcards>creature</idcards>
+        <properties>fear</properties>
+    </init>
+
+    <abilities>
+        <!-- Reduced cost if there is 10 or more creatures in all graveyards -->
+        <activated-ability playable="this" zone="hand">
+            <test>
+                <sup-equal right="10">
+                    <left>
+                        <counter restriction-zone="graveyard">
+                            <has-idcard idcard="creature"/>
+                        </counter>
+                    </left>
+                </sup-equal>
+            </test>
+            <cost>
+                <pay-mana black="2"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+
+        <!-- Normal cost -->
+        <activated-ability playable="this" zone="hand">
+            <test>
+                <inf right="10">
+                    <left>
+                        <counter restriction-zone="graveyard">
+                            <has-idcard idcard="creature"/>
+                        </counter>
+                    </left>
+                </inf>
+            </test>
+            <cost>
+                <pay-mana value="manacost"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+        <activated-ability zone="play" playable="instant">
+            <cost>
+                <action ref="T"/>
+                <action ref="target-creature"/>
+            </cost>
+            <effects>
+                <action ref="bury"/>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

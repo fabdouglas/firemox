@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pulse of the Forge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	instant
+	pulse of the forge deals 4 damage to target player. then if that player has more life than you, return pulse of the forge to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup>
+							<left register="target-list.first" index="life"/>
+							<right register="you" index="life"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<hop value="2"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

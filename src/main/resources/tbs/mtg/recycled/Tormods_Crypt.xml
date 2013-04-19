@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tormod's Crypt">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {0} 
+{t}, sacrifice tormod's crypt: remove target player's graveyard from the game. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="0"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<controller player="target-list.first"/>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

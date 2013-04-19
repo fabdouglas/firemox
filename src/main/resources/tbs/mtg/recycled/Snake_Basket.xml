@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Snake Basket">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	x, sacrifice snake basket: put x 1/1 green snake creature tokens into play. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<create-card>
+					<card name='Snake'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token snake </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

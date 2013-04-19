@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deathmark Prelate">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b} 
+{2}{b}, {t}, sacrifice a zombie: destroy target non-zombie creature. 
+it can't be regenerated. play this ability only any time you could play a sorcery. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="sorcery" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" black="1" />
+				<action ref="T"/>
+				<action ref="sacrifice-a-creature" value="1">
+					<test>
+						<has-property property="zombie"/>
+					</test>
+				</action>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-property property="zombie"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

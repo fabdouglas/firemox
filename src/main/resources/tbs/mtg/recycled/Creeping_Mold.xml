@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Creeping Mold">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+
+	sorcery
+
+	destroy target artifact, enchantment, or land.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-card">
+					<test>
+						<or> 
+							<test ref="is-targetable-artifact"/>
+							<test ref="is-targetable-land"/>
+							<test ref="is-targetable-enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,4 @@
+super card;20
+Benalish Knight;20
+clockwork avian;20
+island;20

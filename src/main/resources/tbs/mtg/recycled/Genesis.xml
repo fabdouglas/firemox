@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Genesis">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	creature - incarnation
+	4/4
+	at the beginning of your upkeep, if genesis is in your graveyard, you may pay 2g. if you do, return target creature card from your graveyard to your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>incarnation </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='graveyard'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana green="1" colorless="2"/>
+						<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</test>
+						</target>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

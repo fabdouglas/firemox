@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aegis of Honor">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {w} 
+{1}: the next time an instant or sorcery spell would deal damage to you this 
+turn, that spell deals that damage to its controller instead. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+			</cost>
+			<effects>
+				<create-ability>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-any">
+							<source-test>
+								<or>
+									<has-idcard idcard="sorcery"/>
+									<has-idcard idcard="instant"/>
+								</or>
+							</source-test>
+							<destination-test>
+								<is-this player="you"/>
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<target type="context.card2.controller"/>
+							<assign-damage value="context.int"/>
+							<!-- this shield is removed -->
+							<unregister-this/>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

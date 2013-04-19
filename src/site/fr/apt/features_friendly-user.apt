@@ -1,0 +1,37 @@
+ ----
+Une application totalement personnalisable
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+27 Mai 2006
+
+Une application totalement personnalisable
+
+    Firemox peut complètement changer d'apparence (<skin> en Anglais).
+    Certaines apparences sont fournies d'emblée mais vous pouvez tout à fait
+    ajouter les vôtres. Vous devrez alors les télécharger et les placer dans
+    le sous-répertoire <<<lib>>> du répertoire d'installation de Firemox.
+
+ Apparence Substance
+
+[../images/guides/user/themes1.png] Apparence Substance
+
+
+ Apparence Gorilla
+
+[../images/guides/user/themes2.png] Apparence Gorilla
+
+
+ Apparence Aqua
+
+[../images/guides/user/themes3.png] Apparence Aqua
+
+
+ L'apparence Substance fourni certaines fonctionnalités additionnelles.
+
+[../images/guides/user/themes_substance.png] L'apparence Substance fourni certaines fonctionnalités additionnelles
+
+
+ L'application est totalement internationalisée.
+
+[../images/guides/user/i18n.png] i18n

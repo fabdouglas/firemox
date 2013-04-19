@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kithkin Zephyrnaut">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - kithkin soldier
+	2/2
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with kithkin zephyrnaut, you may reveal it. if you do, kithkin zephyrnaut gets +2/+2 and gains flying and vigilance until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="this"/>
+				<action ref="add+2+2-until-eot"/>
+				<action ref="flying-until-eot"/>
+				<action ref="vigilance-until-eot"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

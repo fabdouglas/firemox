@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sanctimony">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	enchantment
+	whenever an opponent taps a mountain for mana, you may gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<and>
+						<has-idcard idcard="mountain" />
+						<not>
+							<controller player="you"/>
+						</not>
+					</and>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source" />
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved" />
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this />
+							<choice controller="you" cancel="true">
+								<either>
+									<action ref="gain-life" value="1"/>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare" />
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

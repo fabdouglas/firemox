@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Personal Incarnation">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{w}{w}{w} 
+
+{0}: the next 1 damage that would be dealt to personal incarnation this turn is 
+dealt to its owner instead. 
+any player may play this ability, but only if he or she owns personal incarnation. 
+
+when personal incarnation is put into a graveyard from play, 
+its owner loses half his or her life, rounded up. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="3"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>avatar incarnation</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play" controller="owner">
+			<cost>
+				<pay-mana colorless="0" />
+			</cost>
+			<effects>
+				<target type="owner"/>
+				<action ref="redirect-1-from-this"/>
+			</effects>
+		</activated-ability>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<modify-register register="controller" index="life" operation="minus" name="lose-%n-life">
+					<value>
+						<div-rounded right="2">
+							<left register="stack" index="0"/>
+						</div-rounded>
+					</value>
+				</modify-register>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

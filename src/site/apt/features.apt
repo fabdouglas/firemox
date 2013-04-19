@@ -1,0 +1,64 @@
+ ----
+Features
+ ----
+Fabrice Daugan
+ ----
+April 9 2007
+
+Current features (0.94)
+
+	Fully skinnable :
+
+[images/guides/user/themes1.png] Substance Look & Feel (OS standard)
+
+[images/guides/user/look-and-feel0.png] Metal Look & Feel (Java standard)
+
+[images/guides/user/look-and-feel0.png] Mac OS Look & Feel
+
+	Can play any CCG and other Turn-Based Strategy game
+
+[images/guides/user/choose-game.png] Choosing a game
+
+	Firemox uses SkinLF abilities, bringing a wide range of Skins. You can freely add yours. :
+
+[images/guides/user/available-skins.png] Available L&F
+
+	Also see the {{{faqs.html}"Faq" section}} to add a new Skin to Firemox.
+	
+	Independently, wallpapers are all customisable.
+
+[images/guides/user/wallpapers.png] Wallpapers
+	
+	Playing alone or against anybody with an IP address
+
+[images/guides/user/create-game.png] Creating a game
+
+[images/guides/user/join-game.png] Joining a game
+	
+	A judge is controlling
+
+[images/guides/user/valid-target.png] Firemox is the judge, no manual rule action for valid target
+	
+	A judge is helping
+
+[images/guides/user/valid-ability.png] Firemox is the judge, no manual rule action for valid abilities
+	
+	Advanced tooltips
+[images/guides/user/advanced-tooltip.png] 
+	
+	Custom turn structure
+
+[images/guides/user/custom-phases.png] 
+	
+	Stepping phase
+
+[images/guides/user/advanced-tooltip.png] Phase control
+	
+	Create your own cards
+
+[images/guides/user/create-cards.png] Create your own cards is very easy
+
+	Also see the {{{dev/create_cards.html}"Create cards" section}}
+	
+	Create your own Turn-Based Strategy game
+	Also see the {{{dev/create_tbs.html}"Create TBS" section}}

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thunder Wall">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u}{u}  flying 
+{u}: thunder wall gets +1/+1 until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>flying  wall</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-modifier index="power" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+					<register-modifier index="toughness" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

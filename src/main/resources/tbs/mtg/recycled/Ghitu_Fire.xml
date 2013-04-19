@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ghitu Fire">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {x}{r} 
+		you may play ghitu fire any time you could play an instant if you pay {2} more to play it. 
+		ghitu fire deals x damage to target creature or player. -->
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<action ref="target-dealtable" />
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0" />
+				</assign-damage>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<pay-mana colorless="2" />
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum register="you" index="manapool" />
+				</input-number>
+				<pay-mana>
+					<colorless register="stack" index="0" />
+				</pay-mana>
+				<action ref="target-dealtable" />
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0" />
+				</assign-damage>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

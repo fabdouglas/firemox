@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cadaverous Bloom">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bg
+	enchantment
+	remove a card in your hand from the game: add bb or gg to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<give-mana black='2' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<give-mana green='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

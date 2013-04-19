@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sulfurous Blast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	instant
+	sulfurous blast deals 2 damage to each creature and each player. if you played this spell during your main phase, sulfurous blast deals 3 damage to each creature and each player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'/>
+				<assign-damage type='damage-normal'>
+					<value>
+						<if-then-else then="3" else="2">
+							<if ref="during-your-main"/>
+						</if-then-else>
+					</value>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

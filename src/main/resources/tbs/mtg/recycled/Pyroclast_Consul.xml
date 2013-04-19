@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pyroclast Consul">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - elemental shaman
+	3/3
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with pyroclast consul, you may reveal it. if you do, pyroclast consul deals 2 damage to each creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<action ref="all-creatures"/>
+				<assign-damage value='2' type='damage-normal'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

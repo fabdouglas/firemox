@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Royal Decree">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	enchantment
+	cumulative upkeep w 
+	whenever a swamp, mountain, black permanent, or red permanent becomes tapped, royal decree deals 1 damage to that permanent's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='cumulative-upkeep'/>
+		<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel='false'>
+					<either>
+						<pay-mana>
+							<white>
+								<counter object-name='age' card='this'/>
+							</white>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<become-tapped>
+				<test>
+					<or>
+						<has-idcard idcard="swamp"/>
+						<has-idcard idcard="mountain"/>
+						<has-color color="red"/>						
+						<has-color color="black"/>
+					</or>
+				</test>
+			</become-tapped>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

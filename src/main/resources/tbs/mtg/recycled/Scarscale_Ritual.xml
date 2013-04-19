@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scarscale Ritual">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(u/b)
+	sorcery
+	
+	as an additional cost to play scarscale ritual, put a -1/-1 counter on a creature you control. draw two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<add-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

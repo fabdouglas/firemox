@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bloodfire Infusion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant creature you control
+	r, sacrifice enchanted creature: bloodfire infusion deals damage equal to the sacrificed creature's power to each creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<target type="attachedto"/>
+				<action ref="put-in-graveyard"/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target>
+			<and>
+				<test ref="valid-to-enchant" />
+				<test ref="is-targetable-creature" />
+				<controller player="you"/>
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

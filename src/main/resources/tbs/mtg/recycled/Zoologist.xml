@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zoologist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - druid
+	1/2
+	3g, t :reveal the top card of your library. if it's a creature card, put it into play. otherwise, put it into your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='3' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has-idcard idcard="creature" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<action ref="move-to-play"/>
+				<hop value="2"/>
+				<action ref="put-in-graveyard"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

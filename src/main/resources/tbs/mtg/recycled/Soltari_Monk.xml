@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Soltari Monk">
+<rules-author-comment></rules-author-comment>
+
+<!--  ww protection from black; shadow  -->
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>protection-from-black shadow soltari monk cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

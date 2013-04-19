@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Vial">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1} 
+
+at the beginning of your upkeep, you may put a charge counter on aether vial. 
+{t}: you may put a creature card with converted mana cost equal to the number 
+of charge counters on aether vial from your hand into play. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<target type="this"/>
+						<add-object object-name="charge"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+					<target type="card" raise-event="false" mode="choose" restriction-zone="hand">
+						<test>
+							<and>
+								<controller player="controller"/>
+								<has-idcard idcard="creature"/>
+								<equal>
+									<left>
+										<counter object-name="charge" card="this"/>
+									</left>
+									<right register="tested" index="manacost"/>
+								</equal>
+							</and>
+						</test>
+					</target>
+			</cost>
+			<effects>
+				<move-card controller="target.owner" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Death Charmer">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} whenever death charmer deals combat damage to a creature, that 
+creature's controller loses 2 life unless he or she pays {2}. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>worm mercenary</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat-only">
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<has-idcard idcard="creature"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="context.card.controller" cancel="false">
+					<either>
+						<modify-register register="target" index="life" operation="minus" name="lose-%n-life" value="2"/>
+					</either>
+					<either>
+						<pay-mana colorless="2" controller="context.card.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,38 @@
+ ----
+Deck Builder
+ ----
+Fabrice Daugan
+ ----
+2007 April 9th
+
+Main window
+
+[../images/guides/user/deckbuilder_full.png] Main
+
+Realtime deck validation
+[../images/guides/user/deckbuilder_validate.png] Validate
+
+    The validation is done on the fly depending on the known format of the game.
+    A number is displayed to indicate the amount of card in your deck.
+
+Statistics
+
+[../images/guides/user/deckbuilder_stats1.png] Colors
+
+[../images/guides/user/deckbuilder_stats2.png] Types
+
+[../images/guides/user/deckbuilder_stats3.png] Manacost
+
+Filters
+
+[../images/guides/user/deckbuilder_filter1.png] Filters
+
+[../images/guides/user/deckbuilder_filter1.png] Filters
+
+    A number is displayed to indicate the available / filtered cards.
+
+Converters
+
+[../images/guides/user/deckbuilder_converter.png] Deck converters
+
+    Deck converters from some deck format such as Shandalar one. Many other would be added on demand.

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Glacial Chasm">
+<rules-author-comment></rules-author-comment>
+
+<!--  land 
+	cumulative upkeep - pay 2 life 
+	
+	if glacial chasm would come into play, sacrifice a land instead. 
+	if you do, put glacial chasm into play. 
+	if you don't, put it into its owner's graveyard. 
+	
+	skip your combat phase. 
+	prevent all damage that would be dealt to you. 
+-->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="cumulative-upkeep"/>
+		<triggered-ability resolution="normal" zone="play" name="cumulative-upkeep">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<action ref="pay-life">
+							<value>
+								<mult right="2">
+									<left>
+										<counter object-name="age" card="this"/>
+									</left>
+								</mult>
+							</value>
+						</action>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this player="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects/>
+		</replacement-ability>
+		<triggered-ability zone="play">
+			<before-phase phase="declare-attack">
+				<test>
+					<is-this player="controller"/>
+				</test>
+			</before-phase>
+			<effects>
+				<target type="currentplayer"/>
+				<skip-phase phase="declare-attack"/>
+				<skip-phase phase="declare-attacking"/>
+				<skip-phase phase="declare-blocking"/>
+				<skip-phase phase="combat-deals"/>
+				<skip-phase phase="eoc"/>
+			</effects>
+		</triggered-ability>
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice>
+					<either>
+						<action ref="sacrifice-a-land" value="1"/>
+						<action ref="put-in-play"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

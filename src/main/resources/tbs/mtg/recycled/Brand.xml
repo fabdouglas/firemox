@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Brand">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	instant
+	gain control of all permanents you own. 
+	cycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<owner player="you"/>
+							<not>
+								<controller player="you"/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

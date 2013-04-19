@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Addle">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{b} 
+choose a color. 
+target player reveals his or her hand, then you choose a card of that color from it. 
+that player discards that card. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="discard-a-player" value="1">
+					<test>
+						<has-color>
+							<color register="stack" index="0"/>
+						</has-color>
+					</test>
+				</action>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

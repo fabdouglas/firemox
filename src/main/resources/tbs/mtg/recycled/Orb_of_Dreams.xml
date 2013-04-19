@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Orb of Dreams">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact
+	permanents come into play tapped.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="permanent"/>
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card destination="playANDtapped" controller="controller" />
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

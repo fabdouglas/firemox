@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jaya Ballard, Task Mage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	legendary creature - human spellshaper
+	2/2
+	r, t, discard a card: destroy target blue permanent.
+	1r, t, discard a card: jaya ballard, task mage deals 3 damage to target creature or player. a creature dealt damage this way can't be regenerated this turn.
+	5rr, t, discard a card: jaya ballard deals 6 damage to each creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<action ref='target-permanent'>
+					<test>
+						<has-color color='blue'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-cannot-be-regenerated'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='2' colorless='5' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<target type='player' mode='all'/>
+				<action ref='all-creatures'/>
+			</cost>
+			<effects>
+				<assign-damage value='6' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

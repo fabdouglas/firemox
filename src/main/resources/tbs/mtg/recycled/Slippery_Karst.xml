@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Slippery Karst">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land slippery karst comes into play tapped. t add g to your mana pool. cycling 2  -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="cycling">
+    			<actions>
+      				<pay-mana colorless="2" />
+    			</actions>
+  		</ability>
+	</abilities>
+</card>

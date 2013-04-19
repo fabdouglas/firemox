@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jodah's Avenger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5u
+	creature - shapeshifter
+	4/4
+	0: until end of turn, jodah's avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>shapeshifter </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add-1-1-until-eot"/>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="double-strike-until-eot"/>
+					</either>
+					<either>
+						<action ref="protection-from-red-until-eot"/>
+					</either>
+					<either>
+						<action ref="vigilance-until-eot"/>
+					</either>
+					<either>
+						<action ref="shadow-until-eot"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

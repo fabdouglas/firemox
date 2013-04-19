@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Elfhame Palace">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land elfhame palace comes into play tapped. t add g or w to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

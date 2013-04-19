@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ashen Ghoul">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{b} haste 
+{b}: return ashen ghoul from your graveyard to play. 
+play this ability only during your upkeep and only if three or more creature 
+cards are above ashen ghoul. 
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>haste zombie</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability zone="graveyard" playable="instant">
+			<test>
+				<and>
+					<test ref="during-your-upkeep"/>
+					<sup-equal right="3">
+						<left>
+							<counter restriction-zone="graveyard">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+									<sup>
+										<left>
+											<position card="this"/>
+										</left>
+										<right>
+											<position card="tested"/>
+										</right>
+									</sup>
+								</and>
+							</counter>
+						</left>
+					</sup-equal>
+				</and>
+			</test>
+			<effects>
+				<pay-mana black="1"/>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Basking Rootwalla">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - lizard
+	1/1
+	1g: basking rootwalla gets +2/+2 until end of turn. play this ability only once each turn.
+	madness 0 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>lizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="madness">
+			<actions/>
+			<actions>
+				<pay-mana colorless="0"/>
+			</actions>
+		</ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<action ref="gain+2+2-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bloodbond March">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bg
+	enchantment
+	whenever a creature spell is played, each player returns all cards with the same name as that spell from his or her graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-idcard idcard="creature"/>
+				</test>
+			</casting>
+			<effects>
+				<target type="card" mode="all"	restriction-zone="graveyard">
+					<test>
+						<has-name name="context.card.name"/>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

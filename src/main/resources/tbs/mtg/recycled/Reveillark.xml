@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reveillark">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - elemental
+	4/3
+	flying
+	when reveillark leaves play, return up to two target creature cards with power 2 or less from your graveyard to play.
+	evoke 5w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>elemental flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+			</moved-card>
+			<cost>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard" hop="1" cancel="true">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<inf-equal right="2">
+								<left register="tested" index="power"/>
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-to-play"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana white='1' colorless='5' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

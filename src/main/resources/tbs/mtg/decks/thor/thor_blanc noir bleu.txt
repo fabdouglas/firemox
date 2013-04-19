@@ -1,0 +1,29 @@
+#Jeu blanc noir bleu
+#
+#John
+#
+#septembre 05, 2000
+#1
+#4th Edition
+#
+Black_Lotus;4
+Mox_Sapphire;4
+Mox_Pearl;4
+Mox_Jet;4
+Sol_Ring;3
+Arena;1
+Scrubland;5
+Underground_Sea;5
+Tundra;5
+Ancestral_Recall;2
+Counterspell;3
+Mahamoti_Djinn;2
+Power_Sink;2
+Time_Walk;4
+Timetwister;3
+Spirit_Link;2
+Serra_Angel;2
+Disenchant;2
+Demonic_Tutor;2
+Sengir_Vampire;2
+Swords_to_Plowshares;3

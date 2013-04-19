@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krosan Reclamation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	target player shuffles up to two target cards from his or her graveyard into his or her library.
+	flashback 1g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+				<action ref='target-player'/>
+				<repeat value="2"/>
+				<target type="card" mode="target-choose" hop="1" restriction-zone="graveyard">
+					<test>
+						<controller player="target-list.first"/>
+					</test>
+				</target>
+				<action ref="shuffle-in-lib"/>
+		</action>
+	</actions>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='flashback'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

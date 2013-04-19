@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Inviolability">
+	<rules-author-comment>By tureba</rules-author-comment>
+	<!-- Enchant creature
+		Prevent all damage that would be dealt to enchanted creature.
+	-->
+	<init>
+		<registers>
+			<register index="white" value="1" />
+			<register index="colorless" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-enchant" />
+		<ability ref="prevent-all-on-attachedto"/>
+	</abilities>
+	<attachment>
+		<modifiers/>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

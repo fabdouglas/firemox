@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Blastoderm">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{g}{g} 
+fading 3  
+blastoderm can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="2"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>beast shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="fading"/>
+	</abilities>
+	<modifiers>
+		<object name="fade"/>
+		<object name="fade"/>
+		<object name="fade"/>
+	</modifiers>
+</card>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Chromium">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{w}{w}{u}{u}{b}{b} flying 
+
+at the beginning of your upkeep, sacrifice chromium unless you pay {w}{u}{b}. 
+rampage 2  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="2"/>
+			<register index="blue" value="2"/>
+			<register index="black" value="2"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="7"/>
+		</registers>
+		<colors>white blue black</colors>
+		<idcards>creature </idcards>
+		<properties>flying elder dragon legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana white="1" black="1" blue="1"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

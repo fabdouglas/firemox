@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Murmuring Bosk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land - forest
+	
+	as murmuring bosk comes into play, you may reveal a treefolk card from your hand. if you don't, murmuring bosk comes into play tapped.
+	t :add w or b to your mana pool. murmuring bosk deals 1 damage to you.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>forest</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="this" />
+						<move-card destination="playANDtapped" controller="controller" />
+					</either>
+					<either>
+						<target type="card" mode="choose" restriction-zone="hand">
+							<test>
+								<and> 
+									<controller player="you"/>
+									<has-property property="treefolk"/>
+								</and>
+							</test>
+						</target>
+						<action ref="reveal"/>
+						<action ref="put-in-play"/>
+					</either>
+				</choice>	
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white='1' />
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black='1' />
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

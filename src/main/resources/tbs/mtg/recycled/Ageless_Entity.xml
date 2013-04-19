@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ageless Entity">
+<rules-author-comment></rules-author-comment>
+
+<!--  3gg 
+	whenever you gain life, put that many +1/+1 counters on ageless entity.   
+-->
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<modified-register register="you" index="life" operation="add"/>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

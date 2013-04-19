@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Eladamri, Lord of Leaves">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {g}{g} 
+all elves have forestwalk. 
+elves can't be the target of spells or abilities. -->
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="shroud" linked="false" layer="global"/>
+				<property-modifier property="forestwalk" linked="false" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-property property="elf"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

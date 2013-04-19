@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ballista Squad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - human rebel
+	2/2
+	xw, t :ballista squad deals x damage to target attacking or blocking creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<test ref='tested-is-attacking'/>
+							<test ref='tested-is-blocking'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

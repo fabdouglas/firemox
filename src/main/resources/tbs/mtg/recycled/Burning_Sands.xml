@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Burning Sands">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	enchantment
+	whenever a creature is put into a graveyard from play, that creature's controller sacrifices a land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card.controller"/>
+				<target type="card" mode="target-choose" raise-event="false" restriction-zone="play" name="%"
+					cancel="false">
+					<test>
+						<and>
+							<has-idcard idcard="land" />
+							<controller player="context.card.controller" />
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

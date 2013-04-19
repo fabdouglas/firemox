@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Green Mana Battery">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {4} {2}, {t}: put a charge counter on black mana battery. {t}, remove any number of charge counters from black mana battery: add {b} to your mana pool, then add an additional {b} to your mana pool for each charge counter removed this way. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="init-counter"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="charge"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<input-number minimum="0" controller="you" operation="set" register="stack" index="0">
+					<text>%x-value</text>
+					<maximum>
+						<counter object-name="charge" card="this"/>
+					</maximum>
+				</input-number>
+			</cost>
+			<effects>
+				<give-mana>
+					<green>
+						<add left="1">
+							<right register="stack" index="0"/>
+						</add>
+					</green>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

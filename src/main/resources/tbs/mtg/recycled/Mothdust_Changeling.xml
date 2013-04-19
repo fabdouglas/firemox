@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mothdust Changeling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	creature - shapeshifter
+	1/1
+	changeling 
+	tap an untapped creature you control: mothdust changeling gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>shapeshifter changeling </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<in-zone zone="playANDuntapped" card="tested" />
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

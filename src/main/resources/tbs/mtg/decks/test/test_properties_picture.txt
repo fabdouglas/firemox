@@ -1,0 +1,2 @@
+Super_Card;20
+Wall_of_air;20

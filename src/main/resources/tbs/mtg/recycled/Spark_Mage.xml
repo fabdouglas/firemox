@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spark Mage">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - dwarf wizard
+	1/1
+	whenever spark mage deals combat damage to a player, you may have spark mage deal 1 damage to target creature that player controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dwarf wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<controller player="context.player"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage type='damage-normal' value="1"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

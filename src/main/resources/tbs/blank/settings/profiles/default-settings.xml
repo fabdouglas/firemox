@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Configuration>
+	<preferred>org.jvnet.substance.SubstanceLookAndFeel</preferred>
+	<zones>
+		<play>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+			<up>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</up>
+		</play>
+		<graveyard>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+			<up>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</up>
+		</graveyard>
+		<hand>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+			<up>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</up>
+		</hand>
+		<library>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+			<up>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</up>
+		</library>
+		<tbz>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+		</tbz>
+		<dbz>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+		</dbz>
+		<side>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+		</side>
+		<stack>
+			<down>
+				<wallpaper/>
+				<mosaic>true</mosaic>
+				<background>-16777216</background>
+			</down>
+		</stack>
+	</zones>
+	<language>auto</language>
+	<automana>true</automana>
+	<autostack>false</autostack>
+	<lastTBS>blank</lastTBS>
+	<logdisptime>false</logdisptime>
+	<loglocked>false</loglocked>
+	<chatdisptime>false</chatdisptime>
+	<chatlocked>false</chatlocked>
+	<threshold-colored>6</threshold-colored>
+	<border-color>auto</border-color>
+	<timer>
+		<hourglass-delay>0</hourglass-delay>
+		<deadlock-delay>0</deadlock-delay>
+		<waiting-delay>0</waiting-delay>
+	</timer>
+	<themes>
+		<skinlf>
+			<caches>
+<cache file="lib/amarachthemepack.zip" name="Amarach"/>
+<cache file="lib/aquathemepack.zip" name="Aqua"/>
+<cache file="lib/b0sumiErgothempack.zip" name="b0sumiErgo"/>
+<cache file="lib/BeOSthemepack.zip" name="BeOS"/>
+<cache file="lib/blueTurquesathemepack.zip" name="BlueTurquesa"/>
+<cache file="lib/coronaHthemepack.zip" name="CoronaH"/>
+<cache file="lib/crystal2themepack.zip" name="Crystal2"/>
+<cache file="lib/fatalEthemepack.zip" name="FatalE"/>
+<cache file="lib/gorillathemepack.zip" name="Gorilla"/>
+<cache file="lib/macosthemepack.zip" name="Mac OS"/>
+<cache file="lib/mmMagra-Xthemepack.zip" name="mmMagra-X"/>
+<cache file="lib/modernthemepack.zip" name="Modern"/>
+<cache file="lib/toxicthemepack.zip" name="Alluminium Alloy / Toxic"/>
+<cache file="lib/xplunathemepack.zip" name="XP Luna"/>
+</caches>
+		</skinlf>
+	</themes>
+	<port>1299</port>
+	<clientPassword>OBF|</clientPassword>
+	<ip>127.0.0.1</ip>
+	<gameName>My Game</gameName>
+	<serverPassword>OBF|</serverPassword>
+	<useMana>true</useMana>
+	<opponentResponse>true</opponentResponse>
+	<database>
+		<dataOrder>blank-sample</dataOrder>
+		<pictureOrder>blank-sample</pictureOrder>
+	</database>
+	
+
+<decks>
+<deck>tbs/mtg/decks/deck1.txt</deck>
+<deck>tbs/blank/decks/deck1.txt</deck>
+</decks>
+</Configuration>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grasslands">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	grasslands comes into play tapped.
+	t, sacrifice grasslands: search your library for a forest or plains card and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<or>
+							<has-idcard idcard='forest'/>
+							<has-idcard idcard='plains'/>
+						</or>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

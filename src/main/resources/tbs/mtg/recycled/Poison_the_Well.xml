@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Poison the Well">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(b/r)(b/r)
+	sorcery
+	
+	destroy target land. poison the well deals 2 damage to that land's controller.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="2"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target type="target-list.last.controller"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="1" red="1"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target type="target-list.last.controller"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana red="2"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target type="target-list.last.controller"/>
+				<assign-damage value='2' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

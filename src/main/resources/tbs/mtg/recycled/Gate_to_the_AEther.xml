@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gate to the AEther">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	at the beginning of each player's upkeep, that player reveals the top card of his or her library. if it's an artifact, creature, enchantment, or land card, the player may put it into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="card" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="currentplayer"/>
+							<position position="1"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="enchantment"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</if-then-hop>
+				<choice controller="currentplayer" cancel="true">
+					<either>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

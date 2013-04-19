@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Vine Trellis">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  1g defender  t add g to your mana pool. -->
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>defender plant wall</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="tap-add-G"/>
+	</abilities>
+</card>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<deck-translation xmlns="http://sourceforge.net/projects/firemox/deck-translation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/deck-translation ../deck-translation.xsd">
+	<replace this=" : " by="_" />
+	<replace this=" :" by="_" />
+	<replace this=": " by="_" />
+	<replace this=":" by="_" />
+	<replace this=" ' " by="" />
+	<replace this="' " by="" />
+	<replace this=" '" by="" />
+	<replace this="'" by="" />
+	<replace this="&#180;" by="" />
+	<replace this=" , " by="_" />
+	<replace this=" ," by="_" />
+	<replace this=", " by="_" />
+	<replace this="," by="" />
+	<replace this=" // " by="__" />
+	<replace this="/" by="_" />
+	<replace this=" - " by="_" />
+	<replace this=" -" by="_" />
+	<replace this="- " by="_" />
+	<replace this="-" by="_" />
+	<replace this="  " by="_" />
+	<replace this=" " by="_" />
+	<replace this="&#198;" by="AE" />
+	<replace this="?" by="" />
+</deck-translation>
+

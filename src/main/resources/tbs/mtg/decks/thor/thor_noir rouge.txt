@@ -1,0 +1,29 @@
+#Jeu noir rouge
+#
+#John
+#
+#février 20, 2000
+#1
+#4th Edition
+#
+Badlands;15
+Black_Lotus;4
+Dingus_Egg;2
+Mox_Jet;5
+Mox_Ruby;5
+Sol_Ring;4
+Dark_Ritual;3
+Demonic_Hordes;2
+Demonic_Tutor;2
+Fork;2
+Lightning_Bolt;4
+Stone_Rain;3
+Fireball;3
+Sinkhole;3
+Disintegrate;3
+Mana_Flare;2
+Black_Vise;1
+Howling_Mine;2
+Animate_Dead;1
+Wheel_of_Fortune;2
+Winds_of_Change;2

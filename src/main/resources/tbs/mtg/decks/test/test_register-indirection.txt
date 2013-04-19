@@ -1,0 +1,4 @@
+Swamp;20
+Nightmare;20
+Bad_Moon;20
+Spirit_Link:20

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amulet of Unmaking">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	5, t, remove amulet of unmaking from the game: remove target artifact, creature, or land from the game. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='5' />
+				<action ref='T'/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+				<action ref='target-permanent'>
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="land"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

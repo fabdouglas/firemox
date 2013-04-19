@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cytoplast_Root_Kin">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<!-- Creature - Elemental Mutant
+		P/T: 	0/0
+		Rules Text (Oracle): 	Graft 4 (This creature comes into play with four +1/+1 
+		counters on it. 
+		Whenever another creature comes into play, you may move a +1/+1 counter from 
+		this creature onto it.)
+		When Cytoplast Root-Kin comes into play, put a +1/+1 counter on each other 
+		creature you control that has a +1/+1 counter on it.
+		2 Mana: Move a +1/+1 counter from target creature you control onto Cytoplast 
+		Root-Kin.
+		
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="green" value="2" />
+			<register index="power" value="0" />
+			<register index="toughness" value="0" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>elemental mutant</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+				<repeat value="4" />
+				<add-object object-name="+1/+1" />
+			</effects>
+		</activated-ability>
+
+		<triggered-ability name="Graft" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature" />
+						<not>
+							<is-this />
+						</not>
+						<controller player="you" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<target type="this" />
+						<remove-object object-name="+1/+1" />
+						<target-list operation="clear" name="%" />
+						<target type="context.card" />
+						<add-object object-name="+1/+1" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<is-this />
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<not>
+								<is-this />
+							</not>
+							<controller player="you" />
+							<equal right="0">
+								<left>
+									<counter object-name="+1/+1" card="tested" />
+								</left>
+							</equal>
+						</and>
+					</test>
+				</target>
+				<add-object object-name="+1/+1" />
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+			</cost>
+			<effects>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you" />
+							<sup right="0">
+								<left>
+									<counter object-name="+1/+1" card="tested" />
+								</left>
+							</sup>
+						</and>
+					</test>
+				</action>
+				<remove-object object-name="+1/+1" />
+				<target-list operation="clear" name="%" />
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Decree of Justice">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {x}{x}{2}{w}{w} put x 4/4 white angel creature tokens with flying into play. 
+		cycling {2}{w} when you cycle decree of justice, you may pay {x}. 
+		if you do, put x 1/1 white soldier creature tokens into play. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="2" />
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-xx" />
+			</cost>
+			<effects>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<create-card>
+					<card name="Angel">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="4" />
+								<register index="toughness" value="4" />
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>angel flying token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="2" white="1" />
+				<action ref="pay-x" />
+			</actions>
+			<actions>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<create-card>
+					<card name="Soldier">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1" />
+								<register index="toughness" value="1" />
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>soldier token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+			</actions>
+		</ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="2" white="1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

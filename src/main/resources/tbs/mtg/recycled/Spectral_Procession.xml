@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spectral Procession">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(2/w)(2/w)(2/w)
+	sorcery
+	
+	 put three 1/1 white spirit creature tokens with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<repeat value='3'/>
+			<create-card>
+				<card name='Spirit'>
+					<rules-author-comment></rules-author-comment>
+					<init>
+						<registers>
+							<register index='power' value='1'/>
+							<register index='toughness' value='1'/>
+						</registers>
+						<colors>white</colors>
+						<idcards>creature</idcards>
+						<properties>token spirit flying </properties>
+					</init>
+				</card>
+			</create-card>
+			<move-card controller='you' destination='play'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="6"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="4" white="1"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="2" white="2"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana white="3"/>
+			</cost>
+			<effects>
+				<action ref="main"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

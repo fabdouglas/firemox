@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Farmstead">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+
+		<!-- At the beginning of your upkeep, you may pay {W}{W}.  If you do, you gain 1 life. 
+		    [Oracle 99/09/03] -->
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<pay-mana white="2"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+			 <action ref="gain-life"  value="1"/>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers />
+		<valid-target ref="valid-land-to-enchant" />
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

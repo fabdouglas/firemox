@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zur the Enchanter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wub
+	legendary creature - human wizard
+	1/4
+	flying
+	whenever zur the enchanter attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it into play. if you do, shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<and>
+							<inf-equal right="3">
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+							<has-idcard idcard='enchantment'/>
+						</and>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

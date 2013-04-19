@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ali from Cairo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - human
+	0/1
+	damage that would reduce your life total to less than 1 reduces it to 1 instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<inf right="1">
+							<left>
+								<minus right="context.int">
+									<left register="you" index="life"/>
+								</minus>
+							</left>
+						</inf>
+						<is-player target="you"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="you"/>
+				<assign-damage type="context.int2">
+					<value>
+						<minus right="1">
+							<left register="you" index="life"/>
+						</minus>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

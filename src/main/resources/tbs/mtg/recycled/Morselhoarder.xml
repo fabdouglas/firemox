@@ -1,0 +1,100 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Morselhoarder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4(r/g)(r/g)
+	creature - elemental
+	6/4
+	morselhoarder comes into play with two -1/-1 counters on it. remove a -1/-1 counter from morselhoarder: add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<modifiers>
+		<object object-name="-1/-1"/>
+		<object object-name="-1/-1"/>
+	</modifiers>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='2' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='1' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' red='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<give-mana black='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<give-mana blue='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<give-mana white='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<give-mana green='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</cost>
+			<effects>
+				<give-mana red='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vigor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ggg
+	creature - elemental incarnation
+	6/6
+	trample
+	if damage would be dealt to a creature you control other than vigor, prevent that damage. put a +1/+1 counter on that creature for each 1 damage prevented this way.
+	when vigor is put into a graveyard from anywhere, shuffle it into its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental incarnation trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<repeat value="context.int"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

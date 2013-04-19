@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mana Matrix">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6
+	artifact
+	instant and enchantment spells you play cost up to 2 less to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<and>
+					<controller player="you"/>
+					<or>
+						<has-idcard idcard="instant"/>
+						<has-idcard idcard="enchantment"/>
+					</or>
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless='-2' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

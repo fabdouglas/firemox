@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Sting">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{r} whenever an opponent plays a creature spell, aether sting deals 
+1 damage to that player. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="opponent" />
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card.controller"/>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

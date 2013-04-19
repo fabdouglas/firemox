@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Descendant of Masumaro">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - human monk
+	1/1
+	at the beginning of your upkeep, put a +1/+1 counter on descendant of masumaro for each card in your hand, then remove a +1/+1 counter from descendant of masumaro for each card in target opponent's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human monk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="hand">
+							<controller player="you"/>
+						</counter>
+					</value>
+				</repeat>
+				<add-object object-name='+1/+1'/>
+				<repeat>
+					<value>
+						<counter restriction-zone="hand">
+							<controller player="opponent"/>
+						</counter>
+					</value>
+				</repeat>
+				<remove-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

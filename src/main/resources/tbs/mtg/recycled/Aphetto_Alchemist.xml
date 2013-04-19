@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aphetto Alchemist">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-morph" />
+		<ability ref="morph">
+			<actions>
+				<pay-mana blue="1" />
+			</actions>
+		</ability>
+		<activated-ability playable="this" zone="play">
+			<test>
+				<is-face-up card="this" />
+			</test>
+			<cost>
+				<action ref="T" />
+				<target type="card" restriction-zone="play">
+					<test>
+						<or>
+							<has-idcard idcard="creature" card="tested" />
+							<has-idcard idcard="artifact" card="tested" />
+						</or>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<untap />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Extruder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	4/3
+	echo 4 
+	sacrifice an artifact: put a +1/+1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>juggernaut</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='echo'>
+			<actions>
+				<pay-mana colorless='4' />
+			</actions>
+		</ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-an-artifact' value='1'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

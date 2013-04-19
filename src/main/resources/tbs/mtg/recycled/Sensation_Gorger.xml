@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sensation Gorger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - goblin shaman
+	2/2
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with sensation gorger, you may reveal it. if you do, each player discards his or her hand and draws four cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="card" mode="all" restriction-zone="hand"/>
+				<action ref="discard-cards"/>
+				<target type="player" mode="all"/>				
+				<repeat value="4"/>
+				<action ref="draw-a-card"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

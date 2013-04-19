@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Uncontrolled Infestation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment - aura
+	enchant nonbasic land
+	when enchanted land becomes tapped, destroy it.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<become-tapped>
+				<test>
+					<is target="attachedto"/>
+				</test>
+			</become-tapped>
+			<effects>
+				<target type="attachedto"/>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<valid-target>
+			<and>
+				<test ref="is-nonbasic-land"/>
+				<test ref="valid-to-enchant" />
+				<test ref="is-targetable-land" />
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

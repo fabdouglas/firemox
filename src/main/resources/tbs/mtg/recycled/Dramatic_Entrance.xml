@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dramatic Entrance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	instant
+	
+	you may put a green creature card from your hand into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<has-color color="green"/>
+							<has-idcard idcard="creature"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

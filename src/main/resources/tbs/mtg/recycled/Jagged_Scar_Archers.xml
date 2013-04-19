@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jagged-Scar Archers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - elf archer
+	*/*
+	jagged-scar archers's power and toughness are each equal to the number of elves you control.
+	t :jagged-scar archers deals damage equal to its power to target creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-property property="elf"/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-property property="elf"/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf archer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register='this' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

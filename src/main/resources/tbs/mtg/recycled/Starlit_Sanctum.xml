@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Starlit Sanctum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	w, t, sacrifice a cleric creature: you gain life equal to the sacrificed creature's toughness.
+	b, t, sacrifice a cleric creature: target player loses life equal to the sacrificed creature's power.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<has-property property="cleric"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value register='target-list.first' index='toughness'/>
+				</action>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<has-property property="cleric"/>
+					</test>
+				</action>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target'>
+					<value register='target-list.first' index='power'/>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

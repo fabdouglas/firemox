@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Demonfire">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!--
+		xr
+	sorcery
+	demonfire deals x damage to target creature or player. if a creature dealt 
+		damage this way would be put into a graveyard this turn, remove it from the 
+		game instead.
+	hellbent - if you have no cards in hand, demonfire can't be countered by 
+		spells or abilities and the damage can't be prevented.
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<target mode="choose" type="dealtable" restriction-zone="play">
+					<test ref="is-targetable-dealtable" />
+				</target>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test ref="hellbent" />
+				</if-then-hop>
+				<assign-damage type="damage-cannot-be-regenerated">
+					<value register="stack" index="0" />
+				</assign-damage>
+				<hop value="2"/>
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0" />
+				</assign-damage>
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<is-player target="target-list.first" />
+						</not>
+					</test>
+				</if-then-hop>
+				<create-ability>
+					<!-- save the damaged creature -->
+					<save target="target-list.first" />
+					<replacement-ability zone="play">
+						<moved-card>
+							<source-test>
+								<is target="saved" />
+							</source-test>
+							<destination-test>
+								<in-zone zone="graveyard" />
+							</destination-test>
+						</moved-card>
+						<effects>
+							<target type="context.card" />
+							<move-card destination="side" controller="target.owner" />
+							<unregister-this />
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<property-modifier property="cannot-be-countered" layer="internal" activation-zone="stack">
+			<while>
+				<test ref="hellbent" />
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

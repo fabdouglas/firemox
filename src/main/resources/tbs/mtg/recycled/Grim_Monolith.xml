@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Grim Monolith">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2} grim monolith doesn't untap during your untap step. 
+{t}: add {3} to your mana pool. 
+{4}: untap grim monolith. 
+
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>does-not-untap</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana colorless="3" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="4" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

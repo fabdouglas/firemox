@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blizzard Specter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ub
+	snow creature - specter
+	2/3
+	flying
+	whenever blizzard specter deals combat damage to a player, choose one - that player returns a permanent he or she controls to its owner's hand; or that player discards a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>snow specter flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="card" mode="contextchoose" restriction-zone="play">
+							<test>
+								<and>
+									<controller player="context.player"/>
+									<test ref="is-target" />
+								</and>
+							</test>
+						</target>
+						<action ref='return-to-hand'/>
+					</either>
+					<either>
+						<target type="context.player"/>
+						<action ref='player-discard' value='1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

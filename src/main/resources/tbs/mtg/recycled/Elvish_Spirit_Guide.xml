@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elvish Spirit Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - spirit
+	2/2
+	remove elvish spirit guide in your hand from the game: add g to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<give-mana green='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

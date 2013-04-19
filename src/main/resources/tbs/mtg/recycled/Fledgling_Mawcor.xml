@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fledgling Mawcor">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3u
+		creature - beast
+		2/2
+		flying
+		t :fledgling mawcor deals 1 damage to target creature or player.
+		morph uu 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='3' />
+			<register index='power' value='2' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>beast flying</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T' />
+				<action ref='target-dealtable' />
+			</cost>
+			<effects>
+				<assign-damage value='1' type='damage-normal' />
+			</effects>
+		</activated-ability>
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

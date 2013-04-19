@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sunscape Familiar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - wall
+	0/3
+	defender 
+	green spells and blue spells you play cost 1 less to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<and>
+					<controller player="you"/>
+					<or>
+						<has-color color="green"/>
+						<has-color color="blue"/>
+					</or>
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless='-1' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

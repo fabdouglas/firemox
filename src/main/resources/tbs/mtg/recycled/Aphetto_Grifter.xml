@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aphetto Grifter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - wizard
+	1/1
+	tap two untapped wizards you control: tap target permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="wizard"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+				<action ref="target-permanent"/>
+			</cost>
+			<effects>
+				<tap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

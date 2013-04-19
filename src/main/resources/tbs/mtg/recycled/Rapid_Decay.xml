@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rapid Decay">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	instant
+	remove from the game up to three target cards in a single graveyard.
+	cycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-player"/>
+				<repeat value="3"/>
+				<target type="card" mode="choose" restriction-zone="graveyard" hop="1">
+					<test>	
+						<controller player="target-list.first"/>
+					</test>
+				</target>
+				<target-list operation="remove-first"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

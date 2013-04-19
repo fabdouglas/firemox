@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Entrails Feaster">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - zombie cat
+	1/1
+	at the beginning of your upkeep, you may remove a creature card in a graveyard from the game. if you do, put a +1/+1 counter on entrails feaster. if you don't, tap entrails feaster.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie cat </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+							<test>
+								<has-idcard idcard="creature"/>
+							</test>
+						</target>
+						<action ref="remove-from-game"/>
+						<target-list operation="clear"/>
+						<target type='this'/>
+						<add-object object-name='+1/+1'/>
+					</either>
+					<either>
+						<target type='this'/>
+						<tap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thelonite Hermit">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="green" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>elf shaman</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green="2" colorless="3" />
+			</actions>
+		</ability>
+		<triggered-ability zone="play">
+			<faced-up>
+				<test>
+					<is-this />
+				</test>
+			</faced-up>
+			<effects>
+				<repeat value="4" />
+				<create-card>
+					<card name="Saproling">
+						<init>
+							<registers>
+								<register index="power" value="1" />
+								<register index="toughness" value="1" />
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>saproling token</properties>
+						</init>
+						<abilities />
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="toughness" operation="add" value="1" linked="true"
+					layer="global" />
+				<register-modifier index="power" operation="add" value="1" linked="true"
+					layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="creature" />
+					<in-zone zone="play" />
+					<has-property property="saproling" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

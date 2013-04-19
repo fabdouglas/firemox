@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wake Thrasher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - merfolk soldier
+	1/1
+	whenever a permanent you control becomes untapped, wake thrasher gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<become-untapped>
+				<test>
+					<controller player="you"/>
+				</test>
+			</become-untapped>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

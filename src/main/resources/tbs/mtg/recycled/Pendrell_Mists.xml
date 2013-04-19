@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pendrell Mists">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment
+	all creatures have "at the beginning of your upkeep, sacrifice this creature unless you pay 1."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability resolution='normal' zone='play'>
+							<beginning-of-phase phase='upkeep'>
+								<test>
+									<and>
+										<phase-is phase="upkeep" />
+										<controller player="currentplayer" card="currentcard" />
+									</and>
+								</test>
+							</beginning-of-phase>
+							<cost>
+								<choice cancel='false' controller="currentplayer">
+									<either>
+										<pay-mana colorless='1'/>
+									</either>
+									<either>
+										<action ref='sacrifice-this'/>
+									</either>
+								</choice>
+							</cost>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

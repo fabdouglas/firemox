@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Scragnoth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+
+	creature - beast
+
+	3/4
+
+	scragnoth can't be countered.
+	protection from blue
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>protection-from-blue cannot-be-countered beast</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

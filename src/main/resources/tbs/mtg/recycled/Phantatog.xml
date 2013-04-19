@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Phantatog">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1wu
+	creature - atog
+	1/2
+	sacrifice an enchantment: phantatog gets +1/+1 until end of turn.
+	discard a card: phantatog gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>atog </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-an-enchantment' value='1'/>
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

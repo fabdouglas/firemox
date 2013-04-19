@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Explosive Growth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	kicker 5 
+	target creature gets +2/+2 until end of turn. if the kicker cost was paid, that creature gets +5/+5 until end of turn instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="5" />
+				<action ref="target-creature"/>
+			</actions>
+			<actions>
+				<action ref="add+5+5-until-eot"/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

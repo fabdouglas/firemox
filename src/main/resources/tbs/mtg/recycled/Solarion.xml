@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Solarion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact creature
+	0/0
+	sunburst 
+	t :double the number of +1/+1 counters on solarion.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>sunburst construct</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<repeat>
+					<value>
+						<counter object-name="+1/+1" card="this"/>
+					</value>
+				</repeat>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Force of Nature">
+	<rules-author-comment>By brius</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="green" value="4"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="8"/>
+			<register index="toughness" value="8"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>trample elemental</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<!-- Text(4th/5th+errata): 8/8, Trample. ; At the beginning of your upkeep, 
+		~this~ deals 8 damage to you unless you pay {G}{G}{G}{G}. 
+		[Oracle 00/02/01] -->
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice>
+					<either>
+						<pay-mana green="4"/>
+					</either>
+					<either>
+						<target type="you"/>
+						<assign-damage value="8"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

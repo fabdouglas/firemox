@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dominaria's Judgment">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{w} until end of turn, creatures you control gain protection 
+from white if you control a plains, 
+from blue if you control an island, 
+from black if you control a swamp, 
+from red if you control a mountain, 
+and from green if you control a forest. 
+
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<create-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+						 	<property-modifier property="protection-from-white" linked="false" layer="global"/>
+						</modifiers>
+						<while>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="plains"/>
+								</and>
+							</has>
+						</while>
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</static-modifier>
+				</create-modifier>
+				<create-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+						 	<property-modifier property="protection-from-blue" linked="false" layer="global"/>
+						</modifiers>
+						<while>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="island"/>
+								</and>
+							</has>
+						</while>
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</static-modifier>
+				</create-modifier>
+				<create-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+						 	<property-modifier property="protection-from-green" linked="false" layer="global"/>
+						</modifiers>
+						<while>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="forest"/>
+								</and>
+							</has>
+						</while>
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</static-modifier>
+				</create-modifier>
+				<create-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+						 	<property-modifier property="protection-from-red" linked="false" layer="global"/>
+						</modifiers>
+						<while>
+							<sup right="0">
+								<left>
+									<counter restriction-zone="play">
+										<and>
+											<controller player="you"/>
+											<has-idcard idcard="mountain"/>
+										</and>
+									</counter>
+								</left>
+							</sup>
+						</while>
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</static-modifier>
+				</create-modifier>
+				<create-modifier>
+					<static-modifier filter-zone="play">
+						<modifiers>
+						 	<property-modifier property="protection-from-black" linked="false" layer="global"/>
+						</modifiers>
+						<while>
+							<sup right="0">
+								<left>
+									<counter restriction-zone="play">
+										<and>
+											<controller player="you"/>
+											<has-idcard idcard="swamp"/>
+										</and>
+									</counter>
+								</left>
+							</sup>
+						</while>
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</static-modifier>
+				</create-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

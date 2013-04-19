@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Legacy Weapon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	legendary artifact
+	wubrg: remove target permanent from the game.
+	if legacy weapon would be put into a graveyard from anywhere, reveal legacy weapon and shuffle it into its owner's library instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' red='1' green='1' blue='1' black='1' />
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+		<replacement-ability name="state-based-token" zone="graveyard">
+			<moved-card>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this"/>
+				<action ref="reveal"/>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

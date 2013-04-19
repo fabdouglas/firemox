@@ -1,0 +1,114 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Coalition Victory'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--
+		3wubrg
+		sorcery
+		you win the game if you control a land of each basic land type and a creature of each color.
+	-->
+
+	<init>
+		<registers>
+			<register index='white' value='1' />
+			<register index='red' value='1' />
+			<register index='green' value='1' />
+			<register index='blue' value='1' />
+			<register index='black' value='1' />
+			<register index='colorless' value='3' />
+		</registers>
+		<colors>white red green blue black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<and>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<test ref="is-basic-land" />
+									<has-idcard idcard="swamp" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<test ref="is-basic-land" />
+									<has-idcard idcard="forest" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<test ref="is-basic-land" />
+									<has-idcard idcard="mountain" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<test ref="is-basic-land" />
+									<has-idcard idcard="island" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<test ref="is-basic-land" />
+									<has-idcard idcard="plains" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<has-idcard idcard="creature" />
+									<has-color color="black" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<has-idcard idcard="creature" />
+									<has-color color="blue" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<has-idcard idcard="creature" />
+									<has-color color="green" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<has-idcard idcard="creature" />
+									<has-color color="red" />
+								</and>
+							</has>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you" />
+									<has-idcard idcard="creature" />
+									<has-color color="white" />
+								</and>
+							</has>
+						</and>
+					</test>
+				</if-then-hop>
+				<lose-game player="opponent" />
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

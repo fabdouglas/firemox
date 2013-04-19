@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ceremonial Guard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - human soldier
+	3/4
+	when ceremonial guard attacks or blocks, destroy it at end of combat.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<action ref='destroy-target-eoc'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<target type="this"/>
+				<action ref='destroy-target-eoc'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,30 @@
+#Jeu rouge
+#
+#John
+#
+#novembre 03, 1999
+#1
+#4th Edition
+#
+Black_Lotus;4
+Disintegrate;3
+Dragon_Whelp;2
+Eternal_Warrior;2
+Fireball;3
+Fork;2
+Gauntlet_of_Might;3
+Giant_Strength;2
+Granite_Gargoyle;2
+Howling_Mine;1
+Iron_Star;2
+Lightning_Bolt;4
+Mana_Flare;3
+Shivan_Dragon;2
+Sol_Ring;3
+Mountain;15
+Mox_Ruby;8
+Wheel_of_Fortune;2
+Feldons_Cane;1
+Blood_Lust;2
+Rukh_Egg;2
+Wall_of_Stone;1

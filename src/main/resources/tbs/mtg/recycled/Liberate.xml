@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Liberate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	remove target creature you control from the game. at end of turn, return that card to play under its owner's control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="side">
+						<end-of-phase phase="eot" />
+						<effects>
+							<target type="saved"/>
+							<action ref="move-to-play" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

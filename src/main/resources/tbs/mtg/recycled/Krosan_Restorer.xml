@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Krosan Restorer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - druid
+	1/2
+	t :untap target land.
+	threshold - t :untap up to three target lands. play this ability only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<repeat value="3"/>
+				<target type="card" mode="choose" restriction-zone="play" hop="1">
+					<test ref="is-targetable-land" />
+				</target>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

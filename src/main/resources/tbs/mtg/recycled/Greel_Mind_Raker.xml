@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Greel, Mind Raker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	legendary creature - spellshaper
+	3/3
+	xb, t, discard two cards: target player discards x cards at random.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend horror spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='discard' value="2"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard-random'>
+					<value register="stack" index="0"/>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

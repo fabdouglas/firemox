@@ -1,0 +1,26 @@
+#Jeu envoutant
+#
+#John
+#
+#août 25, 2001
+#1
+#4th Edition
+#
+Cursed_Land;4
+Warp_Artifact;4
+Psychic_Venom;4
+Wanderlust;4
+Stream_of_Life;1
+Black_Lotus;4
+Howling_Mine;2
+Mox_Jet;3
+Mox_Sapphire;3
+Mox_Emerald;3
+Time_Walk;4
+Timetwister;4
+Counterspell;4
+Power_Sink;3
+Bayou;5
+Tropical_Island;5
+Underground_Sea;5
+Demonic_Tutor;2

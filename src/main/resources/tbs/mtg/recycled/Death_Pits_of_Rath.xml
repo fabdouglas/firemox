@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Death Pits of Rath">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b}{b} whenever a creature is dealt damage, destroy it. 
+it can't be regenerated. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<has-idcard idcard="creature"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<action ref="bury"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

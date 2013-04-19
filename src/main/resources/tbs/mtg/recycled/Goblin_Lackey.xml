@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Lackey">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - goblin
+	1/1
+	whenever goblin lackey deals damage to a player, you may put a goblin card from your hand into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="card" mode="choose" raise-event="true" restriction-zone="hand">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-property property="goblin"/>
+								</and>
+							</test>
+						</target>
+						<move-card destination="play" controller="you"/>
+					</either>
+				</choice>
+			</effects> 
+		</triggered-ability>
+	</abilities>
+</card>

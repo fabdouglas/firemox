@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dauthi Mindripper">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{b} shadow  
+whenever dauthi mindripper attacks and isn't blocked, you may sacrifice it. 
+if you do, defending player discards three cards from his or her hand. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>dauthi minion shadow</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<repeat value="3"/>
+				<target type="card" mode="opponentchoose" restriction-zone="hand">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<action ref="opponent-discards" value="3"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

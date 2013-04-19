@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Angel of Mercy">
+	<rules-author-comment>By brius not tested yet...</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>angel flying</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<!-- l'attribut 'zone' des capacités (triggered-ability et activated-ability) sert de filtre
+		    pour le moteur du jeu, et indique dans quelle zone doit se trouver la carte pour que 
+		    cette capacité puisse être activable. En fait dès qu'une carte bouge, on retire/ajoute
+		    les capacités de cette carte suivant l'attribut 'zone' de chacune d'elle. 
+		    Les capacités sont ajoutées avant de générer l'événement 'moved-card' en prévision de la 
+		    prochaine zone de la carte ce qui n'était pas fait avant. Ce qui faisait que la
+		    capacité de cette carte ne marchait puisque la zone d'activation est 'play' et que la 
+		    capacité n'était pas encore enregistrée lorsque l'événement était généré.
+		    Les capacités sont des-enregistrées après que l'événement 'moved-card' a été généré.
+		    
+		    Pour une capacité requérant la carte d'être dégagée et en jeu pour pouvoir être activée, 
+		    il faut mettre le filtre 'zone="play" ' (normal quoi), mais il faudra ajouter le test dans 
+		    l'événement : <in-zone zone="playANDuntaped" card="owner"/> pour représenter la contrainte 
+		    'dégagée'.
+		    Pour ce qui est de l'attribut "card", il spécifie quelle carte est concernée par le test,
+		    'dégagée'lorsque sa valeur est ambigüe, il faut le spécifier. Il peut prendre les valeurs 'owner', 
+		    'tested', 'target-list.last' -> cf mtg.xml.
+		    Dans la version 0.80, les valeurs suivantes seront ajoutées : 'context.card',
+		    'context.card2' et peut être d'autres.
+		    -->
+		<triggered-ability zone="play">
+			<moved-card>
+				<!-- no care where this card came from -->
+				<source-test>
+					<and>
+						<is-this/>
+						<!-- nevertheless, changing controller does not trigger this ability -->
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="gain-life" value="3"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tahngarth, Talruum Hero">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	legendary creature - minotaur
+	4/4
+	vigilance
+	1r, t :tahngarth, talruum hero deals damage equal to its power to target creature. that creature deals damage equal to its power to tahngarth.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend minotaur warrior vigilance </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal' from="this" to="target-list.first">
+					<value register='this' index='power'/>
+				</assign-damage>
+				<assign-damage type='damage-normal' from="target-list.first" to="this">
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

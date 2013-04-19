@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Broker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - cephalid
+	2/2
+	t :target player draws two cards, then discards two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>cephalid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value='2'/>
+				<action ref='draw-a-card'/>
+				<action ref='player-discard' value="2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

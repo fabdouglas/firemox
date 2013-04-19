@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Aggressor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - kavu
+	3/2
+	kicker 4 
+	kavu aggressor can't block.
+	if the kicker cost was paid, kavu aggressor comes into play with a +1/+1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>kavu cannot-block </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="4"/>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

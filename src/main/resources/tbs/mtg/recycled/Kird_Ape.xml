@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kird Ape">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - ape
+	1/1
+	kird ape gets +1/+2 as long as you control a forest.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>ape </properties>
+	</init>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="forest" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="2">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="forest" />
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

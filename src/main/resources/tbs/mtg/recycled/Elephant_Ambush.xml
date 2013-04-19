@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Elephant Ambush">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+
+	instant
+
+	put a 3/3 green elephant creature token into play.
+	flashback 6gg 
+ -->
+
+
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+			<create-card>
+				<card name="elephant">
+					<rules-author-comment></rules-author-comment>
+					<init>
+						<registers>
+							<register index="power" value="3"/>
+							<register index="toughness" value="3"/>
+						</registers>
+						<colors>green</colors>
+						<idcards>creature</idcards>
+						<properties>elephant token</properties>
+					</init>
+				</card>
+			</create-card>
+			<move-card controller="you" destination="play"/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana green="2" colorless="6" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

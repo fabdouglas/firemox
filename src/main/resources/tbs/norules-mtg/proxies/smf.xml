@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	xmlns:mp="http://sourceforge.net/projects/firemox" name="smf"
+	home="http://www.smfcorp.net" language="francais" encoding="iso-8859-1">
+	<alias>
+		<alias property="card.set" local-value="smf" ref="smf" />
+	</alias>
+
+	<pictures>
+		<picture url="${card.id}.jpg" base="http://www.smfcorp.net/images/funcards" />
+	</pictures>
+	<data>
+		<!--  Streams. Order is important -->
+		<streams base="http://www.smfcorp.net/funcards/search.php?">
+			<stream url="text=${card.name}" />
+		</streams>
+		<!-- Managed properties for this proxy. Order is important -->
+		<properties></properties>
+	</data>
+</proxy>

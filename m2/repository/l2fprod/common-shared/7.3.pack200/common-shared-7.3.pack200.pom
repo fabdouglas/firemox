@@ -1,0 +1,14 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>l2fprod</groupId>
+  <artifactId>common-shared</artifactId>
+  <version>7.3.pack200</version>
+ 	<name>Organizing the option dialog</name>
+  <description>
+		Even if this is not the primary goal of the JButtonBar, this is where you often find it. It is a bar made of buttons [sic], you have seen it in Mozilla Firebird, IntelliJ.  
+	</description>
+	<url>http://common.l2fprod.com</url>
+	<distributionManagement>
+		<downloadUrl>http://common.l2fprod.com/download.php</downloadUrl>
+	</distributionManagement>
+</project>

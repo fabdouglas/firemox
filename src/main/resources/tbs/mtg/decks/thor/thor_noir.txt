@@ -1,0 +1,28 @@
+#Jeu noir
+#
+#John
+#
+#février 16, 2000
+#1
+#4th Edition
+#
+Sol_Ring;3
+Royal_Assassin;2
+Black_Knight;2
+Drain_Life;2
+Unholy_Strength;3
+Black_Lotus;4
+Bad_Moon;2
+Swamp;17
+Dark_Ritual;3
+Howling_Mine;2
+Demonic_Tutor;4
+Hypnotic_Specter;2
+Sengir_Vampire;2
+Icy_Manipulator;1
+Mox_Jet;8
+Terror;2
+Feldons_Cane;1
+Arena;1
+Raise_Dead;2
+Animate_Dead;2

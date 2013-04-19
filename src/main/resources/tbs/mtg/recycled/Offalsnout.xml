@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Offalsnout">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - elemental
+	2/2
+	flash
+	when offalsnout leaves play, remove target card in a graveyard from the game.
+	evoke b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental flash </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<in-zone zone='play' card='tested'/>
+				</source-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke-flash'>
+			<actions>
+				<pay-mana black='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

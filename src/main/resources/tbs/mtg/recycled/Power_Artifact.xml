@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Power Artifact">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+<!--  {u}{u} enchanted artifact's activated abilities cost up to {2} less to play. 
+if this would make an ability cost 0 or less mana to play, 
+it costs {1}, plus any nonmana costs. 
+-->
+
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<!-- PUT HERE THE COST OF THIS ABILITY -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS ABILITY -->
+			</effects>
+		</activated-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-artifact"/>
+</card>

@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Altar of Dementia">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	sacrifice a creature: target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register="target-list.first" index="power"/>
+				</repeat>
+				<action ref="mill-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

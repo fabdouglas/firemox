@@ -1,0 +1,1320 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2006 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Your Name here
+-->
+
+<!--[[apt lang=en header]]		______
+	The TBS file description
+	`______
+	Your Name here
+	`______
+	November 28 2006
+	
+	The Blank game rules file
+-->
+<!--[[apt lang=fr header]]		______
+	Description du fichier XML du jeu Blank
+	`______
+	Your Name here
+	`______
+	28 novembre 2006
+	
+	Le fichier de description des règles de Blank
+-->
+
+<!--[[apt lang=en]]
+	`As said before, the rules of the games are described in the file <<<blank.xml>>>
+	`in the <<<src/main/resources/tbs>>> directory. You will often search withing this
+	`file to get some already written tests, actions or abilities, so let's see the
+	`structure of this file.
+	
+	* Header
+	
+	`The <<<blank.xml>>> starts with the <<<\<tbs\>>>> element, which stands for
+	`"<Turn Based Strategy>". Some of the attributes specify the XML schema location,
+	`the XML namespace, some others specify the name of the game, the version and
+	`the author. We also have information about the picture of the back of the cards
+	`file.
+-->
+<!--[[apt lang=fr]]
+	`Comme cela a été précisé plus haut, les règles de ce jeu de cartes sont
+	`décrites dans le fichier <<<blank.xml>>> du répertoire
+	`<<<src/main/resources/tbs>>>. Vous chercherez souvent dans ce fichier afin
+	`d'obtenir des tests, actions ou capacités déjà écrites, alors analysons la
+	`structure de ce fichier.
+	
+	* En-tête
+	
+	`Le fichier <<<blank.xml>>> commence avec l'élément <<<\<tbs\>>>>, qui est
+	`l'abbréviation de "<Turn Based Strategy>" (ou <stratégie basée sur des tours>).
+	`Certains attributs spécifient l'emplacement du schéma XML du fichier,
+	`l'espace de nommage XML, d'autres spécifient le nom du jeu, la version et
+	`l'auteur. On trouvera également des informations concernant le fichier
+	`contenant l'image du dos des cartes de ce jeu.
+-->
+<tbs xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox validator.xsd" name="Blank (R)"
+	version="0.1-SNAPSHOT" author="your-name" comment="By user@users.blank.net"
+	art-url="http://default/global/images/blank" back-picture="back.jpg" damage-picture="damage.jpg">
+
+	<!--[[apt lang=en]]
+		* Database management
+		
+		`<<Magic Project>> also implements a database management for informations on
+		`cards not related to the rules, like the picture of the card, the <flavor text>
+		`or the artist. All these informations can be grabbed automatically from various
+		`sites by just providing a well formed XML proxy file.
+		
+		`The <<<\<database-properties\>>>> element in the <<<mtg.xml>>> file is used to
+		`declare the different informations understood by <<Magic Project>>. You will
+		`find below an extract of this element from the <<<blank.xml>>> file.
+	-->
+	<!--[[apt lang=fr]]
+		* Base de données des informations complémentaires
+		
+		`<<Magic Project>> inclu également une base données des informations concernant
+		`les cartes qui n'ont pas de relations avec les règles comme l'image d'une carte,
+		`le <texte d'ambiance> ou l'artiste. Toutes ces informations sont téléchargées
+		`automatiquement depuis plusieurs sites par la fourniture de fichier XML de
+		`proxy valides.
+		
+		`L'élément <<<\<database-properties\>>>> dans le fichier <<<mtg.xml>>> est
+		`utilisé pour déclarer les différentes informations interprétées par
+		`<<Magic Project>>. Vous trouverez ci-dessous un extrait du contenu de cet
+		`élément prélevé depuis le fichier <<<blank.xml>>>.
+	-->
+	<!--[[apt start-code]] -->
+	<database-properties>
+		<property name="card.artist-credit" type="java.lang.String" translate="false" />
+		<property name="card.flavor-text" type="java.lang.String" translate="false" />
+		<property name="card.sets" type="java.util.List" translate="true" />
+		<property name="card.text" type="java.lang.String" translate="false" />
+		<property name="card.id" type="java.lang.String" translate="false" />
+		<property name="card.set" type="java.lang.String" translate="true" />
+		<property name="card.version" type="java.lang.String" translate="false" />
+	</database-properties>
+	<!--[[apt end-code]] -->
+
+	<!--[[apt lang=en]]
+		* Mana symbols
+		
+		`<<Magic Project>> dynamically download the <mana symbols> needed to display the
+		`abilities from the <<Blank Main Site>> website for copyright considerations.
+		`The <<<\<mana-symbols\>>>> element stands for giving <<Magic Project>> all
+		`the information needed to properly download these symbols.
+	-->
+	<!--[[apt lang=fr]]
+		* Les symboles de mana
+		
+		`<<Magic Project>> télécharge dynamiquement les <symboles de mana> nécessaires
+		`à l'affichage des capacités depuis le site web de <<Blank Main Site>> pour
+		`des raisons de propriété intellectuelle. L'élément <<<\<mana-symbols\>>>>
+		`permet de fournir à <<Magic Project>> toutes les informations permettant de
+		`télécharger ces symboles.
+	-->
+
+	<mana-symbols>
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colored url="http://blank/images/Symbols/" big-url="http://blank/images/Symbols_big/">
+			<mana name="black" picture="black_mana.gif" big-picture="black_mana.jpg" />
+			<!-- Mana dependencies, would be removed in next releases -->
+			<mana name="blue" picture="black_mana.gif" big-picture="black_mana.jpg" />
+			<mana name="green" picture="black_mana.gif" big-picture="black_mana.jpg" />
+			<mana name="red" picture="black_mana.gif" big-picture="black_mana.jpg" />
+			<mana name="white" picture="black_mana.gif" big-picture="black_mana.jpg" />
+		</colored>
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colorless url="http://blank/images/Symbols/" big-url="colorlessmana.gif"
+			unknown="Symbol_X_mana.gif">
+			<mana amount="0" picture="Symbol_0_mana.gif" />
+		</colorless>
+	</mana-symbols>
+
+	<!--[[apt lang=en]]
+		* License
+		
+		`The element <<<\<license\>>>> just give a description of the license linked to
+		`the game referenced in the <<<mtg.xml>>> file. You will find an extract
+		`of this license description below :
+	-->
+	<!--[[apt lang=fr]]
+		* Licence
+		
+		`L'élément <<<\<license\>>>> fourni une description de la licence du jeu auquel
+		`est associé le fichier <<<mtg.xml>>>. Vous trouverez ci-dessous un extrait de
+		`la description de la license :
+	-->
+
+	<!--[[apt start-code]]-->
+	<licence>
+		This program is not published, produced or supported by Blank Company(TM), Inc. Blank(TM)
+		and Blank Company(R) Inc. are registered trademarks owned by Blank Company(R) Inc., a
+		subsidiary of Company, Inc.
+	</licence>
+	<!--[[apt end-code]]-->
+
+	<!--[[apt lang=en]]
+		* Aliases
+		
+		`Most of the elements of the <<Blank>> game implementation in
+		`<<Magic Project>> are referenced by integer values. To make rules readable by
+		`a human, we can also use aliases for specific integer values, which are
+		`declared within the <<<\<aliases\>>>> element.
+		
+		`Let's look at the different availables aliases.
+		
+		** Global aliales
+		
+		`These aliases are used in many different situations :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		* Les alias
+		
+		`La plupart des élément de l'implémentation du jeu de cartes
+		`<<Blank>> dans <<Magic Project>> sont référencés par des valeurs
+		`entières. Afin de rendre les règles lisibles pour un humain, on peut également
+		`utiliser des alias pour certaines valeurs entières spécifiques, qui sont déclarées
+		`au sein de l'élément <<<\<aliases\>>>>.
+		
+		`Voyons les différents alias disponibles.
+		
+		** Les alias globaux
+		
+		`Ces alias sont utilisés dans diverses situations :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+
+	<aliases>
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="none" value="0" />
+		<alias name="all" value="65535" />
+		<alias name="abortme" value="65535" />
+		<alias name="abort" value="65535" />
+		<alias name="destroy" value="65535" />
+		<alias name="manapool" value="255" />
+		<alias name="manacost" value="255" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** The damage types
+			
+			`All the different types of damage can be tested using this set of available aliases :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les types de dommages
+			
+			`Tous les différents types de dommages peuvent être testés en utilisant les alias
+			`suivants :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="damage-normal" value="1" export="damage-types" />
+		<alias name="damage-combat" value="2" export="damage-types" />
+		<alias name="damage-cannot-be-prevented" value="4" export="damage-types" />
+		<alias name="damage-cannot-be-redirected" value="8" export="damage-types" />
+		<alias name="damage-cannot-be-regenerated" value="16" export="damage-types" />
+		<alias name="damage-cannot-be-prevented-redirected" value="12" export="damage-types" />
+		<alias name="damage-can-prevent" value="0" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** The card positions
+			
+			`The position of a card in a zone can be referenced using these aliases :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les positions d'une carte
+			
+			`La position d'une carte dans une zone peut être référencée en utilisant les alias
+			`suivants :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="top" value="0" />
+		<alias name="bottom" value="65535" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** Aliases used in damage prevention
+			
+			`The following aliases are used in damage prevention :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour la prévention de dommages
+			
+			`Les alias suivants sont utilisés pour la prévention de dommages :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="damage-any" value="127" />
+		<alias name="damage-combat-only" value="126" />
+		<alias name="damage-combat-can-be-prevented" value="121" />
+		<alias name="damage-can-be-prevented" value="123" />
+		<alias name="damage-can-be-redirected" value="115" />
+		<alias name="damage-can-be-regenerated" value="111" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** Aliases for phase indexes
+			
+			`The following aliases are used for phase indexes :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les index de phase
+			
+			`Les alias suivants sont utilisés pour les index de phase :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="phase-index1" value="0" />
+		<alias name="phase-index2" value="2" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- game.static indexes, reseted each turn -->
+		<!--[[apt lang=en]]
+			** Aliases for game static indexes
+			
+			`The following aliases are used for game static indexes, they are reseted
+			`each turn :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les index de jeu statiques
+			
+			`Les alias suivants sont utilisés pour les index de jeu statiques, il sont
+			`mis à zéro au début de chaque tour :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="static-index1" value="1" />
+		<alias name="static-index2" value="2" />
+		<alias name="turnid" value="31" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- card/player registers -->
+		<!--[[apt lang=en]]
+			** Aliases for registers dedicated to cards or players
+			
+			`The following aliases are used for registers dedicated to cards or players :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les registres liés aux cartes et aux joueurs
+			
+			`Les alias suivants sont utilisés pour les registres liés aux cartes et aux joueurs :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="colorless" value="0" />
+		<alias name="black" value="1" />
+		<alias name="free0" value="16" />
+		<alias name="free1" value="17" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- Only for cards -->
+		<!--[[apt lang=en]]
+			** Aliases for registers dedicated to cards
+			
+			`The following aliases are used for registers dedicated to cards :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les registres liés aux cartes
+			
+			`Les alias suivants sont utilisés pour les registres liés aux cartes :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="power" value="11" />
+		<alias name="toughness" value="12" />
+		<alias name="special-abilities" value="15" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- Only for players -->
+		<!--[[apt lang=en]]
+			** Aliases for registers dedicated to players
+			
+			`The following aliases are used for registers dedicated to players :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les registres liés aux joueurs
+			
+			`Les alias suivants sont utilisés pour les registres liés aux joueurs :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="poison" value="11" />
+		<alias name="life" value="12" />
+		<alias name="player-index-13" value="13" />
+		<alias name="player-index-14" value="14" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- card state bits -->
+		<alias name="state1" value="1" />
+		<alias name="not-state1" value="65534" />
+		<!-- = ~0x0001 -->
+		<alias name="state2" value="2" />
+		<alias name="state3" value="4" />
+		<!--[[apt lang=en]]
+			** Aliases for card types
+			
+			`The following aliases are used for card types :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les types de cartes
+			
+			`Les alias suivants sont utilisés pour les types de cartes :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="idcard1" value="1" export="types" />
+		<alias name="idcard2" value="2" export="types" />
+		<alias name="idcard3" value="4" export="types" />
+		<alias name="idcard4" value="8" export="types" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** Aliases for permanent types
+			
+			`The following aliases are used for permanent types :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les types de permanents
+			
+			`Les alias suivants sont utilisés pour les types de permanents :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<!-- = is a idcard4 and idcard2 = 2 or 8 -->
+		<alias name="idcard5" value="10" export="types" />
+		<!-- = is an idcard5 and idcard1 -->
+		<alias name="idcard6" value="11" export="types" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- phases -->
+		<!--[[apt lang=en]]
+			** Aliases for phases
+			
+			`The following aliases are used for phases :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les phases
+			
+			`Les alias suivants sont utilisés pour les phases:
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="phase1" value="0" export="phases" />
+		<alias name="phase2" value="1" export="phases" />
+		<!--[[apt end-multiref]]-->
+
+		<!-- properties -->
+
+		<!--[[apt lang=en]]
+			** Aliases for protection types
+			
+			`The following aliases are used for protection types :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les types de protection
+			
+			`Les alias suivants sont utilisés pour les types de protection :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+
+		<!-- protection from card types 32768 -->
+		<alias name="protection-from-idcard" value="32768" export="properties" />
+		<alias name="protection-from-idcard1" value="32769" export="properties" />
+		<alias name="protection-from-idcard2" value="32770" export="properties" />
+
+		<!-- protection from card colors 16384 -->
+		<alias name="protection-from-color" value="16384" export="properties" />
+		<alias name="protection-from-black" value="16385" export="properties"
+			picture="protection-from-black.gif" />
+
+		<!-- protection from card properties 8192 -->
+		<alias name="protection-from-property" value="8192" export="properties" />
+		<alias name="protection-from-property1" value="8193" export="properties" />
+
+		<!-- properties -->
+		<!--[[apt lang=en]]
+			** Aliases for card properties
+			
+			`The following aliases are used for card properties :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les alias utilisés pour les propriétés des cartes
+			
+			`Les alias suivants sont utilisés pour les propriétés des cartes :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="property1" value="1" export="properties" picture="property1.gif" />
+		<alias name="property2" value="2" export="properties" />
+		<alias name="master-property" value="3" export="properties" />
+		<!--[[apt end-multiref]]-->
+
+		<!--[[apt lang=en]]
+			** The creature types
+			
+			`All the declared creatures types available in <<Magic Project>> are listed below :
+			
+			*___________________________+
+			| <<Name of the alias>>     |
+			*___________________________+
+		-->
+		<!--[[apt lang=fr]]
+			** Les types de créatures
+			
+			`Tous les types de créatures déclarés dans <<Magic Project>> sont listés ci-dessous :
+			
+			*___________________________+
+			| <<Nom de l'alias>>        |
+			*___________________________+
+		-->
+		<!--[[apt start-multiref@name ]]-->
+		<alias name="not-exported-property" value="2" />
+		<!--[[apt end-multiref]]-->
+
+	</aliases>
+
+	<!--[[apt lang=en]]
+		* Initialisation of the players registers
+		
+		`A bunch of integer registers (like life) are allocated to each player. the elements
+		`<<<\<registers-first-player\>>>> and <<<\<registers-first-player\>>>> are
+		`decaded to the initialisation of these registers. You will find below an
+		`extract of theses elements from the <<<mtg.xml>>> file :
+	-->
+	<!--[[apt lang=fr]]
+		* Initialisation des registres des joueurs
+		
+		`Une série de registres de valeurs entières (comme les points de vie) est
+		`allouée pour chaque joueur. Les éléments <<<\<registers-first-player\>>>> et
+		`<<<\<registers-first-player\>>>> sont dédiés à l'initialisation de ces
+		`registres. Vous trouverez ci-dessous un extrait de ces éléments issus du fichier
+		`<<<mtg.xml>>> :
+	-->
+
+	<!--[[apt start-code]]-->
+	<registers-first-player>
+		<register index="life" value="500" />
+		<register index="player-index-13" value="1" />
+		<register index="player-index-14" value="123" />
+	</registers-first-player>
+	<registers-second-player>
+		<register index="life" value="500" />
+		<register index="player-index-13" value="1" />
+		<register index="player-index-14" value="321" />
+	</registers-second-player>
+	<!--[[apt end-code]]-->
+
+	<!--[[apt lang=en]]
+		* Phases declaration
+		
+		`The next element <<<\<phases\>>>> declare the differents phases of a turn
+		`in the implemented game. It also specifies which type of spells are playable
+		`during these phases.
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des phases
+		
+		`L'élément suivant <<<\<phases\>>>> déclare les différentes phases qui composent
+		`un tour dans le jeu de carte implémenté. Il spécifie également quels types de
+		`sorts sont jouables durant ces différentes phases.
+	-->
+
+	<phases start="1" turn-structure="phase1 phase2 phase1">
+		<phase name="phase1" playable-empty-stack-you="idcard1"
+			playable-middle-resolution-you="idcard1" playable-empty-stack-opponent="none"
+			playable-middle-resolution-opponent="none" />
+		<phase name="phase2" playable-empty-stack-you="idcard5"
+			playable-middle-resolution-you="idcard1" playable-empty-stack-opponent="idcard1"
+			playable-middle-resolution-opponent="idcard1" />
+	</phases>
+
+	<!--[[apt lang=en]]
+		* States pictures
+		
+		`For any card in game with a specific state (like <summoning sickness>),
+		`<<Magic Project>> interprets the <<<\<state-pictures\>>>> element to get the
+		`picture and the test associated to each state.
+		`If the <<<index>>> and <<<state>>> attributes are provided, <<Magic Project>> will make a
+		`bitwise compare with the index value of card's registers and the given state
+		`value. <<<width>>> and <<<height>>> values determines the size of the picture to
+		`display on the card. You can make <<Magic Project>> positionning automatically
+		`the picture (trailing) by setting the <<<x>>> and the <<<y>>> attributes to
+		`<<<-1>>>.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux états
+		
+		`Pour chaque carte en jeu avec un état spécique (comme le <mal d'invocation>),
+		`<<Magic Project>> interprète l'élément <<<\<state-pictures\>>>> pour
+		`récupérer et associer une image relative à cet état.
+		`Si les attributs <<<index>>> et <<<state>>> sont fournis, <<Magic Project>>
+		`va faire une comparaison bit à bit entre la valeur entière à la position
+		`désignée par <<<index>>> dans les registres de la carte et la valeur contenue
+		`dans <<<state>>>. Les attributs <<<width>>> et <<<height>>> permettent de
+		`renseigner <<Magic Project>> sur respectivement la largeur et la hauteur de
+		`l'image à afficher sur la carte. Il est possible de faire en sorte que
+		`<<Magic Project>> positionne automatiquement les images (en les séquençant)
+		`en mettant la valeur <<<-1>>> pour les attributs <<<x>>> et <<<y>>>.
+	-->
+
+	<state-pictures>
+		<state-picture name="state1" picture="state1.gif" state="state1" index="state1" x="-1"
+			y="-1" width="12" height="12">
+			<display-test>
+				<and>
+					<in-zone zone="play" />
+					<has-idcard idcard="idcard1" />
+				</and>
+			</display-test>
+		</state-picture>
+	</state-pictures>
+
+	<!-- Associated picture to actions. For undeclared actions, no picture will be used
+		12 x 12 Pictures are advised.
+	-->
+
+	<!--[[apt lang=en]]
+		* Action pictures
+		
+		`In <<Blank>> game, some actions are linked to a picture. This is
+		`true for the action "<tap>" for example. The element <<<\<action-pictures\>>>>
+		`declares the different pictures associated to actions.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux actions
+		
+		`Dans le jeu de cartes <<Blank>>, certaines actions sont liées à
+		`une image. Cela est vrai pour l'action "<engager>" par exemple. L'élément
+		`<<<\<action-pictures\>>>> déclare les différentes images associées aux actions.
+	-->
+
+	<action-pictures url="http://blank/images/Symbols/">
+		<action name="@action1" picture="action1.gif" />
+	</action-pictures>
+
+	<!--[[apt lang=en]]
+		* Tooltip filters
+		
+		`The element <<<\<tooltip-filters\>>>> informs <<Magic Project>> of the amount of
+		`informations to show on cards depending on various tests (for example, it is
+		`not necessary to show the colors of a land card since all of them are colorless).
+	-->
+	<!--[[apt lang=fr]]
+		* Les filtres des informations affichées sur les cartes
+		
+		`L'élément <<<\<tooltip-filters\>>>> informe <<Magic Project>> de la quantité
+		`d'informations à afficher sur les cartes en fonction de tests divers (par
+		`exemple, il est inutile d'afficher les couleurs d'un terrain étant donné qu'ils
+		`sont tous incolores).
+	-->
+
+	<tooltip-filters>
+		<tooltip-filter powerANDtoughness="true" states="true" types="true" colors="true"
+			properties="true" damage="true">
+			<filter>
+				<has-idcard idcard="idcard2" />
+			</filter>
+		</tooltip-filter>
+		<tooltip-filter types="true" properties="true">
+			<filter>
+				<has-idcard idcard="idcard1" />
+			</filter>
+		</tooltip-filter>
+		<!-- the default filter (when previous filters not been verified) -->
+		<tooltip-filter types="true" colors="true" properties="true">
+			<filter />
+		</tooltip-filter>
+	</tooltip-filters>
+
+	<!--[[apt lang=en]]
+		* Static modifiers
+		
+		`The static modifiers are modifications that apply to cards automatically since
+		`they verify the associated test. They are declared with the <<<\<static-modifiers\>>>>
+		`element. We will find in this element, for example, the static modifiers that
+		`give any basic land type the ability to produce the associated mana by tapping it,
+		`the static modifier for a play-using-morph creature or the ability of cards
+		`with <flash> to be cast at any time.
+		
+		`You will find below an example of the static modifier for creatures with
+		`the <morph> ability :
+	-->
+	<!--[[apt lang=fr]]
+		* Les modifieurs statiques
+		
+		`Les modifieurs statiques sont des modifications qui s'appliquent automatiquement
+		`à certaines cartes à partir du moment où ces dernières vérifient les règles
+		`qui sont attachées à ces modifieurs. Il sont déclarés au sein de l'élément
+		`<<<\<static-modifiers\>>>>. On trouve par exemple dans cette élément un modifieur
+		`statique qui permer à tout terrain basique en jeu de produire un mana de la
+		`couleur à laquelle il est associée, un modifieur statique pour pouvoir jouer
+		`les cartes avec la capacité <morph> ou un modifieur statique qui permet aux
+		`cartes qui ont la capacité <flash> d'être jouées à tout moment où un <éphémère>
+		`pourrait être joué.
+		
+		`Vous trouverez ci-dessous l'exemple du modifieur statique relatifs aux
+		`crétures avec la capacité <mue> :
+	-->
+
+	<static-modifiers>
+		<!-- static mofifiers
+			Put here some comments about the rules implemented by this modifiers.
+		-->
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="add-B-to-plains">
+					<abilities>
+						<ability ref="tap-add-B" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<has-idcard idcard="idcard1" />
+			</while>
+		</static-modifier>
+	</static-modifiers>
+
+	<!--[[apt lang=en]]
+		* Abilities declaration
+		
+		`In the element <<<\<abilities\>>>>, we can find all the abilities associated
+		`directly to the general management of the game.
+		
+		`The element starts with the system abilities (declared with the
+		`<<<\<system-ability\>>>> elements) that allow players to play the attack phase,
+		`inits the game, implements the draw and the discard phase, implements the
+		`mulligan, manages and initializes the turn, manages the lethal damage or the
+		`manaburn, implements the <legend> rule, implements the <enchant world> rules
+		`or the limitation while playing lands.
+		
+		`These declarations are followed by the replacement abilities, which stand for
+		`abilities that trigger on specific actions and replace theses actions dynamically
+		`by other actions. They are declared using the <<<\<replacement-ability\>>>>
+		`element. We will find here the replacement abilities that trigger when a token
+		`goes to the graveyard (in fact it is put out of the game), that trigger when
+		`a card is played using <flashback> (when the spell resolves, it goes out of the
+		`game) or that trigger when a card is played with <buyback> (when the spell
+		`resolves, it goes to its owner's hand).
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des capacités
+		
+		`Dans l'élément <<<\<abilities\>>>>, on peut trouver toutes les capacités
+		`directement associées avec la gestion générale du jeu.
+		
+		`Le contenu de cet élément débute avec les capacités système (déclarées à l'aide
+		`d'éléments <<<\<system-ability\>>>>) qui permettent entre autres aux joueurs
+		`de jouer durant la phase d'attaque, d'initialiser le jeu, d'implémenter les
+		`phases de pioche et de défausse, d'implémenter le <mulligan>, de gérer et
+		`d'initialiser le tour, de gérer les dommages mortels ou les <brûlures de mana>,
+		`d'implémenter la règle des <légendes>, d'implémenter la règles des <enchantements
+		`du monde> ou encore d'imposer la limitation concernant le nombre de terrains
+		`que l'on peut jouer par tour.
+		
+		`Ces déclarations sont suivies par les capacités de remplacement, qui sont
+		`des capacités qui se déclenchent sur l'occurence de certaines actions et
+		`remplacent dynamiquement ces actions par d'autres actions. Elles sont
+		`déclarées via l'élément <<<\<replacement-ability\>>>>. On trouve entre autres
+		`les capacités de remplacement qui gère le déplacement d'une carte <jeton> vers
+		`le cimetière (en réalité une telle carte est retirée de la partie à la place), qui
+		`gère le fait de jouer une carte avec la capacité <flashback> (lorsque le sort
+		`se résout, la carte associée est retirée de la partie) ou qui gère le fait
+		`de jouer une carte avec la capacité <buyback> (lorsque le sort se résout, la
+		`carte associée retourne dans la main de son propriétaire).
+	-->
+
+	<abilities abortionzone="graveyard">
+
+		<system-ability name="draw-phase1" picture="ability1">
+			<beginning-of-phase phase="phase1" />
+			<effects>
+				<target type="currentplayer" />
+				<action ref="draw-a-card" />
+			</effects>
+		</system-ability>
+		<system-ability name="" resolution="hidden">
+			<beginning-of-phase phase="phase2" />
+			<effects>
+				<modify-register register="currentplayer" index="player-index-13" operation="add"
+					value="1" />
+				<modify-register register="currentplayer" index="life" operation="minus" value="1" />
+				<action ref="update-some-registers" />
+			</effects>
+		</system-ability>
+
+		<!-- INIT GAME : each player drw seven cards -->
+		<system-ability name="game-init" resolution="hidden">
+			<beginning-of-phase phase="phase2" />
+			<!-- set the zone visibility for players -->
+			<effects>
+				<target type="player" mode="all" />
+				<!-- shuffle the libraries -->
+				<shuffle zone="library" />
+				<!-- set the zone visibility for players -->
+				<show-zone zone="play" for="controller" />
+				<show-zone zone="play" for="opponent" />
+				<show-zone zone="hand" for="controller" />
+				<show-zone zone="graveyard" for="controller" />
+				<show-zone zone="graveyard" for="opponent" />
+				<!-- side, stack, dbz, tbz are always visible for both players-->
+				<!-- useless since, by default, zone are hidden -->
+				<hide-zone zone="hand" for="opponent" />
+				<hide-zone zone="library" for="controller" />
+				<hide-zone zone="library" for="opponent" />
+				<!-- each player draws 7 cards -->
+				<repeat value="7" />
+				<move-player-card from="library" to="hand" controller="controller" />
+				<!-- init the turn ID to 0 -->
+				<modify-register register="game.static" index="turnid" operation="clear" />
+				<target-list operation="clear" />
+				<target type="currentplayer" />
+				<skip-phase phase="phase1" />
+				<unregister-this />
+			</effects>
+		</system-ability>
+
+		<!-- TURN INIT : reset registers
+			212.3d A creature's activated ability with the tap symbol in its
+			activation cost can't be played unless the creature has been under its
+			controller's control since the start of his or her most recent turn. A
+			creature can't attack unless it has been under its controller's control
+			since the start of his or her most recent turn. This rule is informally
+			called the "summoning sickness" rule. Ignore this rule for creatures
+			with haste (see rule 502.5).
+		-->
+		<system-ability name="turn-init" resolution="hidden_high">
+			<before-phase phase="phase1" />
+			<effects>
+				<modify-register operation="add" register="game.static" index="turnid" value="1" />
+				<modify-register operation="add" register="game.static" index="static-index1"
+					value="1" />
+			</effects>
+		</system-ability>
+
+		<!-- When a card with 'property1' moves to graveyard, put it into the 'nowhere' place.
+		-->
+		<replacement-ability name="state-based-token" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play" />
+						<has-property property="property1" />
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card controller="target.owner" destination="nowhere" />
+			</effects>
+		</replacement-ability>
+	</abilities>
+
+	<!--[[apt lang=en]]
+		* Game layout
+		
+		`The layout of the game is also described in the XML file using the
+		`<<<\<layout\>>>> element. Common panels and zones are declared within.
+	-->
+	<!--[[apt lang=fr]]
+		* Disposition de l'espace de jeu
+		
+		`La disposition de l'espace de jeu est également décrite dans le fichier
+		`XML à l'aide de l'élément <<<\<layout\>>>>. Les zones et cadres communs
+		`y sont déclarés.
+	-->
+
+	<layouts>
+		<!-- Would contain more components with XML definition -->
+		<common-panel>
+			<card-details>
+				<properties>
+					<menu-element name="database.main">
+						<menu-attribute name="card.local-name" value="card.database.local-name"
+							type="string" />
+						<menu-attribute name="card.text" value="card.database.property[card.text]"
+							type="text" />
+						<menu-attribute name="card.flavor-text"
+							value="card.database.property[card.flavor-text]" type="text" />
+					</menu-element>
+					<menu-element name="database.credits">
+						<menu-attribute name="card.artist-credit"
+							value="card.database.property[card.artist-credit]" type="string" />
+						<menu-attribute name="card.rules-credit" value="card.database.rules-credit"
+							type="string" />
+					</menu-element>
+					<menu-element name="database.proxy">
+						<menu-attribute name="card.proxy.name"
+							value="card.database.picture-proxy.name" type="string" />
+						<menu-attribute name="card.proxy.home"
+							value="card.database.picture-proxy.home" type="string" />
+						<menu-attribute name="card.proxy.language"
+							value="card.database.picture-proxy.language" type="string" />
+						<menu-attribute name="card.proxy.encoding"
+							value="card.database.picture-proxy.encoding" type="string" />
+						<menu-attribute name="card.stream" value="card.database.picture-stream"
+							type="link" />
+					</menu-element>
+					<menu-element name="database.properties">
+						<menu-attribute name="card.set" value="card.database.property[card.set]"
+							type="string" />
+						<menu-attribute name="card.version"
+							value="card.database.property[card.version]" type="string" />
+						<menu-attribute name="card.sets" value="card.database.property[card.sets]"
+							type="string" />
+						<menu-attribute name="card.id" value="card.database.property[card.id]"
+							type="string" />
+						<!-- TODO Add private properties in this nested element
+							<element name="database.private.properties">
+							</menu-element>
+						-->
+					</menu-element>
+				</properties>
+			</card-details>
+		</common-panel>
+		<zones enable-stack="true" enable-dbz="true" enable-tbz="true" enable-play="true"
+			enable-hand="true" default-zone="library">
+			<play>
+				<sector constraint="South">
+					<has-idcard idcard="idcard1" />
+				</sector>
+				<sector constraint="West">
+					<has-idcard idcard="idcard6" />
+				</sector>
+				<sector constraint="East">
+					<false />
+				</sector>
+				<sector constraint="Center" />
+			</play>
+			<additional-zones>
+				<additional-zone name="graveyard" layout-class="" constraint-you="East"
+					constraint-opponent="West" />
+				<additional-zone name="library" layout-class="" constraint-you="West"
+					constraint-opponent="East" />
+			</additional-zones>
+		</zones>
+	</layouts>
+	<!-- declared references -->
+	<!-- WARNING : Declaration order is important, you cannot refers
+		to an ability or a test that has not previously
+		been declared. -->
+
+	<!--[[apt lang=en]]
+		* References
+		
+		`This is the most important part of the XML file for card rules writers.
+		`Identified by the element <<<\<references\>>>>, it contains a set of
+		`tests, actions, abilities or attachments that can be referenced from your
+		`card XML code.
+	-->
+	<!--[[apt lang=fr]]
+		* Les références
+		
+		`C'est la partie la plus importante du fichier XML pour les développeurs
+		`de règles de cartes. Identifié par l'élément <<<\<references\>>>>, il
+		`contient un ensemble de tests, d'actions, d'capacités ou d'attaches qui
+		`peuvent être référencées depuis votre code XML d'une carte.
+	-->
+
+	<references>
+
+		<!--[[apt lang=en]]
+			** Tests references
+			
+			`These are described withing the nested <<<\<tests\>>>> element. We can find
+			`the following references :
+			
+			*___________________________+__________________________________________________+
+			| <<Reference name>>        | <<Description>>
+			*___________________________+__________________________________________________+-->
+		<!--[[apt lang=fr]]
+			** Références de test
+			
+			`Elles sont décrites dans l'élément <<<\<tests\>>>>. On trouvera les références
+			`suivantes :
+			
+			*___________________________+__________________________________________________+
+			| <<Nom de la référence>>   | <<Description>>
+			*___________________________+__________________________________________________+-->
+		<tests>
+
+			<!--[[apt lang=en|fr @reference-name]]
+				Returns true if there is an imprinted card on the current card. |
+				Retourne vrai s'il y a une carte impriméee sur la carte courante. -->
+			<test reference-name="has-property1-and-idcard2">
+				<and>
+					<has-property property="property1" />
+					<has-idcard idcard="idcard2" />
+				</and>
+			</test>
+		</tests>
+
+		<!--[[apt lang=en]]
+			** Actions references
+			
+			`These are described withing the nested <<<\<actions\>>>> element. Some reference
+			`are <<MACRO(\[value\],\[test\])>>, which means that you can dynamically append
+			`a test to the referenced action or pass a value to the referenced action (if
+			`<<value>> is specified in the parenthesis just after <<MACRO>>). We can find
+			`the following references :
+			
+			*___________________________+__________________________________________________+
+			| <<Reference name>>        | <<Description>>
+			*___________________________+__________________________________________________+-->
+		<!--[[apt lang=fr]]
+			** Les références d'actions
+			
+			`Elles sont décrites au sein de l'élément <<<\<actions\>>>>. Certaines références
+			`sont désignées comme des <<MACRO(\[value\],\[test\])>>, ce qui signifie que vous
+			`pouvez y associer dynamiquement un test additionnel à ajouter au tests de
+			`l'action ou passer une valeur à l'action référencée. On peut trouver les références
+			`suivantes :
+			
+			*___________________________+__________________________________________________+
+			| <<Nom de la référence>>   | <<Description>>
+			*___________________________+__________________________________________________+-->
+
+		<actions>
+			<!--[[apt lang=en|fr @reference-name]]
+				Counters the spell(s) in the target list.
+				| Contre les sort(s) dans la liste des cibles. -->
+			<action reference-name="update-some-registers">
+				<modify-register register="you" index="player-index-13" operation="add" value="1" />
+				<modify-register register="opponent" index="player-index-13" operation="minus"
+					value="1" />
+			</action>
+
+			<!--[[apt lang=en|fr @reference-name]]
+				<Tap> the card referencing this action.
+				| <Engage> la carte qui référence cette action. -->
+			<action reference-name="T">
+				<target type="this" name="%" />
+				<tap name="@action1" />
+				<target-list operation="clear" name="%" />
+			</action>
+
+			<action reference-name="put-in-play">
+				<target-list operation="clear" name="%" />
+				<target type="this" name="%" />
+				<move-card controller="target.owner" destination="play" name="" />
+			</action>
+
+			<!--[[apt lang=en|fr @reference-name]]
+				Makes the players in the target list draw a card.
+				| Fait piocher une carte aux joueurs de la liste des cibles. -->
+			<action reference-name="draw-a-card">
+				<move-player-card from="library" to="hand" controller="owner" name="draw-%n-card" />
+			</action>
+		</actions>
+
+		<!--[[apt lang=en]]
+			** Abilities references
+			
+			`These are described withing the nested <<<\<abilities\>>>> element. Using these
+			`references is the best way to accelerate card developement and maintenance since
+			`repetitive code are place in this place. So if you find some abilities appearing
+			`often in cards, this is the right place to add a reference to share with the
+			`community of card rules developers. The project team will make infinite effort
+			`to add this ability detection in our card generator for the Oracle. Some abilities 
+			`work as	macro by accepting one or two actions lists.
+			`We can find the following references :
+			
+			*___________________________+__________________________________________________+
+			| <<Reference name>>        | <<Description>>
+			*___________________________+__________________________________________________+-->
+		<!--[[apt lang=fr]]
+			** Les références de capacités
+			
+			`Elles sont décrites au sein de l'élément <<<\<abilities\>>>>. Utiliser ces
+			`références est la meilleure manière d'accélérer le développement et la
+			`maintenance du code des cartes car elles centralisent tout le code réutilisable
+			`relatif aux cartes. Ainsi, si vous trouvez des capacités souvent répétées
+			`dans les cartes, c'est le meilleur endroit pour y ajouter une référence afin de
+			`la partager avec l'ensemble de la communauté des développeurs de cartes.
+			`L'équipe de développement fera tout son possible pour inclure la détection
+			`de nouvelles capacités au sein de son générateur de règles de cartes à partir de
+			`l'Oracle. Certaines capacités fonctionnent comme des macros en acceptant une 
+			`ou deux liste d'actions.
+			`On trouve les références suivantes :
+			
+			*___________________________+__________________________________________________+
+			| <<Nom de la référence>>   | <<Description>>
+			*___________________________+__________________________________________________+-->
+
+		<abilities>
+
+			<!--[[apt lang=en|fr @reference-name]]
+				\{T\} : add one black mana to your mana pool.
+				| \{T\} : ajouter un mana noir à votre réserve de mana. -->
+			<ability reference-name="tap-add-B">
+				<activated-ability playable="idcard1" zone="play" resolution="auto">
+					<cost>
+						<action ref="T" />
+					</cost>
+					<effects>
+						<give-mana black="1" />
+					</effects>
+				</activated-ability>
+			</ability>
+
+			<ability reference-name="cast-spell">
+				<activated-ability playable="this" zone="hand">
+					<cost>
+						<pay-mana value="manacost" />
+					</cost>
+					<effects>
+						<action ref="put-in-play" />
+					</effects>
+				</activated-ability>
+			</ability>
+		</abilities>
+
+		<!--[[apt lang=en]]
+			** Attachment references
+			
+			`These are described withing the nested <<<\<attachments\>>>> element. We can find
+			`the following references :
+			
+			*___________________________+__________________________________________________+
+			| <<Reference name>>        | <<Description>>
+			*___________________________+__________________________________________________+-->
+		<!--[[apt lang=fr]]
+			** Les références d'attaches
+			
+			`Elles sont décrites au sein de l'élément <<<\<attachments\>>>>. On peut
+			`trouver les références suivantes :
+			
+			*___________________________+__________________________________________________+
+			| <<Nom de la référence>>   | <<Description>>
+			*___________________________+__________________________________________________+-->
+
+		<attachments>
+
+			<!--[[apt lang=en|fr @reference-name]]
+				Use this reference to attach '<enchant: creature>' <auras> to a
+				valid creature to enchant.
+				| Utilisez cette référence pour attacher une <aura> de type
+				'<enchanter : créature>' à une créature valide à enchanter. -->
+			<attachment reference-name="enchant-idcards-with-property1">
+				<modifiers>
+					<register-modifier index="black" operation="add" />
+				</modifiers>
+				<valid-target>
+					<in-zone zone="play" />
+				</valid-target>
+				<valid-attachment>
+					<true />
+				</valid-attachment>
+			</attachment>
+		</attachments>
+	</references>
+
+	<!--[[apt lang=en]]
+		* Action constraints
+		
+		`<<Magic Project>> is also capable to apply constraints on actions if they match
+		`the <<<\<action\>>>> child elements. These constraints are dynamically <appended>
+		`using the given operation (usually set to <<<"and">>>) to the test associated
+		`with the matched action. Theses constraints are declared using the
+		`<<<\<action-constraints\>>>> element. You will find here constraints concerning
+		`the ability to equip a creature with an equipment artifact for example
+		`(it's impossible to equip a creature if the equipment is also a creature in
+		`addition to its artifact type) :
+	-->
+	<!--[[apt lang=fr]]
+		* Contraintes d'actions
+		
+		`<<Magic Project>> est également capable d'appliquer des contraintes sur les
+		`actions si elles correspondent aux éléments fils de l'élément <<<\<action\>>>>.
+		`Ces contraintes sont ajoutées dynamiquement à l'aide de l'opération fournie
+		`(génégalement renseignée à <<<"and">>>) au test associé au sein de l'action
+		`correspondante. Ces contraintes sont déclarées via l'élément <<<\<action-constraints\>>>>.
+		`Vous trouverez ici par exemple les contraintes concernant la capacité d'un
+		`équipement d'équiper une créature (il est impossible pour un équipement qui est
+		`également une créature d'équiper une créature) :
+	-->
+	<action-constraints>
+		<!--[[apt end-code]]-->
+	</action-constraints>
+
+	<!--[[apt lang=en]]
+		* Additionnal costs
+		
+		`<<Magic Project>> can manage additional costs using the
+		`<<<\<additional-costs\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Coûts additionnels
+		
+		`<<Magic Project>> est capable de gérer les coûts additionnels à l'aide de
+		`l'élément <<<\<additional-costs\>>>>.
+	-->
+	<additional-costs>
+		<additional-cost name="additional-cost-for-property2">
+			<test>
+				<has-property property="property2" />
+			</test>
+			<cost>
+				<pay-mana colorless="2" />
+			</cost>
+		</additional-cost>
+	</additional-costs>
+
+	<!--[[apt lang=en]]
+		* Objects
+		
+		`The last part of the XML file is dedicated to the objects, which can be
+		`considerated as counters (<ice>, <poison>, <+1/+1>, etc.). These are declared
+		`using the <<<\<objects\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Les objets
+		
+		`La dernière partie du fichier XML est dédiée aux objets, qui peuvent être
+		`considérés comme des compteurs (<glace>, <poison>, <+1/+1>, etc.). Ils sont
+		`déclarés via l'élément <<<\<objects\>>>>.
+	-->
+	<objects>
+		<object name="object1">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+		</object>
+		<object name="object2" />
+	</objects>
+	
+	<deck-constraints
+		deckbuilder-min-property="property1" 
+		deckbuilder-max-property="property2"
+		master="master-property"
+	/>
+</tbs>
+<!-- END OF FILE -->

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Grim Lavamancer'>
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--
+		r
+	creature - wizard
+	1/1
+	r, t, remove two cards in your graveyard from the game: grim lavamancer deals 
+	2 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+				<repeat value='2'/>
+				<action ref='remove-a-card-from-graveyard'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

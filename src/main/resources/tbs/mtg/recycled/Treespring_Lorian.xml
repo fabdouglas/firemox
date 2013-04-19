@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Treespring Lorian">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		5g
+		creature - beast
+		5/4
+		morph 5g 
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='1' />
+			<register index='colorless' value='5' />
+			<register index='power' value='5' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>beast</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='1' colorless='5' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

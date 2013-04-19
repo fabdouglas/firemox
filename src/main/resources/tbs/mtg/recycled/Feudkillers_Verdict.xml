@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Feudkiller's Verdict">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ww
+	tribal sorcery - giant
+	you gain 10 life. then if you have more life than an opponent, put a 5/5 white giant warrior creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>tribal sorcery </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='10'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup>
+							<left register="you" index="life"/>
+							<right register="opponent" index="life"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<create-card>
+					<card name='Giant'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='5'/>
+								<register index='toughness' value='5'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token giant warrior</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

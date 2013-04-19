@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Floodchaser">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5u
+	creature - elemental
+	0/0
+	floodchaser comes into play with six +1/+1 counters on it.
+	floodchaser can't attack unless defending player controls an island.
+	u, remove a +1/+1 counter from floodchaser: target land becomes an island until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>elemental</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="island-home-attack"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="island" operation="set" linked="false"> 
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<ability-modifier operation="clear" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rending Vines">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	instant - arcane
+	destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.
+	draw a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+		<properties>arcane </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="artifact"/>
+								<has-idcard idcard="enchantment"/>
+							</or>
+							<inf-equal>
+								<right>
+									<counter restriction-zone="hand">
+										<controller player="you"/>
+									</counter>
+								</right>
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

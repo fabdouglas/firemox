@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Grave-Shell Scarab">
+
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="black" value="1" />
+			<register index="green" value="2" />
+			<register index="power" value="4" />
+			<register index="toughness" value="4" />
+		</registers>
+		<colors>black green</colors>
+		<idcards>creature</idcards>
+		<properties>insect</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="dredge1" />
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="sacrifice-this" />
+			</cost>
+			<effects>
+				<target type="you" />
+				<action ref="draw-a-card" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

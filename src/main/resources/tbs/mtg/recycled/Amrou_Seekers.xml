@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Amrou Seekers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - kithkin rebel
+	2/2
+	amrou seekers can't be blocked except by artifact creatures and/or white creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin rebel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+					<declared-blocking>
+						<blocking-test>
+							<and>
+								<in-zone zone="play"/>
+								<has-idcard idcard="creature"/>
+								<not>
+									<or>
+										<has-color color="white"/>
+										<has-idcard idcard="artifact"/>
+									</or>
+								</not>
+							</and>
+						</blocking-test>
+						<attacking-test>
+							<is-this/>
+						</attacking-test>
+					</declared-blocking>
+					<effects/><!-- Disable blocking -->
+		</replacement-ability>
+	</abilities>
+</card>

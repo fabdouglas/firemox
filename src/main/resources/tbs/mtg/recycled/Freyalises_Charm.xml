@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Freyalise's Charm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gg
+	enchantment
+	whenever an opponent plays a black spell, you may pay gg. if you do, you draw a card.
+	gg: return freyalise's charm to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="opponent"/>
+						<has-color color="black"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice cancel="true" controller="you">
+					<either>
+						<pay-mana green="2"/>
+						<target type='you'/>
+						<action ref='draw-a-card'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='2' />
+			</cost>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

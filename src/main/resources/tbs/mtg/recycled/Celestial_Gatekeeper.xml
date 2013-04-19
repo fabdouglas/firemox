@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Celestial Gatekeeper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - bird cleric
+	2/2
+	flying
+	when celestial gatekeeper is put into a graveyard from play, remove it from the game, then return up to two target bird and/or cleric permanent cards from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>bird cleric flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<repeat value="2"/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<or>
+								<has-property property="bird"/>
+								<has-property property="cleric"/>
+							</or>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-to-play"/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

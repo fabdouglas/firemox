@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bestial Fury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment - aura
+	enchant creature
+	when bestial fury comes into play, draw a card at the beginning of the next turn's upkeep.
+	whenever enchanted creature becomes blocked, it gets +4/+0 and gains trample until end of turn.
+ -->
+ 
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='draw-a-card-next-upkeep'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is target="attachedto"/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="add+4+0-until-eot"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dwarven Catapult">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{r} dwarven catapult deals x damage divided evenly, rounded down, 
+among all creatures target opponent controls. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<controller player="target-list.first"/>
+					</test>
+				</action>
+				<target-list operation="remove-first"/>
+				<assign-damage type="damage-normal">
+					<value>
+						<div-truncated right="target-list.size">
+							<left register="stack" index="0"/>
+						</div-truncated>
+					</value>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lady Evangela">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wub
+	legendary creature
+	1/2
+	wb, t :prevent all combat damage that would be dealt by target creature this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' black='1' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='deals-no-combat-damage'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

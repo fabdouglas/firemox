@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Card 1">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>idcard1</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="tap-add-B" />
+		<triggered-ability zone="play">
+			<become-tapped>
+				<test>
+					<is-this />
+				</test>
+			</become-tapped>
+			<effects>
+				<modify-register register="you" index="life" value="1" operation="minus" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

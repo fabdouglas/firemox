@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ursine Fylgja">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - spirit bear
+	3/3
+	ursine fylgja comes into play with four healing counters on it.
+	remove a healing counter from ursine fylgja: prevent the next 1 damage that would be dealt to ursine fylgja this turn.
+	2w: put a healing counter on ursine fylgja.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit bear </properties>
+	</init>
+	<modifiers>
+		<object name="healing"/>
+		<object name="healing"/>
+		<object name="healing"/>
+		<object name="healing"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="healing"/>
+			</cost>
+			<effects>
+				<action ref='prevent-1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='healing'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

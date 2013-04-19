@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hidden Path">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gggg
+	enchantment
+	green creatures have forestwalk.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='4'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="forestwalk" linked="true"/>			 		
+			</modifiers>
+			<while>
+				<and>
+					<has-color color="green"/>
+		 			<has-idcard idcard="creature"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

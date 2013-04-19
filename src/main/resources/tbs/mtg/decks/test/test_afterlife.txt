@@ -1,0 +1,3 @@
+Afterlife;4
+Plains;8
+Suntail Hawk;4

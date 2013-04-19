@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Memnarch">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	legendary artifact creature - wizard
+	4/5
+	1uu: target permanent becomes an artifact in addition to its other types. 
+	3u: gain control of target artifact. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>legend wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='2' colorless='1' />
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="artifact" operation="or" linked="false"/>
+				 </add-modifier>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='3' />
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

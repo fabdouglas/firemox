@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stag Beetle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - insect
+	0/0
+	stag beetle comes into play with x +1/+1 counters on it, where x is the number of other creatures in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>insect </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+				<target type="this"/>
+				<repeat>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<not>
+									<is-this/>
+								</not>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

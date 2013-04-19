@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Jade Monolith">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4} 
+{1}: the next time a source of your choice would deal damage to target 
+creature this turn, that source deals that damage to you instead. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="put-shield" zone="play">
+			<cost>
+				<pay-mana colorless="1"/>
+				<action ref="choose-damage-source"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<!-- save the card we have targeted -->
+					<save target="target-list.first" target2="target-list.last"/>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-any">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+							<destination-test>
+								<is target="saved2"/>
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<unregister-this/>
+							<target type="you"/>
+							<assign-damage value="context.int"/>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

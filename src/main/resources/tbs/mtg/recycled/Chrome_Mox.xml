@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Chrome Mox'>
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--
+		0
+	artifact
+	imprint - when chrome mox comes into play, you may remove a nonartifact, nonland 
+		card in your hand from the game. 
+		t :add one mana of any of the imprinted card's colors to your mana pool.
+	-->
+	<init>
+		<registers></registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone='play' card='tested' />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested' />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" cancel="true" raise-event="false" mode="choose" hop="3"
+					restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you" />
+							<not>
+								<or>
+									<has-idcard idcard="land" />
+									<has-idcard idcard="artifact" />
+								</or>
+							</not>
+						</and>
+					</test>
+				</target>
+				<action ref="imprint-card" />
+				<action ref="remove-from-game" />
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='mana-source' zone='play' resolution="auto">
+			<test ref="has-imprinted-card" />
+			<cost>
+				<action ref='T' />
+				<action ref="load-imprinted-card" />
+				<input-color operation="set" index="0" register="stack">
+					<values>
+						<value>
+							<card-colors card="target-list.last" />
+						</value>
+					</values>
+				</input-color>
+			</cost>
+			<effects>
+				<give-mana value="1">
+					<color>
+						<to-index>
+							<value register="stack" index="0" />
+						</to-index>
+					</color>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

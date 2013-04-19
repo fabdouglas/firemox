@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pilgrim of Virtue">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - human cleric
+	1/3
+	protection from black
+	w, sacrifice pilgrim of virtue: the next time a black source of your choice would deal damage this turn, prevent that damage.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric protection-from-black </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white="1"/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref="choose-damage-source">
+					<test>
+						<has-color color="black"/>
+					</test>
+				</action>	
+				<action ref='prevent-all'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

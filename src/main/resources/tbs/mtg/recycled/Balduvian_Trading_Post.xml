@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Balduvian Trading Post">
+<rules-author-comment>By Fabdouglas (corrected by Hoani CROSS : the sacrificed mountain must be untapped)</rules-author-comment>
+
+<!--  land 
+if balduvian trading post would come into play, sacrifice an untapped mountain instead. if you do, put balduvian trading post into play. if you don't, put it into its owner's graveyard. 
+{t}: add {1}{r} to your mana pool. 
+{1}, {t}: balduvian trading post deals 1 damage to target attacking creature.
+
+Text(AL+errata): 
+If ~this~ would come into play, sacrifice an untapped mountain instead.  
+If you do, put ~this~ into play.  
+If you don't, put it into its owner's graveyard. ; 
+
+{Tap}: Add {R} and one colorless mana to your mana pool. ; 
+{1},{Tap}: ~this~ deals 1 damage to target attacking creature.  [Oracle 1999/11/01]
+Mana Flare will let you make an extra red or an extra colorless mana of your choice.  [Aahz 1996/05/21]
+You sacrifice the mountain before this card is put into play, and do so no matter how it is put into play. [D'Angelo 1999/11/14]
+ -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice>
+					<either>
+						<action ref="sacrifice-a-land" value="1">
+							<test>
+								<and>
+									<in-zone zone="playANDuntapped"/>
+									<has-idcard idcard="mountain"/>
+								</and>
+							</test>
+						</action>
+						<action ref="put-in-play"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+		
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana colorless="1" red="1" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Regrowth">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{g} return target card from your graveyard to your hand. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<target type="card" restriction-zone="graveyard">
+					<test>
+						<controller player="controller"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

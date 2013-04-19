@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Do or Die">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {1}{b} separate all creatures target player controls into two piles. destroy all creatures in the pile of that player's choice. they can't be regenerated. -->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-player"/>
+				<!-- PUT HERE THE COST OF THIS SPELL -->
+			</cost>
+			<effects>
+				<target-list operation="clear" name="%"/>
+				<!-- UPDATE TYPE, ZONE OF THIS TEST -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+				<!-- COMPLETE THE TEST TO DETERMINE OBJECTS USED BY THE NEXT ACTION -->
+					</test>
+				</target>
+				<action ref="destroy"/>
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

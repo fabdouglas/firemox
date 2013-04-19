@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Glasses of Urza">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<!-- ORACLE TEXT 1, TAP: You may look at target player's hand.' -->
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you"/>
+				<msg type="ok">
+					<text>%ok_when_finished</text>
+				</msg>
+				<action ref="restore-hand-visibility"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

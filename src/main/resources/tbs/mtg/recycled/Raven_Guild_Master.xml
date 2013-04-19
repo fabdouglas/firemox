@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Raven Guild Master">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	creature - wizard mutant
+	1/1
+	whenever raven guild master deals combat damage to a player, that player removes the top ten cards of his or her library from the game.
+	morph 2uu 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard mutant </properties>
+	</init>
+	<actions>
+		<action reference-name="main">
+			<target type="card" mode="all" restriction-zone="library">
+				<test>
+					<and>
+						<position position="top" />
+						<controller player="target-list.last" />
+					</and>
+				</test>
+			</target>
+			<action ref="remove-from-game" />
+		</action>
+	</actions>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.player"/>
+				<repeat value="10"/>
+				<action ref="main"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='2' colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

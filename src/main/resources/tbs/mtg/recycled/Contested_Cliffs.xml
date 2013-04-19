@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Contested Cliffs">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	rg, t :choose target beast creature you control and target creature an opponent controls. each creature deals damage equal to its power to the other.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' green='1' />
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property='beast'/>
+						</and>
+					</test>
+				</action>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<controller player="you"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal' from="target-list.first" to="target-list.last">
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+				<assign-damage type='damage-normal' from="target-list.last" to="target-list.first">
+					<value register='target-list.last' index='power'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

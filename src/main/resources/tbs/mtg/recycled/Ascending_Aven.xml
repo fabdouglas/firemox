@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ascending Aven">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		2uu
+		creature - bird soldier
+		3/2
+		flying
+		ascending aven can block only creatures with flying.
+		morph 2u 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='colorless' value='2' />
+			<register index='power' value='3' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>bird soldier flying block-only-flying</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref="morph">
+			<actions>
+				<pay-mana blue='1' colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

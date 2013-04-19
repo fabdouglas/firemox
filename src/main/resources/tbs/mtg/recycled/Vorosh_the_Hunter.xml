@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vorosh, the Hunter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gub
+	legendary creature - dragon
+	6/6
+	flying
+	whenever vorosh, the hunter deals combat damage to a player, you may pay 2g. if you do, put six +1/+1 counters on vorosh.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="2" green="1"/>
+						<target type="this"/>
+						<repeat value="6"/>
+						<add-object object-name='+1/+1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

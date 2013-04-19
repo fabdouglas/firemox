@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Citanul Flute">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	x, t :search your library for a creature card with converted mana cost x or less, reveal it, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<and>
+							<inf-equal>
+								<left register="tested" index="manacost"/>
+								<right register="stack" index="0"/>
+							</inf-equal>
+							<has-idcard idcard='creature'/>
+						</and>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

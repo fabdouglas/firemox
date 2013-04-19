@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grinning Ignus">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental
+	2/2
+	r, return grinning ignus to its owner's hand: add 2r to your mana pool. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</cost>
+			<effects>
+				<give-mana red='1' colorless='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

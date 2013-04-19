@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Boris Devilboon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3br
+
+	legendary creature
+
+	2/2
+
+	2br, t :put a 1/1 black and red minor demon creature token into play.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="black" value="1"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>legend zombie wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" black="1" colorless="2" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name="Minor Demon">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>black red</colors>
+							<idcards>creature</idcards>
+							<properties>demon token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

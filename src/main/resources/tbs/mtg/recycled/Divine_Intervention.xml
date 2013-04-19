@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divine Intervention">
+<rules-author-comment></rules-author-comment>
+
+<!--  {6}{w}{w} divine intervention comes into play with two intervention
+ counters on it. at the beginning of your upkeep, remove an intervention
+ counter from divine intervention. if there are no intervention counters on it,
+ the game is a draw. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="intervention"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="intervention" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<lose-game player="you"/>
+				<lose-game player="opponent"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<object name="intervention"/>
+		<object name="intervention"/>
+	</modifiers>
+</card>

@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Obsidian Battle-Axe">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	tribal artifact - warrior equipment
+	equipped creature gets +2/+1 and has haste.
+	whenever a warrior creature comes into play, you may attach obsidian battle-axe to it.
+	equip 3
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors></colors>
+		<idcards>tribal artifact </idcards>
+		<properties>warrior equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<has-property property="warrior"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<attach from="this" to="context.card" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="haste" linked="true" />
+			<register-modifier index='power' operation='add' linked='true' value='2' />
+			<register-modifier index='toughness' operation='add' linked='true' value='1' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

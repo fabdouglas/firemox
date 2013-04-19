@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Yavimaya Dryad">
+	<!-- 
+		1GG
+		Creature - Dryad
+		2/1
+		Forestwalk
+		When Yavimaya Dryad comes into play, you may search your library for 
+		a Forest card and put it into play tapped under target player's control. 
+		If you do, shuffle your library.
+	-->
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="2" />
+			<register index="colorless" value="1" />
+			<register index="power" value="2" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>dryad forestwalk</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="play" />
+						<is-this />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<choice cancel="true">
+					<either>
+						<private-object object="target-list.first" object-name="player" operation="add"
+							name="%" />
+						<target-list operation="clear" name="%" />
+						<target type="you" />
+						<action ref="search-lib-up-to-player" value="1">
+							<test>
+								<has-idcard card="tested" idcard="forest" />
+							</test>
+						</action>
+						<target-list operation="remove-first" name="%" />
+						<target type="private-object" name="player" />
+						<move-card controller="target-list.last" destination="playANDtapped" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

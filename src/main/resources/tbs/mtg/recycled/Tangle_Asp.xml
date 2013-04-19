@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tangle Asp">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - snake
+	1/2
+	whenever tangle asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>snake </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="context.card2"/>
+				<action ref="destroy-target-eoc"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="context.card"/>
+				<action ref="destroy-target-eoc"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

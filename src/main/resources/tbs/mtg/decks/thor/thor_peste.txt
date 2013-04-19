@@ -1,0 +1,35 @@
+#Jeu peste
+#
+#John
+#
+#octobre 29, 2000
+#1
+#4th Edition
+#
+Circle_of_Protection:_Black;2
+Disenchant;2
+Spirit_Link;2
+White_Knight;2
+Giant_Growth;2
+Stream_of_Life;1
+Whirling_Dervish;2
+Ancestral_Recall;2
+Counterspell;2
+Power_Sink;2
+Time_Walk;3
+Timetwister;3
+Pestilence;2
+Demonic_Tutor;1
+Black_Lotus;4
+Mox_Jet;3
+Mox_Emerald;3
+Mox_Pearl;3
+Bayou;3
+Savannah;3
+Scrubland;3
+City_of_Brass;2
+Tundra;4
+Mox_Sapphire;3
+Howling_Mine;1
+Underground_Sea;4
+Fastbond;1

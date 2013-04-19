@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Copperhoof Vorrac">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - beast
+	2/2
+	copperhoof vorrac gets +1/+1 for each untapped permanent your opponents control.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>boar beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add">
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<in-zone zone="playANDuntapped"/>
+						<not>
+							<controller player="you"/>
+						</not>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add">
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<in-zone zone="playANDuntapped"/>
+						<not>
+							<controller player="you"/>
+						</not>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

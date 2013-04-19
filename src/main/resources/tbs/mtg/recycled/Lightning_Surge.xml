@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lightning Surge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	sorcery
+	lightning surge deals 4 damage to target creature or player.
+	threshold - if seven or more cards are in your graveyard, instead lightning surge deals 6 damage to that creature or player and the damage can't be prevented.
+	flashback 5rr 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name='main-effects'>
+				<action ref='target-dealtable'/>
+				<if-then-hop elsehop="3">
+					<test ref="threshold"/>
+				</if-then-hop>
+				<assign-damage value='6' type='damage-cannot-be-prevented'/>
+				<hop value="2"/>
+				<assign-damage value='4' type='damage-normal'/>
+		</action>
+	</actions>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability reference-name='main-ability' playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='flashback%a' zone='graveyard'>
+			<cost>
+				<pay-mana red='2' colorless='5' />
+			</cost>
+			<effects>
+				<action ref='main-effects'/>
+				<action ref='flashback'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

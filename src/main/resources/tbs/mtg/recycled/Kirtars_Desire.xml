@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kirtar's Desire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	enchantment - aura
+	enchant creature
+	enchanted creature can't attack.
+	threshold - enchanted creature can't block as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="cannot-attack" linked="true" />
+			<property-modifier property="cannot-block" linked="true" >
+				<while>
+					<test ref="threshold"/>
+				</while>
+			</property-modifier>
+		</modifiers>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Hollow Trees">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  land bottomless vault comes into play tapped. you may choose not to untap 
+bottomless vault during your untap step. at the beginning of your upkeep, 
+if bottomless vault is tapped, put a storage counter on it. 
+
+{t}, remove any number of storage counters from bottomless vault: add {g} to 
+your mana pool for each storage counter removed this way. 
+-->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>may-not-untap</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<ability ref="come-into-play-tapped" />
+		<triggered-ability zone="play" >
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<test ref="during-your-upkeep"/>
+						<in-zone zone="playANDtapped" card="this"/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="storage"/>
+			</effects>
+		</triggered-ability>
+		
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+				<input-number minimum="0" register="stack" index="0" operation="set">
+					<text>Specify the amount of storage counters to use</text>
+					<maximum>
+						<counter object-name="storage" card="this"/>
+					</maximum>
+				</input-number>
+				<target type="this" />
+				<repeat>
+					<value register="stack" index="0" />
+				</repeat>
+				<remove-object object-name="storage" />
+			</cost>
+			<effects>
+				<give-mana>
+					<green register="stack" index="0"/>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dawn's Reflection">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		3G
+		Enchantment - Aura
+		Enchant land
+		Whenever enchanted land is tapped for mana, its controller adds two mana in 
+		any combination of colors to his or her mana pool.
+		
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<become-tapped>
+				<test>
+					<is target="attachedto"/>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<cost>
+							<input-color register="stack" index="0" operation="set" controller="controller" />
+							<input-color register="stack" index="1" operation="set" controller="controller" />
+						</cost>
+						<effects>
+							<unregister-this/>
+							<give-mana value="1" to="attachedto.controller">
+								<color register="stack" index="0" />
+							</give-mana>
+							<give-mana value="1" to="attachedto.controller">
+								<color register="stack" index="1" />
+							</give-mana>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers />
+		<valid-target ref="valid-land-to-enchant" />
+		<valid-attachment ref="valid-enchant-land" />
+	</attachment>
+</card>

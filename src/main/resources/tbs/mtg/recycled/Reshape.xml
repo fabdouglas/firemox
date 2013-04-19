@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reshape">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xuu
+	sorcery
+	as an additional cost to play reshape, sacrifice an artifact.
+	search your library for an artifact card with converted mana cost x or less and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref='sacrifice-an-artifact' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib' value="1">
+					<test>
+						<and>
+							<inf-equal>
+								<right register="stack" index="0"/>
+								<left register="tested" index="manacost"/>
+							</inf-equal>
+							<has-idcard idcard='artifact'/>
+						</and>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

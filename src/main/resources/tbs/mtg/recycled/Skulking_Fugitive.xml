@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skulking Fugitive">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	creature - horror mercenary
+	3/4
+	when skulking fugitive becomes the target of a spell or ability, sacrifice it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror mercenary </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<destination-test>
+					<is-this />
+				</destination-test>
+			</targeted>
+			<effects>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

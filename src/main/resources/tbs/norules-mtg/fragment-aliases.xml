@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2007 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Fabrice Daugan
+	* @author Hoani Cross
+-->
+<!--[[apt lang=en]]
+	* Aliases
+	
+	`Most of the elements of the <<Magic the Gathering>> game implementation in
+	`<<Magic Project>> are referenced by integer values. To make rules readable by
+	`a human, we can also use aliases for specific integer values, which are
+	`declared within the <<<\<aliases\>>>> element.
+	
+	`Let's look at the different available aliases.
+	
+	** Global aliases
+	
+	`These aliases are used in many different situations :
+	
+	*___________________________+
+	| <<Name of the alias>>     |
+	*___________________________+
+-->
+<!--[[apt lang=fr]]
+	* Les alias
+	
+	`La plupart des élément de l'implémentation du jeu de cartes
+	`<<Magic : l'Assemblée>> dans <<Magic Project>> sont référencés par des valeurs
+	`entières. Afin de rendre les règles lisibles pour un humain, on peut également
+	`utiliser des alias pour certaines valeurs entières spécifiques, qui sont déclarées
+	`au sein de l'élément <<<\<aliases\>>>>.
+	
+	`Voyons les différents alias disponibles.
+	
+	** Les alias globaux
+	
+	`Ces alias sont utilisés dans diverses situations :
+	
+	*___________________________+
+	| <<Nom de l'alias>>        |
+	*___________________________+
+-->
+<aliases xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../validator.xsd">
+
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="none" value="0" />
+	<alias name="all" value="65535" />
+	<alias name="abortme" value="65535" />
+	<alias name="abort" value="65535" />
+	<alias name="destroy" value="65535" />
+	<alias name="manapool" value="255" />
+	<alias name="manacost" value="255" />
+	<alias name="threshold" value="7" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The damage types
+		
+		`All the different types of damage can be tested using this set of available aliases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les types de dommages
+		
+		`Tous les différents types de dommages peuvent être testés en utilisant les alias
+		`suivants :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The card positions
+		
+		`The position of a card in a zone can be referenced using these aliases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les positions d'une carte
+		
+		`La position d'une carte dans une zone peut être référencée en utilisant les alias
+		`suivants :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="top" value="0" />
+	<alias name="bottom" value="65535" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases used in damage prevention
+		
+		`The following aliases are used in damage prevention :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour la prévention de dommages
+		
+		`Les alias suivants sont utilisés pour la prévention de dommages :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases for phase indexes
+		
+		`The following aliases are used for phase indexes :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les index de phase
+		
+		`Les alias suivants sont utilisés pour les index de phase :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="precombat-main" value="3" />
+	<alias name="eoc.index" value="8" />
+	<alias name="postcombat-main" value="9" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- game.static indexes, reseted each turn -->
+	<!--[[apt lang=en]]
+		** Aliases for game static indexes
+		
+		`The following aliases are used for game static indexes, they are reseted
+		`each turn :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les index de jeu statiques
+		
+		`Les alias suivants sont utilisés pour les index de jeu statiques, il sont
+		`mis à zéro au début de chaque tour :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="attack-step-index" value="24" />
+	<alias name="nb-attacking-group" value="25" />
+	<alias name="assignment-configuration" value="26" />
+	<alias name="assignment-configuration-int" value="27" />
+	<alias name="beginning-of-combat-target-lists" value="28" />
+	<alias name="normal-next-player" value="29" />
+	<alias name="skipping-turn" value="30" />
+	<alias name="turnid" value="31" />
+	<alias name="nbattacking" value="9" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- card/player registers -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to cards or players
+		
+		`The following aliases are used for registers dedicated to cards or players :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux cartes et aux joueurs
+		
+		`Les alias suivants sont utilisés pour les registres liés aux cartes et aux joueurs :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="colorless" value="0" />
+	<alias name="black" value="1" />
+	<alias name="blue" value="2" />
+	<alias name="green" value="3" />
+	<alias name="red" value="4" />
+	<alias name="white" value="5" />
+	<alias name="state" value="7" />
+	<alias name="damage" value="8" />
+	<alias name="combat.assignedto" value="9" />
+	<alias name="free0" value="16" />
+	<alias name="free1" value="17" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- Only for cards -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to cards
+		
+		`The following aliases are used for registers dedicated to cards :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux cartes
+		
+		`Les alias suivants sont utilisés pour les registres liés aux cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="combat.toassign" value="10" />
+	<alias name="power" value="11" />
+	<alias name="toughness" value="12" />
+	<alias name="loyalty" value="13" />
+	<alias name="special-abilities" value="15" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- Only for players -->
+	<!--[[apt lang=en]]
+		** Aliases for registers dedicated to players
+		
+		`The following aliases are used for registers dedicated to players :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les registres liés aux joueurs
+		
+		`Les alias suivants sont utilisés pour les registres liés aux joueurs :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="poison" value="11" />
+	<alias name="life" value="12" />
+	<alias name="mulligan" value="22" />
+	<alias name="creatures-moved-in-graveyard-from-play-this-turn" value="23" />
+	<alias name="damage-dealt-this-turn" value="24" />
+	<alias name="hand-vibility-modifiers" value="25" />
+	<alias name="initialized" value="26" />
+	<alias name="land-remain-to-cast" value="27" />
+	<alias name="maxi-cards-in-hand" value="28" />
+	<alias name="playedland" value="29" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- card state bits -->
+	
+	<alias name="just-summoned" value="1" />
+	<alias name="not-just-summoned" value="65534" />
+	<!-- = ~0x0001 -->
+	<alias name="untapped-under-condition" value="8" />
+	<alias name="declared-as-attacking" value="16" />
+	<alias name="declared-as-blocking" value="32" />
+	<alias name="declared-as-blocked" value="64" />
+	<alias name="declared-as-unblocked" value="128" />
+	
+	<!-- id cards -->
+	<alias name="supra" value="0" />
+
+	<!-- WARNING : here '+' is binary 'or' operator, not arythmetic -->
+	<!--[[apt lang=en]]
+		** Aliases for card types
+		
+		`The following aliases are used for card types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de cartes
+		
+		`Les alias suivants sont utilisés pour les types de cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<alias name="instant" value="4" export="types" />
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** Aliases for permanent types
+		
+		`The following aliases are used for permanent types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de permanents
+		
+		`Les alias suivants sont utilisés pour les types de permanents :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!--[[apt end-multiref]]-->
+
+	<!-- phases -->
+	<!--[[apt lang=en]]
+		** Aliases for phases
+		
+		`The following aliases are used for phases :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les phases
+		
+		`Les alias suivants sont utilisés pour les phases:
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	<alias name="untap" value="0" export="phases" />
+	<alias name="upkeep" value="1" export="phases" />
+	<alias name="draw" value="2" export="phases" />
+	<alias name="main" value="3" export="phases" />
+	<alias name="declare-attack" value="5" export="phases" />
+	<alias name="declare-attacking" value="6" export="phases" />
+	<alias name="declare-blocking" value="7" export="phases" />
+	<alias name="combat-deals" value="8" export="phases" />
+	<alias name="eoc" value="9" export="phases" />
+	<alias name="eot" value="10" export="phases" />
+	<alias name="cleanup" value="4" export="phases" />
+	<!--[[apt end-multiref]]-->
+
+	<!-- properties -->
+
+	<!--[[apt lang=en]]
+		** Aliases for protection types
+		
+		`The following aliases are used for protection types :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les types de protection
+		
+		`Les alias suivants sont utilisés pour les types de protection :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+
+	<!-- protection from card types 32768 -->
+	
+	<!--[[apt end-multiref]]-->
+
+	<!-- untargetable by idcard 4096 -->
+	<!--[[apt lang=en]]
+		** Aliases for categories of <shroud> property
+		
+		`The following aliases are used for categories of <shroud> property :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les catégories de la propriété <inciblable>
+		
+		`Les alias suivants sont utilisés pour les catégories de la propriété <inciblable> :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!-- protection from sub properties 4096 -->
+	<!--[[apt end-multiref]]-->
+
+	<!-- properties -->
+	<!--[[apt lang=en]]
+		** Aliases for card properties
+		`The following aliases are used for card properties :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les alias utilisés pour les propriétés des cartes
+		
+		`Les alias suivants sont utilisés pour les propriétés des cartes :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!--[[apt end-multiref]]-->
+
+	<!--[[apt lang=en]]
+		** The creature types
+		 
+		`All the declared creatures types available in <<Magic Project>> are listed below :
+		
+		*___________________________+
+		| <<Name of the alias>>     |
+		*___________________________+
+	-->
+	<!--[[apt lang=fr]]
+		** Les types de créatures
+		
+		`Tous les types de créatures déclarés dans <<Magic Project>> sont listés ci-dessous :
+		
+		*___________________________+
+		| <<Nom de l'alias>>        |
+		*___________________________+
+	-->
+	<!--[[apt start-multiref@name ]]-->
+	
+	<!--[[apt end-multiref]]-->
+
+</aliases>

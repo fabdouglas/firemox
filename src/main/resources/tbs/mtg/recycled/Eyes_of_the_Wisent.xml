@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Eyes of the Wisent">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	tribal enchantment - elemental
+	whenever an opponent plays a blue spell during your turn, you may put a 4/4 green elemental creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>tribal global-enchantment </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<has-color color="blue"/>
+						<not>
+							<controller player="you"/>
+						</not>
+						<controller player="currentplayer" card="this" />
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<create-card>
+							<card name='Elemental'>
+								<rules-author-comment></rules-author-comment>
+								<init>
+									<registers>
+										<register index='power' value='4'/>
+										<register index='toughness' value='4'/>
+									</registers>
+									<colors>green</colors>
+									<idcards>creature</idcards>
+									<properties>token elemental </properties>
+								</init>
+							</card>
+						</create-card>
+						<move-card controller='you' destination='play'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

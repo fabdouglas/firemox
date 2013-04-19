@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Akroma's Devoted">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+	<!-- 
+		[3] [blanc]
+		Akroma's Devoted
+		Creature - 2/4	
+		
+		
+		Attacking doesn't cause Clerics to tap.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="white" value="1" />
+			<register index="power" value="2" />
+			<register index="toughness" value="4" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="vigilance" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-property property="cleric" />
+					<has-idcard idcard="creature" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

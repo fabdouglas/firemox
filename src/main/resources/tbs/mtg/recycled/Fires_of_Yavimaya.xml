@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fires of Yavimaya">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rg
+	enchantment
+	creatures you control have haste.
+	sacrifice fires of yavimaya: target creature gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="haste" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

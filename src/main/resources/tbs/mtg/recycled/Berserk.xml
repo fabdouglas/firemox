@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Berserk">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+				<inf right="eoc.index" left="current-phase.index"/>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+				<target mode="choose" type="card" restriction-zone="play">
+					<test ref="is-targetable-creature"/>
+				</target>
+			</cost>
+			<effects>
+				<action ref="trample-until-eot"/>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+						<value register="target-list.first" index="power"/>
+					</register-modifier>
+				</add-modifier>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="play">
+						<declared-attacking>
+							<test>
+								<is target="saved"/>
+							</test>
+						</declared-attacking>
+						<effects>
+							<create-ability>
+								<save target="saved"/>
+								<triggered-ability zone="play">
+									<end-of-phase phase="untap"/>
+									<effects>
+										<target type="saved"/>
+										<action ref="destroy"/>
+									</effects>
+								</triggered-ability>
+							</create-ability>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

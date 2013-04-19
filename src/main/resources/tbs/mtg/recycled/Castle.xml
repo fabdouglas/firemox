@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Castle">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	
+	<!-- Text(6th): Untapped creatures you control get +0/+2. -->
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<!-- The "zone" tag used in <filtertest> element is the zone where this
+			     modifier is applied to. The while test is used to determine if this 
+			     satic-modifier would be applied or not. in
+			     Later in game, if any effect modifies an attribute of a card placed 
+			     in the filtered zone, and if the modified attribut can modify the 
+			     value of the test of this filter, the specified modifiers are added 
+			     or removed from the cards.
+			     For castle, the filter-test contains <has-idcard> and 
+			     <in-zone "playANDuntapped"/> tests, so this static-modifier looks for 
+			     any cards coming into play satisfying the test : 
+			     must be a creature, in play and untappe.
+			-->
+			<modifiers>
+			 	<register-modifier index="toughness" operation="add" value="2" linked="true" layer="global"/>			 		
+			</modifiers>
+	 		<while>
+	 			<and>
+			 		<has-idcard idcard="creature"/>
+	 				<in-zone zone="playANDuntapped"/>
+	 			</and>
+	 		</while>
+		</static-modifier>
+	</modifiers>
+</card>

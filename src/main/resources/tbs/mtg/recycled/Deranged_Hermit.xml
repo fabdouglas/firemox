@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deranged Hermit">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {3}{g}{g} echo  when deranged hermit comes into play, 
+put four 1/1 green squirrel creature tokens into play. 
+all squirrels get +1/+1. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>elf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="echo"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<repeat value="4"/>
+				<create-card>
+					<card name="Squirrel">
+						<rules-author-comment>By fabdouglas</rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>squirrel token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-property property="squirrel"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

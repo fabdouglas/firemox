@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diabolic Servitude">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+						<!-- PUT HERE ADDITIONAL TEST ON CARD BEFORE IT GOES TO PLAY -->
+					</and>
+				</source-test>
+				<destination-test>
+					<!-- PUT HERE ADDITIONAL TEST ON CARD WHEN IT GOES TO PLAY -->
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target mode="choose" type="card" restriction-zone="play">
+					<!-- COMPLETE THIS TEST ON CREATURE TO TARGET -->
+					<test ref="is-targetable-creature"/>
+				</target>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+					<!-- UPDATE THE EVENT OF THIS TRIGGERED ABILITY -->
+			<become-tapped>
+				<test>
+					<!-- COMPLETE THE TEST APPLIED ON TAPPING CARD -->
+					<is-this/>
+				</test>
+			</become-tapped>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<!-- COMPLETE TEST ON CARD BEFORE IT LEAVE PLAY -->
+							<in-zone zone="play" card="tested"/>
+				</source-test>
+			</moved-card>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

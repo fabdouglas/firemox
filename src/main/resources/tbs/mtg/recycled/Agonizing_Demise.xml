@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Agonizing Demise">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {3}{b} kicker {1}{r}  
+		destroy target nonblack creature. 
+		it can't be regenerated. if the kicker cost was paid, agonizing demise deals damage equal 
+		to that creature's power to the creature's controller. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="black" value="1" />
+		</registers>
+		<colors>black</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<action ref="kicker" />
+				<pay-mana red="1" colorless="1" />
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black" />
+						</not>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref="bury" />
+				<assign-damage type="damage-normal" from="this" to="target-list.last.controller">
+					<value register="target-list.first" index="power" />
+				</assign-damage>
+				<action ref="finish-spell" />
+			</actions>
+		</ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black" />
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

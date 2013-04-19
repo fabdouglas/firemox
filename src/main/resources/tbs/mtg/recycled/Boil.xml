@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Boil">
+<!-- Destroy all Islands. -->
+<!-- Tested ok 0.81.30 04/01/2005 -->
+	<rules-author-comment>By brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<has-idcard idcard="island"/>
+					</test>
+				</target>
+				<action ref="destroy"/>
+				<!-- Put Boil to graveyard. -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

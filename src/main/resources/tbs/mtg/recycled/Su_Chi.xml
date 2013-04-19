@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Su-Chi">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {4} when su-chi is put into a graveyard from play, add {4} to your mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<give-mana colorless="4" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

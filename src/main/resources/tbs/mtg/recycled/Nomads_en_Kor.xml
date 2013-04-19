@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nomads en-Kor">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<idcards>creature</idcards>
+		<properties>kor nomad soldier</properties>
+		<colors>white</colors>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="put-shield" zone="play">
+			<cost>
+				<pay-mana colorless="0"/>
+				<action ref="target-creature">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target-list operation="save" index="0" target="this"/>
+				<action ref="redirect-1-from-this"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nature's Resurgence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	sorcery
+	each player draws a card for each creature card in his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat>
+					<value>
+						<counter restriction-zone="graveyard">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<target-list operation="clear"/>
+				<target type="opponent"/>
+				<repeat>
+					<value>
+						<counter restriction-zone="graveyard">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</repeat>
+				<action ref='draw-a-card'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

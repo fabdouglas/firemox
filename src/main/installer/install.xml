@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+	<info>
+		<appname>Magic - Project</appname>
+		<appversion>0.95 beta</appversion>
+		<url>http://firemox.sourceforge.net/</url>
+		<javaversion>1.5</javaversion>
+		<authors>
+			<author name="Fabrice Daugan" email="fabdouglas@users.sourceforge.net" />
+			<author name="Bojan Jovicic" email="bojan_jovicic@users.sourceforge.net" />
+			<author name="Olivier Verelst" email="brius@users.sourceforge.net" />
+			<author name="Peter Deal" email="dealpete@users.sourceforge.net" />
+			<author name="goldeneyeMDK" email="goldeneyemdk@users.sourceforge.net" />
+			<author name="Hoani Cross" email="hcross@users.sourceforge.net" />
+			<author name="jods" email="jods4@users.sourceforge.net" />
+			<author name="GOAK" email="kaffine@users.sourceforge.net" />
+			<author name="Dedecker" email="ldedecker@users.sourceforge.net" />
+			<author name="SAVARY" email="meuh24@users.sourceforge.net" />
+			<author name="Nicolas Vacher" email="nico100@users.sourceforge.net" />
+			<author name="Jan Blaha" email="pofider@users.sourceforge.net" />
+			<author name="Rajmahendra" email="rajmahendra@users.sourceforge.net" />
+			<author name="Carlouet Mathieu" email="seingalt_tm@users.sourceforge.net" />
+			<author name="surtur" email="surtur2@users.sourceforge.net" />
+			<author name="Arthur Nascimento" email="tureba@users.sourceforge.net" />
+		</authors>
+
+	</info>
+
+	<guiprefs height="600" resizable="yes" width="640" />
+
+	<locale>
+		<langpack iso3="eng" />
+		<langpack iso3="fra" />
+		<langpack iso3="por" />
+		<langpack iso3="spa" />
+	</locale>
+
+	<native type="izpack" name="ShellLink.dll" />
+
+	<resources>
+		<res id="shortcutSpec.xml" src="default_shortcut_specification.xml" />
+		<res id="Win_shortcutSpec.xml" src="win_shortcut_specification.xml" />
+		<res id="Unix_shortcutSpec.xml" src="unix_shortcut_specification.xml" />
+
+		<res id="LicencePanel.licence" src="LICENSE.txt" />
+		<res id="InfoPanel.info" src="README.txt" />
+		<res id="Installer.image" src="images/install.jpg" />
+	</resources>
+
+
+
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="InfoPanel" />
+		<panel classname="LicencePanel" />
+		<panel classname="ShortcutPanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="PacksPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="FinishPanel" />
+	</panels>
+
+
+	<packs>
+		<pack name="Core" required="yes">
+			<description>The core</description>
+			<fileset dir=""  targetdir="$INSTALL_PATH">
+				<include name="*" />
+				<include name="dtds" />
+			</fileset>
+			<fileset dir="lib"  targetdir="$INSTALL_PATH/lib">
+				<exlude name="*.zip" />
+				<exlude name="lnf-*.jar" />
+			</fileset>
+			<fileset dir="tbs"  targetdir="$INSTALL_PATH/tbs">
+				<include name="*" />
+			</fileset>
+		</pack>
+
+		<pack name="Images" required="yes">
+			<description>The base files</description>
+			<file src="images" targetdir="$INSTALL_PATH" />
+		</pack>
+
+		<pack name="Themes" required="no">
+			<description>The libraries and themes</description>
+			<fileset dir="lib"  targetdir="$INSTALL_PATH/lib">
+				<include name="*.zip" />
+				<include name="lnf-*.jar" />
+			</fileset>
+		</pack>
+
+		<pack name="MTG" required="yes">
+			<description>The Magic The Gathering files</description>
+			<fileset dir="tbs/mtg"  targetdir="$INSTALL_PATH/tbs/mtg">
+				<include name="**/*" />
+			</fileset>
+		</pack>
+		
+		<pack name="MTG (no rules)" required="yes">
+			<description>The Magic The Gathering files without rules</description>
+			<fileset dir="tbs/norules-mtg"  targetdir="$INSTALL_PATH/tbs/norules-mtg">
+				<include name="**/*" />
+			</fileset>
+		</pack>
+		
+		<pack name="BLANK" required="yes">
+			<description>The Tutorial game files</description>
+			<fileset dir="tbs/blank"  targetdir="$INSTALL_PATH/tbs/blank">
+				<include name="**/*" />
+			</fileset>
+		</pack>
+	</packs>
+</installation>

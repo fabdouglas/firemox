@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mishra's Groundbreaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	t, sacrifice mishra's groundbreaker: target land becomes a 3/3 artifact creature that's still a land. 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-indirection index="power" value="3" operation="set" linked="false"/>
+					<register-indirection index="toughness" value="3" operation="set" linked="false"/>
+					<idcard-modifier idcard="artifact-creature" operation="or" linked="false"/>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

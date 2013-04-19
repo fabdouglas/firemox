@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Notorious Assassin">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - spellshaper
+	2/2
+	2b, t, discard a card: destroy target nonblack creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper assassin</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='2' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

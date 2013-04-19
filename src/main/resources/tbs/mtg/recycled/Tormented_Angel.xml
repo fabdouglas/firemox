@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tormented Angel">
+<rules-author-comment></rules-author-comment>
+
+<!--  3w flying -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>flying angel</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

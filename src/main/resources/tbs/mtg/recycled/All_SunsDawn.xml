@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="All Suns' Dawn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4g
+	sorcery
+	for each color, return up to one target card of that color from your graveyard to your hand. then remove all suns' dawn from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="black"/>
+						</and>
+					</test>
+				</target>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="blue"/>
+						</and>
+					</test>
+				</target>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="green"/>
+						</and>
+					</test>
+				</target>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="red"/>
+						</and>
+					</test>
+				</target>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color="white"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rushwood Legate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - dryad
+	2/1
+	if an opponent controls an island and you control a forest, you may play rushwood legate without paying its mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>dryad </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+			<activated-ability playable="this" zone="hand">
+				<test>
+					<and>
+						<has restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="forest"/>
+							</and>
+						</has>
+						<has restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="island"/>
+							</and>
+						</has>
+					</and>
+				</test>
+				<effects>
+					<action ref="put-in-play" />
+				</effects>
+			</activated-ability>
+	</abilities>
+</card>

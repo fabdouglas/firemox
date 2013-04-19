@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Doomgape">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4(b / g)(b / g)(b / g)
+	creature - elemental
+	10/10
+	trample
+	at the beginning of your upkeep, sacrifice a creature. you gain life equal to that creature's toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='10'/>
+			<register index='toughness' value='10'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental trample </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' black='3' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' black='2' green='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' black='1' green='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='4' green='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref='sacrifice-a-creature' value='1'/>
+				<action ref='gain-life'>
+					<value register='target-list.first' index='toughness'/>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

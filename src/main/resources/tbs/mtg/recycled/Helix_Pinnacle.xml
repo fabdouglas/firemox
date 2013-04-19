@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Helix Pinnacle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	enchantment
+	shroud
+	x: put x tower counters on helix pinnacle.
+	at the beginning of your upkeep, if there are 100 or more tower counters on helix pinnacle, you win the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>global-enchantment </idcards>
+		<properties>shroud </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<repeat>
+					<value register='stack' index='0'/>
+				</repeat>
+				<add-object object-name='tower'/>
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<sup right="99">
+							<left>
+								<counter object-name="tower" card="this"/>
+							</left>
+						</sup>
+					</test>
+				</if-then-hop>
+				<lose-game player="opponent" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

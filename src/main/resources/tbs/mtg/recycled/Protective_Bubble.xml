@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Protective Bubble">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	enchantment - aura
+	enchant creature
+	enchanted creature is unblockable and has shroud. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<property-modifier property="shroud" linked="true" />
+			<property-modifier property="unblockable" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Daru Warchief">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!-- 
+		Card Type:  	 Creature - Soldier
+		P/T: 	1/1
+		Rules Text (Oracle): 	Soldier spells you play cost 1 Mana less to play.
+		Soldiers you control get +1/+2.
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="2" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human soldier</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+					<has-property property="soldier" />
+					<controller player="you" />
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless="-1" />
+			</cost>
+		</additional-cost-modifier>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-modifier index="power" operation="add" value="1" linked="true"
+					layer="global" />
+				<register-modifier index="toughness" operation="add" value="2" linked="true"
+					layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-property property="soldier" />
+					<controller player="you" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

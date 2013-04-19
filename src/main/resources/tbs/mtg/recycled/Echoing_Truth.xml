@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Echoing Truth">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	instant
+	return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<not>
+								<has-idcard idcard="land"/>
+							</not>
+							<has-name name="target-list.first.name"/>
+						</and>
+					</test>
+				</target>
+				<action ref="return-to-hand"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

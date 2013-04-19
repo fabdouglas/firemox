@@ -1,0 +1,86 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chainer, Dementia Master">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	legendary creature - minion
+	3/3
+	nightmare creatures get +1/+1.
+	bbb, pay 3 life: put target creature card from a graveyard into play under your control. that creature is black and is a nightmare in addition to its other creature types.
+	when chainer, dementia master leaves play, remove all nightmares from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='3' />
+				<action ref='pay-life' value='3'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card controller="you" destination="play"/>
+				<add-modifier>	
+					<property-modifier property="nightmare" linked="false"/>
+				 	<color-modifier color="black" linked="false"/>
+				 </add-modifier>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="nightmare"/>
+					</test>
+				</action>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone='play'>
+			<modifiers>
+				<register-modifier index='power' operation='add' value='1' linked='true' layer='global'/>
+				<register-modifier index='toughness' operation='add' value='1' linked='true' layer='global'/>
+			</modifiers>
+			<while>
+				<and>
+					<has-property property='nightmare'/>
+					<has-idcard idcard="creature"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

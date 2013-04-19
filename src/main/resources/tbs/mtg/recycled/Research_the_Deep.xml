@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Research the Deep">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	sorcery
+	draw a card. clash with an opponent. if you win, return research the deep to its owner's hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref="clash">
+					<actions>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</actions>
+					<actions>
+						<action ref='finish-spell'/>
+					</actions>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

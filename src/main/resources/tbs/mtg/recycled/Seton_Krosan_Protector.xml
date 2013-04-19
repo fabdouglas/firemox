@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Seton, Krosan Protector">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ggg
+	legendary creature - centaur druid
+	2/2
+	tap an untapped druid you control: add g to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend centaur druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<has-property property="druid"/>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+			</cost>
+			<effects>
+				<give-mana green='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghost-Lit Redeemer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - spirit
+	1/1
+	w, t :you gain 2 life.
+	channel - 1w, discard ghost-lit redeemer: you gain 4 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="1" white="1"/>
+				<target type="this"/>
+				<action ref="put-in-graveyard"/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='4'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

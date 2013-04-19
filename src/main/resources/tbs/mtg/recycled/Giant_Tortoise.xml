@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Giant Tortoise">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - turtle
+	1/1
+	giant tortoise gets +0/+3 as long as it's untapped.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>turtle </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="toughness" operation="add" value="3">
+			<while>
+				<in-zone zone="playANDuntapped" card="this"/>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

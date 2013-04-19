@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lyzolda, the Blood Witch">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1br
+	legendary creature - human cleric
+	3/1
+	2, sacrifice a creature: lyzolda, the blood witch deals 2 damage to target creature or player if the sacrificed creature was red. draw a card if the sacrificed creature was black.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='sacrifice-a-creature' value='1'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<has-color color="red" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<assign-damage value='2' type='damage-normal'/>
+				<if-then-hop elsehop="3">
+					<test>
+						<has-color color="black" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

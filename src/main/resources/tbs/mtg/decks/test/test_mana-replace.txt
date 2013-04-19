@@ -1,0 +1,8 @@
+volcanic island;10
+dormant volcano;10
+mana flare;10
+deep water;10
+mishra's workshop;10
+clockwork avian;10
+Basalt_Monolith;10
+super card;20

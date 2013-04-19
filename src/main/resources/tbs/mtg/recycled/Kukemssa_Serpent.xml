@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Kukemssa Serpent">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{u} kukemssa serpent can't attack unless defending player controls an island. 
+{u}, sacrifice an island: target land an opponent controls becomes an island until end of turn. when you control no islands, sacrifice kukemssa serpent. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack serpent</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home-attack"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="sacrifice-a-land" value="1">
+					<test>
+						<has-idcard idcard="island"/>
+					</test>
+				</action>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-land">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="island" operation="set" linked="false"> 
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+					<ability-modifier operation="clear" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

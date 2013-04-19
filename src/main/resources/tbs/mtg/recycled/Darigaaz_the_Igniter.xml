@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darigaaz, the Igniter">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{b}{r}{g} flying 
+whenever darigaaz, the igniter deals combat damage to a player, you may pay {2}{r}. 
+if you do, choose a color. that player reveals his or her hand and darigaaz deals x damage to him or her, where x is the number of cards revealed of that color. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+			<register index="red" value="1"/>
+			<register index="green" value="1"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>black red green</colors>
+		<idcards>creature </idcards>
+		<properties>flying dragon legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<assigned-damage type="damage-combat-only">
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<pay-mana colorless="2" red="1"/>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<target type="context.player"/>
+				<show-zone zone="hand" for="you"/>
+					<msg type="ok">
+					<text>%ok_when_finished</text>
+				</msg>
+				<action ref="restore-hand-visibility"/>
+				<assign-damage type="damage-normal">
+					<value>
+						<counter restriction-zone="hand">
+							<and>
+								<controller player="opponent"/>
+								<has-color>
+									<color register="stack" index="0"/>
+								</has-color>
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Squirrel Mob">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - squirrel
+	2/2
+	squirrel mob gets +1/+1 for each other squirrel in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>squirrel </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="squirrel"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+		<register-modifier index='toughness' operation='add' linked='false'>
+			<value>
+				<counter restriction-zone="play">
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<has-property property="squirrel"/>
+					</and>
+				</counter>
+			</value>
+		</register-modifier>
+	</modifiers>
+</card>

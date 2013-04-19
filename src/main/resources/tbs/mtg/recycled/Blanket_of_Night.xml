@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blanket of Night">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	enchantment
+	each land is a swamp in addition to its other land types.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<idcard-modifier idcard="swamp" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="land"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

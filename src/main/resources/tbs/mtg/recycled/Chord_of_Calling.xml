@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Chord of Calling">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="3" />
+		</registers>
+		<colors>green</colors>
+		<idcards>instant</idcards>
+		<properties>convoke</properties>
+	</init>
+	<abilities>
+		<activated-ability zone="hand" playable="this">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<controller player="you" />
+					</test>
+				</target>
+				<face-up for="you" />
+				<target-list operation="clear" />
+				<target type="card" mode="choose" restriction-zone="library">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<controller player="you" />
+							<inf-equal>
+								<left register="tested" index="manacost" />
+								<right register="stack" index="0" />
+							</inf-equal>
+						</and>
+					</test>
+				</target>
+				<move-card controller="you" destination="play" />
+				<target-list operation="clear" />
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<controller player="you" />
+					</test>
+				</target>
+				<face-down for="you" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Healing Salve">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+<!--  {w} choose one - target player gains 3 life; 
+or prevent the next 3 damage that would be dealt to target creature or player this turn. -->
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<idcards>instant</idcards>
+		<colors>white</colors>
+	</init>
+
+	<abilities>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="gain-life-target" value="3"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<action ref="prevent-3"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forge Armor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	instant
+	as an additional cost to play forge armor, sacrifice an artifact.
+	put x +1/+1 counters on target creature, where x is the sacrificed artifact's converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-an-artifact' value='1'/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register='target-list.first' index='manacost'/>
+				</repeat>
+				<add-object object-name='+1/+1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

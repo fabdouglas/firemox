@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Detonate">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{r} destroy target artifact with converted mana cost x. 
+it can't be regenerated. 
+detonate deals x damage to that artifact's controller. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<action ref="target-artifact">
+					<test>
+						<equal>
+							<left register="tested" index="manacost"/>
+							<right register="stack" index="0"/>
+						</equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury"/>
+				<target type="target-list.first.controller"/>
+				<target-list operation="remove-first"/>
+				<assign-damage>
+					<value register="target-list.first" index="manapool"/>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

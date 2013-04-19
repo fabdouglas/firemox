@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Furnace Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rrr
+	creature - dragon
+	5/5
+	affinity for artifacts 
+	flying
+	when furnace dragon comes into play, if you played it from your hand, remove all artifacts from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<action ref='affinity'>
+					<counter-test>
+						<has-idcard idcard='artifact'/>
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='hand' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<has-idcard idcard="artifact" />
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

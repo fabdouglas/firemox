@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Keeper of the Beasts">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gg
+	creature - human wizard
+	1/2
+	g, t :put a 2/2 green beast creature token into play. play this ability only if an opponent controls more creatures than you.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup>
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</left>
+					<right>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</right>
+				</sup>
+			</test>
+			<cost>
+				<pay-mana green='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Beast'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token beast </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

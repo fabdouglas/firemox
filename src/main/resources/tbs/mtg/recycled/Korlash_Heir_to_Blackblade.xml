@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Korlash, Heir to Blackblade">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	legendary creature - zombie warrior
+	*/*
+	korlash, heir to blackblade's power and toughness are each equal to the number of swamps you control.
+	1b: regenerate korlash.
+	grandeur - discard another card named korlash, heir to blackblade: search your library for up to two swamp cards, put them into play tapped, then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='swamp'/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='swamp'/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend zombie warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard' value='1'>
+					<test>
+						<has-name name="korlash_heir_to_blackblade"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='search-lib-up-to' value='2'>
+					<test>
+						<has-idcard idcard='swamp'/>
+					</test>
+				</action>
+				<move-card destination="playANDtapped" controller="you"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

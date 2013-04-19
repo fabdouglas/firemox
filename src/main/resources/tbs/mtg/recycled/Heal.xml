@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--[[apt lang=en header]] ______
+ Heal
+ ______
+ Fabrice Daugan
+ ______
+ October 22 2007
+
+Heal
+-->
+<!--[[apt lang=fr header]] ______
+ Heal
+ ______
+ Fabrice Daugan
+ ______
+ 22 Octobre 2007
+
+Heal
+-->
+<!--[[apt lang=en]]
+ This card is an example of effect allowing the controller to draw a card the next upkeep phase.
+ 
+[http://magiccards.info/scans/en/5e/308.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+ Cette carte est un exemple permettant au contrôleur de piocher une carte à la prochaine phase d'entretien.
+
+[http://magiccards.info/scans/en/5e/308.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]-->
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Heal">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {w} prevent the next 1 damage that would be dealt to target creature or player this turn. 
+		draw a card at the beginning of the next turn's upkeep. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-dealtable" />
+			</cost>
+			<effects>
+				<action ref="prevent-1" />
+				<action ref="draw-a-card-next-upkeep" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

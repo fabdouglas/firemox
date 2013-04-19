@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Calciderm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	creature - beast
+	5/5
+	vanishing 4 
+	calciderm can't be the target of spells or abilities.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>beast shroud </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='vanishing'/>
+	</abilities>
+	<modifiers>
+		<object name="time"/>
+		<object name="time"/>
+		<object name="time"/>
+		<object name="time"/>
+	</modifiers>
+</card>

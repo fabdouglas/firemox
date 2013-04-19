@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fire-Lit Thicket">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	land
+	
+	t :add 1 to your mana pool. o, t :add rr, rg, or gg to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>land</idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red="1" green="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana red="1" green="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana green="2" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

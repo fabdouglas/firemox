@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<document>
+	<properties>
+		<title>Welcome to Firemox</title>
+		<author email="fabdouglas@users.sourceforge.net">Fabrice Daugan</author>
+	</properties>
+	<head>
+		<link rel="alternate" type="application/rss+xml" title="Firemox RSS Feed"
+			href="rss/news.xml" />
+	</head>
+	<body>
+		<section name="Welcome to Firemox">
+			<div id="downloadbox">
+				<h5>Get Firemox 0.95</h5>
+				<p>
+					<a href="http://sourceforge.net/project/showfiles.php?group_id=92519">
+						<img valign="top" src="images/folder-open.gif" border="0" alt=""
+							title="download" />
+						Download
+					</a>
+					Firemox
+					<small>(11Mb)</small>
+				</p>
+				<ul>
+					<li>
+						<a href="download.html#Requirements">System Requirements</a>
+					</li>
+					<li>
+						<a href="download.html#Installation">Installation Instructions</a>
+					</li>
+					<li>
+						<a href="changes-report.html">Release Notes</a>
+					</li>
+					<li>
+						<a href="dev/getstarted.html">Getting Started</a>
+					</li>
+					<li>
+						<a href="guides/index.html">Documentation</a>
+					</li>
+				</ul>
+			</div>
+
+			<p>
+				Firemox (FM) is a full Java program which allows players to play various card games
+				against an opponent over a network, such as a LAN and the Internet, or alone. The
+				program is the judge: it implements and enforces the rules, so that the players do
+				not need to resolve them themselves.
+				<br />
+				At the moment, network play requires the IP address of your opponent, but we are
+				working on a client/server option which will allow players to host and connect to
+				game servers. The game currently runs
+				<it>Magic: The Gathering</it>
+				but rules can be written for any classic card game (eg. Poker) or collectible card
+				game (CCG).
+				<br />
+				The main feature of this program is that it can parse the rules of a game which are
+				defined in an (human readable) XML file. FM parses these rules files to determine
+				turn structure, card types, colors, etc.. making it impossible for players to cheat.
+				Also, if a player forgets to do something during the game, he/she will be reminded
+				since all rules are managed by FM.
+				<br />
+				Highlights:
+				<ul>
+					<li>Written in Java: works on Mac, Windows and Linux</li>
+					<li>Highly customizable and extensible rules</li>
+					<li>Is fully skinnable using Look &amp; Feel control settings</li>
+					<li>Free and open-source</li>
+					<li>Customizable language settings</li>
+				</ul>
+				<br />
+				You need
+				<a href="http://java.com/download/index.jsp">
+					Java 5.0 or Java 6.0u3 (recommended)
+				</a>
+				to run Firemox !
+			</p>
+
+			<subsection name="About Firemox">
+				<p>
+					<ul>
+						<li>
+							<a href="features_judge.html">What are the features of Firemox?</a>
+						</li>
+						<li>
+							<a href="getstarted.html">Can I get involved?</a>
+						</li>
+						<li>
+							<a href="howto.html">Where do I get help with Firemox?</a>
+						</li>
+					</ul>
+				</p>
+			</subsection>
+			<subsection name="Screenshots">
+				<p>
+					<a href="images/guides/user/screenshot_full_1.png">
+						<img alt="screenshot1"
+							src="./images/guides/user/screenshot_full_1_sml.png">
+						</img>
+					</a>
+					<a href="images/guides/user/screenshot_full_2.png">
+						<img alt="screenshot2"
+							src="./images/guides/user/screenshot_full_2_sml.png">
+						</img>
+					</a>
+					<a href="images/guides/user/screenshot_full_3.png">
+						<img alt="screenshot3"
+							src="./images/guides/user/screenshot_full_3_sml.png">
+						</img>
+					</a>
+					<a href="images/guides/user/screenshot_full_4.png">
+						<img alt="screenshot4"
+							src="./images/guides/user/screenshot_full_4_sml.png">
+						</img>
+					</a>
+				</p>
+			</subsection>
+			<subsection name="Latest News">
+				<p>
+					<ul>
+						<li>Firemox 0.95 Beta Release Available - 2007-11-18</li>
+						<li>Project rename (Magic-Project) - 2007-10-30</li>
+						<li>Web site review - 2007-09-30</li>
+						<li>Firemox 0.94 Beta Release Available - 2007-04-10</li>
+						<li>Web site review - 2007-02-12</li>
+						<li>Firemox 0.93 Beta Release Available - 2007-02-02</li>
+						<li>Firemox 0.92 Beta Release Available - 2006-09-28</li>
+						<li>Firemox 0.91 Beta Release Available - 2006-09-24</li>
+						<li>Firemox 0.90 Beta Release Available - 2006-05-26</li>
+						<li>Web site created with Maven2 - 2006-04-05</li>
+						<li>Firemox 0.86 Beta Release Available - 2006-02-14</li>
+						<li>Firemox 0.85 Alpha Release Available - 2005-08-01</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

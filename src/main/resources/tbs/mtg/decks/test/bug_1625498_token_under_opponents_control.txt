@@ -1,0 +1,2 @@
+super card;20
+Hunted_Horror;20

@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Titanic Bulvox">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		6gg
+		creature - beast
+		7/4
+		trample
+		morph 4ggg 
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='2' />
+			<register index='colorless' value='6' />
+			<register index='power' value='7' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>beast trample</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='3' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

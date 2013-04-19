@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Instill Energy">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {g} enchanted creature has haste. 
+{0}: untap enchanted creature. 
+play this ability only during your turn but only once each turn. -->
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="init-counter"/>
+		<ability ref="reset-counter"/>
+		<ability ref="cast-enchant" />
+		<activated-ability playable="instant" name="" zone="play">
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana colorless="0" />
+				<action ref="use-once-each-turn"/>
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref="haste"/>
+</card>

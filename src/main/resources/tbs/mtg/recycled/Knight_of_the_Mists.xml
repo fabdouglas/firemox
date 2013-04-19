@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Knight of the Mists">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - human knight
+	2/2
+	flanking 
+	when knight of the mists comes into play, you may pay u. if you don't, destroy target knight and it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='target-creature'>
+							<test>
+								<has-property property='knight'/>
+							</test>
+						</action>
+						<action ref='bury'/>
+					</either>
+					<either>
+						<pay-mana blue="1"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Repopulate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	shuffle all creature cards from target player's graveyard into that player's library.
+	cycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<action ref="shuffle-in-lib"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

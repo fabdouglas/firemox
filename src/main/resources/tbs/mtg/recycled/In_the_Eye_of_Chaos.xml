@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="In the Eye of Chaos">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	world enchantment
+	whenever a player plays an instant spell, counter it unless that player pays x, where x is its converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>enchant-world </idcards>
+		<properties>enchant-world </properties>
+	</init>
+	<abilities>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-idcard idcard="instant"/>
+				</test>
+			</casting>
+			<effects>
+				<choice cancel="false" controller="context.card.controller">
+					<either>
+						<pay-mana controller="context.card.controller">
+							<colorless register="context.card" index="manacost" />
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="counter"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

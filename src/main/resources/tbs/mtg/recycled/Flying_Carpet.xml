@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Flying Carpet">
+    <rules-author-comment>By jods</rules-author-comment>
+
+    <init>
+        <registers>
+            <register index="colorless" value="4"/>
+        </registers>
+        <idcards>artifact</idcards>
+    </init>
+
+    <abilities>
+        <ability ref="cast-spell"/>
+        
+        <activated-ability playable="instant" zone="play">
+            <cost>
+                <pay-mana colorless="2"/>                
+                <action ref="T"/>
+                <action ref="target-creature"/>
+            </cost>
+            <effects>
+                <add-modifier>
+                    <property-modifier property="flying" linked="false">
+                        <until><end-of-phase phase="cleanup"/></until>
+                    </property-modifier>
+                </add-modifier>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

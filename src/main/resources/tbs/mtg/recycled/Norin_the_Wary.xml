@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Norin the Wary">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	legendary creature - human warrior
+	2/1
+	when a player plays a spell or a creature attacks, remove norin the wary from the game. return it to play under its owner's control at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend human warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking/>
+			<effects>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<triggered-ability zone="side">
+						<end-of-phase phase="eot" />
+						<effects>
+							<action ref="put-in-play" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<triggered-ability zone="side">
+						<end-of-phase phase="eot" />
+						<effects>
+							<action ref="put-in-play" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

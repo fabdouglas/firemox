@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ingot Chewer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - elemental
+	3/3
+	when ingot chewer comes into play, destroy target artifact.
+	evoke r 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana red='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

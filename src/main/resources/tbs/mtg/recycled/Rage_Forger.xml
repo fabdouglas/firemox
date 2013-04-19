@@ -1,0 +1,82 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rage Forger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - elemental shaman
+	2/2
+	when rage forger comes into play, put a +1/+1 counter on each other shaman creature you control.
+	whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="creatures-you-control">
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<has-property property="shaman"/>
+						</and>
+					</test>
+				</action>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<and>
+						<controller player="you"/>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="tested" />
+							</left>
+						</sup>
+					</and>
+				</test>
+			</declared-attacking>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<assign-damage value='1' type='damage-normal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

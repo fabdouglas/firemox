@@ -1,0 +1,198 @@
+ ------
+ Téléchargement
+ ------
+ Hoani CROSS
+ ------
+18 Novembre 2007
+
+Téléchargez Firemox 0.95
+
+ Firemox est livré dans différents formats selon vos besoins.
+
+  Firemox 0.95 est distribué sous la licence {{{http://www.gnu.org/copyleft/gpl.html} GNU General Public License, version 2}}.
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (install)| {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-install.jar?use_mirror=osdn}  	firemox-0.95.52.0-install.jar}} | 13573045 | .jar
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-bin.zip?use_mirror=osdn}  	firemox-0.95.52.0-bin.zip}} | 15973370 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-bin.tar.gz?use_mirror=osdn} firemox-0.95.52.0-bin.tar.gz}} | 5722112 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-bin.tar.bz2?use_mirror=osdn} firemox-0.95.52.0-bin.tar.bz2}} | 12056208 | .bz2
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-src.zip?use_mirror=osdn}  firemox-0.95.52.0-src.zip}} | 12424107 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-src.tar.gz?use_mirror=osdn} firemox-0.95.52.0-src.tar.gz}} | 7884633 | Source .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.95 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.95.52.0-src.tar.bz2?use_mirror=osdn} firemox-0.95.52.0-src.tar.bz2}} | 7152770 | Source .bz2
+*-----------------------------+---------+--------------+------------+
+
+*Précédentes versions
+
+**Firemox 0.93
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (install)| {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-install.jar?use_mirror=osdn}  	firemox-0.93.48.0-install.jar}} | 9682018 | .jar
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-bin.zip?use_mirror=osdn}  	firemox-0.93.48.0-bin.zip}} | 9750822 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-bin.tar.gz?use_mirror=osdn} firemox-0.93.48.0-bin.tar.gz}} | 8834785 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-src.zip?use_mirror=osdn}  firemox-0.93.48.0-src.zip}} | 7191409 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-src.tar.gz?use_mirror=osdn} firemox-0.93.48.0-src.tar.gz}} | 5244124 | Source .gz
+*-----------------------------+---------+--------------+------------+
+
+*Versions précédentes
+
+**Firemox 0.93
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (install)| {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-install.jar?use_mirror=osdn}  	firemox-0.93.48.0-install.jar}} | 9682018 | .jar
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-bin.zip?use_mirror=osdn}  	firemox-0.93.48.0-bin.zip}} | 9750822 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (bin)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-bin.tar.gz?use_mirror=osdn} firemox-0.93.48.0-bin.tar.gz}} | 8834785 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-src.zip?use_mirror=osdn}  firemox-0.93.48.0-src.zip}} | 7191409 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.93 (src)    | {{{http://downloads.sourceforge.net/firemox/firemox-0.93.48.0-src.tar.gz?use_mirror=osdn} firemox-0.93.48.0-src.tar.gz}} | 5244124 | Source .gz
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.92
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.92 (install)| {{{http://prdownloads.sourceforge.net/firemox/firemox-0.92.45.0-bin.zip?download}      firemox-0.92.45.0-install.jar}} | 7703769 | .jar
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.92 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.92.45.0-bin.zip?download}      firemox-0.92.45.0-bin.zip}} | 7724821 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.92 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.92.45.0-bin.tar.gz?download} firemox-0.92.45.0-bin.tar.gz}} | 7014009 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.92 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.92.45.0-src.zip?download}  firemox-0.92.45.0-src.zip}} | 5652480 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.92 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.92.45.0-src.tar.gz?download} firemox-0.92.45.0-src.tar.gz}} | 3946940 | Source .gz
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.91
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.91 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.91.44.0-bin.zip?download}      firemox-0.91.44.0-bin.zip}} | 7703769 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.91 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.91.44.0-bin.tar.gz?download} firemox-0.91.44.0-bin.tar.gz}} | 6995392 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.91 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.91.44.0-src.zip?download}  firemox-0.91.44.0-src.zip}} | 5650375 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.91 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.91.44.0-src.tar.gz?download} firemox-0.91.44.0-src.tar.gz}} | 3944920 | Source .gz
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.90
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.90 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.90-bin.zip?download}      firemox-0.90-bin.zip}} | 6646381 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.90 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.90-bin.tar.gz?download} firemox-0.90-bin.tar.gz}} | 5938688 | .gz
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.90 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.90-src.zip?download}  firemox-0.90-src.zip}} | 6121426 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.90 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox-0.90-src.tar.gz?download} firemox-0.90-src.tar.gz}} | 4417272 | Source .gz
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.86
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.86 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_bin_0.86.42.zip?download} firemox_bin-0.86.zip}} | 2906778 | .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.86 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_full_0.86.42.zip?download} firemox_full-0.86.zip}} | 6158496 | Source .zip
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.72
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.72 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_src_0.72.zip?download} firemox_full-0.72.zip}} | 2927328 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.72 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_full_0.72.zip?download} firemox_bin-0.72.zip}} | 2985209 | Source .zip
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.60
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.60 (src)    | {{{http://prdownloads.sourceforge.net/firemox/Firemox.zip?download} firemox_full-0.60.zip}} | 2368406 | Source .zip
+*-----------------------------+---------+--------------+------------+
+
+**Firemox 0.41
+
+*-----------------------------+---------+--------------+------------+
+|                             | Mirrors | Size (bytes) | Type       |
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.41 (bin)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_full-0.41.zip?download} firemox_full-0.41.zip}} | 858828 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.41 (src)    | {{{http://prdownloads.sourceforge.net/firemox/firemox_src-0.41.zip?download} firemox_bin-0.41.zip}} | 690019 | Source .zip
+*-----------------------------+---------+--------------+------------+
+| Firemox 0.41 (pic)    | {{{http://easynews.dl.sourceforge.net/sourceforge/firemox/screenshot04.JPG} First screenshot}} | 176905 | Jpg
+*-----------------------------+---------+--------------+------------+
+
+* {Prérequis} système
+
+*----------------------+--------------------------------------------------------------------------------------------------------------------------------+
+|  <<JDK>>             | {{{http://java.com/java/download/index.jsp} 5.0 ou plus}}                                                                                                               |
+*----------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| <<Memory>>           | Pas de prérequis minimum                                                                                                         |
+*----------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| <<Disk>>             | L'application Firemox pèse moins de 10MB mais plus d'espace disque sera utilisé si vous téléchargez les images des cartes depuis Internet |
+*----------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| <<Operating System>> | Pas de prérequis minimum. A été testé sous Windows XP, Debian et Mac OS X                                                 |
+*----------------------+--------------------------------------------------------------------------------------------------------------------------------+
+
+* {Instructions} d'installation
+
+ L'installation de Firemox consiste tout simplement à décompresser
+ l'archive fournie dans le répertoire de votre choix. C'est aussi simple que ça !
+
+** Windows 2000/XP
+
+  [[1]] Décompressez <<<firemox_bin-0.92-bin.zip>>> dans le répertoire de
+        votre choix pour installer Magic Project. Considérons que vous avez
+        choisi de l'installer dans <<<C:\Program Files\Firemox>>>.
+
+  [[2]] Double-cliquez sur le fichier <<<C:\Program Files\Firemox\magic.bat>>>.
+
+** Systèmes d'exploitation de type Unix (Linux, Solaris ou Mac OS X)
+
+  [[1]] Décompressez l'archive fournie dans le répertoire de votre choix pour
+        installer Firemox. Considérons que vous avez choisi de l'installer
+        dans <<</usr/local/firemox>>>. Le répertoire <<<firemox>>>
+        sera créé depuis l'archive.
+
+  [[2]] Vérifiez bien que le fichier de commandes <<</usr/local/firemox/magic>>>
+        a bien les droits d'exécution à l'aide de la commande <<<chmod>>>.
+
+  [[3]] Exécutez le fichier de commandes <<</usr/local/firemox/magic>>>.
+
+** Tous les systèmes
+
+  [[4]] Lors de la première exécution, Firemox va tenter de récupérer un
+        certain nombre d'images depuis Internet comme les symboles de mana,
+        des images de cartes...
+
+  [[5]] Lorsque cette opération sera terminée, vous pourrez considérer Firemox
+        comme installé et le configurer comme bon vous semble.
+
+

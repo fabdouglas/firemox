@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Honden of Night's Reach">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	legendary enchantment - shrine
+	at the beginning of your upkeep, target opponent discards a card for each shrine you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+		<properties>legend shrine </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="target-player"/>
+				<action ref='player-discard'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-property property="shrine"/>
+								<controller player="you"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

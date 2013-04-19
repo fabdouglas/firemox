@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hundred-Talon Kami">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4w
+	creature - spirit
+	2/3
+	flying
+	soulshift 4 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='soulshift4'/>
+	</abilities>
+</card>

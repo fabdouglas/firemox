@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Iron-Barb Hellion">
+<rules-author-comment></rules-author-comment>
+
+<!--  5r haste iron-barb hellion can't block. -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="colorless" value="5"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>cannot-block haste hellion beast</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

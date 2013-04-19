@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gorgon Recluse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - gorgon
+	2/4
+	whenever gorgon recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+	madness bb 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>gorgon </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<not>
+						<has-color color="black"/>
+					</not>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="context.card"/>
+				<action ref='destroy-target-eoc'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<not>
+						<has-color color="black"/>
+					</not>
+				</blocking-test>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="context.card"/>
+				<action ref='destroy-target-eoc'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='madness'>
+			<actions/>
+			<actions>
+				<pay-mana black='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

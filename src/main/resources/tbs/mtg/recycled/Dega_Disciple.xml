@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dega Disciple">
+<rules-author-comment></rules-author-comment>
+
+<!--  {w} 
+{b}, {t}: target creature gets -2/-0 until end of turn. 
+{r}, {t}: target creature gets +2/+0 until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add-2-0-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="add+2+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

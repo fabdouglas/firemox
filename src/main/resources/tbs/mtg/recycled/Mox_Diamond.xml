@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mox Diamond">
+	<!-- tested 11/27/2004 , v0.80.27 -->
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<!-- Text(SH+errata): As an additional cost to play ~this~, discard a land card from your hand.--> 
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="land"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+	
+		<!-- {Tap}: Add one mana of any color to your mana pool. [Oracle 99/05/01] -->
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

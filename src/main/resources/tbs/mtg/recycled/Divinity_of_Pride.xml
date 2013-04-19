@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Divinity of Pride">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(w / b)(w / b)(w / b)(w / b)(w / b)
+	creature - spirit avatar
+	4/4
+	flying, lifelink
+	divinity of pride gets +4/+4 as long as you have 25 or more life.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit avatar flying </properties>
+	</init>
+	<abilities>
+		<ability ref='lifelink'/>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='5' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='4' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='3' white='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='2' white='3'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana black='1' white='4'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana white='5'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' value='4' operation='add' linked='false'>
+			<while>
+				<sup right="24">
+					<left register="you" index="life"/>
+				</sup>
+			</while>			
+		</register-modifier>
+		<register-modifier index='toughness' value='4' operation='add' linked='false'>
+			<while>
+				<sup right="24">
+					<left register="you" index="life"/>
+				</sup>
+			</while>			
+		</register-modifier>
+	</modifiers>
+</card>

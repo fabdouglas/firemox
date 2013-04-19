@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Devour in Shadow">
+<rules-author-comment></rules-author-comment>
+
+<!--  {b}{b} destroy target creature. it can't be regenerated. 
+you lose life equal to that creature's toughness. -->
+
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="lose-life">
+					<value register="target-list.first" index="toughness"/>
+				</action>
+				<action ref="bury"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

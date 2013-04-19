@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dormant Volcano">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  land 
+if dormant volcano would come into play, 
+return an untapped mountain you control to its owner's hand instead. 
+if you do, put dormant volcano into play tapped. 
+if you don't, put it into its owner's graveyard. 
+{t}: add {1}{r} to your mana pool. -->
+	<init>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice>
+					<either>
+           <target type="card" mode="choose" raise-event="false" restriction-zone="play">
+                <test>                        
+                    <and>
+                        <has-idcard idcard="mountain"/>
+                        <in-zone zone="playANDuntapped"/>
+                        <controller player="you"/>                                
+                    </and>
+                </test>                            
+            </target>
+						<action ref="return-to-hand"/>
+						<target-list operation="clear" name="%"/>
+						<target type="this" name="%"/>
+						<move-card controller="target.owner" destination="playANDtapped"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<move-card destination="graveyard" controller="owner"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana colorless="1" red="1" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

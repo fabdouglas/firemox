@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Betrothed of Fire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment - aura
+	enchant creature
+	sacrifice an untapped creature: enchanted creature gets +2/+0 until end of turn.
+	sacrifice enchanted creature: creatures you control get +2/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<in-zone zone="playANDuntapped"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+2+0-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-creature' value="1">
+					<test>
+						<is-this card="attachedto"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="add+2+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

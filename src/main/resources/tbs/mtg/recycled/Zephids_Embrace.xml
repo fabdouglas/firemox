@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Zephid's Embrace">
+	<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+	<!--  {2}{u}{u} 
+		enchanted creature gets +2/+2 and has flying. 
+		it can't be the target of spells or abilities. 
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="+2/+2">
+		<modifiers>
+			<property-modifier property="flying" linked="true" />
+			<property-modifier property="shroud" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

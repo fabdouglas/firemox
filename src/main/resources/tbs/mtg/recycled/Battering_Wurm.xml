@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battering Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6g
+	creature - wurm
+	4/3
+	bloodthirst 1 
+	creatures with power less than battering wurm's power can't block it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>wurm </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bloodthirst1'/>
+		<replacement-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<and>
+						<in-zone zone="play" />
+						<has-idcard idcard="creature" />
+						<inf>
+							<left register="tested" index="power" />
+							<right register="this" index="power" />
+						</inf>
+					</and>
+				</blocking-test>
+				<attacking-test>
+					<is-this />
+				</attacking-test>
+			</declared-blocking>
+			<effects />
+		</replacement-ability>
+	</abilities>
+</card>

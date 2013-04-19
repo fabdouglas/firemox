@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Archivist">
+<!-- Test ok 28/12/2004 0.81.30 -->
+	<rules-author-comment>By brius</rules-author-comment>
+	
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>wizard</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play" resolution="normal">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

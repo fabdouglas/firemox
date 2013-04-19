@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Oxidda Golem">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		6
+		artifact creature - golem
+		3/2
+		affinity for mountains 
+		haste
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='6' />
+			<register index='power' value='3' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>golem haste</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="mountain" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

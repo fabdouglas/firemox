@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aven Windreader">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	creature - bird soldier wizard
+	3/3
+	flying 
+	1u: target player reveals the top card of his or her library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>bird soldier wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' colorless='1' />
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all">
+					<test>
+						<and>
+							<and>
+								<in-zone zone="library"/>
+								<position position="top"/>
+							</and>
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

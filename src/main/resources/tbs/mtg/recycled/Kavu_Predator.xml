@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Predator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - kavu
+	2/2
+	trample
+	whenever an opponent gains life, put that many +1/+1 counters on kavu predator.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>kavu trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<modified-register register="opponent" index="life" operation="add"/>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<add-object object-name="+1/+1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

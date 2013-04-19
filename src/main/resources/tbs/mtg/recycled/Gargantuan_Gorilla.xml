@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Gargantuan Gorilla">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {4}{g}{g}{g} 
+		at the beginning of your upkeep, 
+		sacrifice gargantuan gorilla unless you sacrifice a forest. 
+		if you sacrifice gargantuan gorilla this way, it deals 7 damage to you. 
+		if you sacrifice a snow-covered forest this way, 
+		gargantuan gorilla gains trample until end of turn. 
+		
+		{t}: gargantuan gorilla deals damage equal to its power to target creature. 
+		that creature deals damage equal to its power to gargantuan gorilla. 
+		
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4" />
+			<register index="green" value="3" />
+			<register index="power" value="7" />
+			<register index="toughness" value="7" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>ape</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<assign-damage from="this" to="target-list.first" type="damage-normal">
+					<value register="this" index="power" />
+				</assign-damage>
+				<assign-damage from="target-list.first" to="this" type="damage-normal">
+					<value register="target-list.first" index="power" />
+				</assign-damage>
+			</effects>
+		</activated-ability>
+
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep" />
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<action ref="sacrifice-a-land" value="1">
+							<test>
+								<and>
+									<has-idcard idcard="forest" />
+									<not>
+										<has-property property="snow" />
+									</not>
+								</and>
+							</test>
+						</action>
+					</either>
+					<either>
+						<action ref="sacrifice-a-land" value="1">
+							<test>
+								<and>
+									<has-idcard idcard="forest" />
+									<has-property property="snow" />
+								</and>
+							</test>
+						</action>
+						<target-list operation="clear" name="%" />
+						<target type="this" />
+						<add-modifier>
+							<property-modifier property="trample">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<action ref="sacrifice-this" />
+						<target type="you" />
+						<assign-damage value="7" type="damage-normal" />
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

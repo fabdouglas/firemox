@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Riftsweeper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf shaman
+	2/2
+	when riftsweeper comes into play, choose target face-up card that's removed from the game. its owner shuffles it into his or her library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="side">
+					<test>
+						<is-face-up card="tested"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

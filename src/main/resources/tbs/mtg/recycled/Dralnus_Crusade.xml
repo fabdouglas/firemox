@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dralnu's Crusade">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{b}{r} all goblins are zombies in addition to their creature types.
+all goblins get +1/+1 and are black. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>black red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 	
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			 	<color-modifier color="black" operation="set" linked="true" layer="global"/>
+			 	<property-modifier property="zombie" operation="add" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-color color="white"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

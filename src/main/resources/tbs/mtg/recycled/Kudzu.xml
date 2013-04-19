@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Kudzu">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {1}{g}{g} 
+		when enchanted land becomes tapped, destroy it. 
+		that land's controller moves kudzu to a land of his or her choice. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="green" value="2" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<triggered-ability zone="play">
+			<become-tapped>
+				<test>
+					<is target="attachedto" />
+				</test>
+			</become-tapped>
+			<cost>
+				<target type="card" restriction-zone="play" hop="1" cancel="false"
+					mode="attachedto.controller-choose">
+					<test ref="valid-land-to-enchant" />
+				</target>
+			</cost>
+			<effects>
+				<target-list operation="save" name="%" />
+				<target-list operation="clear" name="%" />
+				<target type="attachedto" />
+				<action ref="destroy" />
+				<target-list operation="clear" name="%" />
+				<target-list operation="load" list-index="-1" name="%" />
+				<target-list operation="remove" name="%" />
+				<target type="this" />
+				<attach-list>
+					<valid-attachment ref="valid-enchant-land" />
+				</attach-list>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="enchant-land" />
+</card>

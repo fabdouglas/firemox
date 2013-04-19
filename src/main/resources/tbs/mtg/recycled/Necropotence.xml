@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Necropotence">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  bbb 
+		Skip your draw step. if you would discard a card, remove that 
+		card from the game instead. pay 1 life: remove the top card of your 
+		library from the game face down. at the end of your turn, put that card 
+		into your hand.   
+	-->
+
+	<init>
+		<registers>
+			<register index="black" value="3" />
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+
+		<triggered-ability zone="play" resolution="hidden">
+			<before-phase phase="draw">
+				<test>
+					<controller player="currentplayer" card="this" />
+				</test>
+			</before-phase>
+			<effects>
+				<target type="currentplayer" />
+				<skip-phase phase="draw" />
+			</effects>
+		</triggered-ability>
+
+		<replacement-ability zone="play" name="">
+			<moved-card>
+				<source-test>
+					<and>
+						<controller player="you" />
+						<action-source name="discard" />
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<action ref="remove-from-game" />
+			</effects>
+		</replacement-ability>
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="pay-life" value="1" />
+			</cost>
+			<effects>
+				<target type="card" restriction-zone="library" mode="all">
+					<test>
+						<and>
+							<controller player="you" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game" />
+				<face-down for="everyone" />
+				<create-ability>
+					<save target="target-list.first" />
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot">
+							<test>
+								<controller player="currentplayer" card="this" />
+							</test>
+						</end-of-phase>
+						<effects>
+							<target type="saved" />
+							<action ref="return-to-hand" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blazing Blade Askari">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - human knight
+	2/2
+	flanking 
+	2: blazing blade askari becomes colorless until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='flanking'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<color-modifier operation="clear" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</color-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

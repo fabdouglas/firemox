@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Azorius Herald">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - spirit
+	2/1
+	azorius herald is unblockable.
+	when azorius herald comes into play, you gain 4 life.
+	when azorius herald comes into play, sacrifice it unless u was spent to play it.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit unblockable </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='4'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<or>
+							<not>
+								<is other="this" target="currentcard" />
+							</not>
+							<equal right="0">
+								<left>
+									<mana-paid card="this" color="blue" />
+								</left>
+							</equal>
+						</or>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<is target="this" other="context.event-source" />
+						</not>
+					</test>
+				</if-then-hop>
+				<action ref="sacrifice-this" />
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

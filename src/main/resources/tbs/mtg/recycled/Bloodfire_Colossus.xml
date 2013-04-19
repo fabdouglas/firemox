@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bloodfire Colossus">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rr
+	creature - giant
+	6/6
+	r, sacrifice bloodfire colossus: bloodfire colossus deals 6 damage to each creature and each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='sacrifice-this'/>
+				<target mode="all" type="player"/>
+				<action ref="all-creatures"/>
+			</cost>
+			<effects>
+				<assign-damage value='6' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

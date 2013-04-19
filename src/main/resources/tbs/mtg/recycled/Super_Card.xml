@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Super Card">
+	<rules-author-comment></rules-author-comment>
+
+	<init>
+		<idcards>instant</idcards>
+		<colors>blue red</colors>
+	</init>
+
+	<abilities>
+		<!-- Draw 20 cards -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<target type="you"/>
+			</cost>
+			<effects>
+				<repeat value="20"/>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<!-- Destroy permanent -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<target type="card" restriction-zone="play">
+					<test>
+						<test ref="is-target"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<assign-damage value="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<!-- Destroy creature -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<assign-damage value="destroy"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<!-- Damage 3 a creature -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<assign-damage value="3"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<!-- Gain an extra turn -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<ability ref="extra-turn"/>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="mana-source" zone="hand" resolution="auto">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<give-mana black="5" blue="5" green="5" red="5" white="5"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		
+		<activated-ability playable="this" zone="hand" resolution="auto">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<modify-register register="you" index="manapool" operation="clear" name="Empty manapool"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

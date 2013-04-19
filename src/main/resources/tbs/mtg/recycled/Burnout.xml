@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Burnout">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	instant
+	counter target instant spell if it is blue.
+	draw a card at the beginning of the next turn's upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-spell'>
+					<test>
+						<and>
+							<has-idcard idcard='instant'/>
+							<has-color color="blue"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref='draw-a-card-next-upkeep'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

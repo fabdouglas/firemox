@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bribery">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	sorcery
+	search target opponent's library for a creature card and put that card into play under your control. then that player shuffles his or her library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<show-zone zone="library" for="you" name="%" />
+				<target mode="choose" type="card" raise-event="false" restriction-zone="library">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="target-list.first" />
+						</and>
+					</test>
+				</target>
+				<action ref="restore-library-visibility" name="%" />
+				<shuffle zone="library" />
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

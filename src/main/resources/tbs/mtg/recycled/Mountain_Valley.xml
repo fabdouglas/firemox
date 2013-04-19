@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mountain Valley">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	mountain valley comes into play tapped.
+	t, sacrifice mountain valley: search your library for a mountain or forest card and put it into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='search-lib' value="1">
+					<test>
+						<or>
+							<has-idcard idcard='forest'/>
+							<has-idcard idcard='mountain'/>
+						</or>
+					</test>
+				</action>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

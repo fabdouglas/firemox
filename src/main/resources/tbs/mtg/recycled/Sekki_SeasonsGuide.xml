@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sekki, Seasons' Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ggg
+	legendary creature - spirit
+	0/0
+	sekki, seasons' guide comes into play with eight +1/+1 counters on it.
+	if damage would be dealt to sekki, prevent that damage, remove that many +1/+1 counters from sekki, and put that many 1/1 colorless spirit creature tokens into play.
+	sacrifice eight spirits: return sekki from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<repeat value="context.int"/>
+				<remove-object object-name="+1/+1"/>
+				<repeat value="context.int"/>
+				<create-card>
+					<card name='Spirit'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token spirit </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</replacement-ability>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value="8">
+					<test>
+						<has-property property='spirit'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

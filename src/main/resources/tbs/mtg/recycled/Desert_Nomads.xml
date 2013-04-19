@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Desert Nomads">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{r} desertwalk prevent all damage that would be dealt to desert nomads 
+by deserts. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>desertwalk human nomad</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<source-test>
+					<has-property property="desert"/>
+				</source-test>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects/>
+		</replacement-ability>
+	</abilities>
+</card>

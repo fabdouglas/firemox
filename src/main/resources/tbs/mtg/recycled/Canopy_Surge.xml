@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Canopy Surge">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	sorcery
+	kicker 2 
+	canopy surge deals 1 damage to each creature with flying and each player. if the kicker cost was paid, canopy surge deals 4 damage to each creature with flying and each player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="2" />
+			</actions>
+			<actions>
+				<target type="player" mode="all"/>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage value='4' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="player" mode="all"/>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage value='1' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

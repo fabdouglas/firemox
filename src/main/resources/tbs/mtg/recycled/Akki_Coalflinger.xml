@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Akki Coalflinger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	creature - goblin shaman
+	2/2
+	first strike
+	r, t :attacking creatures gain first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin shaman first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<test ref="tested-is-attacking"/>
+					</test>
+				</action>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

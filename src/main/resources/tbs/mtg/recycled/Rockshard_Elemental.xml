@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rockshard Elemental">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		5rr
+		creature - elemental
+		4/3
+		double strike 
+		morph 4rr 
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='2' />
+			<register index='colorless' value='5' />
+			<register index='power' value='4' />
+			<register index='toughness' value='3' />
+		</registers>
+		<colors>red</colors>
+		<idcards>creature</idcards>
+		<properties>elemental double-strike</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana red='2' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Guardian Angel">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<init>
+		<registers>
+			<register index="white" value="1" />
+		</registers>
+		<idcards>instant</idcards>
+		<colors>white</colors>
+	</init>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<abilities>
+		<activated-ability playable="instant" name="put-shield" zone="play">
+			<cost>
+				<pay-mana value="manacost" />
+				<target type="dealtable" restriction-zone="play">
+					<test>
+						<and>
+							<test ref="is-target" />
+							<or>
+								<is-player />
+								<has-idcard idcard="creature" />
+							</or>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<!-- 
+					<add-ability ref="pay1-put1-shield-on-me">
+					<until>
+					<end-of-phase phase="cleanup"/>
+					</until>
+					</add-ability> -->
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

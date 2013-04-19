@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abuna's Chant">
+<rules-author-comment></rules-author-comment>
+<keywords>TESTED_0.91+</keywords>
+
+<!--  {3}{w} 
+	choose one 
+	- you gain 5 life; 
+	or prevent the next 5 damage that would be dealt to target creature this turn.  
+	entwine {2}  
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="gain-life"  value="5"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="prevent-5"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<pay-mana colorless="2"/>
+				<action ref="entwine" />
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="prevent-5"/>
+				<action ref="gain-life"  value="5"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

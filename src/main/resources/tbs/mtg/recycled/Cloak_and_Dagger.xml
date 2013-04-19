@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cloak and Dagger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	tribal artifact - rogue equipment
+	equipped creature gets +2/+0 and has shroud. 
+	whenever a rogue creature comes into play, you may attach cloak and dagger to it.
+	equip 3
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>tribal artifact </idcards>
+		<properties>rogue equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<has-property property="rogue"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<attach from="this" to="context.card" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="shroud" linked="true" />
+			<register-modifier index='power' operation='add' linked='true' value='2' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

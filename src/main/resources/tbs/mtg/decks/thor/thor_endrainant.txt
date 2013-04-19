@@ -1,0 +1,33 @@
+#Jeu endrainant
+#
+#John
+#
+#août 23, 2001
+#1
+#4th Edition
+#
+Ancestral_Recall;2
+Counterspell;4
+Power_Sink;2
+Time_Walk;4
+Timetwister;3
+Demonic_Tutor;2
+Drain_Life;4
+Disenchant;2
+Swords_to_Plowshares;2
+Wrath_of_God;2
+Fork;2
+Mana_Flare;2
+Wheel_of_Fortune;2
+Black_Lotus;3
+Mox_Jet;3
+Mox_Pearl;3
+Mox_Sapphire;3
+Badlands;3
+Plateau;3
+Scrubland;3
+Underground_Sea;3
+Tundra;2
+Volcanic_Island;2
+Mox_Ruby;3
+Winds_of_Change;2

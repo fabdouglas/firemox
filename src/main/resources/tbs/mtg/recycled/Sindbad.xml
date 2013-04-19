@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sindbad">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - human
+	1/1
+	t :draw a card and reveal it. if it isn't a land card, discard it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="1">
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</if-then-hop>
+				<action ref='put-in-graveyard'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

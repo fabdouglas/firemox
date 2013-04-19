@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Circle of Protection: Shadow">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="put-shadow-shield" zone="play">
+			<cost>
+				<pay-mana colorless="1"/>
+				<!-- target a card in stack or in play -->
+				<target type="card" restriction-zone="play" raise-event="false">
+					<test>
+						<has-property property="shadow"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<create-ability>
+					<!-- save the card we have targeted -->
+					<save target="target-list.first"/>
+					<ability ref="prevent-all-from-once"/>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

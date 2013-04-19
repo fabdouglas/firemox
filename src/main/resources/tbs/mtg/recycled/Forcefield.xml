@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Forcefield">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3} 
+{1}: prevent all but 1 combat damage that would be dealt this turn by target 
+unblocked creature attacking you. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="target-creature">
+					<test>
+						<and>
+							<test ref="tested-is-unblocked"/>
+							<controller player="opponent"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first"/>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-combat-can-be-prevented">
+							<source-test>
+								<and>
+									<is target="saved"/>
+									<in-zone zone="play"/>
+								</and>
+							</source-test>
+							<destination-test>
+								<is-this player="you"/>
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<!-- this shield is removed -->
+							<unregister-this/>
+							<target type="you"/>
+							<assign-damage value="1" type="damage-combat"/>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

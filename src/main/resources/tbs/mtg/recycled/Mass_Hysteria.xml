@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mass Hysteria">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment
+	all creatures have haste.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="haste" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

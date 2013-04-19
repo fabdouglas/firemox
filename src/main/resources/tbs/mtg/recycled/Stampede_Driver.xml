@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stampede Driver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - spellshaper
+	1/1
+	1g, t, discard a card: creatures you control get +1/+1 and gain trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="add+1+1-until-eot"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

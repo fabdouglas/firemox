@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reality Strobe">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4uu
+	sorcery
+	return target permanent to its owner's hand. remove reality strobe from the game with three time counters on it.
+	suspend 3-2u 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana blue='1' colorless='2' />
+			</actions>
+			<actions>
+				<repeat value='3'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+				<target-list operation="clear" />
+				<target type="this" />
+				<action ref="remove-from-game" />
+				<repeat value='3'/>
+				<add-object object-name='time'/>
+				<target-list operation="clear" />
+				<target type="this" />
+				<add-modifier>
+					<ability-modifier linked="false" operation="add" layer="global">
+						<abilities>
+							<ability ref="suspend" />
+							<ability ref="suspend-trigger" />
+							<activated-ability name="suspend-play" playable="instant"
+								zone="side">
+								<test>
+									<equal left="suspend-triggered">
+										<right>
+											<and left="suspend-triggered">
+												<right register="this"
+													index="special-abilities" />
+											</and>
+										</right>
+									</equal>
+								</test>
+								<effects>
+									<action ref="put-in-play" />
+								</effects>
+							</activated-ability>
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

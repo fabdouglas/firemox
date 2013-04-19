@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tinker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	sorcery
+	as an additional cost to play tinker, sacrifice an artifact.
+	search your library for an artifact card and put that card into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-an-artifact' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard='artifact'/>
+					</test>
+				</action>
+				<move-card destination="play" controller="you"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

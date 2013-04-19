@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Planeswalker's Fury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	enchantment
+	3r: target opponent reveals a card at random in his or her hand. planeswalker's fury deals damage equal to that card's converted mana cost to that player. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='3' />
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<target type="card" mode="random" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.last' index='manacost'/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

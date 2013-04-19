@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aurochs Herd">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5g
+	creature - aurochs
+	4/4
+	trample
+	when aurochs herd comes into play, you may search your library for an aurochs card, reveal it, and put it into your hand. if you do, shuffle your library.
+	whenever aurochs herd attacks, it gets +1/+0 until end of turn for each other attacking aurochs.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>aurochs trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-property property="aurochs"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<add-modifier>
+					<register-modifier index='power' operation='add' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<and>
+									<has-property property="aurochs"/>
+									<test ref="tested-is-attacking"/>
+								</and>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

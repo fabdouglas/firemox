@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Carrion Ants">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{b}{b} {1}: carrion ants gets +1/+1 until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>insect</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+			</cost>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

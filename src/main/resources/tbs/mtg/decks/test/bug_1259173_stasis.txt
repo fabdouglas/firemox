@@ -1,0 +1,4 @@
+stasis;10
+mox sapphire;30
+super card;10
+Mox_Super;20

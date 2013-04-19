@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Haunting Apparition">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ub
+	creature - spirit
+	1+*/2
+	flying
+	as haunting apparition comes into play, choose an opponent.
+	haunting apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power'>
+				<value>
+					<add right="1">
+						<left>
+							<counter restriction-zone='graveyard'>
+								<and>
+									<has-idcard idcard='creature'/>
+									<has-color color="green"/>
+									<controller player='opponent'/>
+								</and>
+							</counter>
+						</left>
+					</add>
+				</value>
+			</register>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

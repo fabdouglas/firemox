@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Benediction of Moons">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	sorcery
+	you gain 1 life for each player.
+	haunt 
+	when the creature benediction of moons haunts is put into a graveyard, you gain 1 life for each player.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='2'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='haunting'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<has-private-object object-name="haunting" target="tested" />
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="graveyard" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="gain-life" value="2" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

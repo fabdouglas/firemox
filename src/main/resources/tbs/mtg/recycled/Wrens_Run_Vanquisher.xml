@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wren's Run Vanquisher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf warrior
+	3/3
+	as an additional cost to play wren's run vanquisher, reveal an elf card from your hand or pay 3.
+	deathtouch 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf warrior</properties>
+	</init>
+	<abilities>
+		<ability ref="deathtouch"/>
+		<ability ref='cast-spell'>
+			<actions>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="elf"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'>
+			<actions>
+				<pay-mana colorless="3"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

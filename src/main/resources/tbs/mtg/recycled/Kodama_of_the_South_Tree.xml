@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kodama of the South Tree">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	legendary creature - spirit
+	4/4
+	whenever you play a spirit or arcane spell, each other creature you control gets +1/+1 and gains trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<not>
+								<is-this/>
+							</not>
+							<has-idcard idcard="creature" />
+							<controller player="you" />
+						</and>
+					</test>
+				</target>
+				<action ref="add+1+1-until-eot"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

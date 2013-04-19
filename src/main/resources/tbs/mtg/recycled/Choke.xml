@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Choke">
+<!-- Islands do not untap during their controllers' untap phases '-->
+<!-- Tested ok. 0.80.31 04/01/2005 -->
+	<rules-author-comment>By brius</rules-author-comment>
+	
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="does-not-untap" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="island"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

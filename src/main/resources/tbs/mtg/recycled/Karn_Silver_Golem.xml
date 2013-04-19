@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Karn, Silver Golem">
+<rules-author-comment></rules-author-comment>
+
+<!--  {5} 
+whenever karn, silver golem blocks or becomes blocked, it gets -4/+4 until end of turn. 
+{1}: target nonartifact-creaturebecomes an artifact creature with power and 
+	toughness each equal to its converted mana cost until end of turn.  
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>golem legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability name="flanking" zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+				 	<register-modifier index="power" value="4" operation="minus" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+				 	<register-modifier index="toughness" value="4" operation="add" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability name="flanking" zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+				 	<register-modifier index="power" value="4" operation="minus" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+				 	<register-modifier index="toughness" value="4" operation="add" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" />
+				<action ref="target-noncreature-artifact"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="artifact" operation="or" linked="false"/> 
+					<register-indirection index="power" operation="set" linked="false">
+						<value register="target-list.last" index="manacost"/>
+					</register-indirection>
+					<register-indirection index="toughness" operation="set" linked="false">
+						<value register="target-list.last" index="manacost"/>
+					</register-indirection>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

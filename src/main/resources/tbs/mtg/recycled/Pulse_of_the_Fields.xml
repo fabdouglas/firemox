@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pulse of the Fields">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	instant
+	you gain 4 life. then if an opponent has more life than you, return pulse of the fields to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='4'/>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup>
+							<left register="opponent" index="life"/>
+							<right register="you" index="life"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<hop value="2"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

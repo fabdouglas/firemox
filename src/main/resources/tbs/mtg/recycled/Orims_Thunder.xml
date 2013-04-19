@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Orim's Thunder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	instant
+	kicker r 
+	destroy target artifact or enchantment. if the kicker cost was paid, orim's thunder deals damage equal to that artifact or enchantment's converted mana cost to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana red="1" />
+				<action ref="target-permanent">
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref='destroy'/>
+				<action ref="target-creature"/>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.first' index='manacost'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-permanent">
+					<test>
+						<or>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="enchantment"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

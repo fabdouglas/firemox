@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aeolipile">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="T"/>
+				<pay-mana colorless="1"/>
+				<target type="dealtable" mode="choose">
+					<test ref="is-targetable-dealtable"/>
+				</target>
+			</cost>
+			<effects>
+				<assign-damage value="2"/>
+				<action ref="sacrifice-this"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

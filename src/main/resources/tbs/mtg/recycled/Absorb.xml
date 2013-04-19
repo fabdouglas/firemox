@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Absorb">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {w}{u}{u} counter target spell. you gain 3 life. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>white blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<action ref="gain-life"  value="3"/>
+				<action ref="counter"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

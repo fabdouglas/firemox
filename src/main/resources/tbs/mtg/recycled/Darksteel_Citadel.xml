@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darksteel Citadel">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  artifact land darksteel citadel is indestructible.  {t}: add {1} to your mana pool. -->
+	<init>
+		<registers>
+		</registers>
+		<idcards>land artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-C"/>
+		<ability ref="indestructible"/>
+	</abilities>
+</card>

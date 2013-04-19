@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bog Hoodlums">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5b
+	creature - goblin warrior
+	4/1
+	bog hoodlums can't block.
+	when bog hoodlums comes into play, clash with an opponent. if you win, put a +1/+1 counter on bog hoodlums. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>goblin warrior cannot-block </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="clash">
+					<actions>
+						<target type='this'/>
+						<add-object object-name='+1/+1'/>
+					</actions>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tattoo Ward">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+1 and has protection from enchantments. this effect doesn't remove tattoo ward.
+	sacrifice tattoo ward: destroy target enchantment.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-enchantment'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='+1/+1'>
+		<modifiers>
+			<property-modifier property="protection-from-enchantments" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

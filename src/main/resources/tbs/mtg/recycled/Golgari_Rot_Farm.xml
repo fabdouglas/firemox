@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Golgari Rot Farm">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target mode="choose" type="card" restriction-zone="play" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="land" card="tested"/>
+						</and>
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="hand"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana green="1" black="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

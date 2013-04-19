@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Riptide Chronologist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	creature - wizard
+	1/3
+	u, sacrifice riptide chronologist: untap all creatures of the type of your choice.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<input-property operation="set" index="free0" register="this"
+					values="FIRST_SUB_TYPE..LAST_SUB_TYPE" />
+				<action ref="all-creatures">
+					<test>
+						<has-property>
+							<property register="this" index="free0"/>
+						</has-property>
+					</test>
+				</action>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

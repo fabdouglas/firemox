@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fangren Pathcutter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	creature - beast
+	4/6
+	whenever fangren pathcutter attacks, attacking creatures gain trample until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<test ref="tested-is-attacking"/>
+					</test>
+				</action>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

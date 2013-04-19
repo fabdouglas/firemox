@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grave Robbers">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		1bb
+		creature - robber
+		1/1
+		b, t :remove target artifact card in a graveyard from the game. you gain 2 life.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='2' />
+			<register index='colorless' value='1' />
+			<register index='power' value='1' />
+			<register index='toughness' value='1' />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>human rogue</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T' />
+				<target type='card' restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="artifact" />
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='gain-life' value='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

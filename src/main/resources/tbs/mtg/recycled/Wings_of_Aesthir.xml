@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wings of Aesthir">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wu
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +1/+0 and has flying and first strike.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='+1/+0'>
+		<modifiers>
+			<property-modifier property='flying' linked='true'/>
+			<property-modifier property='first-strike' linked='true'/>
+		</modifiers>
+	</attachment>
+</card>

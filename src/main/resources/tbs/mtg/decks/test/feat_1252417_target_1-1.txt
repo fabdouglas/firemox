@@ -1,0 +1,4 @@
+super_card;10
+Aegis_of_the_Meek;10
+Savannah_Lions;10
+Agent_of_Stromgald;10

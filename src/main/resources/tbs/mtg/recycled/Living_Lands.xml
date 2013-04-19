@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Living Lands">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+<!--  {3}{g} all forests are 1/1 creatures that are still lands. -->
+	<init>
+		<registers>
+			<register index="green" value="1"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<idcard-modifier idcard="creature" linked="true" layer="global"/>
+			 	<register-indirection index="power" operation="set" value="1" linked="true" layer="global"/>
+			 	<register-indirection index="toughness" operation="set" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+			 	<has-idcard idcard="forest"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

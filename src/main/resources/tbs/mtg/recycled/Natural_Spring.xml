@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Natural Spring">
+	<rules-author-comment>By tureba</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="gain-life" value="8"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

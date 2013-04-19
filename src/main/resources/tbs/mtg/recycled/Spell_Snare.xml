@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Spell Snare">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<!-- Counter target spell with casting cost 2 -->
+
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="Counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell">
+					<test>
+						<equal left="2">
+							<right register="tested" index="manacost" />
+						</equal>
+						</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="counter"/>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

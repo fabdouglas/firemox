@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cockatrice">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>cockatrice flying</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<!-- Text(5th+errata): 2/4, Flying. ; Whenever ~this~ blocks or becomes 
+		     blocked by a non-Wall creature, destroy that creature at end of 
+		     combat. [Oracle 00/02/01] -->
+
+		<!-- A non-wall creature blocking or blocked by this card gets a "destroy 
+		     at end of combat" effect placed on it when it is assigned as a blocker 
+		     or this card is assigned to block it.  The effect is added to a 
+		     creature which becomes a blocker by any means, including being part of 
+		     a band which is blocked or by being moved into blocking or being 
+		     blocked by an effect such as General Jarkeld.  This effect stays even 
+		     if the creature is removed from the blocking situation by an ability 
+		     like General Jarkeld. [WotC Rules Team 95/09/22] -->
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card2"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-property property="wall" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<create-ability>
+					<save target="context.card"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eoc"/>
+						<effects>
+							<if-then-hop elsehop="3">
+								<test>
+									<not>
+										<has-property property="wall" card="saved"/>
+									</not>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

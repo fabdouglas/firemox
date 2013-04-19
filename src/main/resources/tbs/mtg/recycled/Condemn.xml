@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Condemn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	instant
+	put target attacking creature on the bottom of its owner's library. its controller gains life equal to its toughness.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test ref="tested-is-attacking"/>
+				</action>
+			</cost>
+			<effects>
+				<action ref="move-library-bottom"/>
+				<target type="target-list.first.controller"/>
+				<action ref='gain-life-target'>
+					<value register='target-list.first' index='toughness'/>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

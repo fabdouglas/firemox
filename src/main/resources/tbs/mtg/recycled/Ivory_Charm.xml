@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--[[apt lang=en header]] ______
+ Ivory Charm
+ ______
+ Fabrice Daugan
+ ______
+ October 22 2007
+
+Ivory Charm
+-->
+<!--[[apt lang=fr header]] ______
+ Ivory Charm
+ ______
+ Fabrice Daugan
+ ______
+ 22 Octobre 2007
+
+Ivory Charm
+-->
+<!--[[apt lang=en]]
+ This card is an example of effect giving -2/-0 to several cards.
+
+[http://magiccards.info/scans/en/mr/227.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+  Cette carte est un exemple d'un effet donnant -2/-0 à plusieurs cartes.
+
+[http://magiccards.info/scans/en/mr/227.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]-->
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ivory Charm">
+<rules-author-comment></rules-author-comment>
+
+<!--  {w} choose one - 
+all creatures get -2/-0 until end of turn; 
+or tap target creature; 
+or prevent the next 1 damage that would be dealt to target creature or player this turn. 
+
+-->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<action ref="prevent-1"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<action ref="add-2-0-until-eot"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<tap/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

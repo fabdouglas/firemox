@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Deathspore Thallid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - zombie fungus
+	1/1
+	at the beginning of your upkeep, put a spore counter on deathspore thallid.
+	remove three spore counters from deathspore thallid: put a 1/1 green saproling creature token into play.
+	sacrifice a saproling: target creature gets -1/-1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie fungus </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+            <beginning-of-phase phase="upkeep">
+                <test ref="during-your-upkeep"/>
+            </beginning-of-phase>
+            <effects>
+                <target type="this"/>
+                <add-object object-name="spore"/>
+            </effects>
+        </triggered-ability>
+        <activated-ability zone="play" playable="instant">
+            <cost>
+                <target type="this"/>
+                <repeat value="3"/>
+                <remove-object object-name="spore"/>
+            </cost>
+            <effects>
+                <target-list operation="clear"/>
+                <create-card>
+                    <card name="Saproling">
+                        <init>
+                            <registers>
+                                <register index="power" value="1"/>
+                                <register index="toughness" value="1"/>
+                            </registers>
+                            <colors>green</colors>
+                            <idcards>creature</idcards>
+                            <properties>saproling token</properties>
+                        </init>
+                        <abilities/>
+                    </card>
+                </create-card>
+                <move-card controller="you" destination="play"/>
+            </effects>
+        </activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='saproling'/>
+					</test>
+				</action>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add-1-1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

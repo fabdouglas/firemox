@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Squeaking Pie Sneak">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - goblin rogue
+	2/2
+	as an additional cost to play squeaking pie sneak, reveal a goblin card from your hand or pay 3.
+	fear
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>goblin rogue fear </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="goblin"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+			</actions>
+		</ability>
+		<ability ref='cast-spell'>
+			<actions>
+				<pay-mana colorless="3"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

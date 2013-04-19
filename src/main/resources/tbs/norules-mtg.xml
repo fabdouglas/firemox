@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	*     Firemox is a turn based strategy simulator
+	*     Copyright (C) 2003-2007 Fabrice Daugan and contributors
+	*
+	*     This program is free software; you can redistribute it and/or modify it
+	* under the terms of the GNU General Public License as published by the Free
+	* Software Foundation; either version 2 of the License, or (at your option) any
+	* later version.
+	*
+	*     This program is distributed in the hope that it will be useful, but WITHOUT
+	* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	* FOR A PARTICULAR PURPOSE.    See the GNU General Public License for more
+	* details.
+	*
+	*     You should have received a copy of the GNU General Public License along
+	* with this program; if not, write to the Free Software Foundation, Inc.,
+	* 59 Temple Place, Suite 330, Boston, MA    02111-1307    USA
+	*
+	* XML Schema for Firemox XML card and XML turn based strategy rules
+	* definition.
+	*
+	* @author Fabrice Daugan
+	* @author Hoani Cross
+-->
+
+<!--[[apt lang=en header]]		______
+	Magic the Gathering game XML file description
+	`______
+	Fabrice Daugan, Hoani CROSS
+	`______
+	October 1st 2007
+	
+	The Magic the Gathering game rules file
+-->
+<!--[[apt lang=fr header]]		______
+	Description du fichier XML du jeu Magic : l'Assemblée
+	`______
+	Fabrice Daugan, Hoani CROSS
+	`______
+	01 octobre 2007
+	
+	Le fichier de description des règles de Magic : l'Assemblée
+-->
+
+<!--[[apt lang=en]]
+	`As said before, the rules of the games are described in the file <<<mtg.xml>>>
+	`in the <<<src/main/resources/tbs>>> directory. You will often search withing this
+	`file to get some already written tests, actions or abilities, so let's see the
+	`structure of this file.
+	
+	* Header
+	
+	`The <<<mtg.xml>>> starts with the <<<\<tbs\>>>> element, which stands for
+	`"<Turn Based Strategy>". Some of the attributes specify the XML schema location,
+	`the XML namespace, some others specify the name of the game, the version and
+	`the author. We also have information about the picture of the back of the cards
+	`file.
+-->
+<!--[[apt lang=fr]]
+	`Comme cela a été précisé plus haut, les règles de ce jeu de cartes sont
+	`décrites dans le fichier <<<mtg.xml>>> du répertoire
+	`<<<src/main/resources/tbs>>>. Vous chercherez souvent dans ce fichier afin
+	`d'obtenir des tests, actions ou capacités déjà écrites, alors analysons la
+	`structure de ce fichier.
+	
+	* En-tête
+	
+	`Le fichier <<<mtg.xml>>> commence avec l'élément <<<\<tbs\>>>>, qui est
+	`l'abbréviation de "<Turn Based Strategy>" (ou <stratégie basée sur des tours>).
+	`Certains attributs spécifient l'emplacement du schéma XML du fichier,
+	`l'espace de nommage XML, d'autres spécifient le nom du jeu, la version et
+	`l'auteur. On trouvera également des informations concernant le fichier
+	`contenant l'image du dos des cartes de ce jeu.
+-->
+<tbs xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox validator.xsd"
+	name="Magic The Gathering (R) (no rules enforcement)" version="0.95" author="riclas"
+	comment="By riclas@users.sourceforge.net"
+	art-url="http://mi.wizards.com/global/images/magic/general" back-picture="magic_the_gathering.jpg"
+	damage-picture="damage.jpg">
+	<!-- Mirroring : .... for later
+		http://www.magictrade.org/index.php3?mod=picviewcrd3201
+		http://magiccards.info/query.php?cardname_match=exactly&cardname=Mishra%27s+Factory
+		http://magiccards.info/query.php?cardname=Cemetery_Gate
+		http://magiccards.info/query.php?cardname=black_lotus
+		http://magiccards.info/al/en/232/
+		http://magiccards.info/scans/en/hl/5.jpg
+		http://www.magicotw.com/voir_carte.php?id=245
+		http://www.yavipengs.com/
+		http://www.magic-ville.com/fr/carte.php?fda086
+		http://www.magictrade.org/index.php3?mod=picviewcrd3489
+		http://www.smfcorp.net/
+	-->
+	<!-- http://www.wizards.com/global/images/magic/general/Soldier_Token.jpg -->
+
+	<!--[[apt lang=en]]
+		* Database management
+		
+		`<<Magic Project>> also implements a database management for informations on
+		`cards not related to the rules, like the picture of the card, the <flavor text>
+		`or the artist. All these informations can be grabbed automatically from various
+		`sites by just providing a well formed XML proxy file.
+		
+		`The <<<\<database-properties\>>>> element in the <<<mtg.xml>>> file is used to
+		`declare the different informations understood by <<Magic Project>>. You will
+		`find below an extract of this element from the <<<mtg.xml>>> file.
+	-->
+	<!--[[apt lang=fr]]
+		* Base de données des informations complémentaires
+		
+		`<<Magic Project>> inclu également une base données des informations concernant
+		`les cartes qui n'ont pas de relations avec les règles comme l'image d'une carte,
+		`le <texte d'ambiance> ou l'artiste. Toutes ces informations sont téléchargées
+		`automatiquement depuis plusieurs sites par la fourniture de fichier XML de
+		`proxy valides.
+		
+		`L'élément <<<\<database-properties\>>>> dans le fichier <<<mtg.xml>>> est
+		`utilisé pour déclarer les différentes informations interprétées par
+		`<<Magic Project>>. Vous trouverez ci-dessous un extrait du contenu de cet
+		`élément prélevé depuis le fichier <<<mtg.xml>>>.
+	-->
+	<!--[[apt start-code]] -->
+	<database-properties>
+		<property name="card.artist-credit" type="java.lang.String" translate="false" />
+		<property name="card.flavor-text" type="java.lang.String" translate="false" />
+		<property name="card.sets" type="java.util.List" translate="true" />
+		<property name="card.text" type="java.lang.String" translate="false" />
+		<property name="card.id" type="java.lang.String" translate="false" />
+		<property name="card.set" type="java.lang.String" translate="true" />
+		<property name="card.version" type="java.lang.String" translate="false" />
+	</database-properties>
+	<!--[[apt end-code]] -->
+
+	<!--[[apt lang=en]]
+		* Mana symbols
+		
+		`<<Magic Project>> dynamically download the <mana symbols> needed to display the
+		`abilities from the <<Wizards of the Coast>> website for copyright considerations.
+		`The <<<\<mana-symbols\>>>> element stands for giving <<Magic Project>> all
+		`the information needed to properly download these symbols.
+	-->
+	<!--[[apt lang=fr]]
+		* Les symboles de mana
+		
+		`<<Magic Project>> télécharge dynamiquement les <symboles de mana> nécessaires
+		`à l'affichage des capacités depuis le site web de <<Wizards of the Coast>> pour
+		`des raisons de propriété intellectuelle. L'élément <<<\<mana-symbols\>>>>
+		`permet de fournir à <<Magic Project>> toutes les informations permettant de
+		`télécharger ces symboles.
+	-->
+
+	<mana-symbols>
+		<!-- http://www.cs.utk.edu/~mcsurley/images -->
+		<!-- http://www.mutantswarm.org/magic/images/smilies -->
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colored url="http://www.wizards.com/images/Symbols/"
+			big-url="http://www.wizards.com/magic/advanced/7e/images/">
+			<mana name="black" picture="black_mana.gif" big-picture="black_mana_40w.jpg" />
+			<mana name="blue" picture="blue_mana.gif" big-picture="blue_mana_40w.jpg" />
+			<mana name="green" picture="green_mana.gif" big-picture="green_mana_40w.jpg" />
+			<mana name="red" picture="red_mana.gif" big-picture="red_mana_40w.jpg" />
+			<mana name="white" picture="white_mana.gif" big-picture="white_mana_40w.jpg" />
+		</colored>
+		<!--
+			12 x 12 Pictures are advised.
+		-->
+		<colorless url="http://www.wizards.com/images/Symbols/" big-url="colorlessmana.gif"
+			unknown="Symbol_X_mana.gif">
+			<mana amount="0" picture="Symbol_0_mana.gif" />
+			<mana amount="1" picture="Symbol_1_mana.gif" />
+			<mana amount="2" picture="Symbol_2_mana.gif" />
+			<mana amount="3" picture="Symbol_3_mana.gif" />
+			<mana amount="4" picture="Symbol_4_mana.gif" />
+			<mana amount="5" picture="Symbol_5_mana.gif" />
+			<mana amount="6" picture="Symbol_6_mana.gif" />
+			<mana amount="7" picture="Symbol_7_mana.gif" />
+			<mana amount="8" picture="Symbol_8_mana.gif" />
+			<mana amount="9" picture="Symbol_9_mana.gif" />
+			<mana amount="10" picture="Symbol_10_mana.gif" />
+		</colorless>
+	</mana-symbols>
+
+	<!--[[apt lang=en]]
+		* License
+		
+		`The element <<<\<license\>>>> just give a description of the license linked to
+		`the game referenced in the <<<mtg.xml>>> file. You will find an extract
+		`of this license description below :
+	-->
+	<!--[[apt lang=fr]]
+		* Licence
+		
+		`L'élément <<<\<license\>>>> fourni une description de la licence du jeu auquel
+		`est associé le fichier <<<mtg.xml>>>. Vous trouverez ci-dessous un extrait de
+		`la description de la license :
+	-->
+
+	<!--[[apt start-code]]-->
+	<licence>
+		This program is not published, produced or supported by Wizards Of The Coast(TM), Inc. Magic
+		The Gathering(TM) and Wizards Of The Coast(R) Inc. are registered trademarks owned by
+		Wizards Of The Coast(R) Inc., a subsidiary of Hasbro, Inc.
+	</licence>
+	<!--[[apt end-code]]-->
+
+	<aliases file="tbs/norules-mtg/fragment-aliases.xml" />
+
+	<!--[[apt lang=en]]
+		* Initialisation of the players registers
+		
+		`A bunch of integer registers (like life) are allocated to each player. the elements
+		`<<<\<registers-first-player\>>>> and <<<\<registers-first-player\>>>> are
+		`decaded to the initialisation of these registers. You will find below an
+		`extract of theses elements from the <<<mtg.xml>>> file :
+	-->
+	<!--[[apt lang=fr]]
+		* Initialisation des registres des joueurs
+		
+		`Une série de registres de valeurs entières (comme les points de vie) est
+		`allouée pour chaque joueur. Les éléments <<<\<registers-first-player\>>>> et
+		`<<<\<registers-first-player\>>>> sont dédiés à l'initialisation de ces
+		`registres. Vous trouverez ci-dessous un extrait de ces éléments issus du fichier
+		`<<<mtg.xml>>> :
+	-->
+
+	<!--[[apt start-code]]-->
+	<registers-first-player>
+		<register index="life" value="20" />
+		<register index="maxi-cards-in-hand" value="7" />
+		<register index="land-remain-to-cast" value="1" />
+		<register index="hand-vibility-modifiers" value="0" />
+		<register index="playedland" value="0" />
+		<register index="mulligan" value="7" />
+	</registers-first-player>
+	<registers-second-player>
+		<register index="life" value="20" />
+		<register index="maxi-cards-in-hand" value="7" />
+		<register index="hand-vibility-modifiers" value="0" />
+		<register index="playedland" value="0" />
+		<register index="mulligan" value="7" />
+	</registers-second-player>
+	<!--[[apt end-code]]-->
+
+	<!--[[apt lang=en]]
+		* Phases declaration
+		
+		`The next element <<<\<phases\>>>> declare the differents phases of a turn
+		`in the implemented game. It also specifies which type of spells are playable
+		`during these phases.
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des phases
+		
+		`L'élément suivant <<<\<phases\>>>> déclare les différentes phases qui composent
+		`un tour dans le jeu de carte implémenté. Il spécifie également quels types de
+		`sorts sont jouables durant ces différentes phases.
+	-->
+
+	<phases start="1"
+		turn-structure="untap upkeep draw main declare-attack declare-attacking declare-blocking combat-deals eoc main eot cleanup">
+		<phase name="untap" playable-empty-stack-you="none" playable-middle-resolution-you="none"
+			playable-empty-stack-opponent="none" playable-middle-resolution-opponent="none" />
+		<phase name="upkeep" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="draw" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="main" playable-empty-stack-you="all" playable-middle-resolution-you="instant"
+			playable-empty-stack-opponent="instant" playable-middle-resolution-opponent="instant" />
+		<phase name="declare-attack" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="declare-attacking" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="declare-blocking" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="none" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="combat-deals" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="eoc" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="eot" playable-empty-stack-you="instant"
+			playable-middle-resolution-you="instant" playable-empty-stack-opponent="instant"
+			playable-middle-resolution-opponent="instant" />
+		<phase name="cleanup" playable-empty-stack-you="none" playable-middle-resolution-you="none"
+			playable-empty-stack-opponent="none" playable-middle-resolution-opponent="none" />
+	</phases>
+
+	<!--[[apt lang=en]]
+		* States pictures
+		
+		`For any card in game with a specific state (like <summoning sickness>),
+		`<<Magic Project>> interprets the <<<\<state-pictures\>>>> element to get the
+		`picture and the test associated to each state.
+		`If the <<<index>>> and <<<state>>> attributes are provided, <<Magic Project>> will make a
+		`bitwise compare with the index value of card's registers and the given state
+		`value. <<<width>>> and <<<height>>> values determines the size of the picture to
+		`display on the card. You can make <<Magic Project>> positionning automatically
+		`the picture (trailing) by setting the <<<x>>> and the <<<y>>> attributes to
+		`<<<-1>>>.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux états
+		
+		`Pour chaque carte en jeu avec un état spécique (comme le <mal d'invocation>),
+		`<<Magic Project>> interprète l'élément <<<\<state-pictures\>>>> pour
+		`récupérer et associer une image relative à cet état.
+		`Si les attributs <<<index>>> et <<<state>>> sont fournis, <<Magic Project>>
+		`va faire une comparaison bit à bit entre la valeur entière à la position
+		`désignée par <<<index>>> dans les registres de la carte et la valeur contenue
+		`dans <<<state>>>. Les attributs <<<width>>> et <<<height>>> permettent de
+		`renseigner <<Magic Project>> sur respectivement la largeur et la hauteur de
+		`l'image à afficher sur la carte. Il est possible de faire en sorte que
+		`<<Magic Project>> positionne automatiquement les images (en les séquençant)
+		`en mettant la valeur <<<-1>>> pour les attributs <<<x>>> et <<<y>>>.
+	-->
+
+	<state-pictures>
+		<state-picture name="state-haste" picture="summon.gif" state="just-summoned" index="state"
+			x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="state-attacking" picture="isattacking.gif"
+			state="declared-as-attacking" index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="state-blocking" picture="isblocking.gif" state="declared-as-blocking"
+			index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="state-blocked" picture="isblocked.gif" state="declared-as-blocked"
+			index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="state-unblocked" picture="isunblocked.gif"
+			state="declared-as-unblocked" index="state" x="-1" y="-1" width="12" height="12">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="untapped-under-condition" picture="untapped-under-condition.gif"
+			state="untapped-under-condition" index="state" x="-1" y="-1" width="12" height="12" />
+		<state-picture name="toassign" picture="toassign.gif" state="0" index="combat.toassign"
+			x="50" y="35" width="16" height="16">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+		<state-picture name="assignedto" picture="assignedto.gif" state="0"
+			index="combat.assignedto" x="34" y="35" width="16" height="16">
+			<display-test>
+				<in-zone zone="play" />
+			</display-test>
+		</state-picture>
+	</state-pictures>
+
+	<!-- Associated picture to actions. For undeclared actions, no picture will be used
+		12 x 12 Pictures are advised.
+	-->
+
+	<!--[[apt lang=en]]
+		* Action pictures
+		
+		`In <<Magic the Gathering>> game, some actions are linked to a picture. This is
+		`true for the action "<tap>" for example. The element <<<\<action-pictures\>>>>
+		`declares the different pictures associated to actions.
+	-->
+	<!--[[apt lang=fr]]
+		* Les images associées aux actions
+		
+		`Dans le jeu de cartes <<Magic : l'Assemblée>>, certaines actions sont liées à
+		`une image. Cela est vrai pour l'action "<engager>" par exemple. L'élément
+		`<<<\<action-pictures\>>>> déclare les différentes images associées aux actions.
+	-->
+
+	<action-pictures url="http://www.wizards.com/images/Symbols/">
+		<action name="@T" picture="tap.gif" />
+	</action-pictures>
+
+	<!--[[apt lang=en]]
+		* Tooltip filters
+		
+		`The element <<<\<tooltip-filters\>>>> informs <<Magic Project>> of the amount of
+		`informations to show on cards depending on various tests (for example, it is
+		`not necessary to show the colors of a land card since all of them are colorless).
+	-->
+	<!--[[apt lang=fr]]
+		* Les filtres des informations affichées sur les cartes
+		
+		`L'élément <<<\<tooltip-filters\>>>> informe <<Magic Project>> de la quantité
+		`d'informations à afficher sur les cartes en fonction de tests divers (par
+		`exemple, il est inutile d'afficher les couleurs d'un terrain étant donné qu'ils
+		`sont tous incolores).
+	-->
+
+	<tooltip-filters>
+		<tooltip-filter powerANDtoughness="true" states="true">
+			<filter>
+				<in-zone zone="play"/>
+			</filter>
+		</tooltip-filter>
+	</tooltip-filters>
+
+	<!--[[apt lang=en]]
+		* Static modifiers
+		
+		`The static modifiers are modifications that apply to cards automatically since
+		`they verify the associated test. They are declared with the <<<\<static-modifiers\>>>>
+		`element. 
+	-->
+	<!--[[apt lang=fr]]
+		* Les modifieurs statiques
+		
+		`Les modifieurs statiques sont des modifications qui s'appliquent automatiquement
+		`à certaines cartes à partir du moment où ces dernières vérifient les règles
+		`qui sont attachées à ces modifieurs. Il sont déclarés au sein de l'élément
+		`<<<\<static-modifiers\>>>>. 
+		
+	-->
+
+	<!-- static mofifiers
+	-->
+
+	<static-modifiers>
+		<!--[[apt start-code]]-->
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="tap-this">
+					<abilities>
+						<ability ref="tap-this" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<in-zone zone="play"/>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="put-in-play">
+					<abilities>
+						<ability ref="cast-spell" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<not>
+					<in-zone zone="play"/>
+				</not>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="put-in-graveyard">
+					<abilities>
+						<ability ref="put-in-graveyard" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<not>
+					<in-zone zone="graveyard"/>
+				</not>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="return-to-hand">
+					<abilities>
+						<ability ref="return-to-hand" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<not>
+					<in-zone zone="hand"/>
+				</not>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="remove-from-game">
+					<abilities>
+						<ability ref="remove-from-game" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<not>
+					<in-zone zone="side"/>
+				</not>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="discard-a-player">
+					<abilities>
+						<ability ref="discard-a-player" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="draw-a-card">
+					<abilities>
+						<ability ref="draw-a-card" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="search-lib-opponent">
+					<abilities>
+						<ability ref="search-lib-opponent" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="search-lib-reveal">
+					<abilities>
+						<ability ref="search-lib-reveal" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="lose-life">
+					<abilities>
+						<ability ref="lose-life" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="gain-life">
+					<abilities>
+						<ability ref="gain-life" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<or>
+					<in-zone zone="hand"/>
+					<in-zone zone="play"/>
+				</or>
+			</while>
+		</static-modifier>
+		<static-modifier filter-zone="anywhere">
+			<modifiers>
+				<ability-modifier linked="false" layer="global" name="set-power-toughness">
+					<abilities>
+						<ability ref="set-power-toughness" />
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<in-zone zone="play"/>
+			</while>
+		</static-modifier>
+	</static-modifiers>
+
+	<!--[[apt lang=en]]
+		* Abilities declaration
+		
+		`In the element <<<\<abilities\>>>>, we can find all the abilities associated
+		`directly to the general management of the game.
+		
+		`The element starts with the system abilities (declared with the
+		`<<<\<system-ability\>>>> elements) that allow players to play the attack phase,
+		`inits the game, implements the draw and the discard phase, implements the
+		`mulligan, manages and initializes the turn, manages the lethal damage or the
+		`manaburn, implements the <legend> rule, implements the <enchant world> rules
+		`or the limitation while playing lands.
+		
+		`These declarations are followed by the replacement abilities, which stand for
+		`abilities that trigger on specific actions and replace theses actions dynamically
+		`by other actions. They are declared using the <<<\<replacement-ability\>>>>
+		`element. We will find here the replacement abilities that trigger when a token
+		`goes to the graveyard (in fact it is put out of the game), that trigger when
+		`a card is played using <flashback> (when the spell resolves, it goes out of the
+		`game) or that trigger when a card is played with <buyback> (when the spell
+		`resolves, it goes to its owner's hand).
+	-->
+	<!--[[apt lang=fr]]
+		* La déclaration des capacités
+		
+		`Dans l'élément <<<\<abilities\>>>>, on peut trouver toutes les capacités
+		`directement associées avec la gestion générale du jeu.
+		
+		`Le contenu de cet élément débute avec les capacités système (déclarées à l'aide
+		`d'éléments <<<\<system-ability\>>>>) qui permettent entre autres aux joueurs
+		`de jouer durant la phase d'attaque, d'initialiser le jeu, d'implémenter les
+		`phases de pioche et de défausse, d'implémenter le <mulligan>, de gérer et
+		`d'initialiser le tour, de gérer les dommages mortels ou les <brûlures de mana>,
+		`d'implémenter la règle des <légendes>, d'implémenter la règles des <enchantements
+		`du monde> ou encore d'imposer la limitation concernant le nombre de terrains
+		`que l'on peut jouer par tour.
+		
+		`Ces déclarations sont suivies par les capacités de remplacement, qui sont
+		`des capacités qui se déclenchent sur l'occurence de certaines actions et
+		`remplacent dynamiquement ces actions par d'autres actions. Elles sont
+		`déclarées via l'élément <<<\<replacement-ability\>>>>. On trouve entre autres
+		`les capacités de remplacement qui gère le déplacement d'une carte <jeton> vers
+		`le cimetière (en réalité une telle carte est retirée de la partie à la place), qui
+		`gère le fait de jouer une carte avec la capacité <flashback> (lorsque le sort
+		`se résout, la carte associée est retirée de la partie) ou qui gère le fait
+		`de jouer une carte avec la capacité <buyback> (lorsque le sort se résout, la
+		`carte associée retourne dans la main de son propriétaire).
+	-->
+
+	<abilities abortionzone="graveyard">
+		
+		<!-- DISCARD : if (#cards > maxi) -> discard, restart a cleanup phase -->
+		<system-ability picture="discard" name="discard-phase" resolution="high">
+			<beginning-of-phase phase="cleanup">
+				<test ref="priv_currentplayer-has-to-discard" />
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="5">
+					<test ref="priv_currentplayer-has-to-discard" />
+				</if-then-hop>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="currentplayer" />
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+				<target-list operation="clear" />
+				<hop value="-4" />
+			</effects>
+		</system-ability>
+		<!-- DRAW : current player draw a card -->
+		<system-ability name="draw-phase" picture="draw">
+			<beginning-of-phase phase="draw" />
+			<effects>
+				<target type="currentplayer" />
+				<action ref="draw-a-card" />
+			</effects>
+		</system-ability>
+		<!-- INIT GAME : each player drw seven cards -->
+		<system-ability name="game-init" resolution="hidden">
+			<beginning-of-phase phase="upkeep" />
+			<!-- set the zone visibility for players -->
+			<effects>
+				<target type="player" mode="all" />
+				<!-- shuffle the libraries -->
+				<shuffle zone="library" />
+				<!-- set the zone visibility for players -->
+				<show-zone zone="play" for="controller" />
+				<show-zone zone="play" for="opponent" />
+				<show-zone zone="phased-out" for="controller" />
+				<show-zone zone="phased-out" for="opponent" />
+				<show-zone zone="hand" for="controller" />
+				<show-zone zone="graveyard" for="controller" />
+				<show-zone zone="graveyard" for="opponent" />
+				<!-- side, stack, dbz, tbz are always visible for both players-->
+				<!-- useless since, by default, zone are hidden -->
+				<hide-zone zone="hand" for="opponent" />
+				<hide-zone zone="library" for="controller" />
+				<hide-zone zone="library" for="opponent" />
+				<!-- each player draws 7 cards -->
+				<repeat value="7" />
+				<move-player-card from="library" to="hand" controller="controller" />
+				<!-- init the turn ID to 0 -->
+				<modify-register register="game.static" index="turnid" operation="clear" />
+				<!-- 101.5. Once both players are satisfied with their hands, the
+					starting player takes his or her turn. The player who plays
+					first skips the draw step (see rule 304, "Draw Step") of his
+					or her first turn.
+				-->
+				<target-list operation="clear" />
+				<target type="currentplayer" />
+				<skip-phase phase="draw" />
+				<unregister-this />
+			</effects>
+		</system-ability>
+		<!-- MULLIGAN for the non starting player -->
+		<system-ability name="mulligan" resolution="hidden_low">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller" />
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer.opponent" />
+				<!-- IF (can do mulligan one more time) -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup right="0">
+							<left register="currentplayer.opponent" index="mulligan" />
+						</sup>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- is this player wants to take a mulligan? -->
+				<msg type="yesno" controller="currentplayer.opponent">
+					<text>%mulligan_question</text>
+				</msg>
+				<!-- IF (answer==yes) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<equal right="0">
+							<left register="stack" index="0" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- put cards of hand and put them in the library -->
+				<repeat>
+					<value register="currentplayer.opponent" index="mulligan" />
+				</repeat>
+				<move-player-card from="hand" to="library" controller="currentplayer.opponent" />
+				<!-- shuffle the library -->
+				<shuffle zone="library" />
+				<!-- decrement the amount of cards to draw the next mulligan -->
+				<modify-register register="currentplayer.opponent" index="mulligan"
+					operation="minus" value="1" />
+				<!-- draw the new hand -->
+				<repeat>
+					<value register="currentplayer.opponent" index="mulligan" />
+				</repeat>
+				<move-player-card from="library" to="hand" controller="currentplayer.opponent" />
+				<hop value="-9" />
+				<!-- ELSE -->
+				<!-- Cannot do "mulligan" the next time -->
+				<unregister-this />
+				<!-- END IF -->
+			</effects>
+		</system-ability>
+		<!-- MULLIGAN for starting player -->
+		<system-ability name="mulligan" resolution="hidden_low">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<is-this player="controller" />
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="currentplayer" />
+				<!-- IF (can do mulligan one more time) -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup right="0">
+							<left register="currentplayer" index="mulligan" />
+						</sup>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- is this player wants to take a mulligan? -->
+				<msg type="yesno">
+					<text>%mulligan_question</text>
+				</msg>
+				<!-- IF (answer==yes) -->
+				<if-then-hop elsehop="8">
+					<test>
+						<equal right="0">
+							<left register="stack" index="0" />
+						</equal>
+					</test>
+				</if-then-hop>
+				<!-- THEN -->
+				<!-- put cards of hand and put them in the library -->
+				<repeat>
+					<value register="currentplayer" index="mulligan" />
+				</repeat>
+				<move-player-card from="hand" to="library" controller="currentplayer" />
+				<!-- shuffle the library -->
+				<shuffle zone="library" />
+				<!-- decrement the amount of cards to draw the next mulligan -->
+				<modify-register register="currentplayer" index="mulligan" operation="minus"
+					value="1" />
+				<!-- draw the new hand -->
+				<repeat>
+					<value register="currentplayer" index="mulligan" />
+				</repeat>
+				<move-player-card from="library" to="hand" controller="currentplayer" />
+				<hop value="-9" />
+				<!-- ELSE -->
+				<!-- Cannot do "mulligan" the next time -->
+				<unregister-this />
+				<!-- END IF -->
+			</effects>
+		</system-ability>
+		<!-- TURN INIT : reset registers
+			212.3d A creature's activated ability with the tap symbol in its
+			activation cost can't be played unless the creature has been under its
+			controller's control since the start of his or her most recent turn. A
+			creature can't attack unless it has been under its controller's control
+			since the start of his or her most recent turn. This rule is informally
+			called the "summoning sickness" rule. Ignore this rule for creatures
+			with haste (see rule 502.5).
+		-->
+		<system-ability name="turn-init" resolution="hidden_high">
+			<before-phase phase="untap" />
+			<effects>
+				<modify-register operation="clear" register="game.static" index="attack-step-index" />
+				<modify-register operation="clear" register="currentplayer"
+					index="damage-dealt-this-turn" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="damage-dealt-this-turn" />
+				<modify-register operation="clear" register="currentplayer"
+					index="creatures-moved-in-graveyard-from-play-this-turn" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="creatures-moved-in-graveyard-from-play-this-turn" />
+				<modify-register value="1" operation="set" register="currentplayer"
+					index="land-remain-to-cast" />
+				<modify-register operation="clear" register="currentplayer" index="playedland" />
+				<modify-register operation="clear" register="currentplayer.opponent"
+					index="playedland" />
+				<!-- We remove the "summoning sickness" state of cards controlled by current player and all damages
+					for card in play and controlled by current player -->
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<controller player="currentplayer" />
+					</test>
+				</target>
+				<modify-register operation="clear" register="target" index="state" />
+			</effects>
+		</system-ability>
+		<!-- TURN MANAGER
+			314.2. After discarding, the following actions happen simultaneously:
+			all damage is removed from permanents and all "until end of turn" and
+			"this turn" effects end (this game action doesn't use the stack).
+		-->
+		<system-ability name="turn-manager" resolution="hidden_low">
+			<end-of-phase phase="cleanup" />
+			<effects>
+				<!-- useless since this not change the current player,
+					but notify the event manager that we have handled
+					the turn chaining.
+					@see firemox.stack.EventManager#gotonext-phase()
+				-->
+				<next-current-player player="currentplayer" />
+				<if-then-hop elsehop="2">
+					<test>
+						<or>
+							<!-- no extra turn, normal turn chainning :
+								The opponent become the next current player -->
+							<equal left="0">
+								<right register="game.static" index="normal-next-player" />
+							</equal>
+							<!-- it was an extra turn, an this one was inserted
+								before the opponent's turn whom become the
+								next current player. '-->
+							<equal left="3">
+								<right register="game.static" index="normal-next-player" />
+							</equal>
+						</or>
+					</test>
+				</if-then-hop>
+				<next-current-player player="currentplayer.opponent" />
+				<!-- We restore the normal turn chainning -->
+				<modify-register register="game.static" index="normal-next-player"
+					operation="clear" />
+				<!-- Increment the turn ID -->
+				<modify-register register="game.static" index="turnid" operation="add" value="1" />
+				<!-- remove damages from permanents in pay -->
+				<target type="card" mode="all" restriction-zone="play" />
+				<modify-register operation="clear" register="target" index="damage" />
+			</effects>
+		</system-ability>
+		<!-- STATE BASED :
+			420.5g A player who was required to draw more cards than were in his
+			or her library since the last time state-based effects were checked
+			loses the game. -->
+		<system-ability name="state-based-no-card-to-draw" resolution="hidden">
+			<catch-exception name="NoSuchElement">
+				<test>
+					<action-source name="draw-%n-card" />
+				</test>
+			</catch-exception>
+			<effects>
+				<lose-game player="context.player" />
+			</effects>
+		</system-ability>
+		<system-ability picture="untap" name="untap-cards" resolution="hidden">
+			<beginning-of-phase phase="untap" />
+			<effects>
+				<!--  'Untap' static ability -->
+				<target type="card" hop="2" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<in-zone zone="playANDtapped" />
+							<controller player="currentplayer" />
+						</and>
+					</test>
+				</target>
+				<target-list operation="save" />
+				<!-- 
+					
+					FOR EACH (Card in target-list) -->
+				<if-then-hop elsehop="5">
+					<test>
+						<sup left="target-list.size" right="0" />
+					</test>
+				</if-then-hop>
+				<!-- 
+					DO (ask 'untap or not' ) -->
+				<choice cancel="true" hop="1">
+					<either>
+						<target-list operation="remove" list-index="-1" target="target-list.last"
+							name="do-not-untap" />
+					</either>
+				</choice>
+				<target-list operation="remove-last" />
+				<hop value="-4" />
+				<!-- 
+					END FOR -->
+
+				<target-list operation="load" list-index="-1" />
+				<target-list operation="remove" list-index="-1" />
+				<untap />
+			</effects>
+		</system-ability>
+	</abilities>
+
+	<!--[[apt lang=en]]
+		* Game layout
+		
+		`The layout of the game is also described in the XML file using the
+		`<<<\<layout\>>>> element. Common panels and zones are declared within.
+	-->
+	<!--[[apt lang=fr]]
+		* Disposition de l'espace de jeu
+		
+		`La disposition de l'espace de jeu est également décrite dans le fichier
+		`XML à l'aide de l'élément <<<\<layout\>>>>. Les zones et cadres communs
+		`y sont déclarés.
+	-->
+
+	<layouts>
+		<!-- Would contain more components with XML definition -->
+		<common-panel>
+			<card-details>
+				<properties>
+					<menu-element name="database.main">
+						<menu-attribute name="card.local-name" value="card.database.local-name"
+							type="string" />
+						<menu-attribute name="card.text" value="card.database.property[card.text]"
+							type="text" />
+						<menu-attribute name="card.flavor-text"
+							value="card.database.property[card.flavor-text]" type="text" />
+					</menu-element>
+					<menu-element name="database.credits">
+						<menu-attribute name="card.artist-credit"
+							value="card.database.property[card.artist-credit]" type="string" />
+						<menu-attribute name="card.rules-credit" value="card.database.rules-credit"
+							type="string" />
+					</menu-element>
+					<menu-element name="database.proxy">
+						<menu-attribute name="card.proxy.name"
+							value="card.database.picture-proxy.name" type="string" />
+						<menu-attribute name="card.proxy.home"
+							value="card.database.picture-proxy.home" type="string" />
+						<menu-attribute name="card.proxy.language"
+							value="card.database.picture-proxy.language" type="string" />
+						<menu-attribute name="card.proxy.encoding"
+							value="card.database.picture-proxy.encoding" type="string" />
+						<menu-attribute name="card.stream" value="card.database.picture-stream"
+							type="link" />
+					</menu-element>
+					<menu-element name="database.properties">
+						<menu-attribute name="card.set" value="card.database.property[card.set]"
+							type="string" />
+						<menu-attribute name="card.version"
+							value="card.database.property[card.version]" type="string" />
+						<menu-attribute name="card.sets" value="card.database.property[card.sets]"
+							type="string" />
+						<menu-attribute name="card.id" value="card.database.property[card.id]"
+							type="string" />
+						<!-- TODO Add private properties in this nested element
+							<element name="database.private.properties">
+							</menu-element>
+						-->
+					</menu-element>
+				</properties>
+			</card-details>
+		</common-panel>
+		<zones enable-stack="true" enable-dbz="true" enable-tbz="true" enable-play="true"
+			enable-hand="true" default-zone="library">
+			<play>
+				<sector constraint="Center" />
+			</play>
+			<additional-zones>
+				<additional-zone name="graveyard" layout-class="" constraint-you="East"
+					constraint-opponent="West" />
+				<additional-zone name="library" layout-class="" constraint-you="West"
+					constraint-opponent="East" />
+				<additional-zone name="phased-out" layout-class="java.awt.FlowLayout" />
+			</additional-zones>
+		</zones>
+	</layouts>
+
+	<references file="tbs/norules-mtg/fragment-references.xml" />
+
+	<!--[[apt lang=en]]
+		* Action constraints
+		
+		`<<Magic Project>> is also capable to apply constraints on actions if they match
+		`the <<<\<action\>>>> child elements. These constraints are dynamically <appended>
+		`using the given operation (usually set to <<<"and">>>) to the test associated
+		`with the matched action. Theses constraints are declared using the
+		`<<<\<action-constraints\>>>> element. You will find here constraints concerning
+		`the ability to equip a creature with an equipment artifact for example
+		`(it's impossible to equip a creature if the equipment is also a creature in
+		`addition to its artifact type) :
+	-->
+	<!--[[apt lang=fr]]
+		* Contraintes d'actions
+		
+		`<<Magic Project>> est également capable d'appliquer des contraintes sur les
+		`actions si elles correspondent aux éléments fils de l'élément <<<\<action\>>>>.
+		`Ces contraintes sont ajoutées dynamiquement à l'aide de l'opération fournie
+		`(génégalement renseignée à <<<"and">>>) au test associé au sein de l'action
+		`correspondante. Ces contraintes sont déclarées via l'élément <<<\<action-constraints\>>>>.
+		`Vous trouverez ici par exemple les contraintes concernant la capacité d'un
+		`équipement d'équiper une créature (il est impossible pour un équipement qui est
+		`également une créature d'équiper une créature) :
+	-->
+	<action-constraints>
+		<constraint operation="and"> 
+			<test>
+				<inf-equal left="%value">
+					<right register="you" index="life" />
+				</inf-equal>
+			</test>
+			<actions>
+				<modify-register register="you" index="life" operation="minus" value="?" />
+			</actions>
+		</constraint>
+		<!--[[apt start-code]]-->
+		<!--[[apt end-code]]-->
+	</action-constraints>
+
+	<!--[[apt lang=en]]
+		* Additionnal costs
+		
+		`<<Magic Project>> can manage additional costs using the
+		`<<<\<additional-costs\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Coûts additionnels
+		
+		`<<Magic Project>> est capable de gérer les coûts additionnels à l'aide de
+		`l'élément <<<\<additional-costs\>>>>.
+	-->
+
+	<additional-costs/>
+
+	<!--[[apt lang=en]]
+		* Objects
+		
+		`The last part of the XML file is dedicated to the objects, which can be
+		`considerated as counters (<ice>, <poison>, <+1/+1>, etc.). These are declared
+		`using the <<<\<objects\>>>> element.
+	-->
+	<!--[[apt lang=fr]]
+		* Les objets
+		
+		`La dernière partie du fichier XML est dédiée aux objets, qui peuvent être
+		`considérés comme des compteurs (<glace>, <poison>, <+1/+1>, etc.). Ils sont
+		`déclarés via l'élément <<<\<objects\>>>>.
+	-->
+
+	<objects>
+		<object name="+1/+0">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+		</object>
+		<object name="+1/+2">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+2/+0">
+			<register-modifier index="power" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+3/+0">
+			<register-modifier index="power" operation="add" value="3" linked="false" />
+		</object>
+		<object name="+1/+1">
+			<register-modifier index="power" operation="add" value="1" linked="false" />
+			<register-modifier index="toughness" operation="add" value="1" linked="false" />
+		</object>
+		<object name="-1/-1">
+			<register-modifier index="power" operation="minus" value="1" linked="false" />
+			<register-modifier index="toughness" operation="minus" value="1" linked="false" />
+		</object>
+		<object name="-0/-1">
+			<register-modifier index="toughness" operation="minus" value="1" linked="false" />
+		</object>
+		<object name="+2/+2">
+			<register-modifier index="power" operation="add" value="2" linked="false" />
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+0/+1">
+			<register-modifier index="toughness" operation="add" value="1" linked="false" />
+		</object>
+		<object name="+0/+2">
+			<register-modifier index="toughness" operation="add" value="2" linked="false" />
+		</object>
+		<object name="+0/+3">
+			<register-modifier index="toughness" operation="add" value="3" linked="false" />
+		</object>
+		<object name="cube" />
+		<object name="storage" />
+		<object name="page" />
+		<object name="age" />
+		<object name="charge" />
+		<object name="depletion" />
+		<object name="fade" />
+		<object name="delay" />
+		<object name="verse" />
+		<object name="infection" />
+		<object name="intervention" />
+		<object name="spore" />
+		<object name="time" />
+		<object name="arrow" />
+		<object name="doom" />
+		<object name="gold" />
+		<object name="ki" />
+		<object name="devotion" />
+		<object name="fuse" />
+		<object name="omen" />
+		<object name="luck" />
+		<object name="sleight" />
+		<object name="pupa" />
+		<object name="polyp" />
+		<object name="rust" />
+		<object name="poison" />
+		<object name="wind" />
+		<object name="healing" />
+		<object name="mining" />
+		<object name="glyph" />
+		<object name="javelin" />
+		<object name="ice" />
+		<object name="matrix" />
+		<object name="vitality" />
+		<object name="net" />
+		<object name="fungus" />
+		<object name="divinity" />
+		<object name="ore" />
+		<object name="dream" />
+		<object name="shell" />
+		<object name="corpse" />
+		<object name="arrowhead" />
+		<object name="echo" />
+		<object name="sleep" />
+		<object name="blood" />
+		<object name="plague" />
+		<object name="phoenix" />
+		<object name="shred" />
+		<object name="petal" />
+		<object name="pressure" />
+		<object name="shield" />
+		<object name="feather" />
+		<object name="loyalty" />
+	</objects>
+	<deck-constraints file="tbs/norules-mtg/fragment-deck-constraints.xml" />
+</tbs>
+
+<!--[[apt lang=en]]
+	* The Magic the Gathering cards rules files
+	
+	`As mentioned before, each card in a game such <<Magic the Gathering>> can
+	`hold its own specific rules. In <<Magic Project>>, we have to write one XML
+	`file per card to implement. The content of the file describe the rules of
+	`the card in the same language than the large XML file of the card game.
+	
+	* Card rules XML file description
+	
+	`The best way to describe the structure of these files is to look at an example,
+	`why not coding the card from the <Starter> edition, <Angel of Light> ?
+-->
+<!--[[apt lang=fr]]
+	* Les fichiers des règles des cartes de Magic : l'Assemblée
+	
+	`Comme cela a été précisé avant, chaque carte dans un jeu comme
+	`<<Magic : l'Assemblée>> peut faire référence à ses propres règles spécifiques.
+	`Dans <<Magic Project>>, il faut écrire un fichier XML par carte à implémenter.
+	`Le contenu du fichier décrit les règles de la carte dans la même syntaxe utilisée
+	`dans le fichier <<<mtg.xml>>>.
+	
+	* Description des règles de syntaxe XML des règles des cartes
+	
+	`La meilleure façon de décrire la structure de ces fichier est d'examiner un
+	`exemple. Pourquoi ne pas coder la carte <Angel of Light> de l'édition <Starter>
+	`?
+-->
+<!--[[apt include-card=Angel_of_Light]]-->
+<!--[[apt lang=en]]
+	* Other examples
+	
+	`Now you are aware of the basic structure of a card, it's a good idea to look
+	`at example of cards somewhat more complicated to implement.
+	
+	** Cloudstone Curio
+-->
+<!--[[apt lang=fr]]
+	* Autre exemples
+	
+	`Maintenant que vous connaissez la structure de base d'une carte, il serait
+	`judicieux de regarder des exemples de cartes un peu plus complexes à
+	`implémenter.
+	
+	** Cloudstone Curio
+-->
+<!--[[apt include-card=Cloudstone_Curio]]-->
+<!-- END OF FILE -->

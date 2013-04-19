@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Zoetic Cavern">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		land
+		t :add 1 to your mana pool.
+		morph 2 
+	-->
+
+	<init>
+		<registers></registers>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land' />
+		<ability ref="tap-add-C" />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

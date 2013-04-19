@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Toxic Stench">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	instant
+	target nonblack creature gets -1/-1 until end of turn.
+	threshold - if seven or more cards are in your graveyard, instead destroy that creature. it can't be regenerated.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test ref="threshold"/>
+				</if-then-hop>
+				<action ref='bury'/>
+				<hop value="2"/>
+				<action ref="add-1-1-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

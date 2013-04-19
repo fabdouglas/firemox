@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bosh, Iron Golem">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		8
+	legendary artifact creature - golem
+	6/7
+	trample
+	3r, sacrifice an artifact: bosh, iron golem deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='8'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='7'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>legend golem trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='3' />
+				<action ref='sacrifice-an-artifact' value='1'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value register="target-list.first" index="manacost"/>
+				</assign-damage>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

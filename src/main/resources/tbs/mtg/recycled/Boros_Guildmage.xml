@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Boros Guildmage">
+
+	<!--
+		creature - human wizard
+		
+		2/2
+		1r: target creature gains haste until end of turn.
+		1w: target creature gains first strike until end of turn.
+	-->
+
+
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>red white</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana red="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana red="1" white="1" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana white="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" red="1" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="haste-until-eot" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" white="1" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="first-strike-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

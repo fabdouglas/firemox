@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rush of Knowledge">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{u} draw cards equal to the highest converted mana cost among 
+permanents you control. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<repeat>
+					<value>
+						<highest-among restriction-zone="play" expression="manacost">
+							<test>
+								<controller player="you"/>
+							</test>
+						</highest-among>
+					</value>
+				</repeat>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

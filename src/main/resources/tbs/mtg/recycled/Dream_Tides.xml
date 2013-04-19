@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dream Tides">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		Creatures don't untap during their controllers' untap steps.
+		Nongreen creatures have "At the beginning of your upkeep, you may pay 2 Mana. 
+		If you do, untap this creature."
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="does-not-untap" linked="true" live-update="false"
+					operation="add" layer="global">
+					<while>
+						<has-idcard idcard="creature" card="this" />
+					</while>
+				</property-modifier>
+				<ability-modifier linked="true" operation="add" layer="global">
+					<while>
+						<and>
+							<has-idcard idcard="creature" card="this" />
+							<not>
+								<has-color color="green" card="this" />
+							</not>
+						</and>
+					</while>
+					<abilities>
+						<triggered-ability zone="play">
+							<beginning-of-phase phase="upkeep">
+								<test ref="during-your-upkeep" />
+							</beginning-of-phase>
+							<cost>
+								<choice cancel="true" hop="abortme">
+									<either>
+										<pay-mana colorless="2" />
+									</either>
+								</choice>
+							</cost>
+							<effects>
+								<target type="this" />
+								<untap />
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+		</static-modifier>
+
+	</modifiers>
+</card>

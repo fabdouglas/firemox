@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Goblin Trenches">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rw
+
+	enchantment
+
+	2, sacrifice a land: put two 1/1 red and white goblin soldier creature tokens into play.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="red" value="1"/>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="sacrifice-a-land" value="1"/>
+			</cost>
+			<effects>
+				<repeat value="2"/>
+				<create-card>
+					<card name="goblin soldier">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>red white</colors>
+							<idcards>creature</idcards>
+							<properties>goblin soldier token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

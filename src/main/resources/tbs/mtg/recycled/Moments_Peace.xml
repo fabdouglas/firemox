@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Moment's Peace">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{g} prevent all combat damage that would be dealt this turn. flashback {2}{g}  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>instant </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+			<action ref="prevent-all-combat-damage"/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+			<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana colorless="2" green="1" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

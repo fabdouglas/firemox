@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Tropical Storm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xg
+	sorcery
+	tropical storm deals x damage to each creature with flying and 1 additional damage to each blue creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<action ref='all-creatures'>
+					<test>
+						<has-property property="flying"/>
+					</test>
+				</action>
+				<assign-damage type='damage-normal'>
+					<value register='stack' index='0'/>
+				</assign-damage>
+				<target-list operation="clear"/>
+				<action ref='all-creatures'>
+					<test>
+						<has-color color="blue"/>
+					</test>
+				</action>
+				<assign-damage type='damage-normal' value="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

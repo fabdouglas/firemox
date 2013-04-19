@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Nightshade Schemers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - faerie wizard
+	3/2
+	flying
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with nightshade schemers, you may reveal it. if you do, each opponent loses 2 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>faerie wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="opponent"/>
+				<action ref='lose-life-target' value='2'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

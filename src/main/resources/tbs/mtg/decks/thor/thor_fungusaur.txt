@@ -1,0 +1,31 @@
+#Jeu fungusaur
+#
+#John
+#
+#novembre 26, 2000
+#1
+#4th Edition
+#
+Fungusaur;4
+Fastbond;2
+Gaeas_Liege;1
+Giant_Growth;2
+Lure;2
+Regeneration;2
+Stream_of_Life;1
+Venom;1
+Web;2
+Whirling_Dervish;1
+Ancestral_Recall;2
+Counterspell;3
+Lifetap;1
+Power_Sink;2
+Prodigal_Sorcerer;2
+Time_Walk;4
+Timetwister;4
+Black_Lotus;4
+Mox_Emerald;4
+Mox_Sapphire;4
+Sol_Ring;2
+Tropical_Island;15
+Instill_Energy;1

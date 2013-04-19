@@ -1,0 +1,34 @@
+ ----
+Friendly-User application
+ ----
+Fabrice Daugan
+ ----
+May 27 2006
+
+Friendly-User application
+
+	FM is fully skinnable. There are some embedded skins, but you can add your own. You have to download one and to place it in the "lib" directory.
+
+ Substance Look & Feel
+
+[images/guides/user/themes1.png] Substance Look & Feel
+
+
+ Gorilla Look & Feel
+
+[images/guides/user/themes2.png] Gorilla Look & Feel
+
+
+ Aqua Look & Feel
+	
+[images/guides/user/themes3.png] Aqua Look & Feel
+
+
+ Substance Look & Feel provides some additionnal features.
+	
+[images/guides/user/themes_substance.png] Substance Look & Feel provide some additoinnal features.
+
+
+ The application is entirely translated
+
+[images/guides/user/i18n.png] i18n

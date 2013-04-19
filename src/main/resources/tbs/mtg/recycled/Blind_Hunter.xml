@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Blind Hunter">
+	<rules-author-comment>By Surtur2</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="1" />
+			<register index="black" value="1" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>white black</colors>
+		<idcards>creature</idcards>
+		<properties>flying bat</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="haunting" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<action ref="lose-life-target" value="2" />
+				<target-list operation="clear" name="%" />
+				<target type="you" />
+				<action ref="gain-life" value="2" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<has-private-object object-name="haunting" target="tested" />
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="graveyard" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<action ref="lose-life-target" value="2" />
+				<target-list operation="clear" name="%" />
+				<target type="you" />
+				<action ref="gain-life" value="2" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

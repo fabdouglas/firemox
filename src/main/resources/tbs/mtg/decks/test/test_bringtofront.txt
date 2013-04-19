@@ -1,0 +1,5 @@
+Holy_strength;20
+Animate Wall;20
+Savannah_Lions;20
+super card;20
+plains;20

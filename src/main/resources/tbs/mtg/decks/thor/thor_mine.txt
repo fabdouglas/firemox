@@ -1,0 +1,28 @@
+#Jeu mine
+#
+#John
+#
+#novembre 01, 2000
+#1
+#4th Edition
+#
+Black_Vise;4
+Ivory_Tower;2
+Howling_Mine;4
+Mox_Pearl;4
+Mox_Sapphire;4
+Sol_Ring;2
+Disenchant;2
+Island_Sanctuary;2
+Swords_to_Plowshares;2
+Spirit_Link;2
+Wrath_of_God;2
+Ancestral_Recall;2
+Braingeyser;1
+Counterspell;3
+Power_Sink;2
+Time_Walk;4
+Timetwister;4
+Tundra;15
+Balance;2
+Armageddon;2

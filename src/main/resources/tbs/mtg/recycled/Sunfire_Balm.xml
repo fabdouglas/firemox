@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sunfire Balm">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{w} prevent the next 4 damage that would be dealt to target creature or player this turn. 
+		cycling {1}{w}  
+		when you cycle sunfire balm, you may prevent the next 1 damage that would be dealt to target creature or player this turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-dealtable" />
+			</cost>
+			<effects>
+				<action ref="prevent-4" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="1" white="1" />
+				<action ref="target-dealtable" />
+			</actions>
+			<actions>
+				<action ref="prevent-1" />
+			</actions>
+		</ability>
+		<ability ref="cycling">
+			<actions>
+				<pay-mana colorless="1" white="1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soldevi Steam Beast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact creature
+	4/2
+	whenever soldevi steam beast becomes tapped, target opponent gains 2 life.
+	2: regenerate soldevi steam beast.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature beast</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<become-tapped>
+				<test>
+					<is-this card='tested'/>
+				</test>
+			</become-tapped>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='gain-life-target' value='2'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

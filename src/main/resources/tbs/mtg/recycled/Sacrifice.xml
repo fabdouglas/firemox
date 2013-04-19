@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sacrifice">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {b} 
+as an additional cost to play sacrifice, sacrifice a creature. 
+add to your mana pool an amount of black mana equal to the sacrificed creature's 
+converted mana cost. 
+-->
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="sacrifice-a-creature" value="1"/>
+			</cost>
+			<effects>
+				<give-mana value="manacost" card="target-list.first"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,2 @@
+Mountain;8
+Rift Bolt;4

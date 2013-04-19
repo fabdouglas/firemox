@@ -1,0 +1,27 @@
+#Jeu karma
+#
+#John
+#
+#novembre 17, 2000
+#1
+#4th Edition
+#
+Karma;3
+Disenchant;2
+Swords_to_Plowshares;2
+Ancestral_Recall;2
+Counterspell;4
+Lifetap;3
+Power_Sink;2
+Time_Walk;4
+Timetwister;4
+Black_Lotus;4
+Cyclopean_Tomb;3
+Howling_Mine;2
+Ivory_Tower;2
+Mox_Pearl;4
+Mox_Sapphire;4
+Sol_Ring;2
+Tundra;14
+Magical_Hack;2
+Wrath_of_God;2

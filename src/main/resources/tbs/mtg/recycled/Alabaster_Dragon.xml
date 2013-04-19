@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Alabaster Dragon">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4}{w}{w} flying 
+
+if alabaster dragon would be put into a graveyard from play, 
+shuffle alabaster dragon into its owner's library instead. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="white" value="2"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>flying dragon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this"/>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

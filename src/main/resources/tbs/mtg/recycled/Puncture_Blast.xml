@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Puncture Blast">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	instant
+	wither (this deals damage to creatures in the form of -1/-1 counters.)
+	puncture blast deals 3 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<is-player target="target-list.last" />
+					</test>
+				</if-then-hop>
+				<assign-damage value='3' type='damage-normal'/>
+				<hop value="3"/>
+				
+				<repeat value="3"/>
+				<add-object object-name='-1/-1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

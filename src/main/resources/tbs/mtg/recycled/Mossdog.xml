@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mossdog">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - fungus hound
+	1/1
+	whenever mossdog becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on mossdog.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>plant hound </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<source-test>
+					<controller player="opponent"/>
+				</source-test>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="The Abyss">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{b} at the beginning of each player's upkeep, 
+destroy target nonartifact creature that player controls of his or her choice. 
+it can't be regenerated. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+		<properties>enchant-world</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep"/>
+			<cost>
+				<target type="card" mode="contextchoose" restriction-zone="play" raise-event="false">
+					<test> 
+						<and>
+							<has-idcard idcard="creature"/>
+							<not>
+								<has-idcard idcard="artifact"/>
+							</not>
+							<test ref="is-target"/>
+							<controller player="context.player"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="bury"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

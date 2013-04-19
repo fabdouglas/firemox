@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chieftain en-Dal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	creature - human knight
+	2/2
+	whenever chieftain en-dal attacks, attacking creatures gain first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human knight </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="all-creatures">
+					<test ref="tested-is-attacking"/>
+				</action>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lake of the Dead">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	if lake of the dead would come into play, sacrifice a swamp instead. if you do, put lake of the dead into play. if you don't, put it into its owner's graveyard.
+	t :add b to your mana pool.
+	t, sacrifice a swamp: add bbbb to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-B"/>
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice>
+					<either>
+						<action ref="sacrifice-a-land" value="1">
+							<test>
+								<has-idcard idcard="swamp"/>
+							</test>
+						</action>
+						<action ref="put-in-play"/>
+					</either>
+					<either>
+						<target type="this"/>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+				<unregister-this/>
+			</effects>
+		</replacement-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-a-land' value='1'>
+					<test>
+						<has-idcard idcard='swamp'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<give-mana black='4' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

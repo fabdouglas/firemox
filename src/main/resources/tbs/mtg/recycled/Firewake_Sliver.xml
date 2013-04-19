@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Firewake Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rg
+	creature - sliver
+	1/1
+	all slivers have haste and "1, sacrifice this creature: target sliver gets +2/+2 until end of turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="haste" linked="true" layer="global"/>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable="instant" name="" zone="play">
+							<cost>
+								<pay-mana colorless="1"/>
+								<action ref="sacrifice-this"/>
+								<action ref="target-creature">
+									<test>
+										<has-property property="sliver"/>
+									</test>
+								</action>
+							</cost>
+							<effects>
+								<action ref="add+2+2-until-eot"/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

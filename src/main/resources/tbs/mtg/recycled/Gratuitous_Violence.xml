@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gratuitous Violence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rrr
+	enchantment
+	if a creature you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play" layer="1">
+			<!-- Y assigned damage -> Y x 2 assigned -->
+			<assigned-damage type="damage-any">
+				<source-test>
+					<and>
+						<has-idcard idcard="creature"/>
+						<controller player="you"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<or>
+						<is-player/>
+						<has-idcard idcard="creature"/>
+					</or>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<assign-damage type="context.int2">
+					<value>
+						<mult left="2" right="context.int"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

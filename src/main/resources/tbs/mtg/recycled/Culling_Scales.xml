@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Culling Scales">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3} at the beginning of your upkeep, destroy target nonland permanent with 
+the lowest converted mana cost among nonland permanents in play.  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-card">
+					<test>
+						<and>
+							<not>
+								<has-idcard idcard="land"/>
+							</not>
+							<equal>
+								<left register="tested" index="manacost"/>
+								<right>
+									<lowest-among restriction-zone="play" expression="manacost">
+										<test>
+											<not>
+												<has-idcard idcard="land"/>
+											</not>
+										</test>
+									</lowest-among>
+								</right>
+							</equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

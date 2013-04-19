@@ -1,0 +1,1 @@
+Put here the 32x32 colored mana symbols.

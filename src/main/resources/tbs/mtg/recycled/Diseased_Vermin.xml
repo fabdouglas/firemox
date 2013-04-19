@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Diseased Vermin">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} whenever diseased vermin deals combat damage to a player, 
+put an infection counter on it. at the beginning of your upkeep, 
+diseased vermin deals x damage to target opponent previously dealt damage by it, 
+where x is the number of infection counters on it. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>rat</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="init-counter"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat-only">
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<add-object object-name="infection"/>
+				<modify-register register="this" index="free0" operation="or">
+					<value>
+						<add right="1">
+							<left register="context.player" index="id"/>
+						</add>
+					</value>
+				</modify-register>
+			</effects>
+		</triggered-ability>
+		
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<if-then-hop elsehop="abort">
+					<test>
+						<sup right="1">
+							<left register="this" index="free0"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<action ref="target-opponent"/>
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal">
+					<value>
+						<counter object-name="infection" card="this"/>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

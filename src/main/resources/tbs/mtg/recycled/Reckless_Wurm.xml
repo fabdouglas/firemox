@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Reckless Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	creature - wurm
+	4/4
+	trample
+	madness 2r 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>wurm trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='madness'>
+			<actions/>
+			<actions>
+				<pay-mana red='1' colorless='2' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

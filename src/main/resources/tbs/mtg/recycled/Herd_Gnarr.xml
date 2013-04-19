@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Herd Gnarr">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - beast
+	2/2
+	whenever another creature comes into play under your control, herd gnarr gets +2/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>	
+							<is-this/>
+						</not>
+						<has-idcard idcard="creature"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone='play' card='tested'/>
+						<controller player="you"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="gain+2+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

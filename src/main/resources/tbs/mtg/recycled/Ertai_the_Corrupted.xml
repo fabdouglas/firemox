@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ertai, the Corrupted">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2wub
+
+	legendary creature - wizard
+
+	3/4
+
+	u, t, sacrifice a creature or enchantment: counter target spell.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="black" value="1"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white blue black </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard legend</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="T"/>
+				<action ref="sacrifice-a-permanent" value="1">
+  					<test>
+						<or>
+    						<has-idcard idcard="enchantment"/>
+							<has-idcard idcard="creature"/>
+						</or>	
+  					</test>
+				</action>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<action ref= "counter"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

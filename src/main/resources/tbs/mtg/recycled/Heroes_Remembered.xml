@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Heroes Remembered">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6www
+	sorcery
+	you gain 20 life.
+	suspend 10-w 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='6'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-suspend'>
+			<actions>
+				<pay-mana white='1' />
+			</actions>
+			<actions>
+				<repeat value='10'/>
+				<add-object object-name='time'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref='gain-life' value='20'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

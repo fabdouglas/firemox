@@ -1,0 +1,70 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Emberstrike Duo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(b/r)
+	creature - elemental warrior shaman
+	1/1
+	whenever you play a black spell, emberstrike duo gets +1/+1 until end of turn. whenever you play a red spell, emberstrike duo gains first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental warrior shaman </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="black"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="red"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

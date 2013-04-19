@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Vandal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - cephalid
+	1/1
+	at the beginning of your upkeep, put a shred counter on cephalid vandal. then put the top card of your library into your graveyard for each shred counter on cephalid vandal.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>cephalid rogue</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='shred'/>
+				<target type="you"/>
+				<repeat>
+					<value>
+						<counter object-name="shred" card="this"/>
+					</value>
+				</repeat>
+				<action ref="mill-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

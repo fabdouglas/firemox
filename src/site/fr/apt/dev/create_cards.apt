@@ -1,0 +1,51 @@
+ ------
+ La création de cartes
+ ------
+ Fabrice Daugan, Hoani CROSS
+ ------
+ 9 Avril 2007
+
+La création de cartes
+
+* Introduction
+
+ La fonctionnalité principale de <<Magic Project>> comparé aux autres programmes
+ de simulation de jeux de cartes est que <<Magic Project>> est capable
+ d'interpréter et de <comprendre> les règles de ces jeux. Ces fameuses règles
+ sont décrites dans un fichier XML écrit dans un pseudo language qu'un humain
+ peut parfaitement écrire, fournissant ainsi à <<Magic Project>> tous les
+ éléments du jeu permettant sa simulation. Pour les jeux de cartes à règles
+ dites <statiques> (comme le <No Limit Texas Hold 'Em Poker>), écrire le fichier
+ de description des règles n'est pas une tâche impossible. Pour les jeux de
+ cartes à collectionner (<JCC>), on trouve une base de règles décrivant le
+ déroulement global du jeu et une ou plusieurs règles spécifiques associées à
+ chaque carte du jeu.
+
+* Le fichier de description des règles
+
+ Un jeu de carte est décrit par un fichier XML principal et un ensemble d'autres
+ fichiers XML pour chaque carte du jeu. Par exemple, dans le jeu <<Magic : l'Assemblée>>,
+ on trouvera un gros fichier intitulé <<<mtg.xml>>> dans le sous-répertoire
+ <<<src/main/resources/tbs>>>. Chaque carte implémentée dispose d'un fichier
+ XML qui lui est dédié dans le sous-répertoire <<<src/main/resources/tbs/mtg/recycled>>>.
+ Le nom de ce fichier XML est le nom de la carte en Anglais avec les espaces
+ remplacés par des caractères <underscore> et les apostrophes supprimés. Par
+ exemple, la carte "<Abu Ja'far>" aura un fichier XML associé intitulé
+ <<<src/main/resources/tbs/mtg/recycled/Abu_Jafar.xml>>>.
+
+* Les jeux de cartes implémentés dans Firemox
+
+ Pour l'heure, <<Firemox>> implémente uniquement le jeu
+ {{{mtg/mtg.html}Magic : l'Assemblée}}.
+ 
+* Création des cartes
+
+ Un outil très pratique a été développé afin d'accélérer la création le XML des cartes.
+ La commande 'oracle2xml' permet de créer l'intégralité des XML à partir d'un fichier txt similaire aux sortie d'Oracle. Il est possible de récupérer ces fichiers depuis le site régulièrement mis à jour {{{http://www.yawgatog.com/resources/oracle/} ici}} ou un fichier tout près {{{Allsets-2007-03-11.txt}ici}} et à placer dans le répertoire à créer <<etc>>.
+ Ensuite il suffit de lancer la commande 'oracle2xml' depuis le répertoire d'installation, et regarder ensuite le contenu du répertoire <<etc/xml>> pour voir les fichier XML qui ont été générés. 
+ Ils peuvent être édités et déplacés dans le répertoire <<tbs/mtg/recycled>> une fois qu'ils sont bons pour que FM puisse les prendre en compte.
+ 
+ Il est conseillé de construite toutes ses nouvelles cartes à partir de l'outil 'oracle2xml' car il vous fait gagner beaucoup de temps et assure que vous partez sur de bonne base.
+
+ PS : puisque le nom du fichier Oracle peut avoir changé depuis l'éditon de ce deocument, il se peut que vous ayez besoin d'éditer la commande 'oracle2xml' ou 'oracle2xml.bat' et mettre à jour le nom du fichier.
+ 

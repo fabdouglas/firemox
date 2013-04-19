@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Karma">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="2" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<!-- put into play -->
+		<ability ref="cast-spell" />
+
+		<!-- Text(5th+errata): At the beginning of each player's upkeep, ~this~ deals to
+			that player damage equal to the number of swamps he or she controls.
+			[Oracle 00/02/01] '-->
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep" />
+			<effects>
+				<target type="currentplayer" />
+				<assign-damage type="damage-normal">
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="swamp" />
+								<controller player="currentplayer" />
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

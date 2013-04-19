@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dispersing Orb">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  3uu 3u, sacrifice a permanent: return target permanent to its owner's hand.   -->
+
+	<init>
+		<registers>
+			<register index="blue" value="2" />
+			<register index="colorless" value="3" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" colorless="3" />
+				<action ref="sacrifice-a-permanent" value="1" />
+				<action ref="target-permanent" />
+			</cost>
+			<effects>
+				<action ref="return-to-hand" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

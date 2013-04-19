@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soratami Mindsweeper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - moonfolk wizard
+	1/4
+	flying
+	2, return a land you control to its owner's hand: target player puts the top two cards of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>moonfolk wizard flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref="target-land">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="mill-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

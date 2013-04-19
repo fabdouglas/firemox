@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="US-ASCII" ?> 
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+    name="Brushland">
+    <rules-author-comment>By jods</rules-author-comment>
+    
+    <init>
+        <idcards>land</idcards>
+    </init>
+    
+    <abilities>
+			<ability ref="cast-land"/>        
+			<ability ref="tap-add-C"/>
+        
+        <activated-ability playable="mana-source" zone="play" resolution="auto">
+            <cost>
+                <action ref="T"/>
+            </cost>
+            <effects>
+                <give-mana white="1"/>
+                <target type="you"/>
+                <assign-damage value="1"/>
+            </effects>
+        </activated-ability>
+        
+        <activated-ability playable="mana-source" zone="play" resolution="auto">
+            <cost>
+                <action ref="T"/>
+            </cost>
+            <effects>
+                <give-mana green="1"/>
+                <target type="you"/>
+                <assign-damage value="1"/>
+            </effects>
+        </activated-ability>
+    </abilities>
+</card>

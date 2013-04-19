@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flesh Reaver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - horror
+	4/4
+	whenever flesh reaver deals damage to a creature or opponent, flesh reaver deals that much damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<or>
+						<has-idcard idcard='creature'/>
+						<is other="opponent"/>
+					</or>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='you'/>
+				<assign-damage type='damage-normal' value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Wizard Replica">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+
+	artifact creature - wizard
+
+	1/3
+
+	flying
+	u, sacrifice wizard replica: counter target spell unless its controller pays 2.
+ -->
+
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>flying wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+				<action ref="sacrifice-this"/>
+				<action ref="target-spell"/>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref= "counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="2" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

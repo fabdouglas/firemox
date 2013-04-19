@@ -1,0 +1,89 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ovinomancer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - human wizard
+	0/1
+	when ovinomancer comes into play, sacrifice it unless you return three basic lands you control to their owner's hand.
+	t, return ovinomancer to its owner's hand: destroy target creature. it can't be regenerated. that creature's controller puts a 0/1 green sheep creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<repeat value="3"/>
+						<action ref="target-land">
+							<test>
+								<and>
+									<test ref="is-basic-land"/>
+									<controller player="you"/>
+								</and>
+							</test>
+						</action>
+						<action ref="return-to-hand"/>
+					</either>
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+				<create-card>
+	                <card name="Sheep">
+	                    <init>
+	                        <registers>
+	                            <register index="power" value="0"/>
+	                            <register index="toughness" value="1"/>
+	                        </registers>
+	                        <colors>green</colors>
+	                        <idcards>creature</idcards>
+	                        <properties>sheep token</properties>
+	                    </init>
+	                </card>
+	            </create-card>
+	            <move-card controller="target-list.last.controller" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

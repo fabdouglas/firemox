@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Suntouched Myr">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  3 sunburst  -->
+	<!-- 
+Card Type:  	 Artifact Creature - Myr
+P/T: 	0/0
+Rules Text (Oracle): 	
+Sunburst (This comes into play with a +1/+1 counter on it for each color 
+of mana used to pay its cost.)
+ -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="0"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>sunburst myr</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

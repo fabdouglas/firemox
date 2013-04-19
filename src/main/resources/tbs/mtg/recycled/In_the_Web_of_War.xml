@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="In the Web of War">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rr
+	enchantment
+	whenever a creature comes into play under your control, it gets +2/+0 and gains haste until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="creature" />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card"/>
+				<action ref="add+2+0-until-eot"/>
+				<action ref="haste-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

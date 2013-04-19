@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disappear">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{u}{u} 
+{u}: return enchanted creature and disappear to their owners' hands. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<target type="attachedto"/>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

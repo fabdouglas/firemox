@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Redeem the Lost">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	target creature you control gains protection from the color of your choice until end of turn. clash with an opponent. if you win, return redeem the lost to its owner's hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+				<action ref="clash">
+					<actions>
+						<target type='this' />
+						<action ref='return-to-hand'/>
+					</actions>
+					<actions>
+						<action ref='finish-spell'/>
+					</actions>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

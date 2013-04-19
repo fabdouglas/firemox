@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Charge">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {4}{r} whenever a beast comes into play under your control, 
+		you may have it deal 4 damage to target opponent. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<has-property property="beast" card="tested" />
+						<controller player="you" card="tested" />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-opponent" />
+			</cost>
+			<effects>
+				<assign-damage value="4" type="damage-normal" from="context.card" to="target-list.last" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Llanowar Druid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf druid
+	1/2
+	t, sacrifice llanowar druid: untap all forests.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<has-idcard idcard="forest"/>
+					</test>
+				</target>
+				<untap/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,3 @@
+super card;20
+northern paladin;20
+AEther_Mutation;20

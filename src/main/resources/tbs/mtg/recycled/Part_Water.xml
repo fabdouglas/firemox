@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Part Water">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xxu
+	sorcery
+	x target creatures gain islandwalk until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-xx"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="islandwalk-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

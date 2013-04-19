@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Zuran Orb">
+	<!-- tested 12/6/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="sacrifice-a-land" value="1"/>
+			</cost>
+			<effects>
+				<action ref="gain-life" value="2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

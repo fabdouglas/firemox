@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ballynock Cohort">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - kithkin soldier
+	2/2
+	first strike 
+	ballynock cohort gets +1/+1 as long as you control another white creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin soldier first-strike</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="white"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="white"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

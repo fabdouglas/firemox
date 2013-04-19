@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Possessed Barbarian">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - barbarian horror
+	3/3
+	first strike
+	threshold - as long as seven or more cards are in your graveyard, possessed barbarian gets +1/+1, is black, and has "2b, t :destroy target red creature."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human barbarian horror first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<pay-mana colorless="2" black="1"/>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-color color='red'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<color-modifier color="black" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</color-modifier>
+	</modifiers>
+</card>

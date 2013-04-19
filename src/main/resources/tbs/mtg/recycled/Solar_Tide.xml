@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Solar Tide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ww
+	sorcery
+	choose one - destroy all creatures with power 2 or less; or destroy all creatures with power 3 or greater.
+	entwine-sacrifice two lands. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<inf-equal right="2">
+							<left register="tested" index="power"/>
+						</inf-equal>
+					</test>
+				</action>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<sup-equal right="3">
+							<left register="tested" index="power"/>
+						</sup-equal>
+					</test>
+				</action>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="entwine"/>
+				<action ref="sacrifice-a-land" value="2"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures"/>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

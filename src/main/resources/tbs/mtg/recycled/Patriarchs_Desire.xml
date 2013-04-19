@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Patriarch's Desire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +2/-2.
+	threshold - enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<if-then-else then="4" else="2">
+						<if ref="threshold"/>
+					</if-then-else>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="minus" linked="true">
+				<value>
+					<if-then-else then="4" else="2">
+						<if ref="threshold"/>
+					</if-then-else>
+				</value>
+			</register-modifier>
+		</modifiers>
+	</attachment>
+</card>

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rooting Kavu">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	creature - kavu
+	4/3
+	when rooting kavu is put into a graveyard from play, you may remove rooting kavu from the game. if you do, shuffle all creature cards from your graveyard into your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>kavu </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type="this"/>
+						<action ref="remove-from-game"/>
+						<target-list operation="clear"/>
+						<target type="card" mode="all" restriction-zone="graveyard">
+							<test>
+								<and>
+									<has-idcard idcard="creature"/>
+									<controller player="you"/>
+								</and>
+							</test>
+						</target>
+						<action ref="shuffle-in-lib"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

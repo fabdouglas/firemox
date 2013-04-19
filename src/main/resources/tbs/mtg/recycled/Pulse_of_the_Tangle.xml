@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pulse of the Tangle">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	sorcery
+	put a 3/3 green beast creature token into play. then if an opponent controls more creatures than you, return pulse of the tangle to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Beast'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='3'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token beast </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup>
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="creature"/>
+										<controller player="opponent"/>
+									</and>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="hand">
+									<and>
+										<controller player="you"/>
+										<has-idcard idcard="creature"/>
+									</and>
+								</counter>
+							</right>
+						</sup>
+					</test>
+				</if-then-hop>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+				<hop value="2"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

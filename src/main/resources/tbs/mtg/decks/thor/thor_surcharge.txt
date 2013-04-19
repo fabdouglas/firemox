@@ -1,0 +1,27 @@
+#Jeu surcharge
+#
+#John
+#
+#août 23, 2001
+#1
+#4th Edition
+#
+Mana_Flare;3
+Mishras_Factory;3
+Power_Surge;4
+Shivan_Dragon;2
+Granite_Gargoyle;2
+Fireball;1
+Disintegrate;1
+Fork;1
+Counterspell;4
+Timetwister;3
+Time_Walk;4
+Mox_Ruby;5
+Mox_Sapphire;5
+Black_Lotus;4
+Volcanic_Island;14
+Ivory_Tower;2
+Braingeyser;3
+Library_of_Leng;1
+Ancestral_Recall;4

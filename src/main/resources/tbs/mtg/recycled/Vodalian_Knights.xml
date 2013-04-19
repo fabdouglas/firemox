@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Vodalian Knights">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{u}{u} first strike 
+vodalian knights can't attack unless defending player controls an island. 
+{u}: vodalian knights gains flying until end of turn. 
+when you control no islands, sacrifice vodalian knights. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack first-strike merfolk</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home"/>
+		<ability ref="island-home-attack"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" />
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

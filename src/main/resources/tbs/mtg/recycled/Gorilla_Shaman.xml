@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gorilla Shaman">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - ape shaman
+	1/1
+	xx1: destroy target noncreature artifact with converted mana cost x.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>ape shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref="pay-xx"/>
+				<action ref='target-artifact'>
+					<test>
+						<and>
+							<not>
+								<has-idcard idcard="creature"/>
+							</not>
+							<equal>
+								<left register="stack" index="0"/>
+								<right register="tested" index="manacost"/>
+							</equal>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

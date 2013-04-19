@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fetid Heath">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add 1 to your mana pool.
+	o(w/b), t :add ww, wb, or bb to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white="2"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black="2"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white="1" black="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white="2"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana black="2"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black="1"/>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana white="1" black="1"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

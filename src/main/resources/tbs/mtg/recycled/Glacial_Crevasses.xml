@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Glacial Crevasses">
+<rules-author-comment>by Hoani CROSS</rules-author-comment>
+
+<!--  {2}{r} sacrifice a snow-covered mountain: 
+prevent all combat damage that would be dealt this turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-a-land" value="1">
+					<test>
+						<and>
+							<has-property property="snow"/>
+							<has-property property="mountain"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="prevent-all-combat-damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Laccolith Rig">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment - aura
+	enchant creature
+	whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. if you do, the first creature deals no combat damage this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is target="attachedto"/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='target-creature'/>
+						<assign-damage type='damage-normal'>
+							<value register='attachedto' index='power'/>
+						</assign-damage>
+						<target-list operation="clear"/>
+						<target type="attachedto"/>
+						<action ref="deals-no-combat-damage"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

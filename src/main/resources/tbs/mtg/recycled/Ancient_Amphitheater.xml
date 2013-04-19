@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ancient Amphitheater">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	as ancient amphitheater comes into play, you may reveal a giant card from your hand. if you don't, ancient amphitheater comes into play tapped.
+	t :add r or w to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<target type="this" />
+						<move-card destination="playANDtapped" controller="controller" />
+					</either>
+					<either>
+						<target type="card" mode="choose" restriction-zone="hand">
+							<test>
+								<and> 
+									<controller player="you"/>
+									<has-property property="giant"/>
+								</and>
+							</test>
+						</target>
+						<action ref="reveal"/>
+						<action ref="put-in-play"/>
+					</either>
+				</choice>	
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

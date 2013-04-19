@@ -1,0 +1,31 @@
+#Jeu dervish
+#
+#John
+#
+#octobre 25, 2000
+#1
+#4th Edition
+#
+Whirling_Dervish;4
+Web;2
+Venom;2
+Stream_of_Life;1
+Regeneration;2
+Lure;2
+Giant_Growth;2
+Gaeas_Liege;1
+Aspect_of_Wolf;2
+Ancestral_Recall;2
+Counterspell;3
+Invisibility;2
+Mahamoti_Djinn;1
+Power_Sink;2
+Time_Walk;4
+Timetwister;4
+Black_Lotus;4
+Howling_Mine;1
+Mox_Emerald;4
+Mox_Sapphire;4
+Sol_Ring;2
+Tropical_Island;14
+Fastbond;1

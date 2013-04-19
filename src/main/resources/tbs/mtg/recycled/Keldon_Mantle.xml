@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Keldon Mantle">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{r} 
+{b}: regenerate enchanted creature. 
+{r}: enchanted creature gets +1/+0 until end of turn. 
+{g}: enchanted creature gains trample until end of turn. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+			</cost>
+			<effects>
+				<action ref="regenerate-attached-to"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<add-modifier>
+					<register-modifier index="power" value="1" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana green="1" />
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="trample-until-eot"/>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

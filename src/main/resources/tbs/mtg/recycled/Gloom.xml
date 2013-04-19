@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Gloom'>
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		2b
+		enchantment
+		white spells and activated abilities of white enchantments cost 3 more to play.
+	-->
+
+	<init>
+		<registers>
+			<register index='black' value='1' />
+			<register index='colorless' value='2' />
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+	</abilities>
+
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<has-color color="white" />
+			</test>
+			<cost>
+				<pay-mana colorless="3" />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

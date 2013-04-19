@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lavamancer's Skill">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	enchantment - aura
+	enchant creature
+	enchanted creature has "t :this creature deals 1 damage to target creature."
+	if enchanted creature is a wizard, it has "t :this creature deals 2 damage to target creature."
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<action ref="T"/>
+							<action ref='target-creature'/>
+						</cost>
+						<effects>
+							<assign-damage value='1' type='damage-normal'/>
+						</effects>
+					</activated-ability>
+					<activated-ability playable='instant' name='' zone='play'>
+						<test>
+							<has-property property="wizard" card="this"/>
+						</test>
+						<cost>
+							<action ref="T"/>
+							<action ref='target-creature'/>
+						</cost>
+						<effects>
+							<assign-damage value='2' type='damage-normal'/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

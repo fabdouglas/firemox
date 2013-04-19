@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Backfire">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		u
+	enchantment - aura
+	enchant creature
+	whenever enchanted creature deals damage to you, backfire deals that much damage to that creature's 
+		controller.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+		<properties>aura</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant' />
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is target="attachedto" />
+				</source-test>
+				<destination-test>
+					<is-player target="you" />
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="attachedto.controller" />
+				<assign-damage type='damage-normal' value="context.int" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

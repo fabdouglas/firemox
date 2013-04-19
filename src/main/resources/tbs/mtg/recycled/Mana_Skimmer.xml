@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mana Skimmer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - leech
+	2/2
+	flying
+	whenever mana skimmer deals damage to a player, tap target land that player controls. that land doesn't untap during its controller's next untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>leech flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<action ref='target-land'>
+					<test>
+						<controller player="context.player"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<tap/>
+				<action ref="does-not-untap-next-untap"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

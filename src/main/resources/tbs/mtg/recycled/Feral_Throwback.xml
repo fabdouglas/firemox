@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Feral Throwback">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4gg
+	creature - beast
+	3/3
+	amplify 2 
+	provoke 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>beast</properties>
+	</init>
+	<abilities>
+		<ability ref="provoke"/>
+		<ability ref="amplify-2"/>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

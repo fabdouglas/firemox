@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sapphire Leech">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - leech
+	2/2
+	flying
+	blue spells you play cost u more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>leech flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked='true'>
+			<test>
+				<and>
+					<has-color color="blue"/>
+					<controller player="you"/>
+				</and>
+			</test>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

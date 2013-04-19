@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Marhault Elsdragon">
+<rules-author-comment>Fabdougla</rules-author-comment>
+
+<!--  {3}{r}{r}{g} rampage 1  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="2"/>
+			<register index="green" value="1"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>red green</colors>
+		<idcards>creature </idcards>
+		<properties>legend elf warrior</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="rampage1"/>
+	</abilities>
+</card>

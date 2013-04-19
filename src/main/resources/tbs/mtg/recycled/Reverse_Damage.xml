@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Reverse Damage">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{w}{w} 
+the next time a source of your choice would deal damage to you this turn, 
+prevent that damage. 
+you gain life equal to the damage prevented this way. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="choose-damage-source"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first"/>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-can-be-prevented">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+							<destination-test>
+								<is-this player="controller"/>
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<action ref="gain-life" value="context.int" />
+							<!-- this shield is removed -->
+							<unregister-this/>
+						</effects>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Adarkar Unicorn">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{w}{w} 
+
+{t}: add either {u} or {1}{u} to your mana pool. this mana is usable only to pay for cumulative upkeep. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>unicorn</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana blue="1">
+					<restriction ref="only-for-cumulative-upkeep"/>
+				</give-mana>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" colorless="1">
+					<restriction ref="only-for-cumulative-upkeep"/>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

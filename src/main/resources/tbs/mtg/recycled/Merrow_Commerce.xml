@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Merrow Commerce">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	tribal enchantment - merfolk
+	at the end of your turn, untap all merfolk you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>tribal global-enchantment </idcards>
+		<properties>merfolk </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot">
+				<test ref="during-your-eot"/>
+			</end-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="merfolk"/>
+						</and>
+					</test>
+				</target>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

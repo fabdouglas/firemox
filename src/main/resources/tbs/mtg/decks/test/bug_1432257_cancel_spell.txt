@@ -1,0 +1,4 @@
+super card;30
+juzam_djinn;30
+Basalt_Monolith;30
+Badlands;30

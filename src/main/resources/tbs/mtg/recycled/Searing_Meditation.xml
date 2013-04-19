@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Searing Meditation">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rw
+	enchantment
+	whenever you gain life, you may pay 2. if you do, searing meditation deals 2 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<modified-register register="you" index="life" operation="add"/>
+			<cost>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana colorless="2"/>
+						<assign-damage value='2' type='damage-normal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

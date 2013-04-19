@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Seedborn Muse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - spirit
+	2/4
+	untap all permanents you control during each other player's untap step.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play" resolution="hidden">
+			<beginning-of-phase phase="untap">
+				<test>	
+					<not>
+						<test ref="during-your-upkeep" />
+					</not>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

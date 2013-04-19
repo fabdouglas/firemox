@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fallen Ideal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	enchantment - aura
+	enchant creature
+	enchanted creature has flying and "sacrifice a creature: this creature gets +2/+1 until end of turn."
+	when fallen ideal is put into a graveyard from play, return fallen ideal to its owner's hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type='this' />
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='flying'>
+		<modifiers>
+			<ability-modifier linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<action ref='sacrifice-a-creature' value='1'/>
+						</cost>
+						<effects>
+							<target type="this"/>
+							<action ref="add+2+1-until-eot"/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

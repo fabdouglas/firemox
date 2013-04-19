@@ -1,0 +1,89 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Iname as One">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		8bbgg
+	legendary creature - spirit
+	8/8
+	when iname as one comes into play, if you played it from your hand, you may search your library for a spirit permanent card, put it into play, then shuffle your library.
+	when iname as one is put into a graveyard from play, you may remove it from the game. if you do, return target spirit permanent card from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='black' value='2'/>
+			<register index='colorless' value='8'/>
+			<register index='power' value='8'/>
+			<register index='toughness' value='8'/>
+		</registers>
+		<colors>green black </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='hand' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib'>
+							<test>
+								<has-property property="spirit"/>
+							</test>
+						</action>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="spirit"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="move-to-play"/>
+						<target-list operation="clear"/>
+						<target type="this"/>
+						<action ref="remove-from-game"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

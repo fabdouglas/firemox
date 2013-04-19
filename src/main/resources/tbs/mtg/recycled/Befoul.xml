@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Befoul">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{b}{b} destroy target land or nonblack creature. it can't be regenerated. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-card">
+					<test>
+						<or>
+							<test ref="is-targetable-land"/>
+							<and>
+								<test ref="is-targetable-land"/>
+								<not>
+									<has-color color="black"/>
+								</not>
+							</and>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

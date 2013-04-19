@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Multani, Maro-Sorcerer">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+<!--  {4}{g}{g} 
+multani, maro-sorcerer can't be the target of spells or abilities. 
+multani's power and toughness are each equal to the total number of cards in 
+all players' hands. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="green" value="2"/>
+			<register index="power">
+				<value><counter restriction-zone="hand"/></value>
+			</register>
+			<register index="toughness">
+				<value><counter restriction-zone="hand"/></value>
+			</register>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>legend shroud elemental</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

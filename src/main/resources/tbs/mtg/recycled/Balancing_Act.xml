@@ -1,0 +1,175 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Balancing Act">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	sorcery
+	each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. each player discards cards the same way.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+			<!-- count permanents in play -->
+				<modify-register register="stack" index="0" operation="set">
+					<value><counter restriction-zone="play">
+						<controller player="you"/>
+					</counter></value>
+				</modify-register>
+				<modify-register register="stack" index="1" operation="set">
+					<value><counter restriction-zone="play">
+						<controller player="opponent"/>
+					</counter></value>
+				</modify-register>
+				
+				<!-- if (you have the highest amount of permanents)
+				     you have to sacrifice permanents -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup>
+							<left register="stack" index="0"/>
+							<right register="stack" index="1"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="1"/>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="play" raise-event="false">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<target-list operation="save"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<target-list operation="remove-all" list-index="-1"/>
+				<target-list operation="remove" list-index="-1"/>
+				<action ref="sacrifice"/>
+				<target-list operation="clear" name="%"/>
+				
+				<!-- if (opponent has the highest amount of permanents)
+				     opponent have to sacrifice permanents -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup>
+							<left register="stack" index="1"/>
+							<right register="stack" index="0"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<target type="card" mode="opponentchoose" restriction-zone="play" raise-event="false">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<target-list operation="save"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<target-list operation="remove-all" list-index="-1"/>
+				<target-list operation="remove" list-index="-1"/>
+				<action ref="sacrifice"/>
+				<target-list operation="clear" name="%"/>
+				
+				<!-- count cards in hand -->
+				<modify-register register="stack" index="0" operation="set">
+					<value><counter restriction-zone="hand">
+						<controller player="you"/>
+					</counter></value>
+				</modify-register>
+				<modify-register register="stack" index="1" operation="set">
+					<value><counter restriction-zone="hand">
+						<controller player="opponent"/>
+					</counter></value>
+				</modify-register>
+				
+				<!-- if (you have the highest amount of cards in the hand)
+				     you have to discard -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup>
+							<left register="stack" index="0"/>
+							<right register="stack" index="1"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="1"/>
+				</repeat>
+				<target type="card" mode="choose" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<target-list operation="save"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<target-list operation="remove-all" list-index="-1"/>
+				<target-list operation="remove" list-index="-1"/>
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%"/>
+				
+				<!-- if (opponent has the highest amount of cards in the hand)
+				     opponent has to discard -->
+				<if-then-hop elsehop="10">
+					<test>
+						<sup>
+							<left register="stack" index="1"/>
+							<right register="stack" index="0"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<target type="card" mode="opponentchoose" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<target-list operation="save"/>
+				<target-list operation="clear"/>
+				<target type="card" mode="all" restriction-zone="hand">
+					<test>
+						<controller player="opponent"/>
+					</test>
+				</target>
+				<target-list operation="remove-all" list-index="-1"/>
+				<target-list operation="remove" list-index="-1"/>
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

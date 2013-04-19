@@ -1,0 +1,127 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gemstone Mine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	gemstone mine comes into play with three mining counters on it.
+	t, remove a mining counter from gemstone mine: add one mana of any color to your mana pool. if there are no mining counters on gemstone mine, sacrifice it.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<modifiers>
+		<object name="mining"/>
+		<object name="mining"/>
+		<object name="mining"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="mining"/>
+			</cost>
+			<effects>
+				<give-mana black='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="mining" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="mining"/>
+			</cost>
+			<effects>
+				<give-mana blue='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="mining" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="mining"/>
+			</cost>
+			<effects>
+				<give-mana green='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="mining" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="mining"/>
+			</cost>
+			<effects>
+				<give-mana red='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="mining" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="mining"/>
+			</cost>
+			<effects>
+				<give-mana white='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<equal right="0">
+							<left>
+								<counter object-name="mining" card="this"/>
+							</left>
+						</equal>
+					</test>
+				</if-then-hop>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,23 @@
+ ----
+Get started
+ ----
+Fabrice Daugan
+ ----
+September 09 2007
+
+To make cards and help Firemox
+
+	You can find here instruction to {{{eclipse.html} Setup Eclipse and plugins}} (about 10 minutes)
+
+	Once Eclipse installed you can {{{project.html} setup Firemox}} : getting 
+	sources and launcher configuration (about 5 minutes)
+
+	Now you can do everything :
+	
+      * {{{create_cards.html} Creating cards}}
+		
+      * {{{../mtg/mtg.html} Modifying/creating rules}}.
+
+	A full description of Card(s) and TBS definition files are available here :
+	{{{../mtg/mtg.html} Magic the Gathering}}
+	

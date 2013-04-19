@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aboshan's Desire">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {u} enchanted creature has flying. 
+		threshold - enchanted creature can't be the target of spells or abilities.  -->
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="flying" linked="true" />
+			<property-modifier property="shroud" linked="true">
+				<while>
+					<test ref="threshold" />
+				</while>
+			</property-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

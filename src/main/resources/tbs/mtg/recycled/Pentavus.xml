@@ -1,0 +1,77 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Pentavus">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact creature
+	0/0
+	pentavus comes into play with five +1/+1 counters on it.
+	1, remove a +1/+1 counter from pentavus: put a 1/1 pentavite artifact creature token with flying into play.
+	1, sacrifice a pentavite: put a +1/+1 counter on pentavus.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>construct</properties>
+	</init>
+	
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Pentavite'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>artifact-creature</idcards>
+							<properties>token pentavite flying </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='pentavite'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='+1/+1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

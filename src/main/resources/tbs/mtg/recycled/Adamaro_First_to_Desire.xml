@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Adamaro, First to Desire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	legendary creature - spirit
+	*/*
+	adamaro, first to desire's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='opponent'/>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='hand'>
+						<controller player='opponent'/>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

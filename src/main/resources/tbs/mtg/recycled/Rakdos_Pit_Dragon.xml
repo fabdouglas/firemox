@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rakdos Pit Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - dragon
+	3/3
+	rr: rakdos pit dragon gains flying until end of turn.
+	r: rakdos pit dragon gets +1/+0 until end of turn.
+	hellbent - rakdos pit dragon has double strike as long as you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>dragon </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='2' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<action ref="gain+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<property-modifier property="double-strike" linked="false">
+			<while>
+				<test ref="hellbent"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mephidross Vampire">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	creature - vampire
+	3/4
+	flying
+	each creature you control is a vampire in addition to its other creature types and has "whenever this creature deals damage to a creature, put a +1/+1 counter on this creature."
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>vampire flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="vampire" linked="true" layer="global"/>
+				<ability-modifier operation="add" linked="true">
+					<abilities>
+						<triggered-ability zone='play'>
+							<assigned-damage type='damage-any'>
+								<source-test>
+									<is-this/>
+								</source-test>
+								<destination-test>
+									<has-idcard idcard='creature'/>
+								</destination-test>
+							</assigned-damage>
+							<effects>
+								<target type="this"/>
+								<add-object object-name='+1/+1'/>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>			 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

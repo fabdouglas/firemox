@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Living Terrain">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2gg
+	enchantment - aura
+	enchant land
+	enchanted land is a 5/6 green treefolk creature that's still a land.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-land'>
+		<modifiers>
+			<register-indirection index="power" value="5" operation="set" linked="true"/>
+			<register-indirection index="toughness" value="6" operation="set" linked="true"/>
+			<idcard-modifier idcard="creature" operation="or" linked="true"/>
+			<property-modifier property="treefolk" linked="true"/>
+		 	<color-modifier color="green" linked="true"/>
+		</modifiers>
+	</attachment>
+</card>

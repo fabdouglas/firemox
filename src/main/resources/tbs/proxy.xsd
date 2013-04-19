@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://sourceforge.net/projects/firemox/proxy"
+	targetNamespace="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:mp="http://sourceforge.net/projects/firemox"
+	elementFormDefault="qualified" version="0.90-SNAPSHOT">
+
+	<xsd:import namespace="http://sourceforge.net/projects/firemox"
+		schemaLocation="validator.xsd" />
+	<!-- 
+		*   Firemox is a turn based strategy simulator
+		*   Copyright (C) 2003-2007 Fabrice Daugan
+		*
+		*   This program is free software; you can redistribute it and/or modify it 
+		* under the terms of the GNU General Public License as published by the Free 
+		* Software Foundation; either version 2 of the License, or (at your option) any
+		* later version.
+		*
+		*   This program is distributed in the hope that it will be useful, but WITHOUT
+		* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+		* FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more 
+		* details.
+		*
+		*   You should have received a copy of the GNU General Public License along  
+		* with this program; if not, write to the Free Software Foundation, Inc., 
+		* 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+		*
+		* XML Schema for Firemox XML card and XML turn based strategy rules 
+		* definition.
+		*
+		* @author Fabrice Daugan
+	-->
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			Proxy definition schema file.
+		</xsd:documentation>
+		<xsd:documentation xml:lang="fr">
+			Schema pour fichier de definition de proxy.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="proxy">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Proxy definitions. There are two goals for a proxy : data and
+				pictures.
+			</xsd:documentation>
+			<xsd:documentation xml:lang="fr">
+				Definition de proxy. Il y a deux cas d'utilisation pour un proxy
+				: donnees et images
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="alias" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							Local aliases of this proxy.
+						</xsd:documentation>
+						<xsd:documentation xml:lang="fr">
+							Alias locaux de ce proxy.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="alias" minOccurs="0"
+								maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="property"
+										type="xsd:string" use="required" />
+									<xsd:attribute name="local-value"
+										type="xsd:string" use="required" />
+									<xsd:attribute name="ref" type="xsd:string"
+										use="required" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="pictures" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							Picture streams of this proxy.
+						</xsd:documentation>
+						<xsd:documentation xml:lang="fr">
+							Flux d'images de ce proxy.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="picture" minOccurs="0"
+								maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="url" type="xsd:string"
+										use="required" />
+									<xsd:attribute name="base" type="xsd:string"
+										use="required" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="data" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							Data section of this proxy.
+						</xsd:documentation>
+						<xsd:documentation xml:lang="fr">
+							Section de donnees de ce proxy.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="streams" minOccurs="0"
+								maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="en">
+										Data streams of this proxy.
+									</xsd:documentation>
+									<xsd:documentation xml:lang="fr">
+										Flux de donnees de ce proxy.
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="stream" minOccurs="0"
+											maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:attribute name="url"
+													type="xsd:string" use="required" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="base" type="xsd:string"
+										use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="properties" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="en">
+										Data entities of this proxy.
+									</xsd:documentation>
+									<xsd:documentation xml:lang="fr">
+										Entites de donnees de ce proxy.
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="property"
+											minOccurs="0" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element
+														name="starting-offset" minOccurs="0" type="mp:valueType" />
+													<xsd:element
+														name="ending-offset" minOccurs="0" type="mp:valueType" />
+												</xsd:sequence>
+												<xsd:attribute
+													name="delimiter-left" type="xsd:string" />
+												<xsd:attribute
+													name="delimiter-right" type="xsd:string" />
+												<xsd:attribute
+													name="starting-offset" type="mp:registerValue" />
+												<xsd:attribute
+													name="ending-offset" type="mp:registerValue" />
+												<xsd:attribute name="name"
+													type="xsd:string" use="required" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="home" type="xsd:string" use="required" />
+			<xsd:attribute name="language" type="xsd:string" use="required" />
+			<xsd:attribute name="encoding" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

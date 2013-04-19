@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sanguine Praetor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6bb
+	creature - avatar
+	7/5
+	b, sacrifice a creature: destroy each creature with the same converted mana cost as the sacrificed creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='7'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>avatar </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<equal>
+							<right register="target-list.first" index="manacost"/>
+							<left register="tested" index="manacost"/>
+						</equal>
+					</test>
+				</action>
+				<action ref='destroy'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

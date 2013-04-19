@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dire Wolves">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{g} dire wolves has banding as long as you control a plains. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>wolf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<property-modifier property="banding" operation="add">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="plains"/>
+					</and>
+				</has>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

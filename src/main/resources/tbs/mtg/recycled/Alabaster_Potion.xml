@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Alabaster Potion">
+<rules-author-comment></rules-author-comment>
+
+<!--  {x}{w}{w} choose one - target player gains x life; or prevent the next x damage that would be dealt to target creature or player this turn. -->
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref="gain-life">
+					<value register="stack" index="0"/>
+				</action>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<action ref="prevent-x"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

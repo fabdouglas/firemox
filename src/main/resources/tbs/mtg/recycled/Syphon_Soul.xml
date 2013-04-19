@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Syphon Soul">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{b} syphon soul deals 2 damage to each other player. 
+you gain life equal to the damage dealt this way. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<target type="opponent"/>
+				<assign-damage value="2" type="damage-normal"/>
+				<create-ability>
+					<registers>
+						<register index="0" value="2"/>
+					</registers>
+					<save target="target-list.last"/>
+					<triggered-ability zone="play">
+						<assigned-damage type="damage-any">
+							<source-test>
+								<is-this/>
+							</source-test>
+						</assigned-damage>
+						<effects>
+							<action ref="gain-life" >
+								<value>
+									<minimum right="context.int">
+										<left register="context.player" index="life"/>
+									</minimum>
+								</value>
+							</action>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<assign-damage type="damage" value="2"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

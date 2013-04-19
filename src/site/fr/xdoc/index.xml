@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+	<properties>
+		<title>Bienvenue dans Firemox</title>
+		<author email="fabdouglas@users.sourceforge.net">Fabrice Daugan</author>
+	</properties>
+	<head>
+		<link rel="alternate" type="application/rss+xml" title="Flux RSS Firemox"
+			href="rss/news.xml" />
+	</head>
+	<body>
+		<section name="Welcome to Firemox">
+			<div id="downloadbox">
+				<h5>Téléchargez Firemox 0.95</h5>
+				<p>
+					<a href="http://sourceforge.net/project/showfiles.php?group_id=92519">
+						<img valign="top" src="images/folder-open.gif" border="0" alt=""
+							title="download" />
+						Téléchargez
+					</a>
+					Firemox
+					<small>(11 Mo)</small>
+				</p>
+				<ul>
+					<li>
+						<a href="download.html#Prérequis">Prérequis système</a>
+					</li>
+					<li>
+						<a href="download.html#Instructions">Instructions d'installation</a>
+					</li>
+					<li>
+						<a href="changes-report.html">Nouveautés apportées</a>
+					</li>
+					<li>
+						<a href="dev/getstarted.html">Démarrage</a>
+					</li>
+					<li>
+						<a href="guides/index.html">Documentation</a>
+					</li>
+				</ul>
+			</div>
+
+			<p>
+				Firemox (FM) est un projet totalement écrit en Java.
+				<br />
+				Il permet de jouer à divers jeux de cartes à travers un réseau local ou sur
+				Internet, tout seul ou contre un autre joueur (l'adresse IP de votre adversaire est
+				alors nécessaire). Le programme est le juge : vous jouez ainsi avec les vraies
+				règles. Magic-project peut émuler des jeux de cartes classiques (Poker par exemple)
+				mais égalements des jeux de cartes à collectionner.
+				<br />
+				<br />
+				La fonctionnalité principale de ce programme est qu'il peut interpréter les règles
+				d'un jeu de carte. Ces règles sont définies dans un fichier XML (lisible par un
+				humain), Firemox interprète alors ce fichier afin d'implémenter la structure d'un
+				tour, les types de cartes, leurs couleurs, etc.
+				<br />
+				Ainsi il est impossible de tricher ou d'oublier une étape dans le jeu de carte émulé
+				: toutes les règles sont gérées par Firemox.
+				<br />
+				Fonctionnalités clés :
+				<ul>
+					<li>Ecrit en Java, fonctionne sous MacOS, Windows et Linux</li>
+					<li>Les règles des jeux émulés sont facilement modifiables et étendable</li>
+					<li>Les décorations des fenêtres sont entièrements paramétrables</li>
+					<li>Gratuit et Open-Source</li>
+					<li>Paramétrage des langues</li>
+				</ul>
+				<br />
+				Vous avez besoin de
+				<a href="http://java.com/fr/download/index.jsp">
+					Java 5.0 ou Java 6.0u3 (recommandé)
+				</a>
+				pour jouer avec Firemox !
+			</p>
+
+			<subsection name="A propos de Firemox">
+				<p>
+					<ul>
+						<li>
+							<a href="features_judge.html">
+								Quelles sont les fonctionnalités de Firemox?
+							</a>
+						</li>
+						<li>
+							<a href="dev/getstarted.html">Comment puis-je vous aider ?</a>
+						</li>
+						<li>
+							<a href="howto.html">
+								Où puis-je trouver de l'aide concernant l'utilisation de Firemox?
+							</a>
+						</li>
+					</ul>
+				</p>
+			</subsection>
+			<subsection name="Photos d'écran">
+				<p>
+					<a href="images/guides/user/screenshot_full_1.png">
+						<img alt="screenshot1"
+							src="../images/guides/user/screenshot_full_1_sml.png">
+						</img>
+					</a>
+					<a href="images/guides/user/screenshot_full_2.png">
+						<img alt="screenshot2"
+							src="../images/guides/user/screenshot_full_2_sml.png">
+						</img>
+					</a>
+					<a href="../images/guides/user/screenshot_full_3.png">
+						<img alt="screenshot3"
+							src="../images/guides/user/screenshot_full_3_sml.png">
+						</img>
+					</a>
+					<a href="../images/guides/user/screenshot_full_4.png">
+						<img alt="screenshot4"
+							src="../images/guides/user/screenshot_full_4_sml.png">
+						</img>
+					</a>
+				</p>
+			</subsection>
+			<subsection name="Dernières informations">
+				<p>
+					<ul>
+						<li>Firemox 0.95 Beta disponible - 2007-11-18</li>
+						<li>Rennomage du projet (Magic-Project) - 2007-10-30</li>
+						<li>Revue du site web - 2007-09-30</li>
+						<li>Firemox 0.94 Beta disponible - 2007-04-10</li>
+						<li>Revue du site web - 2007-02-12</li>
+						<li>Firemox 0.93 Beta disponible - 2007-02-02</li>
+						<li>Firemox 0.92 Beta disponible - 2006-09-28</li>
+						<li>Firemox 0.91 Beta disponible - 2006-09-24</li>
+						<li>Firemox 0.90 Beta disponible - 2006-05-26</li>
+						<li>Site web créé avec Maven2 - 2006-04-05</li>
+						<li>Firemox 0.86 Beta disponible - 2006-02-14</li>
+						<li>Firemox 0.85 Alpha disponible - 2005-08-01</li>
+					</ul>
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

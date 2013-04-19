@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Siren's Call">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {u} play only during an opponent's turn and only before attackers are declared. 
+creatures the active player controls attack this turn if able. 
+at end of turn, destroy all non-wall creatures that player controls that didn't attack this turn. ignore this effect for each creature the player didn't control continuously since the beginning of the turn. -->
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<test>
+				<and>
+					<controller player="currentplayer.opponent"/>
+					<or>
+						<phase-is phase="upkeep"/>
+						<phase-is phase="draw"/>
+						<phase-is phase-index="precombat-main"/>
+						<phase-is phase="declare-attack"/>
+					</or>					
+				</and>
+			</test>
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<controller player="opponent"/>
+							<not>
+								<has-property property="wall"/>
+							</not>
+						</and>
+					</test>
+				</action>
+				<add-modifier>
+					<property-modifier property="attacks-if-able" linked="false">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</property-modifier>
+				</add-modifier>
+				<if-then-hop elsehop="4">
+					<test>
+						<sup left="target-list.size" right="0"/>
+					</test>
+				</if-then-hop>
+				<create-ability>
+					<save target="target-list.last"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="nocare">
+							<test>
+								<and>
+									<phase-is phase="cleanup"/>
+									<phase-is phase="declare-attacking"/>
+								</and>
+							</test>
+						</end-of-phase>
+						<effects>
+							<if-then-hop elsehop="3">
+								<test>
+									<phase-is phase="declare-attacking"/>
+								</test>
+							</if-then-hop>
+							<if-then-hop elsehop="abort">
+								<test>
+									<test ref="saved-is-attacking"/>
+								</test>
+							</if-then-hop>
+							<hop value="4"/>
+							<if-then-hop elsehop="3">
+								<test>
+									<not ref="tested-just-summoned"/>
+								</test>
+							</if-then-hop>
+							<target type="saved"/>
+							<action ref="destroy"/>
+							<unregister-this/>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+				<target-list operation="remove-last"/>
+				<hop value="-3"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Faerie Trickery">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	tribal instant - faerie
+	counter target non-faerie spell. if that spell is countered this way, remove it from the game instead of putting it into its owner's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>tribal instant </idcards>
+		<properties>faerie </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-spell">
+					<test>
+						<not>
+							<has-property property="faerie"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref="remove-from-game"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

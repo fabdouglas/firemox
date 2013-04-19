@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Animate Dead">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{b} 
+when animate dead comes into play, if it's in play, it becomes an enchant creature. 
+put target creature card from a graveyard into play under your control enchanted by animate dead. 
+enchanted creature gets -1/-0. when animate dead leaves play, destroy enchanted creature. 
+it can't be regenerated. 
+
+
+* Oct 4, 2004 - A "creature card" is a Creature card or Artifact Creature card. Older cards of type Summon are also Creature cards.
+* Oct 4, 2004 - This is a targeted ability. Note that cards in the graveyard do not have Protection from Color abilities, but the comes into play ability may be countered if the target creature card is removed from the graveyard before the spell resolves. If the ability is countered, then this card stays an Enchantment and stays in play.
+* Oct 4, 2004 - When putting a card into play that requires a definition for its value or some other choice, you do what is needed to define the value or make the choice.
+* Oct 4, 2004 - In general, an animated creature comes out as if it were just played. Any X in the mana cost is zero.
+* Aug 1, 2005 - Enters play as a global enchantment and then becomes an Enchant Creature Aura as a triggered ability upon entering play. It follows all the rules for Auras from then on.
+* See also: Adun Oakenshield, All Hallow's Eve, Dance of the Dead, Dreams of the Dead, Eater of the Dead, Frankenstein's Monster, Glyph of Reincarnation, Hell's Caretaker, Hymn of Rebirth, Lhurgoyf, Necropolis, Night Soil, Raise Dead, Reincarnation, Songs of the Damned, Soul Exchange, Spoils of Evil, Spoils of War, Triassic Egg, Wall of Tombstones, Defense of the Heart, Karmic Guide, Ostracize, Phyrexian Reclamation, Quicksilver Amulet, Repopulate, Unearth, Enduring Renewal, Altar of Bone, Zombie Mob
+
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard" cancel="false">
+					<test>
+						<has-idcard idcard="creature" card="tested"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<unregister-this/>
+				<move-card controller="you" destination="play" name="%"/>
+				<attach from="this" to="target-list.first" />
+				<target-list operation="clear" name="%"/>
+				<target type="this"/>
+				<add-modifier>
+					<idcard-modifier idcard="local-enchantment" linked="false" operation="set"/>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play" card="tested"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" card="tested"/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="attachedto"/>
+				<action ref="bury"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="minus" linked="true" value="1"/>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

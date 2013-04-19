@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Eye Spy">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	sorcery
+	look at the top card of target player's library. you may put that card into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all">
+					<test>
+						<and>
+							<in-zone zone="library"/>
+							<position position="top"/>
+							<controller player="target-list.first"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="put-in-graveyard"/>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

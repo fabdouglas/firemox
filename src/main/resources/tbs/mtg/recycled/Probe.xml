@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Probe">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	sorcery
+	kicker 1b 
+	draw three cards, then discard two cards.
+	if the kicker cost was paid, target player discards two cards.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="1" black="1" />
+				<action ref="target-player"/>
+			</actions>
+			<actions>
+				<action ref="player-discard" value="2"/>
+				<target-list operation="clear"/>
+				<target type='you'/>
+				<repeat value='3'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value='2'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<repeat value='3'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value='2'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

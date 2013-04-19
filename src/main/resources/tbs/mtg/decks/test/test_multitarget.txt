@@ -1,0 +1,4 @@
+Super card;20
+Fireball;20
+Savannah_Lions;20
+counterspell;20

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Luminescent Rain">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	instant
+	choose a creature type. you gain 2 life for each permanent you control of that type.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<input-property operation='set' index='free0' register='this' values='FIRST_SUB_TYPE..LAST_SUB_TYPE' />
+				<action ref='gain-life'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<controller player="you"/>
+										<has-property>
+											<property register="this" index="free0"/>
+										</has-property>
+									</and>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

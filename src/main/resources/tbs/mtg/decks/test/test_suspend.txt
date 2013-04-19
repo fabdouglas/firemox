@@ -1,0 +1,2 @@
+Lotus Bloom;20;card.set=tsp
+Super card;20

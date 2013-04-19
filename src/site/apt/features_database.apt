@@ -1,0 +1,26 @@
+ ----
+Database
+ ----
+Fabrice Daugan
+ ----
+May 27 2006
+
+Database
+
+	Firemox now contains a database feature. Data and pictures of cards are gathered from specified remote/local sites. 	
+	
+   Targeting sample for MTG
+	
+ Database preferences
+	
+[images/guides/user/database_settings_full.png] order
+
+ Displaying data
+	
+[images/guides/user/database0.png] db01
+
+[images/guides/user/database1.png] db02
+
+ Gathered data can be used to display different pictures for a same card
+	
+[images/guides/user/cards_versions.png] versions

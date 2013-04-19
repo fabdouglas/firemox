@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coretapper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact creature - myr
+	1/1
+	t :put a charge counter on target artifact.
+	sacrifice coretapper: put two charge counters on target artifact.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>myr </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<repeat value='2'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vigilant Sentry">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	creature - nomad
+	2/2
+	threshold - as long as seven or more cards are in your graveyard, vigilant sentry gets +1/+1 and has "t :target attacking or blocking creature gets +3/+3 until end of turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human nomad </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<or>
+							<test ref='tested-is-attacking'/>
+							<test ref='tested-is-blocking'/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="add+3+3-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	
+	<modifiers>
+		<register-modifier index='power' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

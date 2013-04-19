@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mana Short">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{u} 
+tap all lands target player controls and empty his or her mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<modify-register register="target-list.first" index="0" operation="clear" name="%"/>
+				<modify-register register="target-list.first" index="1" operation="clear" name="%"/>
+				<modify-register register="target-list.first" index="2" operation="clear" name="%"/>
+				<modify-register register="target-list.first" index="3" operation="clear" name="%"/>
+				<modify-register register="target-list.first" index="4" operation="clear" name="%"/>
+				<modify-register register="target-list.first" index="5" operation="clear" name="%"/>
+				<target type="card" mode="all" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<has-idcard idcard="land"/>
+						</and>
+					</test>
+				</target>
+				<target-list operation="remove-first"/>
+				<tap/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

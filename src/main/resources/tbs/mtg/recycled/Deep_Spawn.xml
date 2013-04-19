@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deep Spawn">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="blue" value="3"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>trample homarid</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<!-- At the beginning of your upkeep, sacrifice ~this~ unless you put the top two cards of your library into your graveyard -->
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<target type="you"/>
+						<repeat value="2"/>
+						<move-player-card from="library" to="graveyard" controller="controller"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

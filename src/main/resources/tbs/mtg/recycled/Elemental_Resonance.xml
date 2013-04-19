@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Elemental Resonance">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--  2gg 
+		enchant permanent 
+		at the beginning of your precombat main phase, add 
+		mana equal to enchanted permanent's mana cost to your mana pool.    
+	-->
+
+	<init>
+		<registers>
+			<register index="green" value="2" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="main">
+				<test>
+					<and>
+						<phase-is phase="main" />
+						<controller player="currentplayer" card="this" />
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<!-- give-mana value="attachedto.manacost"/ -->
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="enchant-creature"/>
+</card>

@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Brigid, Hero of Kinsbaile">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	legendary creature - kithkin archer
+	2/3
+	first strike
+	t :brigid, hero of kinsbaile deals 2 damage to each attacking or blocking creature target player controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend kithkin archer first-strike </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<and>
+							<controller player="target-list.first"/>
+							<or>
+								<test ref="tested-is-attacking"/>
+								<test ref="tested-is-blocking"/>
+							</or>
+						</and>
+					</test>
+				</action>
+				<target-list operation="remove-first"/>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

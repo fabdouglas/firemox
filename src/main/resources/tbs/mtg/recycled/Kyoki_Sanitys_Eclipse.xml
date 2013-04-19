@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kyoki, Sanity's Eclipse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	legendary creature - demon spirit
+	6/4
+	whenever you play a spirit or arcane spell, target opponent removes a card in his or her hand from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend demon spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<or>
+							<has-property property="spirit" />
+							<has-property property="arcane" />
+						</or>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<target type="card" mode="target-choose" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

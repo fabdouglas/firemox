@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Guiltfeeder">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b}{b} fear whenever guiltfeeder attacks and isn't blocked, 
+defending player loses 1 life for each card in his or her graveyard. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="2"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>fear horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<modify-register register="controller" index="life" operation="minus" name="lose-%n-life">
+					<value>
+						<counter restriction-zone="graveyard">
+							<controller player="opponent"/>
+						</counter>
+					</value>
+				</modify-register>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

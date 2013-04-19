@@ -1,0 +1,28 @@
+#Jeu forteresse
+#
+#John
+#
+#août 20, 2001
+#1
+#4th Edition
+#
+Animate_Wall;2
+Castle;2
+Disenchant;3
+Fortified_Area;2
+Serra_Angel;2
+Swords_to_Plowshares;3
+Wall_of_Swords;2
+Ancestral_Recall;2
+Counterspell;4
+Wall_of_Water;2
+Power_Sink;3
+Time_Walk;4
+Timetwister;4
+Tundra;15
+Black_Lotus;4
+Howling_Mine;2
+Mox_Pearl;4
+Mox_Sapphire;4
+Sol_Ring;2
+Spirit_Link;2

@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Beasts of Bogardan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - beast
+	3/3
+	protection from red
+	beasts of bogardan gets +1/+1 as long as any opponent controls a white permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>beast protection-from-red </properties>
+	</init>
+	<modifiers>
+		<register-modifier index='power' operation='add' value='1' linked='false'>
+			<while>
+				<sup-equal right="1">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-color color="white"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' operation='add' value='1' linked='false'>
+			<while>
+				<sup-equal right="1">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-color color="white"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</while>
+		</register-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

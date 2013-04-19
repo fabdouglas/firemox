@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glimmervoid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	at end of turn, if you control no artifacts, sacrifice glimmervoid.
+	t :add one mana of any color to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-G"/>
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot">
+				<test>
+					<not>
+						<has restriction-zone="play">
+							<and>
+								<has-idcard idcard="artifact"/>
+								<controller player="you"/>
+							</and>
+						</has>
+					</not>
+				</test>
+			</end-of-phase>
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

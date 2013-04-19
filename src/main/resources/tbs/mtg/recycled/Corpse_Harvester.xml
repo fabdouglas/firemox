@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Corpse Harvester">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - zombie wizard
+	3/3
+	1b, t, sacrifice a creature: search your library for a zombie card and a swamp card, reveal them, and put them into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-property property='zombie'/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-idcard idcard="swamp"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

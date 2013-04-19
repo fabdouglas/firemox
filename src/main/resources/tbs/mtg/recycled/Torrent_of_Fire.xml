@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Torrent of Fire">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{r}{r} torrent of fire deals damage equal to the highest converted mana 
+cost among permanents you control to target creature or player. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal">
+					<value>
+						<highest-among restriction-zone="play" expression="manacost">
+							<test>
+								<controller player="you"/>
+							</test>
+						</highest-among>
+					</value>
+				</assign-damage>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

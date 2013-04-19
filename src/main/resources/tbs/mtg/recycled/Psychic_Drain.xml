@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psychic Drain">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xub
+	sorcery
+	target player puts the top x cards of his or her library into his or her graveyard and you gain x life.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value register='stack' index='0'/>
+				</repeat>
+				<action ref="mill-a-card"/>
+				<action ref='gain-life'>
+					<value register='stack' index='0'/>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

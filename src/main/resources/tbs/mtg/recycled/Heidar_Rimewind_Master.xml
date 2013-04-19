@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Heidar, Rimewind Master">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	legendary creature - human wizard
+	3/3
+	2, t :return target permanent to its owner's hand. play this ability only if you control four or more snow permanents.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal right="4">
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-property property="snow"/>
+							</and>
+						</counter>
+					</left>
+				</sup-equal>
+			</test>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='target-permanent'/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

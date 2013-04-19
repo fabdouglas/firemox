@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Laccolith Whelp">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - beast
+	1/1
+	whenever laccolith whelp becomes blocked, you may have it deal damage equal to its power to target creature. if you do, laccolith whelp deals no combat damage this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='target-creature'/>
+						<assign-damage type='damage-normal'>
+							<value register='this' index='power'/>
+						</assign-damage>
+						<target-list operation="clear"/>
+						<target type="this"/>
+						<action ref="deals-no-combat-damage"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

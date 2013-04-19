@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Cosmic Horror">
+	<rules-author-comment>By brius</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="black" value="3"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="7"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>first-strike horror</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<!-- At the beginning of your upkeep, sacrifice ~this~ and it deals 7 damage to you unless you pay {3}{B}{B}{B} -->
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana black="3" colorless="3"/>
+					</either>
+					<either>
+						<target type="you"/>
+						<assign-damage value="7"/>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+	</abilities>
+</card>

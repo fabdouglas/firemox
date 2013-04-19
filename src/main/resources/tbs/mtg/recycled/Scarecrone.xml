@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Scarecrone">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+	artifact creature - scarecrow
+	1/2
+	1, sacrifice a scarecrow: draw a card.
+	4, t :return target artifact creature card from your graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>scarecrow </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='scarecrow'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref='T'/>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="artifact-creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

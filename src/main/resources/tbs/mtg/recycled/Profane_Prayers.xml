@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Profane Prayers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	sorcery
+	profane prayers deals x damage to target creature or player and you gain x life, where x is the number of clerics in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter restriction-zone="play">
+							<has-property property="cleric"/>
+						</counter>
+					</value>
+				</assign-damage>
+				<action ref='gain-life'>
+					<value>
+						<counter restriction-zone="play">
+							<has-property property="cleric"/>
+						</counter>
+					</value>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="City of Brass">
+	<!-- tested 11/27/2004 , v0.80.27 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<idcards>land</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-B"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-G"/>
+		<ability ref="tap-add-R"/>
+		<ability ref="tap-add-W"/>
+		<triggered-ability zone="play">
+			<become-tapped>
+				<test>
+					<is-this/>
+				</test>
+			</become-tapped>
+			<effects>
+				<target type="you"/>
+				<assign-damage value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

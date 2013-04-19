@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drill-Skimmer">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4} flying drill-skimmer can't be the target of spells or abilities as 
+long as you control another artifact creature. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>flying thopter</properties>
+	</init>
+	
+	<modifiers>
+		<property-modifier property="shroud" operation="add" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-idcard idcard="artifact-creature"/>
+					</and>
+				</has>
+			</while>
+		</property-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Planeswalker's Scorn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	enchantment
+	3b: target opponent reveals a card at random in his or her hand. target creature gets -x/-x until end of turn, where x is the revealed card's converted mana cost. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='3' />
+				<action ref='target-opponent'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<target type="card" mode="random" restriction-zone="hand" raise-event="false">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<add-modifier>
+					<register-modifier index='power' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='target-list.last' index='manacost'/>
+					</register-modifier>
+					<register-modifier index='toughness' operation='minus' linked='false'>
+						<until>
+							<end-of-phase phase='cleanup'/>
+						</until>
+						<value register='target-list.last' index='manacost'/>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

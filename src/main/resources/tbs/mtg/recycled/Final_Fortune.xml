@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Final Fortune">
+	<!-- tested 12/03/2004 , v0.80.27 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+
+				<!--see mtg.xml/extra-turn -->
+				<create-ability>
+					<replacement-ability name="extra-turn" zone="play">
+						<before-phase phase="untap"/>
+						<effects>
+							<action ref="prepare-extra-turn"/>
+				
+							<!-- create an ability waiting for the end of turn 
+							     to add exclusively an additional turn -->
+							<create-ability>
+								<!-- save into a register the turn id where you
+								     will lose -->
+								<registers>
+									<register index="0">
+										<value register="game.static" index="turnid"/>
+									</register>
+								</registers>
+								<!-- * if (current turn = looked for turn) then 
+								     you lose -->
+								<!-- * if (current turn > looked for turn) then
+								     unregister this ability since the 
+								     additional turn has been skipped -->
+								<triggered-ability zone="play">
+									<end-of-phase phase="eot">
+										<test>
+											<inf-equal>
+												<left register="game.static" index="turnid"/>
+												<right register="ability" index="0"/>
+											</inf-equal>
+										</test>
+									</end-of-phase>
+									<effects>
+										<if-then-hop elsehop="2">
+											<test>
+												<equal>
+													<left register="ability" index="0"/>
+													<right register="game.static" index="turnid"/>
+												</equal>
+											</test>
+										</if-then-hop>
+										<lose-game player="you"/>
+										<unregister-this/>
+									</effects>
+								</triggered-ability>
+							</create-ability>
+						</effects>
+					</replacement-ability>
+				</create-ability>
+				
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

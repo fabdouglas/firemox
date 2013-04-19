@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Water Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	creature - wurm
+	1/1
+	water wurm gets +0/+1 as long as an opponent controls an island.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>wurm </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="toughness" operation="add" value="1">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="opponent"/>
+						<has-idcard idcard="island"/>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

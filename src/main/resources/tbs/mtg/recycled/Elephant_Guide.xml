@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elephant Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +3/+3.
+	when enchanted creature is put into a graveyard, put a 3/3 green elephant creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone="play" card="tested"/>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="graveyard" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-card>
+					<card name='Elephant'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='3'/>
+								<register index='toughness' value='3'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token elephant </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='+3/+3'/>
+</card>

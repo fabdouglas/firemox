@@ -1,0 +1,82 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Raving Oni-Slave">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - ogre warrior
+	3/3
+	when raving oni-slave comes into play, you lose 3 life if you don't control a demon.
+	when raving oni-slave leaves play, you lose 3 life if you don't control a demon.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>ogre warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-property property="demon"/>
+								</and>
+							</has>
+						</not>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='lose-life' value='3'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<has restriction-zone="play">
+								<and>
+									<controller player="you"/>
+									<has-property property="demon"/>
+								</and>
+							</has>
+						</not>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='lose-life' value='3'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

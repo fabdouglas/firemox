@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Apprentice Necromancer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - zombie wizard
+	1/1
+	b, t, sacrifice apprentice necromancer: return target creature card from your graveyard to play. that creature gains haste. at end of turn, sacrifice it.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="move-to-play"/>
+				<action ref="haste-until-eot"/>
+				<action ref="destroy-target-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

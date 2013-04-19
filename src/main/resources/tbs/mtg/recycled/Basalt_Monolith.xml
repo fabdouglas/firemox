@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Basalt Monolith">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--
+Basalt Monolith doesn’t untap during your untap step.
+3 Mana: Untap Basalt Monolith.
+Tap: Add 3 Mana to your mana pool. 
+This mana can’t be spent on abilities of permanents named Basalt Monolith.
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>does-not-untap</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana colorless="3"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<untap/>
+			</effects>
+		</activated-ability>
+		
+		<activated-ability playable="mana-source" name="" zone="play" resolution="auto">
+			<cost>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<give-mana colorless="3">
+					<restriction>
+						<not>
+							<has-name name="Basalt_Monolith"/>
+						</not>
+					</restriction>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Demonic Consultation">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+<!-- 
+Card Type:  	 Instant
+P/T: 	
+Rules Text (Oracle): 	
+Name a card. Remove the top six cards of your library from the game, 
+then reveal cards from the top of your library until you reveal the 
+named card. Put that card into your hand and remove all other cards 
+revealed this way from the game.
+
+    * 04/10/2004 There is no way to make this card affect your opponent. It affects "you", and "you" means the caster. It has no targets.
+    * 04/10/2004 The spell fails if you do not find the card before your library is empty. You do not lose the game at that point. You lose on the next time you have to draw.
+    * 04/10/2004 You must name a card that actually exists in the game of Magic.
+    * 04/10/2004 You name which card to look for on resolution.
+
+
+ -->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant 
+</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<!-- PUT HERE THE COST OF THIS SPELL -->
+			</cost>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS SPELL -->
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

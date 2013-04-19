@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Jackal Pup">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {r} 
+whenever jackal pup is dealt damage, it deals that much damage to you. 
+-->
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>creature </idcards>
+		<properties>hound</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="you"/>
+				<assign-damage type="damage-normal" value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

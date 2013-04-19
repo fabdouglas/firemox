@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Frogmite">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact creature
+	2/2
+	affinity for artifacts 
+ -->
+
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>frog</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'>
+			<actions>
+				<action ref='affinity'>
+					<counter-test>
+						<has-idcard idcard='artifact' />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

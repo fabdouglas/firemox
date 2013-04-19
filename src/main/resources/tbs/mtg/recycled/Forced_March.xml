@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Forced March">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xbbb
+	sorcery
+	destroy all creatures with converted mana cost x or less.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="pay-x"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<inf-equal>
+							<left register="tested" index="manacost"/>
+							<right register="stack" index="0"/>
+						</inf-equal>
+					</test>
+				</action>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

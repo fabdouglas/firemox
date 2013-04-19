@@ -1,0 +1,95 @@
+<faqs title="Magic-Project Faqs">
+  <part id="faqs">
+    <faq id="How-can-I-install-Magic-Project">
+      <question>How can I install Magic-Project?</question>
+      <answer>
+        <p>All installation instructions are defined <a href="download.html">here</a>
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-can-I-start-Magic-Project">
+      <question>How can I start Magic-Project?</question>
+      <answer>
+        <p>Simply double-click on the "Magic" command.
+        </p>
+      </answer>
+    </faq>
+    <faq id="Why-Magic-Project-to-connects-to-Internet">
+      <question>Why Magic-Project connects to Internet?</question>
+      <answer>
+        <p>When you install Magic-Project, there is no copyrighted content, and since the game you're playing can use a lot of different data, and since the data should suit to your language (English, French,...) the best thing is to dynamically get and cache them.
+        <br/>Once downloaded, you can play offline since card pictures are downloaded, and attached are placed in the tbs/xxx/database.xml file.
+        <br/>Also a lot of people desire to get immediatly a full database.xml file... Magic-project can import some remote data like a big txt file and convert it to a big database.xml. Currently this process is not implemented, but if you give us this file and it's corresponding url, will integrate this feature ;).
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-Magic-Project-manage-cards-pictures">
+      <question>How Magic-Project manage cards pictures?</question>
+      <answer>
+        <p>Required cards pictures are downloaded as needed in your local directory, and will never be downloaded later, unless you delete these files.
+        <br/>In the database settings (F4), you can define your preferences for data, and for pictures. If you know, or want to share a remote repository, please contact us using the feature request dialog.
+        <br/>Dowloaded pictures are placed into the tbs/xxx/images/proxies/ directory.
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-find-an-opponent">
+      <question>How to find an opponent?</question>
+      <answer>
+        <p>Currently, there is no global server were you can find a pool of players. So you have to kno the IP adress of your opponent to join a game.
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-create-a-game">
+      <question>How to create a game?</question>
+      <answer>
+        <p>Create a game menu (Shift+F2), choose your deck and push on the "create" button.
+        You will see a small window waiting for your opponent. You can press the "cancel" 
+        button if you decide you cancel the game creation.
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-join-a-game">
+      <question>How to join a game?</question>
+      <answer>
+        <p>Join a game menu (F2), choose your deck, pu the IP address of the host and push on the "join" button.
+        <br />Note : if you are planing to play alone, leave the IP address to "127.0.0.1".
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-create-your-deck">
+      <question>How to create your deck?</question>
+      <answer>
+        <p>A deckbuilder is provided with Magic-Project. A deck format is very simple since it's a text format.
+        <br/>Sample : <b>Hero;2</b> Indicate we have TWO "hero" card in the deck.<br/>
+        You must put on card per line.
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-create-your-card">
+      <question>How to create your card?</question>
+      <answer>
+        <p> A card is defined in XML syntax. You can find some exemple in the "tbs/mtg/recycled" directory.<br/>
+				Also see the <a href="dev/create_cards.html">Create cards section</a>
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-add-a-skin">
+      <question>How to add a skin?</question>
+      <answer>
+        <p>Simply download the look and feel, and add the zip file to the "lib" directory.
+        </p>
+      </answer>
+    </faq>
+    <faq id="How-to-support-project">
+      <question>How to support Magic-Project?</question>
+      <answer>
+        <p>
+        By helping us to discover some bugs.<br/>
+        By giving your impression, advise, ...<br/>
+        By making a small <a href="http://sourceforge.net/donate/index.php?group_id=92519">contribution</a><br/>
+        Also see the <a href="features_contribute.html">Contribute section</a>
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

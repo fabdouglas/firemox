@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dauthi Horror">
+<rules-author-comment></rules-author-comment>
+
+<!--  {1}{b} shadow  dauthi horror can't be blocked by white creatures. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>dauthi horror shadow</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability name="" zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<has-color color="white"/>
+				</blocking-test>
+				<attacking-test>
+					<is-this/>
+				</attacking-test>
+			</declared-blocking>
+			<effects/>
+		</replacement-ability>
+	</abilities>
+</card>

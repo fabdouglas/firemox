@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Smoldering Tar">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2br
+	enchantment
+	at the beginning of your upkeep, target player loses 1 life.
+	sacrifice smoldering tar: smoldering tar deals 4 damage to target creature. play this ability only any time you could play a sorcery.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

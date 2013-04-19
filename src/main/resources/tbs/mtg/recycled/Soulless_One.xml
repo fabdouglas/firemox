@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soulless One">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - zombie avatar
+	*/*
+	soulless one's power and toughness are each equal to the number of zombies in play plus the number of zombie cards in all graveyards.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power'>
+				<value>
+					<add>
+						<right>
+							<counter restriction-zone='play'>
+								<has-property property="zombie"/>
+							</counter>
+						</right>
+						<left>
+							<counter restriction-zone='graveyard'>
+								<has-property property="zombie"/>
+							</counter>
+						</left>
+					</add>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<add>
+						<right>
+							<counter restriction-zone='play'>
+								<has-property property="zombie"/>
+							</counter>
+						</right>
+						<left>
+							<counter restriction-zone='graveyard'>
+								<has-property property="zombie"/>
+							</counter>
+						</left>
+					</add>
+				</value>
+			</register>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie avatar </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

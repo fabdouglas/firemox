@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Aven Fisher">
+<!-- When ~this~ is put into a graveyard from play, you may draw a card -->
+<!-- Test ok 28/12/2004 0.81.30 -->
+	<rules-author-comment>By brius</rules-author-comment>
+	
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="colorless" value="3"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>flying bird soldier</properties>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<ability ref="cast-spell"/>
+<!-- If put into graveyard from play, may draw a card -->
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card.controller"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

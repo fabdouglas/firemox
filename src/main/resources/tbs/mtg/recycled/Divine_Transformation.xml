@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divine Transformation">
+	<rules-author-comment>By jods</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="white" value="2" />
+		</registers>
+		<colors>white</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="+3/+3" />
+</card>

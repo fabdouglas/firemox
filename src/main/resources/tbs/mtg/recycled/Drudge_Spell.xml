@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drudge Spell">
+<rules-author-comment></rules-author-comment>
+
+<!--  {b}{b} 
+{b}, remove two creature cards in your graveyard from the game: 
+put a 1/1 black skeleton creature token into play. 
+it has "{b}: regenerate this creature." when drudge spell leaves play, 
+destroy all skeleton tokens. 
+they can't be regenerated. 
+-->
+
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1"/>
+				<repeat value="2"/>
+				<target type="card" restriction-zone="graveyard" cancel="false" mode="choose">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+						</and>
+					</test>
+				</target>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name="Skeleton">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="1"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>skeleton token</properties>
+						</init>
+						<abilities>
+							<activated-ability playable="instant" name="" zone="play">
+								<cost>
+									<pay-mana black="1" />
+								</cost>
+								<effects>
+									<action ref="regenerate"/>
+								</effects>
+							</activated-ability>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller="attachedto.controller" destination="play"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play" card="tested"/>
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-property property="skeleton"/>
+					</test>
+				</action>
+				<action ref="bury"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cragganwick Cremator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rr
+	creature - giant shaman
+	5/4
+	when cragganwick cremator comes into play, discard a card at random. if you discard a creature card this way, cragganwick cremator deals damage equal to that card's power to target player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>giant shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='discard-random' value='1'/>
+				<if-then-hop elsehop="2">
+					<test>
+						<has-idcard idcard="creature" card="target-list.last"/>
+					</test>
+				</if-then-hop>
+				<assign-damage type='damage-normal'>
+					<value register='target-list.last' index='power'/>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

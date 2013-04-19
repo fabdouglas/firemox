@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Artificer's Intuition">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	enchantment
+	u, discard an artifact card: search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+				<action ref="discard" value="1">
+					<test>
+						<has-idcard idcard="artifact"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="search-lib-reveal" value="1">
+					<test>
+						<and>
+							<inf-equal right="1">
+								<left register="tested" index="manacost" />
+							</inf-equal>
+							<has-idcard idcard="artifact"/>
+						</and>
+					</test>
+				</action>
+				<action ref="return-to-hand" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

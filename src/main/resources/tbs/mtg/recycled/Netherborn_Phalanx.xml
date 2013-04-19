@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Netherborn Phalanx">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5b
+	creature - horror
+	2/4
+	when netherborn phalanx comes into play, each opponent loses 1 life for each creature he or she controls.
+	transmute 1bb 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>horror </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='transmute'>
+			<actions>
+				<pay-mana black='2' colorless='1' />
+			</actions>
+		</ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="opponent"/>
+				<action ref='lose-life-target'>
+					<value>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

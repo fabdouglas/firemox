@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Braids, Conjurer Adept">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	legendary creature - human wizard
+	2/2
+	at the beginning of each player's upkeep, that player may put an artifact, creature, or land card from his or her hand into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human wizard </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" restriction-zone="hand" raise-event="false">
+					<test>
+						<and>
+							<controller player="target-list.first" />
+							<or>
+								<has-idcard idcard="artifact"/>
+								<has-idcard idcard="creature"/>
+								<has-idcard idcard="land"/>
+							</or>
+						</and>
+					</test>
+				</target>
+				<choice controller="currentplayer" cancel="true">
+					<either>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

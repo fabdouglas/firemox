@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Debtors' Knell">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4 
+	enchantment
+	
+	at the beginning of your upkeep, put target creature card in a graveyard into play under your control.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+		</registers>
+		<colors>black white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="4" white="3" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="4" white="2" black="1"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="4" white="1" black="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana colorless="4" black="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+	
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<target type="card" mode="choose" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card destination="play" controller="you"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Meekstone">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1} creatures with power 3 or greater don't untap during their controllers' untap steps. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="does-not-untap" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+	 				<sup-equal right="3">
+	 					<left register="tested" index="power"/>
+	 				</sup-equal>
+	 			</and>
+	 		</while>
+		</static-modifier>
+	</modifiers>
+</card>

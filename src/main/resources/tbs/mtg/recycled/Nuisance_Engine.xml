@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Nuisance Engine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3
+
+	artifact
+
+	2, t :put a 0/1 pest artifact creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name="pest">
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="0"/>
+								<register index="toughness" value="1"/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>artifact pest token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

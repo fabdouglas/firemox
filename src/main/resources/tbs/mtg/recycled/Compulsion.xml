@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Compulsion">
+	<rules-author-comment>ashsaver</rules-author-comment>
+	<!-- Compulsion: 
+		{1}{U}, Discard a card: Draw a card.
+		{1}{U}, Sacrifice ~: Draw a card.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" blue="1" />
+				<action ref="discard" value="1" />
+			</cost>
+			<effects>
+				<target type="you" />
+				<action ref="draw-a-card" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana colorless="1" blue="1" />
+				<action ref="sacrifice-this" />
+			</cost>
+			<effects>
+				<target type="you" />
+				<action ref="draw-a-card" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>
+
+

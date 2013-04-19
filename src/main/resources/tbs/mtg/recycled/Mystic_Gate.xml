@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mystic Gate">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		
+	land
+	
+	t :add 1 to your mana pool. o, t :add ww, wu, or uu to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards></idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<ability ref="tap-add-C"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana blue="1"/>
+			</cost>
+			<effects>
+				<give-mana blue="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana blue="1"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" white="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana blue="1"/>
+			</cost>
+			<effects>
+				<give-mana white="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+				<give-mana blue="2" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" white="1"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<pay-mana white="1"/>
+			</cost>
+			<effects>
+				<give-mana white="2" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

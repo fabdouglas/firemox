@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dizzying Gaze">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  r enchant creature you control 
+		r: enchanted creature deals 1 damage to target creature with flying.   
+	-->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="1" />
+				<action ref="target-creature">
+					<test>
+						<has-property property="flying" />
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage from="attachedto" to="target-list.first" value="1"
+					type="damage-normal" />
+			</effects>
+		</activated-ability>
+	</abilities>
+
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" value="1" operation="add" linked="true" />
+			<register-modifier index="toughness" value="2" operation="add" linked="true" />
+		</modifiers>
+		<valid-target>
+			<and>
+				<test ref="valid-to-enchant" />
+				<test ref="is-targetable-creature" />
+				<controller player="you" />
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

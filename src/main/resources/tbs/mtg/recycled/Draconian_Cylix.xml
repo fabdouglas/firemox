@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Draconian Cylix">
+	<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+	<!--  {3} 
+		{2}, {t}, discard a card at random from your hand: regenerate target creature. 
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T" />
+				<action ref="discard-random" value='1' />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="regenerate-target" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

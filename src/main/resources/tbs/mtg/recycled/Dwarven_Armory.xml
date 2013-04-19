@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dwarven Armory">
+<rules-author-comment>by Fabdouglas</rules-author-comment>
+
+<!--  {2}{r}{r} {2}, sacrifice a land: put a +2/+2 counter on target creature. 
+play this ability only during any upkeep step. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="red" value="2"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<test>
+				<controller player="currentplayer" card="this"/>
+			</test>
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="sacrifice-a-land" value="1"/>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<add-object object-name="+2/+2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

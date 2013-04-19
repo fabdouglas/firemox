@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Sorceress Queen">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	creature - sorceress
+	1/1
+	t :target creature other than sorceress queen becomes 0/2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-indirection index="power" value="0" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-indirection>
+					<register-indirection index="toughness" value="2" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</register-indirection>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

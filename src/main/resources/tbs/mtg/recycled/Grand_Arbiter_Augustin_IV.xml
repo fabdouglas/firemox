@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grand Arbiter Augustin IV">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2wu
+	legendary creature - human advisor
+	2/3
+	white spells you play cost 1 less to play.
+	blue spells you play cost 1 less to play.
+	spells your opponents play cost 1 more to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human advisor </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+					<has-color color="white"/>
+		       		<controller player="you"/> 
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless="-1" />
+			</cost>
+		</additional-cost-modifier>
+		<additional-cost-modifier linked="true">
+			<test>
+				<and>
+					<has-color color="blue"/>
+		       		<controller player="you"/> 
+				</and>
+			</test>
+			<cost>
+				<pay-mana colorless="-1" />
+			</cost>
+		</additional-cost-modifier>
+		<additional-cost-modifier linked="true">
+			<test>
+				<not>
+		       		<controller player="you"/> 
+	            </not>
+			</test>
+			<cost>
+				<pay-mana colorless="1" />
+			</cost>
+		</additional-cost-modifier>
+	</modifiers>
+</card>

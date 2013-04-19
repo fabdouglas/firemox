@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battletide Alchemist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	creature - kithkin cleric
+	3/4
+	if a source would deal damage to a player, you may prevent x of that damage, where x is the number of clerics you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>kithkin cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-can-be-prevented">
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<!-- this shield is removed -->
+						<unregister-this/>
+						<target type="context.card"/>
+						<assign-damage type="context.int2">
+							<value>
+								<minus left="context.int">
+									<right>
+										<counter restriction-zone="play">
+											<and>
+												<controller player="you"/>
+												<has-property property="cleric"/>
+											</and>
+										</counter>
+									</right>
+								</minus>
+							</value>
+						</assign-damage>
+					</either>
+				</choice>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Braids, Cabal Minion">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	legendary creature - minion
+	2/2
+	at the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'/>
+			<effects>
+				<choice controller="currentplayer" cancel="false">
+					<either>
+						<action ref="sacrifice-a-creature" value="1"/>
+					</either>
+					<either>
+						<action ref="sacrifice-an-artifact" value="1"/>
+					</either>
+					<either>
+						<action ref="sacrifice-a-land" value="1"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

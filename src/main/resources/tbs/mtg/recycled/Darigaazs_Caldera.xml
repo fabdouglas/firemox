@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darigaaz's Caldera">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  land - - lair 
+		when darigaaz's caldera comes into play, sacrifice it unless you return a non-lair land you control to 
+		its owner's hand. {t}: add {b}, {r}, or {g} to your mana pool. -->
+	<init>
+		<registers></registers>
+		<idcards>land</idcards>
+		<properties>lair</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<ability ref="tap-add-B" />
+		<ability ref="tap-add-G" />
+		<ability ref="tap-add-R" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" card="tested" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" card="tested" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<action ref="sacrifice-this" />
+					</either>
+					<either>
+						<target type="card" mode="choose" raise-event="false"
+							restriction-zone="play">
+							<test>
+								<and>
+									<has-idcard idcard="land" />
+									<not>
+										<has-property property="lair" />
+									</not>
+									<controller player="you" />
+								</and>
+							</test>
+						</target>
+						<action ref="return-to-hand" />
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

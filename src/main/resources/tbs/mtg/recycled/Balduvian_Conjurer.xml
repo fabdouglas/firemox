@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Balduvian Conjurer">
+<rules-author-comment>By Fabdouglas (corrected by Hoani CROSS : the land HAS TO BE snow-covered)</rules-author-comment>
+
+<!--  {1}{u} 
+
+{t}: until end of turn, target snow-covered land becomes a 2/2 creature that's still a land. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-land">
+					<test>
+						<and>
+							<or>
+								<has-idcard idcard="plains"/>
+								<has-idcard idcard="mountain"/>
+								<has-idcard idcard="island"/>
+								<has-idcard idcard="swamp"/>
+								<has-idcard idcard="forest"/>
+							</or>
+							<has-property property="snow"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="creature" operation="or" linked="false">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</idcard-modifier>
+				 	<register-indirection index="toughness" value="2" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+				 	<register-indirection index="power" value="2" operation="set" linked="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+				 	</register-indirection>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

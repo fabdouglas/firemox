@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dauthi Embrace">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} {b}{b}: target creature gains shadow until end of turn.  -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="2" />
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="shadow-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

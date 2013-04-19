@@ -1,0 +1,66 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coral Atoll">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	coral atoll comes into play tapped.
+	when coral atoll comes into play, sacrifice it unless you return an untapped island you control to its owner's hand.
+	t :add 1u to your mana pool.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref='come-into-play-tapped'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='sacrifice-this'/>
+					</either>
+					<either>
+						<action ref="target-land">
+							<test>
+								<and>
+									<has-idcard idcard="island"/>
+									<controller player="you"/>
+									<in-zone zone="playANDuntapped"/>
+								</and>
+							</test>
+						</action>
+						<action ref='return-to-hand'/>
+					</either>
+				</choice>	
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1' colorless='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

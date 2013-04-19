@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Shirei, Shizo's Caretaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	legendary creature - spirit
+	2/2
+	whenever a creature with power 1 or less is put into your graveyard from play, you may return that card to play under your control at end of turn if shirei, shizo's caretaker is still in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<inf-equal right="1">
+							<left register="tested" index="power"/>
+						</inf-equal>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-ability>
+					<save target="context.card"/>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<choice controller="you" cancel="true">
+								<either>
+									<target type="saved"/>
+									<action ref="move-to-play"/>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

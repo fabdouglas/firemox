@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cutthroat il-Dal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - human rogue
+	4/1
+	hellbent - cutthroat il-dal has shadow as long as you have no cards in hand. 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human rogue </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<property-modifier property="shadow" linked="false">
+			<while>
+				<test ref="hellbent"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Absolute Grace">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {1}{w} all creatures have protection from black. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="protection-from-black" linked="true"/>			 		
+			</modifiers>
+			<while>
+		 		<has-idcard idcard="creature"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

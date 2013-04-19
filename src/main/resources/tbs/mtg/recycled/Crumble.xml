@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crumble">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	instant
+	destroy target artifact. it can't be regenerated. that artifact's controller gains life equal to its converted mana cost.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-artifact'/>
+			</cost>
+			<effects>
+				<modify-register register="target.controller" index="life" operation="add" name="gain-%n-life">
+					<value register="target-list.last" index="manacost"/>
+				</modify-register>
+				<action ref='bury'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

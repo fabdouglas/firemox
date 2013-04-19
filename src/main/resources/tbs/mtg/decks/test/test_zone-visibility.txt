@@ -1,0 +1,3 @@
+Tundra;20
+Ancestral_Recall;20
+Glasses_of_Urza;10

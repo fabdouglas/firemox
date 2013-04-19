@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Undead Gladiator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	creature - zombie barbarian
+	3/1
+	1b, discard a card: return undead gladiator from your graveyard to your hand. play this ability only during your upkeep.
+	cycling 1b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie barbarian </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<action ref='discard' value='1'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+		<ability ref='cycling'>
+			<actions>
+				<pay-mana black='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

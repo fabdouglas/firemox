@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Hymn to Tourach">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  bb target player discards two cards at random.   -->
+
+	<init>
+		<registers>
+			<register index="black" value="2" />
+		</registers>
+		<colors>black</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<repeat value="2"/>
+				<target type="card" mode="random" raise-event="false"
+					restriction-zone="hand">
+					<test>
+						<controller player="target-list.first" />
+					</test>
+				</target>
+				<action ref="discard-cards" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

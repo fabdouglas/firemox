@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Memory Sluice">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(u/b)
+	sorcery
+	
+	target player puts the top four cards of his or her library into his or her graveyard. conspire 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>sorcery </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana blue="1"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<repeat value="4"/>
+				<action ref="mill-a-card"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana black="1"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<repeat value="4"/>
+				<action ref="mill-a-card"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

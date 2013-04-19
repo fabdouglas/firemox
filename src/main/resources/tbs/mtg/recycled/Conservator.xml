@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Conservator">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4} 
+{3}, {t}: prevent the next 2 damage that would be dealt to you this turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="you"/>
+				<action ref="prevent-2"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

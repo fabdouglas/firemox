@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Drift of Phantasms">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - spirit
+	0/5
+	defender 
+	flying
+	transmute 1uu 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>spirit defender flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='transmute'>
+			<actions>
+				<pay-mana blue='2' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wall of Deceit">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - wall
+	0/5
+	defender 
+	3: turn wall of deceit face down.
+	morph u 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>wall defender </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<is-face-up card="this"/>
+			</test>
+			<cost>
+				<pay-mana colorless='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<face-down for="opponent"/>
+			</effects>
+		</activated-ability>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

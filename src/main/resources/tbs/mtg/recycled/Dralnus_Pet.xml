@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dralnu's Pet">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!-- 
+		Kicker - 2B, Discard a creature card. (You may pay  and discard a creature card in addition to any other costs as you play this spell.)
+		If the kicker cost was paid, Dralnu's Pet has flying and comes into play with X +1/+1 
+		counters on it, where X is the discarded card's converted mana cost.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="2" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="2" black="1"/>
+				<target type="card" mode="choose" restriction-zone="hand" raise-event="false" hop="1"
+					cancel="false" name="discard-%n-card">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="you" />
+						</and>
+					</test>
+				</target>
+				<modify-register operation="set" register="this" index="free0">
+					<value register="target-list.last" index="manacost"/>
+				</modify-register>
+				<action ref="discard-cards_noname" name="%" />
+			</actions>
+			<actions>
+				<repeat>
+					<value register="this" index="free0"/>
+				</repeat>
+				<add-object object-name="+1/+1"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

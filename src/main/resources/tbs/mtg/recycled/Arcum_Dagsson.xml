@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Arcum Dagsson">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	legendary creature - human artificer
+	2/2
+	t :target artifact creature's controller sacrifices it. that player may search his or her library for a noncreature artifact card, put it into play, then shuffle his or her library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend human artificer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-artifact-creature'/>
+			</cost>
+			<effects>
+				<move-card controller="target-list.first.owner" destination="graveyard" />
+				<target type="target-list.first.controller"/>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref='search-lib-player' value='1'>
+							<test>
+								<and>
+									<not>
+										<has-idcard idcard='creature'/>
+									</not>
+									<has-idcard idcard="artifact"/>
+								</and>
+							</test>
+						</action>
+						<move-card controller="target-list.first.owner" destination="play" />
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

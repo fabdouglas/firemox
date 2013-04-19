@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blinkmoth Urn">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		5
+	artifact
+	at the beginning of each player's precombat main phase, if blinkmoth urn is untapped, that player 
+		adds 1 to his or her mana pool for each artifact he or she controls.
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='precombat-main'>
+				<test>
+					<in-zone card="this" zone="playANDuntapped" />
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<give-mana to="currentplayer">
+					<colorless>
+						<counter restriction-zone="play">
+							<and>
+								<has-idcard idcard="artifact" />
+								<controller player="currentplayer" />
+							</and>
+						</counter>
+					</colorless>
+				</give-mana>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

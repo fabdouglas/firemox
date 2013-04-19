@@ -1,0 +1,7 @@
+Betatester_Toolbox;4
+Super_Card;4
+Absolver_Thrull;4
+Savannah_Lions;4;card.set=9e
+Sengir_Vampire;4;card.set=9e
+Blessing_of_the_Nephilim;4
+Unholy_Strength;4

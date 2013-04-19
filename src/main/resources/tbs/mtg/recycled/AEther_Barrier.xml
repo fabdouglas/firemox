@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Barrier">
+<rules-author-comment>By Fabdouglas (corrected by Hoani CROSS : sacrifice applies to a permanent, not on a creature)</rules-author-comment>
+
+<!--  {2}{u} whenever a player plays a creature spell, that player sacrifices a 
+permanent unless he or she pays {1}. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<has-idcard idcard="creature"/>
+				</test>
+			</casting>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play" name="%" cancel="false" hop="2">
+							<test>
+								<controller player="context.card.controller"/> 
+							</test>
+						</target>
+						<action ref="sacrifice" name="sacrifice-%n-permanent"/>
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="context.card.controller"/>
+					</either>
+				</choice>
+			</cost>
+			<effects/>
+		</triggered-ability>
+	</abilities>
+</card>

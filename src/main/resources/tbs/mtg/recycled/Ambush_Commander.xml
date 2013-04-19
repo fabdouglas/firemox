@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ambush Commander">
+	<rules-author-comment>By Trigger911</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="green" value="2" />
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>elf</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana green="1" colorless="1" />
+				<action ref="sacrifice-a-creature" value="1">
+					<test>
+						<has-property property="elf" />
+					</test>
+				</action>
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<action ref="add+3+3-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<register-indirection index="power" value="1" linked="true" operation="add"
+					layer="global" />
+				<register-indirection index="toughness" value="1" linked="true" operation="add"
+					layer="global" />
+				<idcard-modifier idcard="creature" linked="true" layer="global" />
+				<property-modifier property="elf" linked="true" layer="global" />
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="forest" />
+					<controller player="controller" />
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

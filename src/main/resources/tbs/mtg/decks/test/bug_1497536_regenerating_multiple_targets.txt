@@ -1,0 +1,2 @@
+Loxodon Hierarch;20
+super card;20

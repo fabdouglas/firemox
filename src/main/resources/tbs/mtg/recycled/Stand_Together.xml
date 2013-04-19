@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stand Together">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	instant
+	put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+				<action ref='target-creature'>
+					<test>
+						<not>
+							<is target="target-list.first"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<repeat value='2'/>
+				<add-object object-name='+1/+1'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

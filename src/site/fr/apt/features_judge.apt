@@ -1,0 +1,28 @@
+ ----
+Interprétation des règles
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+27 Mai 2006
+
+Interprétation des règles
+
+    Firemox est capable d'interpréter et d'appliquer les règles d'un jeu
+    de cartes. Il est impossible de tricher ou de se tromper sur la façon de
+    jouer un sort par exemple.
+
+ Vérification de la validité de cibles dans <<Magic : l'Assemblée>>
+
+[../images/guides/user/valid-target.png] Vérification de la validité de cibles
+
+
+ Déplacement d'une carte dans une zone ordonnée
+
+[../images/guides/user/choose-order.png] Ordonnancement
+
+
+ Détermination des dommages et cibles maximales pour la carte <Fireball> (carte
+ issue du jeu <<Magic : l'Assemblée>>)
+
+[../images/guides/user/input-integer.png] fb
+

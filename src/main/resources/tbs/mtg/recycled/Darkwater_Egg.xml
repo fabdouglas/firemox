@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Darkwater Egg">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  2, T, Sacrifice Darkwater Egg: Add UB to your mana pool. Draw a card. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<give-mana blue="1" black="1" />
+				<target-list operation="clear" name="%"/>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

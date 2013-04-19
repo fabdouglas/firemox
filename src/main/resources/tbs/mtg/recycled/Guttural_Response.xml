@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Guttural Response">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		(r/g)
+	instant
+	
+	counter target blue instant spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>instant </idcards>
+		<properties> </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana red="1"/>
+				<action ref="target-spell">
+					<test>
+						<and>
+							<has-color color="blue"/>
+							<has-idcard idcard="instant"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana green="1"/>
+				<action ref="target-spell">
+					<test>
+						<and>
+							<has-color color="blue"/>
+							<has-idcard idcard="instant"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

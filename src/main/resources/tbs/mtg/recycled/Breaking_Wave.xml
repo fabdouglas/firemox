@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Breaking Wave">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2uu
+	sorcery
+	you may play breaking wave any time you could play an instant if you pay 2 more to play it.
+	simultaneously untap all tapped creatures and tap all untapped creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<in-zone zone="playANDtapped"/>
+						</and>
+					</test>
+				</target>
+				<untap/>
+				<target-list operation='clear' name='%'/>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</target>
+				<tap/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<pay-mana colorless="2"/>
+			</cost>
+			<effects>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<in-zone zone="playANDtapped"/>
+						</and>
+					</test>
+				</target>
+				<untap/>
+				<target-list operation='clear' name='%'/>
+				<target type='card' mode='all' restriction-zone='play'>
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</target>
+				<tap/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

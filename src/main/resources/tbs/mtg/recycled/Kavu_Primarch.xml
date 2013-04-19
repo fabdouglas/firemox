@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kavu Primarch">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - kavu
+	3/3
+	convoke 
+	kicker 4 
+	if the kicker cost was paid, kavu primarch comes into play with four +1/+1 counters on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>kavu convoke </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="4"/>
+			</actions>
+			<actions>
+				<target type="this" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+				<add-object object-name="+1/+1" />
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disorder">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  1r 
+		disorder deals 2 damage to each white creature and each player who controls a 
+		white creature.   
+	-->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+			<register index="colorless" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<has-color color="white" />
+					</test>
+				</action>
+				<target mode="all" type="player">
+					<test>
+						<has restriction-zone="play">
+							<and>
+								<controller player="super.tested" card="tested" />
+								<has-idcard idcard="creature" card="tested" />
+								<has-color color="white" card="tested" />
+							</and>
+						</has>
+					</test>
+				</target>
+				<assign-damage value="2" type="damage-normal" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

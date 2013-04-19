@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lurking Informant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1 
+	creature - human rogue
+	1/2
+	
+	2, t :look at the top card of target player's library. you may put that card into that player's graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='9'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>creature </idcards>
+		<properties>human rogue  </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="target-list.first" />
+							<position position="top" />
+						</and>
+					</test>
+				</target>
+				<face-up for="you" />
+				<choice cancel="true" hop="1">
+					<either>
+						<action ref="put-in-graveyard" />
+					</either>
+				</choice>
+				<face-down for="you" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

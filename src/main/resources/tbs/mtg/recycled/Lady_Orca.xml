@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Lady Orca">
+<rules-author-comment></rules-author-comment>
+
+<!--  5br -->
+
+	<init>
+		<registers>
+			<register index="red" value="1"/>
+			<register index="black" value="1"/>
+			<register index="colorless" value="5"/>
+			<register index="power" value="7"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>legend demon</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Looter il-Kor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - kor rogue
+	1/1
+	shadow 
+	whenever looter il-kor deals damage to an opponent, draw a card, then discard a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>kor rogue shadow </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-player/>
+						<not>
+							<is-player target="you"/>
+						</not>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+				<action ref='discard' value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

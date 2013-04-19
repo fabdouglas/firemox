@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Grafted Skullcap">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	at the beginning of your draw step, draw a card.
+	at the end of your turn, discard your hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='draw'>
+				<test ref='during-your-draw'/>
+			</beginning-of-phase>
+			<effects>
+				<target type='you'/>
+				<action ref='draw-a-card'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone="play">
+			<end-of-phase phase="eot">
+				<test ref="during-your-eot"/>
+			</end-of-phase>
+			<effects>
+				<action ref="discard" value="all"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

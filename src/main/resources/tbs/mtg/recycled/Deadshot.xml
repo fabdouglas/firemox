@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Deadshot">
+	<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+	<!--  {3}{r} tap target creature. 
+		it deals damage equal to its power to another target creature. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="red" value="1" />
+		</registers>
+		<colors>red</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+				<tap />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<assign-damage type="damage-normal" from="target-list.first"
+					to="target-list.last">
+					<value register="target-list.first" index="power" />
+				</assign-damage>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

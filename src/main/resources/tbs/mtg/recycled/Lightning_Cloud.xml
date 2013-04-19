@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lightning Cloud">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	enchantment
+	whenever a player plays a red spell, you may pay r. if you do, lightning cloud deals 1 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-color color="red"/>
+				</test>
+			</casting>
+			<cost>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana red="1"/>
+						<assign-damage value='1' type='damage-normal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

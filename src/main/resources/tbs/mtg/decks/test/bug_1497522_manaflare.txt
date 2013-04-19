@@ -1,0 +1,4 @@
+mana flare;20
+super card;20
+Wasteland;20
+carnophage;20

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mana Chains">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	enchantment - aura
+	enchant creature
+	enchanted creature has "cumulative upkeep 1."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='enchant-creature'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<ability ref='cumulative-upkeep'/>
+					<triggered-ability resolution='normal' zone='play' name='cumulative-upkeep'>
+						<beginning-of-phase phase='upkeep'>
+							<test ref='during-your-upkeep'/>
+						</beginning-of-phase>
+						<cost>
+							<choice cancel='false'>
+								<either>
+									<pay-mana>
+										<colorless>
+											<counter object-name='age' card='this'/>
+										</colorless>
+									</pay-mana>
+								</either>
+								<either>
+									<action ref='sacrifice-this'/>
+								</either>
+							</choice>
+						</cost>
+					</triggered-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

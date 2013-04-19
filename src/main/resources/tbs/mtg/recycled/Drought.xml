@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drought">
+<rules-author-comment>Oracle2Xml generator v0.86.39</rules-author-comment>
+
+<!--  {2}{w}{w} at the beginning of your upkeep, 
+sacrifice drought unless you pay {w}{w}. 
+as an additional cost to play spells with {b} in their mana costs and activated 
+abilities with {b} in their activation costs, 
+that spell or ability's controller sacrifices a swamp for each {b} in that cost. 
+
+-->
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="2"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana white="2"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+
+	</abilities>
+	<modifiers>
+	    <static-modifier filter-zone="hand">
+	        <modifiers>
+	            <register-modifier index="white" operation="add" value="1" linked="true" layer="global"/>
+	        </modifiers>
+						<while>
+							<and>
+	            	<has-color color="white"/>
+		       		<controller player="you"/> 
+	            </and>
+					</while>
+	    </static-modifier>
+	</modifiers>
+</card>

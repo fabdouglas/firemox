@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Gaea's Liege">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{g}{g}{g} 
+as long as gaea's liege isn't attacking, 
+its power and toughness are each equal to the number of forests you control. 
+
+as long as gaea's liege is attacking, 
+its power and toughness are each equal to the number of forests defending player controls. 
+
+{t}: target land becomes a forest until gaea's liege leaves play. 
+
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="3"/>
+			<register index="power">
+				<value><counter restriction-zone="play">
+					<and>
+						<has-idcard idcard="forest"/>
+						<or>
+							<and>
+								<test ref="is-attacking"/>
+								<controller player="opponent"/>
+							</and>
+							<and>
+								<not>
+									<test ref="is-attacking"/>
+								</not>
+								<controller player="you"/>
+							</and>
+						</or>
+					</and>
+				</counter></value>
+			</register>
+			<register index="toughness">
+				<value><counter restriction-zone="play">
+					<and>
+						<has-idcard idcard="forest"/>
+						<or>
+							<and>
+								<test ref="is-attacking"/>
+								<controller player="opponent"/>
+							</and>
+							<and>
+								<not>
+									<test ref="is-attacking"/>
+								</not>
+								<controller player="you"/>
+							</and>
+						</or>
+					</and>
+				</counter></value>
+			</register>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>avatar</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="target-land"/>
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier idcard="forest" operation="set" linked="true"/> 
+					<property-modifier property="basic-land" operation="add" linked="true"/>
+					<ability-modifier operation="clear" linked="true">
+						<abilities/>
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

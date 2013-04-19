@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<proxy xmlns="http://sourceforge.net/projects/firemox/proxy"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox/proxy ../../proxy.xsd"
+	name="Magic Workstation (zip)" home="http://www.magicworkstation.com"
+	language="english" encoding="iso-8859-1">
+
+	<alias>
+		<alias property="card.set" local-value="U" ref="un" />
+		<alias property="card.set" local-value="B" ref="be" />
+		<alias property="card.set" local-value="A" ref="al" />
+		<alias property="card.set" local-value="MI" ref="mr" />
+		<alias property="card.set" local-value="MR" ref="mi" />
+		<alias property="card.set" local-value="FD" ref="5dn" />
+		<alias property="card.set" local-value="AL" ref="ai" />
+	</alias>
+
+	<pictures>
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}${card.version}.full.jpg"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}.full.jpg"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}1.full.jpg"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}2.full.jpg"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}${card.version}.full.JPG"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}.full.JPG"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}1.full.JPG"
+			base="http://www.volcanichammer.com/files" />
+		<picture url="${card.set}Full.zip!/${card.set}/${card.name}2.full.JPG"
+			base="http://www.volcanichammer.com/files" />
+	</pictures>
+
+	<!-- 
+		No data stream available for this proxy : only picture.
+	-->
+	<data />
+
+</proxy>

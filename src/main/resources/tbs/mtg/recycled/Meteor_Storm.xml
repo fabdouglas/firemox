@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Meteor Storm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		rg
+	enchantment
+	2rg, discard two cards at random: meteor storm deals 4 damage to target creature or player.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' green='1' colorless='2' />
+				<action ref='discard-random' value="2"/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

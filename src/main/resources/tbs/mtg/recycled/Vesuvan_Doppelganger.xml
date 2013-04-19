@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vesuvan Doppelganger">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		3uu
+	creature - doppelganger
+	0/0
+	as vesuvan doppelganger comes into play, you may choose a creature 
+		in play. if you do, vesuvan doppelganger comes into play as a copy of that 
+		creature except for its color and gains "at the beginning of your upkeep, 
+		you may have this creature become a copy of target creature except for its 
+		color. if you do, this creature gains this ability."
+	-->
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='colorless' value='3' />
+			<register index='power' value='0' />
+			<register index='toughness' value='0' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play" />
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" restriction-zone="play" raise-event="false" mode="choose"
+					cancel="true" hop="2">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</target>
+				<copy-card card="target-list.last" to="this">
+					<excludes colors="all" />
+				</copy-card>
+				<action ref="put-in-play" />
+			</effects>
+		</replacement-ability>
+
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep' />
+			</beginning-of-phase>
+			<cost>
+				<target type="card" restriction-zone="play" mode="choose" cancel="true"
+					hop="abortme">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<copy-card card="target-list.last" to="this">
+					<excludes colors="all" />
+				</copy-card>
+				<add-ability ref="this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

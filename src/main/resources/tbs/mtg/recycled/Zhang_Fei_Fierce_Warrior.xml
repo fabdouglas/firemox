@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Zhang Fei, Fierce Warrior">
+<rules-author-comment></rules-author-comment>
+
+<!--  4ww horsemanship, vigilance -->
+
+	<init>
+		<registers>
+			<register index="white" value="2"/>
+			<register index="colorless" value="4"/>
+			<register index="power" value="4"/>
+			<register index="toughness" value="4"/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>vigilance horsemanship legend human soldier warrior</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

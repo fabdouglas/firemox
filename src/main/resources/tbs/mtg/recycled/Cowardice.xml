@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cowardice">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="blue" value="2"/>
+			<register index="colorless" value="3"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<targeted>
+				<destination-test>
+					<and>
+						<not>
+							<is-player/>
+						</not>
+						<in-zone zone="play"/>
+						<has-idcard idcard="creature"/>
+					</and>
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type="context.target"/>
+				<move-card destination="hand" controller="target.owner"/>
+			</effects>				
+		</triggered-ability>
+	</abilities>
+</card>

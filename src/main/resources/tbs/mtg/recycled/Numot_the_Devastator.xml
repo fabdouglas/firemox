@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Numot, the Devastator">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rwu
+	legendary creature - dragon
+	6/6
+	flying
+	whenever numot, the devastator deals combat damage to a player, you may pay 2r. if you do, destroy up to two target lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white red blue </colors>
+		<idcards>creature </idcards>
+		<properties>legend dragon flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<cost>
+				<repeat value="2"/>
+				<target type="card" hop="1" mode="choose" restriction-zone="play">
+					<test ref="is-targetable-land" />
+				</target>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<pay-mana red="1" colorless="2"/>
+						<action ref='destroy'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Razor Barrier">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	instant
+	target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-permanent'>
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-artifacts' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-red' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-white' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-black' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-blue' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property='protection-from-green' linked='false'>
+								<until>
+									<end-of-phase phase='cleanup'/>
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+				</choice>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

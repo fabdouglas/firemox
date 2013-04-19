@@ -1,0 +1,6 @@
+crusade;20
+savannah lions;20
+tundra;20
+super card;20
+wonder;20
+compulsion;20

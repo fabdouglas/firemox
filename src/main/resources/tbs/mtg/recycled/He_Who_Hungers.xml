@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="He Who Hungers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	legendary creature - spirit
+	3/2
+	flying
+	1, sacrifice a spirit: target opponent reveals his or her hand. choose a card from it. that player discards that card. play this ability only any time you could play a sorcery.
+	soulshift 4
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='spirit'/>
+					</test>
+				</action>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='discard-a-player' value="1"/>
+			</effects>
+		</activated-ability>
+		<ability ref='soulshift4'/>
+	</abilities>
+</card>

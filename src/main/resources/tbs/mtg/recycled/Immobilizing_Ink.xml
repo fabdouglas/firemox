@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Immobilizing Ink">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	enchantment - aura
+	enchant creature
+	enchanted creature doesn't untap during its controller's untap step.
+	enchanted creature has "1, discard a card: untap this creature."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='does-not-untap'>
+		<modifiers>
+			<ability-modifier operation="add" linked="true">
+				<abilities>
+					<activated-ability playable='instant' name='' zone='play'>
+						<cost>
+							<pay-mana colorless="1"/>
+							<action ref='discard' value='1'/>
+						</cost>
+						<effects>
+							<target type="this"/>
+							<untap/>
+						</effects>
+					</activated-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+	</attachment>
+</card>

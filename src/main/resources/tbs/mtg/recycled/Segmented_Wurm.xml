@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Segmented Wurm">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rg
+	creature - wurm
+	5/5
+	whenever segmented wurm becomes the target of a spell or ability, put a -1/-1 counter on it.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>wurm </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<targeted>
+				<destination-test>
+					<is-this />
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type="this"/>
+				<add-object object-name='-1/-1'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

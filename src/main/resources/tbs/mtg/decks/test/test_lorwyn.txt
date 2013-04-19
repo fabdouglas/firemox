@@ -1,0 +1,6 @@
+Adder-Staff Boggart;4
+Betatester Toolbox;8
+Flamekin Bladewhirl;4
+Flamekin Harbinger;4
+Ghostly Changeling;4
+Nova Chaser;4

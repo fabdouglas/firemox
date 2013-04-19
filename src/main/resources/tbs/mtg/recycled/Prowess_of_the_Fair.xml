@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Prowess of the Fair">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	tribal enchantment - elf
+	whenever another nontoken elf is put into your graveyard from play, you may put a 1/1 green elf warrior creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>tribal global-enchantment </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<is-this/>
+						</not>
+						<not>
+							<has-property property="token"/>
+						</not>
+						<has-property property="elf"/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<controller player="you"/>
+						<in-zone zone='graveyard' card='tested'/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<create-card>
+							<card name='Elf'>
+								<rules-author-comment></rules-author-comment>
+								<init>
+									<registers>
+										<register index='power' value='1'/>
+										<register index='toughness' value='1'/>
+									</registers>
+									<colors>green</colors>
+									<idcards>creature</idcards>
+									<properties>token elf warrior</properties>
+								</init>
+							</card>
+						</create-card>
+						<move-card controller='you' destination='play'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

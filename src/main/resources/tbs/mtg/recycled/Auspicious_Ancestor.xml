@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Auspicious Ancestor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - human cleric
+	2/3
+	when auspicious ancestor is put into a graveyard from play, you gain 3 life.
+	whenever a player plays a white spell, you may pay 1. if you do, you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref='gain-life' value='3'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+					<source-test>
+						<and>
+							<not>
+								<is-this />
+							</not>
+							<not>
+								<in-zone zone="play" />
+							</not>
+							<has-color color="white"/>
+						</and>
+					</source-test>
+					<destination-test>
+						<in-zone zone="play" />
+					</destination-test>
+				</moved-card>
+				<effects>
+					<choice controller="you" cancel="true">
+						<either>
+							<pay-mana colorless="1"/>
+							<action ref='gain-life' value='1'/>
+						</either>
+					</choice>
+				</effects>
+		</triggered-ability>
+	</abilities>
+</card>

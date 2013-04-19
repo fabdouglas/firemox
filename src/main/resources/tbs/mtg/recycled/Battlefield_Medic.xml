@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battlefield Medic">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	creature - cleric
+	1/1
+	t :prevent the next x damage that would be dealt to target creature this turn, where x is the number of clerics in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<create-ability>
+					<registers>
+						<register index="0">
+							<value>
+								<counter restriction-zone="play">
+									<has-property property="cleric"/>
+								</counter>
+							</value>
+						</register>
+					</registers>
+					<save target="target-list.last" />
+					<ability ref="prevent-x" />
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

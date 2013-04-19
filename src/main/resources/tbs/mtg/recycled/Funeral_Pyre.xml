@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Funeral Pyre">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	instant
+	remove target card in a graveyard from the game. its owner puts a 1/1 white spirit creature token with flying into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<target type="card" mode="choose" raise-event="true" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<create-card>
+	                <card name="Spirit">
+	                    <init>
+	                        <registers>
+	                            <register index="power" value="1"/>
+	                            <register index="toughness" value="1"/>
+	                        </registers>
+	                        <colors>white</colors>
+	                        <idcards>creature</idcards>
+	                        <properties>spirit token flying</properties>
+	                    </init>
+	                </card>
+	            </create-card>
+	            <move-card controller="target.owner" destination="play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

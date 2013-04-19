@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Assembly Hall">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5
+	artifact
+	4, t :reveal a creature card in your hand. search your library for a card with the same name as that card, reveal the card, and put it into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='4' />
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<has-idcard idcard="creature"/>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<action ref='search-lib-reveal' value="1">
+					<test>
+						<has-name name="target-list.last.name"/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

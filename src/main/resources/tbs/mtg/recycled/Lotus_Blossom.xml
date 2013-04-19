@@ -1,0 +1,102 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lotus Blossom">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	at the beginning of your upkeep, you may put a petal counter on lotus blossom.
+	t, sacrifice lotus blossom: add x mana of any one color to your mana pool, where x is the number of petal counters on lotus blossom.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<target type='this'/>
+						<add-object object-name='petal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<red>
+						<counter object-name="petal" card="this"/>
+					</red>
+				</give-mana>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<green>
+						<counter object-name="petal" card="this"/>
+					</green>
+				</give-mana>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<white>
+						<counter object-name="petal" card="this"/>
+					</white>
+				</give-mana>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<black>
+						<counter object-name="petal" card="this"/>
+					</black>
+				</give-mana>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<blue>
+						<counter object-name="petal" card="this"/>
+					</blue>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

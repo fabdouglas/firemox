@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crush Underfoot">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1r
+	tribal instant - giant
+	choose a giant creature you control. it deals damage equal to its power to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>tribal instant </idcards>
+		<properties>giant </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="giant"/>
+						</and>
+					</test>
+				</action>
+				<assign-damage type='damage-normal' from="target-list.last" to="target-list.first">
+					<value register='target-list.last' index='power'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

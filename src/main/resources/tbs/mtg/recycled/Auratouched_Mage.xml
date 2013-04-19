@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Auratouched Mage">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--  When Auratouched Mage comes into play, search your library
+		for an Aura card that could enchant it. If Auratouched Mage
+		is still in play, attach that Aura to it. Otherwise, reveal
+		the Aura card and put it into your hand. Then shuffle your
+		library. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5" />
+			<register index="white" value="1" />
+			<register index="power" value="3" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<is-this />
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="search-lib-up-to" value="1">
+					<test>
+						<and>
+							<has-idcard idcard="local-enchantment" />
+							<valid-target-attachment from="tested" card="this" />
+						</and>
+					</test>
+				</action>
+				<action ref="restore-library-visibility" name="%" />
+				<if-then-hop elsehop="3">
+					<test>
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</test>
+				</if-then-hop>
+				<action ref="return-to-hand" />
+				<hop value="2" />
+				<attach from="target-list.last" to="this" />
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

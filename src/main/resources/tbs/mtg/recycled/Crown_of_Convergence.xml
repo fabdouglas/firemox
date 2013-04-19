@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Crown of Convergence">
+<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you"/>
+							<position position="top"/>
+						</and>
+					</test>
+				</target>
+				<face-up for="everyone"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="library"/>
+						<position position="top"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<or>
+						<not>
+							<in-zone zone="library"/>
+						</not>
+						<and>
+							<in-zone zone="library"/>
+							<not>
+								<position position="top"/>
+							</not>
+						</and>
+					</or>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<is target="context.card"/>
+					</test>
+				</target>
+				<face-down for="everyone"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<not>
+						<and>
+							<in-zone zone="library"/>
+							<position position="top"/>
+						</and>
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="library"/>
+						<position position="top"/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<is target="context.card"/>
+					</test>
+				</target>
+				<face-up for="everyone"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana green="1" white="1"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" raise-event="false" restriction-zone="library">
+					<test>
+						<position position="top"/>
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="library" position="bottom"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

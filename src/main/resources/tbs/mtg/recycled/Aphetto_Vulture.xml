@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Aphetto Vulture">
+	<rules-author-comment>By Trigger911</rules-author-comment>
+<!-- Text(ON): 3/2, Flying. ; 
+When ~this~ is put into a graveyard from play, you may put target Zombie card from your graveyard 
+on top of your library.
+
+The ability can be used to return itself to the top of your library if it is still in your graveyard 
+when the ability resolves. [Onslaught FAQ 2002/09/24]
+
+-->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="black" value="2"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>flying zombie bird</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="true">
+					<either>
+            <target type="card" mode="choose" restriction-zone="graveyard">
+                <test>
+                    <and>
+                        <controller player="you"/>
+                        <has-property property="zombie"/>
+ 					         </and>
+                </test>
+            </target>
+						<action ref="move-library-top"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

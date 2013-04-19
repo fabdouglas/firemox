@@ -1,0 +1,4 @@
+Swamp;20
+Super card;20
+duress;20
+Dark ritual;20

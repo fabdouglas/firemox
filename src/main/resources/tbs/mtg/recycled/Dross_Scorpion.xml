@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dross Scorpion">
+<rules-author-comment></rules-author-comment>
+
+<!--  {4} whenever dross scorpion or another artifact creature is put into a 
+graveyard from play, you may untap target artifact. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature</idcards>
+		<properties>scorpion</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone="play"/>
+						<or>
+							<is-this/>
+							<has-idcard idcard="artifact-creature"/>
+						</or>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<action ref="target-artifact"/>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<untap/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

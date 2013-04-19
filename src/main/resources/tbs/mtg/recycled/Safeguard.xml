@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Safeguard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	enchantment
+	2w: prevent all combat damage that would be dealt by target creature this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="deals-no-combat-damage"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

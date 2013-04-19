@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mistbind Clique">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3u
+	creature - faerie wizard
+	4/4
+	flash
+	flying
+	champion a faerie 
+	when a faerie is championed with mistbind clique, tap all lands target player controls.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie wizard flash flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+					<either>
+						<action ref="target-creature">
+							<test>
+								<and>
+									<not>
+										<is-this/>
+									</not>
+									<has-property property="faerie"/>
+									<controller player="you"/>
+								</and>
+							</test>
+						</action>
+						<action ref="remove-from-game"/>
+						<create-ability>
+							<save target="target-list.last"/>
+							<triggered-ability zone="play">
+								<moved-card>
+									<source-test>
+										<and>
+											<is-this />
+											<in-zone zone="play" />
+										</and>
+									</source-test>
+									<destination-test>
+										<not>
+											<in-zone zone="play" />
+										</not>
+									</destination-test>
+								</moved-card>
+								<effects>
+									<target type="saved"/>
+									<action ref="move-to-play" />
+									<unregister-this />
+								</effects>
+							</triggered-ability>
+						</create-ability>
+						<action ref="target-player"/>
+						<target type="card" mode="all" restriction-zone="play">
+							<test>
+								<and>
+									<has-idcard idcard="land"/>
+									<controller player="target-list.last"/>
+								</and>
+							</test>
+						</target>
+						<tap/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blinkmoth Infusion">
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		12uu
+		instant
+		affinity for artifacts 
+		untap all artifacts.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='colorless' value='12' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="artifact" />
+					</counter-test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="all-artifacts" />
+				<untap />
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--[[apt lang=en header]]`______
+Cloudstone Curio
+`______
+Hoani CROSS
+`______
+November 29 2006
+
+Cloudstone Curio
+-->
+<!--[[apt lang=fr header]]`______
+Cloudstone Curio
+`______
+Hoani CROSS
+`______
+29 novembre 2006
+
+Cloudstone Curio
+-->
+<!--[[apt lang=en]]
+`This card is somewhat complicated to implement : it has interactions with the
+`events concerning movement of cards and it has to check whether two cards
+`share a permanent type. Below you will find a picture of this card :
+
+[http://magiccards.info/scans/en/rav/257.jpg]
+
+`Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+`Cette carte est quelque peu compliquée à implémenter : elle a des interactions
+`avec les événements concernant le mouvement des cartes et elle doit également
+`vérifier si deux cartes partagent un type de permanent. Vous trouverez
+`ci-dessous l'image de cette carte :
+
+[http://magiccards.info/scans/en/rav/257.jpg]
+
+`Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]]-->
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Cloudstone Curio">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<!--[[apt lang=en]]
+	`The <<<\<init\>>>> element let us know that this card is an artifact with a
+	`mana cost of 3.
+	-->
+	<!--[[apt lang=fr]]
+	`L'élément <<<\<init\>>>> nous montre que cette carte est un artefact avec un
+	`coût d'invocation de 3.
+	-->
+	<!--[[apt start-code]]-->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+	<!--[[apt end-code]]-->
+
+	<abilities>
+
+		<!--[[apt lang=en]]
+		`Let's observe the abilities of the card because you will find there the most
+		`important parts of the card implementation.
+
+		`The first ability is for sure used to let the owner of this card cast it.
+		-->
+		<!--[[apt lang=fr]]
+		`Observons les capacités de cette carte car elles contiennent les parties les
+		`plus importantes concernant l'implémentation de la carte.
+
+		`La première capacité est bien sûr celle qui permet au propriétaire de cette
+		`carte de l'invoquer.
+		-->
+		<!--[[apt start-code]]-->
+		<ability ref="cast-spell"/>
+		<!--[[apt end-code]]-->
+
+		<!--[[apt lang=en]]
+		`The main ability of the card is a trigerred ability that triggers only when
+		`the card is in play :
+		-->
+		<!--[[apt lang=fr]]
+		`La capacité principale de la carte est une capacité déclenchée qui se déclenche
+		`uniquement pendant que la carte est en jeu :
+		-->
+		<!--[[apt start-code]]-->
+		<triggered-ability zone="play">
+		<!--[[apt end-code]]-->
+
+			<!--[[apt lang=en]]
+			`The card abily starts with "Whenever a nonartifact permanent comes into play
+			`under your control". Thus the ability will trigger if a card is moved from
+			`a zone different from the play zone to the play zone and only if the moved card
+			`is an non-artifact card that you control.
+			-->
+			<!--[[apt lang=fr]]
+			`La capacité de la carte commence par "À chaque fois qu'un permanent
+			`non-artefact arrive en jeu sous votre contrôle". Ainsi la capacité va se
+			`déclencher si une carte est déplacée depuis une zone différente de la zone de
+			`jeu vers la zone de jeu et seulement si la carte déplacée est une carte
+			`non-artefact que vous contrôlez.
+			-->
+			<!--[[apt start-code]]-->
+			<moved-card>
+				<source-test>
+					<not>
+						<in-zone zone="play"/>
+					</not>
+				</source-test>
+				<destination-test>
+					<and>
+						<in-zone zone="play"/>
+						<controller player="you"/>
+						<not>
+							<has-idcard idcard="artifact"/>
+						</not>
+					</and>
+				</destination-test>
+			</moved-card>
+			<!--[[apt end-code]]-->
+
+			<!--[[apt lang=en]]
+			`This ability has a hidden cost : targetting a valid permanent to eventually
+			`return to its owner's hand. That's why the next element is a <<<\<cost\>>>>
+			`element :
+			-->
+			<!--[[apt lang=fr]]
+			`Cette capacité a un coût caché : cibler un permanent valide pour éventuellement
+			`le faire retourner dans la main de son propriétaire. C'est pourquoi l'élément
+			`suivante est un élément <<<\<cost\>>>> :
+			-->
+			<!--[[apt start-code]]-->
+			<cost>
+
+				<!--[[apt lang=en]]
+				`The controller of the card has the choice to target or not the permanent, that's
+				`why you'll see the following element with the attribute <<<cancel>>> set to
+				`<<<true>>> :
+				-->
+				<!--[[apt lang=fr]]
+				`Le contrôlleur de carte a le choix de cibler ou non le permanent, c'est pourquoi
+				`vous trouverez l'élément suivante avec l'attribut <<<cancel>>> renseigné à
+				`<<<true>>> :
+				-->
+				<!--[[apt start-code]]-->
+				<choice cancel="true">
+					<either>
+
+						<!--[[apt lang=en]]
+						`Letting the controller of the card target a permanent is done by the following
+						`element (the <<<raise-event>>> attribute is set to <<<false>>> because the
+						`ability is not targetted) :
+						-->
+						<!--[[apt lang=fr]]
+						`Laisser le contrôleur cibler un permanent est est réalisé par l'élément suivant
+						`(l'attribut <<<raise-event>>> est renseigné avec <<<false>>> car la capacité
+						`n'est pas ciblée) :
+						-->
+						<!--[[apt start-code]]-->
+						<target type="card" mode="choose" restriction-zone="play" raise-event="false">
+							<test>
+
+								<!--[[apt lang=en]]
+								`The test must verify that the targeted permanent (<<<"tested">>>) is controlled
+								`by you and that it is not the card that triggered this ability
+								`(<<<"context.card">>>) and that it shares a card type with the card that
+								`triggered this ability :
+								-->
+								<!--[[apt lang=fr]]
+								`Le test doit vérifier que le permanent ciblé (<<<"tested">>>) est contrôlé par
+								`vous et qu'il n'est pas la carte qui vient de déclencher cette capacité
+								`(<<<"context.card">>>) et qu'il partage un type de carte avec la carte qui
+								`vient de déclencher cette capacité :
+								-->
+								<!--[[apt start-code]]-->
+								<and>
+									<controller player="you"/>
+									<not>
+										<is target="context.card"/>
+									</not>
+									<sup right="0">
+										<left>
+											<and>
+												<left>
+													<card-types card="context.card"/>
+												</left>
+												<right>
+													<card-types card="tested"/>
+												</right>
+											</and>
+										</left>
+									</sup>
+								</and>
+								<!--[[apt end-code]]-->
+							</test>
+						</target>
+						<!--[[apt end-code]]-->
+					</either>
+				</choice>
+				<!--[[apt end-code]]-->
+			</cost>
+			<!--[[apt end-code]]-->
+
+			<!--[[apt lang=en]]
+			`The effects of the triggered ability are declared with the following element :
+			-->
+			<!--[[apt lang=fr]]
+			`Les effets de cette capacité déclenchée sont déclarés avec l'élément suivant :
+			-->
+
+			<!--[[apt start-code]]-->
+			<effects>
+				<action ref="return-to-hand"/>
+			</effects>
+			<!--[[apt end-code]]-->
+
+			<!--[[apt lang=en]]
+			`The <<<"return-to-hand">>> action reference just return the card in the target
+			`list to their respective owner's hand.
+			-->
+			<!--[[apt lang=fr]]
+			`La référence d'action <<<"return-to-hand">>> retourne les cartes de la liste
+			`des cibles dans la main de leurs propriétaires respectifs.
+			-->
+
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Pariah's Shield">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="5" />
+		</registers>
+		<idcards>artifact</idcards>
+		<properties>equipment</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" zone="play">
+			<cost>
+				<pay-mana colorless="3" />
+				<action ref="target-equipable-creature" />
+			</cost>
+			<effects>
+				<action ref="equip" />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<ability-modifier>
+				<abilities>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-any">
+							<destination-test>
+								<is-this player="controller" />
+							</destination-test>
+						</assigned-damage>
+						<effects>
+							<assign-damage from="context.card2" to="attachedto" value="context.int" />
+						</effects>
+					</replacement-ability>
+				</abilities>
+			</ability-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

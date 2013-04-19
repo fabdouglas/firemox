@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Radha, Heir to Keld">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		rg
+	legendary creature - elf warrior
+	2/2
+	whenever radha, heir to keld attacks, you may add rr to your mana pool.
+	t :add g to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>creature </idcards>
+		<properties>legend elf warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-attacking>
+				<test>
+					<is-this/>
+				</test>
+			</declared-attacking>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<give-mana red="2"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<ability ref="tap-add-G"/>
+	</abilities>
+</card>

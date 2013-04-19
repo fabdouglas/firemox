@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mishra's War Machine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact creature
+	5/5
+	banding
+	at the beginning of your upkeep, unless you discard a card, tap mishra's war machine and it deals 3 damage to you.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>banding juggernaut</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref="discard" value="1"/>
+					</either>
+					<either>
+						<target type='this'/>
+						<tap/>
+						<target-list operation="clear"/>
+						<target type='you'/>
+						<assign-damage value='3' type='damage-normal'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

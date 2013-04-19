@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Thalakos Mistfolk">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2u
+	creature - illusion
+	2/1
+	shadow 
+	u: put thalakos mistfolk on top of its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>thalakos illusion shadow </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="move-library-top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

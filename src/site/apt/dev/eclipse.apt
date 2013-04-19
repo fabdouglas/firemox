@@ -1,0 +1,164 @@
+ ----
+Workspace configuration
+ ----
+Fabrice Daugan
+ ----
+September 09 2007
+
+Configure Eclipse to make cards and help Firemox : about 10 minutes (download excluded)
+
+  There are some softwares to install and configurations to do for :
+ 
+ 	Java : the language
+ 	 
+  Eclipse (itself) : the IDE
+  
+  Subversion (aka SVN) : the source control
+  
+  Maven 2 : the build manager
+
+* Get Java 6.0
+
+	Get the latest {{{http://java.com/fr/download/index.jsp} Java JDK 6.0}} from 
+	the Sun site.
+	
+	Install it.
+
+* Get Eclipse
+
+	From this location {{{http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/20070927/eclipse-java-europa-fall-win32.zip} Eclipse 3.3+}}.
+	
+  Unzip the downloaded zip into any directory that will become your eclipse home.
+  
+  Launch <<<eclipse.exe>>> or <<<eclipse.sh>>>.
+
+  Note that if you are running a modern Linux distribution, it is likely that Eclipse is either
+  already installed or can be easily installed using your distribution's package manager 
+  (eg. APT, yum, etc.)
+
+* Get SVN plugin from Eclipse
+
+  The goal of the Subversion (SVN) project is to build a version control system that 
+  is a compelling replacement for CVS in the open source community.
+  
+	You can find the following SVN plugin instructions 
+	{{{http://subclipse.tigris.org/install.html} here}}
+	
+	Here you will find a screenshot tour of the Subclipse installation process in Eclipse 3.x.
+	These particular screens were captured in Eclipse 3.2 running on Windows XP.
+
+** Step 1:
+
+	Begin the installation from the Eclipse Help menu item.
+
+[../images/guides/dev/subclipse_install-1.png]
+
+** Step 2:
+
+	This screenshot show the screen as it initially comes up. In this case you will 
+	need to change the radio button to indicate that this is a new install.
+
+[../images/guides/dev/subclipse_install-2.png]
+
+** Step 3:
+
+	This screen will vary depending on the features you have installed already.
+	You want to click on the <New Remote Site> button. If you are behind a proxy and 
+	the Eclipse install mechanism does not work, then you can download a zipped 
+	version of the update site and then click the <New Local Site> button instead.
+
+[../images/guides/dev/subclipse_install-3.png]
+
+** Step 4:
+
+	This screen is showing the <New Remote Site> dialog, filled in with the correct 
+	information to install Subclipse.
+	
+	Name: <<<Subclipse>>>
+	
+	URL:  <<<http://subclipse.tigris.org/update_1.2.x>>>
+
+[../images/guides/dev/subclipse_install-4.png]
+
+
+** Step 5:
+
+	When you first come back to this screen, the site you added will NOT be selected. 
+	Be sure to select it before clicking Next.
+
+[../images/guides/dev/subclipse_install-5.png]
+
+** Step 6:
+
+	This next screen shows all of the features that are available to install.
+
+[../images/guides/dev/subclipse_install-6.png]
+
+** Step 7:
+
+	Click the button to accept the license agreement.
+
+[../images/guides/dev/subclipse_install-7.png]
+
+** Step 8:
+
+	Confirm the install location
+
+[../images/guides/dev/subclipse_install-8.png]
+
+** Step 9:
+
+	There is an Eclipse preference to turn off this next dialog. I have never seen a 
+	signed feature. Not even Eclipse.org nor IBM sign their features.
+
+[../images/guides/dev/subclipse_install-9.png]
+
+** Step 10:
+
+	Just a screenshot of the in-process installation.
+
+[../images/guides/dev/subclipse_install-10.png]
+
+** Step 11:
+
+	Eclipse needs to be restarted after installing Subclipse.
+
+[../images/guides/dev/subclipse_install-11.png]
+
+** Step 12:
+
+	Finally, after restarting Eclipse, the first thing you will typically want to do 
+	is open the Subclipse Repository perspective where you can define your repositories.
+	Be sure to also check the online help as well as the Subclipse preferences located 
+	under Team -> SVN.
+
+[../images/guides/dev/subclipse_install-12.png]
+
+* Get Maven2
+
+	Maven is a software project management and comprehension tool. Based on the 
+	concept of a project object model (POM), Maven can manage a project's build, 
+	reporting and documentation from a central piece of information.
+	
+	You can install the Maven 2.x from this site :
+	{{{http://maven.apache.org/download.html}http://maven.apache.org/download.html}}
+	
+	The minimal version is 2.0.7.
+
+* Get m2eclipse plugin from Eclipse
+
+  Maven Integration for Eclipse provides tight integration for Maven into the IDE.
+  
+	You can install the Maven 2.x Plug-in for Eclipse by using the following update 
+	site from within Eclipse:
+	{{{http://m2eclipse.codehaus.org/}http://m2eclipse.codehaus.org}}
+	
+	All following instructions can been found {{{http://maven.apache.org/eclipse-plugin.html} here}}
+	There is a Flash demo that you can view which shows you how to install the 
+	plug-in if you are unfamiliar with Eclipse's standard install mechanism:
+	{{{http://m2eclipse.codehaus.org/Installing_Maven_2.0_plugin_for_Eclipse.html}http://m2eclipse.codehaus.org/Installing_Maven_2.0_plugin_for_Eclipse.html}}
+	
+	Optionally, you can see what the Maven 2.x Plug-in for Eclipse can do by viewing 
+	the following demo in Flash:
+	{{{http://m2eclipse.codehaus.org/Maven_2.0_Plugin_for_Eclipse.html}http://m2eclipse.codehaus.org/Maven_2.0_Plugin_for_Eclipse.html}}
+

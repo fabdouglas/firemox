@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Belltower Sphinx">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - sphinx
+	2/5
+	flying
+	whenever a source deals damage to belltower sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>sphinx flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='context.card2.controller'/>
+				<repeat value="context.int"/>
+				<action ref="mill-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

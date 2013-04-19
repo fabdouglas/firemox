@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Michiko Konda, Truth Seeker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	legendary creature - human advisor
+	2/2
+	whenever a source an opponent controls deals damage to you, that player sacrifices a permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human advisor </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<controller player="opponent"/>
+				</source-test>
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="card" mode="contextchoose" raise-event="false" restriction-zone="play">
+					<test>
+						<controller player="context.player" />
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="graveyard" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

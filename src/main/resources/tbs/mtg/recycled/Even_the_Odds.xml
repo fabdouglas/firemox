@@ -1,0 +1,69 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Even the Odds">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	instant
+	play even the odds only if you control fewer creatures than each opponent.
+	put three 1/1 white soldier creature tokens into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<test>
+				<inf>
+					<left>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="you"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</left>
+					<right>
+						<counter restriction-zone="play">
+							<and>
+								<controller player="opponent"/>
+								<has-idcard idcard="creature"/>
+							</and>
+						</counter>
+					</right>
+				</inf>
+			</test>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<repeat value='3'/>
+				<create-card>
+					<card name='Soldier'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>white</colors>
+							<idcards>creature</idcards>
+							<properties>token soldier </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Demon's Jester">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3b
+	creature - imp
+	2/2
+	flying
+	hellbent - demon's jester gets +2/+1 as long as you have no cards in hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>imp flying </properties>
+	</init>
+	<modifiers>
+		<register-modifier index="power" value="2" operation="add" linked="false">
+			<while>
+				<test ref="hellbent" />
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" value="1" operation="add" linked="false">
+			<while>
+				<test ref="hellbent" />
+			</while>
+		</register-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

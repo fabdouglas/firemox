@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Phyrexian Negator">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  2b trample 
+		whenever phyrexian negator is dealt damage, sacrifice a permanent for 
+		each 1 damage dealt to it.   
+	-->
+
+	<init>
+		<registers>
+			<register index="black" value="1" />
+			<register index="colorless" value="2" />
+			<register index="power" value="5" />
+			<register index="toughness" value="5" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>trample horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref="sacrifice-a-permanent" value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

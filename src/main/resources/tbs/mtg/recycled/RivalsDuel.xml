@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Rivals' Duel">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	sorcery
+	choose two target creatures that share no creature types. each of those creatures deals damage equal to its power to the other.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+				<action ref='target-creature'>
+					<test>
+						<equal right="0">
+							<left>
+								<card-properties operation="intersection.size" card="target-list.first"
+									card2="tested" lower="FIRST_SUB_TYPE" higher="LAST_SUB_TYPE" />
+							</left>
+						</equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage type='damage-normal' from="target-list.first" to="target-list.last">
+					<value register='target-list.first' index='power'/>
+				</assign-damage>
+				<assign-damage type='damage-normal' from="target-list.last" to="target-list.first">
+					<value register='target-list.last' index='power'/>
+				</assign-damage>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

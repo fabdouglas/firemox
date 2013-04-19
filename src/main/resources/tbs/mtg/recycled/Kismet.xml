@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kismet">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	enchantment
+	artifacts, creatures, and lands your opponents control come into play tapped.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<or>
+							<has-idcard idcard="creature"/>
+							<has-idcard idcard="artifact"/>
+							<has-idcard idcard="land"/>
+						</or>
+						<controller player="opponent"/>
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="context.card" />
+				<move-card destination="playANDtapped" controller="controller" />
+				<unregister-this />
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

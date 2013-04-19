@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dream Cache">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		Draw three cards, then put two cards from your hand both on top of your library 
+		or both on the bottom of your library.
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target type="you" />
+				<repeat value="3" />
+				<action ref="draw-a-card" />
+				<target-list operation="clear" />
+				<repeat value="2" />
+				<target type="card" mode="choose" restriction-zone="hand" raise-event="false" />
+				<choice>
+					<either>
+						<move-card destination="library" position="top" controller="you" />
+					</either>
+					<either>
+						<move-card destination="library" position="bottom" controller="you" />
+					</either>
+				</choice>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

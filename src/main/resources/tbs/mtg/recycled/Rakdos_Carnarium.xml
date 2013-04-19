@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rakdos Carnarium">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--  land rakdos carnarium comes into play tapped. when rakdos carnarium comes into play, return a land you control to its owner's hand. t add br to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="come-into-play-tapped"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play"/>
+						</not>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target mode="choose" type="card" restriction-zone="play" hop="1">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="land" card="tested"/>
+						</and>
+					</test>
+				</target>
+				<move-card controller="target.owner" destination="hand"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable="mana-source" zone="play" resolution="auto">
+				<cost>
+						<action ref="T" />
+				</cost>
+				<effects>
+						<give-mana black="1" red="1" />
+				</effects>
+		</activated-ability>
+	</abilities>
+</card>

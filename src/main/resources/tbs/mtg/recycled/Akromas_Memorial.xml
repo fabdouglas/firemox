@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Akroma's Memorial">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	legendary artifact
+	creatures you control have flying, first strike, vigilance, trample, haste, protection from black, and protection from red.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>legend </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="flying" linked="true" layer="global"/>	
+			 	<property-modifier property="first-strike" linked="true" layer="global"/>
+			 	<property-modifier property="vigilance" linked="true" layer="global"/>
+			 	<property-modifier property="trample" linked="true" layer="global"/>
+			 	<property-modifier property="haste" linked="true" layer="global"/>
+			 	<property-modifier property="protection-from-red" linked="true" layer="global"/>
+			 	<property-modifier property="protection-from-black" linked="true" layer="global"/>		 		
+			</modifiers>
+			<while>
+		 		<and>
+			 		<controller player="you"/>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

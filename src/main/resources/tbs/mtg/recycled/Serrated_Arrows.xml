@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Serrated Arrows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4
+	artifact
+	serrated arrows comes into play with three arrowhead counters on it.
+	at the beginning of your upkeep, if there are no arrowhead counters on serrated arrows, sacrifice it.
+	t, remove an arrowhead counter from serrated arrows: put a -1/-1 counter on target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<modifiers>
+		<object name="arrowhead"/>
+		<object name="arrowhead"/>
+		<object name="arrowhead"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<equal right="0">
+							<left>
+								<counter object-name="arrowhead" card="this"/>
+							</left>
+						</equal>
+						<test ref='during-your-upkeep'/>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<action ref='sacrifice-this'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<target type="this"/>
+				<remove-object object-name="arrowhead"/>
+				<target-list operation="clear"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<add-object object-name='-1/-1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

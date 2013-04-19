@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Gauntlet of Might">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {4} red creatures get +1/+1. 
+whenever a mountain is tapped for mana, its controller adds an additional {r} to his or her mana pool. -->
+	<init>
+		<registers>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+		 		<and>
+			 		<has-idcard idcard="creature"/>
+			 		<has-color color="red"/>
+			 	</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<has-idcard idcard="mountain"/>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability zone="play" optimize="choice">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<give-mana red="1" to="context.player"/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

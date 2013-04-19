@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lion's Eye Diamond">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		0
+	artifact
+	sacrifice lion's eye diamond, discard your hand: add three mana of any one color to your mana pool. play this ability only any time you could play an instant.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='discard' value='all'/>
+			</cost>
+			<effects>
+				<give-mana black='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='discard' value='all'/>
+			</cost>
+			<effects>
+				<give-mana blue='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='discard' value='all'/>
+			</cost>
+			<effects>
+				<give-mana green='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='discard' value='all'/>
+			</cost>
+			<effects>
+				<give-mana red='3'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+				<action ref='discard' value='all'/>
+			</cost>
+			<effects>
+				<give-mana white='3'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

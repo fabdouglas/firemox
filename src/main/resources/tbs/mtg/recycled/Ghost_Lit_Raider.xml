@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghost-Lit Raider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - spirit
+	2/1
+	2r, t :ghost-lit raider deals 2 damage to target creature.
+	channel - 3r, discard ghost-lit raider: ghost-lit raider deals 4 damage to target creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' colorless='2' />
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='2' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<pay-mana colorless="3" red="1"/>
+				<target type="this"/>
+				<action ref="put-in-graveyard"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

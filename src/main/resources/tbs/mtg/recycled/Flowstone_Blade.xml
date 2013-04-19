@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Flowstone Blade">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	enchantment - aura
+	enchant creature
+	r: enchanted creature gets +1/-1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<target type='attachedto'/>
+				<action ref="add+1-1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment ref='enchant-creature'/>
+</card>

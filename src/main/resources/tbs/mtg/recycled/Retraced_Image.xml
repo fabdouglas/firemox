@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Retraced Image">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		u
+	sorcery
+	reveal a card in your hand, then put that card into play if it has the same name as a permanent.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<controller player="you"/>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="2">
+					<test>
+						<has restriction-zone="play">
+							<has-name name="target-list.first.name"/>
+						</has>
+					</test>
+				</if-then-hop>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

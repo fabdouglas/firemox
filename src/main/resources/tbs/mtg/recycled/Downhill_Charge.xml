@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Downhill Charge">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  2r 
+		you may sacrifice a mountain rather than pay downhill charge's mana cost. 
+		target creature gets +x/+0 until end of turn, where x is the number of mountains 
+		you control.   -->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>red</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<and>
+									<controller player="you" card="tested" />
+									<has-idcard idcard="mountain" card="tested" />
+								</and>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<action ref="sacrifice-a-land" value="1">
+					<test>
+						<has-idcard idcard="mountain" card="tested" />
+					</test>
+				</action>
+				<action ref="target-creature" />
+			</cost>
+			<effects>
+				<add-modifier>
+					<register-modifier index="power" operation="add" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<value>
+							<counter restriction-zone="play">
+								<and>
+									<controller player="you" card="tested" />
+									<has-idcard idcard="mountain" card="tested" />
+								</and>
+							</counter>
+						</value>
+					</register-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

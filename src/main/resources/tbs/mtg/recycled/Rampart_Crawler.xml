@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Rampart Crawler">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {b} rampart crawler can't be blocked by walls. -->
+	<init>
+		<registers>
+			<register index="black" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>lizard mercenary cannot-be-blocked-by-walls</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

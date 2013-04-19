@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dread">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bbb
+	creature - elemental incarnation
+	6/6
+	fear
+	whenever a creature deals damage to you, destroy it.
+	when dread is put into a graveyard from anywhere, shuffle it into its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental incarnation fear </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<has-idcard idcard="creature"/>
+				</source-test>
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type='context.card'/>
+				<action ref='destroy'/>
+			</effects>
+		</triggered-ability>
+		
+		<triggered-ability name="state-based-token" zone="graveyard">
+			<moved-card>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this"/>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

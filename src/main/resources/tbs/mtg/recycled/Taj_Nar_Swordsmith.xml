@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Taj-Nar Swordsmith">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - cat soldier
+	2/3
+	when taj-nar swordsmith comes into play, you may pay x. if you do, search your library for an equipment card with converted mana cost x or less and put that card into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>cat soldier </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="pay-x"/>
+						<action ref='search-lib'>
+							<test>
+								<and>
+									<has-property property="equipment"/>
+									<inf-equal>
+										<right register="stack" index="0"/>
+										<left register="tested" index="manacost"/>
+									</inf-equal>
+								</and>
+							</test>
+						</action>
+						<action ref="move-to-play"/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

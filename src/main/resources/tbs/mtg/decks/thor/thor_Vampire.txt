@@ -1,0 +1,25 @@
+#Jeu Vampire
+#
+#John
+#
+#mars 18, 2000
+#1
+#4th Edition
+#
+Mox_Jet;4
+Black_Lotus;4
+Sol_Ring;3
+Dark_Ritual;2
+Hypnotic_Specter;3
+Sengir_Vampire;3
+Unholy_Strength;3
+Royal_Assassin;2
+Demonic_Tutor;2
+Arena;2
+Ancestral_Recall;3
+Counterspell;3
+Power_Sink;3
+Time_Walk;4
+Timetwister;3
+Underground_Sea;18
+Mox_Sapphire;4

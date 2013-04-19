@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Petit Chaperon Rouge">
+	<rules-author-comment>dungeon-keeper</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="green" value="4" />
+			<register index="power" value="2" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>legend fillette</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<create-card>
+					<card name="Grand Mechant Loup">
+						<rules-author-comment>dungeon-keeper</rules-author-comment>
+						<init>
+							<registers>
+								<register index="power" value="3" />
+								<register index="toughness" value="3" />
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>legend token wolf</properties>
+						</init>
+						<abilities>
+							<replacement-ability zone="play">
+								<assigned-damage type="damage-can-be-redirected">
+									<destination-test>
+										<is target="creator" />
+									</destination-test>
+								</assigned-damage>
+								<effects>
+									<target type="this" />
+									<assign-damage type="context.int2"
+										value="context.int" />
+								</effects>
+							</replacement-ability>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card destination="play" controller="controller" />
+				<unregister-this />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

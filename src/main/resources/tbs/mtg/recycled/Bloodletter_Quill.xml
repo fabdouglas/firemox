@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Bloodletter Quill">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+		</registers>
+		<idcards>artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<action ref="T"/>
+				<pay-mana colorless="2"/>
+				<target type="this"/>
+				<add-object object-name="blood"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<target type="controller"/>
+				<action ref="draw-a-card"/>
+				<action ref="lose-life">
+					<value>
+						<counter object-name="blood" card="this"/>
+					</value>
+				</action>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana blue="1" black="1"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="blood"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

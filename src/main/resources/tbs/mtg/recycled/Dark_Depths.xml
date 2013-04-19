@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dark Depths">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary snow land
+	dark depths comes into play with ten ice counters on it.
+	3: remove an ice counter from dark depths.
+	when dark depths has no ice counters on it, sacrifice it. if you do, put an indestructible legendary 20/20 black avatar creature token with flying named marit lage into play.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>snow legend </properties>
+	</init>
+	<modifiers>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+		<object name="ice"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="ice"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<when>
+				<equal right="0">
+					<left>
+						<counter object-name="ice" card="this"/>
+					</left>
+				</equal>
+			</when>
+			<effects>
+				<action  ref="sacrifice-this"/>
+				<create-card>
+					<card name='Marit Lage'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='20'/>
+								<register index='toughness' value='20'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token avatar indestructible legend flying</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

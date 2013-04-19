@@ -1,0 +1,3 @@
+super_card;10
+Aboshans_Desire;10
+Savannah_Lions;10

@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kiki-Jiki, Mirror Breaker">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rrr
+	legendary creature - goblin shaman
+	2/2
+	haste
+	t :put a token into play that's a copy of target nonlegendary creature you control. that creature token has haste. sacrifice it at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>legend goblin shaman haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<not>
+								<has-property property='legend'/>
+							</not>
+							<controller player="you"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='token'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>creature</idcards>
+							<properties>token</properties>
+						</init>
+					</card>
+				</create-card>
+				<copy-card card="target-list.first" to="target-list.last"/>
+				<target-list operation="remove-first"/>
+				<move-card controller='you' destination='play'/>
+				<action ref="sacrifice-target-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

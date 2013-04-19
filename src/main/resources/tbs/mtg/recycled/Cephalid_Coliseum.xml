@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cephalid Coliseum">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t :add u to your mana pool. cephalid coliseum deals 1 damage to you.
+	threshold - u, t, sacrifice cephalid coliseum: target player draws three cards, then discards three cards. play this ability only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana blue='1' />
+				<target type='you'/>
+				<assign-damage value='1' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<pay-mana blue="1"/>
+				<action ref='T'/>
+				<action ref='sacrifice-this'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat value='3'/>
+				<action ref='draw-a-card'/>
+				<action ref='player-discard' value="3"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

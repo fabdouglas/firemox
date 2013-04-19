@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cry of Contrition">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	sorcery
+	target player discards a card.
+	haunt 
+	when the creature cry of contrition haunts is put into a graveyard, target player discards a card.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value="1"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='haunting'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<has-private-object object-name="haunting" target="tested" />
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="graveyard" />
+					</and>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref="target-player" />
+			</cost>
+			<effects>
+				<action ref='player-discard' value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

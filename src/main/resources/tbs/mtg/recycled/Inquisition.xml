@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Inquisition">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2b
+	sorcery
+	target player reveals his or her hand. inquisition deals damage to that player equal to the number of white cards in his or her hand.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<show-zone zone="hand" for="you"/>
+				<assign-damage type='damage-normal'>
+					<value>
+						<counter restriction-zone="hand">
+							<and>
+								<controller player="target-list.first"/>
+								<has-property property="white"/>
+							</and>
+						</counter>
+					</value>
+				</assign-damage>
+				<action ref="restore-hand-visibility"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,13 @@
+Coalition Victory;20
+super card;40
+fastbond;10
+swamp;10
+mountain;10
+forest;10
+plains;10
+island;10
+Will-O-The-Wisp;10
+Merfolk of the Pearl Trident;10
+Birds of Paradise;10
+Goblin Balloon Brigade;10
+Savannah Lions;10

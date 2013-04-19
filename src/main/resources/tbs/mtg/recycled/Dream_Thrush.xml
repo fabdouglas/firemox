@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dream Thrush">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {1}{u} flying {t}: target land's type becomes the basic land type of your choice until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>flying bird</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="T" />
+				<action ref="target-land" />
+				<input-color register="stack" index="0" operation="set" />
+			</cost>
+			<effects>
+				<add-modifier>
+					<idcard-modifier operation="set" linked="false" live-update="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<idcard>
+							<add left="land">
+								<right>
+									<mult right="256">
+										<left register="stack" index="0" />
+									</mult>
+								</right>
+							</add>
+						</idcard>
+					</idcard-modifier>
+					<property-modifier operation="add" linked="false" property="basic-land">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+					<ability-modifier operation="clear" linked="true">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities />
+					</ability-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

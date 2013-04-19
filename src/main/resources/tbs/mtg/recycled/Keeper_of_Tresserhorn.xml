@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Keeper of Tresserhorn">
+<rules-author-comment></rules-author-comment>
+
+<!--  {5}{b} whenever keeper of tresserhorn attacks and isn't blocked, 
+it deals no combat damage this turn and defending player loses 2 life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="black" value="1"/>
+			<register index="power" value="6"/>
+			<register index="toughness" value="6"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>avatar</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability name="" zone="play">
+			<modified-register operation="or" register="card" index="state">
+				<destination-test>
+					<and>
+						<is-this/>
+						<test ref="tested-is-unblocked"/>
+					</and>
+				</destination-test>
+			</modified-register>
+			<effects>
+				<target type="this"/>
+				<action ref="deals-no-combat-damage"/>
+				<modify-register register="controller" index="life" operation="minus" name="lose-%n-life" value="2"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mind Harness">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {u} 
+		cumulative upkeep {1} 
+		mind harness can enchant only a red or green creature. 
+		you control enchanted creature. -->
+
+	<init>
+		<registers>
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+
+		<triggered-ability resolution="normal" zone="play" name="cumulative-upkeep">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep" />
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana>
+							<colorless>
+								<counter object-name="age" card="this" />
+							</colorless>
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="sacrifice-this" />
+					</either>
+				</choice>
+			</cost>
+		</triggered-ability>
+		<ability ref="cumulative-upkeep" />
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<controller-modifier player="you" linked="true" />
+		</modifiers>
+		<valid-target>
+			<and>
+				<test ref="valid-creature-to-enchant" />
+				<or>
+					<has-color color="red" />
+					<has-color color="green" />
+				</or>
+			</and>
+		</valid-target>
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

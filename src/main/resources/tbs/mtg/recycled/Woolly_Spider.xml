@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Woolly Spider">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gg
+	creature - spider
+	2/3
+	reach 
+	whenever woolly spider blocks a creature with flying, woolly spider gets +0/+2 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>spider reach </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+				<attacking-test>
+					<has-property property="flying"/>
+				</attacking-test>
+			</declared-blocking>
+			<effects>
+				<action ref="gain+0+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

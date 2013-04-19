@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kitsune Healer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - fox cleric
+	2/2
+	t :prevent the next 1 damage that would be dealt to target creature or player this turn.
+	t :prevent all damage that would be dealt to target legendary creature this turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>fox cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<action ref='prevent-1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<has-property property="legend"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='prevent-all'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Delif's Cone">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="0"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+				<target mode="choose" type="card" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="controller"/>
+							<test ref="is-targetable-creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.last"/>
+					<triggered-ability zone="play">
+						<modified-register operation="or" register="card" index="state">
+							<destination-test>
+								<and>
+									<is target="saved"/>
+									<test ref="tested-is-unblocked"/>
+								</and>
+							</destination-test>
+						</modified-register>
+						<cost>
+							<choice cancel="true">
+								<either>
+									<action ref="gain-life">
+										<value register="saved" index="power"/>
+									</action>
+									<create-ability>
+										<save target="context.card"/>
+										<replacement-ability zone="play">
+											<assigned-damage type="damage-combat-can-be-prevented">
+												<source-test>
+													<is target="saved"/>
+												</source-test>
+											</assigned-damage>
+											<effects/>
+										</replacement-ability>
+								 		<until>
+								 			<end-of-phase phase="cleanup"/>
+								 		</until>
+								 	</create-ability>
+								</either>
+							</choice>
+						</cost>
+						<effects/>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

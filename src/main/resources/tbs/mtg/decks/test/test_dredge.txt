@@ -1,0 +1,3 @@
+Grave-Shell Scarab;60
+ancestral recall;20
+super card;20

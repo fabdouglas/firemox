@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Pestilence">
+<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		
+		<triggered-ability zone="play">
+			<end-of-phase phase="eot">
+				<test>
+					<equal left="0">
+						<right>
+							<counter restriction-zone="play">
+								<has-idcard idcard="creature"/>
+							</counter>
+						</right>
+					</equal>
+				</test>
+			</end-of-phase>
+			<effects>
+				<action ref="sacrifice-this"/>
+			</effects>
+		</triggered-ability>
+		
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+			</cost>
+			<effects>
+				<target mode="all" type="player"/>
+				<action ref="all-creatures"/>
+				<assign-damage value="1" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

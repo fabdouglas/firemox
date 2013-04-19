@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elvish Soultiller">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - elf mutant
+	5/4
+	when elvish soultiller is put into a graveyard from play, choose a creature type. shuffle all creature cards of that type from your graveyard into your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf mutant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<input-property operation='set' index='free0' register='this' values='FIRST_SUB_TYPE..LAST_SUB_TYPE' />
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<has-property>
+								<property register="this" index="free0"/>
+							</has-property>
+						</and>
+					</test>
+				</target>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

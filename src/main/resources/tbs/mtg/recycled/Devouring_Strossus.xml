@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Devouring Strossus">
+<rules-author-comment></rules-author-comment>
+
+<!--  {5}{b}{b}{b} flying, trample at the beginning of your upkeep, 
+sacrifice a creature. 
+sacrifice a creature: regenerate devouring strossus. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="black" value="3"/>
+			<register index="power" value="9"/>
+			<register index="toughness" value="9"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>flying trample horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<action ref="sacrifice-a-creature" value="1"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="sacrifice-a-creature" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

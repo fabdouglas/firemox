@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thornscape Master">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{g}{g} 
+
+{r}{r}, {t}: thornscape master deals 2 damage to target creature. 
+{w}{w}, {t}: target creature gains protection from the color of your choice until end of turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="green" value="2"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>human wizard</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana red="2" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<assign-damage value="2" type="damage-normal"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana white="2" />
+				<action ref="T"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<input-color controller="you" operation="set" register="stack" index="0"/>
+				<add-modifier>
+					<property-modifier live-update="false">
+				 		<until>
+				 			<end-of-phase phase="cleanup"/>
+				 		</until>
+						<property>
+							<or left="protection-from-color">
+								<right register="stack" index="0"/>
+							</or>
+						</property>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

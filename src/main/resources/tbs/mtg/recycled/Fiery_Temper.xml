@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fiery Temper">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	instant
+	fiery temper deals 3 damage to target creature or player.
+	madness r 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-dealtable'/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+		<ability ref='madness'>
+			<actions>
+				<action ref='target-dealtable'/>
+			</actions>
+			<actions>
+				<pay-mana red='1' />
+			</actions>
+			<actions>
+				<assign-damage value='3' type='damage-normal'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

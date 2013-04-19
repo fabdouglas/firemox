@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Blanchwood Armor">
+	<!-- Enchanted creature gets +1/+1 for each Forest you control. -->
+	<!-- Test ok 28/12/2004 0.81.30 
+		But, I have a strange behavior as soon as armor is put on a creature. I play without mana costs, and anything done in primary main phase jumps auto to combat.
+	-->
+
+	<rules-author-comment>By brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="1" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>green</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<register-modifier index="power" operation="add" linked="true">
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<has-idcard idcard="forest" />
+							<controller player="controller" />
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+			<register-modifier index="toughness" operation="add" linked="true">
+				<value>
+					<counter restriction-zone="play">
+						<and>
+							<has-idcard idcard="forest" />
+							<controller player="controller" />
+						</and>
+					</counter>
+				</value>
+			</register-modifier>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

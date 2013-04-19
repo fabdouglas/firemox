@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drinker of Sorrow">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{b} drinker of sorrow can't block. whenever drinker of sorrow deals 
+		combat damage, sacrifice a permanent. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="black" value="1" />
+			<register index="power" value="5" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors>black</colors>
+		<idcards>creature</idcards>
+		<properties>cannot-block horror</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-combat">
+				<test>
+					<is-this />
+				</test>
+			</assigned-damage>
+			<effects>
+				<action ref="sacrifice-this" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

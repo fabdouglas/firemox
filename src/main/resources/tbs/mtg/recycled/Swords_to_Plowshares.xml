@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Swords to Plowshares">
+	<!-- tested 12/6/2004 , v0.81.28 -->
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+		<!-- Text(4th+errata): Remove target creature from the game.
+		     Its controller gains life equal to its power. 
+		     [Oracle 99/09/03] -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<!-- If the creature has a negative power, the player does not lose life.-->
+				<if-then-hop elsehop="2">
+					<test>
+						<sup right="0">
+							<left register="target-list.last" index="power"/>
+						</sup>
+					</test>
+				</if-then-hop>
+				<modify-register register="target.controller" index="life" operation="add" name="gain-%n-life">
+					<value register="target-list.last" index="power"/>
+				</modify-register>
+				<action ref="remove-from-game"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

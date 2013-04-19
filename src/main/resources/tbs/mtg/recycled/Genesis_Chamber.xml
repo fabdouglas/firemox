@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Genesis Chamber">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	whenever a nontoken creature comes into play, if genesis chamber is untapped, that creature's controller puts a 1/1 myr artifact creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<actions>
+		<action reference-name="create-token">
+            <create-card>
+                <card name="Myr">
+                    <init>
+                        <registers>
+                            <register index="power" value="1"/>
+                            <register index="toughness" value="1"/>
+                        </registers>
+                        <colors></colors>
+                        <idcards>creature</idcards>
+                        <properties>myr token</properties>
+                    </init>
+                </card>
+            </create-card>
+            <move-card controller="context.card.controller" destination="play"/>
+        </action>
+	</actions>
+	<abilities>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<has-property property="token"/>	
+						</not>
+						<has-idcard idcard="creature"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<if-then-hop elsehop="1">
+					<test>
+						<in-zone card="this" zone="playANDuntapped"/>
+					</test>
+				</if-then-hop>
+				<action ref="create-token"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

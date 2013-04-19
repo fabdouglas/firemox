@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Island Sanctuary">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {1}{w} 
+		if you would draw a card during your draw step, 
+		instead you may skip that draw. if you do, 
+		until the beginning of your next turn, 
+		only creatures with flying or islandwalk may attack you. 
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="white" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+
+		<replacement-ability name="" zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<phase-is phase="draw" />
+						<action-source name="draw-%n-card" />
+						<controller player="currentplayer" card="this" />
+					</and>
+				</source-test>
+			</moved-card>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<target type="you"/>
+						<action ref="draw-a-card" />
+					</either>
+					<either>
+						<add-modifier name="skip that draw">
+							<static-modifier filter-zone="play">
+								<modifiers>
+									<property-modifier property="cannot-attack" linked="false"
+										layer="global" />
+								</modifiers>
+								<while>
+									<and>
+										<controller player="opponent" />
+										<has-idcard idcard="creature" />
+										<not>
+											<has-property property="flying" />
+										</not>
+										<not>
+											<has-property property="islandwalk" />
+										</not>
+									</and>
+								</while>
+								<until>
+									<beginning-of-phase phase="untap">
+										<test ref="during-modifier-untap"/>
+									</beginning-of-phase>
+								</until>
+							</static-modifier>
+						</add-modifier>
+					</either>
+				</choice>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

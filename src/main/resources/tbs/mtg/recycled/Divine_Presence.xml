@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divine Presence">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{w} if a source would deal 4 damage or more to a creature or player,
+ that source deals 3 damage to that creature or player instead. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<replacement-ability zone="play" layer="0">
+			<assigned-damage type="damage-any">
+				<destination-test/>
+			</assigned-damage>
+			<effects>
+				<target type="context.target"/>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup-equal left="context.int" right="4"/>
+					</test>
+				</if-then-hop>
+				<assign-damage value="3" type="context.int2"/>
+				<hop value="2"/>
+				<assign-damage value="context.int" type="context.int2"/>
+			</effects>
+		</replacement-ability>
+	</abilities>
+</card>

@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Traumatize">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	sorcery
+	target player puts the top half of his or her library, rounded down, into his or her graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<repeat>
+					<value>
+						<div-truncated right="2">
+							<left>
+								<counter restriction-zone="library">
+									<controller player="target-list.first"/>
+								</counter>
+							</left>
+						</div-truncated>
+					</value>
+				</repeat>
+				<action ref="mill-a-card"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

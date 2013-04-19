@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skirk Ridge Exhumer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - zombie spellshaper
+	1/1
+	b, t, discard a card: put a 1/1 black zombie goblin creature token named festering goblin into play with "when festering goblin is put into a graveyard from play, target creature gets -1/-1 until end of turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie spellshaper </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+				<action ref='T'/>
+				<action ref='discard' value="1"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Festering Goblin'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>black</colors>
+							<idcards>creature</idcards>
+							<properties>token zombie goblin</properties>
+						</init>
+						<abilities>
+							<triggered-ability zone='play'>
+								<moved-card>
+									<source-test>
+										<and>
+											<is-this/>
+											<in-zone zone='play' card='tested'/>
+										</and>
+									</source-test>
+									<destination-test>
+										<in-zone zone='graveyard' card='tested'/>
+									</destination-test>
+								</moved-card>
+								<cost>
+									<action ref='target-creature'/>
+								</cost>
+								<effects>
+									<action ref="add-1-1-until-eot"/>
+								</effects>
+							</triggered-ability>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

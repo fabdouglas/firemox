@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Assault//Battery">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="green" value="1" />
+			<register index="red" value="1" />
+			<register index="colorless" value="3" />
+		</registers>
+		<colors>green red</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+		<activated-ability playable="instant" name="Assault" zone="hand">
+			<cost>
+				<pay-mana red="1" />
+				<target type="dealtable" mode="choose">
+					<test>
+						<or>
+							<and>
+								<is-player />
+								<test ref="is-targetable-player" />
+							</and>
+							<and>
+								<not>
+									<is-player />
+								</not>
+								<and>
+									<in-zone zone="play" />
+									<test ref="is-targetable-creature" />
+								</and>
+							</and>
+						</or>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<assign-damage value="2" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="instant" name="Battery" zone="hand">
+			<cost>
+				<pay-mana red="1" />
+			</cost>
+			<effects>
+				<!-- Create a card, and add it to the target list -->
+				<create-card>
+					<card name="Elephant">
+						<rules-author-comment>
+							By fabdouglas
+						</rules-author-comment>
+
+						<init>
+							<registers>
+								<register index="power" value="3" />
+								<register index="toughness" value="3" />
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>elephant token</properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller="you" destination="play" />
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,1 @@
+Put here the 12x12 colorless mana symbols.

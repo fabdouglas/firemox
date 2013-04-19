@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="City of Shadows">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land
+	t, remove a creature you control from the game: put a storage counter on city of shadows.
+	t :add x to your mana pool, where x is the number of storage counters on city of shadows.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref="target-creature">
+					<test>
+						<controller player="you"/>
+					</test>
+				</action>
+				<action ref="remove-from-game"/>
+			</cost>
+			<effects>
+				<target-list operation='clear'/>
+				<target type='this'/>
+				<add-object object-name='storage'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana>
+					<colorless>
+						<counter object-name="storage" card="this"/>
+					</colorless>
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

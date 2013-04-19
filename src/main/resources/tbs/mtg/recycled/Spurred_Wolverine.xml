@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spurred Wolverine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - beast
+	3/2
+	tap two untapped beasts you control: target creature gains first strike until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>wolverine beast </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<repeat value="2"/>
+				<action ref="target-creature">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-property property="beast"/>
+							<in-zone zone="playANDuntapped"/>
+						</and>
+					</test>
+				</action>
+				<tap/>
+				<target-list operation="clear"/>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="first-strike-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

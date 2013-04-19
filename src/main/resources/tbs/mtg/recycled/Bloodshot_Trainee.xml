@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Bloodshot Trainee">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - goblin warrior
+	2/3
+	t :bloodshot trainee deals 4 damage to target creature. play this ability only if bloodshot trainee's power is 4 or greater.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<sup-equal right="4">
+					<left register="this" index="power"/>
+				</sup-equal>
+			</test>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

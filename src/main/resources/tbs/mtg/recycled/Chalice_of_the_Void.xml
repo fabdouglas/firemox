@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Chalice of the Void">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xx
+	artifact
+	chalice of the void comes into play with x charge counters on it.
+	whenever a player plays a spell with converted mana cost equal to the number of charge counters on chalice of the void, counter that spell.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<action ref="pay-xx"/>
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+				<target type="this"/>
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<add-object object-name="charge"/>
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<equal>
+						<left register="tested" index="manacost"/>
+						<right>
+							<counter object-name="charge" card="this"/>
+						</right>
+					</equal>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.card"/>
+				<action ref='counter'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

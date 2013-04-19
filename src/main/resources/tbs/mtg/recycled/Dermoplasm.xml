@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dermoplasm">
+	<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- 
+		Flying
+		Morph 2 ManaBlue ManaBlue Mana (You may play this face down as a 2/2 
+		creature for 3 Mana. 
+		Turn it face up any time for its morph cost.)
+		When Dermoplasm is turned face up, you may put a creature card with morph 
+		from your hand into play face up. 
+		If you do, return Dermoplasm to its owner's hand.
+	-->
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>flying shapeshifter</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana colorless="2" blue="2" />
+			</actions>
+		</ability>
+		<triggered-ability zone="play">
+			<!-- UPDATE THE EVENT OF THIS TRIGGERED ABILITY -->
+			<become-tapped>
+				<test>
+					<!-- COMPLETE THE TEST APPLIED ON TAPPING CARD -->
+					<is-this />
+				</test>
+			</become-tapped>
+			<effects>
+				<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wake of Destruction">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3rrr
+	sorcery
+	destroy target land and all other lands with the same name as that land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-land'/>
+			</cost>
+			<effects>
+				<action ref="all-lands">
+					<test>
+						<and>
+							<has-name name="target-list.first.name"/>
+							<not>
+								<is-this card="target-list.first"/>
+							</not>
+						</and>
+					</test>
+				</action>
+				<action ref='destroy'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Ghost Council of Orzhova">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		wwbb
+	legendary creature - spirit 
+	4/4
+	when ghost council of orzhova comes into play, target opponent loses 1 life and you gain 1 life.
+	1, sacrifice a creature: remove ghost council of orzhova from the game. return it to play under its owner's control at end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='black' value='2'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>creature </idcards>
+		<properties>legend spirit</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-opponent'/>
+			</cost>
+			<effects>
+				<action ref='lose-life-target' value='1'/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<triggered-ability zone="side">
+						<end-of-phase phase="eot" />
+						<effects>
+							<action ref="put-in-play" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

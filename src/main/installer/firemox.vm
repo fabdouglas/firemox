@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp
+	spec="1.0+"
+	codebase="http://firemox.sourceforge.net/"
+	href="firemox.jnlp">
+	<information>
+		<title>Firemox</title>
+		<vendor>Fabdouglas</vendor>
+		<homepage href="index.html"/>
+		<description>A very nice description. of version ${version}</description>
+		<icon href="images/logos/mp64.gif"/>
+		<offline-allowed/>
+	</information>
+	<security>
+	</security>
+	<resources>
+		<j2se version="1.5+"/>
+		<jar href="firemox-${version}-installer.jar"/>
+	</resources>
+	<application-desc main-class="com.izforge.izpack.installer.Installer"/>
+</jnlp>

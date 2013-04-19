@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Jagged Poppet">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1br
+	creature - ogre warrior
+	3/4
+	whenever jagged poppet is dealt damage, discard that many cards.
+	hellbent - whenever jagged poppet deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>red black </colors>
+		<idcards>creature </idcards>
+		<properties>ogre warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<and>
+						<test ref="hellbent"/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<is-player/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.player"/>
+				<action ref='player-discard' value='context.int'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<destination-test>
+					<is-this/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref='discard' value='context.int'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

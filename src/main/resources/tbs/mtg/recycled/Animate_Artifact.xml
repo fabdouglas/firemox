@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Animate Artifact">
+	<rules-author-comment>
+		By Fabdouglas (corrected by Hoani CROSS : creature idcard is added instead of artifact
+		idcard)
+	</rules-author-comment>
+
+	<!--  {3}{u} 
+		enchanted artifact is a creature with power and toughness each equal to its converted mana cost. 
+		it's still an artifact. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers>
+			<idcard-modifier idcard="creature" operation="or" linked="true" />
+			<register-indirection index="power" operation="set" linked="true">
+				<value register="target-list.last" index="manacost" />
+			</register-indirection>
+			<register-indirection index="toughness" operation="set" linked="true">
+				<value register="target-list.last" index="manacost" />
+			</register-indirection>
+		</modifiers>
+		<valid-target ref="valid-creature-to-enchant" />
+		<valid-attachment ref="valid-enchant-creature" />
+	</attachment>
+</card>

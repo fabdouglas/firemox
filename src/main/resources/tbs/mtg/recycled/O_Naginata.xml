@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="O-Naginata">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact - equipment
+	o-naginata can be attached only to a creature with 3 or more power.
+	equipped creature gets +3/+0 and has trample.
+	equip 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<target type="card" mode="choose" restriction-zone="play">
+					<test>
+						<and>
+							<sup-equal right="3">
+								<left register="tested" index="power"/>
+							</sup-equal>
+							<valid-attachment from="this" card="tested" />
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<modifiers>
+			<property-modifier property="trample" linked="true" />
+			<register-modifier index='power' operation='add' linked='true' value='3' />
+		</modifiers>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

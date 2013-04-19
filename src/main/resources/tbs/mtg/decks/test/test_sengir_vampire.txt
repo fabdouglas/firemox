@@ -1,0 +1,4 @@
+super card;10
+Sengir_Vampire;20
+Northern_Paladin;20
+Serra angel;20

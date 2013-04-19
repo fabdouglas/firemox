@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spitting Gourna">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3gg
+		creature - beast
+		3/4
+		spitting gourna can block as though it had flying.
+		morph 4g 
+	-->
+
+	<init>
+		<registers>
+			<register index='green' value='2' />
+			<register index='colorless' value='3' />
+			<register index='power' value='3' />
+			<register index='toughness' value='4' />
+		</registers>
+		<colors>green</colors>
+		<idcards>creature</idcards>
+		<properties>beast reach</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<ability ref="cast-morph" />
+		<ability ref='morph'>
+			<actions>
+				<pay-mana green='1' colorless='4' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

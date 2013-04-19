@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Delusions of Mediocrity">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{u} when delusions of mediocrity comes into play, you gain 10 life. 
+when delusions of mediocrity leaves play, you lose 10 life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="gain-life"  value="10"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone="play" card="tested"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone="play" card="tested"/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="lose-life"  value="10"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

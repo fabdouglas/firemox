@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Natural Emergence">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2rg
+	enchantment
+	when natural emergence comes into play, return a red or green enchantment you control to its owner's hand.
+	lands you control are 2/2 creatures with first strike. they're still lands.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>red green </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-enchantment">
+					<test>
+						<and>
+							<controller player="you"/>
+							<or>
+								<has-color color="green"/>
+								<has-color color="red"/>
+							</or>
+						</and>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<property-modifier property="first-strike" linked="true" layer="global"/>	
+			 	<register-indirection index="power" value="2" operation="set" linked="true"/>
+				<register-indirection index="toughness" value="2" operation="set" linked="true"/>
+				<idcard-modifier idcard="creature" operation="or" linked="true"/>
+			</modifiers>
+			<while>
+				<and>
+					<controller player="you"/>
+		 			<has-idcard idcard="land"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

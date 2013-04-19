@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Force of Will">
+	<rules-author-comment>Hoani CROSS</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="blue" value="2" />
+			<register index="colorless" value="3" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant</idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effect">
+			<action ref="counter" />
+			<action ref="finish-spell" />
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<action ref="main-effect" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<action ref="pay-life" value="1" />
+				<target type="card" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<owner player="you" />
+							<has-color color="blue" />
+						</and>
+					</test>
+				</target>
+				<move-card destination="side" controller="you" />
+				<target-list operation="clear" name="%" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<action ref="main-effect" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

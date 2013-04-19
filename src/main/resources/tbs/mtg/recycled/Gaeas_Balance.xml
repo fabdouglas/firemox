@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gaea's Balance">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	sorcery
+	as an additional cost to play gaea's balance, sacrifice five lands.
+	search your library for a land card of each basic land type and put them into play. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='sacrifice-a-land' value="5"/>
+			</cost>
+			<effects>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard="island"/>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard="swamp"/>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard="forest"/>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard="mountain"/>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='search-lib'>
+					<test>
+						<has-idcard idcard="plains"/>
+					</test>
+				</action>
+				<action ref="move-to-play"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spring Cleaning">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	instant
+	destroy target enchantment. clash with an opponent. if you win, destroy all enchantments your opponents control. 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-enchantment'/>
+			</cost>
+			<effects>
+				<action ref='destroy'/>
+				<action ref="clash">
+					<actions>
+						<action ref="all-enchantments">
+							<test>
+								<controller player="opponent"/>
+							</test>
+						</action>
+						<action ref='destroy'/>
+					</actions>
+				</action>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

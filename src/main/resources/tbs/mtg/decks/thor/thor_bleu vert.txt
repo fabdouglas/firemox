@@ -1,0 +1,29 @@
+#Jeu bleu vert
+#
+#John
+#
+#août 11, 2000
+#1
+#4th Edition
+#
+Aspect_of_Wolf;1
+Aswan_Jaguar;2
+Cockatrice;2
+Gaeas_Liege;2
+Giant_Growth;2
+Lure;2
+Regeneration;2
+Venom;2
+Whirling_Dervish;2
+Black_Lotus;4
+Mox_Emerald;4
+Sol_Ring;3
+Mox_Sapphire;4
+Tropical_Island;15
+Mahamoti_Djinn;2
+Time_Walk;4
+Timetwister;4
+Ancestral_Recall;3
+Counterspell;3
+Power_Sink;2
+Howling_Mine;2

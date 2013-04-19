@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Argothian Enchantress">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{g} 
+argothian enchantress can't be the target of spells or abilities. 
+whenever you play an enchantment spell, draw a card. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="1"/>
+			<register index="power" value="0"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>creature </idcards>
+		<properties>human druid shroud</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<casting>
+				<test>
+					<and>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+						<has-idcard idcard="enchantment" card="tested"/>
+						<controller player="you"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urza's Power Plant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		land - urza's power-plant
+	t :add 1 to your mana pool. if you control an urza's mine and an urza's tower, add 2 to your mana pool instead.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties></properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<not>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<has-name name="urza's mine"/>
+							<has-name name="urza's tower"/>
+						</and>
+					</has>
+				</not>
+			</test>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana colorless='1' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-name name="mine"/>
+						<has-name name="urza's tower"/>
+					</and>
+				</has>
+			</test>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<give-mana colorless='2' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,28 @@
+#Jeu meule
+#
+#John
+#
+#décembre 20, 2000
+#1
+#4th Edition
+#
+Consecrate_Land;3
+Disenchant;2
+Swords_to_Plowshares;4
+Armageddon;2
+Wrath_of_God;2
+Howling_Mine;4
+Millstone;4
+Cursed_Rack;2
+Tundra;14
+Ancestral_Recall;2
+Counterspell;4
+Power_Sink;2
+Time_Walk;4
+Feldons_Cane;2
+Alabaster_Potion;1
+Mox_Pearl;4
+Mox_Sapphire;4
+Sol_Ring;2
+Ivory_Tower;1
+Black_Lotus;4

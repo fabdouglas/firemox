@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Briarhorn">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3g
+	creature - elemental
+	3/3
+	flash
+	when briarhorn comes into play, target creature gets +3/+3 until end of turn.
+	evoke 1g 
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elemental flash</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="gain+3+3-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke-flash'>
+			<actions>
+				<pay-mana green='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

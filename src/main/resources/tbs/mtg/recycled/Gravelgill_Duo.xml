@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gravelgill Duo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2(u/b)
+	creature - merfolk rogue warrior
+	2/1
+	whenever you play a blue spell, gravelgill duo gets +1/+1 until end of turn. whenever you play a black spell, gravelgill duo gains fear until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue black </colors>
+		<idcards>creature </idcards>
+		<properties>merfolk rogue warrior </properties>
+	</init>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='2' blue='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-color color="blue"/>
+				</test>
+			</casting>
+			<effects>
+				<action ref="gain+1+1-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<has-color color="blue"/>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<action ref="fear-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

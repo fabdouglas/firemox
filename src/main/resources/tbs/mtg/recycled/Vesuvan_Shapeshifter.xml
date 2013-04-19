@@ -1,0 +1,130 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vesuvan Shapeshifter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3uu
+	creature - shapeshifter
+	0/0
+	as vesuvan shapeshifter comes into play or is turned face up, you may choose another creature in play. if you do, until vesuvan shapeshifter is turned face down, it becomes a copy of that creature and gains "at the beginning of your upkeep, you may turn this creature face down."
+	morph 1u
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>shapeshifter </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<not>
+							<in-zone zone="play" />
+						</not>
+						<is-face-up card="this"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<and>
+						<is-this />
+						<in-zone zone="play" />
+						<is-face-up/>
+					</and>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" restriction-zone="play" raise-event="false" mode="choose"
+					cancel="true" hop="2">
+					<test>
+						<and>
+							<has-idcard idcard="creature" />
+							<not>
+								<is-this/>
+							</not>
+						</and>
+					</test>
+				</target>
+				<copy-card card="target-list.last" to="this" />
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<add-ability>
+					<triggered-ability resolution='normal' zone='play'>
+						<beginning-of-phase phase='upkeep'>
+							<test>
+								<and>
+									<is-face-up card="this"/>
+									<test ref='during-your-upkeep'/>
+								</and>
+							</test>
+						</beginning-of-phase>
+						<effects>
+							<choice controller="you" cancel="true">
+								<either>
+									<target type="this"/>
+									<face-down for="opponent"/>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+				</add-ability>
+				<action ref="put-in-play"/>
+			</effects>
+		</replacement-ability>
+		<replacement-ability zone="play">
+			<faced-up>
+				<test>
+					<is-this/>
+				</test>
+			</faced-up>
+			<effects>
+				<target type="card" restriction-zone="play" raise-event="false" mode="choose"
+					cancel="true" hop="2">
+					<test>
+						<has-idcard idcard="creature" />
+					</test>
+				</target>
+				<copy-card card="target-list.last" to="this" />
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<add-ability>
+					<triggered-ability resolution='normal' zone='play'>
+						<beginning-of-phase phase='upkeep'>
+							<test>
+								<and>
+									<is-face-up card="this"/>
+									<test ref='during-your-upkeep'/>
+								</and>
+							</test>
+						</beginning-of-phase>
+						<effects>
+							<choice controller="you" cancel="true">
+								<either>
+									<target type="this"/>
+									<face-down for="opponent"/>
+								</either>
+							</choice>
+						</effects>
+					</triggered-ability>
+				</add-ability>
+			</effects>
+		</replacement-ability>
+		<ability ref='cast-morph'/>
+		<ability ref='morph'>
+			<actions>
+				<pay-mana blue='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

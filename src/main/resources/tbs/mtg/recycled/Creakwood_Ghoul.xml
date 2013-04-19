@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Creakwood Ghoul">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4b
+	creature - plant zombie
+	3/3
+	o(b/g)o(b/g): remove target card in a graveyard from the game. you gain 1 life.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>plant zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana green="1" black="1"/>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+				<action ref='gain-life' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

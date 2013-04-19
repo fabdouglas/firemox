@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Seeds of Strength">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		gw
+	instant
+	target creature gets +1/+1 until end of turn.
+	target creature gets +1/+1 until end of turn.
+	target creature gets +1/+1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<repeat value="3"/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<action ref="add+1+1-until-eot"/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

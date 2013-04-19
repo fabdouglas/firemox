@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Call of the Wild">
+<!-- 2GG: Reveal the top card of your library. If it is a creature card, put it into play. Otherwise, put it into your graveyard. -->
+<!-- Test ok -->
+	<rules-author-comment>By brius</rules-author-comment>
+	<init>
+		<registers>
+			<register index="green" value="2"/>
+			<register index="colorless" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>enchantment</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana green="2" colorless="2"/>
+			</cost>
+			<effects>
+				<!-- select first card of library -->
+				<target type="card" mode="all">
+					<test>
+						<and>
+							<and>
+								<in-zone zone="library"/>
+								<position position="top"/>
+							</and>
+							<controller player="you"/>
+						</and>
+					</test>
+				</target>
+
+				<!-- If creature, put into play... -->
+				<if-then-hop elsehop="2">
+					<test>
+						<has-idcard idcard="creature" card="target-list.last"/>
+					</test>
+				</if-then-hop>
+				<move-card destination="play" controller="owner"/>
+				
+				<!-- If not creature, put at bottom of lib... -->
+				<if-then-hop elsehop="2">
+					<test>
+						<not>
+							<has-idcard idcard="creature" card="target-list.last"/>
+						</not>
+					</test>
+				</if-then-hop>
+				<move-card destination="graveyard" controller="owner" position="top"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

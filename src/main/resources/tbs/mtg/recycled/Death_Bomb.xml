@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Death Bomb">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{b} as an additional cost to play death bomb, sacrifice a creature. 
+destroy target nonblack creature. 
+it can't be regenerated. 
+its controller loses 2 life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="black" value="1"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="sacrifice-a-creature" value="1"/>
+				<target-list operation="clear" name="%"/>
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black"/>
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<modify-register register="target-list.first.controller" index="life" operation="minus" value="2" name="lose-%n-life"/>
+				<action ref="bury"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

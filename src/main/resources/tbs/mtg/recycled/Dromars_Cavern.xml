@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dromar's Cavern">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  land - lair when dromar's cavern comes into play, sacrifice it unless you 
+return a non-lair land you control to its owner's hand. 
+
+{t}: add {w}, {u}, or {b} to your mana pool. -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>lair</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-W"/>
+		<ability ref="tap-add-U"/>
+		<ability ref="tap-add-B"/>
+
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone="play" card="tested"/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+						<in-zone zone="play" card="tested"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<choice cancel="false">
+					<either>
+						<target type="card" mode="choose" restriction-zone="play" raise-event="false" cancel="false">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="land"/>
+									<not>
+										<has-property property="lair"/>
+									</not>
+								</and>
+							</test>
+						</target>
+						<action ref="return-to-hand"/>
+					</either>
+					<either>
+						<action ref="sacrifice-this"/>
+					</either>
+				</choice>					
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

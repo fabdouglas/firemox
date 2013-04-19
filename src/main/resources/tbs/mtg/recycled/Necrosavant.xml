@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Necrosavant">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bbb
+	creature - zombie giant
+	5/5
+	3bb, sacrifice a creature: return necrosavant from your graveyard to play. play this ability only during your upkeep.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie giant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana black='2' colorless='3' />
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

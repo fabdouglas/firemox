@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Putrid Imp">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		b
+	creature - zombie imp
+	1/1
+	discard a card: putrid imp gains flying until end of turn.
+	threshold - as long as seven or more cards are in your graveyard, putrid imp gets +1/+1 and can't block.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie imp </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='discard' value='1'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<register-modifier index='power' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<register-modifier index='toughness' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</register-modifier>
+		<property-modifier property="cannot-block" linked="false">
+			<while>
+				<test ref="threshold"/>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

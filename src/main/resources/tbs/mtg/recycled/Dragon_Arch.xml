@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dragon Arch">
+<rules-author-comment></rules-author-comment>
+
+<!--  {5} {2}, {t}: put a multicolored creature card from your hand into play. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="this" name="" zone="play">
+			<cost>
+				<pay-mana colorless="2" />
+				<action ref="T"/>
+				<target type="card" raise-event="false" mode="choose" restriction-zone="hand">
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="creature"/>
+							<test ref="is-multicolored"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<move-card controller="target.owner" destination="play" name=""/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Psionic Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - sliver
+	2/2
+	all sliver creatures have "t :this creature deals 2 damage to target creature or player and 3 damage to itself."
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<activated-ability playable="instant" name="" zone="play">
+							<cost>
+								<action ref="T"/>
+								<action ref="target-dealtable"/>
+							</cost>
+							<effects>
+								<assign-damage value="2" type="damage-normal"/>
+								<target-list operation="clear"/>
+								<target type="this"/>
+								<assign-damage value="3" type="damage-normal"/>
+							</effects>
+						</activated-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

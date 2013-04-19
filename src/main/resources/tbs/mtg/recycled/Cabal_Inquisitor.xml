@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Cabal Inquisitor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - minion
+	1/1
+	threshold - 1b, t, remove two cards in your graveyard from the game: target player discards a card. play this ability only any time you could play a sorcery, and only if seven or more cards are in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human minion </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test ref="threshold"/>
+			<cost>
+				<pay-mana colorless="1" black="1" />
+				<action ref='T'/>
+				<target type="you"/>
+				<repeat value='2'/>
+				<action ref='remove-a-card-from-graveyard'/>
+				<target-list operation="clear"/>
+				<action ref="target-player"/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

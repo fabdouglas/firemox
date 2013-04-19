@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Douse">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {2}{u} {1}{u}: counter target red spell. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana colorless="1" blue="1" />
+				<action ref="target-spell">
+					<test>
+						<has-color color="red"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="counter"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

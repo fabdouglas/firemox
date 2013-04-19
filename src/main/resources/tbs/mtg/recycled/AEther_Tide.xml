@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="&#198;ther Tide">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {x}{u} as an additional cost to play aether tide, discard x creature cards from your hand. 
+return x target creatures to their owners' hands. -->
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="pay-x" />
+				<repeat>
+					<value register="stack" index="0"/>
+				</repeat>
+				<action ref="target-creature"/>
+			</cost>
+			<effects>
+				<action ref="return-to-hand"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

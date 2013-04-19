@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Stoneshaker Shaman">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2r
+	creature - human shaman
+	1/1
+	at the end of each player's turn, that player sacrifices an untapped land.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<end-of-phase phase="eot"/>
+			<effects>
+				<target type="currentplayer"/>
+				<target type="card" mode="target-choose" raise-event="false" restriction-zone="play">
+					<test>
+						<and>
+							<has-idcard idcard="land"/>
+							<in-zone zone="playANDuntapped"/>
+							<controller player="currentplayer" />
+						</and>
+					</test>
+				</target>
+				<action ref="sacrifice"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

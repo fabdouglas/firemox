@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Isao, Enlightened Bushi">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	legendary creature - human samurai
+	2/1
+	isao, enlightened bushi can't be countered.
+	bushido 2 
+	2: regenerate target samurai.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend human samurai cannot-be-countered </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='bushido2-blocked'/>
+		<ability ref='bushido2-blocking'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-creature'>
+					<test>
+						<has-property property="samurai"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="regenerate-target"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

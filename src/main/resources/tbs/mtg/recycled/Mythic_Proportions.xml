@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Mythic Proportions">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ggg
+	enchantment - aura
+	enchant creature
+	enchanted creature gets +8/+8 and has trample.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+	</abilities>
+	<attachment ref='trample'>
+		<modifiers>
+			<register-modifier index="power" value="8" operation="add" linked="true" />
+			<register-modifier index="toughness" value="8" operation="add" linked="true" />
+		</modifiers>
+	</attachment>
+</card>

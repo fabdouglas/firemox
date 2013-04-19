@@ -1,0 +1,14 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jvnet</groupId>
+  <artifactId>substance</artifactId>
+  <version>3.2.0.pack200</version>
+  <name>Substance Java look &amp; feel</name>
+  <description>
+		The goal of this project is to provide a configurable and customizable production-quality Java look and feel library for Swing applications. This Java look and feel is available for JDK 5.0+ only.
+	</description>
+	<url>https://substance.dev.java.net/</url>
+	<distributionManagement>
+		<downloadUrl>http://www.jfree.org/jcommon/download/</downloadUrl>
+	</distributionManagement>
+</project>

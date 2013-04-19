@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coral Helm">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3
+		artifact
+		3, discard a card at random: target creature gets +2/+2 until end of turn.
+	-->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3' />
+		</registers>
+		<colors></colors>
+		<idcards>artifact</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='3' />
+				<action ref="discard-random" value='3' />
+				<action ref='target-creature' />
+			</cost>
+			<effects>
+				<action ref="add+2+2-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,140 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crackleburr">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1(u / r)(u / r)
+	creature - elemental
+	2/2
+	o(u/r)o(u/r), t, tap two untapped red creatures you control: crackleburr deals 3 damage to target creature or player.
+	o(u/r)o(u/r), oq, untap two tapped blue creatures you control: return target creature to its owner's hand. (oq is the untap symbol.)
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red blue </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<actions>
+		<action reference-name="cost1">
+			<action ref='T'/>
+			<repeat value="2"/>
+			<action ref="target-creature">
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="red"/>
+						<in-zone zone="playANDuntapped"/>
+					</and>
+				</test>
+			</action>
+			<tap/>
+			<target-list operation="clear"/>
+			<action ref='target-dealtable'/>
+		</action>
+		<action reference-name="cost2">
+			<action ref='Q'/>
+			<repeat value="2"/>
+			<action ref="target-creature">
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+						<in-zone zone="playANDtapped"/>
+					</and>
+				</test>
+			</action>
+			<untap/>
+			<target-list operation="clear"/>
+			<action ref='target-creature'/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='2' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' blue='1' red='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='1' red='2'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="1" blue="1"/>
+				<action ref="cost1"/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue="2"/>
+				<action ref="cost1"/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="2"/>
+				<action ref="cost1"/>
+			</cost>
+			<effects>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue="2"/>
+				<action ref="cost2"/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana blue="1" red="1"/>
+				<action ref="cost2"/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red="2"/>
+				<action ref="cost2"/>
+			</cost>
+			<effects>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

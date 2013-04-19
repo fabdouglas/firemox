@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Annex">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{u}{u} you control enchanted land. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="blue" value="2"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment ref="control-land"/>
+</card>

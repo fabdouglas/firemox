@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Death Mutation">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+	<!--  {6}{b}{g} destroy target nonblack creature. it can't be regenerated. 
+		put x 1/1 green saproling creature tokens into play, where x is its converted 
+		mana cost.
+		Oct 4, 2004 - You do not get to put the tokens into play if the target is not 
+		destroyed because it is not legal on resolution.
+	-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="6" />
+			<register index="black" value="1" />
+			<register index="green" value="1" />
+		</registers>
+		<colors>black green</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="target-creature">
+					<test>
+						<not>
+							<has-color color="black" />
+
+						</not>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="bury" />
+				<repeat>
+					<value register="target-list.first" index="manacost"/>
+				</repeat>
+				<create-card name="saproling">
+					<card name='Saproling'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors>green</colors>
+							<idcards>creature</idcards>
+							<properties>token saproling </properties>
+						</init>
+					</card>
+				</create-card>
+				<action ref="move-to-play"/>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

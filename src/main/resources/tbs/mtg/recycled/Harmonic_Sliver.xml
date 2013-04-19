@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Harmonic Sliver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1gw
+	creature - sliver
+	1/1
+	all slivers have "when this creature comes into play, destroy target artifact or enchantment."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white green </colors>
+		<idcards>creature </idcards>
+		<properties>sliver </properties>
+	</init>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<triggered-ability zone='play'>
+							<moved-card>
+								<source-test>
+								</source-test>
+								<destination-test>
+									<in-zone zone='play' card='tested'/>
+								</destination-test>
+							</moved-card>
+							<cost>
+								<action ref='target-permanent'>
+									<test>
+										<or>
+											<has-idcard idcard="artifact"/>
+											<has-idcard idcard="enchantment"/>
+										</or>
+									</test>
+								</action>
+							</cost>
+							<effects>
+								<action ref='destroy'/>
+							</effects>
+						</triggered-ability>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+			 	<has-property property="sliver"/>
+			</while>
+		</static-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

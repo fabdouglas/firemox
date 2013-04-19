@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Harsh Deceiver">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - spirit
+	1/4
+	1: look at the top card of your library.
+	2: reveal the top card of your library. if it's a land card, untap harsh deceiver and it gets +1/+1 until end of turn. play this ability only once each turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+			</cost>
+			<effects>
+				<action ref="look-at-the-top"/>
+				<msg type="ok" controller="you">
+					<text>%ok_when_finished</text>
+				</msg>
+				<face-down for="you" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test ref="once-each-turn"/>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='use-once-each-turn'/>
+			</cost>
+			<effects>
+				<target type="card" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you"/>
+							<position position="1"/>
+						</and>
+					</test>
+				</target>
+				<action ref="reveal"/>
+				<if-then-hop elsehop="4">
+					<test>
+						<has-idcard idcard="land" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<target type="this"/>
+				<untap/>
+				<action ref="add+1+1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

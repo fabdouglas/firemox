@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Skirk Prospector">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	creature - goblin
+	1/1
+	sacrifice a goblin: add r to your mana pool.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-permanent' value='1'>
+					<test>
+						<has-property property='goblin'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<give-mana red='1' />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

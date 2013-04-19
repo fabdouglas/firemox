@@ -1,0 +1,36 @@
+# Creatures
+Birds_Of_Paradise;4;card.set=rav
+Coiling_Oracle;4;card.set=dis
+Llanowar_Elves;4;card.set=9e
+Loxodon_Hierarch;4;card.set=rav
+Mystic_Snake;4;card.set=tsb
+Selesnya_Guildmage;3;card.set=rav
+Yavimaya_Dryad;3;card.set=tsp
+
+# Legendary Creatures
+Mangara_of_Corondor;1;card.set=tsp
+
+# Enchantments
+Glare_of_Subdual;3;card.set=rav
+
+# Instants
+Chord_of_Calling;3;card.set=rav
+Momentary_Blink;4;card.set=tsp
+
+# Sorcery
+Call_of_the_Herd;3;card.set=tsb
+
+# Basic lands
+Forest;1;card.version=1;card.set=tsp
+Island;1;card.version=2;card.set=tsp
+
+# Non-basic lands
+Breeding_Pool;4;card.set=dis
+Brushland;2;card.set=9e
+Hallowed_Fountain;1;card.set=dis
+Temple_Garden;4;card.set=rav
+Vitu_Ghazi_The_City_Tree;3;card.set=rav
+Yavimaya_Coast;4;card.set=ap
+
+#Legendary land
+Pendelhaven;1;card.set=tsb

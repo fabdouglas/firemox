@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sulfurous Springs">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  land 
+		t: add 1 to your mana pool. 
+		t: add b or r to your mana pool. 
+		sulfurous springs deals 1 damage to you.   -->
+
+	<init>
+		<registers></registers>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<ability ref="tap-add-C" />
+		<activated-ability playable="mana-source" zone="play">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<give-mana red="1" />
+				<target type="you" />
+				<assign-damage value="1" type="damage-normal" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="mana-source" zone="play">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<give-mana black="1" />
+				<target type="you" />
+				<assign-damage value="1" type="damage-normal" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

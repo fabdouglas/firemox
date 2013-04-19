@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Power Leak">
+	<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<!--  {1}{u} 
+		At the beginning of the upkeep of enchanted enchantment's controller, 
+		that player may pay up to {2}. for each one mana less than {2} he or she pays 
+		this way, power leak deals 1 damage to him or her. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="blue" value="1" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<triggered-ability zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<phase-is phase="upkeep" />
+						<is-this player="attachedto.controller" />
+					</and>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="false">
+					<either>
+						<pay-mana colorless="2" controller="attachedto.controller" />
+						<modify-register register="stack" value="0" operation="set" index="0"
+							name="%" />
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="attachedto.controller" />
+						<modify-register register="stack" value="1" operation="set" index="0"
+							name="%" />
+					</either>
+					<either>
+						<pay-mana colorless="0" controller="attachedto.controller" />
+						<modify-register register="stack" value="2" operation="set" index="0"
+							name="%" />
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<target type="attachedto.controller" />
+				<assign-damage type="damage-normal">
+					<value register="stack" index="0" />
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+		<ability ref="cast-enchant" />
+	</abilities>
+	<attachment>
+		<modifiers />
+		<valid-target ref="valid-enchantment-to-enchant" />
+		<valid-attachment ref="valid-enchant-enchantment" />
+	</attachment>
+</card>

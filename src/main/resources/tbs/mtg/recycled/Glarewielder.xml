@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Glarewielder">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4r
+	creature - elemental shaman
+	3/1
+	haste
+	when glarewielder comes into play, up to two target creatures can't block this turn.
+	evoke 1r 
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental shaman haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="play" hop="1" cancel="true">
+					<test ref="is-targetable-creature" />
+				</target>
+			</cost>
+			<effects>
+				<action ref="cannot-block-until-eot"/>
+			</effects>
+		</triggered-ability>
+		<ability ref='evoke'>
+			<actions>
+				<pay-mana red='1' colorless='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>

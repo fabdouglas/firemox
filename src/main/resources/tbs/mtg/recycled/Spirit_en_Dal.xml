@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spirit en-Dal">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	creature - spirit
+	2/1
+	shadow 
+	forecast - 1w, reveal spirit en-dal from your hand: target creature gains shadow until end of turn. 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>spirit shadow </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref='reset-forecast' />
+		<ability ref='forecast'>
+			<actions>
+				<pay-mana white='1' colorless='1' />
+			</actions>
+			<actions>
+				<action ref="target-creature"/>
+				<action ref="shadow-until-eot"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

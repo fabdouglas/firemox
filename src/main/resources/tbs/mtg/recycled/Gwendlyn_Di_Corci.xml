@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gwendlyn Di Corci">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		ubbr
+	legendary creature - human
+	3/5
+	t :target player discards a card at random. play this ability only during your turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='blue' value='1'/>
+			<register index='black' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>red blue black </colors>
+		<idcards>creature </idcards>
+		<properties>legend human rogue</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<test>
+				<controller player="currentplayer" card="this"/>
+			</test>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard-random' value='1'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

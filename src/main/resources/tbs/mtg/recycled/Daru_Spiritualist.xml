@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Daru Spiritualist">
+	<rules-author-comment></rules-author-comment>
+
+	<!-- 
+		Daru Spiritualist 1W
+		Creature - Cleric
+		
+		Whenever a Cleric creature you control becomes the target of a spell or ability, 
+		it gets +0/+2 until end of turn.
+		
+	-->
+	<init>
+		<registers>
+			<register index="colorless" value="1" />
+			<register index="white" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="1" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<targeted>
+				<destination-test>
+					<and>
+						<not>
+							<is-player />
+						</not>
+						<controller player="you" />
+						<has-idcard idcard="creature" />
+						<has-property property="cleric" />
+					</and>
+				</destination-test>
+			</targeted>
+			<effects>
+				<target type="context.card"/>
+				<action ref="add+0+2-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

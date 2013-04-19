@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Crovax the Cursed">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	legendary creature - vampire
+	0/0
+	crovax the cursed comes into play with four +1/+1 counters on it.
+	at the beginning of your upkeep, you may sacrifice a creature. if you do, put a +1/+1 counter on crovax. if you don't, remove a +1/+1 counter from crovax.
+	b: crovax gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend vampire </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<action ref='sacrifice-a-creature' value='1'/>
+						<target type="this"/>
+						<add-object object-name='+1/+1'/>
+					</either>
+					<either>
+						<target type="this"/>
+						<remove-object object-name='+1/+1'/>
+					</either>
+				</choice>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Simic Guildmage">
+	<keywords>TESTED_0.91</keywords>
+	<rules-author-comment>By Hoani CROSS</rules-author-comment>
+	<init>
+		<registers>
+			<register index="power" value="2" />
+			<register index="toughness" value="2" />
+			<register index="colorless" value="2" />
+			<!-- register value="2" index="0">
+				TODO 
+				<index>
+				<enumeration>
+				<value value="blue"/>
+				<value value="green"/>
+				</enumeration>
+				</index>
+				
+				</register -->
+		</registers>
+		<colors>blue green</colors>
+		<idcards>creature</idcards>
+		<properties>elf wizard</properties>
+	</init>
+	<abilities>
+		<!-- ability ref="cast-spell" / -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana green="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana green="1" blue="1" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana blue="2" />
+			</cost>
+			<effects>
+				<action ref="put-in-play" />
+			</effects>
+		</activated-ability>
+
+		<activated-ability playable="this" zone="play">
+			<cost>
+				<pay-mana green="1" colorless="1" />
+				<action ref="target-creature">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+				<action ref="target-creature">
+					<test>
+						<or>
+							<equal left="target-list.size" right="0" />
+							<controller card="tested" player="target-list.first.controller" />
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<move-object object-name="+1/+1" from="target-list.first" to="target-list.last"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" zone="play">
+			<cost>
+				<pay-mana blue="1" colorless="1" />
+				<action ref="target-local-enchantment" />
+				<action ref="target-permanent-enchant">
+					<test>
+						<or>
+							<equal left="target-list.size" right="0" />
+							<and>
+								<not>
+									<is target="target-list.first.attachedto"/>
+								</not>
+								<controller card="tested" player="target-list.first.attachedto.controller" />
+								<valid-attachment from="target-list.first" card="tested" />
+							</and>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<attach from="target-list.first" to="target-list.last" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

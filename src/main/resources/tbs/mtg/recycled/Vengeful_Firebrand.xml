@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Vengeful Firebrand">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - elemental warrior
+	5/2
+	vengeful firebrand has haste as long as a warrior card is in your graveyard.
+	r: vengeful firebrand gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>elemental warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<action ref="add+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<property-modifier property="haste">
+			<while>
+				<has restriction-zone="graveyard">
+					<and>
+						<controller player="you"/>
+						<has-property property="warrior"/>
+					</and>
+				</has>
+			</while>
+		</property-modifier>
+	</modifiers>
+</card>

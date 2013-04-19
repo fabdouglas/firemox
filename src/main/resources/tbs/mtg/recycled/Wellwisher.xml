@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Wellwisher">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf
+	1/1
+	t :you gain 1 life for each elf in play.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<counter restriction-zone="play">
+							<has-property property="elf"/>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

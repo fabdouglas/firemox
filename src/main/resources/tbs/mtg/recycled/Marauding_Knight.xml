@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Marauding Knight">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2bb
+	creature - knight
+	2/2
+	protection from white
+	marauding knight gets +1/+1 for each plains your opponents control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie knight protection-from-white </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" linked="true" layer="global">
+			 		<value>
+			 			<counter restriction-zone="play">
+			 				<and>
+			 					<has-idcard idcard="plains"/>
+			 					<not>
+			 						<controller player="you"/>
+			 					</not>
+			 				</and>
+			 			</counter>
+			 		</value>
+			 	</register-modifier>			 		
+			 	<register-modifier index="toughness" operation="add" linked="true" layer="global">
+			 		<value>
+			 			<counter restriction-zone="play">
+			 				<and>
+			 					<has-idcard idcard="plains"/>
+			 					<not>
+			 						<controller player="you"/>
+			 					</not>
+			 				</and>
+			 			</counter>
+			 		</value>
+			 	</register-modifier>
+			</modifiers>
+			<while>
+				<is-this/>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

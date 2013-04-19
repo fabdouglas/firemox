@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Coffin Puppets">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	creature - zombie
+	3/3
+	sacrifice two lands: return coffin puppets from your graveyard to play. play this ability only during your upkeep and only if you control a swamp.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test>
+				<and>
+					<test ref="during-your-upkeep"/>
+					<has restriction-zone="play">
+						<and>
+							<controller player="you"/>
+							<has-idcard idcard="swamp"/>
+						</and>
+					</has>
+				</and>
+			</test>
+			<cost>
+				<action ref='sacrifice-a-land' value='2'/>
+			</cost>
+			<effects>
+				<target-list operation="clear"/>
+				<target type="this"/>
+				<action ref="move-to-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

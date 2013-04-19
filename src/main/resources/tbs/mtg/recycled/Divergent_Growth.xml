@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divergent Growth">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {g} until end of turn, lands you control gain 
+		"{t}: add one mana of any color to your mana pool." -->
+	<init>
+		<registers>
+			<register index="green" value="1" />
+		</registers>
+		<colors>green</colors>
+		<idcards>instant</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand" resolution="auto">
+			<cost>
+				<pay-mana value="manacost" />
+			</cost>
+			<effects>
+				<target mode="all" type="card" restriction-zone="play">
+					<test>
+						<and>
+							<controller player="you" />
+							<has-idcard idcard="land" />
+						</and>
+					</test>
+				</target>
+				<add-modifier>
+					<ability-modifier>
+						<while>
+							<and>
+								<controller player="you" />
+								<has-idcard idcard="land" />
+							</and>
+						</while>
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+						<abilities>
+							<ability ref="tap-add-B" />
+							<ability ref="tap-add-U" />
+							<ability ref="tap-add-G" />
+							<ability ref="tap-add-R" />
+							<ability ref="tap-add-W" />
+						</abilities>
+					</ability-modifier>
+				</add-modifier>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

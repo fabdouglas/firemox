@@ -1,0 +1,73 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Umezawa's Jitte">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	legendary artifact - equipment
+	whenever equipped creature deals combat damage, put two charge counters on umezawa's jitte.
+	remove a charge counter from umezawa's jitte: choose one - equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.
+	equip 2
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+		<properties>legend equipment </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-combat'>
+				<source-test>
+					<is target="attachedto"/>
+				</source-test>
+			</assigned-damage>
+			<effects>
+				<target type="this"/>
+				<repeat value="2"/>
+				<add-object object-name="charge"/>
+			</effects>
+		</triggered-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="charge"/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="true">
+					<either>
+						<action ref="target-creature"/>
+						<action ref="add-1-1-until-eot"/>
+					</either>
+					<either>
+						<target type="attachedto"/>
+						<action ref="add+2+2-until-eot"/>
+					</either>
+					<either>
+						<action ref='gain-life' value='2'/>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='play'>
+			<cost>
+				<pay-mana colorless='2' />
+				<action ref='target-equipable-creature' />
+			</cost>
+			<effects>
+				<action ref='equip' />
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-equip' />
+		<valid-attachment ref='valid-equip-creature' />
+	</attachment>
+</card>

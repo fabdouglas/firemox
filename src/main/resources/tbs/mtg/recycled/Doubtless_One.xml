@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Doubtless One">
+<rules-author-comment></rules-author-comment>
+
+<!--  {3}{w} doubtless one's power and toughness are each equal to the number 
+of clerics in play. 
+
+whenever doubtless one deals damage, you gain that much life. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+			<register index="power">
+				<value><counter restriction-zone="play">
+					<has-property property="cleric"/>
+				</counter></value>
+			</register>
+			<register index="toughness">
+				<value><counter restriction-zone="play">
+					<has-property property="cleric"/>
+				</counter></value>
+			</register>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature </idcards>
+		<properties>cleric avatar</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<is-this/>
+				</source-test>
+			</assigned-damage>
+			<effects>
+			 	<action ref="gain-life" value="context.int"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

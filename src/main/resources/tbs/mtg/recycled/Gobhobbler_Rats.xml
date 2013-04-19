@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gobhobbler Rats">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		br
+		creature - rat
+		2/2
+		hellbent - gobhobbler rats gets +1/+0 and has "b: regenerate gobhobbler rats" as long as you have no cards in hand.
+	-->
+
+	<init>
+		<registers>
+			<register index='red' value='1' />
+			<register index='black' value='1' />
+			<register index='power' value='2' />
+			<register index='toughness' value='2' />
+		</registers>
+		<colors>red black</colors>
+		<idcards>creature</idcards>
+		<properties>rat</properties>
+	</init>
+	<modifiers>
+		<register-modifier index='power' value='1' operation='add' linked='false'>
+			<while>
+				<test ref="hellbent" />
+			</while>
+		</register-modifier>
+		<ability-modifier linked="true" layer="global">
+			<abilities>
+				<activated-ability playable='instant' name='' zone='play'>
+					<test ref="hellbent" />
+					<cost>
+						<pay-mana black="1" />
+					</cost>
+					<effects>
+						<action ref='regenerate' />
+					</effects>
+				</activated-ability>
+			</abilities>
+		</ability-modifier>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell' />
+	</abilities>
+</card>

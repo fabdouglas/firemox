@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--[[apt lang=en header]] ______
+ Dross Golem
+ ______
+ Fabrice Daugan
+ ______
+ October 22 2007
+
+Dross Golem
+-->
+<!--[[apt lang=fr header]] ______
+ Dross Golem
+ ______
+ Fabrice Daugan
+ ______
+ 22 Octobre 2007
+
+Dross Golem
+-->
+<!--[[apt lang=en]]
+ This card is the perfect example for the implementation of the <affinity>
+ ability.
+
+[http://magiccards.info/scans/en/ds/119.jpg]
+
+ Let's start by looking at this card code :
+-->
+<!--[[apt lang=fr]]
+ Cette carte est un exemple d'implémentation de la capacité de <affinity>.
+
+[http://magiccards.info/scans/en/ds/119.jpg]
+
+ Commençons par observer le code de cette carte :
+-->
+<!--[[apt content]-->
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dross Golem">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {5} affinity for swamps  fear -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="5" />
+			<register index="power" value="3" />
+			<register index="toughness" value="2" />
+		</registers>
+		<colors></colors>
+		<idcards>creature artifact</idcards>
+		<properties>fear golem</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell">
+			<actions>
+				<action ref="affinity">
+					<counter-test>
+						<has-idcard idcard="swamp" />
+					</counter-test>
+				</action>
+			</actions>
+		</ability>
+	</abilities>
+</card>

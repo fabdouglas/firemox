@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Sea Serpent">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {5}{u} sea serpent can't attack unless defending player controls an island. when you control no islands, sacrifice sea serpent. -->
+	<init>
+		<registers>
+			<register index="colorless" value="5"/>
+			<register index="blue" value="1"/>
+			<register index="power" value="5"/>
+			<register index="toughness" value="5"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature </idcards>
+		<properties>cannot-attack serpent</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<ability ref="island-home"/>
+		<ability ref="island-home-attack"/>
+	</abilities>
+</card>

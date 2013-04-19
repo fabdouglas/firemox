@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Purity">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3www
+	creature - elemental incarnation
+	6/6
+	flying
+	if a spell or ability would deal damage to you, prevent that damage. you gain life equal to the damage prevented this way.
+	when purity is put into a graveyard from anywhere, shuffle it into its owner's library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='3'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>elemental incarnation flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<replacement-ability zone="play">
+			<assigned-damage type="damage-any">
+				<source-test>
+					<or>
+						<is-spell/>
+						<is-ability/>
+					</or>
+				</source-test>
+				<destination-test>
+					<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<action ref="gain-life" value="context.int"/>
+			</effects>
+		</replacement-ability>
+		<triggered-ability zone="graveyard">
+			<moved-card>
+				<source-test>
+					<is-this/>
+				</source-test>
+				<destination-test>
+					<in-zone zone="graveyard"/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="this"/>
+				<action ref="shuffle-in-lib"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

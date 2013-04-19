@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Molimo, Maro-Sorcerer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4ggg
+	legendary creature
+	*/*
+	trample
+	molimo, maro-sorcerer's power and toughness are each equal to the number of lands you control.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='3'/>
+			<register index='colorless' value='4'/>
+			<register index='power'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='land'/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+			<register index='toughness'>
+				<value>
+					<counter restriction-zone='play'>
+						<and>
+							<has-idcard idcard='land'/>
+							<controller player='you'/>
+						</and>
+					</counter>
+				</value>
+			</register>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>legend trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

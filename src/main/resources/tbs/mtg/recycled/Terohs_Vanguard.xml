@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Teroh's Vanguard">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3w
+	creature - nomad
+	2/3
+	flash
+	threshold - as long as seven or more cards are in your graveyard, teroh's vanguard has "when teroh's vanguard comes into play, creatures you control gain protection from black until end of turn."
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human nomad flash </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+						<test ref="threshold"/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="creatures-you-control"/>
+				<action ref="protection-from-black-until-eot"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

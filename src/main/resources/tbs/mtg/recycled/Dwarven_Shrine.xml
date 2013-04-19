@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Dwarven Shrine">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1rr
+	enchantment
+	whenever a player plays a spell, dwarven shrine deals x damage to that player, where x is twice the number of cards in all graveyards with the same name as that spell.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<is-spell/>
+				</test>
+			</casting>
+			<effects>
+				<target type="context.player"/>
+				<assign-damage type='damage-normal'>
+					<value>
+						<mult right="2">
+							<left>
+								<counter restriction-zone="graveyard">
+									<has-name name="context.card.name"/>
+								</counter>
+							</left>
+						</mult>
+					</value>
+				</assign-damage>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

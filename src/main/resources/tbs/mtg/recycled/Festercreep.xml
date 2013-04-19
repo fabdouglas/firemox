@@ -1,0 +1,51 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Festercreep">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1b
+	creature - elemental
+	0/0
+	festercreep comes into play with a +1/+1 counter on it.
+	1b, remove a +1/+1 counter from festercreep: all other creatures get -1/-1 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' colorless='1' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<not>
+							<is-this/>
+						</not>
+					</test>
+				</action>
+				<action ref="add-1-1-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Helium Squirter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4u
+	creature - beast mutant
+	0/0
+	graft 3 
+	1: target creature with a +1/+1 counter on it gains flying until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='0'/>
+			<register index='toughness' value='0'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>beast mutant </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+		<object name="+1/+1" />
+	</modifiers>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="graft" />
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<action ref="target-creature">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="+1/+1" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="flying-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

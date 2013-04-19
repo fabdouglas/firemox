@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blazing Salvo">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		r
+	instant
+	blazing salvo deals 3 damage to target creature unless that creature's controller has blazing salvo deal 5 damage to him or her.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="target-list.first.controller" cancel="false">
+					<either>
+						<assign-damage value='3' type='damage-normal'/>
+					</either>
+					<either>
+						<target type="target-list.first.controller"/>
+						<assign-damage value='5' type='damage-normal'/>
+					</either>
+				</choice>		
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Twisted Abomination">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5b
+	creature - zombie mutant
+	5/3
+	b: regenerate twisted abomination.
+	swampcycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='1'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>zombie mutant </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana black='1' />
+			</cost>
+			<effects>
+				<action ref='regenerate'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="hand">
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<target type="this" name="%" />
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%" />
+				<action ref="search-lib-reveal" value="1">
+					<test>
+						<has-idcard idcard="swamp"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

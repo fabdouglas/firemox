@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Doomed Necromancer">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b} 
+{b}, {t}, sacrifice doomed necromancer: return target creature card from your 
+graveyard to play. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power" value="2"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>cleric mercenary</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana black="1" />
+				<action ref="T"/>
+				<action ref="sacrifice-this"/>
+				<target type="card" mode="choose" restriction-zone="graveyard"> 
+					<test>
+						<and>
+							<controller player="you"/>
+							<test ref="is-targetable-creature"/>
+						</and>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<action ref="put-in-play"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

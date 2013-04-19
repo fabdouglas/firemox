@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Briarberry Cohort">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	creature - faerie soldier
+	1/1
+	flying 
+	briarberry cohort gets +1/+1 as long as you control another blue creature.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>creature </idcards>
+		<properties>faerie soldier flying</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="1" linked="true">
+			<while>
+				<has restriction-zone="play">
+					<and>
+						<controller player="you"/>
+						<has-color color="blue"/>
+						<not>
+							<is-this/>
+						</not>
+					</and>
+				</has>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

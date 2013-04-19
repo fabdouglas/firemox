@@ -1,0 +1,14 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>l2fprod</groupId>
+  <artifactId>common-totd</artifactId>
+  <version>7.3.pack200</version>
+ 	<name>Organizing the option dialog</name>
+  <description>
+		You do not have a Tip of The Day dialog in Swing. Well, now you have it with the JTipOfTheDay component!  
+	</description>
+	<url>http://common.l2fprod.com</url>
+	<distributionManagement>
+		<downloadUrl>http://common.l2fprod.com/download.php</downloadUrl>
+	</distributionManagement>
+</project>

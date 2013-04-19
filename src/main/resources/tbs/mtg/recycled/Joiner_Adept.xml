@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Joiner Adept">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1g
+	creature - elf druid
+	2/1
+	lands you control have "t :add one mana of any color to your mana pool."
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf druid </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+				<ability-modifier linked="true" layer="global">
+					<abilities>
+						<ability ref="tap-add-W"/>
+						<ability ref="tap-add-B"/>
+						<ability ref="tap-add-U"/>
+						<ability ref="tap-add-R"/>
+						<ability ref="tap-add-G"/>
+					</abilities>
+				</ability-modifier>
+			</modifiers>
+			<while>
+				<and>
+					<has-idcard idcard="land"/>
+					<controller player="you"/>
+				</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

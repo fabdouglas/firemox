@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Myr Servitor">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1
+	artifact creature - myr
+	1/1
+	at the beginning of your upkeep, if myr servitor is in play, each player returns all cards named myr servitor from his or her graveyard to play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>myr </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<has-name name="myr_servitor"/>
+					</test>
+				</target>
+				<action ref="move-to-play"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

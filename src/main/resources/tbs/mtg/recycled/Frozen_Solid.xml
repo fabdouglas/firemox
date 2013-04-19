@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Frozen Solid">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1uu
+	enchantment - aura
+	enchant creature
+	enchanted creature doesn't untap during its controller's untap step.
+	when damage is dealt to enchanted creature, destroy it.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='2'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type="damage-any">
+				<destination-test>
+					<and>
+						<is target="attachedto"/>
+						<in-zone zone="play"/>
+					</and>
+				</destination-test>
+			</assigned-damage>
+			<effects>	
+				<target type="attachedto"/>
+				<action ref="destroy"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref='does-not-untap'/>
+</card>

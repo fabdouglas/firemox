@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Eternal Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		5ww
+	creature - dragon spirit
+	5/5
+	flying
+	3ww: return eternal dragon from your graveyard to your hand. play this ability only during your upkeep.
+	plainscycling 2 
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='5'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>dragon spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='graveyard'>
+			<test ref="during-your-upkeep"/>
+			<cost>
+				<pay-mana white='2' colorless='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref='return-to-hand'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="instant" zone="hand">
+			<cost>
+				<pay-mana colorless='2' />
+			</cost>
+			<effects>
+				<target type="this" name="%" />
+				<action ref="put-in-graveyard"/>
+				<target-list operation="clear" name="%" />
+				<action ref="search-lib-reveal" value="1">
+					<test>
+						<has-idcard idcard="plains"/>
+					</test>
+				</action>
+				<action ref="return-to-hand"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

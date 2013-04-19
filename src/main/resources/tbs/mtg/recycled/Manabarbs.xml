@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Manabarbs">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {3}{r} whenever a player taps a land for mana, 
+manabarbs deals 1 damage to that player. -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="red" value="1"/>
+		</registers>
+		<colors>red</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability zone="play" resolution="hidden">
+			<become-tapped>
+				<test>
+					<has-idcard idcard="land"/>
+				</test>
+			</become-tapped>
+			<effects>
+				<create-ability>
+					<save target="context.event-source"/>
+					<triggered-ability zone="play">
+						<given-mana color="nocare">
+							<source-test>
+								<is target="saved"/>
+							</source-test>
+						</given-mana>
+						<effects>
+							<unregister-this/>
+							<target type="context.card2.controller"/>
+							<assign-damage value="1" type="damage-normal"/>
+						</effects>
+					</triggered-ability>
+					<until>
+						<end-of-phase phase="nocare"/>
+					</until>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

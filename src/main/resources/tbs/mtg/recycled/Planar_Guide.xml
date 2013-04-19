@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Planar Guide">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	creature - cleric
+	1/1
+	3w, remove planar guide from the game: remove all creatures from the game. at end of turn, return those cards to play under their owners' control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>human cleric </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='3' />
+			</cost>
+			<effects>
+				<target type="this"/>
+				<action ref="remove-from-game"/>
+				<target-list operation="clear"/>
+				<action ref="all-creatures"/>
+				<action ref="remove-from-game"/>
+				<target-list operation="save"/>
+				<modify-register operation="set" register="this" index="free0" value="saved-target-list.size"/>
+				<create-ability>
+					<triggered-ability zone="play">
+						<end-of-phase phase="eot" />
+						<effects>
+							<target-list operation="load">
+								<list-index register="this" index="free0"/>
+							</target-list>
+							<action ref='move-to-play'/>
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

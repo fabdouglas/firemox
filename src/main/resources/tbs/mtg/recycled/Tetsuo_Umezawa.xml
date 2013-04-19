@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Tetsuo Umezawa">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {u}{b}{r} 
+tetsuo umezawa can't be the target of enchant creature spells. 
+{u}{b}{b}{r}, {t}: destroy target tapped or blocking creature. -->
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+			<register index="black" value="1"/>
+			<register index="red" value="1"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>blue black red</colors>
+		<idcards>creature </idcards>
+		<properties>legend untargetable-by-enchant human archer</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable="instant" name="" zone="play">
+			<cost>
+				<pay-mana blue="1" black="2" red="1" />
+				<action ref="T"/>
+				<action ref="target-creature">
+					<test>
+						<or>
+							<in-zone zone="playANDtapped"/>
+							<test ref="tested-is-blocking"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

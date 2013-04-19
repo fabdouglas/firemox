@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Urborg">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		legendary land
+	t :add b to your mana pool.
+	t :target creature loses first strike or swampwalk until end of turn.
+ -->
+
+	<init>
+		<registers>
+		</registers>
+		<idcards>land </idcards>
+		<properties>legend </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-land'/>
+		<ability ref="tap-add-B"/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'/>
+			</cost>
+			<effects>
+				<choice controller="you" cancel="false">
+					<either>
+						<add-modifier>
+							<property-modifier property="first-strike" linked="false" operation="remove">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+					<either>
+						<add-modifier>
+							<property-modifier property="swampwalk" linked="false" operation="remove">
+								<until>
+									<end-of-phase phase="cleanup" />
+								</until>
+							</property-modifier>
+						</add-modifier>
+					</either>
+				</choice>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

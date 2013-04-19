@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Form of the Dragon">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4rrr
+	enchantment
+	at the beginning of your upkeep, form of the dragon deals 5 damage to target creature or player.
+	at the end of each turn, your life total becomes 5.
+	creatures without flying can't attack you.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='3'/>
+			<register index='colorless' value='4'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test ref='during-your-upkeep'/>
+			</beginning-of-phase>
+			<cost>
+				<action ref="target-dealtable"/>
+			</cost>
+			<effects>
+				<assign-damage value='5' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability resolution='normal' zone='play'>
+			<end-of-phase phase="eot" />
+			<effects>
+				<modify-register register="you" index="life" operation="set" value="5"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="cannot-attack" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+					<not>
+						<has-property property="flying"/>
+					</not>
+					<not>
+						<controller player="you"/>
+					</not>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

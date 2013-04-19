@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Broken Ambitions">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		xu
+	instant
+	counter target spell unless its controller pays x. clash with an opponent. if you win, that spell's controller puts the top four cards of his or her library into his or her graveyard. 
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="Counter" zone="hand">
+			<cost>
+				<pay-mana value="manacost" />
+				<action ref="pay-x" />
+				<action ref="target-spell" />
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.last.controller">
+					<either>
+						<pay-mana controller="target-list.last.controller">
+							<colorless register="stack" index="0" />
+						</pay-mana>
+					</either>
+					<either>
+						<action ref="counter"/>
+					</either>
+				</choice>
+				<action ref="clash">
+					<actions>
+						<target type="target-list.first.controller"/>
+						<repeat value="4"/>
+						<action ref="mill-a-card"/>
+					</actions>
+				</action>
+				<action ref="finish-spell" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

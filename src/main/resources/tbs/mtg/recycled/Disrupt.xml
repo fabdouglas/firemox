@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Disrupt">
+<rules-author-comment></rules-author-comment>
+
+<!--  {u} counter target instant or sorcery spell unless its controller pays {1}. 
+draw a card. 
+-->
+	<init>
+		<registers>
+			<register index="blue" value="1"/>
+		</registers>
+		<colors>blue</colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-spell">
+					<test>
+						<or>
+							<has-idcard idcard="instant"/>
+							<has-idcard idcard="sorcery"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<choice cancel="false" controller="target-list.first.controller">
+					<either>
+						<action ref="counter"/>
+					</either>
+					<either>
+						<pay-mana colorless="1" controller="target-list.first.controller"/>
+					</either>
+				</choice>
+				<target type="you"/>
+				<action ref="draw-a-card"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

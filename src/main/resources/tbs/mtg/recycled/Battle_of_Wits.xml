@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Battle of Wits">
+	<rules-author-comment>riclas</rules-author-comment>
+
+	<!--
+		3uu
+		enchantment
+		at the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='2' />
+			<register index='colorless' value='3' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>global-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell' />
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<and>
+						<test ref='during-your-upkeep' />
+						<sup-equal right="200">
+							<left>
+								<counter restriction-zone="library">
+									<controller player="you" />
+								</counter>
+							</left>
+						</sup-equal>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<lose-game player="opponent" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

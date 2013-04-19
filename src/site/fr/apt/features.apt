@@ -1,0 +1,75 @@
+ ----
+Fonctionnalités
+ ----
+Fabrice Daugan (traduit par Hoani CROSS)
+ ----
+27 Mai 2006
+
+Fonctionnalités courantes (0.90)
+
+    Apparence complètement personnalisable :
+
+[../images/guides/user/themes1.png] Apparence Substance (standard du système hôte)
+
+[../images/guides/look-and-feel0.png] Apparence Metal (standard de Java)
+
+[../images/guides/look-and-feel0.png] Apparence Mac OS
+
+    Permet de jouer à tout jeu de cartes à collectionner (<JCC> ou <CCG> en Anglais)
+    ou tout jeu de stratégie basée sur une structure en tours.
+
+[../images/guides/choose-game.png] Choisir un jeu
+
+[../images/guides/poker.png] Poker
+
+[../images/guides/mtg.png] Magic : l'Assemblée
+
+    Firemox utilise les fonctionnalités de SkinLF, fournissant ainsi un
+    large choix d'apparences. Vous pouvez sans problèmes ajouter vos propres
+    apparences :
+
+[../images/guides/available-skins.png] Apparences disponibles
+
+    Veuillez également consulter la rubrique {{{faqs.html}Foire Aux Questions}}
+    pour comprendre comment ajouter une apparence à Firemox.
+
+    De manière totalement indépendante de l'apparence, les fonds utilisés peuvent
+    également être modifiés selon vos préférences.
+
+[../images/guides/wallpapers.png] Fonds
+
+    Jouer tout seul ou contre un adversaire (avec son IP)
+
+[../images/guides/create-game.png] Créer une partie
+
+[../images/guides/join-game.png] Rejoindre une partie
+
+    Un juge contrôle le déroulememnt du jeu
+
+[../images/guides/valid-target.png] Firemox est le juge (1)
+
+    Un juge vous aide
+
+[../images/guides/valid-ability.png] Firemox est le juge (2)
+
+    Fenêtre flottante contextuelle
+[../images/guides/advanced-tooltip.png]
+
+    Structure d'un tour personnalisable
+
+[../images/guides/custom-phases.png]
+
+    Contrôle du déroulement d'un tour
+
+[../images/guides/advanced-tooltip.png] Contrôle du déroulement des phases
+
+    Créez vos propres cartes
+
+[../images/guides/create-cards.png] Créer vos propres cartes est facile
+
+    Veuillez consulter la rubrique {{{dev/create_cards.html}Création de cartes}} pour
+    de plus amples informations.
+
+    Vous pouvez également créer votre propre jeu de carte ou de stratégie basée
+    sur la structure d'un tour. Consultez la rubrique
+    {{{create_tbs.html}Création de cartes}} pour de plus amples informations.

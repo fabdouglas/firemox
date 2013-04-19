@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Plague Rats">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+<!--  {2}{b} plague rats's power and toughness are each equal to the number of creatures named plague rats in play. -->
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="1"/>
+			<register index="power">
+				<value><counter restriction-zone="play">
+					<has-name name="plague_rats"/>
+				</counter></value>
+			</register>
+			<register index="toughness">
+				<value><counter restriction-zone="play">
+					<has-name name="plague_rats"/>
+				</counter></value>
+			</register>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>rat</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

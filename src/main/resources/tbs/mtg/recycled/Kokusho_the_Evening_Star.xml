@@ -1,0 +1,48 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Kokusho, the Evening Star">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+	legendary creature - dragon spirit
+	5/5
+	flying
+	when kokusho, the evening star is put into a graveyard from play, each opponent loses 5 life. you gain life equal to the life lost this way.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='4'/>
+			<register index='power' value='5'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>legend dragon spirit flying </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='graveyard'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<in-zone zone='play' card='tested'/>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='graveyard' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="opponent"/>
+				<action ref='lose-life-target' value='5'/>
+				<action ref='gain-life' value="5"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

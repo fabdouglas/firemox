@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Soraya the Falconer">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1ww
+	legendary creature
+	2/2
+	bird creatures get +1/+1.
+	1w: target bird creature gains banding until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='1' />
+				<action ref='target-creature'>
+					<test>
+						<has-property property='bird'/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="banding-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<register-modifier index="power" operation="add" value="1" linked="true" layer="global"/>			 		
+			 	<register-modifier index="toughness" operation="add" value="1" linked="true" layer="global"/>
+			</modifiers>
+			<while>
+				<and>
+			 		<has-property property="bird"/>
+			 		<has-idcard idcard="creature"/>
+			 	</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

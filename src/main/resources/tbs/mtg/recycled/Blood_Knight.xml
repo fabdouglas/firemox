@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Blood Knight">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		rr
+	creature - human knight
+	2/2
+	first strike, protection from white
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>human knight first-strike protection-from-white </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+</card>

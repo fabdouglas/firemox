@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gorilla Titan">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3gg
+	creature - ape
+	4/4
+	trample
+	gorilla titan gets +4/+4 as long as there are no cards in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='4'/>
+			<register index='toughness' value='4'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>ape trample </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+	</abilities>
+	<modifiers>
+		<register-modifier index="power" operation="add" value="4">
+			<while>
+				<not>
+					<has restriction-zone="graveyard">
+						<controller player="you"/>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+		<register-modifier index="toughness" operation="add" value="4">
+			<while>
+				<not>
+					<has restriction-zone="graveyard">
+						<controller player="you"/>
+					</has>
+				</not>
+			</while>
+		</register-modifier>
+	</modifiers>
+</card>

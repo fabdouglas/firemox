@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Elvish Eulogist">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		g
+	creature - elf shaman
+	1/1
+	sacrifice elvish eulogist: you gain 1 life for each elf card in your graveyard.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf shaman </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-this'/>
+			</cost>
+			<effects>
+				<action ref='gain-life'>
+					<value>
+						<counter restriction-zone="graveyard">
+							<and>
+								<controller player="you"/>
+								<has-property property="elf"/>
+							</and>
+						</counter>
+					</value>
+				</action>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Purelace">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>instant</idcards>
+	</init>
+
+	<abilities>
+<!-- put into play -->
+		<activated-ability playable="this" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<target type="card">
+					<test>
+						<or>
+							<and>
+								<in-zone zone="play"/>
+								<test ref="is-target"/>
+							</and>
+							<in-zone zone="stack"/>
+						</or>
+					</test>
+				</target>
+			</cost>
+			<effects>
+				<add-modifier>
+					<color-modifier color="white" operation="set"/>
+				</add-modifier>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

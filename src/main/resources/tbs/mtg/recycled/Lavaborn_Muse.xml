@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Lavaborn Muse">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - spirit
+	3/3
+	at the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, lavaborn muse deals 3 damage to him or her.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='3'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>spirit </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability resolution='normal' zone='play'>
+			<beginning-of-phase phase='upkeep'>
+				<test>
+					<not>
+						<test ref='during-your-upkeep'/>
+					</not>
+				</test>
+			</beginning-of-phase>
+			<effects>
+				<if-then-hop elsehop="3">	
+					<test>
+						<inf-equal right="2">
+							<left>
+								<counter restriction-zone="hand">
+									<controller player="currentplayer"/>
+								</counter>
+							</left>
+						</inf-equal>
+					</test>
+				</if-then-hop>
+				<target type="currentplayer"/>
+				<assign-damage value='3' type='damage-normal'/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

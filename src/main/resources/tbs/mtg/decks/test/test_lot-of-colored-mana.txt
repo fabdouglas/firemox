@@ -1,0 +1,3 @@
+Tolarian Academy;10
+Super card;10
+mox jet;50

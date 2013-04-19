@@ -1,0 +1,52 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Hazduhr the Abbot">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3ww
+	legendary creature
+	2/5
+	x, t :the next x damage that would be dealt this turn to target white creature you control is dealt to hazduhr the abbot instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='5'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>creature </idcards>
+		<properties>legend human cleric</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref="pay-x"/>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<controller player="you"/>
+							<has-color color='white'/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<create-ability>
+					<save target="target-list.first" target2="this" />
+					<ability ref="redirect-X" />
+					<until>
+						<end-of-phase phase="cleanup" />
+					</until>
+				</create-ability>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

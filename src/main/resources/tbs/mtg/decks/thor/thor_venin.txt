@@ -1,0 +1,33 @@
+#Jeu venin
+#
+#John
+#
+#janvier 30, 2001
+#1
+#4th Edition
+#
+Marsh_Viper;2
+Pit_Scorpion;3
+Lure;2
+Cockatrice;2
+Demonic_Tutor;1
+Fastbond;1
+Giant_Growth;2
+Regeneration;1
+Thicket_Basilisk;2
+Web;2
+Stream_of_Life;1
+Bayou;5
+Black_Lotus;4
+Howling_Mine;2
+Ivory_Tower;2
+Mox_Emerald;4
+Mox_Jet;4
+Sol_Ring;2
+Mox_Sapphire;4
+Tropical_Island;5
+Underground_Sea;5
+Counterspell;2
+Power_Sink;2
+Time_Walk;3
+Timetwister;3

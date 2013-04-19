@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Femeref Archers">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - human archer
+	2/2
+	t :femeref archers deals 4 damage to target attacking creature with flying.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>human archer </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='T'/>
+				<action ref='target-creature'>
+					<test>
+						<and>
+							<test ref="tested-is-attacking"/>
+							<has-property property="flying"/>
+						</and>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<assign-damage value='4' type='damage-normal'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

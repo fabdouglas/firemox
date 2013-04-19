@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Dawn of the Dead">
+<rules-author-comment></rules-author-comment>
+
+<!--  {2}{b}{b}{b} at the beginning of your upkeep, you lose 1 life. 
+at the beginning of your upkeep, you may return target creature card from your 
+graveyard to play. 
+that creature gains haste until end of turn. 
+remove it from the game at end of turn. 
+-->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2"/>
+			<register index="black" value="3"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<cost>
+				<choice cancel="true">
+					<either>
+						<target type="card" restriction-zone="graveyard" raise-event="false" mode="choose">
+							<test>
+								<and>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</test>
+						</target>
+					</either>
+				</choice>
+			</cost>
+			<effects>
+				<move-card controller="target.owner" destination="play" name=""/>
+				<action ref="haste-until-eot"/>
+				<action ref="remove-from-game-target-eot"/>
+			</effects>
+		</triggered-ability>
+
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test ref="during-your-upkeep"/>
+			</beginning-of-phase>
+			<effects>
+				<action ref="lose-life" value="1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

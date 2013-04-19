@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Winnower Patrol">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2g
+	creature - elf warrior
+	3/2
+	kinship - at the beginning of your upkeep, you may look at the top card of your library. if it shares a creature type with winnower patrol, you may reveal it. if you do, put a +1/+1 counter on winnower patrol.
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='1'/>
+			<register index='colorless' value='2'/>
+			<register index='power' value='3'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>elf warrior </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<ability ref="kinship">
+			<actions>
+				<target type="this"/>
+				<add-object object-name="+1/+1"/>
+			</actions>
+		</ability>
+	</abilities>
+</card>

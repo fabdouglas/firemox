@@ -1,0 +1,94 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Liliana Vess">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3bb
+	planeswalker - liliana
+	5
+	+1: target player discards a card.
+	-2: search your library for a card, then shuffle your library and put that card on top of it.
+	-8: put all creature cards in all graveyards into play under your control.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='3'/>
+			<register index='loyalty' value='5'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>planeswalker </idcards>
+		<properties>liliana</properties>
+	</init>
+	<modifiers>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+		<object name="loyalty"/>
+	</modifiers>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<add-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+				<action ref='target-player'/>
+			</cost>
+			<effects>
+				<action ref='player-discard' value='1'/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="2"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<action ref="search-lib"/>
+				<action ref="move-library-top"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='sorcery' name='' zone='play'>
+			<test>
+				<equal right="0">
+					<left register="this" index="planeswalker-ability"/>
+				</equal>
+			</test>
+			<cost>
+				<target type="this"/>
+				<repeat value="8"/>
+				<remove-object object-name="loyalty"/>
+				<target-list operation="clear"/>
+			</cost>
+			<effects>
+				<target type="card" mode="all" restriction-zone="graveyard">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</target>
+				<move-card destination="play" controller="you"/>
+				<action ref="planeswalker-ability-used"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ageless Sentinels">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  3w defender  flying 
+		when ageless sentinels blocks, its creature type 
+		becomes giant bird, and it loses defender.    
+	-->
+
+	<init>
+		<registers>
+			<register index="white" value="1" />
+			<register index="colorless" value="3" />
+			<register index="power" value="4" />
+			<register index="toughness" value="4" />
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>flying defender</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<triggered-ability zone="play">
+			<declared-blocking>
+				<blocking-test>
+					<is-this/>
+				</blocking-test>
+			</declared-blocking>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<property-modifier property="giant" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+					<property-modifier property="bird" linked="false">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+					<property-modifier property="defender" linked="false" operation="remove">
+						<until>
+							<end-of-phase phase="cleanup" />
+						</until>
+					</property-modifier>
+				</add-modifier>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

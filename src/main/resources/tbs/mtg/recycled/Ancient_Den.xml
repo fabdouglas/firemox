@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!--Version carte 0.1 28-12-2004
+Ancient Den
+Artifact Land
+(Ancient Den isn't a spell.)
+{T}: Add {W} to your mana pool.'
+-->
+
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Ancient Den">
+	<rules-author-comment>By Seingalt</rules-author-comment>
+	<!--keywords : artifact-land -->
+	
+	<init>
+		<idcards>land artifact</idcards>
+	</init>
+
+	<abilities>
+		<ability ref="cast-land"/>
+		<ability ref="tap-add-W"/>
+	</abilities>
+</card>

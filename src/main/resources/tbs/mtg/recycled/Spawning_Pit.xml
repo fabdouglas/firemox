@@ -1,0 +1,58 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Spawning Pit">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2
+	artifact
+	sacrifice a creature: put a charge counter on spawning pit.
+	1, remove two charge counters from spawning pit: put a 2/2 spawn artifact creature token into play.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<action ref='sacrifice-a-creature' value='1'/>
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='charge'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type='this'/>
+				<repeat value="2"/>
+				<remove-object object-name='charge'/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Spawn'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='2'/>
+								<register index='toughness' value='2'/>
+							</registers>
+							<colors></colors>
+							<idcards>artifact-creature</idcards>
+							<properties>token spawn </properties>
+						</init>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

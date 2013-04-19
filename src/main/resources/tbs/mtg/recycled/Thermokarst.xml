@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Thermokarst">
+<rules-author-comment>By Fabdouglas</rules-author-comment>
+
+<!--  {1}{g}{g} destroy target land. if it's a snow-covered land, you gain 1 life. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="green" value="2"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+				<action ref="target-land">
+					<test>
+						<has-property property="snow"/>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref="destroy"/>
+				<if-then-hop elsehop="1">
+					<test>
+						<has-property property="snow" card="target-list.first"/>
+					</test>
+				</if-then-hop>
+				<action ref="gain-life" value="1"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

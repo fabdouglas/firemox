@@ -1,0 +1,74 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Oblivion Ring">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2w
+	enchantment
+	when oblivion ring comes into play, remove another target nonland permanent from the game.
+	when oblivion ring leaves play, return the removed card to play under its owner's control.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone="play">
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this />
+						<not>
+							<in-zone zone="play" />
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone="play" />
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="target-permanent">
+					<test>
+						<not>
+							<has-idcard idcard="land"/>
+						</not>
+					</test>
+				</action>
+				<action ref="remove-from-game"/>
+				<create-ability>
+					<save target="target-list.first"/>
+					<triggered-ability zone="play">
+						<moved-card>
+							<source-test>
+								<and>
+									<is-this />
+									<in-zone zone="play" />
+								</and>
+							</source-test>
+							<destination-test>
+								<not>
+									<in-zone zone="play" />
+								</not>
+							</destination-test>
+						</moved-card>
+						<effects>
+							<target type="saved"/>
+							<action ref="move-to-play" />
+							<unregister-this />
+						</effects>
+					</triggered-ability>
+				</create-ability>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

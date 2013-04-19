@@ -1,0 +1,110 @@
+ ----
+Firemox configuration
+ ----
+Fabrice Daugan
+ ----
+September 09 2007
+
+Configure Eclipse for Firemox 
+
+* Get sources
+
+** Open SVN perspective
+
+[../images/guides/dev/svn_sources1.png]\
+
+** Create a new connection
+
+[../images/guides/dev/svn_sources2.png]\
+
+	Repository root : <<<https://firemox.svn.sourceforge.net/svnroot/firemox>>>\
+
+[../images/guides/dev/svn_sources3.png]
+
+** Checkout sources
+
+[../images/guides/dev/svn_sources4.png]\
+
+	Project name is <<<firemox>>>
+	
+[../images/guides/dev/svn_sources5.png]\
+
+* Create launchers
+
+** How to create a launcher
+
+ Launcher is useful to launch a Java application. For our project we'll need 3 
+ launchers. 
+ 
+ One for the application : it launches the main program and would be the most 
+ often launched.
+
+ One for the XML builder : it	force the XML <build> parsing the XML cards to 
+ check syntax and build the binary MDB file. For more information about XML 
+ building, see {{{../xml_building.html} this page}}.
+ 
+ One for text transformation to XML with <<<xxx2Xml>>>. There is Oracle2Xml for 
+ example that have an Oracle text 
+ file as input and generates some partially completed XML card files. This 
+ launcher would be used only a few times.
+ 
+[../images/guides/dev/eclipse_run1.png]\
+	
+** Application launcher
+	
+	This launcher will launch <<Firemox>> as if you launch it with <<<magic>>> 
+	command. But launching it from Eclipse will allow you to <debug> it.
+	
+[../images/guides/dev/eclipse_main1.png]\
+	
+[../images/guides/dev/eclipse_main2.png]\
+	
+** XML Build launcher
+	
+	This launcher will launch the XML card parsing to create the MDB file. Each time 
+	you modify a card or some rules, the next time you launch/start the program 
+	the MDB is rebuilt. 
+	Nevertheless you can force this process without modifying any XML or file or 
+	starting the UI program.
+	
+	You must run this launcher to force update the MDB. Only the MDB file
+	is used by Firemox, not the XML files.
+	
+[../images/guides/dev/eclipse_buildxmlf1.png]\
+	
+[../images/guides/dev/eclipse_buildxmlf2.png]\
+
+	The XML documents are validated against a XSD file defining the syntax of cards 
+	but this validation is very long, and also is disabled by default.
+	
+	To enable it, use the following launcher :
+	
+[../images/guides/dev/eclipse_buildxmlfxsd.png]\
+	
+  You can find some additional information about XML building 
+  {{{../xml_building.html} there}}.
+
+** Text file to XML
+	
+	As XML format may be a bit long to initialize for thousands cards, we have 
+	created this wonderful tool able to generate <<all>> the cards of a game.
+	This launcher will parse a given text file and create the XML card files. This 
+	launcher would create a 80% completed card. only some complexes rules unhandled 
+	(at this moment) are remaining for developer.
+	
+	You can find a compatible text file {{{http://www.yawgatog.com/resources/oracle} there in Allsets section}}.
+	
+[../images/guides/dev/eclipse_oracle1.png]\
+	
+[../images/guides/dev/eclipse_oracle2.png]\
+	
+  Full options are :
+  
+   <<-d>> (destination, directory) DESTINATION : destination directory of generated XML files
+   
+   <<-f>> (file, oracle) FILE                  : Oracle file downloaded from sites like 'http://www.yawgatog.com/resources/oracle'
+   
+   <<-h>> (help)                               : print this help message and exit
+   
+   <<-v>> (version)                            : print product version and exit
+   

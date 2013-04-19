@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Aurification">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		2ww
+	enchantment
+	whenever a creature deals damage to you, put a gold counter on it.
+	each creature with a gold counter on it has defender. 
+	when aurification leaves play, remove all gold counters from all creatures.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='2'/>
+			<register index='colorless' value='2'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<assigned-damage type='damage-any'>
+				<source-test>
+					<has-idcard idcard="creature"/>
+				</source-test>
+				<destination-test>
+						<is-player target="you"/>
+				</destination-test>
+			</assigned-damage>
+			<effects>
+				<target type="context.card"/>
+				<add-object object-name='gold'/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<in-zone zone='play' card='tested'/>
+						<is-this/>
+					</and>
+				</source-test>
+				<destination-test>
+					<not>
+						<in-zone zone='play' card='tested'/>
+					</not>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<action ref="all-creatures">
+					<test>
+						<sup right="0">
+							<left>
+								<counter object-name="gold" card="tested" />
+							</left>
+						</sup>
+					</test>
+				</action>
+				<remove-object object-name="gold"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<modifiers>
+		<static-modifier filter-zone="play">
+			<modifiers>
+			 	<property-modifier property="defender" linked="true" layer="global"/>			 		
+			</modifiers>
+			<while>
+		 		<and>
+		 			<sup right="0">
+						<left>
+							<counter object-name="gold" card="tested" />
+						</left>
+					</sup>
+			 		<has-idcard idcard="creature"/>
+		 		</and>
+			</while>
+		</static-modifier>
+	</modifiers>
+</card>

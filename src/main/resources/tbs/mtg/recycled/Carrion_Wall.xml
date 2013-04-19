@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd" name="Carrion Wall">
+	<rules-author-comment>By Trigger911</rules-author-comment>
+<!--  {1}{b}{b}  {1}{b}: regenerate carrion wall. -->
+	<init>
+		<registers>
+			<register index="colorless" value="1"/>
+			<register index="black" value="2"/>
+			<register index="power" value="3"/>
+			<register index="toughness" value="2"/>
+		</registers>
+		<colors>black</colors>
+		<idcards>creature </idcards>
+		<properties>wall</properties>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+		<activated-ability zone="play" playable="instant">
+			<cost>
+				<pay-mana colorless="1" black="1"/>
+			</cost>
+			<effects>
+				<action ref="regenerate"/>
+			</effects>
+		</activated-ability>
+		<ability ref="cast-spell"/>
+	</abilities>
+</card>

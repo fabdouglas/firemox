@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Abbey Matron">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="2"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="3"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>human cleric</properties>
+	</init>
+
+	<abilities>
+		<ability ref="cast-spell"/>
+	
+		<activated-ability playable="instant" zone="play">
+			<cost>
+				<pay-mana white="1"/>
+				<action ref="T"/>
+			</cost>
+			<effects>
+				<target type="this"/>
+				<add-modifier>
+					<register-modifier index="toughness" operation="add" value="3">
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

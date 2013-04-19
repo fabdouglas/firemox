@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Divine Light">
+<rules-author-comment></rules-author-comment>
+
+<!--  {w} prevent all damage that would be dealt this turn to creatures you control. -->
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<create-ability>
+					<replacement-ability zone="play">
+						<assigned-damage type="damage-can-be-prevented">
+							<destination-test>
+								<and>
+									<not>
+										<is-player/>
+									</not>
+									<controller player="you"/>
+									<has-idcard idcard="creature"/>
+								</and>
+							</destination-test>
+						</assigned-damage>
+						<effects/>
+					</replacement-ability>
+					<until>
+						<end-of-phase phase="cleanup"/>
+					</until>
+				</create-ability>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

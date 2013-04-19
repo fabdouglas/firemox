@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Prohibit">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1u
+	instant
+	kicker 2 
+	counter target spell if its converted mana cost is 2 or less. if the kicker cost was paid, counter that spell if its converted mana cost is 4 or less instead.
+ -->
+
+	<init>
+		<registers>
+			<register index='blue' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>blue </colors>
+		<idcards>instant </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell-kicker">
+			<actions>
+				<pay-mana colorless="2"/>
+				<action ref="target-spell">
+					<test>
+						<inf-equal right="4">
+							<left register="tested" index="manacost"/>
+						</inf-equal>
+					</test>
+				</action>
+			</actions>
+			<actions>
+				<action ref='counter'/>
+				<action ref='finish-spell'/>
+			</actions>
+		</ability>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+				<action ref="target-spell">
+					<test>
+						<inf-equal right="2">
+							<left register="tested" index="manacost"/>
+						</inf-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='counter'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

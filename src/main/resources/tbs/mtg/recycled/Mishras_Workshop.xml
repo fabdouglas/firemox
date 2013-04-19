@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Mishra's Workshop">
+	<rules-author-comment>By fabdouglas</rules-author-comment>
+
+	<!--  land 
+		{t}: add {3} to your mana pool. spend this mana only to play artifact 
+		spells.
+		
+		Text(AQ+errata): 
+		
+		{Tap}: Add three colorless mana to your mana pool.  
+		Spend this mana only to play artifact spells. [Oracle 1999/09/03]
+		
+		This mana may be used on costs which are added to the spell cost, such as 
+		with Sphere of Resistance or Kicker (see Rule A.22). [Rules Team 2001/05/01]  
+		See Rule K.20.5.
+		This mana may not be used to pay costs imposed after the spell is initially 
+		played, as with Power Sink and Nether Void. [WotC Rules Team 1995/10/18]
+		You can spend the mana on costs on the spell's text. [WotC Rules Team 1995/11/10]
+		
+		The mana cannot be used to pay Echo costs. [D'Angelo 1999/04/06]
+	-->
+	<init>
+		<registers></registers>
+		<idcards>land</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-land" />
+		<activated-ability playable="mana-source" name="" zone="play"
+			resolution="auto">
+			<cost>
+				<action ref="T" />
+			</cost>
+			<effects>
+				<give-mana colorless="3">
+					<restriction ref="only-for-artifact-spell" />
+				</give-mana>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

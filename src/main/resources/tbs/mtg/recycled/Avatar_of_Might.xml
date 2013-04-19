@@ -1,0 +1,95 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avatar of Might">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6gg
+	creature - avatar
+	8/8
+	if an opponent controls at least four more creatures than you, avatar of might costs 6 less to play.
+	trample
+ -->
+
+	<init>
+		<registers>
+			<register index='green' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='8'/>
+			<register index='toughness' value='8'/>
+		</registers>
+		<colors>green </colors>
+		<idcards>creature </idcards>
+		<properties>avatar trample </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+            <test>
+                <sup-equal right="4">
+                    <left>
+                    	<minus>
+                    		<left>
+                        		<counter restriction-zone="play">
+                            		<and>
+                            			<has-idcard idcard="creature"/>
+                            			<controller player="opponent"/>
+                            		</and>
+                        		</counter>
+                        	</left>
+                        	<right>
+                        		<counter restriction-zone="play">
+                            		<and>
+                            			<has-idcard idcard="creature"/>
+                            			<controller player="you"/>
+                            		</and>
+                        		</counter>
+                        	</right>
+                        </minus>
+                    </left>
+                </sup-equal>
+            </test>
+            <cost>
+                <pay-mana green="2"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+
+        <!-- Normal cost -->
+        <activated-ability playable="this" zone="hand">
+            <test>
+                <inf right="4">
+                    <left>
+                    	<minus>
+                    		<left>
+                        		<counter restriction-zone="play">
+                            		<and>
+                            			<has-idcard idcard="creature"/>
+                            			<controller player="opponent"/>
+                            		</and>
+                        		</counter>
+                        	</left>
+                        	<right>
+                        		<counter restriction-zone="play">
+                            		<and>
+                            			<has-idcard idcard="creature"/>
+                            			<controller player="you"/>
+                            		</and>
+                        		</counter>
+                        	</right>
+                        </minus>
+                    </left>
+                </inf>
+            </test>
+            <cost>
+                <pay-mana value="manacost"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+	</abilities>
+</card>

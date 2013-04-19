@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Triskelavus">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		7
+	artifact creature - construct
+	1/1
+	flying
+	triskelavus comes into play with three +1/+1 counters on it.
+	1, remove a +1/+1 counter from triskelavus: put a 1/1 triskelavite artifact creature token with flying into play. it has "sacrifice this creature: this creature deals 1 damage to target creature or player."
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='7'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors></colors>
+		<idcards>artifact-creature </idcards>
+		<properties>construct flying </properties>
+	</init>
+	<modifiers>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+		<object name="+1/+1"/>
+	</modifiers>
+	
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana colorless='1' />
+				<target type="this"/>
+				<remove-object object-name="+1/+1"/>
+			</cost>
+			<effects>
+				<create-card>
+					<card name='Triskelavite'>
+						<rules-author-comment></rules-author-comment>
+						<init>
+							<registers>
+								<register index='power' value='1'/>
+								<register index='toughness' value='1'/>
+							</registers>
+							<colors></colors>
+							<idcards>artifact-creature</idcards>
+							<properties>token triskelavite flying </properties>
+						</init>
+						<abilities>
+							<activated-ability playable='instant' name='' zone='play'>
+								<cost>
+									<action ref="sacrifice-this"/>
+									<action ref="target-dealtable"/>
+								</cost>
+								<effects>
+									<assign-damage value='1' type='damage-normal'/>
+								</effects>
+							</activated-ability>
+						</abilities>
+					</card>
+				</create-card>
+				<move-card controller='you' destination='play'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

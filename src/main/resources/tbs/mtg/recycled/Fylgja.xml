@@ -1,0 +1,57 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Fylgja">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		w
+	enchantment - aura
+	enchant creature
+	fylgja comes into play with four healing counters on it.
+	remove a healing counter from fylgja: prevent the next 1 damage that would be dealt to enchanted creature this turn.
+	2w: put a healing counter on fylgja.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>local-enchantment </idcards>
+		<properties>aura </properties>
+	</init>
+	<modifiers>
+		<object name="healing"/>
+		<object name="healing"/>
+		<object name="healing"/>
+		<object name="healing"/>
+	</modifiers>
+	<abilities>
+		<ability ref='cast-enchant'/>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<target type="this"/>
+				<remove-object object-name="healing"/>
+			</cost>
+			<effects>
+				<target type="attachedto"/>
+				<action ref='prevent-1'/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana white='1' colorless='2' />
+			</cost>
+			<effects>
+				<target type='this'/>
+				<add-object object-name='healing'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+	<attachment>
+		<valid-target ref='valid-creature-to-enchant' />
+		<valid-attachment ref='valid-enchant-creature' />
+	</attachment>
+</card>

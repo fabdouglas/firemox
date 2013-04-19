@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Defense of the Heart">
+<rules-author-comment>Fabdouglas</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="green" value="1"/>
+		</registers>
+		<colors>green</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-spell"/>
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+					<and>
+						<test ref="during-your-upkeep"/>
+						<sup right="3">
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="creature"/>
+										<controller player="opponent"/>
+									</and>
+								</counter>
+							</left>
+						</sup>
+					</and>
+				</test>
+			</beginning-of-phase>
+			<cost>
+				<action ref="sacrifice-this"/>
+			</cost>
+			<effects>
+				<action ref="search-lib-up-to" value="2">
+					<test>
+						<has-idcard idcard="creature"/>
+					</test>
+				</action>
+				<move-card controller="target.owner" destination="play"/>
+		</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Delaying Shield">
+<rules-author-comment>Oracle2Xml generator v0.82.32</rules-author-comment>
+
+	<!-- COMPLETE THE CODE OF THIS CARD -->
+	<init>
+		<registers>
+			<register index="colorless" value="3"/>
+			<register index="white" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>global-enchantment </idcards>
+	</init>
+	<abilities>
+	<ability ref="cast-spell"/>
+			<!-- UPDATE PHASE NAME, TYPE and RESOLUTION -->
+		<triggered-ability resolution="normal" zone="play">
+			<beginning-of-phase phase="upkeep">
+				<test>
+				</test>
+			</beginning-of-phase>
+			<effects>
+		<!-- PUT HERE EFFECTS OF THIS TRIGGERED ABILITY -->
+		</effects>
+		</triggered-ability>
+	</abilities>
+</card>

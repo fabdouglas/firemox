@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Aggression">
+	<rules-author-comment>fabdouglas</rules-author-comment>
+
+	<!--  2r enchant 
+		non-wall creature enchanted creature has first strike and trample. 
+		at the end of its controller's turn, destroy enchanted creature if it didn't 
+		attack this turn.   -->
+
+	<init>
+		<registers>
+			<register index="red" value="1" />
+			<register index="colorless" value="2" />
+		</registers>
+		<colors>red</colors>
+		<idcards>local-enchantment</idcards>
+	</init>
+	<abilities>
+		<ability ref="cast-enchant" />
+		<ability ref="reset-counter" />
+		<ability ref="init-counter" />
+		<triggered-ability name="" zone="play">
+			<declared-attacking>
+				<test>
+					<is target="attachedto" />
+				</test>
+			</declared-attacking>
+			<effects>
+				<action ref="use-once-each-turn" />
+			</effects>
+		</triggered-ability>
+		<triggered-ability name="" zone="play">
+			<before-phase phase="eot">
+				<test>
+					<and>
+						<controller card="attachedto" player="currentplayer" />
+						<not>
+							<test ref="once-each-turn" />
+						</not>
+					</and>
+				</test>
+			</before-phase>
+			<effects>
+				<target type="attachedto" />
+				<action ref="destroy" />
+			</effects>
+		</triggered-ability>
+	</abilities>
+	<attachment ref="enchant-non-wall">
+		<modifiers>
+			<property-modifier operation="add" linked="true" property="first-strike" />
+			<property-modifier operation="add" linked="true" property="trample" />
+		</modifiers>
+	</attachment>
+</card>

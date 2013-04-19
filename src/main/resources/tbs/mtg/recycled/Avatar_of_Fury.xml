@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Avatar of Fury">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		6rr
+	creature - avatar
+	6/6
+	if an opponent controls seven or more lands, avatar of fury costs 6 less to play.
+	flying
+	r: avatar of fury gets +1/+0 until end of turn.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='2'/>
+			<register index='colorless' value='6'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>avatar flying </properties>
+	</init>
+	<abilities>
+		<activated-ability playable="this" zone="hand">
+            <test>
+                <sup-equal right="7">
+                    <left>
+                        <counter restriction-zone="play">
+                            <and>
+                            	<has-idcard idcard="land"/>
+                            	<controller player="opponent"/>
+                            </and>
+                        </counter>
+                    </left>
+                </sup-equal>
+            </test>
+            <cost>
+                <pay-mana red="2"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+
+        <!-- Normal cost -->
+        <activated-ability playable="this" zone="hand">
+            <test>
+                <inf right="7">
+                    <left>
+                        <counter restriction-zone="play">
+                            <and>
+                            	<has-idcard idcard="land"/>
+                            	<controller player="opponent"/>
+                            </and>
+                        </counter>
+                    </left>
+                </inf>
+            </test>
+            <cost>
+                <pay-mana value="manacost"/>
+            </cost>
+            <effects>
+                <action ref="put-in-play"/>
+            </effects>
+        </activated-ability>
+		<activated-ability playable='instant' name='' zone='play'>
+			<cost>
+				<pay-mana red='1' />
+			</cost>
+			<effects>
+				<action ref="gain+1+0-until-eot"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

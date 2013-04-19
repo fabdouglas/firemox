@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Voracious Hatchling">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3(w / b)
+	creature - elemental
+	6/6
+	lifelink
+	voracious hatchling comes into play with four -1/-1 counters on it.
+	whenever you play a white spell, remove a -1/-1 counter from voracious hatchling.
+	whenever you play a black spell, remove a -1/-1 counter from voracious hatchling.
+ -->
+
+	<init>
+		<registers>
+			<register index='colorless' value='4'/>
+			<register index='power' value='6'/>
+			<register index='toughness' value='6'/>
+		</registers>
+		<colors>white black </colors>
+		<idcards>creature </idcards>
+		<properties>elemental </properties>
+	</init>
+	<modifiers>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+		<object name="-1/-1"/>
+	</modifiers>
+	<abilities>
+		<ability ref='lifelink'/>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' black='1' />
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<activated-ability playable='this' zone='hand'>
+			<cost>
+				<pay-mana colorless='3' white='1'/>
+			</cost>
+			<effects>
+				<action ref='put-in-play' />
+			</effects>
+		</activated-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="white"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</effects>
+		</triggered-ability>
+		<triggered-ability zone='play'>
+			<casting>
+				<test>
+					<and>
+						<controller player="you"/>
+						<has-color color="black"/>
+					</and>
+				</test>
+			</casting>
+			<effects>
+				<target type="this"/>
+				<remove-object object-name="-1/-1"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Drake Hatchling">
+	<rules-author-comment></rules-author-comment>
+
+	<!--  {2}{u} flying {u}: drake hatchling gets +1/+0 until end of turn. 
+		play this ability only once each turn. -->
+
+	<init>
+		<registers>
+			<register index="colorless" value="2" />
+			<register index="blue" value="1" />
+			<register index="power" value="1" />
+			<register index="toughness" value="3" />
+		</registers>
+		<colors>blue</colors>
+		<idcards>creature</idcards>
+		<properties>flying drake</properties>
+	</init>
+	<abilities>
+		<ability ref="cast-spell" />
+		<activated-ability playable="this" name="" zone="play">
+			<test ref="once-each-turn" />
+			<cost>
+				<pay-mana blue="1" />
+				<target type="this" />
+				<action ref="use-once-each-turn" />
+			</cost>
+			<effects>
+				<action ref="add+1+0-until-eot" />
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

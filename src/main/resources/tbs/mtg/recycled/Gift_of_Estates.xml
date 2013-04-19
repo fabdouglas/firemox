@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Gift of Estates">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1w
+	sorcery
+	if an opponent controls more lands than you, search your library for up to three plains cards, reveal them, and put them into your hand. then shuffle your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='white' value='1'/>
+			<register index='colorless' value='1'/>
+		</registers>
+		<colors>white </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost'/>
+			</cost>
+			<effects>
+				<if-then-hop elsehop="3">
+					<test>
+						<sup>
+							<left>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="land"/>
+										<controller player="opponent"/>
+									</and>
+								</counter>
+							</left>
+							<right>
+								<counter restriction-zone="play">
+									<and>
+										<has-idcard idcard="land"/>
+										<controller player="you"/>
+									</and>
+								</counter>
+							</right>
+						</sup>
+					</test>
+				</if-then-hop>
+				<action ref='search-lib-reveal' value='3'>
+					<test>
+						<has-idcard idcard='plains'/>
+					</test>
+				</action>
+				<action ref='return-to-hand'/>
+				<action ref='finish-spell'/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+	name="Morbid Hunger">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		4bb
+
+	sorcery
+
+	morbid hunger deals 3 damage to target creature or player. you gain 3 life.
+	flashback 7bb 
+ -->
+
+	<init>
+		<registers>
+			<register index="black" value="2"/>
+			<register index="colorless" value="4"/>
+		</registers>
+		<colors>black </colors>
+		<idcards>sorcery </idcards>
+	</init>
+	<actions>
+		<action reference-name="main-effects">
+				<action ref="target-dealtable"/>
+				<assign-damage value="3"/>
+				<target-list operation="clear" /> 
+				<target type="controller"/>
+				<action ref="gain-life"  value="3"/>
+		</action>
+	</actions>
+	<abilities>
+		<activated-ability reference-name="main-ability" playable="this" name="" zone="hand">
+			<cost>
+				<pay-mana value="manacost"/>
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="finish-spell"/>
+			</effects>
+		</activated-ability>
+		<activated-ability playable="this" name="flashback%a" zone="graveyard">
+			<cost>
+				<pay-mana black="2" colorless="7" />
+			</cost>
+			<effects>
+				<action ref="main-effects"/>
+				<action ref="flashback"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

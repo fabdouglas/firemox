@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<card xmlns="http://sourceforge.net/projects/firemox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/firemox ../../validator.xsd"
+name="Angelic Page">
+	<rules-author-comment>By brius not tested yet...</rules-author-comment>
+
+	<init>
+		<registers>
+			<register index="white" value="1"/>
+			<register index="colorless" value="1"/>
+			<register index="power" value="1"/>
+			<register index="toughness" value="1"/>
+		</registers>
+		<colors>white</colors>
+		<idcards>creature</idcards>
+		<properties>flying angel spirit</properties>
+	</init>
+
+	<abilities>
+
+		<!-- put into play -->
+		<ability ref="cast-spell"/>
+
+		<!-- T: Target attacking or blocking creature gets +1/+1 until end of turn. -->
+		<activated-ability playable="instant" zone="play">
+			<!-- Référence au test qui vérifie qu'une carte peut utiliser {TAP}. Ce test devrait
+			     être utilisé pour toute les cartes utilisant {TAP} même si ce n'est pas une créature
+			     car des effets peuvent modifier le type de la carte. La vérification du type est 
+			     faîte dans le test référencé. Voir "mtg.xml" dans la section "references" la liste 
+			     des tests pre-codés.
+				<test ref="cantap"/>
+				CE TEST EST INUTILE DEPUIS 0.81 ET LE SUPPORT DES CONTRAINTES LIEES AUX ACTIONS
+				cf mtg.xml/contraints/action="tapmyself"
+			-->
+			<cost>
+				<action ref="T"/>
+				
+				<!-- l'action target devrait figurer dans la liste des coût, car s'il n'y a pas
+				     de cibles valides, on ne peut joueur cette capacité '-->
+				<action ref="target-creature">
+					<test>
+						<!-- la carte doit être en jeu -->
+						<!-- la cible doit être valide -->
+						<or>
+							<!-- la cible doit être une créature attaquante -->
+							<test ref="tested-is-attacking"/>
+							<!-- ou bloquante -->
+							<test ref="tested-is-blocking"/>
+						</or>
+					</test>
+				</action>
+			</cost>
+			
+			<effects>
+				<!-- Ajoutons maintenant +1/+1 juqu'à la fin du tour à la liste de cibles '-->
+				<add-modifier>
+					<!-- le registre modifié est la force, et on fait un ajout. 
+					     Si l'attribut "linked" est à 'true', cela signifie que ce modificateur est lié à
+					     ma carte qui la crée. Si la carte bouge, il l'a suit -->
+					<register-modifier index="power" operation="add" value="1" linked="false">
+						<!-- cet effet prend fin à la fin du tour. Si d'autres événement mettait fin
+						     à cet effect, il suffit de les ajouter à la suite dans le même élément until
+						'-->
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+
+					<!-- le registre modifié est endurance, et on fait un ajout. 
+					     Si l'attribut "linked" est à 'true', cela signifie que ce modificateur est lié à
+					     ma carte qui la crée. Si la carte bouge, il l'a suit -->
+					<register-modifier index="toughness" operation="add" value="1" linked="false">
+						<!-- cet effet prend fin à la fin du tour. Si d'autres événement mettait fin
+						     à cet effect, il suffit de les ajouter à la suite dans le même élément until
+						'-->
+						<until>
+				 			<end-of-phase phase="cleanup"/>
+						</until>
+					</register-modifier>
+				</add-modifier>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

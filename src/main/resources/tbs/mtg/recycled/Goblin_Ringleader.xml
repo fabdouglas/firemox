@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Goblin Ringleader">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		3r
+	creature - goblin
+	2/2
+	haste
+	when goblin ringleader comes into play, reveal the top four cards of your library. put all goblin cards revealed this way into your hand and the rest on the bottom of your library.
+ -->
+
+	<init>
+		<registers>
+			<register index='red' value='1'/>
+			<register index='colorless' value='3'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>red </colors>
+		<idcards>creature </idcards>
+		<properties>goblin haste </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<effects>
+				<target type="card" mode="all" restriction-zone="library">
+					<test>
+						<and>
+							<controller player="you" />
+							<or>
+								<position position="0"/>
+								<position position="1"/>
+								<position position="2"/>
+							</or>
+						</and>
+					</test>
+				</target>
+				<pile destination="hand"/>
+			</effects>
+		</triggered-ability>
+	</abilities>
+</card>

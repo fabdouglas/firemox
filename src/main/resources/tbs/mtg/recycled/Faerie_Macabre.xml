@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Faerie Macabre">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	creature - faerie rogue
+	2/2
+	flying discard faerie macabre: remove up to two target cards in graveyards from the game.
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='2'/>
+			<register index='toughness' value='2'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>faerie rogue flying</properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<activated-ability playable='instant' name='' zone='hand'>
+			<cost>
+				<target type="this"/>
+				<action ref='discard-cards'/>
+				<target-list operation="clear"/>
+				<repeat value="2"/>
+				<target type="card" mode="choose" restriction-zone="graveyard"/>
+			</cost>
+			<effects>
+				<action ref="remove-from-game"/>
+			</effects>
+		</activated-ability>
+	</abilities>
+</card>

@@ -1,0 +1,4 @@
+black vise;20
+super card;20
+Ancestral_Recall;20
+Plains;10

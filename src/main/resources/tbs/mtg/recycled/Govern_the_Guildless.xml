@@ -1,0 +1,56 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name='Govern the Guildless'>
+	<rules-author-comment></rules-author-comment>
+
+	<!--
+		5u
+		sorcery
+		gain control of target monocolored creature.
+		forecast - 1u, reveal govern the guildless from your hand: target creature becomes the color or colors of your choice until end of turn. 
+	-->
+
+	<init>
+		<registers>
+			<register index='blue' value='1' />
+			<register index='colorless' value='5' />
+		</registers>
+		<colors>blue</colors>
+		<idcards>sorcery</idcards>
+	</init>
+	<abilities>
+		<activated-ability playable='this' name='' zone='hand'>
+			<cost>
+				<pay-mana value='manacost' />
+				<action ref="target-creature">
+					<test ref="is-monocolored" />
+				</action>
+			</cost>
+			<effects>
+				<add-modifier>
+					<controller-modifier player="you" linked="false" />
+				</add-modifier>
+				<action ref='finish-spell' />
+			</effects>
+		</activated-ability>
+
+		<ability ref="reset-forecast" />
+		
+		<ability ref="forecast">
+			<actions>
+				<pay-mana colorless="1" blue="1" />
+				<action ref="target-creature" />
+			</actions>
+			<actions>
+				<input-color operation="or" index="0" register="stack" multiselect="true" />
+				<add-modifier>
+					<color-modifier operation="set" linked="false" live-update="false">
+						<color register="stack" index="0" />
+					</color-modifier>
+				</add-modifier>
+			</actions>
+		</ability>
+	</abilities>
+</card>

@@ -1,0 +1,3 @@
+Birds of Paradise;4
+Forest;8
+Lodestone Myr;4

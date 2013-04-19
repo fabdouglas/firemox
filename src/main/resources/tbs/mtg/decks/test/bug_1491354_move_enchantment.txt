@@ -1,0 +1,3 @@
+Simic_Guildmage;20
+holy_strength;20
+super card;20

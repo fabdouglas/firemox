@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<card xmlns='http://sourceforge.net/projects/firemox'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://sourceforge.net/projects/firemox ../../validator.xsd'
+	name="Big Game Hunter">
+<rules-author-comment>riclas</rules-author-comment>
+
+<!--
+		1bb
+	creature - human rebel assassin
+	1/1
+	when big game hunter comes into play, destroy target creature with power 4 or greater. it can't be regenerated.
+	madness b 
+ -->
+
+	<init>
+		<registers>
+			<register index='black' value='2'/>
+			<register index='colorless' value='1'/>
+			<register index='power' value='1'/>
+			<register index='toughness' value='1'/>
+		</registers>
+		<colors>black </colors>
+		<idcards>creature </idcards>
+		<properties>human rebel assassin </properties>
+	</init>
+	<abilities>
+		<ability ref='cast-spell'/>
+		<triggered-ability zone='play'>
+			<moved-card>
+				<source-test>
+					<and>
+						<is-this/>
+						<not>
+							<in-zone zone='play' card='tested'/>
+						</not>
+					</and>
+				</source-test>
+				<destination-test>
+					<in-zone zone='play' card='tested'/>
+				</destination-test>
+			</moved-card>
+			<cost>
+				<action ref='target-creature'>
+					<test>
+						<sup-equal right="4">	
+							<left register="tested" index="power"/>
+						</sup-equal>
+					</test>
+				</action>
+			</cost>
+			<effects>
+				<action ref='bury'/>
+			</effects>
+		</triggered-ability>
+		<ability ref='madness'>
+			<actions/>
+			<actions>
+				<pay-mana black='1' />
+			</actions>
+		</ability>
+	</abilities>
+</card>
