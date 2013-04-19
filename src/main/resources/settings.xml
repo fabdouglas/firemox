@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Configuration>
-	<preferred>org.jvnet.substance.SubstanceLookAndFeel</preferred>
-	<zones>
+<preferred>org.jvnet.substance.SubstanceLookAndFeel</preferred>
+<zones>
 		<play>
 			<down>
 				<wallpaper>images/play/hardwoodfloor.png</wallpaper>
@@ -91,22 +91,22 @@
 			</up>
 		</phased-out>
 	</zones>
-	<language>auto</language>
-	<automana>true</automana>
-	<autostack>false</autostack>
-	<lastTBS>mtg</lastTBS>
-	<logdisptime>false</logdisptime>
-	<loglocked>false</loglocked>
-	<chatdisptime>false</chatdisptime>
-	<chatlocked>false</chatlocked>
-	<threshold-colored>6</threshold-colored>
-	<border-color>auto</border-color>
-	<timer>
+<language>auto</language>
+<automana>true</automana>
+<autostack>false</autostack>
+<lastTBS>mtg</lastTBS>
+<logdisptime>false</logdisptime>
+<loglocked>false</loglocked>
+<chatdisptime>false</chatdisptime>
+<chatlocked>false</chatlocked>
+<threshold-colored>6</threshold-colored>
+<border-color>auto</border-color>
+<timer>
 		<hourglass-delay>0</hourglass-delay>
 		<deadlock-delay>0</deadlock-delay>
 		<waiting-delay>0</waiting-delay>
 	</timer>
-	<themes>
+<themes>
 		<skinlf>
 			<caches>
 <cache file="lib/amarachthemepack.zip" name="Amarach"/>
@@ -126,18 +126,18 @@
 </caches>
 		</skinlf>
 	</themes>
-	<port>1299</port>
-	<clientPassword>OBF|</clientPassword>
-	<ip>10.44.32.154</ip>
-	<gameName>My Game</gameName>
-	<serverPassword>OBF|</serverPassword>
-	<useMana>true</useMana>
-	<opponentResponse>true</opponentResponse>
-	<database>
+<port>1299</port>
+<clientPassword>OBF|</clientPassword>
+<ip>10.44.32.154</ip>
+<gameName>My Game</gameName>
+<serverPassword>OBF|</serverPassword>
+<useMana>true</useMana>
+<opponentResponse>true</opponentResponse>
+<database>
 		<dataOrder>magiccards.info|</dataOrder>
 		<pictureOrder>magiccards.info|</pictureOrder>
 	</database>
-	<decks>
+<decks>
 		<constraint>none</constraint>
 
 
@@ -304,6 +304,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<deck>tbs/mtg/decks/thor/thor_noir-blanc.txt</deck>
+<deck>tbs/mtg/decks/test/bug_1259173_stasis.txt</deck>
 <deck>tbs/mtg/decks/test/test_fetch.txt</deck>
 <deck>tbs/mtg/decks/test/test_planeswalker.txt</deck>
 <deck>tbs/mtg/decks/type_2/[2006-10-29]-1st @ Piscataway Champs - 'GhaziGlare' by Paul Bieber-Tremblay.txt</deck>
@@ -313,10 +337,8 @@
 <deck>tbs/mtg/decks/test/bug_1664023_static-modifier_blank-screen.txt</deck>
 <deck>tbs/mtg/decks/test/bug_1657629_untargetable.txt</deck>
 <deck>tbs/mtg/decks/test/bug_1546225_dredge_multi-draw.txt</deck>
-<deck>tbs/mtg/decks/test/bug_1657163_Combat_Bug.txt</deck>
-<deck>tbs/mtg/decks/type_1/wiki_white.txt</deck>
 </decks>
-	<reverseArt>true</reverseArt>
-	<reverseSide>false</reverseSide>
-	<whoStarts>0</whoStarts>
+<reverseArt>true</reverseArt>
+<reverseSide>false</reverseSide>
+<whoStarts>0</whoStarts>
 </Configuration>

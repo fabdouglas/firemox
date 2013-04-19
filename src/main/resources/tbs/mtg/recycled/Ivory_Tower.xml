@@ -19,6 +19,7 @@
 		<idcards>artifact </idcards>
 	</init>
 	<abilities>
+		<ability ref='cast-spell'/>
 		<triggered-ability resolution='normal' zone='play'>
 			<beginning-of-phase phase='upkeep'>
 				<test ref='during-your-upkeep'/>

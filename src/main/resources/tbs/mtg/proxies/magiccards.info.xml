@@ -18,9 +18,9 @@
 				http://magiccards.info/query.php?cardname_language=en&cardname_match=exactly&cardname=Mishra%27s%20Factory&editions[]=aq_en
 			-->
 			<stream
-				url="q=${card.name}%20e%3A${card.set}%2Fen&amp;v=card&amp;s=cname" />
+				url="q=&quot;${card.name}&quot;%20e%3A${card.set}%2Fen&amp;v=card&amp;s=cname" />
 			<stream
-				url="q=${card.name}&amp;v=card&amp;s=cname" />
+				url="q=&quot;${card.name}&quot;&amp;v=card&amp;s=cname" />
 			<!-- stream
 				url="cardname_language=en&amp;cardname_match=exactly&amp;cardname=${card.name}&amp;editions[]=${card.set}_${card.language}" />
 			<stream
