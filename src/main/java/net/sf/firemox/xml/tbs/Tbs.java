@@ -160,6 +160,18 @@ public class Tbs implements XmlToMDB {
 				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
 			}
 		}
+		
+		// Hybrid manas
+		final Node hybrid = manas.get("hybrid");
+		MToolKit.writeString(out, hybrid.getAttribute("url"));
+		out.write(hybrid.getNbNodes());
+		for (Object obj : hybrid) {
+			if (obj instanceof Node) {
+				final Node nodePriv = (Node) obj;
+				MToolKit.writeString(out, nodePriv.getAttribute("name"));
+				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
+			}
+		}
 
 		// Prepare the shortcut to card's bytes offset
 		final long shortcutCardBytes = fileOut.getChannel().position();

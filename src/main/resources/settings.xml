@@ -326,6 +326,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<deck>tbs/mtg/decks/thor/thor_noir vert bleu.txt</deck>
+<deck>tbs/mtg/decks/thor/thor_Necromancien.txt</deck>
+<deck>tbs/mtg/decks/thor/thor_blanc rouge bleu.txt</deck>
+<deck>tbs/mtg/decks/thor/thor_Vampire.txt</deck>
 <deck>tbs/mtg/decks/thor/thor_noir-blanc.txt</deck>
 <deck>tbs/mtg/decks/test/bug_1259173_stasis.txt</deck>
 <deck>tbs/mtg/decks/test/test_fetch.txt</deck>
@@ -333,10 +359,6 @@
 <deck>tbs/mtg/decks/type_2/[2006-10-29]-1st @ Piscataway Champs - 'GhaziGlare' by Paul Bieber-Tremblay.txt</deck>
 <deck>tbs/mtg/decks/thor/thor_atog.txt</deck>
 <deck>tbs/mtg/decks/test/bug_1660295_state-based-effects.txt</deck>
-<deck>tbs/mtg/decks/test/test_convoke.txt</deck>
-<deck>tbs/mtg/decks/test/bug_1664023_static-modifier_blank-screen.txt</deck>
-<deck>tbs/mtg/decks/test/bug_1657629_untargetable.txt</deck>
-<deck>tbs/mtg/decks/test/bug_1546225_dredge_multi-draw.txt</deck>
 </decks>
 <reverseArt>true</reverseArt>
 <reverseSide>false</reverseSide>

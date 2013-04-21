@@ -157,13 +157,13 @@
 		<!--
 			12 x 12 Pictures are advised.
 		-->
-		<colored url="http://www.wizards.com/images/Symbols/"
-			big-url="http://www.wizards.com/magic/advanced/7e/images/">
-			<mana name="black" picture="black_mana.gif" big-picture="black_mana_40w.jpg" />
-			<mana name="blue" picture="blue_mana.gif" big-picture="blue_mana_40w.jpg" />
-			<mana name="green" picture="green_mana.gif" big-picture="green_mana_40w.jpg" />
-			<mana name="red" picture="red_mana.gif" big-picture="red_mana_40w.jpg" />
-			<mana name="white" picture="white_mana.gif" big-picture="white_mana_40w.jpg" />
+		<colored url="http://wiki.mtgsalvation.com/images/"
+			big-url="http://wiki.mtgsalvation.com/images/">
+			<mana name="black" picture="black_mana.gif" big-picture="2/2d/Black_mana.png" />
+			<mana name="blue" picture="2/23/Manau.gif" big-picture="1/1e/Blue_mana.png" />
+			<mana name="green" picture="b/b0/Manag.gif" big-picture="2/25/Green_mana.png" />
+			<mana name="red" picture="4/4d/Manar.gif" big-picture="9/92/Red_mana.png" />
+			<mana name="white" picture="3/3a/Manaw.gif" big-picture="4/4f/White_mana.png" />
 		</colored>
 		<!--
 			12 x 12 Pictures are advised.
@@ -181,7 +181,30 @@
 			<mana amount="8" picture="Symbol_8_mana.gif" />
 			<mana amount="9" picture="Symbol_9_mana.gif" />
 			<mana amount="10" picture="Symbol_10_mana.gif" />
+			<mana amount="11" picture="Symbol_10_mana.gif" />
+			<mana amount="12" picture="Symbol_10_mana.gif" />
+			<mana amount="13" picture="Symbol_10_mana.gif" />
+			<mana amount="14" picture="Symbol_10_mana.gif" />
+			<mana amount="15" picture="Symbol_10_mana.gif" />
 		</colorless>
+		
+		<hybrid url="http://wiki.mtgsalvation.com/images/">
+			<mana name="white-or-blue" picture="1/13/Manawu.gif" />
+			<mana name="white-or-black" picture="3/35/Manawb.gif" />
+			<mana name="blue-or-black" picture="b/bc/Manaub.gif" />
+			<mana name="blue-or-red" picture="4/4b/Manaur.gif" />
+			<mana name="black-or-red" picture="2/2b/Manabr.gif" />
+			<mana name="black-or-green" picture="e/e0/Manabg.gif" />
+			<mana name="red-or-green" picture="c/c5/Manarg.gif" />
+			<mana name="red-or-white" picture="0/00/Manarw.gif" />
+			<mana name="green-or-white" picture="f/f4/Managw.gif" />
+			<mana name="green-or-blue" picture="8/8f/Managu.gif" />
+			<mana name="2-or-white" picture="f/f3/Mana2w.png" />
+			<mana name="2-or-blue" picture="0/02/Mana2u.png" />
+			<mana name="2-or-black" picture="0/08/Mana2b.png" />
+			<mana name="2-or-red" picture="e/ea/Mana2r.png" />
+			<mana name="2-or-green" picture="b/b7/Mana2g.png" />
+		</hybrid>
 	</mana-symbols>
 
 	<!--[[apt lang=en]]

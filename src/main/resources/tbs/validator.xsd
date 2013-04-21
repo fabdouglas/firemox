@@ -265,6 +265,29 @@
 									<xsd:attribute name="big-url" type="xsd:string" use="required" />
 								</xsd:complexType>
 							</xsd:element>
+							<xsd:element name="hybrid">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="en">
+										Contains the URLs of used hybrid manas.
+									</xsd:documentation>
+									<xsd:documentation xml:lang="fr">
+										Contient les URL des manas hybrides utilisés.
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="mana" minOccurs="0" maxOccurs="5">
+											<xsd:complexType>
+												<xsd:attribute name="name" type="hybridmanaEnum"
+													use="required" />
+												<xsd:attribute name="picture" type="xsd:string"
+													use="required" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="url" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
@@ -5159,6 +5182,29 @@
 			<xsd:enumeration value="colorless" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	<xsd:simpleType name="hybridmanaEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Possible values of hybrid mana.</xsd:documentation>
+			<xsd:documentation xml:lang="fr">Valeurs possibles pour le mana hybride.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="white-or-blue" />
+			<xsd:enumeration value="white-or-black" />
+			<xsd:enumeration value="blue-or-black" />
+			<xsd:enumeration value="blue-or-red" />
+			<xsd:enumeration value="black-or-red" />
+			<xsd:enumeration value="black-or-green" />
+			<xsd:enumeration value="red-or-green" />
+			<xsd:enumeration value="red-or-white" />
+			<xsd:enumeration value="green-or-white" />
+			<xsd:enumeration value="green-or-blue" />
+			<xsd:enumeration value="2-or-white" />
+			<xsd:enumeration value="2-or-blue" />
+			<xsd:enumeration value="2-or-black" />
+			<xsd:enumeration value="2-or-red" />
+			<xsd:enumeration value="2-or-green" />
+		</xsd:restriction>
+	</xsd:simpleType>
 	<xsd:simpleType name="manacolorEnum">
 		<xsd:annotation>
 			<xsd:documentation xml:lang="en">Possible values mana colors .</xsd:documentation>
@@ -5166,7 +5212,7 @@
 				Valeurs possible pour une couleur de mana.
 			</xsd:documentation>
 		</xsd:annotation>
-		<xsd:union memberTypes="colorEnum colorLessEnum" />
+		<xsd:union memberTypes="colorEnum colorLessEnum hybridmanaEnum" />
 	</xsd:simpleType>
 	<xsd:simpleType name="objectIndexes">
 		<xsd:annotation>

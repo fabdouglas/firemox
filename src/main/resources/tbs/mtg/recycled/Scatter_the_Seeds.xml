@@ -18,21 +18,7 @@
             </cost>
             <effects>
                 <repeat value="3"/>
-                <create-card>
-                    <card name="Saproling">
-                        <init>
-                            <registers>
-                                <register index="power" value="1"/>
-                                <register index="toughness" value="1"/>
-                            </registers>
-                            <colors>green</colors>
-                            <idcards>creature</idcards>
-                            <properties>saproling token</properties>
-                        </init>
-                        <abilities/>
-                    </card>
-                </create-card>
-                <move-card controller="you" destination="play"/>
+                <action ref="put-saproling-token-under-your-control"/>
                 <action ref="finish-spell"/>
             </effects>
         </activated-ability>

@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -126,8 +128,8 @@ public final class MdbLoader {
 
 	/**
 	 * This is the filename without base name corresponding to the big colorless
-	 * picture. The base web base name is <code>colorlessURL</code> and the
-	 * local base name is <code>tbs/TBS_NAME/images/mana/colorless/big/</code>
+	 * picture. The base web base name is <code>colorlessURL</code> and the local
+	 * base name is <code>tbs/TBS_NAME/images/mana/colorless/big/</code>
 	 */
 	public static String colorlessBigURL;
 
@@ -180,6 +182,29 @@ public final class MdbLoader {
 	 * The picture used for unknown mana cost value.
 	 */
 	public static String unknownSmlMana;
+
+	/**
+	 * This is the defined hybrid mana names associated with the file names
+	 * without base name. The base web base name is <code>coloredManasURL</code>
+	 * and the local base name is <code>tbs/TBS_NAME/images/mana/hybrid/</code>
+	 * 
+	 * @see #hybridManasURL
+	 */
+	public static Map<String, String> hybridManas;
+
+	/**
+	 * This is the web base name where hybrid mana pictures can be found.
+	 * 
+	 * @see #hybridManas
+	 */
+	public static String hybridManasURL;
+
+	/**
+	 * This the HTML representation of defined hybrid manas.
+	 * 
+	 * @see #hybridManas
+	 */
+	public static Map<String, String> hybridManasHtml;
 
 	/**
 	 * The offset position of end of header.
@@ -377,6 +402,21 @@ public final class MdbLoader {
 							+ colorlessSmlManas[index]) + "'>&nbsp;";
 		}
 
+		// hybrid mana section
+		hybridManasURL = MToolKit.readString(dbStream);
+		int nbHybridManas = dbStream.read();
+		hybridManas = new HashMap<String, String>();
+		hybridManasHtml = new HashMap<String, String>();
+		for (int i = 0; i < nbHybridManas; i++) {
+			String hybridManaName = MToolKit.readString(dbStream);
+			hybridManas.put(hybridManaName, MToolKit.readString(dbStream));
+			hybridManasHtml.put(
+					hybridManaName,
+					"<img scr='file:///"
+							+ MToolKit.getTbsHtmlPicture("mana/hybrid/"
+									+ hybridManas.get(hybridManaName)) + "'>&nbsp;");
+		}
+
 		// Read the card bytes position
 		firstCardsBytesOffset = MToolKit.readInt24(dbStream);
 
@@ -445,7 +485,8 @@ public final class MdbLoader {
 			}
 			IOUtils.closeQuietly(out);
 		} catch (java.io.IOException e) {
-			JOptionPane.showMessageDialog(MagicUIComponents.magicForm,
+			JOptionPane.showMessageDialog(
+					MagicUIComponents.magicForm,
 					LanguageManager.getString("loadtbssettingspb") + " : "
 							+ e.getMessage(), LanguageManager.getString("error"),
 					JOptionPane.ERROR_MESSAGE);
@@ -457,8 +498,8 @@ public final class MdbLoader {
 	 * Loading the settings corresponding to the current TBS
 	 */
 	public static void loadTBSSettings() {
-		loadTBSSettings(MToolKit.mdbFile.substring(0, MToolKit.mdbFile
-				.lastIndexOf('.'))
+		loadTBSSettings(MToolKit.mdbFile.substring(0,
+				MToolKit.mdbFile.lastIndexOf('.'))
 				+ ".pref");
 	}
 
@@ -484,7 +525,8 @@ public final class MdbLoader {
 			}
 			IOUtils.closeQuietly(in);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(MagicUIComponents.magicForm,
+			JOptionPane.showMessageDialog(
+					MagicUIComponents.magicForm,
 					LanguageManager.getString("loadtbssettingspb") + " : "
 							+ e.getMessage(), LanguageManager.getString("error"),
 					JOptionPane.ERROR_MESSAGE);
