@@ -276,7 +276,7 @@
 								</xsd:annotation>
 								<xsd:complexType>
 									<xsd:sequence>
-										<xsd:element name="mana" minOccurs="0" maxOccurs="5">
+										<xsd:element name="mana" minOccurs="0" maxOccurs="15">
 											<xsd:complexType>
 												<xsd:attribute name="name" type="hybridmanaEnum"
 													use="required" />
