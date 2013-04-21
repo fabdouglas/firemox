@@ -169,7 +169,7 @@
 			12 x 12 Pictures are advised.
 		-->
 		<colorless url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name="
-			big-url="http://gatherer.wizards.com/Handlers/Image.ashx?size=medium&amp;type=symbol&amp;name="
+			big-url="X&amp;.jpg"
 			unknown="X&amp;.jpg">
 			<mana amount="0" picture="0&amp;.jpg" />
 			<mana amount="1" picture="1&amp;.jpg" />
