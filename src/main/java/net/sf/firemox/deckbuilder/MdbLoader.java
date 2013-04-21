@@ -185,7 +185,7 @@ public final class MdbLoader {
 
 	/**
 	 * This is the defined hybrid mana names associated with the file names
-	 * without base name. The base web base name is <code>coloredManasURL</code>
+	 * without base name. The base web base name is <code>hybridManasURL</code>
 	 * and the local base name is <code>tbs/TBS_NAME/images/mana/hybrid/</code>
 	 * 
 	 * @see #hybridManasURL
@@ -205,6 +205,29 @@ public final class MdbLoader {
 	 * @see #hybridManas
 	 */
 	public static Map<String, String> hybridManasHtml;
+	
+	/**
+	 * This is the defined phyrexian mana names associated with the file names
+	 * without base name. The base web base name is <code>phyrexianManasURL</code>
+	 * and the local base name is <code>tbs/TBS_NAME/images/mana/phyrexian/</code>
+	 * 
+	 * @see #hybridManasURL
+	 */
+	public static Map<String, String> phyrexianManas;
+
+	/**
+	 * This is the web base name where phyrexian mana pictures can be found.
+	 * 
+	 * @see #hybridManas
+	 */
+	public static String phyrexianManasURL;
+
+	/**
+	 * This the HTML representation of defined phyrexian manas.
+	 * 
+	 * @see #hybridManas
+	 */
+	public static Map<String, String> phyrexianManasHtml;
 
 	/**
 	 * The offset position of end of header.
@@ -415,6 +438,21 @@ public final class MdbLoader {
 					"<img scr='file:///"
 							+ MToolKit.getTbsHtmlPicture("mana/hybrid/"
 									+ hybridManas.get(hybridManaName)) + "'>&nbsp;");
+		}
+		
+		// hybrid mana section
+		phyrexianManasURL = MToolKit.readString(dbStream);
+		int nbPhyrexianManas = dbStream.read();
+		phyrexianManas = new HashMap<String, String>();
+		phyrexianManasHtml = new HashMap<String, String>();
+		for (int i = 0; i < nbPhyrexianManas; i++) {
+			String phyrexianManaName = MToolKit.readString(dbStream);
+			phyrexianManas.put(phyrexianManaName, MToolKit.readString(dbStream));
+			phyrexianManasHtml.put(
+					phyrexianManaName,
+					"<img scr='file:///"
+							+ MToolKit.getTbsHtmlPicture("mana/phyrexian/"
+									+ phyrexianManas.get(phyrexianManaName)) + "'>&nbsp;");
 		}
 
 		// Read the card bytes position

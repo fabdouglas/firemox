@@ -288,6 +288,29 @@
 									<xsd:attribute name="url" type="xsd:string" use="required" />
 								</xsd:complexType>
 							</xsd:element>
+							<xsd:element name="phyrexian">
+								<xsd:annotation>
+									<xsd:documentation xml:lang="en">
+										Contains the URLs of used phyrexian manas.
+									</xsd:documentation>
+									<xsd:documentation xml:lang="fr">
+										Contient les URL des manas phyréxians utilisés.
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="mana" minOccurs="0" maxOccurs="5">
+											<xsd:complexType>
+												<xsd:attribute name="name" type="phyrexianmanaEnum"
+													use="required" />
+												<xsd:attribute name="picture" type="xsd:string"
+													use="required" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="url" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
@@ -5203,6 +5226,19 @@
 			<xsd:enumeration value="2-or-black" />
 			<xsd:enumeration value="2-or-red" />
 			<xsd:enumeration value="2-or-green" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="phyrexianmanaEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Possible values of phyrexian mana.</xsd:documentation>
+			<xsd:documentation xml:lang="fr">Valeurs possibles pour le mana phyréxian.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="pwhite" />
+			<xsd:enumeration value="pblue" />
+			<xsd:enumeration value="pblack" />
+			<xsd:enumeration value="pred" />
+			<xsd:enumeration value="pgreen" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:simpleType name="manacolorEnum">

@@ -207,6 +207,14 @@
 			<mana name="2-or-red" picture="2R&amp;.jpg" />
 			<mana name="2-or-green" picture="2G&amp;.jpg" />
 		</hybrid>
+		
+		<phyrexian url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name=">
+			<mana name="pblack" picture="PB&amp;.jpg" />
+			<mana name="pblue" picture="PU&amp;.jpg" />
+			<mana name="pgreen" picture="PG&amp;.jpg" />
+			<mana name="pred" picture="PR&amp;.jpg" />
+			<mana name="pwhite" picture="PW&amp;.jpg" />
+		</phyrexian>
 	</mana-symbols>
 
 	<!--[[apt lang=en]]

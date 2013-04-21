@@ -32,6 +32,20 @@ public interface IdCardColors {
 			"white" };
 
 	/**
+	 * Card color names for hybrid mana
+	 */
+	String[] HYBRID_COLOR_NAMES = { "white-or-blue", "white-or-black",
+			"blue-or-black", "blue-or-red", "black-or-red", "black-or-green",
+			"red-or-green", "red-or-white", "green-or-white", "green-or-blue",
+			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green" };
+
+	/**
+	 * Card color names for phyrexian mana
+	 */
+	String[] PHYREXIAN_COLOR_NAMES = { "pblack", "pblue", "pgreen", "pred",
+			"pwhite" };
+
+	/**
 	 * Card color names Value = Card Colors 2^index
 	 */
 	Color[] CARD_COLOR = { Color.GRAY, Color.BLACK, Color.BLUE, Color.GREEN,
@@ -41,4 +55,16 @@ public interface IdCardColors {
 	 * Card color values
 	 */
 	int[] CARD_COLOR_VALUES = { 0x00, 0x01, 0x02, 0x04, 0x08, 0x10 };
+
+	/**
+	 * Card color values for hybrid manas
+	 */
+	int[] HYBRID_COLOR_VALUES = { 0x20, 0x40, 0x80, 0x100, 0x200, 0x400, 0x800,
+			0x1000, 0x2000, 0x4000, 0x8000, 0x10000, 0x20000, 0x40000, 0x80000 };
+
+	/**
+	 * Card color values for phyrexian manas
+	 */
+	int[] PHYREXIAN_COLOR_VALUES = { 0x100000, 0x200000, 0x400000, 0x800000,
+			0x1000000 };
 }

@@ -172,6 +172,18 @@ public class Tbs implements XmlToMDB {
 				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
 			}
 		}
+		
+		// Hybrid manas
+		final Node phyrexian = manas.get("phyrexian");
+		MToolKit.writeString(out, phyrexian.getAttribute("url"));
+		out.write(phyrexian.getNbNodes());
+		for (Object obj : phyrexian) {
+			if (obj instanceof Node) {
+				final Node nodePriv = (Node) obj;
+				MToolKit.writeString(out, nodePriv.getAttribute("name"));
+				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
+			}
+		}
 
 		// Prepare the shortcut to card's bytes offset
 		final long shortcutCardBytes = fileOut.getChannel().position();
