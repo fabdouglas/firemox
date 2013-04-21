@@ -157,53 +157,55 @@
 		<!--
 			12 x 12 Pictures are advised.
 		-->
-		<colored url="http://wiki.mtgsalvation.com/images/"
-			big-url="http://wiki.mtgsalvation.com/images/">
-			<mana name="black" picture="black_mana.gif" big-picture="2/2d/Black_mana.png" />
-			<mana name="blue" picture="2/23/Manau.gif" big-picture="1/1e/Blue_mana.png" />
-			<mana name="green" picture="b/b0/Manag.gif" big-picture="2/25/Green_mana.png" />
-			<mana name="red" picture="4/4d/Manar.gif" big-picture="9/92/Red_mana.png" />
-			<mana name="white" picture="3/3a/Manaw.gif" big-picture="4/4f/White_mana.png" />
+		<colored url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name="
+			big-url="http://gatherer.wizards.com/Handlers/Image.ashx?size=medium&amp;type=symbol&amp;name=">
+			<mana name="black" picture="B&amp;.jpg" big-picture="B&amp;.jpg" />
+			<mana name="blue" picture="U&amp;.jpg" big-picture="U&amp;.jpg" />
+			<mana name="green" picture="G&amp;.jpg" big-picture="G&amp;.jpg" />
+			<mana name="red" picture="R&amp;.jpg" big-picture="R&amp;.jpg" />
+			<mana name="white" picture="W&amp;.jpg" big-picture="W&amp;.jpg" />
 		</colored>
 		<!--
 			12 x 12 Pictures are advised.
 		-->
-		<colorless url="http://www.wizards.com/images/Symbols/" big-url="colorlessmana.gif"
-			unknown="Symbol_X_mana.gif">
-			<mana amount="0" picture="Symbol_0_mana.gif" />
-			<mana amount="1" picture="Symbol_1_mana.gif" />
-			<mana amount="2" picture="Symbol_2_mana.gif" />
-			<mana amount="3" picture="Symbol_3_mana.gif" />
-			<mana amount="4" picture="Symbol_4_mana.gif" />
-			<mana amount="5" picture="Symbol_5_mana.gif" />
-			<mana amount="6" picture="Symbol_6_mana.gif" />
-			<mana amount="7" picture="Symbol_7_mana.gif" />
-			<mana amount="8" picture="Symbol_8_mana.gif" />
-			<mana amount="9" picture="Symbol_9_mana.gif" />
-			<mana amount="10" picture="Symbol_10_mana.gif" />
-			<mana amount="11" picture="Symbol_10_mana.gif" />
-			<mana amount="12" picture="Symbol_10_mana.gif" />
-			<mana amount="13" picture="Symbol_10_mana.gif" />
-			<mana amount="14" picture="Symbol_10_mana.gif" />
-			<mana amount="15" picture="Symbol_10_mana.gif" />
+		<colorless url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name="
+			big-url="http://gatherer.wizards.com/Handlers/Image.ashx?size=medium&amp;type=symbol&amp;name="
+			unknown="X&amp;.jpg">
+			<mana amount="0" picture="0&amp;.jpg" />
+			<mana amount="1" picture="1&amp;.jpg" />
+			<mana amount="2" picture="2&amp;.jpg" />
+			<mana amount="3" picture="3&amp;.jpg" />
+			<mana amount="4" picture="4&amp;.jpg" />
+			<mana amount="5" picture="5&amp;.jpg" />
+			<mana amount="6" picture="6&amp;.jpg" />
+			<mana amount="7" picture="7&amp;.jpg" />
+			<mana amount="8" picture="8&amp;.jpg" />
+			<mana amount="9" picture="9&amp;.jpg" />
+			<mana amount="10" picture="10&amp;.jpg" />
+			<mana amount="11" picture="11&amp;.jpg" />
+			<mana amount="12" picture="12&amp;.jpg" />
+			<mana amount="13" picture="13&amp;.jpg" />
+			<mana amount="14" picture="14&amp;.jpg" />
+			<mana amount="15" picture="15&amp;.jpg" />
+			<mana amount="16" picture="16&amp;.jpg" />
 		</colorless>
 		
-		<hybrid url="http://wiki.mtgsalvation.com/images/">
-			<mana name="white-or-blue" picture="1/13/Manawu.gif" />
-			<mana name="white-or-black" picture="3/35/Manawb.gif" />
-			<mana name="blue-or-black" picture="b/bc/Manaub.gif" />
-			<mana name="blue-or-red" picture="4/4b/Manaur.gif" />
-			<mana name="black-or-red" picture="2/2b/Manabr.gif" />
-			<mana name="black-or-green" picture="e/e0/Manabg.gif" />
-			<mana name="red-or-green" picture="c/c5/Manarg.gif" />
-			<mana name="red-or-white" picture="0/00/Manarw.gif" />
-			<mana name="green-or-white" picture="f/f4/Managw.gif" />
-			<mana name="green-or-blue" picture="8/8f/Managu.gif" />
-			<mana name="2-or-white" picture="f/f3/Mana2w.png" />
-			<mana name="2-or-blue" picture="0/02/Mana2u.png" />
-			<mana name="2-or-black" picture="0/08/Mana2b.png" />
-			<mana name="2-or-red" picture="e/ea/Mana2r.png" />
-			<mana name="2-or-green" picture="b/b7/Mana2g.png" />
+		<hybrid url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name=">
+			<mana name="white-or-blue" picture="WU&amp;.jpg" />
+			<mana name="white-or-black" picture="WB&amp;.jpg" />
+			<mana name="blue-or-black" picture="UB&amp;.jpg" />
+			<mana name="blue-or-red" picture="UR&amp;.jpg" />
+			<mana name="black-or-red" picture="BR&amp;.jpg" />
+			<mana name="black-or-green" picture="BG&amp;.jpg" />
+			<mana name="red-or-green" picture="RG&amp;.jpg" />
+			<mana name="red-or-white" picture="RW&amp;.jpg" />
+			<mana name="green-or-white" picture="GW&amp;.jpg" />
+			<mana name="green-or-blue" picture="GU&amp;.jpg" />
+			<mana name="2-or-white" picture="2W&amp;.jpg" />
+			<mana name="2-or-blue" picture="2U&amp;.jpg" />
+			<mana name="2-or-black" picture="2B&amp;.jpg" />
+			<mana name="2-or-red" picture="2R&amp;.jpg" />
+			<mana name="2-or-green" picture="2G&amp;.jpg" />
 		</hybrid>
 	</mana-symbols>
 
