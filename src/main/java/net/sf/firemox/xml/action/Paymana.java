@@ -76,7 +76,7 @@ public class Paymana implements XmlToMDB {
 		if (XmlConfiguration.isNoPayMana()) {
 			// we write this action all required mana set to 0
 			MToolKit.writeInt16(out, 0); // dummy mode
-			for (int i = 0; i < IdCommonToken.COLOR_NAMES.length; i++) {
+			for (int i = 0; i < IdCommonToken.PAYABLE_COLOR_NAMES.length; i++) {
 				IdOperation.INT_VALUE.serialize(out);
 				MToolKit.writeInt16(out, 0);
 			}
@@ -88,14 +88,14 @@ public class Paymana implements XmlToMDB {
 				XmlTools.writeTestOn(out, node.getAttribute("card"));
 			} else {
 				MToolKit.writeInt16(out, 0); // dummy mode
-				for (int i = 0; i < IdCommonToken.COLOR_NAMES.length; i++) {
-					if (node.getAttribute(IdCommonToken.COLOR_NAMES[i]) == null
-							&& node.get(IdCommonToken.COLOR_NAMES[i]) == null) {
+				for (int i = 0; i < IdCommonToken.PAYABLE_COLOR_NAMES.length; i++) {
+					if (node.getAttribute(IdCommonToken.PAYABLE_COLOR_NAMES[i]) == null
+							&& node.get(IdCommonToken.PAYABLE_COLOR_NAMES[i]) == null) {
 						// no such mana to pay for this color, so 0
 						IdOperation.INT_VALUE.serialize(out);
 						MToolKit.writeInt16(out, 0);
 					} else {
-						XmlTools.writeAttrOptions(node, IdCommonToken.COLOR_NAMES[i], out);
+						XmlTools.writeAttrOptions(node, IdCommonToken.PAYABLE_COLOR_NAMES[i], out);
 					}
 				}
 			}

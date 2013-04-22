@@ -6,9 +6,9 @@
 	name="MagicCards.Info" home="http://magiccards.info" language="francais"
 	encoding="iso-8859-1">
 	<pictures>
-		<picture url="en/${card.proxy-set}/${card.id+card.version}.jpg"
+		<picture url="en/${card.set}/${card.id+card.version}.jpg"
 			base="http://magiccards.info/scans" />
-		<picture url="en/${card.proxy-set}/${card.id}.jpg"
+		<picture url="en/${card.set}/${card.id}.jpg"
 			base="http://magiccards.info/scans" />
 	</pictures>
 	<data>
@@ -34,7 +34,7 @@
 		</streams>
 		<!-- Managed properties for this proxy. Order is important -->
 		<properties>
-			<property name="proxy-set">
+			<property name="set">
 				<starting-offset>
 					<mp:add right="9">
 						<mp:left>

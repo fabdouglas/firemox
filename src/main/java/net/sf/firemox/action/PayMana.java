@@ -176,7 +176,7 @@ public class PayMana extends UserAction implements ChosenAction, InitAction,
 		if (code0 == IdTokens.MANA_POOL) {
 			on = TestOn.deserialize(inputFile);
 		} else {
-			codeExpr = new Expression[IdCommonToken.COLOR_NAMES.length];
+			codeExpr = new Expression[IdCommonToken.PAYABLE_COLOR_NAMES.length];
 			for (int i = 0; i < codeExpr.length; i++) {
 				codeExpr[i] = ExpressionFactory.readNextExpression(inputFile);
 			}

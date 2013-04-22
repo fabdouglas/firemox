@@ -333,9 +333,12 @@ public final class DatabaseFactory {
 			for (Object node : preferredData.aList) {
 				if (node != null && node instanceof Node && ((Node) node).getAttribute("name") != null) {
 					// Add this property to database object
-					databaseCard.add(propertiesCacheConfig.get(
-							((Node) node).getAttribute("name")).parseProperty(
-							cardModel.getCardName(), (Node) node));
+					PropertyConfig propertyConfig = propertiesCacheConfig.get(
+							((Node) node).getAttribute("name"));
+					if (propertyConfig != null) {
+						databaseCard.add(propertyConfig.parseProperty(
+								cardModel.getCardName(), (Node) node));
+					}
 				}
 			}
 		}

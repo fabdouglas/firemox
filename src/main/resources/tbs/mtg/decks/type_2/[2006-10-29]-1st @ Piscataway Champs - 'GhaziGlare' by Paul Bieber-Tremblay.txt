@@ -1,31 +1,31 @@
 Birds of Paradise;4;card.set=rav
-Blastoderm;4
+Blastoderm;4;card.set=ne
 Brushland;4;card.set=9e
-Calciderm;4
-Desert;1;card.set=tsb
-Forest;1;card.set=tsp;card.version=1
-Forest;1;card.set=tsp;card.version=2
-Forest;1;card.set=tsp;card.version=3
-Forest;1;card.set=tsp;card.version=4
+Calciderm;4;card.set=pc
+Desert;1;card.set=tsts
+Forest;1;card.set=ts;card.version=1
+Forest;1;card.set=ts;card.version=2
+Forest;1;card.set=ts;card.version=3
+Forest;1;card.set=ts;card.version=4
 Forest;1;card.set=rav;card.version=1
 Forest;1;card.set=rav;card.version=2
 Forest;1;card.set=rav;card.version=3
 Forest;1;card.set=rav;card.version=4
 Glare of Subdual;3;card.set=rav
-Hunting Moa;1;card.set=tsb
+Hunting Moa;1;card.set=tsts
 Llanowar Elves;3;card.set=9e
 Loxodon Hierarch;3;card.set=rav
-Plains;1;card.set=tsp;card.version=1
-Plains;1;card.set=tsp;card.version=2
-Plains;1;card.set=tsp;card.version=3
+Plains;1;card.set=ts;card.version=1
+Plains;1;card.set=ts;card.version=2
+Plains;1;card.set=ts;card.version=3
 Scatter the Seeds;4;card.set=rav
 Selesnya Guildmage;4;card.set=rav
 Selesnya Sanctuary;1;card.set=rav
-Sporesower Thallid;2;card.set=tsp
+Sporesower Thallid;2;card.set=ts
 Temple Garden;4;card.set=rav
-Thallid;3;card.set=tsb
-Thelonite Hermit;4;card.set=tsp
-Verdeloth the Ancient;1;card.set=tsb
+Thallid;3;card.set=tsts
+Thelonite Hermit;4;card.set=ts
+Verdeloth the Ancient;1;card.set=tsts
 Vitu-Ghazi, the City-Tree;3;card.set=rav
 Wood Elves;2;card.set=9e
-Yavimaya Dryad;2;card.set=tsp
+Yavimaya Dryad;2;card.set=ts
