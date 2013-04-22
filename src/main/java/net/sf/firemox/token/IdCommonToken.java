@@ -81,11 +81,27 @@ public interface IdCommonToken {
 	String[] COLOR_NAMES = { "colorless", "black", "blue", "green", "red",
 			"white" };
 
+	/**
+	 * Mana colors usable in payable costs.
+	 */
+	String[] PAYABLE_COLOR_NAMES = { "colorless", "black", "blue", "green",
+			"red", "white", "white-or-blue", "white-or-black", "blue-or-black",
+			"blue-or-red", "black-or-red", "black-or-green", "red-or-green",
+			"red-or-white", "green-or-white", "green-or-blue", "2-or-white",
+			"2-or-blue", "2-or-black", "2-or-red", "2-or-green", "pblack", "pblue",
+			"pgreen", "pred", "pwhite" };
+
+	/**
+	 * Hybrid mana colors.
+	 */
 	String[] HYBRID_COLOR_NAMES = { "white-or-blue", "white-or-black",
 			"blue-or-black", "blue-or-red", "black-or-red", "black-or-green",
 			"red-or-green", "red-or-white", "green-or-white", "green-or-blue",
 			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green" };
 
+	/**
+	 * Phyrexian mana colors.
+	 */
 	String[] PHYREXIAN_COLOR_NAMES = { "pblack", "pblue", "pgreen", "pred",
 			"pwhite" };
 

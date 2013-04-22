@@ -163,13 +163,14 @@ public interface IdConst {
 			"black", "blue", "green", "red", "white", "white-or-blue", "white-or-black",
 			"blue-or-black", "blue-or-red", "black-or-red", "black-or-green",
 			"red-or-green", "red-or-white", "green-or-white", "green-or-blue",
-			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green"};
+			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green",
+			"pblack", "pblue", "pgreen", "pred", "pwhite" };
 
 	/**
 	 * Comment for <code>definedValuesValue</code>
 	 */
 	int[] VALUES = { ABORT_ME, ALL, UNUSED, NO_CARE, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 
 	/**
 	 * Minimal version for MP

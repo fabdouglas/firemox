@@ -6,16 +6,7 @@
     <rules-author-comment>Hoani CROSS</rules-author-comment>
     <init>
         <registers>
-            <register index="0" value="1">
-                <!-- TODO
-                <index>
-                    <enumeration>
-                        <value value="white"/>
-                        <value value="green"/>
-                    </enumeration>
-                </index>
-                -->
-            </register>
+            <register index="green-or-white" value="2"/>
             <register index="power" value="2"/>
             <register index="toughness" value="2"/>
         </registers>
