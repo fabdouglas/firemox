@@ -31,7 +31,7 @@ public interface IdTokens {
 	/**
 	 * Size of card's registers
 	 */
-	int CARD_REGISTER_SIZE = 18;
+	int CARD_REGISTER_SIZE = 38;
 
 	/**
 	 * Size of delayed's registers

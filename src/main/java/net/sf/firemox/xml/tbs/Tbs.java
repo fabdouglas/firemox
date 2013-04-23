@@ -164,23 +164,21 @@ public class Tbs implements XmlToMDB {
 		// Hybrid manas
 		final Node hybrid = manas.get("hybrid");
 		MToolKit.writeString(out, hybrid.getAttribute("url"));
-		out.write(hybrid.getNbNodes());
 		for (Object obj : hybrid) {
 			if (obj instanceof Node) {
 				final Node nodePriv = (Node) obj;
-				MToolKit.writeString(out, nodePriv.getAttribute("name"));
+				out.write(XmlTools.getValue(nodePriv.getAttribute("name")));
 				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
 			}
 		}
 		
-		// Hybrid manas
+		// phyrexian manas
 		final Node phyrexian = manas.get("phyrexian");
 		MToolKit.writeString(out, phyrexian.getAttribute("url"));
-		out.write(phyrexian.getNbNodes());
 		for (Object obj : phyrexian) {
 			if (obj instanceof Node) {
 				final Node nodePriv = (Node) obj;
-				MToolKit.writeString(out, nodePriv.getAttribute("name"));
+				out.write(XmlTools.getValue(nodePriv.getAttribute("name")));
 				MToolKit.writeString(out, nodePriv.getAttribute("picture"));
 			}
 		}

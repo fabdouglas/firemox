@@ -125,6 +125,7 @@ public class PayMana extends UserAction implements ChosenAction, InitAction,
 				}
 			}
 		}
+
 		if (res == null) {
 			return " " + MToolKit.getHtmlMana(0, 0);
 		}

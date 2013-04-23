@@ -184,15 +184,6 @@ public final class MdbLoader {
 	public static String unknownSmlMana;
 
 	/**
-	 * This is the defined hybrid mana names associated with the file names
-	 * without base name. The base web base name is <code>hybridManasURL</code>
-	 * and the local base name is <code>tbs/TBS_NAME/images/mana/hybrid/</code>
-	 * 
-	 * @see #hybridManasURL
-	 */
-	public static Map<String, String> hybridManas;
-
-	/**
 	 * This is the web base name where hybrid mana pictures can be found.
 	 * 
 	 * @see #hybridManas
@@ -200,34 +191,11 @@ public final class MdbLoader {
 	public static String hybridManasURL;
 
 	/**
-	 * This the HTML representation of defined hybrid manas.
-	 * 
-	 * @see #hybridManas
-	 */
-	public static Map<String, String> hybridManasHtml;
-	
-	/**
-	 * This is the defined phyrexian mana names associated with the file names
-	 * without base name. The base web base name is <code>phyrexianManasURL</code>
-	 * and the local base name is <code>tbs/TBS_NAME/images/mana/phyrexian/</code>
-	 * 
-	 * @see #hybridManasURL
-	 */
-	public static Map<String, String> phyrexianManas;
-
-	/**
 	 * This is the web base name where phyrexian mana pictures can be found.
 	 * 
 	 * @see #hybridManas
 	 */
 	public static String phyrexianManasURL;
-
-	/**
-	 * This the HTML representation of defined phyrexian manas.
-	 * 
-	 * @see #hybridManas
-	 */
-	public static Map<String, String> phyrexianManasHtml;
 
 	/**
 	 * The offset position of end of header.
@@ -397,8 +365,8 @@ public final class MdbLoader {
 		coloredManaSmlURL = MToolKit.readString(dbStream);
 		coloredManaBigURL = MToolKit.readString(dbStream);
 		coloredBigManas = new String[IdCommonToken.COLOR_NAMES.length];
-		coloredSmlManas = new String[IdCommonToken.COLOR_NAMES.length];
-		coloredSmlManasHtml = new String[coloredBigManas.length];
+		coloredSmlManas = new String[IdCommonToken.PAYABLE_COLOR_NAMES.length];
+		coloredSmlManasHtml = new String[coloredSmlManas.length];
 		for (int i = IdCommonToken.COLOR_NAMES.length; i-- > 1;) {
 			int index = dbStream.read();
 			coloredSmlManas[index] = MToolKit.readString(dbStream);
@@ -427,32 +395,24 @@ public final class MdbLoader {
 
 		// hybrid mana section
 		hybridManasURL = MToolKit.readString(dbStream);
-		int nbHybridManas = dbStream.read();
-		hybridManas = new HashMap<String, String>();
-		hybridManasHtml = new HashMap<String, String>();
-		for (int i = 0; i < nbHybridManas; i++) {
-			String hybridManaName = MToolKit.readString(dbStream);
-			hybridManas.put(hybridManaName, MToolKit.readString(dbStream));
-			hybridManasHtml.put(
-					hybridManaName,
+		for (int i = 0; i < IdCommonToken.HYBRID_COLOR_NAMES.length; i++) {
+			int index = dbStream.read();
+			coloredSmlManas[index] = MToolKit.readString(dbStream);
+			coloredSmlManasHtml[index] = 
 					"<img scr='file:///"
 							+ MToolKit.getTbsHtmlPicture("mana/hybrid/"
-									+ hybridManas.get(hybridManaName)) + "'>&nbsp;");
+									+ coloredSmlManas[index] + "'>&nbsp;");
 		}
 		
 		// hybrid mana section
 		phyrexianManasURL = MToolKit.readString(dbStream);
-		int nbPhyrexianManas = dbStream.read();
-		phyrexianManas = new HashMap<String, String>();
-		phyrexianManasHtml = new HashMap<String, String>();
-		for (int i = 0; i < nbPhyrexianManas; i++) {
-			String phyrexianManaName = MToolKit.readString(dbStream);
-			phyrexianManas.put(phyrexianManaName, MToolKit.readString(dbStream));
-			phyrexianManasHtml.put(
-					phyrexianManaName,
+		for (int i = 0; i < IdCommonToken.PHYREXIAN_COLOR_NAMES.length; i++) {
+			int index = dbStream.read();
+			coloredSmlManas[index] = MToolKit.readString(dbStream);
+			coloredSmlManasHtml[index] = 
 					"<img scr='file:///"
 							+ MToolKit.getTbsHtmlPicture("mana/phyrexian/"
-									+ phyrexianManas.get(phyrexianManaName)) + "'>&nbsp;");
+									+ coloredSmlManas[index] + "'>&nbsp;");
 		}
 
 		// Read the card bytes position

@@ -160,17 +160,29 @@ public interface IdConst {
 	 * Comment for <code>definedValuesName</code>
 	 */
 	String[] VALUES_NAME = { "abortme", "all", "unused", "nocare", "colorless",
-			"black", "blue", "green", "red", "white", "white-or-blue", "white-or-black",
-			"blue-or-black", "blue-or-red", "black-or-red", "black-or-green",
-			"red-or-green", "red-or-white", "green-or-white", "green-or-blue",
-			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green",
-			"pblack", "pblue", "pgreen", "pred", "pwhite" };
+			"black", "blue", "green", "red", "white", "white-or-blue",
+			"white-or-black", "blue-or-black", "blue-or-red", "black-or-red",
+			"black-or-green", "red-or-green", "red-or-white", "green-or-white",
+			"green-or-blue", "2-or-black", "2-or-blue", "2-or-green", "2-or-red",
+			"2-or-white", "pblack", "pblue", "pgreen", "pred", "pwhite" };
 
 	/**
 	 * Comment for <code>definedValuesValue</code>
 	 */
-	int[] VALUES = { ABORT_ME, ALL, UNUSED, NO_CARE, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
+	int[] VALUES = { ABORT_ME, ALL, UNUSED, NO_CARE,
+			IdCommonToken.COLORLESS_MANA, IdCommonToken.BLACK_MANA,
+			IdCommonToken.BLUE_MANA, IdCommonToken.GREEN_MANA,
+			IdCommonToken.RED_MANA, IdCommonToken.WHITE_MANA,
+			IdCommonToken.WHITE_OR_BLUE_MANA, IdCommonToken.WHITE_OR_BLACK_MANA,
+			IdCommonToken.BLUE_OR_BLACK_MANA, IdCommonToken.BLUE_OR_RED_MANA,
+			IdCommonToken.BLACK_OR_RED_MANA, IdCommonToken.BLACK_OR_GREEN_MANA,
+			IdCommonToken.RED_OR_GREEN_MANA, IdCommonToken.RED_OR_WHITE_MANA,
+			IdCommonToken.GREEN_OR_WHITE_MANA, IdCommonToken.GREEN_OR_BLUE_MANA,
+			IdCommonToken.TWO_OR_BLACK_MANA, IdCommonToken.TWO_OR_BLUE_MANA,
+			IdCommonToken.TWO_OR_GREEN_MANA, IdCommonToken.TWO_OR_RED_MANA,
+			IdCommonToken.TWO_OR_WHITE_MANA, IdCommonToken.PHYREXIAN_BLACK_MANA,
+			IdCommonToken.PHYREXIAN_BLUE_MANA, IdCommonToken.PHYREXIAN_GREEN_MANA,
+			IdCommonToken.PHYREXIAN_RED_MANA, IdCommonToken.PHYREXIAN_WHITE_MANA };
 
 	/**
 	 * Minimal version for MP

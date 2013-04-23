@@ -201,11 +201,11 @@
 			<mana name="red-or-white" picture="RW&amp;.jpg" />
 			<mana name="green-or-white" picture="GW&amp;.jpg" />
 			<mana name="green-or-blue" picture="GU&amp;.jpg" />
-			<mana name="2-or-white" picture="2W&amp;.jpg" />
-			<mana name="2-or-blue" picture="2U&amp;.jpg" />
 			<mana name="2-or-black" picture="2B&amp;.jpg" />
-			<mana name="2-or-red" picture="2R&amp;.jpg" />
+			<mana name="2-or-blue" picture="2U&amp;.jpg" />
 			<mana name="2-or-green" picture="2G&amp;.jpg" />
+			<mana name="2-or-red" picture="2R&amp;.jpg" />
+			<mana name="2-or-white" picture="2W&amp;.jpg" />
 		</hybrid>
 		
 		<phyrexian url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name=">
