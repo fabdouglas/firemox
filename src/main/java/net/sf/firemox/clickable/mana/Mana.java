@@ -107,18 +107,24 @@ public class Mana extends Clickable {
 	public static void init(String mdb) {
 		// load the mana picture
 		int error = 0;
-		for (int i = IdCommonToken.COLOR_NAMES.length; i-- > 0;) {
+		for (int i = IdCommonToken.PAYABLE_COLOR_NAMES.length; i-- > 0;) {
 			try {
 				if (error == 0 && i != 0) {
-					IMAGES[i] = Picture.loadImage(
-							MToolKit.getTbsPicture("mana/colored/big/"
-									+ MdbLoader.coloredBigManas[i], false),
-							new URL(MdbLoader.coloredManaBigURL
-									+ MdbLoader.coloredBigManas[i])).getContent();
-					if (IMAGES[i] == null) {
-						error += (i + 1) * 2;
+					if (i <= 5) {
+						IMAGES[i] = Picture.loadImage(
+								MToolKit.getTbsPicture("mana/colored/big/"
+										+ MdbLoader.coloredBigManas[i], false),
+								new URL(MdbLoader.coloredManaBigURL
+										+ MdbLoader.coloredBigManas[i])).getContent();
+						if (IMAGES[i] == null) {
+							error += (i + 1) * 2;
+						} else {
+							// check the small colored mana
+							Picture.download(MToolKit.getTbsPicture("mana/colored/small/"
+									+ MdbLoader.coloredSmlManas[i], false), new URL(
+									MdbLoader.coloredManaSmlURL + MdbLoader.coloredSmlManas[i]));
+						}
 					} else {
-						// check the small colored mana
 						Picture.download(MToolKit.getTbsPicture("mana/colored/small/"
 								+ MdbLoader.coloredSmlManas[i], false), new URL(
 								MdbLoader.coloredManaSmlURL + MdbLoader.coloredSmlManas[i]));
@@ -338,7 +344,7 @@ public class Mana extends Clickable {
 				g2d.rotate(Math.PI, MANA_WIDTH / 2, MANA_HEIGHT / 2);
 			}
 			g2d.drawImage(IMAGES[color], 0, 0, MANA_WIDTH, MANA_WIDTH, null);
-			g2d.setColor(TEXT_COLOR[color]);
+			g2d.setColor(TEXT_COLOR[color % TEXT_COLOR.length]);
 
 			if (StackManager.PLAYERS[0] != null
 					&& StackManager.PLAYERS[0].registers != null) {
@@ -399,7 +405,7 @@ public class Mana extends Clickable {
 
 	@Override
 	public String toString() {
-		return IdCommonToken.COLOR_NAMES[color];
+		return IdCommonToken.PAYABLE_COLOR_NAMES[color];
 	}
 
 	/**
@@ -414,13 +420,13 @@ public class Mana extends Clickable {
 	/**
 	 * represent all images used to represents energy source for each sort
 	 */
-	private static final Image[] IMAGES = new Image[6];
+	private static final Image[] IMAGES = new Image[IdCommonToken.PAYABLE_COLOR_NAMES.length];
 
 	/**
 	 * represent all foreground colors used to represent the amount of energy for
 	 * each type
 	 */
-	private static final Color[] TEXT_COLOR = new Color[6];
+	private static final Color[] TEXT_COLOR = new Color[IMAGES.length];
 
 	/**
 	 * color of this mana

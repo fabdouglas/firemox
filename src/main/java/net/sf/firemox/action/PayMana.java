@@ -113,7 +113,7 @@ public class PayMana extends UserAction implements ChosenAction, InitAction,
 			res = MToolKit.getHtmlMana(0, manaPool[0]);
 		}
 
-		for (int j = IdCommonToken.COLOR_NAMES.length; j-- > 1;) {
+		for (int j = IdCommonToken.PAYABLE_COLOR_NAMES.length; j-- > 1;) {
 			if (manaPool[j] != 0) {
 				if (res == null) {
 					res = "";
@@ -550,12 +550,12 @@ public class PayMana extends UserAction implements ChosenAction, InitAction,
 			res = "" + code[0];
 		}
 
-		for (int j = IdCommonToken.COLOR_NAMES.length; j-- > 1;) {
+		for (int j = IdCommonToken.PAYABLE_COLOR_NAMES.length; j-- > 1;) {
 			if (code[j] != 0) {
 				if (res == null) {
 					res = "";
 				}
-				res += IdCommonToken.COLOR_NAMES[j] + "x" + code[j] + ",";
+				res += IdCommonToken.PAYABLE_COLOR_NAMES[j] + "x" + code[j] + ",";
 			}
 		}
 		if (res == null) {

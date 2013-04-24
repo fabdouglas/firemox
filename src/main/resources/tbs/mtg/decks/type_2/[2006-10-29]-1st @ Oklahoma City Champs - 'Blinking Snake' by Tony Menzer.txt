@@ -1,6 +1,6 @@
 # Creatures
 Birds_Of_Paradise;4;card.set=rav
-Coiling_Oracle;4;card.set=dis
+Coiling_Oracle;4;card.set=di
 Llanowar_Elves;4;card.set=9e
 Loxodon_Hierarch;4;card.set=rav
 Mystic_Snake;4;card.set=tsts
@@ -25,9 +25,9 @@ Forest;1;card.version=1;card.set=ts
 Island;1;card.version=2;card.set=ts
 
 # Non-basic lands
-Breeding_Pool;4;card.set=dis
+Breeding_Pool;4;card.set=di
 Brushland;2;card.set=9e
-Hallowed_Fountain;1;card.set=dis
+Hallowed_Fountain;1;card.set=di
 Temple_Garden;4;card.set=rav
 Vitu_Ghazi_The_City_Tree;3;card.set=rav
 Yavimaya_Coast;4;card.set=ap

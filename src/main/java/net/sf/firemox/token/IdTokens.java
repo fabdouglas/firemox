@@ -41,7 +41,7 @@ public interface IdTokens {
 	/**
 	 * Size of player registers
 	 */
-	int PLAYER_REGISTER_SIZE = 32;
+	int PLAYER_REGISTER_SIZE = 52;
 
 	/**
 	 * Target is a card

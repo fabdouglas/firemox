@@ -238,11 +238,31 @@
 	<alias name="green" value="3" />
 	<alias name="red" value="4" />
 	<alias name="white" value="5" />
-	<alias name="state" value="7" />
-	<alias name="damage" value="8" />
-	<alias name="combat.assignedto" value="9" />
-	<alias name="free0" value="16" />
-	<alias name="free1" value="17" />
+	<alias name="white-or-blue" value="6" />
+	<alias name="white-or-black" value="7" />
+	<alias name="blue-or-black" value="8" />
+	<alias name="blue-or-red" value="9" />
+	<alias name="black-or-red" value="10" />
+	<alias name="black-or-green" value="11" />
+	<alias name="red-or-green" value="12" />
+	<alias name="red-or-white" value="13" />
+	<alias name="green-or-white" value="14" />
+	<alias name="green-or-blue" value="15" />
+	<alias name="2-or-black" value="16" />
+	<alias name="2-or-blue" value="17" />
+	<alias name="2-or-green" value="18" />
+	<alias name="2-or-red" value="19" />
+	<alias name="2-or-white" value="20" />
+	<alias name="pblack" value="21" />
+	<alias name="pblue" value="22" />
+	<alias name="pgreen" value="23" />
+	<alias name="pred" value="24" />
+	<alias name="pwhite" value="25" />
+	<alias name="state" value="26" />
+	<alias name="damage" value="27" />
+	<alias name="combat.assignedto" value="28" />
+	<alias name="free0" value="29" />
+	<alias name="free1" value="30" />
 	<!--[[apt end-multiref]]-->
 
 	<!-- Only for cards -->
@@ -265,12 +285,12 @@
 		*___________________________+
 	-->
 	<!--[[apt start-multiref@name ]]-->
-	<alias name="combat.toassign" value="10" />
-	<alias name="power" value="11" />
-	<alias name="toughness" value="12" />
-	<alias name="loyalty" value="13" />	
-	<alias name="planeswalker-ability" value="14" />
-	<alias name="special-abilities" value="15" />
+	<alias name="combat.toassign" value="28" />
+	<alias name="power" value="29" />
+	<alias name="toughness" value="30" />
+	<alias name="loyalty" value="31" />	
+	<alias name="planeswalker-ability" value="32" />
+	<alias name="special-abilities" value="33" />
 	<!--[[apt end-multiref]]-->
 
 	<!-- Only for players -->
@@ -293,16 +313,16 @@
 		*___________________________+
 	-->
 	<!--[[apt start-multiref@name ]]-->
-	<alias name="poison" value="11" />
-	<alias name="life" value="12" />
-	<alias name="mulligan" value="22" />
-	<alias name="creatures-moved-in-graveyard-from-play-this-turn" value="23" />
-	<alias name="damage-dealt-this-turn" value="24" />
-	<alias name="hand-vibility-modifiers" value="25" />
-	<alias name="initialized" value="26" />
-	<alias name="land-remain-to-cast" value="27" />
-	<alias name="maxi-cards-in-hand" value="28" />
-	<alias name="playedland" value="29" />
+	<alias name="poison" value="29" />
+	<alias name="life" value="30" />
+	<alias name="mulligan" value="40" />
+	<alias name="creatures-moved-in-graveyard-from-play-this-turn" value="41" />
+	<alias name="damage-dealt-this-turn" value="42" />
+	<alias name="hand-vibility-modifiers" value="43" />
+	<alias name="initialized" value="44" />
+	<alias name="land-remain-to-cast" value="45" />
+	<alias name="maxi-cards-in-hand" value="46" />
+	<alias name="playedland" value="47" />
 	<!--[[apt end-multiref]]-->
 
 	<!-- card state bits -->

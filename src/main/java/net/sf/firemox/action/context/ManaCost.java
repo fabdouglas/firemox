@@ -42,7 +42,7 @@ public class ManaCost implements ActionContext {
 	 *          initial mana cost.
 	 */
 	public ManaCost(int[] manaCost) {
-		this.manaCost = new int[IdCardColors.CARD_COLOR_NAMES.length];
+		this.manaCost = new int[IdCardColors.CARD_COLOR_NAMES.length + IdCardColors.HYBRID_COLOR_NAMES.length + IdCardColors.PHYREXIAN_COLOR_NAMES.length];
 		this.requiredMana = new int[this.manaCost.length];
 		this.manaPaid = new int[this.manaCost.length];
 		addManaCost(manaCost);

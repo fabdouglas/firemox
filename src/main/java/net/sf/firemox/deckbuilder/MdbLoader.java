@@ -399,9 +399,9 @@ public final class MdbLoader {
 			int index = dbStream.read();
 			coloredSmlManas[index] = MToolKit.readString(dbStream);
 			coloredSmlManasHtml[index] = 
-					"<img scr='file:///"
-							+ MToolKit.getTbsHtmlPicture("mana/hybrid/"
-									+ coloredSmlManas[index] + "'>&nbsp;");
+					"<img src='file:///"
+							+ MToolKit.getTbsHtmlPicture("mana/colored/small/"
+									+ coloredSmlManas[index]) + "'>&nbsp;";
 		}
 		
 		// hybrid mana section
@@ -410,9 +410,9 @@ public final class MdbLoader {
 			int index = dbStream.read();
 			coloredSmlManas[index] = MToolKit.readString(dbStream);
 			coloredSmlManasHtml[index] = 
-					"<img scr='file:///"
-							+ MToolKit.getTbsHtmlPicture("mana/phyrexian/"
-									+ coloredSmlManas[index] + "'>&nbsp;");
+					"<img src='file:///"
+							+ MToolKit.getTbsHtmlPicture("mana/colored/small/"
+									+ coloredSmlManas[index]) + "'>&nbsp;";
 		}
 
 		// Read the card bytes position

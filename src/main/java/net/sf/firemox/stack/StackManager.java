@@ -1382,7 +1382,7 @@ public final class StackManager implements StackContext {
 	public static String getHtmlManaPaid(MCard card) {
 		final ActionContextWrapper[] context = StackManager.getActionManager(card)
 				.getTotalActionContexts();
-		final int[] res = new int[6];
+		final int[] res = new int[IdCommonToken.PAYABLE_COLOR_NAMES.length];
 		if (context != null) {
 			for (ActionContextWrapper contextI : context) {
 				if (contextI != null && contextI.actionContext != null
@@ -1407,13 +1407,13 @@ public final class StackManager implements StackContext {
 	public static String getHtmlManaCost(MCard card) {
 		final ActionContextWrapper[] context = StackManager.getActionManager(card)
 				.getTotalActionContexts();
-		final int[] res = new int[6];
+		final int[] res = new int[IdCommonToken.PAYABLE_COLOR_NAMES.length];
 		if (context != null) {
 			for (ActionContextWrapper contextI : context) {
 				if (contextI != null && contextI.actionContext != null
 						&& contextI.actionContext instanceof ManaCost) {
 					final int[] manaCost = ((ManaCost) contextI.actionContext).manaCost;
-					for (int j = IdCommonToken.COLOR_NAMES.length; j-- > 0;) {
+					for (int j = IdCommonToken.PAYABLE_COLOR_NAMES.length; j-- > 0;) {
 						res[j] += manaCost[j];
 					}
 				}
@@ -1440,7 +1440,7 @@ public final class StackManager implements StackContext {
 			if (contextI != null && contextI.actionContext != null
 					&& contextI.actionContext instanceof ManaCost) {
 				int[] manaCost = ((ManaCost) contextI.actionContext).manaCost;
-				for (int j = IdCommonToken.COLOR_NAMES.length; j-- > 0;) {
+				for (int j = IdCommonToken.PAYABLE_COLOR_NAMES.length; j-- > 0;) {
 					res += manaCost[j];
 				}
 			}

@@ -780,7 +780,7 @@ public final class MToolKit {
 	 * @return the picture specific to the current TBS
 	 */
 	public static String getTbsHtmlPicture(String pictureFile) {
-		return MToolKit.getTbsPicture(pictureFile, false).replace('\\', '/');
+		return MToolKit.getTbsPicture(pictureFile, false).replace('\\', '/').replace("&", "&amp;");
 	}
 
 	/**

@@ -209,11 +209,11 @@
 		</hybrid>
 		
 		<phyrexian url="http://gatherer.wizards.com/Handlers/Image.ashx?size=small&amp;type=symbol&amp;name=">
-			<mana name="pblack" picture="PB&amp;.jpg" />
-			<mana name="pblue" picture="PU&amp;.jpg" />
-			<mana name="pgreen" picture="PG&amp;.jpg" />
-			<mana name="pred" picture="PR&amp;.jpg" />
-			<mana name="pwhite" picture="PW&amp;.jpg" />
+			<mana name="pblack" picture="BP&amp;.jpg" />
+			<mana name="pblue" picture="UP&amp;.jpg" />
+			<mana name="pgreen" picture="GP&amp;.jpg" />
+			<mana name="pred" picture="RP&amp;.jpg" />
+			<mana name="pwhite" picture="WP&amp;.jpg" />
 		</phyrexian>
 	</mana-symbols>
 
