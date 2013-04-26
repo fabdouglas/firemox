@@ -37,7 +37,7 @@ public interface IdCardColors {
 	String[] HYBRID_COLOR_NAMES = { "white-or-blue", "white-or-black",
 			"blue-or-black", "blue-or-red", "black-or-red", "black-or-green",
 			"red-or-green", "red-or-white", "green-or-white", "green-or-blue",
-			"2-or-white", "2-or-blue", "2-or-black", "2-or-red", "2-or-green" };
+			"2-or-black", "2-or-blue", "2-or-green", "2-or-red", "2-or-white" };
 
 	/**
 	 * Card color names for phyrexian mana
@@ -59,11 +59,34 @@ public interface IdCardColors {
 	/**
 	 * Card color values for hybrid manas
 	 */
-	int[] HYBRID_COLOR_VALUES = { 0x12, 0x11, 0x03, 0x0A, 0x09, 0x05, 0x0C,
-			0x18, 0x14, 0x06, 0x10, 0x02, 0x01, 0x08, 0x04 };
+	int[] HYBRID_COLOR_VALUES = { 0x12, 0x11, 0x03, 0x0A, 0x09, 0x05, 0x0C, 0x18,
+			0x14, 0x06, 0x10, 0x02, 0x01, 0x08, 0x04 };
 
 	/**
 	 * Card color values for phyrexian manas
 	 */
 	int[] PHYREXIAN_COLOR_VALUES = { 0x01, 0x02, 0x04, 0x08, 0x10 };
+
+	int[][] HYBRID_PHYREXIAN_MANA_ALTERNATIVES = {
+			{ 0, 0, 1, 0, 0, 1, 0 },
+			{ 0, 1, 0, 0, 0, 1, 0 },
+			{ 0, 1, 1, 0, 0, 0, 0 },
+			{ 0, 0, 1, 0, 1, 0, 0 },
+			{ 0, 1, 0, 0, 1, 0, 0 },
+			{ 0, 1, 0, 1, 0, 0, 0 },
+			{ 0, 0, 1, 1, 0, 0, 0 },
+			{ 0, 0, 0, 0, 1, 1, 0 },
+			{ 0, 0, 0, 1, 0, 1, 0 },
+			{ 0, 0, 1, 1, 0, 0, 0 },
+			{ 2, 1, 0, 0, 0, 0, 0 },
+			{ 2, 0, 1, 0, 0, 0, 0 },
+			{ 2, 0, 0, 1, 0, 0, 0 },
+			{ 2, 0, 0, 0, 1, 0, 0 },
+			{ 2, 0, 0, 0, 0, 1, 0 },
+			{ 0, 1, 0, 0, 0, 0, 1 },
+			{ 0, 0, 1, 0, 0, 0, 1 },
+			{ 0, 0, 0, 1, 0, 0, 1 },
+			{ 0, 0, 0, 0, 1, 0, 1 },
+			{ 0, 0, 0, 0, 0, 1, 1 }
+	};
 }

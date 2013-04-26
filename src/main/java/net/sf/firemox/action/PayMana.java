@@ -211,7 +211,6 @@ public class PayMana extends UserAction implements ChosenAction, InitAction,
 			if (controller.mana.getMana(idColor, ability) > 0
 					&& (manaContext.requiredMana[idColor] > 0 || manaContext.requiredMana[0] > 0)) {
 				controller.mana.manaButtons[idColor].highLight(null);
-
 			} else {
 				controller.mana.manaButtons[idColor].disHighLight();
 			}

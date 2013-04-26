@@ -54,6 +54,8 @@ public interface IdCommonToken {
 	 * Comment for <code>WHITE_MANA</code>
 	 */
 	int WHITE_MANA = 0x0005;
+	
+	int PAY_LIFE_FOR_MANA_COST = 0x0006;
 
 	int COLORED_MANA_FIRST_INDEX = BLACK_MANA;
 

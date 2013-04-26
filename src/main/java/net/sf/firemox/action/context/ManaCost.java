@@ -19,12 +19,14 @@
 package net.sf.firemox.action.context;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.sf.firemox.clickable.mana.ManaPool;
 import net.sf.firemox.stack.StackManager;
 import net.sf.firemox.test.Test;
 import net.sf.firemox.token.IdCardColors;
+import net.sf.firemox.token.IdCommonToken;
 import net.sf.firemox.tools.PairIntObject;
 
 /**
@@ -42,7 +44,9 @@ public class ManaCost implements ActionContext {
 	 *          initial mana cost.
 	 */
 	public ManaCost(int[] manaCost) {
-		this.manaCost = new int[IdCardColors.CARD_COLOR_NAMES.length + IdCardColors.HYBRID_COLOR_NAMES.length + IdCardColors.PHYREXIAN_COLOR_NAMES.length];
+		this.manaCost = new int[IdCardColors.CARD_COLOR_NAMES.length
+				+ IdCardColors.HYBRID_COLOR_NAMES.length
+				+ IdCardColors.PHYREXIAN_COLOR_NAMES.length];
 		this.requiredMana = new int[this.manaCost.length];
 		this.manaPaid = new int[this.manaCost.length];
 		addManaCost(manaCost);
@@ -81,6 +85,123 @@ public class ManaCost implements ActionContext {
 	 * The restriction used to paid the mana.
 	 */
 	public List<PairIntObject<Test>>[] restrictions = null;
+
+	/**
+	 * A choice node for the hybrid/phyrexian mana cost.
+	 */
+	private class ManaChoiceNode {
+		public ManaChoiceNode() {
+		}
+
+		public int index = -1;
+
+		public int quantity = -1;
+
+		public int reducedColor = -1;
+
+		public ManaChoiceNode first;
+
+		public ManaChoiceNode second;
+	}
+
+	/**
+	 * Recursive method that create the choice nodes tree.
+	 * 
+	 * @param manaCost
+	 *          the initial mana cost
+	 * @param node
+	 *          the node
+	 */
+	private void createChoices(int[] manaCost, ManaChoiceNode node,
+			boolean first, int quantity) {
+		int currentIndex = -1;
+		if (node.index != -1) {
+			currentIndex = node.index;
+			if (quantity > 0) {
+				int[] alternatives = IdCardColors.HYBRID_PHYREXIAN_MANA_ALTERNATIVES[currentIndex];
+				boolean firstFound = false;
+				for (int i = 0; i < alternatives.length; i++) {
+					if (alternatives[i] != 0) {
+						if (first) {
+							node.reducedColor = i;
+							node.quantity = alternatives[i];
+						} else {
+							if (!firstFound) {
+								firstFound = true;
+							} else {
+								node.reducedColor = i;
+								node.quantity = alternatives[i];
+							}
+						}
+					}
+				}
+				node.first = new ManaChoiceNode();
+				node.second = new ManaChoiceNode();
+				node.first.index = node.second.index = currentIndex;
+				int nextQuantity = quantity - 1;
+				createChoices(manaCost, node.first, true, nextQuantity);
+				createChoices(manaCost, node.second, false, nextQuantity);
+			}
+		}
+		if (currentIndex < IdCardColors.HYBRID_PHYREXIAN_MANA_ALTERNATIVES.length - 1) {
+			node.first = new ManaChoiceNode();
+			node.first.index = currentIndex + 1;
+			int nextQuantity = manaCost[IdCommonToken.HYBRID_MANA_FIRST_INDEX
+					+ currentIndex + 1];
+			if (nextQuantity > 0) {
+				node.second = new ManaChoiceNode();
+				node.second.index = node.first.index;
+				createChoices(manaCost, node.first, true, nextQuantity - 1);
+				createChoices(manaCost, node.second, false, nextQuantity - 1);
+			} else {
+				node.first.quantity = 0;
+				createChoices(manaCost, node.first, false, 0);
+			}
+		}
+	}
+	
+	private void fillChoices(ManaChoiceNode node, int[][] choices, int index) {
+		if (node.quantity > 0) {
+			choices[index][node.reducedColor] = choices[index][node.reducedColor] + node.quantity;
+		}
+		if (node.first != null) {
+			fillChoices(node.first, choices, index);
+		}
+		if (node.second != null) {
+			fillChoices(node.second, choices, index+1);
+		}
+	}
+
+	/**
+	 * @return the list of possibles costs regarding hybrid/phyrexian mana where
+	 *         you will only find entries in the colored indexes and in the
+	 *         phyrexian indexes (which means that the player can choose to pay 2
+	 *         life for this type of mana)
+	 */
+	public int[][] getPossibleRequiredManaList() {
+		int[] baseRequiredMana = new int[7];
+		for (int i = 0; i <= IdCommonToken.COLORED_MANA_LAST_INDEX; i++) {
+			baseRequiredMana[i] = manaCost[i];
+		}
+
+		int nbBranches = 1;
+		for (int i = IdCommonToken.HYBRID_MANA_FIRST_INDEX; i <= IdCommonToken.PHYREXIAN_MANA_LAST_INDEX; i++) {
+			if (manaCost[i] > 0) {
+				nbBranches = nbBranches * (int) Math.pow(2, manaCost[i]);
+			}
+		}
+
+		int[][] result = new int[nbBranches][];
+		for (int i = 0; i < nbBranches; i++) {
+			result[i] = Arrays.copyOf(baseRequiredMana, baseRequiredMana.length);
+		}
+
+		ManaChoiceNode choices = new ManaChoiceNode();
+		createChoices(manaCost, choices, false, 0);
+		fillChoices(choices, result, 0);
+
+		return result;
+	}
 
 	/**
 	 * Add a restriction
